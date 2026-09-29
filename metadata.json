@@ -1,0 +1,6 @@
+{
+  "name": "Slijpmaat.nl – Jouw messenslijper in Utrecht",
+  "description": "Professionele messenslijper in Utrecht voor particulieren en horeca. Handmatig geslepen op Japanse whetstones met minimale materiaalafname. Ophaal- en bezorgservice in Utrecht.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

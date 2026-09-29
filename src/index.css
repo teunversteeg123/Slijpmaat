@@ -1,0 +1,67 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --font-heading: 'Instrument Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    --font-body: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+
+    /* The 3 Slijpmaat Core Brand Colors */
+    --slijpmaat-green: #3B7F4B;
+    --slijpmaat-sage: #A9C89E;
+    --slijpmaat-coral: #E87B5B;
+
+    /* Structural & Supporting Neutrals */
+    --slijpmaat-dark: #244A30;
+    --slijpmaat-darker: #203728;
+    --slijpmaat-cream: #F7F4EC;
+    --slijpmaat-softgreen: #E8EFE8;
+    --slijpmaat-border: #d9e1d7;
+    --slijpmaat-bg: #FAFAFA;
+  }
+
+  body {
+    font-family: var(--font-body);
+    background-color: #FAFAFA;
+    color: #203728;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1, h2, h3, h4, .font-heading {
+    font-family: var(--font-heading);
+    letter-spacing: -0.02em;
+  }
+}
+
+/* Slijpmaat Core Color Classes */
+.bg-slijpmaat-green { background-color: #3B7F4B; }
+.bg-slijpmaat-sage { background-color: #A9C89E; }
+.bg-slijpmaat-coral { background-color: #E87B5B; }
+.bg-slijpmaat-coral-dark { background-color: #C95E3E; }
+.bg-slijpmaat-dark { background-color: #244A30; }
+.bg-slijpmaat-cream { background-color: #F7F4EC; }
+.bg-slijpmaat-softgreen { background-color: #E8EFE8; }
+
+.text-slijpmaat-green { color: #3B7F4B; }
+.text-slijpmaat-sage { color: #A9C89E; }
+.text-slijpmaat-coral { color: #E87B5B; }
+.text-slijpmaat-dark { color: #244A30; }
+
+.border-slijpmaat-green { border-color: #3B7F4B; }
+.border-slijpmaat-sage { border-color: #A9C89E; }
+.border-slijpmaat-coral { border-color: #E87B5B; }
+.border-slijpmaat-subtle { border-color: #d9e1d7; }
+
+/* Accessible Contrast Combinations */
+/* 1. On #3B7F4B (Primary Green): Use crisp white */
+.text-on-green { color: #FFFFFF; }
+.text-on-green-subtle { color: #E8EFE8; }
+
+/* 2. On #A9C89E (Soft Sage): Must use deep dark green, never white! */
+.text-on-sage { color: #162E1C; }
+
+/* 3. On #E87B5B (Coral): Use crisp white */
+.text-on-coral { color: #FFFFFF; }
+
+/* 4. On Cream/White: Use #244A30 or deep charcoal */
+.text-on-cream { color: #244A30; }
+
