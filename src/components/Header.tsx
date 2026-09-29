@@ -62,16 +62,16 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
         </div>
       </div>
 
-      {/* Main Sticky Header: Authentic #F7F4EC (Gebroken wit) matching Slijpmaat.nl original header */}
+      {/* Main sticky header */}
       <header className="sticky top-0 z-40 bg-[#F7F4EC] border-b border-[#3B7F4B]/20 shadow-xs transition-shadow">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           {/* Zone 1: Wordmark Brand Lockup */}
           <button
             onClick={() => handleLinkClick('home')}
             className="flex items-center gap-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B7F4B] rounded-lg p-1"
-            aria-label="Slijpmaat.nl Home"
+            aria-label="Slijpmaat home"
           >
-            <SlijpmaatLogo variant="dark" showTagline={true} />
+            <SlijpmaatLogo variant="dark" size="lg" />
           </button>
 
           {/* Zone 2: Clean Text Navigation (color: #244A30, hover: #3B7F4B) */}

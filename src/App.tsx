@@ -3,7 +3,6 @@ import { PageId, Article } from './types';
 import { ARTICLES } from './data/siteData';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
-import { DesignSystemDrawer } from './components/DesignSystemDrawer';
 
 import { SLIJPMAAT_INFO } from './data/siteData';
 import { MessageCircle, ArrowRight } from 'lucide-react';
@@ -32,6 +31,9 @@ export default function App() {
 
   const handleNavigate = (page: PageId) => {
     setCurrentPage(page);
+    if (window.location.hash !== `#${page}`) {
+      window.location.hash = page;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
@@ -81,7 +83,7 @@ export default function App() {
   const renderCurrentPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage onNavigate={handleNavigate} />;
+        return <HomePage />;
       case 'particulieren':
         return <ParticulierenPage onNavigate={handleNavigate} />;
       case 'horeca':
@@ -122,7 +124,7 @@ export default function App() {
       case 'privacy':
         return <PrivacyPage onNavigate={handleNavigate} />;
       default:
-        return <HomePage onNavigate={handleNavigate} />;
+        return <HomePage />;
     }
   };
 
@@ -152,16 +154,7 @@ export default function App() {
         </a>
 
         <button
-          onClick={() => {
-            if (currentPage === 'home') {
-              const calcEl = document.getElementById('calculator');
-              if (calcEl) {
-                calcEl.scrollIntoView({ behavior: 'smooth' });
-                return;
-              }
-            }
-            handleNavigate('prijzen-bestellen');
-          }}
+          onClick={() => handleNavigate('prijzen-bestellen')}
           className="flex-1 py-3 px-3 rounded-full bg-[#E87B5B] active:bg-[#C95E3E] text-white font-bold text-xs flex items-center justify-center gap-1 shadow-2xs active:scale-[0.98] transition-all min-h-[46px]"
         >
           <span className="truncate">Plan slijpbeurt</span>
@@ -169,11 +162,6 @@ export default function App() {
         </button>
       </div>
 
-      {/* Interactive Prototype Navigator & Design System Token Switcher */}
-      <DesignSystemDrawer
-        currentPage={currentPage}
-        onNavigate={handleNavigate}
-      />
     </div>
   );
 }

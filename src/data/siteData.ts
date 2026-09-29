@@ -11,7 +11,7 @@ export const SLIJPMAAT_INFO = {
   fullAddress: 'Gerard Noodtstraat 57, 3515 VW Utrecht',
   whatsappNumber: '+31682074967',
   whatsappDisplay: '06 82 07 49 67',
-  email: 'info@slijpmaat.nl',
+  email: 'slijpmaat@outlook.com',
   turnaroundTime: 'Binnen 48 uur na ophalen terug',
   hours: 'Maandag–zaterdag 10:00–21:00 (Zondag gesloten)',
   pickupMinKnivesFree: 3,

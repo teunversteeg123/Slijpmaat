@@ -9,6 +9,8 @@
     --slijpmaat-green: #3B7F4B;
     --slijpmaat-sage: #A9C89E;
     --slijpmaat-coral: #E87B5B;
+    --slijpmaat-coral-dark: #C95E3E;
+    --slijpmaat-peach: #F9E4DE;
 
     /* Structural & Supporting Neutrals */
     --slijpmaat-dark: #244A30;
@@ -17,6 +19,7 @@
     --slijpmaat-softgreen: #E8EFE8;
     --slijpmaat-border: #d9e1d7;
     --slijpmaat-bg: #FAFAFA;
+    --slijpmaat-white: #FFFFFF;
   }
 
   body {
@@ -52,7 +55,7 @@
 .border-slijpmaat-subtle { border-color: #d9e1d7; }
 
 /* Accessible Contrast Combinations */
-/* 1. On #3B7F4B (Primary Green): Use crisp white */
+/* 1. On green panels: use white/soft green; never place a filled coral CTA on green. */
 .text-on-green { color: #FFFFFF; }
 .text-on-green-subtle { color: #E8EFE8; }
 

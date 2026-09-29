@@ -1,12 +1,27 @@
 import React from 'react';
+import { Facebook, Instagram } from 'lucide-react';
 import { SlijpmaatLogo } from './SlijpmaatLogo';
 import { PageId } from '../types';
-import { MessageCircle, MapPin, Clock, ShieldCheck, Mail, Phone, ExternalLink } from 'lucide-react';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
 }
+
+const MAPS_URL = 'https://www.google.com/maps/place/Slijpmaat.nl/@52.1032142,5.1191271,17z/data=!3m1!4b1!4m6!3m5!1s0x2db61c15d9f3a351:0x81e0896d1578558b!8m2!3d52.1032142!4d5.1191271!16s%2Fg%2F11njwnblms';
+
+const QUICK_LINKS: Array<{ label: string; page: PageId }> = [
+  { label: 'Over ons', page: 'over-ons' },
+  { label: 'Werkwijze', page: 'werkwijze' },
+  { label: 'Prijzen & bestellen', page: 'prijzen-bestellen' },
+  { label: 'Reviews', page: 'reviews' },
+  { label: 'Veelgestelde vragen', page: 'faq' },
+  { label: 'Contact', page: 'contact' },
+];
+
+const columnClass = 'border-b border-[#3B7F4B]/20 pb-7 sm:border-0 sm:pb-0';
+const columnHeadClass = 'mb-3 flex min-h-[54px] items-center sm:mb-0 sm:h-[68px]';
+const footerLinkClass = 'inline-block text-[14px] leading-[1.55] text-[#3B7F4B] transition-transform duration-200 hover:translate-x-[3px] hover:opacity-70 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]';
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const handleNav = (page: PageId) => {
@@ -15,234 +30,113 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   };
 
   return (
-    <footer className="bg-[#FAFAFA] text-[#244A30] pt-16 pb-12 border-t-2 border-[#3B7F4B]">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 pb-12 border-b border-[#3B7F4B]/20">
-          {/* Col 1 & 2: Brand & Utrecht Location info */}
-          <div className="lg:col-span-2 space-y-4">
-            <button
-              onClick={() => handleNav('home')}
-              className="text-left cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B7F4B] rounded-lg"
-            >
-              <SlijpmaatLogo variant="dark" showTagline={true} />
-            </button>
-            <p className="text-sm text-[#203728] leading-relaxed max-w-sm">
-              Slijpmaat is dé professionele messenslijper in Utrecht. Met de hand geslepen op traditionele Japanse whetstones voor maximale scherpte en minimale materiaalafname.
+    <footer className="border-t-2 border-[#3B7F4B] bg-[#FAFAFA] font-sans text-[15px] leading-[1.6] text-[#3B7F4B]">
+      <div className="mx-auto w-full max-w-[1180px] px-[22px] pb-[22px] pt-[46px] sm:px-7 sm:pb-6 sm:pt-16">
+        <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-x-[50px] sm:gap-y-11 lg:grid-cols-4 lg:gap-12">
+          <section className={columnClass} aria-label="Slijpmaat en Google">
+            <div className={columnHeadClass}>
+              <button
+                type="button"
+                onClick={() => handleNav('home')}
+                className="-ml-4 cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] sm:-ml-5"
+                aria-label="Slijpmaat home"
+              >
+                <SlijpmaatLogo variant="dark" className="[&_img]:h-auto [&_img]:w-[210px] sm:[&_img]:w-[220px]" />
+              </button>
+            </div>
+
+            <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className={footerLinkClass}>
+              Bekijk ons op Google <span aria-hidden="true">↗</span>
+            </a>
+          </section>
+
+          <nav className={columnClass} aria-label="Footer navigatie">
+            <div className={columnHeadClass}>
+              <h2 className="font-heading text-[19px] font-semibold leading-tight tracking-[-0.02em]">Snel naar</h2>
+            </div>
+
+            <ul className="m-0 grid list-none gap-2 p-0">
+              {QUICK_LINKS.map((link) => (
+                <li key={link.page}>
+                  <button type="button" onClick={() => handleNav(link.page)} className={`${footerLinkClass} cursor-pointer text-left`}>
+                    {link.label}
+                  </button>
+                </li>
+              ))}
+            </ul>
+          </nav>
+
+          <section className={columnClass}>
+            <div className={columnHeadClass}>
+              <h2 className="font-heading text-[19px] font-semibold leading-tight tracking-[-0.02em]">Contact</h2>
+            </div>
+
+            <address className="grid gap-2 not-italic">
+              <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className={footerLinkClass}>
+                Gerard Noodtstraat 57<br />
+                3515 VW Utrecht
+              </a>
+              <a href={`tel:${SLIJPMAAT_INFO.whatsappNumber}`} className={footerLinkClass}>06 82074967</a>
+              <a href={`mailto:${SLIJPMAAT_INFO.email}`} className={footerLinkClass}>{SLIJPMAAT_INFO.email}</a>
+              <a
+                href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Slijpmaat, ik heb een vraag.')}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={`${footerLinkClass} font-semibold`}
+              >
+                Stuur je Maat een appje
+              </a>
+            </address>
+          </section>
+
+          <section>
+            <div className={columnHeadClass}>
+              <h2 className="font-heading text-[19px] font-semibold leading-tight tracking-[-0.02em]">Openingstijden</h2>
+            </div>
+
+            <dl className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 text-[14px]">
+              <dt>Maandag–zaterdag</dt>
+              <dd className="text-right font-semibold text-[#3B7F4B]">10:00–21:00</dd>
+              <dt>Zondag</dt>
+              <dd className="text-right font-semibold text-[#3B7F4B]">Gesloten</dd>
+            </dl>
+
+            <p className="mb-5 mt-[15px] text-[13px] leading-relaxed text-[#3B7F4B]/80">
+              Geen winkel. Bezoek en afgifte alleen op afspraak.
             </p>
 
-            <div className="space-y-2.5 pt-2 text-xs text-[#203728]">
-              <div className="flex items-start gap-2.5">
-                <MapPin className="w-4 h-4 text-[#3B7F4B] shrink-0 mt-0.5" />
-                <span>
-                  <strong className="text-[#244A30]">{SLIJPMAAT_INFO.fullAddress}</strong>
-                  <br />
-                  <span className="text-[#657068]">{SLIJPMAAT_INFO.addressNote}</span>
-                </span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Clock className="w-4 h-4 text-[#3B7F4B] shrink-0" />
-                <span>Openingstijden: {SLIJPMAAT_INFO.hours}</span>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Phone className="w-4 h-4 text-[#3B7F4B] shrink-0" />
-                <a href={`tel:${SLIJPMAAT_INFO.whatsappNumber}`} className="font-semibold hover:underline">
-                  {SLIJPMAAT_INFO.whatsappDisplay}
-                </a>
-              </div>
-              <div className="flex items-center gap-2.5">
-                <Mail className="w-4 h-4 text-[#3B7F4B] shrink-0" />
-                <a href={`mailto:${SLIJPMAAT_INFO.email}`} className="font-semibold hover:underline">
-                  {SLIJPMAAT_INFO.email}
-                </a>
-              </div>
-            </div>
-
-            <div className="pt-2 flex flex-wrap items-center gap-2.5">
+            <div className="flex items-center gap-2.5">
               <a
-                href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een vraag over het slijpen van mijn messen!')}`}
+                href="https://www.instagram.com/slijpmaat.nl/"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#3B7F4B] text-white font-bold text-xs hover:bg-[#244A30] transition-colors"
+                aria-label="Slijpmaat op Instagram"
+                className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[#3B7F4B] bg-[#3B7F4B] text-white transition-all duration-200 hover:-translate-y-[3px] hover:bg-[#FAFAFA] hover:text-[#3B7F4B] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]"
               >
-                <MessageCircle className="w-4 h-4" />
-                <span>Stuur je Maat een appje</span>
+                <Instagram className="h-[19px] w-[19px]" aria-hidden="true" />
               </a>
-
               <a
-                href="https://www.google.com/maps/place/Slijpmaat.nl/@52.1032142,5.1191271,17z/data=!3m1!4b1!4m6!3m5!1s0x2db61c15d9f3a351:0x81e0896d1578558b!8m2!3d52.1032142!4d5.1191271!16s%2Fg%2F11njwnblms"
+                href="https://www.facebook.com/profile.php?id=61589739536849"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-full bg-[#E8EFE8] text-[#244A30] font-semibold text-xs hover:bg-[#d5e2d5] transition-colors"
+                aria-label="Slijpmaat op Facebook"
+                className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[#3B7F4B] bg-[#3B7F4B] text-white transition-all duration-200 hover:-translate-y-[3px] hover:bg-[#FAFAFA] hover:text-[#3B7F4B] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]"
               >
-                <span>Bekijk op Google</span>
-                <ExternalLink className="w-3 h-3 text-[#3B7F4B]" />
+                <Facebook className="h-[19px] w-[19px]" aria-hidden="true" />
               </a>
             </div>
-          </div>
-
-          {/* Col 3: Diensten & Doelgroep */}
-          <div className="space-y-3">
-            <h4 className="text-xs uppercase tracking-wider font-bold text-[#244A30] font-heading">
-              Diensten &amp; Doelgroep
-            </h4>
-            <ul className="space-y-2 text-sm text-[#203728]">
-              <li>
-                <button
-                  onClick={() => handleNav('particulieren')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Voor Particulieren &amp; Thuiskoks
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('horeca')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Voor Horeca &amp; Restaurants
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('dienst-keukenmessen')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Keukenmessen slijpen
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('dienst-japanse-messen')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Japanse messen slijpen
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('dienst-chips-herstellen')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Chips &amp; beschadigingen herstellen
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('dienst-wel-niet')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer font-medium"
-                >
-                  Wat slijpen we wel &amp; niet?
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 4: Slijpen & Bestellen */}
-          <div className="space-y-3">
-            <h4 className="text-xs uppercase tracking-wider font-bold text-[#244A30] font-heading">
-              Slijpen &amp; Bestellen
-            </h4>
-            <ul className="space-y-2 text-sm text-[#203728]">
-              <li>
-                <button
-                  onClick={() => handleNav('werkwijze')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Onze Whetstone Werkwijze
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('prijzen-bestellen')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer font-bold text-[#3B7F4B]"
-                >
-                  Prijzen &amp; direct bestellen
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('ophalen-bezorgen')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Ophalen, bezorgen &amp; langsbrengen
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('reviews')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Reviews &amp; Resultaten
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('faq')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Veelgestelde vragen (FAQ)
-                </button>
-              </li>
-            </ul>
-          </div>
-
-          {/* Col 5: Bedrijf & Informatie */}
-          <div className="space-y-3">
-            <h4 className="text-xs uppercase tracking-wider font-bold text-[#244A30] font-heading">
-              Bedrijf &amp; Kennis
-            </h4>
-            <ul className="space-y-2 text-sm text-[#203728]">
-              <li>
-                <button
-                  onClick={() => handleNav('kennisbank')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Kennisbank over messen
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('over-ons')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Over Teun &amp; Mike
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('contact')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer"
-                >
-                  Contact &amp; Afspraak maken
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('algemene-voorwaarden')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer text-xs text-[#657068]"
-                >
-                  Algemene voorwaarden
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => handleNav('privacy')}
-                  className="hover:text-[#3B7F4B] transition-colors text-left cursor-pointer text-xs text-[#657068]"
-                >
-                  Privacyverklaring
-                </button>
-              </li>
-            </ul>
-          </div>
+          </section>
         </div>
 
-        {/* Bottom bar */}
-        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-[#657068]">
-          <p>© {new Date().getFullYear()} Slijpmaat.nl &middot; Gerard Noodtstraat 57, Utrecht &middot; Alle rechten voorbehouden.</p>
-          <div className="flex items-center gap-4">
-            <span className="text-[#3B7F4B] font-semibold">Handgeslepen op Shapton Pro whetstones</span>
-            <span>&middot;</span>
-            <span>Meer snijden, minder zagen!</span>
+        <div className="mt-[38px] flex flex-col-reverse items-start gap-6 border-t border-[#3B7F4B]/25 pt-[22px] text-left text-[13px] sm:mt-[52px] sm:flex-row sm:items-center sm:justify-between">
+          <p>© {new Date().getFullYear()} Slijpmaat.nl. Alle rechten voorbehouden.</p>
+          <div className="flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-x-[22px]">
+            <button type="button" onClick={() => handleNav('algemene-voorwaarden')} className="cursor-pointer transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]">
+              Algemene voorwaarden
+            </button>
+            <button type="button" onClick={() => handleNav('privacy')} className="cursor-pointer transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]">
+              Privacyverklaring
+            </button>
           </div>
         </div>
       </div>

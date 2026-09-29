@@ -1,17 +1,7 @@
 import React from 'react';
+import { ArrowRight, Check, MapPin, MessageCircle } from 'lucide-react';
+import { EmbeddedCalculator } from '../components/EmbeddedCalculator';
 import { PageId } from '../types';
-import { SLIJPMAAT_INFO } from '../data/siteData';
-import { Calculator } from '../components/Calculator';
-import {
-  ShieldCheck,
-  CheckCircle,
-  Clock,
-  MessageCircle,
-  HelpCircle,
-  AlertCircle,
-  Sparkles,
-  Check
-} from 'lucide-react';
 
 interface PrijzenBestellenPageProps {
   onNavigate: (page: PageId) => void;
@@ -19,155 +9,60 @@ interface PrijzenBestellenPageProps {
 
 export const PrijzenBestellenPage: React.FC<PrijzenBestellenPageProps> = ({ onNavigate }) => {
   return (
-    <div className="space-y-12 pb-20 bg-[#FAFAFA]">
-      {/* Header Banner */}
-      <section className="bg-[#244A30] text-white py-12 lg:py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="max-w-3xl space-y-3">
-            <span className="text-xs font-semibold text-[#162E1C] tracking-wider uppercase font-heading bg-[#A9C89E] px-3.5 py-1.5 rounded-full inline-block">
-              Scherpe prijzen voor scherpe messen
+    <div className="bg-[#FAFAFA] pb-16 sm:pb-20">
+      <section className="bg-[#244A30] py-12 text-white sm:py-16">
+        <div className="mx-auto max-w-6xl px-4 sm:px-6 lg:px-8">
+          <div className="max-w-3xl space-y-4">
+            <span className="inline-block rounded-full bg-[#A9C89E] px-3.5 py-1.5 font-heading text-xs font-semibold uppercase tracking-wider text-[#162E1C]">
+              Prijs berekenen en bestellen
             </span>
-            <h1 className="text-4xl sm:text-5xl font-extrabold font-heading text-white tracking-tight">
-              Prijzen &amp; direct bestellen.
+            <h1 className="font-heading text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+              Plan je slijpbeurt
             </h1>
-            <p className="text-base sm:text-lg text-[#E8EFE8]/90 leading-relaxed">
-              Geen verborgen kosten. Bereken met de interactieve calculator jouw slijpkosten en verstuur direct een aanvraag via WhatsApp.
+            <p className="max-w-2xl text-base leading-relaxed text-[#E8EFE8] sm:text-lg">
+              Kies je messen, controleer de bezorgkosten en maak je aanvraag klaar voor WhatsApp. Je verstuurt het bericht altijd zelf.
             </p>
           </div>
         </div>
       </section>
 
-      {/* Prominent Highlight Banner: Geen verschil tussen Japanse en normale messen */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#E8EFE8] border-2 border-[#3B7F4B]/40 flex items-start sm:items-center gap-3.5 shadow-xs">
-          <div className="w-10 h-10 rounded-xl bg-[#3B7F4B] text-white flex items-center justify-center shrink-0">
-            <Sparkles className="w-5 h-5 text-white" />
+      <section className="mx-auto max-w-6xl px-4 py-7 sm:px-6 sm:py-9 lg:px-8">
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
+          <div className="flex items-center gap-3 rounded-2xl border border-[#d9e1d7] bg-white p-4">
+            <Check className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+            <span className="text-sm font-semibold text-[#244A30]">Alleen gladde messen</span>
           </div>
-          <div className="text-xs sm:text-sm text-[#162E1C] leading-relaxed">
-            <strong className="block font-heading text-base text-[#244A30]">
-              ✨ Eerlijk &amp; transparant: Geen meerprijs voor Japanse messen!
-            </strong>
-            Of het nu een Duits Wüsthof koksmes of een Japanse Santoku/Gyuto is: wij hanteren exact dezelfde scherpe prijs per formaat. Elk mes wordt met dezelfde uiterste zorg met de hand geslepen op waterstenen.
+          <div className="flex items-center gap-3 rounded-2xl border border-[#d9e1d7] bg-white p-4">
+            <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+            <span className="text-sm font-semibold text-[#244A30]">Bezorgprijs op basis van postcode</span>
           </div>
-        </div>
-      </section>
-
-      {/* Main Interactive Calculator Area */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <Calculator onOrderInitiated={() => {}} />
-      </section>
-
-      {/* Price Table Overview */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-6 sm:p-8 border border-[#d9e1d7] shadow-xs">
-          <h2 className="text-2xl font-bold font-heading text-[#244A30] mb-5">
-            Officieel Slijpmaat Tarievenoverzicht
-          </h2>
-
-          <div className="overflow-x-auto">
-            <table className="w-full text-left text-xs sm:text-sm divide-y divide-[#d9e1d7]">
-              <thead>
-                <tr className="text-[#657068] font-heading">
-                  <th className="py-3 font-semibold">Dienst / Formaat</th>
-                  <th className="py-3 font-semibold">Lemmetlengte</th>
-                  <th className="py-3 font-semibold text-right">Tarief (incl. btw)</th>
-                </tr>
-              </thead>
-              <tbody className="divide-y divide-[#F2F2EC] text-[#203728]">
-                <tr>
-                  <td className="py-3.5 font-medium text-[#244A30]">
-                    Klein mes <span className="text-[#657068] text-xs font-normal block sm:inline">(schilmes, officemes, petty)</span>
-                  </td>
-                  <td className="py-3.5 text-[#657068]">Korter dan 15 cm</td>
-                  <td className="py-3.5 text-right font-bold text-[#244A30]">€ 6,50</td>
-                </tr>
-                <tr className="bg-[#F7F4EC]/50">
-                  <td className="py-3.5 font-medium text-[#244A30]">
-                    Normaal mes <span className="text-[#3B7F4B] text-xs font-bold block sm:inline">[Populair] (santoku, koksmes, universeel)</span>
-                  </td>
-                  <td className="py-3.5 text-[#657068]">15 tot 20 cm</td>
-                  <td className="py-3.5 text-right font-bold text-[#3B7F4B]">€ 8,50</td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 font-medium text-[#244A30]">
-                    Groot mes <span className="text-[#657068] text-xs font-normal block sm:inline">(chefmes, gyuto, trancheermes)</span>
-                  </td>
-                  <td className="py-3.5 text-[#657068]">20 tot en met 25 cm</td>
-                  <td className="py-3.5 text-right font-bold text-[#244A30]">€ 10,50</td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 font-medium text-[#244A30]">
-                    Extra groot mes <span className="text-[#657068] text-xs font-normal block sm:inline">(zalmmes, slagersmes)</span>
-                  </td>
-                  <td className="py-3.5 text-[#657068]">Langer dan 25 cm</td>
-                  <td className="py-3.5 text-right font-bold text-[#E87B5B]">Op aanvraag</td>
-                </tr>
-                <tr className="bg-[#E8EFE8]/70">
-                  <td className="py-3.5 font-medium text-[#244A30]">
-                    StudentenMaat <span className="text-[#162E1C] text-xs block sm:inline">(op vertoon geldige collegekaart)</span>
-                  </td>
-                  <td className="py-3.5 text-[#244A30]/80">Alle formaten tot 25 cm</td>
-                  <td className="py-3.5 text-right font-bold text-[#162E1C]">€ 5,00 per mes</td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 font-medium text-[#244A30]">
-                    Kleine chip herstellen <span className="text-[#657068] text-xs font-normal block sm:inline">(&le; 2 mm hap uit snede)</span>
-                  </td>
-                  <td className="py-3.5 text-[#657068]">Toeslag per beschadigd mes</td>
-                  <td className="py-3.5 text-right font-bold text-[#E87B5B]">+€ 2,50</td>
-                </tr>
-                <tr>
-                  <td className="py-3.5 font-medium text-[#244A30]">
-                    Nieuw profiel / gebroken punt
-                  </td>
-                  <td className="py-3.5 text-[#657068]">Herprofileren bij zware schade</td>
-                  <td className="py-3.5 text-right font-bold text-[#E87B5B]">+€ 8,50</td>
-                </tr>
-                <tr className="bg-[#FAFAFA]">
-                  <td className="py-3.5 font-medium text-[#244A30]">
-                    Ophalen en bezorgen in Utrecht
-                  </td>
-                  <td className="py-3.5 text-[#657068]">Vast servicegebied</td>
-                  <td className="py-3.5 text-right font-bold text-[#3B7F4B]">
-                    Gratis vanaf 3 messen (€4,50 bij 1-2)
-                  </td>
-                </tr>
-                <tr className="bg-[#FAFAFA]">
-                  <td className="py-3.5 font-medium text-[#244A30]">
-                    Langsbrengen &amp; ophalen op afspraak
-                  </td>
-                  <td className="py-3.5 text-[#657068]">Utrecht (ook voor klanten buiten Utrecht)</td>
-                  <td className="py-3.5 text-right font-bold text-[#244A30]">Altijd gratis</td>
-                </tr>
-              </tbody>
-            </table>
+          <div className="flex items-center gap-3 rounded-2xl border border-[#d9e1d7] bg-white p-4">
+            <MessageCircle className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+            <span className="text-sm font-semibold text-[#244A30]">Aanvraag afronden via WhatsApp</span>
           </div>
         </div>
       </section>
 
-      {/* 3 Quick Assurance Blocks */}
-      <section className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs sm:text-sm">
-          <div className="bg-white p-5 rounded-2xl border border-[#d9e1d7] space-y-1.5">
-            <h3 className="font-bold text-[#244A30] text-sm">Betaling achteraf</h3>
-            <p className="text-[#657068] leading-relaxed">
-              Je betaalt pas wanneer de messen geslepen zijn en bij jou afgeleverd worden via Tikkie of zakelijke factuur.
-            </p>
-          </div>
+      <section className="mx-auto max-w-6xl px-2 sm:px-4 lg:px-6">
+        <div className="overflow-hidden rounded-3xl border border-[#d9e1d7] bg-white p-2 shadow-sm sm:p-4">
+          <EmbeddedCalculator />
+        </div>
+      </section>
 
-          <div className="bg-white p-5 rounded-2xl border border-[#d9e1d7] space-y-1.5">
-            <h3 className="font-bold text-[#244A30] text-sm">Altijd vooraf overleg</h3>
-            <p className="text-[#657068] leading-relaxed">
-              Zien we tijdens de inspectie onverwachte beschadigingen? We appen altijd eerst voordat we extra werkzaamheden uitvoeren.
-            </p>
+      <section className="mx-auto mt-10 max-w-5xl px-4 sm:px-6 lg:px-8">
+        <div className="flex flex-col items-start justify-between gap-5 rounded-3xl bg-[#E8EFE8] p-6 sm:flex-row sm:items-center sm:p-8">
+          <div>
+            <h2 className="font-heading text-xl font-bold text-[#244A30]">Eerst weten hoe we slijpen?</h2>
+            <p className="mt-1 text-sm text-[#657068]">Lees meer over onze stenen, slijphoeken en afwerking.</p>
           </div>
-
-          <div className="bg-white p-5 rounded-2xl border border-[#d9e1d7] space-y-1.5">
-            <h3 className="font-bold text-[#244A30] text-sm">Binnen 48 uur terug</h3>
-            <p className="text-[#657068] leading-relaxed">
-              Snel weer aan de slag. Binnen 48 uur na het ophalen heb je jouw vertrouwde messen vlijmscherp terug in de keuken.
-            </p>
-          </div>
+          <button
+            type="button"
+            onClick={() => onNavigate('werkwijze')}
+            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#244A30] transition-colors hover:bg-[#F7F4EC]"
+          >
+            Bekijk de werkwijze
+            <ArrowRight className="h-4 w-4" aria-hidden="true" />
+          </button>
         </div>
       </section>
     </div>
