@@ -13,7 +13,7 @@ const MAPS_URL = 'https://www.google.com/maps/place/Slijpmaat.nl/@52.1032142,5.1
 const QUICK_LINKS: Array<{ label: string; page: PageId }> = [
   { label: 'Over ons', page: 'over-ons' },
   { label: 'Werkwijze', page: 'werkwijze' },
-  { label: 'Prijzen & bestellen', page: 'prijzen-bestellen' },
+  { label: 'Plan mijn slijpbeurt', page: 'particulieren' },
   { label: 'Reviews', page: 'reviews' },
   { label: 'Veelgestelde vragen', page: 'faq' },
   { label: 'Contact', page: 'contact' },
@@ -30,7 +30,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   };
 
   return (
-    <footer className="border-t-2 border-[#3B7F4B] bg-[#FAFAFA] font-sans text-[15px] leading-[1.6] text-[#3B7F4B]">
+    <footer className="border-t-2 border-[#3B7F4B] bg-white font-sans text-[15px] leading-[1.6] text-[#3B7F4B]">
       <div className="mx-auto w-full max-w-[1180px] px-[22px] pb-[22px] pt-[46px] sm:px-7 sm:pb-6 sm:pt-16">
         <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-x-[50px] sm:gap-y-11 lg:grid-cols-4 lg:gap-12">
           <section className={columnClass} aria-label="Slijpmaat en Google">
@@ -111,7 +111,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Slijpmaat op Instagram"
-                className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[#3B7F4B] bg-[#3B7F4B] text-white transition-all duration-200 hover:-translate-y-[3px] hover:bg-[#FAFAFA] hover:text-[#3B7F4B] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]"
+                className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[#3B7F4B] bg-[#3B7F4B] text-white transition-all duration-200 hover:-translate-y-[3px] hover:bg-white hover:text-[#3B7F4B] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]"
               >
                 <Instagram className="h-[19px] w-[19px]" aria-hidden="true" />
               </a>
@@ -120,7 +120,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 target="_blank"
                 rel="noopener noreferrer"
                 aria-label="Slijpmaat op Facebook"
-                className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[#3B7F4B] bg-[#3B7F4B] text-white transition-all duration-200 hover:-translate-y-[3px] hover:bg-[#FAFAFA] hover:text-[#3B7F4B] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]"
+                className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[#3B7F4B] bg-[#3B7F4B] text-white transition-all duration-200 hover:-translate-y-[3px] hover:bg-white hover:text-[#3B7F4B] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]"
               >
                 <Facebook className="h-[19px] w-[19px]" aria-hidden="true" />
               </a>

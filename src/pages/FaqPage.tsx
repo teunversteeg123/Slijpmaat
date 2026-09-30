@@ -41,7 +41,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
           </div>
           <div className="relative flex flex-col gap-3 sm:flex-row">
             <a href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een vraag over het slijpen van mijn messen!')}`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-white px-6 py-3 text-sm font-bold text-[#3B7F4B] transition-colors hover:bg-[#F7F4EC]"><MessageCircle className="h-4 w-4" aria-hidden="true" /> Stel je vraag</a>
-            <button onClick={() => onNavigate('prijzen-bestellen')} className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full border border-white/50 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/10">Bekijk prijzen <ArrowRight className="h-4 w-4" aria-hidden="true" /></button>
+            <button onClick={() => onNavigate('particulieren')} className="inline-flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-full border border-white/50 px-6 py-3 text-sm font-bold text-white transition-colors hover:bg-white/10">Bekijk prijzen <ArrowRight className="h-4 w-4" aria-hidden="true" /></button>
           </div>
         </div>
       </section>

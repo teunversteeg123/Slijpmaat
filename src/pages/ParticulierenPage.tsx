@@ -1,30 +1,17 @@
 import React from 'react';
-import { PageId } from '../types';
 import { SLIJPMAAT_INFO, FAQS } from '../data/siteData';
+import { EmbeddedCalculator } from '../components/EmbeddedCalculator';
 import {
   ArrowRight,
   ShieldCheck,
-  CheckCircle,
-  Clock,
   Sparkles,
   Utensils,
-  Package,
-  GraduationCap,
   MessageCircle,
-  HelpCircle,
-  AlertCircle,
-  Bike,
-  Check,
-  MapPin,
-  ChevronDown
 } from 'lucide-react';
 
-interface ParticulierenPageProps {
-  onNavigate: (page: PageId) => void;
-}
-
-export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate }) => {
+export const ParticulierenPage: React.FC = () => {
   const particulierFaqs = FAQS.slice(0, 4);
+  const scrollToCalculator = () => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
 
   return (
     <div className="space-y-14 pb-20 bg-[#FAFAFA]">
@@ -44,10 +31,11 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
             </p>
             <div className="pt-2 flex flex-wrap items-center gap-3">
               <button
-                onClick={() => onNavigate('prijzen-bestellen')}
+                type="button"
+                onClick={scrollToCalculator}
                 className="px-6 py-3.5 rounded-full bg-white hover:bg-[#E8EFE8] text-[#244A30] font-bold text-sm transition-all shadow-xs flex items-center gap-2 cursor-pointer"
               >
-                <span>Plan je slijpbeurt / Rekenmodule</span>
+                <span>Plan je slijpbeurt</span>
                 <ArrowRight className="w-4 h-4 text-[#244A30]" />
               </button>
               <a
@@ -60,6 +48,19 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
                 <span>Stuur je Maat een appje</span>
               </a>
             </div>
+          </div>
+        </div>
+      </section>
+
+      <section id="calculator" className="scroll-mt-28 px-2 sm:px-4 lg:px-6">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-6 px-2 text-center sm:mb-8">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Plan mijn slijpbeurt</p>
+            <h2 className="mt-3 font-heading text-3xl font-bold text-[#244A30] sm:text-4xl">Bereken direct je prijs</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-[#657068] sm:text-base">Kies je messen, controleer de bezorgkosten en maak je aanvraag klaar voor WhatsApp. Je verstuurt het bericht altijd zelf.</p>
+          </div>
+          <div className="overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-white p-2 shadow-sm sm:p-4">
+            <EmbeddedCalculator />
           </div>
         </div>
       </section>
@@ -146,7 +147,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
             </div>
 
             <div className="p-4 rounded-2xl bg-[#F7F4EC] border-2 border-[#3B7F4B]">
-              <span className="text-xs text-[#244A30] block font-semibold">15 - 20 cm (Populair)</span>
+              <span className="text-xs text-[#244A30] block font-semibold">15–19,99 cm (Populair)</span>
               <h4 className="font-bold text-[#244A30] text-base mt-0.5">Normaal mes</h4>
               <div className="text-2xl font-black font-heading text-[#244A30] my-1.5">€ 8,50</div>
               <p className="text-xs text-[#244A30]">Koksmes, Santoku, allround</p>
@@ -172,7 +173,8 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
               Gratis ophalen &amp; bezorgen in Utrecht vanaf 3 messen. Buiten Utrecht welkom op afspraak!
             </span>
             <button
-              onClick={() => onNavigate('prijzen-bestellen')}
+              type="button"
+              onClick={scrollToCalculator}
               className="px-6 py-3 rounded-full bg-[#E87B5B] hover:bg-[#C95E3E] text-white font-bold text-xs sm:text-sm transition-all shadow-xs flex items-center gap-2 cursor-pointer whitespace-nowrap"
             >
               <span>Bereken &amp; bestel</span>

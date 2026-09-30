@@ -125,7 +125,7 @@ export const ArtikelPage: React.FC<ArtikelPageProps> = ({
               <p className="text-xs text-[#E8EFE8]/80">Vanaf 3 messen gratis opgehaald en binnen 48 uur terug in Utrecht.</p>
             </div>
             <button
-              onClick={() => onNavigate('prijzen-bestellen')}
+              onClick={() => onNavigate('particulieren')}
               className="px-6 py-3 rounded-full bg-white hover:bg-[#E8EFE8] text-[#244A30] font-bold text-xs whitespace-nowrap transition-colors shadow cursor-pointer"
             >
               Plan je slijpbeurt

@@ -157,7 +157,7 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
             </p>
           </div>
           <button
-            onClick={() => onNavigate('prijzen-bestellen')}
+            onClick={() => onNavigate('particulieren')}
             className="px-6 py-3.5 rounded-full bg-white hover:bg-[#E8EFE8] text-[#244A30] font-bold text-xs sm:text-sm transition-colors whitespace-nowrap cursor-pointer shadow"
           >
             Plan je slijpbeurt

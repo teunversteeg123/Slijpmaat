@@ -11,10 +11,8 @@ import { MessageCircle, ArrowRight } from 'lucide-react';
 import { HomePage } from './pages/HomePage';
 import { ParticulierenPage } from './pages/ParticulierenPage';
 import { HorecaPage } from './pages/HorecaPage';
-import { DienstenPage } from './pages/DienstenPage';
 import { DienstDetailPage } from './pages/DienstDetailPage';
 import { WerkwijzePage } from './pages/WerkwijzePage';
-import { PrijzenBestellenPage } from './pages/PrijzenBestellenPage';
 import { ServicegebiedPage } from './pages/ServicegebiedPage';
 import { KennisbankPage } from './pages/KennisbankPage';
 import { ArtikelPage } from './pages/ArtikelPage';
@@ -46,12 +44,18 @@ export default function App() {
   // Sync window hash for easy browser bookmarking / back navigation
   useEffect(() => {
     const handleHashChange = () => {
-      const hash = window.location.hash.replace('#', '') as PageId;
+      const hash = window.location.hash.replace('#', '');
+      if (hash === 'home-contact') {
+        setCurrentPage('home');
+        window.setTimeout(() => {
+          document.getElementById('home-contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 60);
+        return;
+      }
       const validPages: PageId[] = [
         'home',
         'particulieren',
         'horeca',
-        'diensten',
         'dienst-keukenmessen',
         'dienst-japanse-messen',
         'dienst-chips-herstellen',
@@ -68,8 +72,11 @@ export default function App() {
         'algemene-voorwaarden',
         'privacy'
       ];
-      if (validPages.includes(hash)) {
-        setCurrentPage(hash);
+      if (validPages.includes(hash as PageId)) {
+        setCurrentPage(hash as PageId);
+      } else if (hash) {
+        setCurrentPage('home');
+        window.history.replaceState(null, '', '#home');
       }
     };
 
@@ -83,13 +90,11 @@ export default function App() {
   const renderCurrentPage = () => {
     switch (currentPage) {
       case 'home':
-        return <HomePage />;
+        return <HomePage onNavigate={handleNavigate} />;
       case 'particulieren':
-        return <ParticulierenPage onNavigate={handleNavigate} />;
+        return <ParticulierenPage />;
       case 'horeca':
         return <HorecaPage onNavigate={handleNavigate} />;
-      case 'diensten':
-        return <DienstenPage onNavigate={handleNavigate} />;
       case 'dienst-keukenmessen':
       case 'dienst-japanse-messen':
       case 'dienst-chips-herstellen':
@@ -98,7 +103,7 @@ export default function App() {
       case 'werkwijze':
         return <WerkwijzePage onNavigate={handleNavigate} />;
       case 'prijzen-bestellen':
-        return <PrijzenBestellenPage onNavigate={handleNavigate} />;
+        return <ParticulierenPage />;
       case 'ophalen-bezorgen':
         return <ServicegebiedPage onNavigate={handleNavigate} />;
       case 'kennisbank':
@@ -114,7 +119,7 @@ export default function App() {
       case 'over-ons':
         return <OverOnsPage onNavigate={handleNavigate} />;
       case 'reviews':
-        return <ReviewsPage onNavigate={handleNavigate} />;
+        return <ReviewsPage />;
       case 'faq':
         return <FaqPage onNavigate={handleNavigate} />;
       case 'contact':
@@ -124,7 +129,7 @@ export default function App() {
       case 'privacy':
         return <PrivacyPage onNavigate={handleNavigate} />;
       default:
-        return <HomePage />;
+        return <HomePage onNavigate={handleNavigate} />;
     }
   };
 
@@ -154,7 +159,7 @@ export default function App() {
         </a>
 
         <button
-          onClick={() => handleNavigate('prijzen-bestellen')}
+          onClick={() => handleNavigate('particulieren')}
           className="flex-1 py-3 px-3 rounded-full bg-[#E87B5B] active:bg-[#C95E3E] text-white font-bold text-xs flex items-center justify-center gap-1 shadow-2xs active:scale-[0.98] transition-all min-h-[46px]"
         >
           <span className="truncate">Plan slijpbeurt</span>

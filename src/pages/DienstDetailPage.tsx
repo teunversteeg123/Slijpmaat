@@ -113,7 +113,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
 
                 <div className="pt-2">
                   <button
-                    onClick={() => onNavigate('prijzen-bestellen')}
+                    onClick={() => onNavigate('particulieren')}
                     className="w-full py-3 rounded-full bg-[#E87B5B] hover:bg-[#C95E3E] text-white font-bold text-xs transition-colors shadow cursor-pointer text-center"
                   >
                     Bereken &amp; bestel
@@ -219,7 +219,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
 
                 <div className="pt-2">
                   <button
-                    onClick={() => onNavigate('prijzen-bestellen')}
+                    onClick={() => onNavigate('particulieren')}
                     className="w-full py-3 rounded-full bg-[#E87B5B] hover:bg-[#C95E3E] text-white font-bold text-xs transition-colors shadow cursor-pointer text-center"
                   >
                     Plan je slijpbeurt
@@ -412,7 +412,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
 
         <div className="mt-12 text-center">
           <button
-            onClick={() => onNavigate('prijzen-bestellen')}
+            onClick={() => onNavigate('particulieren')}
             className="px-8 py-3.5 rounded-full bg-[#E87B5B] hover:bg-[#C95E3E] text-white font-bold text-sm transition-all shadow cursor-pointer inline-flex items-center gap-2"
           >
             <span>Plan je slijpbeurt met je gladde messen</span>

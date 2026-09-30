@@ -191,7 +191,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
             </p>
           </div>
           <button
-            onClick={() => onNavigate('prijzen-bestellen')}
+            onClick={() => onNavigate('particulieren')}
             className="px-8 py-4 rounded-full bg-white text-[#244A30] font-bold text-sm hover:bg-[#F7F4EC] transition-all shadow-xs cursor-pointer whitespace-nowrap"
           >
             Plan je slijpbeurt
