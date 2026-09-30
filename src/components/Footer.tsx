@@ -14,6 +14,7 @@ const QUICK_LINKS: Array<{ label: string; page: PageId }> = [
   { label: 'Over ons', page: 'over-ons' },
   { label: 'Werkwijze', page: 'werkwijze' },
   { label: 'Plan mijn slijpbeurt', page: 'particulieren' },
+  { label: 'Buiten Utrecht, wat nu?', page: 'buiten-utrecht' },
   { label: 'Reviews', page: 'reviews' },
   { label: 'Veelgestelde vragen', page: 'faq' },
   { label: 'Contact', page: 'contact' },
@@ -30,7 +31,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   };
 
   return (
-    <footer className="border-t-2 border-[#3B7F4B] bg-white font-sans text-[15px] leading-[1.6] text-[#3B7F4B]">
+    <footer className="bg-white font-sans text-[15px] leading-[1.6] text-[#3B7F4B]">
       <div className="mx-auto w-full max-w-[1180px] px-[22px] pb-[22px] pt-[46px] sm:px-7 sm:pb-6 sm:pt-16">
         <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-x-[50px] sm:gap-y-11 lg:grid-cols-4 lg:gap-12">
           <section className={columnClass} aria-label="Slijpmaat en Google">
@@ -38,10 +39,10 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={() => handleNav('home')}
-                className="-ml-4 cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] sm:-ml-5"
+                className="cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] p-0 flex items-center text-left"
                 aria-label="Slijpmaat home"
               >
-                <SlijpmaatLogo variant="dark" className="[&_img]:h-auto [&_img]:w-[210px] sm:[&_img]:w-[220px]" />
+                <SlijpmaatLogo variant="dark" className="[&_img]:h-10 sm:[&_img]:h-11 [&_img]:w-auto block" />
               </button>
             </div>
 

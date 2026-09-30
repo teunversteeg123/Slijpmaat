@@ -34,7 +34,7 @@ export const SlijpmaatFaqSection: React.FC<SlijpmaatFaqSectionProps> = ({
                 id={`faq-question-${index}`}
                 className="group flex w-full cursor-pointer items-center justify-between gap-6 py-6 text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B7F4B] focus-visible:ring-offset-4 sm:py-7"
               >
-                <span className="font-heading text-lg font-bold leading-snug text-[#244A30] sm:text-xl">{faq.q}</span>
+                <span className="font-heading text-lg font-bold leading-snug text-[#3B7F4B] sm:text-xl">{faq.q}</span>
                 <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors ${isOpen ? 'bg-[#3B7F4B] text-white' : 'bg-[#E8EFE8] text-[#3B7F4B] group-hover:bg-[#DCE8DC]'}`}>
                   <Plus className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-45' : ''}`} aria-hidden="true" />
                 </span>

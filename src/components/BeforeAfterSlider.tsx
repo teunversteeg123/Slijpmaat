@@ -20,7 +20,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterProps> = ({
           <span className="text-xs font-bold uppercase tracking-wider text-[#3B7F4B] font-heading">
             Vakmanschap &middot; Zonder materiaalverlies
           </span>
-          <h3 className="text-xl sm:text-2xl font-bold font-heading text-[#244A30] mt-0.5">
+          <h3 className="text-xl sm:text-2xl font-bold font-heading text-[#3B7F4B] mt-0.5">
             {title}
           </h3>
           <p className="text-xs sm:text-sm text-[#657068] mt-1 max-w-xl">
@@ -33,7 +33,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterProps> = ({
           <button
             onClick={() => setActiveMode('slider')}
             className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
-              activeMode === 'slider' ? 'bg-[#3B7F4B] text-white shadow-xs' : 'text-[#244A30] hover:text-[#3B7F4B]'
+              activeMode === 'slider' ? 'bg-[#3B7F4B] text-white shadow-xs' : 'text-[#3B7F4B] hover:text-[#3B7F4B]'
             }`}
           >
             Vergelijkingsschuif
@@ -41,7 +41,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterProps> = ({
           <button
             onClick={() => setActiveMode('before')}
             className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
-              activeMode === 'before' ? 'bg-[#3B7F4B] text-white shadow-xs' : 'text-[#244A30] hover:text-[#3B7F4B]'
+              activeMode === 'before' ? 'bg-[#3B7F4B] text-white shadow-xs' : 'text-[#3B7F4B] hover:text-[#3B7F4B]'
             }`}
           >
             Vóór slijpen (Bot &amp; Chip)
@@ -49,7 +49,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterProps> = ({
           <button
             onClick={() => setActiveMode('after')}
             className={`px-3 py-1.5 text-xs font-semibold rounded-lg transition-colors cursor-pointer ${
-              activeMode === 'after' ? 'bg-[#3B7F4B] text-white shadow-xs' : 'text-[#244A30] hover:text-[#3B7F4B]'
+              activeMode === 'after' ? 'bg-[#3B7F4B] text-white shadow-xs' : 'text-[#3B7F4B] hover:text-[#3B7F4B]'
             }`}
           >
             Na Slijpmaat (Vlijmscherp)
@@ -161,7 +161,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterProps> = ({
         <div className="absolute top-4 left-4 bg-white/90 border border-[#E87B5B] px-3 py-1 rounded-lg text-xs font-semibold text-[#C95E3E]">
           Vóór: Botte afgeronde snede met chip
         </div>
-        <div className="absolute top-4 right-4 bg-white/90 border border-[#3B7F4B] px-3 py-1 rounded-lg text-xs font-semibold text-[#244A30]">
+        <div className="absolute top-4 right-4 bg-white/90 border border-[#3B7F4B] px-3 py-1 rounded-lg text-xs font-semibold text-[#3B7F4B]">
           Na Slijpmaat: Strakke 15&deg; whetstone apex
         </div>
 
@@ -184,7 +184,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterProps> = ({
         <div className="flex items-start gap-2.5">
           <AlertTriangle className="w-4 h-4 text-[#E87B5B] shrink-0 mt-0.5" />
           <div>
-            <span className="font-bold text-[#244A30]">1. Aangeleverde staat</span>
+            <span className="font-bold text-[#3B7F4B]">1. Aangeleverde staat</span>
             <p className="text-[#657068] mt-0.5">Micro-chip van 1,8 mm in de buik, snede glijdt weg over tomatenvellen.</p>
           </div>
         </div>
@@ -192,7 +192,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterProps> = ({
         <div className="flex items-start gap-2.5">
           <Sparkles className="w-4 h-4 text-[#3B7F4B] shrink-0 mt-0.5" />
           <div>
-            <span className="font-bold text-[#244A30]">2. Slijpmaat Behandeling</span>
+            <span className="font-bold text-[#3B7F4B]">2. Slijpmaat Behandeling</span>
             <p className="text-[#657068] mt-0.5">Shapton Pro 320 profielherstel &rarr; 1000 &rarr; 5000 &rarr; Lederen strop.</p>
           </div>
         </div>
@@ -200,7 +200,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterProps> = ({
         <div className="flex items-start gap-2.5">
           <CheckCircle2 className="w-4 h-4 text-[#3B7F4B] shrink-0 mt-0.5" />
           <div>
-            <span className="font-bold text-[#244A30]">3. Vlijmscherp resultaat</span>
+            <span className="font-bold text-[#3B7F4B]">3. Vlijmscherp resultaat</span>
             <p className="text-[#657068] mt-0.5">Zuivere symmetrische snijkant, minimale staalafname, mes snijdt weer moeiteloos.</p>
           </div>
         </div>

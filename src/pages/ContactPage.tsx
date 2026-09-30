@@ -60,7 +60,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               <div className="w-12 h-12 rounded-2xl bg-[#25D366] text-white flex items-center justify-center">
                 <MessageCircle className="w-6 h-6 fill-white" />
               </div>
-              <h2 className="text-xl font-bold font-heading text-[#244A30]">
+              <h2 className="text-xl font-bold font-heading text-[#3B7F4B]">
                 Het snelst: stuur een WhatsApp
               </h2>
               <p className="text-xs sm:text-sm text-slate-700 leading-relaxed">
@@ -120,7 +120,7 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
             {submitted ? (
               <div className="p-8 rounded-2xl bg-[#E8EFE8] border border-[#A9C89E] text-center space-y-3">
                 <CheckCircle className="w-10 h-10 text-[#3B7F4B] mx-auto" />
-                <h3 className="text-xl font-bold font-heading text-[#244A30]">
+                <h3 className="text-xl font-bold font-heading text-[#3B7F4B]">
                   Bericht verzonden!
                 </h3>
                 <p className="text-xs sm:text-sm text-slate-700">

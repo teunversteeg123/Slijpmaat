@@ -95,7 +95,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
               <span className="text-xs uppercase tracking-wider font-bold text-[#3B7F4B] font-heading">
                 De wetenschap van scherpte
               </span>
-              <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-[#244A30]">
+              <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-[#3B7F4B]">
                 Whetstones vs. droge slijpmachines
               </h2>
               <p className="text-xs sm:text-sm text-[#203728] leading-relaxed">
@@ -105,13 +105,13 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                 <div className="flex items-start gap-2.5">
                   <AlertTriangle className="w-4 h-4 text-[#E87B5B] shrink-0 mt-0.5" />
                   <span>
-                    <strong className="text-[#244A30]">Het gevaar van droge machines:</strong> Een ronddraaiende schuurband creëert binnen 2 seconden een temperatuur van &gt;200°C op de uiterste snede. Het staal ontlaat, wordt zacht en blijft na het slijpen nog maar heel even scherp.
+                    <strong className="text-[#3B7F4B]">Het gevaar van droge machines:</strong> Een ronddraaiende schuurband creëert binnen 2 seconden een temperatuur van &gt;200°C op de uiterste snede. Het staal ontlaat, wordt zacht en blijft na het slijpen nog maar heel even scherp.
                   </span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <CheckCircle className="w-4 h-4 text-[#3B7F4B] shrink-0 mt-0.5" />
                   <span>
-                    <strong className="text-[#244A30]">Het voordeel van Japanse waterstenen:</strong> De stenen worden constant gespoeld met water. Geen wrijvingshitte, 100% behoud van de fabrieksgeharde kristalstructuur en minimale staalafname.
+                    <strong className="text-[#3B7F4B]">Het voordeel van Japanse waterstenen:</strong> De stenen worden constant gespoeld met water. Geen wrijvingshitte, 100% behoud van de fabrieksgeharde kristalstructuur en minimale staalafname.
                   </span>
                 </div>
               </div>
@@ -120,7 +120,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
             {/* Clean Grit Progression Diagram (Replacing previous photo) */}
             <div className="bg-[#F7F4EC] rounded-2xl p-6 border border-[#d9e1d7] space-y-4">
               <div className="flex items-center justify-between pb-3 border-b border-[#d9e1d7]">
-                <h3 className="font-bold font-heading text-sm text-[#244A30]">
+                <h3 className="font-bold font-heading text-sm text-[#3B7F4B]">
                   Onze Shapton Pro Waterstenenreeks
                 </h3>
                 <span className="text-[11px] font-bold text-[#3B7F4B]">Watergekoeld</span>
@@ -130,11 +130,11 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                 {gritStages.map((stage, i) => (
                   <div key={i} className="p-2.5 rounded-xl bg-white border border-[#d9e1d7] flex items-center justify-between gap-3 text-xs">
                     <div className="flex items-center gap-2.5">
-                      <span className="w-14 text-center py-1 px-1.5 rounded bg-[#E8EFE8] font-mono font-bold text-[#244A30] text-[11px]">
+                      <span className="w-14 text-center py-1 px-1.5 rounded bg-[#E8EFE8] font-mono font-bold text-[#3B7F4B] text-[11px]">
                         {stage.grit}
                       </span>
                       <div>
-                        <span className="font-bold text-[#244A30] block">{stage.name}</span>
+                        <span className="font-bold text-[#3B7F4B] block">{stage.name}</span>
                         <span className="text-[#657068] text-[11px]">{stage.purpose}</span>
                       </div>
                     </div>
@@ -152,7 +152,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
           <span className="text-xs uppercase tracking-wider font-bold text-[#3B7F4B] font-heading">
             Stap voor stap
           </span>
-          <h2 className="text-3xl sm:text-4xl font-extrabold font-heading text-[#244A30] mt-1">
+          <h2 className="text-3xl sm:text-4xl font-extrabold font-heading text-[#3B7F4B] mt-1">
             Het volledige slijpproces
           </h2>
           <p className="text-xs sm:text-sm text-[#657068] mt-2">
@@ -167,7 +167,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                 <span className="text-2xl font-black font-heading text-[#3B7F4B] block mb-2">
                   {step.num}
                 </span>
-                <h3 className="font-bold text-base font-heading text-[#244A30] mb-2">
+                <h3 className="font-bold text-base font-heading text-[#3B7F4B] mb-2">
                   {step.title}
                 </h3>
                 <p className="text-xs text-[#203728] leading-relaxed">
@@ -192,7 +192,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
           </div>
           <button
             onClick={() => onNavigate('particulieren')}
-            className="px-8 py-4 rounded-full bg-white text-[#244A30] font-bold text-sm hover:bg-[#F7F4EC] transition-all shadow-xs cursor-pointer whitespace-nowrap"
+            className="px-8 py-4 rounded-full bg-white text-[#3B7F4B] font-bold text-sm hover:bg-[#F7F4EC] transition-all shadow-xs cursor-pointer whitespace-nowrap"
           >
             Plan je slijpbeurt
           </button>

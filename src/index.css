@@ -47,7 +47,7 @@
 .text-slijpmaat-green { color: #3B7F4B; }
 .text-slijpmaat-sage { color: #A9C89E; }
 .text-slijpmaat-coral { color: #E87B5B; }
-.text-slijpmaat-dark { color: #244A30; }
+.text-slijpmaat-dark { color: #3B7F4B; }
 
 .border-slijpmaat-green { border-color: #3B7F4B; }
 .border-slijpmaat-sage { border-color: #A9C89E; }
@@ -66,5 +66,5 @@
 .text-on-coral { color: #FFFFFF; }
 
 /* 4. On Cream/White: Use #244A30 or deep charcoal */
-.text-on-cream { color: #244A30; }
+.text-on-cream { color: #3B7F4B; }
 

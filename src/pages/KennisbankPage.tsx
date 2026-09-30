@@ -75,7 +75,7 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
                 onClick={() => setSelectedCategory(cat)}
                 className={`px-3.5 py-2 text-xs font-semibold rounded-xl transition-all cursor-pointer whitespace-nowrap ${
                   selectedCategory === cat
-                    ? 'bg-white text-[#244A30] shadow-sm font-bold'
+                    ? 'bg-white text-[#3B7F4B] shadow-sm font-bold'
                     : 'text-slate-600 hover:text-slate-900'
                 }`}
               >
@@ -158,7 +158,7 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
           </div>
           <button
             onClick={() => onNavigate('particulieren')}
-            className="px-6 py-3.5 rounded-full bg-white hover:bg-[#E8EFE8] text-[#244A30] font-bold text-xs sm:text-sm transition-colors whitespace-nowrap cursor-pointer shadow"
+            className="px-6 py-3.5 rounded-full bg-white hover:bg-[#E8EFE8] text-[#3B7F4B] font-bold text-xs sm:text-sm transition-colors whitespace-nowrap cursor-pointer shadow"
           >
             Plan je slijpbeurt
           </button>

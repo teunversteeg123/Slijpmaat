@@ -16,7 +16,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
         <div className="pointer-events-none absolute -right-20 bottom-2 h-52 w-52 rounded-[58%_42%_40%_60%/47%_52%_48%_53%] bg-[#F9E4DE]" aria-hidden="true" />
         <div className="relative mx-auto max-w-4xl text-center">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Vragen &amp; antwoorden</p>
-          <h1 className="mt-4 font-heading text-4xl font-bold tracking-tight text-[#244A30] sm:text-5xl lg:text-6xl">Alles wat je wilt weten over Slijpmaat</h1>
+          <h1 className="mt-4 font-heading text-4xl font-bold tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">Alles wat je wilt weten over Slijpmaat</h1>
           <p className="mx-auto mt-5 max-w-2xl text-base leading-8 text-[#657068] sm:text-lg">Van veilig meegeven tot bezorgen, betalen en het slijpen zelf. Hieronder vind je alle antwoorden overzichtelijk bij elkaar.</p>
         </div>
       </section>
@@ -25,7 +25,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.48fr_1fr] lg:gap-20">
           <aside className="lg:sticky lg:top-32 lg:self-start">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Veelgestelde vragen</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-[#244A30]">Snel naar het antwoord dat je zoekt</h2>
+            <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B]">Snel naar het antwoord dat je zoekt</h2>
             <p className="mt-4 text-sm leading-7 text-[#657068]">Open een vraag om het antwoord te bekijken. Staat jouw vraag er niet tussen? Stuur je Maat dan direct een bericht.</p>
           </aside>
           <SlijpmaatFaqSection defaultOpenIndex={0} />

@@ -48,14 +48,14 @@ export const DienstenPage: React.FC<DienstenPageProps> = ({ onNavigate }) => {
                 <span className="text-xs font-semibold text-[#3B7F4B] uppercase tracking-wide">
                   Europese &amp; allround messen
                 </span>
-                <h3 className="text-2xl font-bold font-heading text-[#244A30] mt-0.5">
+                <h3 className="text-2xl font-bold font-heading text-[#3B7F4B] mt-0.5">
                   Keukenmessen slijpen
                 </h3>
               </div>
               <p className="text-xs sm:text-sm text-[#203728] leading-relaxed">
                 Geschikt voor alle gladde keukenmessen: koksmessen, Sabatiers, Wüsthof, Zwilling, schilmessen en fileermessen. Geslepen op een robuuste en vlijmscherpe hoek van 15 tot 20 graden per zijde.
               </p>
-              <div className="pt-2 text-xs font-bold text-[#244A30]">
+              <div className="pt-2 text-xs font-bold text-[#3B7F4B]">
                 Tarieven: €6,50 (&lt;15cm) &middot; €8,50 (15-20cm) &middot; €10,50 (20-25cm)
               </div>
             </div>
@@ -63,7 +63,7 @@ export const DienstenPage: React.FC<DienstenPageProps> = ({ onNavigate }) => {
             <div className="pt-6">
               <button
                 onClick={() => onNavigate('dienst-keukenmessen')}
-                className="w-full py-3 px-5 rounded-full bg-[#E8EFE8] hover:bg-[#3B7F4B] hover:text-white text-[#244A30] font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer border border-[#A9C89E]/40"
+                className="w-full py-3 px-5 rounded-full bg-[#E8EFE8] hover:bg-[#3B7F4B] hover:text-white text-[#3B7F4B] font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer border border-[#A9C89E]/40"
               >
                 <span>Bekijk details keukenmessen</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -81,7 +81,7 @@ export const DienstenPage: React.FC<DienstenPageProps> = ({ onNavigate }) => {
                 <span className="text-xs font-semibold text-[#3B7F4B] uppercase tracking-wide">
                   Harde kern (VG-10, Aogami, Shirogami)
                 </span>
-                <h3 className="text-2xl font-bold font-heading text-[#244A30] mt-0.5">
+                <h3 className="text-2xl font-bold font-heading text-[#3B7F4B] mt-0.5">
                   Japanse messen slijpen
                 </h3>
               </div>
@@ -96,7 +96,7 @@ export const DienstenPage: React.FC<DienstenPageProps> = ({ onNavigate }) => {
             <div className="pt-6">
               <button
                 onClick={() => onNavigate('dienst-japanse-messen')}
-                className="w-full py-3 px-5 rounded-full bg-[#E8EFE8] hover:bg-[#3B7F4B] hover:text-white text-[#244A30] font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer border border-[#A9C89E]/40"
+                className="w-full py-3 px-5 rounded-full bg-[#E8EFE8] hover:bg-[#3B7F4B] hover:text-white text-[#3B7F4B] font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer border border-[#A9C89E]/40"
               >
                 <span>Bekijk details Japanse messen</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -114,7 +114,7 @@ export const DienstenPage: React.FC<DienstenPageProps> = ({ onNavigate }) => {
                 <span className="text-xs font-semibold text-[#E87B5B] uppercase tracking-wide">
                   Herstel bij beschadiging
                 </span>
-                <h3 className="text-2xl font-bold font-heading text-[#244A30] mt-0.5">
+                <h3 className="text-2xl font-bold font-heading text-[#3B7F4B] mt-0.5">
                   Chips en beschadigingen herstellen
                 </h3>
               </div>
@@ -129,7 +129,7 @@ export const DienstenPage: React.FC<DienstenPageProps> = ({ onNavigate }) => {
             <div className="pt-6">
               <button
                 onClick={() => onNavigate('dienst-chips-herstellen')}
-                className="w-full py-3 px-5 rounded-full bg-[#E8EFE8] hover:bg-[#3B7F4B] hover:text-white text-[#244A30] font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer border border-[#A9C89E]/40"
+                className="w-full py-3 px-5 rounded-full bg-[#E8EFE8] hover:bg-[#3B7F4B] hover:text-white text-[#3B7F4B] font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer border border-[#A9C89E]/40"
               >
                 <span>Bekijk reparatieservice</span>
                 <ArrowRight className="w-3.5 h-3.5" />
@@ -147,14 +147,14 @@ export const DienstenPage: React.FC<DienstenPageProps> = ({ onNavigate }) => {
                 <span className="text-xs font-semibold text-[#3B7F4B] uppercase tracking-wide">
                   Transparantie vooraf
                 </span>
-                <h3 className="text-2xl font-bold font-heading text-[#244A30] mt-0.5">
+                <h3 className="text-2xl font-bold font-heading text-[#3B7F4B] mt-0.5">
                   Wat slijpen we wel en niet?
                 </h3>
               </div>
               <p className="text-xs sm:text-sm text-[#203728] leading-relaxed">
                 Wij zijn gespecialiseerd in gladde keukenmessen. We slijpen géén tuinscharen, bijlen, beitels of zware industriële zaagbladen. Zo houden we onze whetstones 100% voedselveilig en zuiver.
               </p>
-              <div className="pt-2 text-xs font-bold text-[#244A30]">
+              <div className="pt-2 text-xs font-bold text-[#3B7F4B]">
                 Lees de complete acceptatielijst
               </div>
             </div>
@@ -162,7 +162,7 @@ export const DienstenPage: React.FC<DienstenPageProps> = ({ onNavigate }) => {
             <div className="pt-6">
               <button
                 onClick={() => onNavigate('dienst-wel-niet')}
-                className="w-full py-3 px-5 rounded-full bg-white hover:bg-[#3B7F4B] hover:text-white text-[#244A30] font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer border border-[#d9e1d7]"
+                className="w-full py-3 px-5 rounded-full bg-white hover:bg-[#3B7F4B] hover:text-white text-[#3B7F4B] font-bold text-xs transition-all flex items-center justify-center gap-2 cursor-pointer border border-[#d9e1d7]"
               >
                 <span>Bekijk wat we wel &amp; niet slijpen</span>
                 <ArrowRight className="w-3.5 h-3.5" />

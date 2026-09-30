@@ -4,9 +4,6 @@ import { ARTICLES } from './data/siteData';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 
-import { SLIJPMAAT_INFO } from './data/siteData';
-import { MessageCircle, ArrowRight } from 'lucide-react';
-
 // Pages
 import { HomePage } from './pages/HomePage';
 import { ParticulierenPage } from './pages/ParticulierenPage';
@@ -14,6 +11,7 @@ import { HorecaPage } from './pages/HorecaPage';
 import { DienstDetailPage } from './pages/DienstDetailPage';
 import { WerkwijzePage } from './pages/WerkwijzePage';
 import { ServicegebiedPage } from './pages/ServicegebiedPage';
+import { BuitenUtrechtPage } from './pages/BuitenUtrechtPage';
 import { KennisbankPage } from './pages/KennisbankPage';
 import { ArtikelPage } from './pages/ArtikelPage';
 import { OverOnsPage } from './pages/OverOnsPage';
@@ -63,6 +61,7 @@ export default function App() {
         'werkwijze',
         'prijzen-bestellen',
         'ophalen-bezorgen',
+        'buiten-utrecht',
         'kennisbank',
         'artikel',
         'over-ons',
@@ -106,6 +105,8 @@ export default function App() {
         return <ParticulierenPage />;
       case 'ophalen-bezorgen':
         return <ServicegebiedPage onNavigate={handleNavigate} />;
+      case 'buiten-utrecht':
+        return <BuitenUtrechtPage onNavigate={handleNavigate} />;
       case 'kennisbank':
         return <KennisbankPage onNavigate={handleNavigate} onSelectArticle={handleSelectArticle} />;
       case 'artikel':
@@ -139,34 +140,12 @@ export default function App() {
       <Header currentPage={currentPage} onNavigate={handleNavigate} />
 
       {/* Main Page Area */}
-      <main className="flex-1 focus:outline-none pb-20 md:pb-0" tabIndex={-1}>
+      <main className="flex-1 focus:outline-none" tabIndex={-1}>
         {renderCurrentPage()}
       </main>
 
       {/* Footer */}
       <Footer onNavigate={handleNavigate} />
-
-      {/* Mobile Sticky Action Bar for maximum mobile conversion */}
-      <div className="md:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#d9e1d7] p-2.5 px-4 flex items-center justify-between gap-3 shadow-lg">
-        <a
-          href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!')}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex-1 py-3 px-3 rounded-full bg-[#3B7F4B] active:bg-[#244A30] text-white font-bold text-xs flex items-center justify-center gap-1.5 shadow-2xs active:scale-[0.98] transition-all min-h-[46px]"
-        >
-          <MessageCircle className="w-4 h-4 text-white shrink-0" />
-          <span className="truncate">WhatsApp je Maat</span>
-        </a>
-
-        <button
-          onClick={() => handleNavigate('particulieren')}
-          className="flex-1 py-3 px-3 rounded-full bg-[#E87B5B] active:bg-[#C95E3E] text-white font-bold text-xs flex items-center justify-center gap-1 shadow-2xs active:scale-[0.98] transition-all min-h-[46px]"
-        >
-          <span className="truncate">Plan slijpbeurt</span>
-          <ArrowRight className="w-3.5 h-3.5 text-white shrink-0" />
-        </button>
-      </div>
-
     </div>
   );
 }

@@ -30,15 +30,15 @@ export const PrijzenBestellenPage: React.FC<PrijzenBestellenPageProps> = ({ onNa
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           <div className="flex items-center gap-3 rounded-2xl border border-[#d9e1d7] bg-white p-4">
             <Check className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-            <span className="text-sm font-semibold text-[#244A30]">Alleen gladde messen</span>
+            <span className="text-sm font-semibold text-[#3B7F4B]">Alleen gladde messen</span>
           </div>
           <div className="flex items-center gap-3 rounded-2xl border border-[#d9e1d7] bg-white p-4">
             <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-            <span className="text-sm font-semibold text-[#244A30]">Bezorgprijs op basis van postcode</span>
+            <span className="text-sm font-semibold text-[#3B7F4B]">Bezorgprijs op basis van postcode</span>
           </div>
           <div className="flex items-center gap-3 rounded-2xl border border-[#d9e1d7] bg-white p-4">
             <MessageCircle className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-            <span className="text-sm font-semibold text-[#244A30]">Aanvraag afronden via WhatsApp</span>
+            <span className="text-sm font-semibold text-[#3B7F4B]">Aanvraag afronden via WhatsApp</span>
           </div>
         </div>
       </section>
@@ -52,13 +52,13 @@ export const PrijzenBestellenPage: React.FC<PrijzenBestellenPageProps> = ({ onNa
       <section className="mx-auto mt-10 max-w-5xl px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col items-start justify-between gap-5 rounded-3xl bg-[#E8EFE8] p-6 sm:flex-row sm:items-center sm:p-8">
           <div>
-            <h2 className="font-heading text-xl font-bold text-[#244A30]">Eerst weten hoe we slijpen?</h2>
+            <h2 className="font-heading text-xl font-bold text-[#3B7F4B]">Eerst weten hoe we slijpen?</h2>
             <p className="mt-1 text-sm text-[#657068]">Lees meer over onze stenen, slijphoeken en afwerking.</p>
           </div>
           <button
             type="button"
             onClick={() => onNavigate('werkwijze')}
-            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#244A30] transition-colors hover:bg-[#F7F4EC]"
+            className="inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-full bg-white px-5 py-2.5 text-sm font-bold text-[#3B7F4B] transition-colors hover:bg-[#F7F4EC]"
           >
             Bekijk de werkwijze
             <ArrowRight className="h-4 w-4" aria-hidden="true" />

@@ -56,19 +56,19 @@ export const GoogleReviewsSection: React.FC = () => {
 
   return (
     <section className="bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-      <div className="mx-auto max-w-[1100px] overflow-hidden rounded-[2.625rem] bg-[#FFF7F3] px-4 py-10 text-[#3B7F4B] sm:px-8 sm:py-16 lg:px-[46px] lg:py-[78px]">
-        <p className="mb-3 inline-flex items-center gap-2 font-heading text-[13px] font-extrabold uppercase tracking-[0.08em] before:h-0.5 before:w-[34px] before:rounded-full before:bg-[#3B7F4B]">
+      <div className="mx-auto max-w-[1100px] overflow-hidden rounded-[2.625rem] border border-[#d9e1d7] bg-[#F4F7F4] px-4 py-10 sm:px-8 sm:py-16 lg:px-[46px] lg:py-[78px]">
+        <p className="mb-3 inline-flex items-center gap-2 font-heading text-[13px] font-extrabold uppercase tracking-[0.08em] text-[#3B7F4B] before:h-0.5 before:w-[34px] before:rounded-full before:bg-[#3B7F4B]">
           Google reviews
         </p>
-        <h2 className="mb-7 max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.035em] sm:text-5xl lg:text-[64px]">
+        <h2 className="mb-7 max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.035em] text-[#3B7F4B] sm:text-5xl lg:text-[64px]">
           Scherpe woorden van blije klanten
         </h2>
 
-        <div className="mb-[18px] flex flex-col items-start justify-between gap-4 rounded-[18px] border border-[#3B7F4B]/20 bg-white px-5 py-[18px] shadow-[0_16px_38px_rgba(59,127,75,0.08)] sm:flex-row sm:items-center">
-          <div className="flex flex-wrap items-center gap-2.5 font-black">
+        <div className="mb-[18px] flex flex-col items-start justify-between gap-4 rounded-[18px] border border-[#d9e1d7] bg-white px-5 py-[18px] shadow-[0_8px_24px_rgba(36,74,48,0.05)] sm:flex-row sm:items-center">
+          <div className="flex flex-wrap items-center gap-2.5 font-black text-[#3B7F4B]">
             <span>Slijpmaat op Google</span>
             <span className="text-[22px] leading-none tracking-[1px] text-[#FFCD00]" aria-label="5 van de 5 sterren">★★★★★</span>
-            <span className="text-[14px] font-bold text-[#315F3B]">{GOOGLE_REVIEW_COUNT} reviews · 5,0 op Google</span>
+            <span className="text-[14px] font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews · 5,0 op Google</span>
           </div>
         </div>
 
@@ -80,33 +80,33 @@ export const GoogleReviewsSection: React.FC = () => {
           className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 pt-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         >
           {GOOGLE_REVIEWS.map((review) => (
-            <article key={review.name} className="min-h-[270px] min-w-full snap-start rounded-[20px] border border-[#3B7F4B]/20 bg-white p-6 shadow-[0_18px_44px_rgba(59,127,75,0.10)] sm:p-[34px] md:min-w-[calc((100%-1rem)/2)]">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#3B7F4B]/15 pb-4">
+            <article key={review.name} className="min-h-[270px] min-w-full snap-start rounded-[20px] border border-[#d9e1d7] bg-white p-6 shadow-[0_12px_32px_rgba(36,74,48,0.06)] sm:p-[34px] md:min-w-[calc((100%-1rem)/2)]">
+              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E8EFE8] pb-4">
                 <h3 className="font-heading text-[22px] font-black leading-[1.18] text-[#3B7F4B] sm:text-[26px]">{review.name}</h3>
                 <div className="inline-flex items-center gap-2 whitespace-nowrap text-[18px] font-black tracking-[1px] text-[#FFCD00]" aria-label="5 van de 5 sterren op Google">
                   <span>★★★★★</span>
                   <GoogleIcon />
                 </div>
               </div>
-              {review.text ? <p className="mt-5 text-[15px] leading-[1.65] text-[#315F3B] sm:text-[17px]">{review.text}</p> : null}
+              {review.text ? <p className="mt-5 text-[15px] leading-[1.65] text-[#4F6354] sm:text-[17px]">{review.text}</p> : null}
             </article>
           ))}
         </div>
 
         <div className="mt-[18px] flex gap-2.5">
-          <button type="button" onClick={() => moveTo(activeIndex - 1)} className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_12px_28px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#141414]" aria-label="Vorige review">
+          <button type="button" onClick={() => moveTo(activeIndex - 1)} className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_8px_20px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]" aria-label="Vorige review">
             <ChevronLeft className="h-5 w-5" aria-hidden="true" />
           </button>
-          <button type="button" onClick={() => moveTo(activeIndex + 1)} className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_12px_28px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#141414]" aria-label="Volgende review">
+          <button type="button" onClick={() => moveTo(activeIndex + 1)} className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_8px_20px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]" aria-label="Volgende review">
             <ChevronRight className="h-5 w-5" aria-hidden="true" />
           </button>
         </div>
 
-        <div className="mt-7 grid items-center gap-[18px] rounded-[20px] bg-[#3B7F4B] p-[22px] text-white shadow-[0_18px_44px_rgba(59,127,75,0.18)] sm:grid-cols-[1fr_auto]">
+        <div className="mt-7 grid items-center gap-[18px] rounded-[20px] bg-[#3B7F4B] p-[22px] text-white shadow-[0_16px_36px_rgba(59,127,75,0.18)] sm:grid-cols-[1fr_auto]">
           <p className="text-base font-extrabold leading-[1.45] text-white sm:text-[19px]">
             Heb je jouw messen laten slijpen? Deel je ervaring met je Maat en help anderen ook scherp kiezen.
           </p>
-          <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[42px] items-center justify-center rounded-full bg-white px-4 py-[11px] text-[14px] font-black text-[#3B7F4B] transition-colors hover:bg-[#FFF4EF] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#141414]">
+          <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[42px] items-center justify-center rounded-full bg-white px-5 py-[11px] text-[14px] font-black text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white">
             Schrijf een review
           </a>
         </div>

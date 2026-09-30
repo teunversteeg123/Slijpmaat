@@ -97,7 +97,7 @@ export const DesignSystemDrawer: React.FC<DesignSystemDrawerProps> = ({
                       }}
                       className={`text-left px-3.5 py-2.5 rounded-xl text-xs font-medium transition-all flex items-center justify-between cursor-pointer ${
                         isActive
-                          ? 'bg-[#E8EFE8] text-[#244A30] font-bold border border-[#3B7F4B]/30'
+                          ? 'bg-[#E8EFE8] text-[#3B7F4B] font-bold border border-[#3B7F4B]/30'
                           : 'hover:bg-slate-100 text-slate-700'
                       }`}
                     >
@@ -173,11 +173,11 @@ export const DesignSystemDrawer: React.FC<DesignSystemDrawerProps> = ({
                   <div className="font-bold">Donker Koraal</div>
                   <div className="text-[11px] opacity-80">#C95E3E</div>
                 </div>
-                <div className="p-3 rounded-xl bg-[#E8EFE8] text-[#244A30] border border-[#A9C89E]/40">
+                <div className="p-3 rounded-xl bg-[#E8EFE8] text-[#3B7F4B] border border-[#A9C89E]/40">
                   <div className="font-bold">Zachtgroen</div>
                   <div className="text-[11px] opacity-80">#E8EFE8</div>
                 </div>
-                <div className="p-3 rounded-xl bg-[#A9C89E] text-[#244A30]">
+                <div className="p-3 rounded-xl bg-[#A9C89E] text-[#3B7F4B]">
                   <div className="font-bold">Saliegroen</div>
                   <div className="text-[11px] opacity-80">#A9C89E</div>
                 </div>

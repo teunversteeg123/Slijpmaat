@@ -33,10 +33,10 @@ export const ParticulierenPage: React.FC = () => {
               <button
                 type="button"
                 onClick={scrollToCalculator}
-                className="px-6 py-3.5 rounded-full bg-white hover:bg-[#E8EFE8] text-[#244A30] font-bold text-sm transition-all shadow-xs flex items-center gap-2 cursor-pointer"
+                className="px-6 py-3.5 rounded-full bg-white hover:bg-[#E8EFE8] text-[#3B7F4B] font-bold text-sm transition-all shadow-xs flex items-center gap-2 cursor-pointer"
               >
                 <span>Plan je slijpbeurt</span>
-                <ArrowRight className="w-4 h-4 text-[#244A30]" />
+                <ArrowRight className="w-4 h-4 text-[#3B7F4B]" />
               </button>
               <a
                 href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Slijpmaat, ik ben particulier in Utrecht en wil graag mijn keukenmessen laten slijpen!')}`}
@@ -56,7 +56,7 @@ export const ParticulierenPage: React.FC = () => {
         <div className="mx-auto max-w-6xl">
           <div className="mb-6 px-2 text-center sm:mb-8">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Plan mijn slijpbeurt</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-[#244A30] sm:text-4xl">Bereken direct je prijs</h2>
+            <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Bereken direct je prijs</h2>
             <p className="mx-auto mt-3 max-w-2xl text-sm leading-7 text-[#657068] sm:text-base">Kies je messen, controleer de bezorgkosten en maak je aanvraag klaar voor WhatsApp. Je verstuurt het bericht altijd zelf.</p>
           </div>
           <div className="overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-white p-2 shadow-sm sm:p-4">
@@ -73,7 +73,7 @@ export const ParticulierenPage: React.FC = () => {
               <div className="w-10 h-10 rounded-xl bg-[#E8EFE8] text-[#3B7F4B] flex items-center justify-center font-bold">
                 <ShieldCheck className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-bold font-heading text-[#244A30]">
+              <h3 className="text-xl font-bold font-heading text-[#3B7F4B]">
                 Veiliger snijden
               </h3>
               <p className="text-xs sm:text-sm text-[#203728] leading-relaxed">
@@ -90,7 +90,7 @@ export const ParticulierenPage: React.FC = () => {
               <div className="w-10 h-10 rounded-xl bg-[#E8EFE8] text-[#3B7F4B] flex items-center justify-center font-bold">
                 <Utensils className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-bold font-heading text-[#244A30]">
+              <h3 className="text-xl font-bold font-heading text-[#3B7F4B]">
                 Minder tranen bij uien
               </h3>
               <p className="text-xs sm:text-sm text-[#203728] leading-relaxed">
@@ -107,7 +107,7 @@ export const ParticulierenPage: React.FC = () => {
               <div className="w-10 h-10 rounded-xl bg-[#A9C89E] text-[#162E1C] flex items-center justify-center font-bold">
                 <Sparkles className="w-5 h-5" />
               </div>
-              <h3 className="text-xl font-bold font-heading text-[#244A30]">
+              <h3 className="text-xl font-bold font-heading text-[#3B7F4B]">
                 Behoud van je mes
               </h3>
               <p className="text-xs sm:text-sm text-[#203728] leading-relaxed">
@@ -129,7 +129,7 @@ export const ParticulierenPage: React.FC = () => {
               <span className="text-xs font-bold uppercase tracking-wider text-[#3B7F4B] font-heading">
                 Transparante tarieven
               </span>
-              <h2 className="text-2xl font-bold font-heading text-[#244A30] mt-0.5">
+              <h2 className="text-2xl font-bold font-heading text-[#3B7F4B] mt-0.5">
                 Vaste prijzen voor particulieren
               </h2>
             </div>
@@ -141,28 +141,28 @@ export const ParticulierenPage: React.FC = () => {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="p-4 rounded-2xl bg-[#FAFAFA] border border-[#d9e1d7]">
               <span className="text-xs text-[#657068] block">&lt; 15 cm</span>
-              <h4 className="font-bold text-[#244A30] text-base mt-0.5">Klein mes</h4>
+              <h4 className="font-bold text-[#3B7F4B] text-base mt-0.5">Klein mes</h4>
               <div className="text-2xl font-black font-heading text-[#3B7F4B] my-1.5">€ 6,50</div>
               <p className="text-xs text-[#657068]">Schilmes, officemes, petty</p>
             </div>
 
             <div className="p-4 rounded-2xl bg-[#F7F4EC] border-2 border-[#3B7F4B]">
-              <span className="text-xs text-[#244A30] block font-semibold">15–19,99 cm (Populair)</span>
-              <h4 className="font-bold text-[#244A30] text-base mt-0.5">Normaal mes</h4>
-              <div className="text-2xl font-black font-heading text-[#244A30] my-1.5">€ 8,50</div>
-              <p className="text-xs text-[#244A30]">Koksmes, Santoku, allround</p>
+              <span className="text-xs text-[#3B7F4B] block font-semibold">15–19,99 cm (Populair)</span>
+              <h4 className="font-bold text-[#3B7F4B] text-base mt-0.5">Normaal mes</h4>
+              <div className="text-2xl font-black font-heading text-[#3B7F4B] my-1.5">€ 8,50</div>
+              <p className="text-xs text-[#3B7F4B]">Koksmes, Santoku, allround</p>
             </div>
 
             <div className="p-4 rounded-2xl bg-[#FAFAFA] border border-[#d9e1d7]">
               <span className="text-xs text-[#657068] block">20 - 25 cm</span>
-              <h4 className="font-bold text-[#244A30] text-base mt-0.5">Groot mes</h4>
+              <h4 className="font-bold text-[#3B7F4B] text-base mt-0.5">Groot mes</h4>
               <div className="text-2xl font-black font-heading text-[#3B7F4B] my-1.5">€ 10,50</div>
               <p className="text-xs text-[#657068]">Chefmes, Gyuto, trancheer</p>
             </div>
 
             <div className="p-4 rounded-2xl bg-[#E8EFE8] border border-[#3B7F4B]/30">
               <span className="text-xs text-[#162E1C] block font-bold">Studentenactie</span>
-              <h4 className="font-bold text-[#244A30] text-base mt-0.5">StudentenMaat</h4>
+              <h4 className="font-bold text-[#3B7F4B] text-base mt-0.5">StudentenMaat</h4>
               <div className="text-2xl font-black font-heading text-[#3B7F4B] my-1.5">€ 5,00</div>
               <p className="text-xs text-[#162E1C]">Op vertoon van collegekaart</p>
             </div>
@@ -187,13 +187,13 @@ export const ParticulierenPage: React.FC = () => {
       {/* FAQ Snippet for Particulieren */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="bg-[#F7F4EC] rounded-3xl p-6 sm:p-8 border border-[#d9e1d7] space-y-4">
-          <h3 className="text-xl font-bold font-heading text-[#244A30]">
+          <h3 className="text-xl font-bold font-heading text-[#3B7F4B]">
             Veelgestelde vragen door particulieren
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {particulierFaqs.map((faq, idx) => (
               <div key={idx} className="p-4 bg-white rounded-2xl border border-[#d9e1d7] space-y-1.5">
-                <h4 className="font-bold text-sm text-[#244A30] font-heading">{faq.q}</h4>
+                <h4 className="font-bold text-sm text-[#3B7F4B] font-heading">{faq.q}</h4>
                 <p className="text-xs text-[#657068] leading-relaxed">{faq.a}</p>
               </div>
             ))}

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SlijpmaatLogo } from './SlijpmaatLogo';
 import { PageId } from '../types';
 import { Menu, X, ChevronDown, MessageCircle, MapPin } from 'lucide-react';
@@ -11,6 +11,45 @@ interface HeaderProps {
 
 export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [mobilePrijzenOpen, setMobilePrijzenOpen] = useState(false);
+  const [mobilePlanOpen, setMobilePlanOpen] = useState(false);
+  const [isVisible, setIsVisible] = useState(true);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const lastScrollY = useRef(0);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollY = window.scrollY;
+
+      setIsScrolled(currentScrollY > 10);
+
+      // Always show at or near the very top (including iOS bounce)
+      if (currentScrollY <= 20) {
+        setIsVisible(true);
+        lastScrollY.current = currentScrollY;
+        return;
+      }
+
+      const delta = currentScrollY - lastScrollY.current;
+      // Filter out small jitter
+      if (Math.abs(delta) < 8) {
+        return;
+      }
+
+      if (delta > 0 && currentScrollY > 70) {
+        // Scrolling down -> hide header
+        setIsVisible(false);
+      } else if (delta < 0) {
+        // Scrolling up -> show header
+        setIsVisible(true);
+      }
+
+      lastScrollY.current = currentScrollY;
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navLinks: { id: PageId; label: string }[] = [
     { id: 'home', label: 'Home' },
@@ -21,6 +60,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
   const closeHeaderMenus = () => {
     setMobileMenuOpen(false);
+    setMobilePrijzenOpen(false);
+    setMobilePlanOpen(false);
+    setIsVisible(true);
     document.querySelectorAll<HTMLDetailsElement>('[data-header-menu]').forEach((menu) => menu.removeAttribute('open'));
   };
 
@@ -38,42 +80,58 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
     }, 60);
   };
 
-  return (
-    <>
-      {/* Top Announcement Bar: #3B7F4B (Slijpmaat Groen) with White text */}
-      <div className="bg-[#3B7F4B] text-white text-xs py-2 px-4 border-b border-[#315F3B]/30 select-none">
-        <div className="max-w-7xl mx-auto flex flex-wrap items-center justify-between gap-2">
-          <div className="flex items-center gap-2 text-xs">
-            <span className="flex h-2 w-2 rounded-full bg-white animate-pulse" />
-            <span className="font-semibold text-white">Gratis ophalen &amp; bezorgen in Utrecht</span>
-            <span className="text-[#E8EFE8] hidden sm:inline">&middot; vanaf 3 messen</span>
-            <span className="text-white/40 hidden md:inline">&middot;</span>
-            <span className="text-[#E8EFE8] hidden md:inline">Buiten Utrecht? Breng ze langs op afspraak</span>
-          </div>
+  const isHeaderVisible = isVisible || mobileMenuOpen;
 
-          <div className="flex items-center gap-4 text-xs font-semibold">
+  return (
+    <div
+      className={`sticky top-0 z-50 w-full transition-transform duration-300 ease-in-out ${
+        isHeaderVisible ? 'translate-y-0' : '-translate-y-full'
+      }`}
+    >
+      {/* Top Announcement Bar: #3B7F4B (Slijpmaat Groen) with White text */}
+      <div className="bg-[#3B7F4B] text-white text-[11px] sm:text-xs py-2 px-3 sm:px-4 select-none">
+        <div className="max-w-7xl mx-auto flex items-center justify-center sm:justify-between gap-3">
+          <button
+            type="button"
+            onClick={() => handleLinkClick('ophalen-bezorgen')}
+            className="flex items-center justify-center gap-1.5 sm:gap-2 text-center sm:text-left text-white hover:text-[#E8EFE8] transition-colors cursor-pointer"
+          >
+            <span className="flex h-2 w-2 shrink-0 rounded-full bg-white animate-pulse" />
+            <span className="font-semibold">Gratis ophalen &amp; bezorgen in Utrecht</span>
+            <span className="text-[#E8EFE8] hidden md:inline">&middot; vanaf 3 messen</span>
+          </button>
+
+          <div className="hidden sm:flex items-center gap-3 sm:gap-4 text-xs font-semibold">
             <button
+              type="button"
               onClick={() => handleLinkClick('ophalen-bezorgen')}
-              className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1 cursor-pointer"
+              className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1 cursor-pointer shrink-0"
             >
-              <MapPin className="w-3.5 h-3.5 text-[#fff]" />
+              <MapPin className="w-3.5 h-3.5 text-white shrink-0" />
               <span>Servicegebied Utrecht</span>
+            </button>
+            <button
+              type="button"
+              onClick={() => handleLinkClick('buiten-utrecht')}
+              className="text-[#E8EFE8] hover:text-white transition-colors cursor-pointer shrink-0 underline decoration-[#A9C89E] underline-offset-2 hover:decoration-white"
+            >
+              Buiten Utrecht?
             </button>
             <a
               href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1"
+              className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1 shrink-0"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-white" />
+              <MessageCircle className="w-3.5 h-3.5 text-white shrink-0" />
               <span className="hidden sm:inline">WhatsApp je Maat</span>
             </a>
           </div>
         </div>
       </div>
 
-      {/* Main sticky header */}
-      <header className="sticky top-0 z-40 bg-[#F7F4EC] border-b border-[#3B7F4B]/20 shadow-xs transition-shadow">
+      {/* Main header */}
+      <header className={`bg-[#F7F4EC] border-b border-[#3B7F4B]/20 transition-shadow ${isScrolled ? 'shadow-md' : 'shadow-xs'}`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
           {/* Zone 1: Wordmark Brand Lockup */}
           <button
@@ -85,7 +143,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
           </button>
 
           {/* Zone 2: Clean Text Navigation (color: #244A30, hover: #3B7F4B) */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold text-[#244A30]">
+          <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold text-[#3B7F4B]">
             {navLinks.map((link) => {
               const isActive = currentPage === link.id;
               return (
@@ -93,7 +151,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                   key={link.id}
                   onClick={() => handleLinkClick(link.id)}
                   className={`relative py-1 transition-colors whitespace-nowrap cursor-pointer hover:text-[#3B7F4B] ${
-                    isActive ? 'text-[#3B7F4B] font-bold' : 'text-[#244A30]'
+                    isActive ? 'text-[#3B7F4B] font-bold' : 'text-[#3B7F4B]'
                   }`}
                 >
                   {link.label}
@@ -104,7 +162,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               );
             })}
             <details name="header-menu" data-header-menu className="group relative">
-              <summary className={`relative flex cursor-pointer list-none items-center gap-1.5 py-1 transition-colors marker:hidden hover:text-[#3B7F4B] ${currentPage === 'particulieren' || currentPage === 'horeca' ? 'font-bold text-[#3B7F4B]' : 'text-[#244A30]'}`}>
+              <summary className={`relative flex cursor-pointer list-none items-center gap-1.5 py-1 transition-colors marker:hidden hover:text-[#3B7F4B] ${currentPage === 'particulieren' || currentPage === 'horeca' ? 'font-bold text-[#3B7F4B]' : 'text-[#3B7F4B]'}`}>
                 <span>Prijzen</span>
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" aria-hidden="true" />
                 {(currentPage === 'particulieren' || currentPage === 'horeca') ? <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-[#3B7F4B]" /> : null}
@@ -112,7 +170,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               <div className="absolute left-1/2 top-full z-50 w-60 -translate-x-1/2 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
                   <button type="button" onClick={() => handlePriceClick('particulieren', 'calculator')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
-                    <span className="block font-heading text-sm font-bold text-[#244A30]">Particulier</span>
+                    <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelcalculator</span>
                   </button>
                   <button type="button" onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
@@ -134,15 +192,15 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden="true" />
               </summary>
 
-              <div className="absolute right-0 top-full z-50 w-64 pt-3">
+              <div className="absolute right-0 top-full z-50 w-60 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
                   <button type="button" onClick={() => handleLinkClick('particulieren')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
-                    <span className="block font-heading text-sm font-bold text-[#244A30]">Particulier</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">Bereken je prijs en plan via WhatsApp</span>
+                    <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelcalculator</span>
                   </button>
                   <button type="button" onClick={() => handleLinkClick('horeca')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
                     <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">Bespreek aantallen en planning</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
                   </button>
                 </div>
               </div>
@@ -151,7 +209,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
             {/* Mobile Hamburger Button */}
             <button
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-full border-2 border-[#3B7F4B] text-[#244A30] bg-[#F7F4EC] hover:bg-[#E8EFE8] transition-colors"
+              className="lg:hidden p-2 rounded-full border-2 border-[#3B7F4B] text-[#3B7F4B] bg-[#F7F4EC] hover:bg-[#E8EFE8] transition-colors"
               aria-label={mobileMenuOpen ? 'Menu sluiten' : 'Menu openen'}
               aria-expanded={mobileMenuOpen}
             >
@@ -162,58 +220,168 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-b border-[#3B7F4B]/20 bg-[#F7F4EC] px-4 pt-3 pb-6 space-y-3 shadow-xl">
-            <div className="flex flex-col space-y-1">
-              <div className="mb-2 rounded-2xl border border-[#E87B5B]/30 bg-white p-2">
-                <p className="px-3 pb-1.5 pt-1 font-heading text-xs font-bold uppercase tracking-[0.14em] text-[#C95E3E]">Plan je slijpbeurt</p>
-                <button type="button" onClick={() => handleLinkClick('particulieren')} className={`w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition-colors ${currentPage === 'particulieren' ? 'bg-[#E8EFE8] text-[#3B7F4B]' : 'text-[#244A30] hover:bg-[#E8EFE8]'}`}>Particulier</button>
-                <button type="button" onClick={() => handleLinkClick('horeca')} className={`w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold transition-colors ${currentPage === 'horeca' ? 'bg-[#FFF4EF] text-[#C95E3E]' : 'text-[#244A30] hover:bg-[#FFF4EF]'}`}>Zakelijk</button>
-              </div>
-              <div className="mb-2 rounded-2xl border border-[#3B7F4B]/25 bg-white p-2">
-                <p className="px-3 pb-1.5 pt-1 font-heading text-xs font-bold uppercase tracking-[0.14em] text-[#3B7F4B]">Prijzen</p>
-                <button type="button" onClick={() => handlePriceClick('particulieren', 'calculator')} className="w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-[#244A30] transition-colors hover:bg-[#E8EFE8]">Particulier</button>
-                <button type="button" onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')} className="w-full rounded-xl px-3 py-2.5 text-left text-sm font-semibold text-[#244A30] transition-colors hover:bg-[#FFF4EF]">Zakelijk</button>
-              </div>
-              {navLinks.map((link) => {
-                const isActive = currentPage === link.id;
-                return (
-                  <button
-                    key={link.id}
-                    onClick={() => handleLinkClick(link.id)}
-                    className={`text-left px-4 py-3 rounded-xl text-base font-semibold transition-colors ${
-                      isActive
-                        ? 'bg-[#E8EFE8] text-[#3B7F4B] font-bold'
-                        : 'text-[#244A30] hover:bg-white/60'
-                    }`}
-                  >
-                    {link.label}
-                  </button>
-                );
-              })}
-            </div>
-
-            <div className="pt-3 border-t border-[#3B7F4B]/15 flex flex-col gap-2.5">
-              <a
-                href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag een afspraak maken om mijn messen te laten slijpen!')}`}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-3 rounded-full text-center text-sm font-bold text-white bg-[#3B7F4B] hover:bg-[#244A30] transition-colors flex items-center justify-center gap-2 shadow-xs"
-              >
-                <MessageCircle className="w-4 h-4 text-white" />
-                <span>WhatsApp je Maat ({SLIJPMAAT_INFO.whatsappDisplay})</span>
-              </a>
-
+          <div className="lg:hidden border-b border-[#3B7F4B]/20 bg-[#F7F4EC] px-4 pt-3 pb-6 space-y-2 shadow-xl max-h-[calc(100vh-5rem)] overflow-y-auto">
+            <nav className="flex flex-col space-y-1">
+              {/* Home */}
               <button
-                onClick={() => handleLinkClick('ophalen-bezorgen')}
-                className="w-full py-2.5 rounded-full text-center text-sm font-semibold text-[#244A30] bg-white border border-[#3B7F4B]/30 hover:bg-[#E8EFE8] transition-colors flex items-center justify-center gap-2"
+                type="button"
+                onClick={() => handleLinkClick('home')}
+                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                  currentPage === 'home'
+                    ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
+                    : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
+                }`}
               >
-                <MapPin className="w-4 h-4 text-[#3B7F4B]" />
-                <span>Ophalen, bezorgen &amp; langsbrengen</span>
+                Home
               </button>
-            </div>
+
+              {/* Prijzen with collapsible sub-options */}
+              <div>
+                <button
+                  type="button"
+                  onClick={() => setMobilePrijzenOpen(!mobilePrijzenOpen)}
+                  className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                    currentPage === 'particulieren' || currentPage === 'horeca'
+                      ? 'text-[#3B7F4B] font-bold'
+                      : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
+                  }`}
+                  aria-expanded={mobilePrijzenOpen}
+                >
+                  <span>Prijzen</span>
+                  <ChevronDown
+                    className={`w-4 h-4 text-[#3B7F4B]/60 transition-transform duration-200 ${
+                      mobilePrijzenOpen ? 'rotate-180 text-[#3B7F4B]' : ''
+                    }`}
+                  />
+                </button>
+                {mobilePrijzenOpen && (
+                  <div className="ml-4 pl-4 py-1.5 space-y-2 border-l-2 border-[#3B7F4B]/30">
+                    <button
+                      type="button"
+                      onClick={() => handlePriceClick('particulieren', 'calculator')}
+                      className="block w-full text-left text-sm font-medium text-[#3B7F4B]/75 hover:text-[#3B7F4B] transition-colors py-1"
+                    >
+                      Particulier
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')}
+                      className="block w-full text-left text-sm font-medium text-[#3B7F4B]/75 hover:text-[#3B7F4B] transition-colors py-1"
+                    >
+                      Zakelijk
+                    </button>
+                  </div>
+                )}
+              </div>
+
+              {/* Over ons */}
+              <button
+                type="button"
+                onClick={() => handleLinkClick('over-ons')}
+                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                  currentPage === 'over-ons'
+                    ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
+                    : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
+                }`}
+              >
+                Over ons
+              </button>
+
+              {/* Werkwijze */}
+              <button
+                type="button"
+                onClick={() => handleLinkClick('werkwijze')}
+                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                  currentPage === 'werkwijze'
+                    ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
+                    : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
+                }`}
+              >
+                Werkwijze
+              </button>
+
+              {/* Kennisbank */}
+              <button
+                type="button"
+                onClick={() => handleLinkClick('kennisbank')}
+                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                  currentPage === 'kennisbank'
+                    ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
+                    : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
+                }`}
+              >
+                Kennisbank
+              </button>
+
+              {/* Ophalen & bezorgen */}
+              <button
+                type="button"
+                onClick={() => handleLinkClick('ophalen-bezorgen')}
+                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                  currentPage === 'ophalen-bezorgen'
+                    ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
+                    : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
+                }`}
+              >
+                Ophalen &amp; bezorgen
+              </button>
+
+              {/* Buiten Utrecht wat nu */}
+              <button
+                type="button"
+                onClick={() => handleLinkClick('buiten-utrecht')}
+                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                  currentPage === 'buiten-utrecht'
+                    ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
+                    : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
+                }`}
+              >
+                Buiten Utrecht, wat nu?
+              </button>
+
+              {/* Subtiele CTA onderaan het mobiele menu: dik gedrukte groene tekst met dropdown */}
+              <div className="pt-3 mt-2 border-t border-[#3B7F4B]/15">
+                <button
+                  type="button"
+                  onClick={() => setMobilePlanOpen(!mobilePlanOpen)}
+                  className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-[#E8EFE8]/70 hover:bg-[#E8EFE8] transition-colors text-left"
+                  aria-expanded={mobilePlanOpen}
+                >
+                  <span className="font-heading text-base font-bold text-[#3B7F4B]">
+                    Plan je slijpbeurt
+                  </span>
+                  <ChevronDown
+                    className={`w-4 h-4 text-[#3B7F4B] transition-transform duration-200 ${
+                      mobilePlanOpen ? 'rotate-180' : ''
+                    }`}
+                  />
+                </button>
+
+                {mobilePlanOpen && (
+                  <div className="mt-2 space-y-1.5 overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-sm animate-in fade-in slide-in-from-top-1 duration-200">
+                    <button
+                      type="button"
+                      onClick={() => handlePriceClick('particulieren', 'calculator')}
+                      className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]"
+                    >
+                      <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
+                      <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelcalculator</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')}
+                      className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]"
+                    >
+                      <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
+                      <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
+                    </button>
+                  </div>
+                )}
+              </div>
+            </nav>
           </div>
         )}
       </header>
-    </>
+    </div>
   );
 };

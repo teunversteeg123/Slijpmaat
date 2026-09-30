@@ -169,11 +169,19 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
             </p>
 
             <div className="pt-2 flex flex-wrap items-center gap-3">
+              <button
+                type="button"
+                onClick={() => onNavigate('buiten-utrecht')}
+                className="px-6 py-3.5 rounded-full bg-[#E87B5B] hover:bg-[#C95E3E] text-white font-bold text-xs sm:text-sm transition-colors flex items-center gap-2 cursor-pointer"
+              >
+                <span>Buiten Utrecht, wat nu?</span>
+                <ArrowRight className="w-4 h-4" />
+              </button>
               <a
                 href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik kom van buiten Utrecht en wil graag een afspraak maken om mijn messen langs te brengen!')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-full bg-white hover:bg-[#E8EFE8] text-[#244A30] font-bold text-xs sm:text-sm transition-colors flex items-center gap-2"
+                className="px-6 py-3.5 rounded-full bg-white hover:bg-[#E8EFE8] text-[#3B7F4B] font-bold text-xs sm:text-sm transition-colors flex items-center gap-2"
               >
                 <MessageCircle className="w-4 h-4 text-[#3B7F4B]" />
                 <span>Maak een afspraak via WhatsApp</span>

@@ -59,7 +59,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                 href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik neem contact op namens een restaurant/horecakeuken in Utrecht voor het slijpen van onze messen.')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="px-6 py-3.5 rounded-full bg-white hover:bg-[#E8EFE8] text-[#244A30] font-bold text-sm transition-all shadow flex items-center gap-2"
+                className="px-6 py-3.5 rounded-full bg-white hover:bg-[#E8EFE8] text-[#3B7F4B] font-bold text-sm transition-all shadow flex items-center gap-2"
               >
                 <MessageCircle className="w-4 h-4 text-[#3B7F4B]" />
                 <span>Bespreek je slijpbeurt met je Maat</span>
@@ -82,7 +82,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
             <div className="w-10 h-10 rounded-xl bg-[#E8EFE8] text-[#3B7F4B] flex items-center justify-center font-bold">
               <Sparkles className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-bold font-heading text-[#244A30]">
+            <h3 className="text-lg font-bold font-heading text-[#3B7F4B]">
               Behoud van staalhardheid &amp; snede
             </h3>
             <p className="text-xs sm:text-sm text-[#203728] leading-relaxed">
@@ -94,7 +94,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
             <div className="w-10 h-10 rounded-xl bg-[#E8EFE8] text-[#3B7F4B] flex items-center justify-center font-bold">
               <Clock className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-bold font-heading text-[#244A30]">
+            <h3 className="text-lg font-bold font-heading text-[#3B7F4B]">
               Afgestemd op mise-en-place
             </h3>
             <p className="text-xs sm:text-sm text-[#203728] leading-relaxed">
@@ -106,7 +106,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
             <div className="w-10 h-10 rounded-xl bg-[#A9C89E] text-[#162E1C] flex items-center justify-center font-bold">
               <FileText className="w-5 h-5" />
             </div>
-            <h3 className="text-lg font-bold font-heading text-[#244A30]">
+            <h3 className="text-lg font-bold font-heading text-[#3B7F4B]">
               Eenvoudige btw-facturatie
             </h3>
             <p className="text-xs sm:text-sm text-[#203728] leading-relaxed">
@@ -123,7 +123,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
             <span className="text-xs uppercase tracking-wider font-bold text-[#3B7F4B] font-heading">
               Snel schakelen
             </span>
-            <h2 className="text-2xl font-bold font-heading text-[#244A30] mt-1">
+            <h2 className="text-2xl font-bold font-heading text-[#3B7F4B] mt-1">
               Zakelijke aanvraag voor horeca in Utrecht
             </h2>
           </div>
@@ -131,7 +131,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
           {formSubmitted ? (
             <div className="p-6 bg-[#E8EFE8] rounded-2xl border border-[#3B7F4B]/30 text-center space-y-2">
               <CheckCircle className="w-8 h-8 text-[#3B7F4B] mx-auto" />
-              <h3 className="font-bold text-[#244A30] text-lg">Bedankt voor je aanvraag!</h3>
+              <h3 className="font-bold text-[#3B7F4B] text-lg">Bedankt voor je aanvraag!</h3>
               <p className="text-xs sm:text-sm text-[#203728]">
                 Teun of Mike neemt binnen enkele uren contact met je op voor het ophaalmoment en een passende offerte.
               </p>
@@ -140,7 +140,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
             <form onSubmit={handleSubmit} className="space-y-4">
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                 <div>
-                  <label className="block text-xs font-medium text-[#244A30] mb-1">Restaurant / Zaak *</label>
+                  <label className="block text-xs font-medium text-[#3B7F4B] mb-1">Restaurant / Zaak *</label>
                   <input
                     type="text"
                     required
@@ -151,7 +151,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#244A30] mb-1">Contactpersoon *</label>
+                  <label className="block text-xs font-medium text-[#3B7F4B] mb-1">Contactpersoon *</label>
                   <input
                     type="text"
                     required
@@ -162,7 +162,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#244A30] mb-1">Telefoonnummer *</label>
+                  <label className="block text-xs font-medium text-[#3B7F4B] mb-1">Telefoonnummer *</label>
                   <input
                     type="tel"
                     required
@@ -173,7 +173,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                   />
                 </div>
                 <div>
-                  <label className="block text-xs font-medium text-[#244A30] mb-1">Aantal messen (schatting)</label>
+                  <label className="block text-xs font-medium text-[#3B7F4B] mb-1">Aantal messen (schatting)</label>
                   <select
                     value={formData.knifeCount}
                     onChange={(e) => setFormData({ ...formData, knifeCount: e.target.value })}
@@ -188,7 +188,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#244A30] mb-1">Opmerkingen of wensen</label>
+                <label className="block text-xs font-medium text-[#3B7F4B] mb-1">Opmerkingen of wensen</label>
                 <textarea
                   rows={2}
                   placeholder="Bijv. Maandag na de lunch ophalen, voorkeur voor 15 graden snijkant"
@@ -211,7 +211,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                   href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag direct zakelijk afstemmen over een horeca slijpbeurt in Utrecht.')}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-xs font-bold text-[#3B7F4B] hover:text-[#244A30] flex items-center gap-1.5"
+                  className="text-xs font-bold text-[#3B7F4B] hover:text-[#3B7F4B] flex items-center gap-1.5"
                 >
                   <MessageCircle className="w-4 h-4" />
                   <span>Of stuur direct een WhatsApp</span>

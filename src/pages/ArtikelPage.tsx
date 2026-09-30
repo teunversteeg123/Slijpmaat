@@ -65,7 +65,7 @@ export const ArtikelPage: React.FC<ArtikelPageProps> = ({
           {/* Table of Contents */}
           {currentArticle.content.toc.length > 0 && (
             <div className="p-6 rounded-2xl bg-[#E8EFE8]/50 border border-[#A9C89E]/40 space-y-3">
-              <span className="text-xs uppercase tracking-wider font-bold text-[#244A30] font-heading flex items-center gap-1.5">
+              <span className="text-xs uppercase tracking-wider font-bold text-[#3B7F4B] font-heading flex items-center gap-1.5">
                 <BookOpen className="w-4 h-4 text-[#3B7F4B]" />
                 Inhoudsopgave
               </span>
@@ -126,7 +126,7 @@ export const ArtikelPage: React.FC<ArtikelPageProps> = ({
             </div>
             <button
               onClick={() => onNavigate('particulieren')}
-              className="px-6 py-3 rounded-full bg-white hover:bg-[#E8EFE8] text-[#244A30] font-bold text-xs whitespace-nowrap transition-colors shadow cursor-pointer"
+              className="px-6 py-3 rounded-full bg-white hover:bg-[#E8EFE8] text-[#3B7F4B] font-bold text-xs whitespace-nowrap transition-colors shadow cursor-pointer"
             >
               Plan je slijpbeurt
             </button>

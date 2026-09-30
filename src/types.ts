@@ -10,6 +10,7 @@ export type PageId =
   | 'werkwijze'
   | 'prijzen-bestellen'
   | 'ophalen-bezorgen'
+  | 'buiten-utrecht'
   | 'kennisbank'
   | 'artikel'
   | 'over-ons'

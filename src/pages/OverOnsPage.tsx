@@ -44,7 +44,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
             <span className="text-xs uppercase tracking-wider font-bold text-[#3B7F4B] font-heading">
               Ons Verhaal
             </span>
-            <h2 className="text-3xl font-extrabold font-heading text-[#244A30] leading-tight">
+            <h2 className="text-3xl font-extrabold font-heading text-[#3B7F4B] leading-tight">
               Jouw maten voor scherpe messen.
             </h2>
             <div className="space-y-4 text-xs sm:text-sm text-[#203728] leading-relaxed">
@@ -77,7 +77,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               <div className="flex items-center justify-between pb-4 border-b border-[#3B7F4B]/20">
                 <SlijpmaatLogo variant="green-badge" size="sm" />
                 <div className="text-right">
-                  <span className="text-xs font-bold text-[#244A30] block">Teun &amp; Mike</span>
+                  <span className="text-xs font-bold text-[#3B7F4B] block">Teun &amp; Mike</span>
                   <span className="text-[11px] text-[#657068]">Oprichters Slijpmaat</span>
                 </div>
               </div>
@@ -86,7 +86,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
                 &ldquo;Een koksmes is een verlengstuk van je hand. Zodra je moet duwen of zagen, verdwijnt het kookplezier. Wij zorgen dat jouw messen binnen 48 uur weer fluweelzacht door elke tomaat glijden.&rdquo;
               </blockquote>
 
-              <div className="grid grid-cols-2 gap-3 text-xs text-[#244A30]">
+              <div className="grid grid-cols-2 gap-3 text-xs text-[#3B7F4B]">
                 <div className="p-3 bg-white rounded-xl border border-[#d9e1d7]">
                   <span className="text-slate-500 block text-[11px]">Vestiging</span>
                   <strong>{SLIJPMAAT_INFO.fullAddress}</strong>
@@ -110,7 +110,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
             <span className="text-xs uppercase tracking-wider font-bold text-[#3B7F4B] font-heading">
               Waar wij voor staan
             </span>
-            <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-[#244A30] mt-1">
+            <h2 className="text-2xl sm:text-3xl font-extrabold font-heading text-[#3B7F4B] mt-1">
               De Slijpmaat belofte
             </h2>
           </div>
@@ -120,7 +120,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               <div className="w-10 h-10 rounded-xl bg-[#E8EFE8] text-[#3B7F4B] flex items-center justify-center font-bold">
                 01
               </div>
-              <h3 className="font-bold text-[#244A30] text-base font-heading">Eerlijk en transparant</h3>
+              <h3 className="font-bold text-[#3B7F4B] text-base font-heading">Eerlijk en transparant</h3>
               <p className="text-xs text-[#203728] leading-relaxed">
                 Vaste, heldere prijzen per mesformaat. Geen verborgen toeslagen achteraf. Is een mes niet veilig te slijpen of raden we het af? Dan zeggen we dat eerlijk.
               </p>
@@ -130,7 +130,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               <div className="w-10 h-10 rounded-xl bg-[#E8EFE8] text-[#3B7F4B] flex items-center justify-center font-bold">
                 02
               </div>
-              <h3 className="font-bold text-[#244A30] text-base font-heading">Respect voor het staal</h3>
+              <h3 className="font-bold text-[#3B7F4B] text-base font-heading">Respect voor het staal</h3>
               <p className="text-xs text-[#203728] leading-relaxed">
                 We behandelen elk koksmes alsof het ons eigen gereedschap is. Alleen professionele Shapton Pro stenen, waterkoeling en lederen strops.
               </p>
@@ -140,7 +140,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               <div className="w-10 h-10 rounded-xl bg-[#E8EFE8] text-[#3B7F4B] flex items-center justify-center font-bold">
                 03
               </div>
-              <h3 className="font-bold text-[#244A30] text-base font-heading">Lokaal &amp; benaderbaar</h3>
+              <h3 className="font-bold text-[#3B7F4B] text-base font-heading">Lokaal &amp; benaderbaar</h3>
               <p className="text-xs text-[#203728] leading-relaxed">
                 Snel schakelen via WhatsApp met &lsquo;je Maat&rsquo;. Geen logge ticketsystemen: gewoon direct contact met Teun of Mike.
               </p>
@@ -162,7 +162,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           </div>
           <button
             onClick={() => onNavigate('particulieren')}
-            className="px-8 py-4 rounded-full bg-white text-[#244A30] font-bold text-sm hover:bg-[#F7F4EC] transition-colors shadow-xs cursor-pointer whitespace-nowrap"
+            className="px-8 py-4 rounded-full bg-white text-[#3B7F4B] font-bold text-sm hover:bg-[#F7F4EC] transition-colors shadow-xs cursor-pointer whitespace-nowrap"
           >
             Plan je slijpbeurt
           </button>

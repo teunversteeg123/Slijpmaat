@@ -72,7 +72,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
               <div className="bg-[#E8EFE8] rounded-2xl p-6 border border-[#A9C89E]/50 flex items-center justify-between gap-4">
                 <div className="space-y-1">
                   <span className="text-xs font-bold text-[#3B7F4B] uppercase tracking-wide">Kennisbank</span>
-                  <h4 className="font-bold text-sm text-[#244A30]">
+                  <h4 className="font-bold text-sm text-[#3B7F4B]">
                     Hoe weet je of een keukenmes bot is?
                   </h4>
                   <p className="text-xs text-slate-600">
@@ -105,7 +105,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
                     <span className="text-slate-600">Groot mes (20-25cm)</span>
                     <span className="font-bold text-slate-900">€10,50</span>
                   </div>
-                  <div className="flex justify-between pt-2 text-[#244A30]">
+                  <div className="flex justify-between pt-2 text-[#3B7F4B]">
                     <span>StudentenMaat</span>
                     <span className="font-bold">€5,00 per mes</span>
                   </div>
@@ -179,7 +179,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
               <div className="bg-[#E8EFE8] rounded-2xl p-6 border border-[#A9C89E]/50 flex items-center justify-between gap-4">
                 <div className="space-y-1">
                   <span className="text-xs font-bold text-[#3B7F4B] uppercase tracking-wide">Kennisbank</span>
-                  <h4 className="font-bold text-sm text-[#244A30]">
+                  <h4 className="font-bold text-sm text-[#3B7F4B]">
                     Hoe onderhoud je een Japans keukenmes?
                   </h4>
                   <p className="text-xs text-slate-600">
