@@ -8,45 +8,50 @@ interface PrivacyPageProps {
 
 export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onNavigate }) => {
   return (
-    <div className="space-y-12 pb-20">
-      <section className="bg-[#244A30] text-white py-12 lg:py-16">
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div className="overflow-hidden bg-[#FAFAF8] pb-16">
+      <section className="relative overflow-hidden bg-[#FAFAF8] pb-8 pt-4 sm:pb-12 sm:pt-6 lg:pb-14">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-20 -top-16 h-[340px] w-[340px] rounded-full bg-[#E3EFE5] opacity-80 blur-2xl sm:h-[480px] sm:w-[480px] sm:blur-3xl"
+        />
+
+        <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <button
             onClick={() => onNavigate('home')}
-            className="text-xs text-[#A9C89E] hover:text-white flex items-center gap-1 mb-4 cursor-pointer"
+            className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#3B7F4B] shadow-2xs hover:bg-[#E8EFE8] transition-colors mb-6 cursor-pointer"
           >
-            <ChevronLeft className="w-3.5 h-3.5" />
+            <ChevronLeft className="h-4 w-4" />
             <span>Terug naar Home</span>
           </button>
-          <span className="text-xs font-semibold text-[#A9C89E] tracking-wider uppercase font-heading bg-[#315F3B] px-3.5 py-1.5 rounded-full inline-block">
+          <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
             Privacy &amp; AVG
-          </span>
-          <h1 className="text-3xl sm:text-4xl font-extrabold font-heading text-white mt-2">
+          </p>
+          <h1 className="mt-3 font-heading text-3xl sm:text-4xl lg:text-5xl font-bold tracking-tight text-[#3B7F4B]">
             Privacyverklaring Slijpmaat
           </h1>
-          <p className="text-xs sm:text-sm text-[#E8EFE8]/80 mt-1">
+          <p className="mt-2 text-xs sm:text-sm text-[#657068]">
             Laatst bijgewerkt: maart 2026 &middot; Slijpmaat V.O.F. te Utrecht
           </p>
         </div>
       </section>
 
-      <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="bg-white rounded-3xl p-6 sm:p-12 border border-slate-200 space-y-8 text-xs sm:text-sm text-slate-700 leading-relaxed">
+      <div className="relative mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+        <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-7 sm:p-12 shadow-xs space-y-8 text-xs sm:text-sm text-[#657068] leading-relaxed">
           <section className="space-y-2">
-            <h2 className="text-lg font-bold font-heading text-slate-900">1. Wie zijn wij?</h2>
+            <h2 className="font-heading text-lg font-bold text-[#3B7F4B]">1. Wie zijn wij?</h2>
             <p>
-              Slijpmaat (Slijpmaat V.O.F.), gevestigd te Utrecht, is verantwoordelijk voor de verwerking van persoonsgegevens zoals weergegeven in deze privacyverklaring. Contact via info@slijpmaat.nl of WhatsApp.
+              Slijpmaat (Slijpmaat V.O.F.), gevestigd te Utrecht aan de Gerard Noodtstraat 57, is verantwoordelijk voor de verwerking van persoonsgegevens zoals weergegeven in deze privacyverklaring. Contact via info@slijpmaat.nl of WhatsApp via 06 82 07 49 67.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-lg font-bold font-heading text-slate-900">2. Persoonsgegevens die wij verwerken</h2>
+            <h2 className="font-heading text-lg font-bold text-[#3B7F4B]">2. Persoonsgegevens die wij verwerken</h2>
             <p>
-              Slijpmaat verwerkt jouw persoonsgegevens doordat je gebruikmaakt van onze diensten en/of omdat je deze zelf aan ons verstrekt (bijvoorbeeld via de calculator, WhatsApp of contactformulieren):
+              Slijpmaat verwerkt jouw persoonsgegevens doordat je gebruikmaakt van onze diensten en/of omdat je deze zelf aan ons verstrekt (bijvoorbeeld via de bestelcalculator, WhatsApp of contactformulieren):
             </p>
             <ul className="list-disc pl-5 space-y-1">
               <li>Voor- en achternaam / bedrijfsnaam</li>
-              <li>Telefoonnummer (voor WhatsApp-afstemming en Tikkie betaalverzoek)</li>
+              <li>Telefoonnummer (voor WhatsApp-afstemming en betaling)</li>
               <li>Adresgegevens en postcode (indien ophalen/bezorgen gewenst is)</li>
               <li>E-mailadres (voor offerte of facturatie)</li>
               <li>Informatie en foto’s van jouw messen</li>
@@ -54,24 +59,23 @@ export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onNavigate }) => {
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-lg font-bold font-heading text-slate-900">3. Doeleinden van de verwerking</h2>
+            <h2 className="font-heading text-lg font-bold text-[#3B7F4B]">3. Doeleinden van de verwerking</h2>
             <p>
-              Wij gebruiken jouw gegevens uitsluitend voor:
-            </p>
-            <ul className="list-disc pl-5 space-y-1">
-              <li>Het plannen, ophalen, slijpen en bezorgen van jouw messen;</li>
-              <li>Het versturen van de specificatie en het betaalverzoek of de factuur;</li>
-              <li>Vragen of afstemming over eventuele chips of reparaties.</li>
-            </ul>
-            <p>
-              Wij verkopen of delen jouw gegevens nóóit met derden voor marketingdoeleinden.
+              Wij gebruiken jouw gegevens uitsluitend voor de uitvoering van onze slijpdienst: het plannen van ophaal- en bezorgmomenten, het versturen van statusupdates over jouw messen, het afhandelen van betalingen en het leveren van zakelijke facturen. We verkopen jouw gegevens nooit aan derden.
             </p>
           </section>
 
           <section className="space-y-2">
-            <h2 className="text-lg font-bold font-heading text-slate-900">4. Bewaartermijn &amp; Rechten</h2>
+            <h2 className="font-heading text-lg font-bold text-[#3B7F4B]">4. Bewaartermijn</h2>
             <p>
-              Gegevens worden bewaard zolang noodzakelijk voor de uitvoering van de opdracht en wettelijke administratieve verplichtingen (bijv. Belastingdienst voor facturen). Je hebt te allen tijde het recht om inzage, correctie of verwijdering van jouw persoonsgegevens te verzoeken via info@slijpmaat.nl.
+              Slijpmaat bewaart persoonsgegevens niet langer dan strikt nodig is om de doelen te realiseren waarvoor je gegevens worden verzameld, met uitzondering van de wettelijke fiscale bewaarplicht voor facturen (7 jaar).
+            </p>
+          </section>
+
+          <section className="space-y-2">
+            <h2 className="font-heading text-lg font-bold text-[#3B7F4B]">5. Jouw rechten</h2>
+            <p>
+              Je hebt te allen tijde het recht om jouw persoonsgegevens in te zien, te corrigeren of te laten verwijderen. Stuur hiervoor eenvoudig een verzoek naar info@slijpmaat.nl of via WhatsApp.
             </p>
           </section>
         </div>

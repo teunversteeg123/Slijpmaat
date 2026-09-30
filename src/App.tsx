@@ -120,7 +120,7 @@ export default function App() {
       case 'over-ons':
         return <OverOnsPage onNavigate={handleNavigate} />;
       case 'reviews':
-        return <ReviewsPage />;
+        return <ReviewsPage onNavigate={handleNavigate} />;
       case 'faq':
         return <FaqPage onNavigate={handleNavigate} />;
       case 'contact':
@@ -135,7 +135,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAFAFA] text-slate-800 antialiased font-sans">
+    <div className="min-h-screen flex flex-col bg-[#FAFAF8] text-[#244A30] antialiased font-sans">
       {/* Top Header */}
       <Header currentPage={currentPage} onNavigate={handleNavigate} />
 
