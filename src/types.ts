@@ -2,6 +2,7 @@ export type PageId =
   | 'home'
   | 'particulieren'
   | 'horeca'
+  | 'onze-maten'
   | 'diensten'
   | 'dienst-keukenmessen'
   | 'dienst-japanse-messen'

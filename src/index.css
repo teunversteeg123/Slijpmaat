@@ -68,3 +68,30 @@
 /* 4. On Cream/White: Use #244A30 or deep charcoal */
 .text-on-cream { color: #3B7F4B; }
 
+/* Google Translate UI Overrides: Keep site layout completely clean */
+.goog-te-banner-frame,
+.goog-te-banner-frame.skiptranslate,
+iframe.goog-te-banner-frame {
+  display: none !important;
+  visibility: hidden !important;
+  height: 0 !important;
+}
+body {
+  top: 0px !important;
+  position: static !important;
+}
+#goog-gt-tt,
+.goog-te-balloon-frame {
+  display: none !important;
+}
+.goog-text-highlight {
+  background: none !important;
+  box-shadow: none !important;
+}
+.skiptranslate:not(.keep-translate) {
+  display: none !important;
+}
+#google_translate_element {
+  display: none !important;
+}
+

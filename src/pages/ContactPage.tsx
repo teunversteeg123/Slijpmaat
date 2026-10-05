@@ -128,14 +128,14 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               </div>
             </div>
 
-            {/* Address & Atelier Notice */}
+            {/* Address & Home Notice */}
             <div className="rounded-[2rem] border border-[#d9e1d7] bg-[#F7F4EC] p-6 sm:p-8 space-y-3">
               <div className="flex items-center gap-2.5">
                 <MapPin className="h-5 w-5 text-[#E87B5B]" />
-                <h3 className="font-heading text-lg font-bold text-[#3B7F4B]">Atelier Utrecht &middot; Op afspraak</h3>
+                <h3 className="font-heading text-lg font-bold text-[#3B7F4B]">Utrecht &middot; Wij werken vanuit huis</h3>
               </div>
               <p className="text-sm leading-relaxed text-[#657068]">
-                <strong className="text-[#3B7F4B]">Let op: Slijpmaat heeft géén inloopbalie.</strong> Langsbrengen en ophalen kan uitsluitend na voorafgaande afspraak via WhatsApp. Zo garanderen we dat er iemand klaarstaat om je messen met zorg in ontvangst te nemen.
+                <strong className="text-[#3B7F4B]">Let op: wij werken vanuit huis en hebben géén inloopwinkel.</strong> Langsbrengen en ophalen kan uitsluitend na voorafgaande afspraak via WhatsApp. Zo garanderen we dat er iemand klaarstaat om je messen met zorg in ontvangst te nemen.
               </p>
               <div className="border-t border-[#d9e1d7]/70 pt-3 text-xs font-semibold text-[#3B7F4B]">
                 Adres: {SLIJPMAAT_INFO.fullAddress}

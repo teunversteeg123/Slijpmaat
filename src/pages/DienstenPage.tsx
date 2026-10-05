@@ -140,7 +140,7 @@ export const DienstenPage: React.FC<DienstenPageProps> = ({ onNavigate }) => {
                   </h3>
                 </div>
                 <p className="text-sm leading-relaxed text-[#657068]">
-                  Voor Santoku, Gyuto, Nakiri, Petty en Deba messen. Speciale aandacht voor dunne geometrieën onder 12 tot 15 graden en afwerking tot 8000 grit met lederen strop polish.
+                  Voor Santoku, Gyuto, Nakiri, Petty en Deba messen. Speciale aandacht voor dunne geometrieën onder 12 tot 15 graden. Wij kiezen de juiste watersteen en sluiten af met een leren strop polish.
                 </p>
                 <div className="rounded-xl bg-[#FAFAF8] p-3 text-xs font-bold text-[#3B7F4B] border border-[#d9e1d7]/60">
                   Zelfde tarieven als keukenmessen: geen Japanse meerprijs!
@@ -174,7 +174,7 @@ export const DienstenPage: React.FC<DienstenPageProps> = ({ onNavigate }) => {
                   </h3>
                 </div>
                 <p className="text-sm leading-relaxed text-[#657068]">
-                  Een hapje uit de snijkant of een afgebroken punt? Gooi je mes niet weg! Op onze grove Shapton Pro 320 steen herstellen we de snijlijn zonder dat het lemmet onnodig dun wordt.
+                  Een hapje uit de snijkant of een afgebroken punt? Gooi je mes niet weg! Wij kiezen de juiste herstelsteen en herstellen de snijlijn zonder dat het lemmet onnodig dun wordt.
                 </p>
                 <div className="rounded-xl bg-white p-3 text-xs font-bold text-[#C95E3E] border border-[#E87B5B]/20">
                   Kleine chip: +€2,50 &middot; Nieuw profiel/grote reparatie: +€8,50

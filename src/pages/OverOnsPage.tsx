@@ -3,164 +3,414 @@ import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import {
+  ArrowDown,
   ArrowRight,
   Clock3,
   MapPin,
   MessageCircle,
   Phone,
-  Check,
-  Heart,
-  ShieldCheck,
   Sparkles,
-  Utensils,
-  Award
+  Heart,
+  Plus,
+  Compass,
+  Target,
+  ShieldCheck,
+  CheckCircle2,
+  ExternalLink,
+  Users
 } from 'lucide-react';
 
 interface OverOnsPageProps {
-  onNavigate: (page: PageId) => void;
+  onNavigate?: (page: PageId) => void;
 }
 
-export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag contact met jullie opnemen!')}`;
+const LinkedInIcon: React.FC<{ className?: string }> = ({ className = 'h-5 w-5' }) => (
+  <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+  </svg>
+);
 
-  const values = [
+export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
+  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik las over jullie op de Over Ons pagina en wil graag kennismaken!')}`;
+  const linkedinCompanyUrl = 'https://www.linkedin.com/company/slijpmaat';
+
+  // 1. Hoe zijn we begonnen? (3 Mijlpalen in warm cream #F7F4EC)
+  const originSteps = [
     {
-      title: 'Ambachtelijk met de hand',
-      text: 'Geen agressieve bandslijpmachines die je mes verhitten. We slijpen elk mes zorgvuldig op Japanse Shapton Pro waterstenen met minimale staalafname.',
+      num: '1',
+      title: 'De frustratie van het botte mes',
+      text: 'Het begon aan onze eigen keukentafel in Utrecht. We hielden van koken, maar ergerden ons mateloos aan botte messen die tomaten pletten, door uien heen ploegden en koken tot een frustratie maakten.',
+    },
+    {
+      num: '2',
+      title: 'De ontdekking van de watersteen',
+      text: 'We verdiepten ons in de traditionele Japanse slijpfilosofie: wij kiezen de juiste steen voor elk type mes en staal, en stroppen daarna af op leer. Geen vonkende machines die het staal ontlaten, maar pure controle en spiegelgladde precisie.',
+    },
+    {
+      num: '3',
+      title: 'Slijpmaat: Jouw lokale messenslijper',
+      text: 'Vrienden, familie en al snel Utrechtse restaurants vroegen of we hun messen wilden slijpen. Slijpmaat was geboren: een betrouwbare, persoonlijke vriend aan huis die zorgt voor vlijmscherp gereedschap zonder gedoe.',
+    },
+  ];
+
+  // 2. Onze Filosofie (3 Kernprincipes)
+  const philosophyItems = [
+    {
+      title: '100% Handmatig geslepen',
+      desc: 'Droge machines verhitten de apex boven 200°C waardoor staal zacht wordt en snel weer bot is. Onze waterstenen koelen constant. Hierdoor behoudt je mes zijn fabriekshardheid en blijft het wekenlang scherp.',
       icon: Sparkles,
     },
     {
-      title: 'Persoonlijk contact',
-      text: 'Als je ons belt of appt, spreek je altijd direct met Teun of Mike. Geen anoniem callcenter of ingewikkeld ticketsysteem.',
+      title: 'Persoonlijk als een goede maat',
+      desc: 'Geen anoniem callcenter of logge logistieke ketens. Je appt direct met Teun of Mike, we halen de messen zelf bij je op in Utrecht en denken eerlijk met je mee over het behoud van je messen.',
       icon: Heart,
     },
     {
-      title: 'Lokaal en betrouwbaar',
-      text: 'Gevestigd in Utrecht. Vanaf 3 messen halen we ze gratis op aan huis of in jouw restaurant en leveren we ze binnen 24–48 uur weer vlijmscherp af.',
+      title: 'Duurzaam behoud boven weggooien',
+      desc: 'Een goed mes kan tientallen jaren meegaan. Ook messen met een afgebroken puntje of flinke hap in de snede herstellen we met liefde. Slijpen is beter voor je portemonnee én voor het milieu.',
+      icon: Compass,
+    },
+  ];
+
+  // 3. Groene sectie beloftes
+  const promises = [
+    {
+      title: 'Altijd direct contact',
+      desc: 'App of bel rechtstreeks met Teun en Mike voor advies of planning.',
+      icon: MessageCircle,
+    },
+    {
+      title: '24–48 Uur doorlooptijd',
+      desc: 'Je hoeft je favoriete koksmes nooit lang te missen in de keuken.',
+      icon: Clock3,
+    },
+    {
+      title: 'Gratis ophalen & brengen',
+      desc: 'Vanaf 3 messen halen we ze gratis op aan huis in heel Utrecht.',
       icon: MapPin,
+    },
+    {
+      title: 'Betalen pas achteraf',
+      desc: 'Eenvoudig via een Tikkie zodra je tevreden bent met het resultaat.',
+      icon: CheckCircle2,
+    },
+  ];
+
+  // 4. Veelgestelde vragen over Teun & Mike
+  const faqs = [
+    {
+      question: 'Wie slijpt mijn messen daadwerkelijk?',
+      answer: 'Elk mes dat bij Slijpmaat binnenkomt wordt hoogstpersoonlijk door Teun of Mike geslepen. We werken niet met wisselende stagiairs of externe partijen. Zo garanderen we constante kwaliteit en persoonlijke zorg voor elk lemmet.',
+    },
+    {
+      question: 'Welke stenen gebruiken jullie?',
+      answer: 'We werken met professionele Japanse waterstenen. Voor elk mes en elk staalsoort kiezen wij de juiste steen om de snede perfect op te bouwen. Daarna stroppen we elk mes af op leer met fijne diamantpasta voor een zuivere, braamvrije snijkant.',
+    },
+    {
+      question: 'Waar in Utrecht zijn jullie gevestigd?',
+      answer: 'Wij werken vanuit huis aan de Gerard Noodtstraat in Utrecht. Omdat we vanuit huis werken en overdag messen ophalen met de bakfiets, hebben we geen openbare inloopwinkel en werken we uitsluitend op afspraak. Zo kunnen we onze volle aandacht aan het slijpwerk besteden.',
+    },
+    {
+      question: 'Kan ik ook langskomen om Teun en Mike te ontmoeten?',
+      answer: 'Zeker! Als je je messen liever zelf langsbrengt in plaats van gebruik te maken van onze ophaalservice, kun je via WhatsApp eenvoudig een afspraak maken. Wij werken vanuit huis, dus we stemmen vooraf even een handig moment af en laten je graag onze stenen zien.',
     },
   ];
 
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
-      {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] pb-8 pt-4 sm:pb-12 sm:pt-6 lg:pb-16">
-        <div
+      {/* 1. HERO SECTION (Zelfde lay-out als Particulieren: links tekst, rechts foto van Teun & Mike samen) */}
+      <section className="relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
+        {/* Crisp organic SVG blob in top-right background (geen wazige gloed) */}
+        <svg
           aria-hidden="true"
-          className="pointer-events-none absolute -right-20 -top-16 h-[340px] w-[340px] rounded-full bg-[#E3EFE5] opacity-80 blur-2xl sm:h-[480px] sm:w-[480px] sm:blur-3xl lg:-right-10 lg:top-2 lg:h-[560px] lg:w-[560px]"
-        />
+          viewBox="0 0 520 520"
+          className="pointer-events-none absolute -right-20 top-4 hidden h-[520px] w-[520px] text-[#E8EFE8] opacity-75 lg:block"
+        >
+          <path
+            fill="currentColor"
+            d="M416 72c58 48 88 135 78 213-11 78-62 147-132 181-69 34-157 34-221-4-64-39-104-116-100-193 4-76 53-151 120-194 67-42 197-51 255-3Z"
+          />
+        </svg>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
+        <div className="relative z-10 grid grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-12 lg:py-8 xl:gap-20">
+          {/* Left: Copy & CTAs */}
+          <div className="order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0 lg:pl-4 xl:pl-8">
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
-              De gezichten achter Slijpmaat
+              Over ons · Leer je Maat kennen
             </p>
-            <h1 className="mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
-              Over Teun &amp; Mike.
+            <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
+              Twee Utrechtse vrienden met passie voor scherpte.
             </h1>
-            <p className="mt-5 text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Twee vrienden uit Utrecht met een gedeelde passie voor koken, goed gereedschap en het traditionele vakmanschap van Japans watersteenslijpen.
+            <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
+              Wij zijn Teun en Mike, de oprichters van Slijpmaat. Twee maten uit Utrecht die vonden dat messenslijpen weer ambachtelijk, betrouwbaar en zonder gedoe aan huis geregeld moet worden.
             </p>
 
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <button
                 type="button"
-                onClick={() => onNavigate('particulieren')}
-                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
+                onClick={() => onNavigate ? onNavigate('particulieren') : (window.location.hash = '#particulieren')}
+                className="group inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
               >
                 <span>Plan een slijpbeurt</span>
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
               </button>
-              <button
-                type="button"
-                onClick={() => onNavigate('werkwijze')}
-                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base cursor-pointer"
+
+              <a
+                href={whatsappUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
               >
-                <span>Bekijk onze werkwijze</span>
-                <ArrowRight className="h-4 w-4" />
-              </button>
+                <MessageCircle className="h-4 w-4" />
+                <span>Stuur je Maat een appje</span>
+              </a>
+            </div>
+          </div>
+
+          {/* Right: Foto van Teun & Mike samen (met arm over de schouder) & organische blob */}
+          <div className="order-2 w-full lg:order-2 px-4 sm:px-6 lg:px-0 relative">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
+            />
+            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg sm:aspect-[16/11] lg:aspect-square">
+              <img
+                src="/assets/team/teun-en-mike-samen.jpg"
+                alt="Teun en Mike van Slijpmaat samen in Utrecht"
+                className="h-full w-full object-cover object-[center_35%]"
+              />
+              <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 rounded-full bg-[#203728]/85 px-4 py-2 backdrop-blur-xs text-xs font-bold text-white shadow-md border border-white/10">
+                <span className="flex h-2.5 w-2.5 rounded-full bg-[#4CAF50] animate-pulse" />
+                <span>Teun &amp; Mike · Oprichters Slijpmaat</span>
+              </div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 2. TRUST BAR */}
+      {/* 2. TRUST BAR (Zekerheden) */}
       <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
         <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
           <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
             <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <GoogleIcon />
               <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews · 5,0</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24–48 uur klaar</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24–48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Lokaal in Utrecht</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen in Utrecht</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 3. MAIN STORY WITH REAL PHOTO & ORGANIC BLOB */}
-      <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto grid max-w-7xl items-center gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-          {/* Photo with sage blob */}
-          <div className="relative isolate">
-            <div
-              className="pointer-events-none absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 h-44 w-44 sm:h-56 sm:w-56 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-95 transition-transform duration-500 hover:scale-105 z-0"
-              aria-hidden="true"
-            />
-            <img
-              src="/assets/team/teun-en-mike-samen.jpg"
-              alt="Teun en Mike van Slijpmaat samen in Utrecht"
-              className="relative z-10 aspect-[4/3] w-full rounded-[2rem] object-cover shadow-sm transition-transform duration-500 hover:scale-[1.01]"
-              loading="lazy"
-            />
-          </div>
+      {/* 3. HOE ZIJN WE BEGONNEN? (Warm cream #F7F4EC) */}
+      <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-20 top-1/4 h-72 w-72 rounded-[55%_45%_60%_40%/50%_55%_45%_50%] bg-[#E8EFE8]/70"
+        />
 
-          {/* Story text */}
-          <div className="space-y-6">
+        <div className="relative mx-auto max-w-7xl">
+          <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Ons verhaal</p>
-            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
-              Jouw vertrouwde Maat voor vlijmscherpe messen
-            </h2>
-            <div className="space-y-4 text-base leading-relaxed text-[#657068]">
-              <p>
-                Messenslijpen is een eeuwenoud ambacht, maar de service eromheen mag best van nu zijn. We zagen te vaak dat goede, dierbare messen achterin een la belandden of zelfs werden vervangen, puur omdat ze bot waren.
-              </p>
-              <p>
-                Zonde, vonden wij. Daarom begonnen we Slijpmaat: hoogwaardig handmatig slijpwerk op Japanse whetstones, gecombineerd met snelle en vriendelijke service via WhatsApp en een handige ophaalservice in Utrecht.
-              </p>
-              <p>
-                Of je nu een thuiskok bent met twee favoriete schilmessen of een chef-kok met een volle messenrol in een drukke brigade: elk lemmet krijgt van ons dezelfde toewijding en precisie.
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Hoe het begon aan de keukentafel</h2>
+            <p className="mt-3 text-base leading-7 text-[#657068]">
+              Van twee vrienden die gek werden van botte messen, tot de meest geliefde mobiele messenslijper van Utrecht.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+            {originSteps.map((item) => (
+              <div
+                key={item.num}
+                className="group relative rounded-[2rem] border border-[#d9e1d7] bg-white p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md"
+              >
+                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-sm font-bold text-[#C95E3E]">
+                  {item.num}
+                </span>
+                <h3 className="mt-5 font-heading text-xl font-bold text-[#3B7F4B]">{item.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#657068]">{item.text}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* 4. MISSIE & VISIE (Twee complementaire kaarten) */}
+      <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 text-center sm:mb-14">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Waar we voor gaan</p>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Onze Missie &amp; Visie</h2>
+            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-[#657068]">
+              Wat ons drijft om elke dag met precisie achter de waterstenen te staan.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
+            {/* Missie Kaart */}
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white p-8 sm:p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B] mb-6">
+                <Target className="h-7 w-7" />
+              </div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#C95E3E]">
+                Onze Missie
+              </span>
+              <h3 className="mt-2 font-heading text-2xl sm:text-3xl font-bold text-[#203728]">
+                Elk mes in Utrecht weer het respect en de scherpte geven die het verdient.
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-[#657068]">
+                Koken hoort leuk, ontspannen en veilig te zijn. Wij maken professioneel messenslijpen toegankelijk voor iedereen: van student en thuiskok tot chef-kok, direct aan de voordeur zonder rompslomp.
               </p>
             </div>
 
-            <div className="grid grid-cols-1 gap-3 pt-2 sm:grid-cols-2">
-              <div className="flex items-start gap-2.5 rounded-2xl bg-[#E8EFE8]/60 p-4">
-                <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#3B7F4B]" />
-                <span className="text-xs font-bold text-[#3B7F4B]">Geen agressieve machines, 100% watergekoeld</span>
+            {/* Visie Kaart */}
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white p-8 sm:p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md">
+              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F9E4DE] text-[#C95E3E] mb-6">
+                <Compass className="h-7 w-7" />
               </div>
-              <div className="flex items-start gap-2.5 rounded-2xl bg-[#E8EFE8]/60 p-4">
-                <Check className="mt-0.5 h-5 w-5 shrink-0 text-[#3B7F4B]" />
-                <span className="text-xs font-bold text-[#3B7F4B]">Persoonlijk contact direct met Teun of Mike</span>
-              </div>
+              <span className="text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
+                Onze Visie
+              </span>
+              <h3 className="mt-2 font-heading text-2xl sm:text-3xl font-bold text-[#203728]">
+                Duurzaam behoud als de nieuwe standaard in de keuken.
+              </h3>
+              <p className="mt-4 text-base leading-relaxed text-[#657068]">
+                In een maatschappij waar spullen snel worden weggegooid, laten wij zien dat goed gereedschap generaties lang meegaat. Met vakkundig onderhoud op waterstenen behoud je kwaliteit en voorkom je onnodig afval.
+              </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* 4. ONZE KERNWAARDEN (Cream background with wave divider) */}
-      <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-20 sm:px-6 sm:pb-28 sm:pt-24 lg:px-8">
+      {/* 5. ONZE FILOSOFIE (De 3 pijlers van ons ambacht) */}
+      <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8 bg-[#FAFAF8] border-t border-[#d9e1d7]/60">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-10 text-center sm:mb-14">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Vakmanschap</p>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+              Onze Slijpfilosofie
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-base text-[#657068]">
+              Waarom we trouw blijven aan traditionele Japanse waterstenen en nooit snijden in kwaliteit.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+            {philosophyItems.map((item, idx) => {
+              const Icon = item.icon;
+              return (
+                <div
+                  key={idx}
+                  className="rounded-[2rem] border border-[#d9e1d7] bg-white p-7 sm:p-8 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md flex flex-col justify-between"
+                >
+                  <div>
+                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B]">
+                      <Icon className="h-6 w-6" />
+                    </span>
+                    <h3 className="mt-5 font-heading text-xl font-bold text-[#3B7F4B]">
+                      {item.title}
+                    </h3>
+                    <p className="mt-3 text-sm leading-6 text-[#657068]">
+                      {item.desc}
+                    </p>
+                  </div>
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* 6. WIE ZIJN TEUN & MIKE? + LINKEDIN SECTIE */}
+      <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8 bg-white">
+        <div className="mx-auto max-w-5xl">
+          <div className="mb-10 text-center sm:mb-14">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Het team</p>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+              Ontmoet Teun &amp; Mike
+            </h2>
+            <p className="mx-auto mt-3 max-w-xl text-base text-[#657068]">
+              De jongens die op de fiets door Utrecht trekken en met precisie achter de stenen staan.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
+            {/* Teun Versteeg */}
+            <div className="rounded-[2.25rem] border border-[#d9e1d7] bg-[#FAFAF8] p-6 sm:p-8 shadow-xs">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B] font-heading font-bold text-sm">
+                  TV
+                </span>
+                <div>
+                  <h3 className="font-heading text-xl font-bold text-[#203728]">Teun Versteeg</h3>
+                  <p className="text-xs font-semibold text-[#3B7F4B]">Mede-oprichter &amp; Messenslijper</p>
+                </div>
+              </div>
+              <p className="text-sm leading-relaxed text-[#657068]">
+                Gefascineerd door de technische kant van metallurgie, slijphoeken en micro-bevels. Zorgt ervoor dat elk mes met chirurgische precisie en minimale weerstand teruggaat naar de eigenaar.
+              </p>
+            </div>
+
+            {/* Mike */}
+            <div className="rounded-[2.25rem] border border-[#d9e1d7] bg-[#FAFAF8] p-6 sm:p-8 shadow-xs">
+              <div className="flex items-center gap-3 mb-4">
+                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F9E4DE] text-[#C95E3E] font-heading font-bold text-sm">
+                  M
+                </span>
+                <div>
+                  <h3 className="font-heading text-xl font-bold text-[#203728]">Mike</h3>
+                  <p className="text-xs font-semibold text-[#C95E3E]">Mede-oprichter &amp; Messenslijper</p>
+                </div>
+              </div>
+              <p className="text-sm leading-relaxed text-[#657068]">
+                Gepassioneerd kok en het aanspreekpunt voor horeca en particulieren. Weet precies wat een mes op de snijplank moet doen en hoe belangrijk een soepele service voor keukens is.
+              </p>
+            </div>
+          </div>
+
+          {/* LinkedIn Connectie Banner */}
+          <div className="mt-8 rounded-[2.25rem] border border-[#0A66C2]/20 bg-[#F4F8FC] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xs">
+            <div className="flex items-center gap-4 text-center sm:text-left">
+              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#0A66C2] text-white shadow-sm">
+                <LinkedInIcon className="h-7 w-7" />
+              </div>
+              <div>
+                <h4 className="font-heading text-lg font-bold text-[#0A66C2]">
+                  Connect met ons op LinkedIn
+                </h4>
+                <p className="text-xs sm:text-sm text-[#4A6478] mt-0.5">
+                  Volg het verhaal van Slijpmaat, onze zakelijke updates en kijkjes achter de schermen in Utrecht.
+                </p>
+              </div>
+            </div>
+
+            <a
+              href={linkedinCompanyUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2 rounded-full bg-[#0A66C2] px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-xs transition-all hover:bg-[#084e96] hover:shadow-md cursor-pointer shrink-0"
+            >
+              <span>Volg op LinkedIn</span>
+              <ExternalLink className="h-4 w-4" />
+            </a>
+          </div>
+        </div>
+      </section>
+
+      {/* 7. GROENE GOLFSECTIE (#3B7F4B met wave dividers) */}
+      <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
         <svg
           aria-hidden="true"
           viewBox="0 0 1440 60"
           preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#FAFAF8] sm:h-14 lg:h-16"
+          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
         >
           <path
             fill="currentColor"
@@ -168,90 +418,92 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           />
         </svg>
 
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 100"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute bottom-0 left-0 h-14 w-full text-white sm:h-20 lg:h-24"
+        >
+          <path
+            fill="currentColor"
+            d="M0,100 L1440,100 L1440,30 C1200,75 920,15 620,55 C380,85 180,25 0,65 Z"
+          />
+        </svg>
+
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Waar wij voor staan</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">De Slijpmaat belofte</h2>
-            <p className="mt-3 text-base leading-7 text-[#657068]">
-              Geen loze praatjes, maar drie duidelijke principes waar we elke dag naar werken.
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">De Slijpmaat belofte</p>
+            <h2 className="mt-3 font-heading text-3xl font-bold text-white sm:text-4xl">
+              Wat kun je van jouw Maat verwachten?
+            </h2>
+            <p className="mt-4 text-base leading-7 text-[#E8EFE8]">
+              Vier duidelijke principes waarmee we dagelijks op de fiets stappen en messen slijpen.
             </p>
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {values.map((v) => {
-              const Icon = v.icon;
+          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+            {promises.map((p, idx) => {
+              const Icon = p.icon;
               return (
-                <div
-                  key={v.title}
-                  className="rounded-[2rem] border border-[#d9e1d7] bg-white p-7 sm:p-8 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md"
-                >
-                  <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B]">
-                    <Icon className="h-6 w-6" />
+                <div key={idx} className="rounded-[1.75rem] bg-white p-6 shadow-sm">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B]">
+                    <Icon className="h-5 w-5" />
                   </span>
-                  <h3 className="mt-5 font-heading text-xl font-bold text-[#3B7F4B]">{v.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-[#657068]">{v.text}</p>
+                  <h3 className="mt-5 font-heading text-lg font-bold text-[#3B7F4B]">{p.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[#657068]">{p.desc}</p>
                 </div>
               );
             })}
           </div>
-
-          {/* Quote Banner */}
-          <div className="mt-10 overflow-hidden rounded-[2.5rem] border border-[#E87B5B]/20 bg-[#FFF7F3] p-8 sm:p-12 shadow-sm">
-            <div className="mx-auto max-w-3xl text-center">
-              <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">De filosofie</span>
-              <blockquote className="mt-4 font-heading text-xl font-bold italic leading-relaxed text-[#3B7F4B] sm:text-2xl">
-                &ldquo;Een goed koksmes is het verlengstuk van je hand. Zodra je moet duwen of zagen, verdwijnt het kookplezier. Wij zorgen dat jouw messen weer fluweelzacht door elke tomaat glijden.&rdquo;
-              </blockquote>
-              <p className="mt-4 text-sm font-bold text-[#C95E3E]">— Teun &amp; Mike, Oprichters Slijpmaat</p>
-            </div>
-          </div>
         </div>
       </section>
 
-      {/* 5. ATELIER & LOCATIE IN UTRECHT */}
-      <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div className="space-y-5">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Atelier Utrecht</p>
-            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
-              Onze werkplaats aan de Gerard Noodtstraat
-            </h2>
-            <p className="text-base leading-relaxed text-[#657068]">
-              In onze slijpstudio in Utrecht slijpen we alle messen met de hand. We hebben geen openbare winkel of inloopbalie, zodat we onze volledige aandacht aan het slijpwerk en de kwaliteit kunnen besteden.
+      {/* 8. VEELGESTELDE VRAGEN OVER ONS */}
+      <section id="faq" className="relative scroll-mt-24 overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-20 top-1/3 h-64 w-64 rounded-full bg-[#F4F7F4] opacity-80"
+        />
+
+        <div className="relative z-10 mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
+          <div className="max-w-md">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Veelgestelde vragen</p>
+            <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Vragen over Slijpmaat?</h2>
+            <p className="mt-4 text-base leading-7 text-[#657068]">
+              Wil je meer weten over hoe we vanuit huis werken, onze stenen of de werkwijze in Utrecht? Hier vind je antwoord.
             </p>
-            <div className="space-y-3 rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-6 text-sm">
-              <div className="flex items-center gap-3">
-                <MapPin className="h-5 w-5 text-[#3B7F4B] shrink-0" />
-                <span className="font-bold text-[#3B7F4B]">{SLIJPMAAT_INFO.fullAddress}</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <Clock3 className="h-5 w-5 text-[#3B7F4B] shrink-0" />
-                <span className="text-[#657068]">Maandag t/m Zaterdag 10:00 – 21:00 (op afspraak)</span>
-              </div>
-              <div className="flex items-center gap-3">
-                <MessageCircle className="h-5 w-5 text-[#3B7F4B] shrink-0" />
-                <span className="text-[#657068]">Altijd vooraf even appen via WhatsApp</span>
-              </div>
-            </div>
+            <a
+              href={whatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#3B7F4B] transition-colors hover:text-[#315F3B]"
+            >
+              <span>Stel een persoonlijke vraag via WhatsApp</span>
+              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+            </a>
           </div>
 
-          <div className="relative isolate">
-            <div
-              className="pointer-events-none absolute -bottom-6 -right-6 h-40 w-40 rounded-full bg-[#E8EFE8] opacity-80 blur-2xl"
-              aria-hidden="true"
-            />
-            <img
-              src="/assets/team/teun-en-mike-met-visitekaartje.jpg"
-              alt="Teun en Mike van Slijpmaat met visitekaartje"
-              className="relative z-10 aspect-[4/3] w-full rounded-[2rem] object-cover shadow-sm transition-transform duration-500 hover:scale-[1.01]"
-              loading="lazy"
-            />
+          <div className="space-y-3">
+            {faqs.map((faq) => (
+              <details
+                key={faq.question}
+                className="group rounded-2xl border border-[#d9e1d7]/60 bg-[#FAFAF8] p-5 shadow-xs transition-all duration-200 hover:border-[#3B7F4B]/40 hover:bg-white open:border-[#3B7F4B]/50 open:bg-white open:shadow-md"
+              >
+                <summary className="flex cursor-pointer list-none items-center justify-between gap-5 font-heading text-base font-bold text-[#3B7F4B] marker:hidden sm:text-lg">
+                  <span>{faq.question}</span>
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B] transition-transform duration-200 group-open:rotate-45">
+                    <Plus className="h-4 w-4" aria-hidden="true" />
+                  </span>
+                </summary>
+                <p className="mt-3 max-w-2xl text-sm leading-7 text-[#657068]">{faq.answer}</p>
+              </details>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* 6. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
-      <section id="overons-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
+      {/* 9. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
+      <section id="over-ons-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
         <svg
           aria-hidden="true"
           viewBox="0 0 1440 60"
@@ -277,30 +529,31 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         </svg>
 
         <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Contact</p>
+          <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Maak kennis</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
-            Maak kennis met je Maat
+            Laat je messen slijpen door je Maat.
           </h2>
           <p className="mt-6 max-w-4xl text-lg leading-relaxed text-white/95 sm:text-xl">
-            Heb je een vraag over je messen, ons slijpproces of wil je gewoon even overleggen? Stuur Teun of Mike direct een appje.
+            Ervaar zelf het enorme verschil van echte handgeslepen messen in je eigen keuken.
           </p>
 
           <div className="mt-10 grid max-w-4xl gap-4 sm:grid-cols-2">
+            <button
+              type="button"
+              onClick={() => onNavigate ? onNavigate('particulieren') : (window.location.hash = '#particulieren')}
+              className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl cursor-pointer"
+            >
+              <span>Plan mijn slijpbeurt</span>
+              <ArrowRight className="h-7 w-7 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+            </button>
             <a
               href={whatsappUrl}
               target="_blank"
               rel="noopener noreferrer"
               className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl"
             >
-              <span>Stuur je Maat een appje</span>
+              <span>Stuur een appje</span>
               <MessageCircle className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
-            </a>
-            <a
-              href="tel:+31682074967"
-              className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl"
-            >
-              <span>Bel je Maat</span>
-              <Phone className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
             </a>
           </div>
         </div>

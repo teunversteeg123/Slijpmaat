@@ -44,7 +44,7 @@ export const BuitenUtrechtPage: React.FC<BuitenUtrechtPageProps> = ({ onNavigate
     },
     {
       q: 'Kan ik mijn messen ook opsturen per post?',
-      a: 'Ja, dat kan in overleg! Stuur ons eerst even een appje met foto\'s of het aantal messen. Vervolgens stuur je het pakket goed ingepakt naar ons atelier in Utrecht. Na het slijpen sturen we ze vlijmscherp en verzekerd via PostNL weer naar je terug.',
+      a: 'Ja, dat kan in overleg! Stuur ons eerst even een appje met foto\'s of het aantal messen. Vervolgens stuur je het pakket goed ingepakt naar ons adres in Utrecht (wij werken vanuit huis). Na het slijpen sturen we ze vlijmscherp en verzekerd via PostNL weer naar je terug.',
     },
     {
       q: 'Ik heb een horecakeuken buiten Utrecht. Komen jullie dan wel langs?',
@@ -129,7 +129,7 @@ export const BuitenUtrechtPage: React.FC<BuitenUtrechtPageProps> = ({ onNavigate
                 Belangrijk: altijd even een afspraak maken via WhatsApp
               </h2>
               <p className="text-sm leading-relaxed text-[#657068]">
-                Slijpmaat heeft géén doorlopende inloopbalie. We werken met passie en precisie in ons atelier aan de Gerard Noodtstraat in Utrecht. Door vooraf een dag en tijdstip af te stemmen via WhatsApp, weet je zeker dat Teun of Mike persoonlijk klaarstaat om je messen veilig aan te pakken.
+                Slijpmaat heeft géén doorlopende inloopbalie; wij werken vanuit huis aan de Gerard Noodtstraat in Utrecht. Door vooraf een dag en tijdstip af te stemmen via WhatsApp, weet je zeker dat Teun of Mike persoonlijk klaarstaat om je messen veilig aan te pakken.
               </p>
             </div>
           </div>
@@ -160,7 +160,7 @@ export const BuitenUtrechtPage: React.FC<BuitenUtrechtPageProps> = ({ onNavigate
                   1. Zelf langsbrengen op afspraak
                 </h3>
                 <p className="mt-3 text-sm leading-6 text-[#657068]">
-                  Breng je messen op afspraak langs bij ons atelier aan de Gerard Noodtstraat 57 in Utrecht. Goed bereikbaar vanaf de A27/A28 en gratis parkeren voor de deur.
+                  Breng je messen op afspraak langs bij ons aan de Gerard Noodtstraat 57 in Utrecht. Wij werken vanuit huis, goed bereikbaar vanaf de A27/A28 en gratis parkeren voor de deur.
                 </p>
                 <ul className="mt-4 space-y-2 text-xs font-semibold text-[#3B7F4B]">
                   <li className="flex items-center gap-2"><CheckCircle2 className="h-4 w-4 shrink-0 text-[#3B7F4B]" /> €0,- bezorgkosten</li>
@@ -267,7 +267,7 @@ export const BuitenUtrechtPage: React.FC<BuitenUtrechtPageProps> = ({ onNavigate
                 Goed bereikbaar in Utrecht
               </h2>
               <p className="text-base leading-relaxed text-[#657068]">
-                Ons atelier bevindt zich aan de oostkant van Utrecht. Vanaf de snelweg (A27 afslag Rijnsweerd of A28) ben je er in een paar minuten. Er is altijd plek om even voor de deur te parkeren om je messen af te geven.
+                Wij werken vanuit huis aan de oostkant van Utrecht. Vanaf de snelweg (A27 afslag Rijnsweerd of A28) ben je er in een paar minuten. Er is altijd plek om even voor de deur te parkeren om je messen af te geven.
               </p>
 
               <div className="space-y-3 rounded-2xl border border-[#d9e1d7] bg-white p-6 text-sm">

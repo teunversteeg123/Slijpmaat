@@ -8,7 +8,7 @@ interface BeforeAfterProps {
 
 export const BeforeAfterSlider: React.FC<BeforeAfterProps> = ({
   title = 'Snijprofiel: Bot & Chip vs. Slijpmaat Resultaat',
-  description = 'Klant had een chip van 1,8 mm in de snijkant na het raken van een bord. Volledig hersteld op Shapton Pro 320, opgebouwd tot 8000 grit en afgestropt op leder zonder profielverlies.'
+  description = 'Klant had een chip van 1,8 mm in de snijkant na het raken van een bord. Wij kozen de juiste Japanse waterstenen voor dit specifieke staal, herstelden de snede en stropten af op leer zonder profielverlies.'
 }) => {
   const [sliderPos, setSliderPos] = useState(50);
   const [activeMode, setActiveMode] = useState<'slider' | 'before' | 'after'>('slider');
@@ -193,7 +193,7 @@ export const BeforeAfterSlider: React.FC<BeforeAfterProps> = ({
           <Sparkles className="w-4 h-4 text-[#3B7F4B] shrink-0 mt-0.5" />
           <div>
             <span className="font-bold text-[#3B7F4B]">2. Slijpmaat Behandeling</span>
-            <p className="text-[#657068] mt-0.5">Shapton Pro 320 profielherstel &rarr; 1000 &rarr; 5000 &rarr; Lederen strop.</p>
+            <p className="text-[#657068] mt-0.5">Wij kiezen de juiste steen &rarr; Gecontroleerd profielherstel &rarr; Afstroppen op leer.</p>
           </div>
         </div>
 

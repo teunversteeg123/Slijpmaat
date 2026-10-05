@@ -3,6 +3,8 @@ import { SlijpmaatLogo } from './SlijpmaatLogo';
 import { PageId } from '../types';
 import { Menu, X, ChevronDown, MessageCircle, MapPin } from 'lucide-react';
 import { SLIJPMAAT_INFO } from '../data/siteData';
+import { useLanguage } from '../context/LanguageContext';
+import { LanguageSlider } from './LanguageSlider';
 
 interface HeaderProps {
   currentPage: PageId;
@@ -10,6 +12,7 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
+  const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobilePrijzenOpen, setMobilePrijzenOpen] = useState(false);
   const [mobilePlanOpen, setMobilePlanOpen] = useState(false);
@@ -51,11 +54,12 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const navLinks: { id: PageId; label: string }[] = [
-    { id: 'home', label: 'Home' },
-    { id: 'over-ons', label: 'Over ons' },
-    { id: 'werkwijze', label: 'Werkwijze' },
-    { id: 'kennisbank', label: 'Kennisbank' },
+  const navLinks: { id: PageId; labelKey: string; defaultLabel: string }[] = [
+    { id: 'home', labelKey: 'nav.home', defaultLabel: 'Home' },
+    { id: 'onze-maten', labelKey: 'nav.onze_maten', defaultLabel: 'Onze Maten' },
+    { id: 'over-ons', labelKey: 'nav.over_ons', defaultLabel: 'Over ons' },
+    { id: 'werkwijze', labelKey: 'nav.werkwijze', defaultLabel: 'Werkwijze' },
+    { id: 'kennisbank', labelKey: 'nav.kennisbank', defaultLabel: 'Kennisbank' },
   ];
 
   const closeHeaderMenus = () => {
@@ -97,8 +101,8 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
             className="flex items-center justify-center gap-1.5 sm:gap-2 text-center sm:text-left text-white hover:text-[#E8EFE8] transition-colors cursor-pointer"
           >
             <span className="flex h-2 w-2 shrink-0 rounded-full bg-white animate-pulse" />
-            <span className="font-semibold">Gratis ophalen &amp; bezorgen in Utrecht</span>
-            <span className="text-[#E8EFE8] hidden md:inline">&middot; vanaf 3 messen</span>
+            <span className="font-semibold">{t('topbar.free_pickup', 'Gratis ophalen & bezorgen in Utrecht')}</span>
+            <span className="text-[#E8EFE8] hidden md:inline">&middot; {t('topbar.min_knives', 'vanaf 3 messen')}</span>
           </button>
 
           <div className="hidden sm:flex items-center gap-3 sm:gap-4 text-xs font-semibold">
@@ -108,14 +112,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1 cursor-pointer shrink-0"
             >
               <MapPin className="w-3.5 h-3.5 text-white shrink-0" />
-              <span>Servicegebied Utrecht</span>
+              <span>{t('topbar.service_area', 'Servicegebied Utrecht')}</span>
             </button>
             <button
               type="button"
               onClick={() => handleLinkClick('buiten-utrecht')}
               className="text-[#E8EFE8] hover:text-white transition-colors cursor-pointer shrink-0 underline decoration-[#A9C89E] underline-offset-2 hover:decoration-white"
             >
-              Buiten Utrecht?
+              {t('topbar.outside_utrecht', 'Buiten Utrecht?')}
             </button>
             <a
               href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!')}`}
@@ -124,7 +128,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1 shrink-0"
             >
               <MessageCircle className="w-3.5 h-3.5 text-white shrink-0" />
-              <span className="hidden sm:inline">WhatsApp je Maat</span>
+              <span className="hidden sm:inline">{t('topbar.whatsapp', 'WhatsApp je Maat')}</span>
             </a>
           </div>
         </div>
@@ -154,7 +158,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                     isActive ? 'text-[#3B7F4B] font-bold' : 'text-[#3B7F4B]'
                   }`}
                 >
-                  {link.label}
+                  {t(link.labelKey, link.defaultLabel)}
                   {isActive && (
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#3B7F4B] rounded-full" />
                   )}
@@ -163,44 +167,47 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
             })}
             <details name="header-menu" data-header-menu className="group relative">
               <summary className={`relative flex cursor-pointer list-none items-center gap-1.5 py-1 transition-colors marker:hidden hover:text-[#3B7F4B] ${currentPage === 'particulieren' || currentPage === 'horeca' ? 'font-bold text-[#3B7F4B]' : 'text-[#3B7F4B]'}`}>
-                <span>Prijzen</span>
+                <span>{t('nav.prijzen', 'Prijzen')}</span>
                 <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" aria-hidden="true" />
                 {(currentPage === 'particulieren' || currentPage === 'horeca') ? <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-[#3B7F4B]" /> : null}
               </summary>
               <div className="absolute left-1/2 top-full z-50 w-60 -translate-x-1/2 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
                   <button type="button" onClick={() => handlePriceClick('particulieren', 'calculator')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
-                    <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelcalculator</span>
+                    <span className="block font-heading text-sm font-bold text-[#3B7F4B]">{t('nav.particulier', 'Particulier')}</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.particulier_sub', 'Naar de prijs- en bestelcalculator')}</span>
                   </button>
                   <button type="button" onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
-                    <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
+                    <span className="block font-heading text-sm font-bold text-[#C95E3E]">{t('nav.zakelijk', 'Zakelijk')}</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.zakelijk_sub', 'Naar de zakelijke aanvraag')}</span>
                   </button>
                 </div>
               </div>
             </details>
           </nav>
 
-          {/* Zone 3: Primary Action buttons */}
-          <div className="flex items-center gap-3">
+          {/* Zone 3: Primary Action buttons & Language Switcher */}
+          <div className="flex items-center gap-2 sm:gap-3">
+            {/* The small language slider switch */}
+            <LanguageSlider />
+
             <details name="header-menu" data-header-menu className="group relative hidden sm:block">
               <summary
                 className={`flex cursor-pointer list-none items-center gap-2 rounded-full bg-[#E87B5B] px-5 py-2.5 text-sm font-bold text-white shadow-xs transition-all marker:hidden hover:bg-[#C95E3E] active:scale-[0.98] ${currentPage === 'particulieren' || currentPage === 'horeca' ? 'ring-2 ring-[#C95E3E] ring-offset-2' : ''}`}
               >
-                <span>Plan je slijpbeurt</span>
+                <span>{t('nav.plan_button', 'Plan je slijpbeurt')}</span>
                 <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden="true" />
               </summary>
 
               <div className="absolute right-0 top-full z-50 w-60 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
                   <button type="button" onClick={() => handleLinkClick('particulieren')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
-                    <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelcalculator</span>
+                    <span className="block font-heading text-sm font-bold text-[#3B7F4B]">{t('nav.particulier', 'Particulier')}</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.particulier_sub', 'Naar de prijs- en bestelcalculator')}</span>
                   </button>
                   <button type="button" onClick={() => handleLinkClick('horeca')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
-                    <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
+                    <span className="block font-heading text-sm font-bold text-[#C95E3E]">{t('nav.zakelijk', 'Zakelijk')}</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.zakelijk_sub', 'Naar de zakelijke aanvraag')}</span>
                   </button>
                 </div>
               </div>
@@ -377,6 +384,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                     </button>
                   </div>
                 )}
+              </div>
+
+              {/* Mobile Language Switcher Slider */}
+              <div className="pt-3 mt-3 border-t border-[#3B7F4B]/15 flex items-center justify-between px-3 py-1">
+                <span className="text-xs font-bold text-[#3B7F4B] uppercase tracking-wider">
+                  Taal / Language
+                </span>
+                <LanguageSlider />
               </div>
             </nav>
           </div>

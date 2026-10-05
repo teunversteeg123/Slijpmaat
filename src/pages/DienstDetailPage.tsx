@@ -112,15 +112,15 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-bold text-xs text-[#3B7F4B]">2</span>
-                    <span><strong>Whetstone opbouw:</strong> We slijpen onder een gecontroleerde hoek van 15 tot 20 graden per kant. Beginnend bij korrel 1000 om een zuivere apex te creëren.</span>
+                    <span><strong>Watersteen opbouw:</strong> We slijpen onder een gecontroleerde hoek van 15 tot 20 graden per kant. Wij kiezen de juiste steen om een zuivere apex te creëren.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-bold text-xs text-[#3B7F4B]">3</span>
-                    <span><strong>Polijsten &amp; ontbramen:</strong> We verfijnen op een korrel 2000 / 5000 steen om de microsnede strak te trekken.</span>
+                    <span><strong>Polijsten &amp; ontbramen:</strong> Wij kiezen de juiste fijnere steen om de microsnede strak te trekken.</span>
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-bold text-xs text-[#3B7F4B]">4</span>
-                    <span><strong>Lederen strop:</strong> We halen het mes over een met polijstpasta behandelde lederen riem. De braam is 100% verdwenen en het mes glijdt moeiteloos door papier.</span>
+                    <span><strong>Leren strop:</strong> We halen het mes over een met polijstpasta behandelde leren strop. De braam is 100% verdwenen en het mes glijdt moeiteloos door papier.</span>
                   </li>
                 </ol>
               </div>
@@ -204,9 +204,9 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
                   Japanse messen zijn gemaakt van aanzienlijk harder staal (59 tot 64 HRC) dan traditionele Europese messen. Hierdoor kan het lemmet veel dunner worden uitgeslepen onder een spitse hoek van 12 tot 15 graden. Droge machinale slijpers zijn dodelijk voor dit staal: de hitte sloopt de harding en micro-chips breken direct uit.
                 </p>
 
-                <h3 className="font-heading text-xl font-bold text-[#3B7F4B] pt-3">De Japanse slijpsteenreeks van Slijpmaat</h3>
+                <h3 className="font-heading text-xl font-bold text-[#3B7F4B] pt-3">De Japanse waterstenen van Slijpmaat</h3>
                 <p className="text-sm leading-relaxed text-[#657068]">
-                  Wij beoordelen elk Japans mes vooraf op de staalkern en symmetrie (50/50 of traditioneel asymmetrisch 70/30). Vervolgens slijpen we in stappen over Shapton Pro 1000, 2000, 5000 en sluiten we af op korrel 8000 met een lederen strop met diamant/chromium pasta voor een zuivere spiegelpolijsting.
+                  Wij beoordelen elk Japans mes vooraf op de staalkern en symmetrie (50/50 of traditioneel asymmetrisch 70/30). Vervolgens kiezen wij de juiste stenen die passen bij de hardheid van het staal en sluiten we af op een leren strop met diamantpasta voor een zuivere spiegelpolijsting.
                 </p>
               </div>
             </div>
@@ -284,7 +284,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
 
                 <h3 className="font-heading text-xl font-bold text-[#3B7F4B] pt-3">De aanpak van Slijpmaat</h3>
                 <p className="text-sm leading-relaxed text-[#657068]">
-                  Wij verlagen gecontroleerd het gehele lemmetprofiel op een grove steen (Shapton Pro 320) zodat er weer een zuivere, vloeiende snijboog ontstaat. Vervolgens dunnen we de schouders van het mes uit (&lsquo;thinning&rsquo;) zodat de geometrie slank blijft en het mes soepel snijdt.
+                  Wij verlagen gecontroleerd het gehele lemmetprofiel op de juiste herstelsteen zodat er weer een zuivere, vloeiende snijboog ontstaat. Vervolgens dunnen we de schouders van het mes uit (&lsquo;thinning&rsquo;) zodat de geometrie slank blijft en het mes soepel snijdt.
                 </p>
               </div>
             </div>

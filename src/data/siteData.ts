@@ -16,7 +16,7 @@ export const SLIJPMAAT_INFO = {
   hours: 'Maandag–zaterdag 10:00–21:00 (Zondag gesloten)',
   pickupMinKnivesFree: 3,
   pickupStandardFee: 4.50,
-  addressNote: 'Slijpmaat heeft geen inloopwinkel. Bezoek en afgifte uitsluitend op afspraak in Utrecht.',
+  addressNote: 'Wij werken vanuit huis en hebben geen inloopwinkel. Bezoek en afgifte uitsluitend op afspraak in Utrecht.',
   prices: {
     small: { name: 'Klein mes', size: 'Korter dan 15 cm', price: 6.50, desc: 'Schilmessen, officemessen, kleine tourneermessen' },
     normal: { name: 'Normaal mes', size: '15 tot 20 cm', price: 8.50, desc: 'Kleine koksmessen, santoku’s, universele messen' },
@@ -163,9 +163,9 @@ export const ARTICLES: Article[] = [
           tips: ['Water koelt het lemmet en voert metaaldeeltjes direct af.']
         },
         {
-          heading: 'Waarom wij kiezen voor Shapton Pro stenen',
-          body: 'Bij Slijpmaat werken we met professionele Shapton Pro stenen uit Japan. Deze stenen staan bekend om hun extreem consistente korrelgrootte en dichte structuur. We bouwen de snede trapsgewijs op: van korrel 320 voor reparaties naar 1000 voor de basisvouw, tot 2000, 5000 en 8000 voor een zijdezachte hoogglans polijsting.',
-          tips: ['Elke korrelstap verfijnt de kraspatronen tot een spiegelgladde snede.']
+          heading: 'Waarom wij kiezen voor professionele waterstenen',
+          body: 'Bij Slijpmaat werken we met professionele waterstenen uit Japan. Wij kiezen de juiste steen voor elk type mes en staal: we bouwen de snede trapsgewijs op om de snijvouw strak te trekken en sluiten af met een zijdezachte afwerking op leer.',
+          tips: ['Wij kiezen de juiste steen voor een spiegelgladde snede zonder onnodig materiaalverlies.']
         },
         {
           heading: 'Minimaal materiaalverlies: je mes gaat decennia mee',
@@ -240,7 +240,7 @@ export const ARTICLES: Article[] = [
         },
         {
           heading: 'Hoe herstellen we een chip bij Slijpmaat?',
-          body: 'We plaatsen het mes eerst op een extra grove Japanse steen (Shapton Pro 320). We verlagen gecontroleerd het gehele lemmetprofiel zodat de snede weer één vloeiende boog vormt en de chip verdwijnt. Vervolgens dunnen we de schouders uit ("thinning") zodat het mes niet dik aanvoelt, en bouwen we een gloednieuwe snijvouw op tot korrel 5000+.',
+          body: 'We plaatsen het mes eerst op de juiste herstelsteen. We verlagen gecontroleerd het gehele lemmetprofiel zodat de snede weer één vloeiende boog vormt en de chip verdwijnt. Vervolgens dunnen we de schouders uit ("thinning") zodat het mes niet dik aanvoelt, en bouwen we een gloednieuwe snijvouw op.',
           tips: ['Een hersteld mes snijdt vaak weer net zo fantastisch als een gloednieuw exemplaar.']
         },
         {
@@ -281,7 +281,7 @@ export const ARTICLES: Article[] = [
         },
         {
           heading: 'Waarom een klassiek geribbeld aanzetstaal verboden is',
-          body: 'Een typisch Europees geribbeld staal kan micro-chips slaan in de harde, brosse snede van een Japans mes. Gebruik liever een keramische slijpstaaf met ultrafijne korrel (minimaal 2000 grit) of een leren strop, of laat het mes op waterstenen bijslijpen zodra de scherpte afneemt.',
+          body: 'Een typisch Europees geribbeld staal kan micro-chips slaan in de harde, brosse snede van een Japans mes. Gebruik liever een keramische slijpstaaf met ultrafijne structuur of een leren strop, of laat het mes op waterstenen bijslijpen zodra de scherpte afneemt.',
           tips: ['Twijfel je over jouw staalsoort? Stuur je Maat een foto!']
         }
       ],

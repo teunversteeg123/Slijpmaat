@@ -3,6 +3,31 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script>
+      // Gracefully prevent browser extension / sandbox conflicts with read-only fetch
+      window.addEventListener('error', function(e) {
+        if (e && e.message && typeof e.message === 'string' && e.message.includes('fetch') && e.message.includes('only a getter')) {
+          if (e.preventDefault) e.preventDefault();
+          if (e.stopImmediatePropagation) e.stopImmediatePropagation();
+          return true;
+        }
+      }, true);
+      try {
+        var _proto = typeof Window !== 'undefined' ? Window.prototype : null;
+        if (_proto) {
+          var _desc = Object.getOwnPropertyDescriptor(_proto, 'fetch');
+          if (_desc && !_desc.set && _desc.configurable) {
+            var _cur = _desc.get;
+            Object.defineProperty(_proto, 'fetch', {
+              get: function() { return _cur ? _cur.call(this) : window.fetch; },
+              set: function(fn) { _cur = function() { return fn; }; },
+              configurable: true,
+              enumerable: true
+            });
+          }
+        }
+      } catch (_) {}
+    </script>
     <title>Slijpmaat.nl – Jouw messenslijper in Utrecht | Keukenmessen &amp; Horeca</title>
     <meta name="description" content="Professionele messenslijper in Utrecht voor particulieren en horeca. Handmatig geslepen op Japanse whetstones met minimale materiaalafname. Ophaal- en bezorgservice in Utrecht." />
     <meta property="og:title" content="Slijpmaat.nl – Jouw messenslijper in Utrecht" />
@@ -61,6 +86,22 @@
   </head>
   <body class="bg-[#FAFAFA] text-slate-800 antialiased font-sans selection:bg-[#E8EFE8] selection:text-[#244A30]">
     <div id="root"></div>
+    <!-- Hidden Google Translate Element for automated English translation -->
+    <div id="google_translate_element" style="display:none"></div>
+    <script type="text/javascript">
+      function googleTranslateElementInit() {
+        try {
+          if (window.google && window.google.translate) {
+            new window.google.translate.TranslateElement({
+              pageLanguage: 'nl',
+              includedLanguages: 'nl,en',
+              autoDisplay: false
+            }, 'google_translate_element');
+          }
+        } catch (_) {}
+      }
+    </script>
+    <script type="text/javascript" src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit" async defer></script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

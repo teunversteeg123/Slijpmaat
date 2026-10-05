@@ -128,36 +128,6 @@ export const Calculator: React.FC<CalculatorProps> = ({
               Bestelcalculator
             </h3>
           </div>
-
-          {/* Segmented Switch: Particulier vs Zakelijk */}
-          <div className="inline-flex p-1 bg-[#244A30] rounded-xl border border-white/20 self-start sm:self-auto" role="tablist" aria-label="Klanttype">
-            <button
-              type="button"
-              role="tab"
-              aria-selected={state.customerType === 'particulier'}
-              onClick={() => setState(prev => ({ ...prev, customerType: 'particulier' }))}
-              className={`px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap min-h-[40px] flex items-center ${
-                state.customerType === 'particulier'
-                  ? 'bg-white text-[#3B7F4B] shadow-sm'
-                  : 'text-white/80 hover:text-white'
-              }`}
-            >
-              Particulier
-            </button>
-            <button
-              type="button"
-              role="tab"
-              aria-selected={state.customerType === 'zakelijk'}
-              onClick={() => setState(prev => ({ ...prev, customerType: 'zakelijk', isStudent: false }))}
-              className={`px-4 py-2 text-xs font-bold rounded-lg transition-all cursor-pointer whitespace-nowrap min-h-[40px] flex items-center ${
-                state.customerType === 'zakelijk'
-                  ? 'bg-white text-[#3B7F4B] shadow-sm'
-                  : 'text-white/80 hover:text-white'
-              }`}
-            >
-              Horeca / Zakelijk
-            </button>
-          </div>
         </div>
 
         <p className="mt-2 text-xs sm:text-sm text-[#E8EFE8] max-w-xl leading-relaxed">

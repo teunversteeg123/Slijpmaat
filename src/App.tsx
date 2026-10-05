@@ -3,6 +3,7 @@ import { PageId, Article } from './types';
 import { ARTICLES } from './data/siteData';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
+import { LanguageProvider } from './context/LanguageContext';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -15,6 +16,7 @@ import { BuitenUtrechtPage } from './pages/BuitenUtrechtPage';
 import { KennisbankPage } from './pages/KennisbankPage';
 import { ArtikelPage } from './pages/ArtikelPage';
 import { OverOnsPage } from './pages/OverOnsPage';
+import { OnzeMatenPage } from './pages/OnzeMatenPage';
 import { ReviewsPage } from './pages/ReviewsPage';
 import { FaqPage } from './pages/FaqPage';
 import { ContactPage } from './pages/ContactPage';
@@ -54,6 +56,7 @@ export default function App() {
         'home',
         'particulieren',
         'horeca',
+        'onze-maten',
         'dienst-keukenmessen',
         'dienst-japanse-messen',
         'dienst-chips-herstellen',
@@ -91,7 +94,7 @@ export default function App() {
       case 'home':
         return <HomePage onNavigate={handleNavigate} />;
       case 'particulieren':
-        return <ParticulierenPage />;
+        return <ParticulierenPage onNavigate={handleNavigate} />;
       case 'horeca':
         return <HorecaPage onNavigate={handleNavigate} />;
       case 'dienst-keukenmessen':
@@ -102,7 +105,7 @@ export default function App() {
       case 'werkwijze':
         return <WerkwijzePage onNavigate={handleNavigate} />;
       case 'prijzen-bestellen':
-        return <ParticulierenPage />;
+        return <ParticulierenPage onNavigate={handleNavigate} />;
       case 'ophalen-bezorgen':
         return <ServicegebiedPage onNavigate={handleNavigate} />;
       case 'buiten-utrecht':
@@ -119,8 +122,9 @@ export default function App() {
         );
       case 'over-ons':
         return <OverOnsPage onNavigate={handleNavigate} />;
+      case 'onze-maten':
       case 'reviews':
-        return <ReviewsPage onNavigate={handleNavigate} />;
+        return <OnzeMatenPage onNavigate={handleNavigate} />;
       case 'faq':
         return <FaqPage onNavigate={handleNavigate} />;
       case 'contact':
@@ -135,17 +139,19 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAFAF8] text-[#244A30] antialiased font-sans">
-      {/* Top Header */}
-      <Header currentPage={currentPage} onNavigate={handleNavigate} />
+    <LanguageProvider>
+      <div className="min-h-screen flex flex-col bg-[#FAFAF8] text-[#244A30] antialiased font-sans">
+        {/* Top Header */}
+        <Header currentPage={currentPage} onNavigate={handleNavigate} />
 
-      {/* Main Page Area */}
-      <main className="flex-1 focus:outline-none" tabIndex={-1}>
-        {renderCurrentPage()}
-      </main>
+        {/* Main Page Area */}
+        <main className="flex-1 focus:outline-none" tabIndex={-1}>
+          {renderCurrentPage()}
+        </main>
 
-      {/* Footer */}
-      <Footer onNavigate={handleNavigate} />
-    </div>
+        {/* Footer */}
+        <Footer onNavigate={handleNavigate} />
+      </div>
+    </LanguageProvider>
   );
 }
