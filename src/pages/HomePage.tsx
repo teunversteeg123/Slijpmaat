@@ -106,13 +106,13 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           {/* Right: Copy & CTAs */}
           <div className="order-1 px-4 sm:px-6 lg:order-2 lg:max-w-2xl lg:px-0 lg:pr-10 xl:pr-16">
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
-              Jouw messenslijper in Utrecht
+              Voor particulieren en horeca
             </p>
             <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
-              Je messen weer scherp. Zonder gedoe.
+              Jouw messenslijper in Utrecht
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Wij halen je keukenmessen thuis of op de zaak op, slijpen ze zorgvuldig met de hand en brengen ze weer scherp terug.
+              Voor chefs, thuiskoks en horeca. Slijpmaat haalt je messen thuis of op de zaak op, slijpt ze zorgvuldig met de hand op whetstones en brengt ze vlijmscherp terug.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">

@@ -4,7 +4,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 const GOOGLE_REVIEW_URL = 'https://g.page/r/CYtVeBVtieCBEAE/review';
 export const GOOGLE_REVIEW_COUNT = 20;
 
-const GOOGLE_REVIEWS = [
+export const GOOGLE_REVIEWS = [
   { name: 'Arda Brink', text: 'Altijd gedacht dat ik m’n messen zelf prima kon slijpen, maar nu ze door Slijpmaat écht geslepen zijn, merk ik een groot verschil: vlijmscherp! En bovendien een prima service: de geslepen messen werden keurig en veilig ingepakt weer afgeleverd. Fantastisch en bedankt Slijpmaat!' },
   { name: 'Jodocus van Lodensteinstraat', text: '5 messen laten slijpen, allemaal perfect scherp teruggekomen en heel makkelijk geregeld!' },
   { name: 'K B', text: 'Volle service en vlijmscherpe messen! Aanrader!' },

@@ -1,8 +1,7 @@
-import React from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT, GoogleReviewsSection } from '../components/GoogleReviewsSection';
-import { PartnerLogoSlider } from '../components/PartnerLogoSlider';
+import { GoogleIcon, GOOGLE_REVIEW_COUNT, GOOGLE_REVIEWS, GoogleReviewsSection } from '../components/GoogleReviewsSection';
 import {
   ArrowDown,
   ArrowRight,
@@ -12,7 +11,10 @@ import {
   Sparkles,
   Quote,
   Heart,
-  Users
+  Instagram,
+  Users,
+  ChevronLeft,
+  ChevronRight
 } from 'lucide-react';
 
 interface OnzeMatenPageProps {
@@ -21,46 +23,34 @@ interface OnzeMatenPageProps {
 
 export const OnzeMatenPage: React.FC<OnzeMatenPageProps> = ({ onNavigate }) => {
   const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik las de ervaringen op Onze Maten en wil graag mijn messen laten slijpen!')}`;
+  const [quoteIndex, setQuoteIndex] = useState(0);
+  const quoteTrackRef = useRef<HTMLDivElement>(null);
 
-  // Losse quotes die speels rondvliegen
-  const floatingQuotes = [
-    {
-      quote: 'M’n mes glijdt weer als boter door een rijpe tomaat! 🍅',
-      author: 'Suus',
-      badge: 'Binnen 24u retour',
-      tilt: '-rotate-1',
-    },
-    {
-      quote: 'Super goed geslepen, erg aardige gasten aan de deur.',
-      author: 'Pieke',
-      badge: 'Utrecht',
-      tilt: 'rotate-2',
-    },
-    {
-      quote: 'Quick response times, pickup and drop-off and quality work. What’s not to love?',
-      author: 'Huib Botman',
-      badge: '5 sterren',
-      tilt: '-rotate-2',
-    },
-    {
-      quote: 'Eindelijk geen tranende ogen meer bij het snipperen van uien!',
-      author: 'Dennis',
-      badge: 'Thuiskok',
-      tilt: 'rotate-1',
-    },
-    {
-      quote: 'Strakke prijs voor hele goede ambachtelijke service.',
-      author: 'Melle van Sprew',
-      badge: 'Aanrader',
-      tilt: '-rotate-1',
-    },
-    {
-      quote: 'Mijn Japanse Global snijdt weer veel beter dan toen hij nieuw uit de doos kwam.',
-      author: 'K B',
-      badge: 'Japanse stenen',
-      tilt: 'rotate-2',
-    },
-  ];
+  const featuredReviewNames = ['Jodocus van Lodensteinstraat', 'Pieke Van Der Nol', 'Suus', 'Calandra Culinaria', 'Huib Botman', 'Melle van Sprew'];
+  const featuredQuotes = featuredReviewNames
+    .map((name) => GOOGLE_REVIEWS.find((review) => review.name === name))
+    .filter((review): review is (typeof GOOGLE_REVIEWS)[number] => Boolean(review?.text));
+
+  const moveQuotesTo = useCallback((requestedIndex: number) => {
+    const index = (requestedIndex + featuredQuotes.length) % featuredQuotes.length;
+    const track = quoteTrackRef.current;
+    const card = track?.children.item(index) as HTMLElement | null;
+
+    if (track && card) {
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
+      setQuoteIndex(index);
+    }
+  }, [featuredQuotes.length]);
+
+  const handleQuoteScroll = useCallback(() => {
+    const track = quoteTrackRef.current;
+    const firstCard = track?.firstElementChild as HTMLElement | null;
+    if (!track || !firstCard) return;
+
+    const cardStep = firstCard.offsetWidth + 20;
+    setQuoteIndex(Math.min(featuredQuotes.length - 1, Math.max(0, Math.round(track.scrollLeft / cardStep))));
+  }, [featuredQuotes.length]);
 
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
@@ -88,7 +78,7 @@ export const OnzeMatenPage: React.FC<OnzeMatenPageProps> = ({ onNavigate }) => {
               Onze Maten aan het woord.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Van gepassioneerde thuiskoks en studenten tot Utrechtse restaurantbrigades: dit is waarom onze Maten hun favoriete messen met een gerust hart toevertrouwen aan Teun en Mike.
+              Van gepassioneerde thuiskoks en studenten tot de beste Utrechtse restaurants: dit is waarom onze Maten hun favoriete messen met een gerust hart toevertrouwen aan Slijpmaat.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
@@ -111,22 +101,33 @@ export const OnzeMatenPage: React.FC<OnzeMatenPageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Right: Lege container voor klantfoto of video met organische blob erachter */}
+          {/* Right: vaste ruimte voor de Instagram-storyslider met organische blob erachter */}
           <div className="order-2 w-full lg:order-2 px-4 sm:px-6 lg:px-0 relative">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border-2 border-dashed border-[#d9e1d7] bg-white shadow-xs sm:aspect-[16/11] lg:aspect-square flex flex-col items-center justify-center p-6 text-center transition-all duration-200 hover:border-[#3B7F4B]/50">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B] mb-3">
-                <Users className="h-7 w-7" />
+            <div className="relative z-10 aspect-[4/3] w-full sm:aspect-[16/11] lg:aspect-square">
+              <div className="mx-auto flex h-full w-[92%] flex-col items-center justify-center overflow-hidden rounded-[2.5rem] border-2 border-dashed border-[#d9e1d7] bg-white p-6 text-center shadow-xs transition-all duration-200 hover:border-[#3B7F4B]/50">
+                <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B]">
+                  <Users className="h-7 w-7" />
+                </div>
+                <p className="font-heading text-base font-bold text-[#3B7F4B]">
+                  Klantstories van onze Maten
+                </p>
+                <p className="mt-1 max-w-xs text-xs text-[#657068]">
+                  Hier komt de slider met originele foto&apos;s en video&apos;s van blije klanten.
+                </p>
+                <a
+                  href="https://www.instagram.com/stories/highlights/18014860769923867/?hl=en"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="mt-5 inline-flex items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-5 py-3 text-sm font-bold text-white shadow-sm transition-colors hover:bg-[#C95E3E] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]"
+                >
+                  <Instagram className="h-4 w-4" aria-hidden="true" />
+                  Bekijk klantstories op Instagram
+                </a>
               </div>
-              <p className="font-heading text-base font-bold text-[#3B7F4B]">
-                Foto met onze Maten
-              </p>
-              <p className="mt-1 max-w-xs text-xs text-[#657068]">
-                Gereserveerde container voor een foto of video met blije klanten aan de deur.
-              </p>
             </div>
           </div>
         </div>
@@ -153,14 +154,7 @@ export const OnzeMatenPage: React.FC<OnzeMatenPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 3. LOKALE SAMENWERKINGEN & LOGO SLIDER (Horizontale slider) */}
-      <section className="relative px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-        <div className="mx-auto max-w-6xl">
-          <PartnerLogoSlider />
-        </div>
-      </section>
-
-      {/* 4. LOSSE QUOTES DIE RONDVLIEGEN (Warm cream #F7F4EC) */}
+      {/* 3. ORIGINELE GOOGLE-QUOTES IN HORIZONTALE SLIDER */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div
           aria-hidden="true"
@@ -178,34 +172,50 @@ export const OnzeMatenPage: React.FC<OnzeMatenPageProps> = ({ onNavigate }) => {
             </p>
           </div>
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {floatingQuotes.map((item, idx) => (
-              <div
-                key={idx}
-                className={`relative rounded-[2rem] border border-[#d9e1d7] bg-white p-6 shadow-xs transition-all duration-300 hover:scale-105 hover:shadow-md ${item.tilt}`}
+          <div
+            ref={quoteTrackRef}
+            onScroll={handleQuoteScroll}
+            role="region"
+            aria-label="Korte citaten uit Google-reviews"
+            className="flex snap-x snap-mandatory gap-5 overflow-x-auto px-1 py-3 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          >
+            {featuredQuotes.map((item) => (
+              <article
+                key={item.name}
+                className="relative min-h-[240px] min-w-[calc(100%-0.25rem)] snap-start rounded-[2rem] border border-[#d9e1d7] bg-white p-6 shadow-xs transition-all duration-300 odd:-rotate-[0.35deg] even:rotate-[0.35deg] hover:-translate-y-1 hover:rotate-0 hover:shadow-md sm:min-w-[calc((100%-1.25rem)/2)] lg:min-w-[calc((100%-2.5rem)/3)]"
               >
                 <Quote className="h-6 w-6 text-[#E87B5B]/30 mb-2" />
-                <p className="font-heading text-base font-bold text-[#203728] leading-snug">
-                  &ldquo;{item.quote}&rdquo;
+                <p className="font-heading text-lg font-bold leading-snug text-[#203728]">
+                  &ldquo;{item.text}&rdquo;
                 </p>
-                <div className="mt-4 flex items-center justify-between text-xs pt-3 border-t border-[#d9e1d7]/50">
-                  <span className="font-bold text-[#3B7F4B]">{item.author}</span>
-                  <span className="rounded-full bg-[#FCEEE8] px-2.5 py-0.5 font-bold text-[#C95E3E]">
-                    {item.badge}
+                <div className="absolute inset-x-6 bottom-6 flex items-center justify-between gap-3 border-t border-[#d9e1d7]/50 pt-4 text-xs">
+                  <span className="font-bold text-[#3B7F4B]">{item.name}</span>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FCEEE8] px-2.5 py-1 font-bold text-[#C95E3E]" aria-label="5 van de 5 sterren op Google">
+                    <GoogleIcon />
+                    <span aria-hidden="true">★★★★★</span>
                   </span>
                 </div>
-              </div>
+              </article>
             ))}
+          </div>
+
+          <div className="mt-5 flex justify-center gap-2.5 sm:justify-end">
+            <button type="button" onClick={() => moveQuotesTo(quoteIndex - 1)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_8px_20px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]" aria-label="Vorige quote">
+              <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+            </button>
+            <button type="button" onClick={() => moveQuotesTo(quoteIndex + 1)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_8px_20px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]" aria-label="Volgende quote">
+              <ChevronRight className="h-5 w-5" aria-hidden="true" />
+            </button>
           </div>
         </div>
       </section>
 
-      {/* 5. GOOGLE REVIEWS SECTION (De widget met reviews) */}
+      {/* 4. GOOGLE REVIEWS SECTION (De widget met reviews) */}
       <div id="reviews">
         <GoogleReviewsSection />
       </div>
 
-      {/* 6. ONZE BELOFTE (Witte achtergrond met stijlvol getinte widgets, geen vlag-overgang) */}
+      {/* 5. ONZE BELOFTE (Witte achtergrond met stijlvol getinte widgets, geen vlag-overgang) */}
       <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">

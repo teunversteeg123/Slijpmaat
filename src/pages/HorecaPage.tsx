@@ -16,7 +16,6 @@ import {
   Send,
   CheckCircle2,
   FileText,
-  UtensilsCrossed,
   ShieldCheck
 } from 'lucide-react';
 
@@ -164,22 +163,24 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Right: Lege container voor video met herkenbare organische blob erachter (identiek aan Particulieren) */}
+          {/* Right: Tomatenvideo met herkenbare organische blob erachter (identiek aan Particulieren) */}
           <div className="order-2 w-full lg:order-2 px-4 sm:px-6 lg:px-0 relative">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border-2 border-dashed border-[#d9e1d7] bg-white shadow-xs sm:aspect-[16/11] lg:aspect-square flex flex-col items-center justify-center p-6 text-center transition-all duration-200 hover:border-[#3B7F4B]/50">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B] mb-3">
-                <UtensilsCrossed className="h-7 w-7" />
-              </div>
-              <p className="font-heading text-base font-bold text-[#3B7F4B]">
-                Videoruimte
-              </p>
-              <p className="mt-1 max-w-xs text-xs text-[#657068]">
-                Gereserveerde container voor horeca- / keukenvideo.
-              </p>
+            <div className="relative z-10 mx-auto aspect-[4/3] w-[70%] overflow-hidden rounded-[2.5rem] bg-[#203728] shadow-xs sm:aspect-[16/11] lg:aspect-square">
+              <video
+                className="h-full w-full object-cover"
+                src="/assets/tomaat-website-video.mp4"
+                poster="/assets/tomaat-video-poster.jpg"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="metadata"
+                aria-label="Een scherp keukenmes snijdt soepel door een tomaat"
+              />
             </div>
           </div>
         </div>
