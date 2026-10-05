@@ -174,11 +174,11 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               <div className="absolute left-1/2 top-full z-50 w-60 -translate-x-1/2 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
                   <button type="button" onClick={() => handlePriceClick('particulieren', 'calculator')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
-                    <span className="block font-heading text-sm font-bold text-[#3B7F4B]">{t('nav.particulier', 'Particulier')}</span>
+                    <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.particulier_sub', 'Naar de prijs- en bestelcalculator')}</span>
                   </button>
                   <button type="button" onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
-                    <span className="block font-heading text-sm font-bold text-[#C95E3E]">{t('nav.zakelijk', 'Zakelijk')}</span>
+                    <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.zakelijk_sub', 'Naar de zakelijke aanvraag')}</span>
                   </button>
                 </div>
@@ -202,11 +202,11 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               <div className="absolute right-0 top-full z-50 w-60 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
                   <button type="button" onClick={() => handleLinkClick('particulieren')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
-                    <span className="block font-heading text-sm font-bold text-[#3B7F4B]">{t('nav.particulier', 'Particulier')}</span>
+                    <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.particulier_sub', 'Naar de prijs- en bestelcalculator')}</span>
                   </button>
                   <button type="button" onClick={() => handleLinkClick('horeca')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
-                    <span className="block font-heading text-sm font-bold text-[#C95E3E]">{t('nav.zakelijk', 'Zakelijk')}</span>
+                    <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.zakelijk_sub', 'Naar de zakelijke aanvraag')}</span>
                   </button>
                 </div>
@@ -265,15 +265,17 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                   <div className="ml-4 pl-4 py-1.5 space-y-2 border-l-2 border-[#3B7F4B]/30">
                     <button
                       type="button"
+                      translate="no"
                       onClick={() => handlePriceClick('particulieren', 'calculator')}
-                      className="block w-full text-left text-sm font-medium text-[#3B7F4B]/75 hover:text-[#3B7F4B] transition-colors py-1"
+                      className="notranslate block w-full text-left text-sm font-medium text-[#3B7F4B]/75 hover:text-[#3B7F4B] transition-colors py-1"
                     >
                       Particulier
                     </button>
                     <button
                       type="button"
+                      translate="no"
                       onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')}
-                      className="block w-full text-left text-sm font-medium text-[#3B7F4B]/75 hover:text-[#3B7F4B] transition-colors py-1"
+                      className="notranslate block w-full text-left text-sm font-medium text-[#3B7F4B]/75 hover:text-[#3B7F4B] transition-colors py-1"
                     >
                       Zakelijk
                     </button>
@@ -371,7 +373,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                       onClick={() => handlePriceClick('particulieren', 'calculator')}
                       className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]"
                     >
-                      <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
+                      <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                       <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelcalculator</span>
                     </button>
                     <button
@@ -379,7 +381,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                       onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')}
                       className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]"
                     >
-                      <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
+                      <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
                       <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
                     </button>
                   </div>

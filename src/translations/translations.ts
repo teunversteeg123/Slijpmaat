@@ -55,7 +55,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     'nav.werkwijze': 'How it works',
     'nav.kennisbank': 'Knowledge base',
     'nav.prijzen': 'Pricing',
-    'nav.particulier': 'Residential',
+    'nav.particulier': 'Particulier',
     'nav.particulier_sub': 'Price & order calculator',
     'nav.zakelijk': 'Commercial',
     'nav.zakelijk_sub': 'For restaurants & businesses',

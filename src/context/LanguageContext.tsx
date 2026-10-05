@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
 import { Language, TRANSLATIONS } from '../translations/translations';
+import { setDomLanguage } from '../utils/domTranslator';
 
 interface LanguageContextType {
   language: Language;
@@ -15,7 +16,22 @@ const STORAGE_KEY = 'slijpmaat_lang';
 // Helper to update Google Translate cookies and element
 const applyGoogleTranslate = (lang: Language) => {
   try {
-    const targetLang = lang === 'en' ? 'en' : 'nl';
+    if (lang === 'nl') {
+      const expired = '=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;';
+      document.cookie = `googtrans${expired}`;
+      if (window.location.hostname) {
+        document.cookie = `googtrans${expired} domain=${window.location.hostname};`;
+        const domainParts = window.location.hostname.split('.');
+        if (domainParts.length > 1) {
+          const rootDomain = '.' + domainParts.slice(-2).join('.');
+          document.cookie = `googtrans${expired} domain=${rootDomain};`;
+        }
+      }
+      document.documentElement.lang = 'nl';
+      return;
+    }
+
+    const targetLang = 'en';
     const cookieValue = `/nl/${targetLang}`;
 
     // Set cookie across domains and paths
@@ -30,15 +46,6 @@ const applyGoogleTranslate = (lang: Language) => {
     }
 
     document.documentElement.lang = targetLang;
-
-    // Trigger Google Translate dropdown if rendered
-    const selectElem = document.querySelector<HTMLSelectElement>('.goog-te-combo');
-    if (selectElem) {
-      if (selectElem.value !== targetLang) {
-        selectElem.value = targetLang;
-        selectElem.dispatchEvent(new Event('change', { bubbles: true }));
-      }
-    }
   } catch (err) {
     console.debug('Language translation handler caught non-fatal issue:', err);
   }
@@ -70,25 +77,7 @@ export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ chil
 
   useEffect(() => {
     applyGoogleTranslate(language);
-
-    // Watch for Google Translate dropdown to become available after initial script load
-    const interval = setInterval(() => {
-      const selectElem = document.querySelector<HTMLSelectElement>('.goog-te-combo');
-      if (selectElem) {
-        const targetLang = language === 'en' ? 'en' : 'nl';
-        if (selectElem.value !== targetLang) {
-          selectElem.value = targetLang;
-          selectElem.dispatchEvent(new Event('change', { bubbles: true }));
-        }
-        clearInterval(interval);
-      }
-    }, 400);
-
-    const timer = setTimeout(() => clearInterval(interval), 6000);
-    return () => {
-      clearInterval(interval);
-      clearTimeout(timer);
-    };
+    setDomLanguage(language);
   }, [language]);
 
   const t = useCallback(
