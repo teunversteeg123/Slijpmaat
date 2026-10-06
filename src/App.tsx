@@ -15,8 +15,6 @@ import { ServicegebiedPage } from './pages/ServicegebiedPage';
 import { KennisbankPage } from './pages/KennisbankPage';
 import { ArtikelPage } from './pages/ArtikelPage';
 import { OverOnsPage } from './pages/OverOnsPage';
-import { OnzeMatenPage } from './pages/OnzeMatenPage';
-import { ReviewsPage } from './pages/ReviewsPage';
 import { FaqPage } from './pages/FaqPage';
 import { ContactPage } from './pages/ContactPage';
 import { VoorwaardenPage } from './pages/VoorwaardenPage';
@@ -56,11 +54,23 @@ export default function App() {
         window.history.replaceState(null, '', '#ophalen-bezorgen');
         return;
       }
+      if (hash === 'kennisbank') {
+        setCurrentPage('blogs');
+        window.history.replaceState(null, '', '#blogs');
+        return;
+      }
+      if (hash === 'onze-maten' || hash === 'reviews') {
+        setCurrentPage('over-ons');
+        window.history.replaceState(null, '', '#over-ons');
+        window.setTimeout(() => {
+          document.getElementById('utrechtse-quotes')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 60);
+        return;
+      }
       const validPages: PageId[] = [
         'home',
         'particulieren',
         'horeca',
-        'onze-maten',
         'dienst-keukenmessen',
         'dienst-japanse-messen',
         'dienst-chips-herstellen',
@@ -68,10 +78,9 @@ export default function App() {
         'werkwijze',
         'prijzen-bestellen',
         'ophalen-bezorgen',
-        'kennisbank',
+        'blogs',
         'artikel',
         'over-ons',
-        'reviews',
         'faq',
         'contact',
         'algemene-voorwaarden',
@@ -111,7 +120,7 @@ export default function App() {
         return <ParticulierenPage onNavigate={handleNavigate} />;
       case 'ophalen-bezorgen':
         return <ServicegebiedPage onNavigate={handleNavigate} />;
-      case 'kennisbank':
+      case 'blogs':
         return <KennisbankPage onNavigate={handleNavigate} onSelectArticle={handleSelectArticle} />;
       case 'artikel':
         return (
@@ -123,9 +132,6 @@ export default function App() {
         );
       case 'over-ons':
         return <OverOnsPage onNavigate={handleNavigate} />;
-      case 'onze-maten':
-      case 'reviews':
-        return <OnzeMatenPage onNavigate={handleNavigate} />;
       case 'faq':
         return <FaqPage onNavigate={handleNavigate} />;
       case 'contact':

@@ -84,7 +84,7 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
   const [isPlanExpanded, setIsPlanExpanded] = useState(false);
   const planRef = useRef<HTMLDivElement>(null);
 
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een vraag over een artikel uit de kennisbank!')}`;
+  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een vraag over een artikel uit jullie blogs!')}`;
 
   useEffect(() => {
     if (!isPlanExpanded) return;
@@ -158,7 +158,7 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
               Kennis &amp; Onderhoud · Slijpmaat Utrecht
             </p>
             <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
-              Slijpmaat Kennisbank.
+              Slijpmaat Blogs.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
               Alles over het scherp houden van je messen, staalsoorten, snijplanken, het herstellen van beschadigingen en waarom traditioneel watersteenslijpen het beste is voor je lemmet.
@@ -228,13 +228,14 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
             />
             <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg sm:aspect-[16/11] lg:aspect-square">
               <img
-                src="/assets/werkwijze/03-slijpen.jpg"
-                alt="Keukenmes wordt met de hand geslepen op waterstenen bij Slijpmaat"
-                className="h-full w-full object-cover object-[50%_45%]"
+                src="/assets/kennisbank-slijpmaat-kaartje-planten.jpeg"
+                alt="Groene planten met een Slijpmaat-kaartje"
+                className="h-full w-full object-cover object-center"
+                fetchPriority="high"
               />
               <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 rounded-full bg-[#203728]/85 px-4 py-2 backdrop-blur-xs text-xs font-bold text-white shadow-md border border-white/10">
-                <span className="flex h-2.5 w-2.5 rounded-full bg-[#4CAF50] animate-pulse" />
-                <span>Ambacht · Handmatig op waterstenen</span>
+                <Leaf className="h-4 w-4 text-[#A9C89E]" aria-hidden="true" />
+                <span>Blogs · Tips &amp; onderhoud</span>
               </div>
             </div>
           </div>
@@ -288,7 +289,7 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
               <Search className="w-4 h-4 text-[#657068] absolute left-4 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
-                placeholder="Zoek in kennisbank..."
+                placeholder="Zoek in blogs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
                 className="w-full pl-11 pr-4 py-3 rounded-2xl border border-[#d9e1d7] bg-white text-xs sm:text-sm text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
@@ -453,7 +454,7 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
       </section>
 
       {/* 6. BOTTOM CONTACT BANNER with top and bottom wave dividers (Matching HomePage) */}
-      <section id="kennisbank-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
+      <section id="blogs-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
         <svg
           aria-hidden="true"
           viewBox="0 0 1440 60"

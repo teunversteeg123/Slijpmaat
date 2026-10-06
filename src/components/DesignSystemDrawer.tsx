@@ -27,7 +27,7 @@ export const DesignSystemDrawer: React.FC<DesignSystemDrawerProps> = ({
     { id: 'werkwijze', label: '9. Werkwijze (8 stappen)', group: 'Ambacht' },
     { id: 'prijzen-bestellen', label: '10. Prijzen & Bestellen', group: 'Conversie' },
     { id: 'ophalen-bezorgen', label: '11. Ophalen & Servicegebied', group: 'Logistiek' },
-    { id: 'kennisbank', label: '12. Kennisbank', group: 'Content & SEO' },
+    { id: 'blogs', label: '12. Blogs', group: 'Content & SEO' },
     { id: 'artikel', label: '13. Artikelpagina', group: 'Content & SEO' },
     { id: 'over-ons', label: '14. Over Slijpmaat', group: 'Merk' },
     { id: 'reviews', label: '15. Reviews & Resultaten', group: 'Sociaal bewijs' },

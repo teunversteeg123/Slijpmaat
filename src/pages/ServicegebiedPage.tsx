@@ -304,9 +304,9 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
       )}
 
       {/* 2. POSTCODECHECK & WIJKEN IN UTRECHT */}
-      <section id="postcodecheck" className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
+      <section id="postcodecheck" className="scroll-mt-24 overflow-hidden bg-white px-4 py-12 sm:px-6 sm:py-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl sm:mb-12">
+          <div className="mb-8 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Dekking in Utrecht</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Postcodecheck &amp; wijken</h2>
             <p className="mt-3 text-base text-[#657068]">
@@ -314,32 +314,33 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
             </p>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
-            <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-[#FAFAF8] p-7 sm:p-9 shadow-xs space-y-6 lg:col-span-5">
+          <div className="grid min-w-0 gap-5 sm:gap-8 lg:grid-cols-12 lg:items-start">
+            <div className="min-w-0 space-y-5 rounded-[2rem] border border-[#d9e1d7] bg-[#FAFAF8] p-5 shadow-xs sm:space-y-6 sm:rounded-[2.5rem] sm:p-9 lg:col-span-5">
               <div>
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
                   <Search className="h-3.5 w-3.5" />
                   Direct controleren
                 </span>
-                <h3 className="mt-3 font-heading text-2xl font-bold text-[#3B7F4B]">Check jouw postcode</h3>
+                <h3 className="mt-3 font-heading text-xl font-bold leading-tight text-[#3B7F4B] sm:text-2xl">Check jouw postcode</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#657068]">
                   Vul je 4-cijferige postcode in om te zien of we gratis bij je aan de deur komen.
                 </p>
               </div>
 
               <form onSubmit={handleCheckZip} className="space-y-3">
-                <div className="flex gap-2">
+                <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:gap-2">
                   <input
                     type="text"
                     maxLength={7}
                     placeholder="Bijv. 3511 of 3572"
+                    aria-label="Viercijferige postcode"
                     value={zipInput}
                     onChange={(e) => setZipInput(e.target.value)}
-                    className="flex-1 rounded-2xl border border-[#d9e1d7] bg-white px-4 py-3.5 font-mono text-sm uppercase text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
+                    className="min-h-12 w-full min-w-0 flex-1 rounded-2xl border border-[#d9e1d7] bg-white px-4 py-3.5 font-mono text-sm uppercase text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
                   />
                   <button
                     type="submit"
-                    className="group inline-flex items-center gap-2 rounded-2xl bg-[#3B7F4B] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#315F3B] cursor-pointer"
+                    className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#3B7F4B] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#315F3B] sm:w-auto cursor-pointer"
                   >
                     <span>Check</span>
                     <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
@@ -361,27 +362,27 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                 )}
               </form>
 
-              <div className="space-y-3 border-t border-[#d9e1d7]/70 pt-5 text-xs text-[#657068]">
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="font-medium">Gratis ophalen &amp; bezorgen vanaf 3 messen</span>
+              <div className="space-y-3 border-t border-[#d9e1d7]/70 pt-5 text-xs leading-5 text-[#657068]">
+                <div className="flex items-start gap-2.5">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-[#3B7F4B] shrink-0" />
+                  <span className="min-w-0 font-medium">Gratis ophalen &amp; bezorgen vanaf 3 messen</span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="font-medium">Bezorgtarief bij 1 of 2 messen hangt af van je postcode</span>
+                <div className="flex items-start gap-2.5">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-[#3B7F4B] shrink-0" />
+                  <span className="min-w-0 font-medium">Bezorgtarief bij 1 of 2 messen hangt af van je postcode</span>
                 </div>
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="font-medium">Binnen 24–48 uur weer vlijmscherp terug</span>
+                <div className="flex items-start gap-2.5">
+                  <CheckCircle2 className="mt-0.5 h-4 w-4 text-[#3B7F4B] shrink-0" />
+                  <span className="min-w-0 font-medium">Binnen 24–48 uur weer vlijmscherp terug</span>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-7 sm:p-9 shadow-xs space-y-5 lg:col-span-7">
+            <div className="min-w-0 space-y-5 rounded-[2rem] border border-[#d9e1d7] bg-white p-5 shadow-xs sm:rounded-[2.5rem] sm:p-9 lg:col-span-7">
               <div>
                 <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Wijken &amp; Buurten</p>
-                <h3 className="mt-2 font-heading text-2xl font-bold text-[#3B7F4B]">Binnen ons vaste servicegebied</h3>
-                <p className="mt-2 text-sm text-[#657068]">
+                <h3 className="mt-2 font-heading text-xl font-bold leading-tight text-[#3B7F4B] sm:text-2xl">Binnen ons vaste servicegebied</h3>
+                <p className="mt-2 text-sm leading-6 text-[#657068]">
                   Onder andere in deze bekende Utrechtse wijken fietsen we wekelijks rond:
                 </p>
               </div>
@@ -390,13 +391,15 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                 {SERVICE_AREAS.map((area, idx) => (
                   <div
                     key={idx}
-                    className="flex items-start gap-3 rounded-2xl border border-[#d9e1d7]/70 bg-[#FAFAF8] p-3.5 text-xs transition-all duration-200 hover:border-[#3B7F4B]/50 hover:bg-white hover:shadow-xs"
+                    className="flex min-w-0 items-start gap-3 rounded-2xl border border-[#d9e1d7]/70 bg-[#FAFAF8] p-4 text-xs transition-all duration-200 hover:border-[#3B7F4B]/50 hover:bg-white hover:shadow-xs"
                   >
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#3B7F4B]" />
-                    <div>
-                      <span className="block font-heading text-sm font-bold text-[#3B7F4B]">{area.district}</span>
-                      <span className="font-mono text-[11px] text-[#657068]">{area.zip}</span>
-                      <span className="mt-0.5 block text-[11px] font-semibold text-[#C95E3E]">{area.note}</span>
+                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-xl bg-[#E8EFE8] text-[#3B7F4B]">
+                      <MapPin className="h-4 w-4" />
+                    </span>
+                    <div className="min-w-0">
+                      <span className="block break-words font-heading text-sm font-bold leading-5 text-[#3B7F4B]">{area.district}</span>
+                      <span className="mt-0.5 block break-words font-mono text-[11px] leading-4 text-[#657068]">{area.zip}</span>
+                      <span className="mt-1 block break-words text-[11px] font-semibold leading-4 text-[#C95E3E]">{area.note}</span>
                     </div>
                   </div>
                 ))}

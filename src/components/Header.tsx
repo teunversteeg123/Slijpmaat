@@ -56,10 +56,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
   const navLinks: { id: PageId; labelKey: string; defaultLabel: string }[] = [
     { id: 'home', labelKey: 'nav.home', defaultLabel: 'Home' },
-    { id: 'onze-maten', labelKey: 'nav.onze_maten', defaultLabel: 'Onze Maten' },
     { id: 'over-ons', labelKey: 'nav.over_ons', defaultLabel: 'Over ons' },
     { id: 'werkwijze', labelKey: 'nav.werkwijze', defaultLabel: 'Werkwijze' },
-    { id: 'kennisbank', labelKey: 'nav.kennisbank', defaultLabel: 'Kennisbank' },
+    { id: 'blogs', labelKey: 'nav.blogs', defaultLabel: 'Blogs' },
   ];
 
   const closeHeaderMenus = () => {
@@ -112,7 +111,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1 cursor-pointer shrink-0"
             >
               <MapPin className="w-3.5 h-3.5 text-white shrink-0" />
-              <span>{t('topbar.service_area', 'Servicegebied & buiten Utrecht')}</span>
+              <span>{t('topbar.service_area', 'Servicegebied')}</span>
             </button>
             <a
               href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!')}`}
@@ -168,7 +167,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
                   <button type="button" onClick={() => handlePriceClick('particulieren', 'calculator')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
                     <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.particulier_sub', 'Naar de prijs- en bestelcalculator')}</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.particulier_sub', 'Naar de prijs- en bestelform')}</span>
                   </button>
                   <button type="button" onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
                     <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
@@ -196,7 +195,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
                   <button type="button" onClick={() => handleLinkClick('particulieren')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
                     <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.particulier_sub', 'Naar de prijs- en bestelcalculator')}</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.particulier_sub', 'Naar de prijs- en bestelform')}</span>
                   </button>
                   <button type="button" onClick={() => handleLinkClick('horeca')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
                     <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
@@ -302,17 +301,17 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 Werkwijze
               </button>
 
-              {/* Kennisbank */}
+              {/* Blogs */}
               <button
                 type="button"
-                onClick={() => handleLinkClick('kennisbank')}
+                onClick={() => handleLinkClick('blogs')}
                 className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
-                  currentPage === 'kennisbank'
+                  currentPage === 'blogs'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
                     : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
                 }`}
               >
-                Kennisbank
+                Blogs
               </button>
 
               {/* Ophalen, bezorgen & servicegebied */}
@@ -354,7 +353,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                       className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]"
                     >
                       <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
-                      <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelcalculator</span>
+                      <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
                     </button>
                     <button
                       type="button"

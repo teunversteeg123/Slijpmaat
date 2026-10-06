@@ -2,6 +2,7 @@ import React from 'react';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
+import { UtrechtQuotesSection } from '../components/UtrechtQuotesSection';
 import {
   ArrowDown,
   ArrowRight,
@@ -280,6 +281,8 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      <UtrechtQuotesSection />
 
       {/* 5. ONZE FILOSOFIE (De 3 pijlers van ons ambacht) */}
       <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8 bg-[#FAFAF8] border-t border-[#d9e1d7]/60">

@@ -38,11 +38,11 @@ export const ArtikelPage: React.FC<ArtikelPageProps> = ({
 
         <div className="relative z-10 mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
           <button
-            onClick={() => onNavigate('kennisbank')}
+            onClick={() => onNavigate('blogs')}
             className="inline-flex items-center gap-1.5 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#3B7F4B] shadow-2xs hover:bg-[#E8EFE8] transition-colors mb-6 cursor-pointer"
           >
             <ChevronLeft className="h-4 w-4" />
-            <span>Terug naar Kennisbank</span>
+            <span>Terug naar Blogs</span>
           </button>
 
           <div className="flex flex-wrap items-center gap-2 text-xs font-bold text-[#3B7F4B] uppercase tracking-wider mb-3">
@@ -133,7 +133,7 @@ export const ArtikelPage: React.FC<ArtikelPageProps> = ({
         <section className="relative px-4 pb-16 sm:px-6 sm:pb-24 lg:px-8">
           <div className="mx-auto max-w-4xl">
             <h3 className="font-heading text-2xl font-bold text-[#3B7F4B] mb-6">
-              Meer artikelen uit onze kennisbank
+              Meer artikelen uit onze blogs
             </h3>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               {relatedArticles.map((rel) => (

@@ -5,18 +5,17 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     // Top Bar
     'topbar.free_pickup': 'Gratis ophalen & bezorgen in Utrecht',
     'topbar.min_knives': 'vanaf 3 messen',
-    'topbar.service_area': 'Servicegebied & buiten Utrecht',
+    'topbar.service_area': 'Servicegebied',
     'topbar.whatsapp': 'WhatsApp je Maat',
 
     // Navigation
     'nav.home': 'Home',
-    'nav.onze_maten': 'Onze Maten',
     'nav.over_ons': 'Over ons',
     'nav.werkwijze': 'Werkwijze',
-    'nav.kennisbank': 'Kennisbank',
+    'nav.blogs': 'Blogs',
     'nav.prijzen': 'Prijzen',
     'nav.particulier': 'Particulier',
-    'nav.particulier_sub': 'Naar de prijs- en bestelcalculator',
+    'nav.particulier_sub': 'Naar de prijs- en bestelform',
     'nav.zakelijk': 'Zakelijk',
     'nav.zakelijk_sub': 'Naar de zakelijke aanvraag',
     'nav.plan_button': 'Plan je slijpbeurt',
@@ -43,18 +42,17 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     // Top Bar
     'topbar.free_pickup': 'Free pickup & delivery in Utrecht',
     'topbar.min_knives': 'from 3 knives',
-    'topbar.service_area': 'Service area & outside Utrecht',
+    'topbar.service_area': 'Service area',
     'topbar.whatsapp': 'WhatsApp your Mate',
 
     // Navigation
     'nav.home': 'Home',
-    'nav.onze_maten': 'Our Mates',
     'nav.over_ons': 'About us',
     'nav.werkwijze': 'How it works',
-    'nav.kennisbank': 'Knowledge base',
+    'nav.blogs': 'Blogs',
     'nav.prijzen': 'Pricing',
     'nav.particulier': 'Particulier',
-    'nav.particulier_sub': 'Price & order calculator',
+    'nav.particulier_sub': 'Price & order form',
     'nav.zakelijk': 'Commercial',
     'nav.zakelijk_sub': 'For restaurants & businesses',
     'nav.plan_button': 'Book sharpening',

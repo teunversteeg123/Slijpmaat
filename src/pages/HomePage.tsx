@@ -312,22 +312,31 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="relative max-w-xl">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Duidelijk vooraf</p>
               <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Bekijk direct wat jouw slijpbeurt kost</h2>
-              <p className="mt-4 text-base leading-7 text-[#657068]">Vul je messen in, zie meteen de prijs en stuur je bestelling daarna eenvoudig via WhatsApp.</p>
-              <button
-                type="button"
-                onClick={openCalculator}
-                className="group mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3 text-sm font-bold text-white transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#244A30]"
-              >
-                <span>Bereken mijn prijs</span>
-                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
-              </button>
-              <button
-                type="button"
-                onClick={() => onNavigate('horeca')}
-                className="mt-4 block text-sm font-bold text-[#3B7F4B] underline decoration-[#A9C89E] decoration-2 underline-offset-4 hover:text-[#3B7F4B]"
-              >
-                Zakelijke aanvraag of grotere aantallen?
-              </button>
+              <div className="mt-7 grid gap-3 sm:grid-cols-2">
+                <button
+                  type="button"
+                  onClick={openCalculator}
+                  className="group grid min-h-20 grid-cols-[auto_1fr_auto] items-center gap-2.5 rounded-2xl border border-[#d9e1d7] bg-white px-3 py-3 text-left shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#3B7F4B]/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E8EFE8] text-[#3B7F4B]">
+                    <Utensils className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span className="whitespace-nowrap font-heading text-sm font-bold text-[#3B7F4B]">Naar particulier</span>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                </button>
+
+                <button
+                  type="button"
+                  onClick={() => onNavigate('horeca')}
+                  className="group grid min-h-20 grid-cols-[auto_1fr_auto] items-center gap-2.5 rounded-2xl border border-[#E87B5B]/35 bg-white px-3 py-3 text-left shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#E87B5B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#C95E3E]"
+                >
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F9E4DE] text-[#C95E3E]">
+                    <Building2 className="h-5 w-5" aria-hidden="true" />
+                  </span>
+                  <span className="whitespace-nowrap font-heading text-sm font-bold text-[#C95E3E]">Naar zakelijk</span>
+                  <ArrowRight className="h-4 w-4 shrink-0 text-[#C95E3E] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                </button>
+              </div>
             </div>
           </div>
 

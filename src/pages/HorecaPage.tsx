@@ -169,7 +169,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 mx-auto aspect-[4/3] w-[70%] overflow-hidden rounded-[2.5rem] bg-[#203728] shadow-xs sm:aspect-[16/11] lg:aspect-square">
+            <div className="relative z-10 mx-auto aspect-[4/3] w-[92%] overflow-hidden rounded-[2rem] bg-[#203728] shadow-xs sm:aspect-[16/11] sm:w-[70%] sm:rounded-[2.5rem] lg:aspect-square">
               <video
                 className="h-full w-full object-cover"
                 src="/assets/tomaat-website-video.mp4"
