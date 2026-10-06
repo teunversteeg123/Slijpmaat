@@ -76,11 +76,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
     <div className="overflow-hidden bg-[#FAFAF8]">
       {/* 1. HERO SECTION (Image 2) */}
       <section className="relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
-        {/* Soft organic circular sage blob in the top-right background (Image 2) */}
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-20 -top-16 h-[340px] w-[340px] rounded-full bg-[#E3EFE5] opacity-80 blur-2xl sm:h-[480px] sm:w-[480px] sm:blur-3xl lg:-right-10 lg:top-2 lg:h-[560px] lg:w-[560px]"
-        />
         <svg
           aria-hidden="true"
           viewBox="0 0 520 520"

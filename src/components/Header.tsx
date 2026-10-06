@@ -112,14 +112,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1 cursor-pointer shrink-0"
             >
               <MapPin className="w-3.5 h-3.5 text-white shrink-0" />
-              <span>{t('topbar.service_area', 'Servicegebied Utrecht')}</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => handleLinkClick('buiten-utrecht')}
-              className="text-[#E8EFE8] hover:text-white transition-colors cursor-pointer shrink-0 underline decoration-[#A9C89E] underline-offset-2 hover:decoration-white"
-            >
-              {t('topbar.outside_utrecht', 'Buiten Utrecht?')}
+              <span>{t('topbar.service_area', 'Servicegebied & buiten Utrecht')}</span>
             </button>
             <a
               href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!')}`}
@@ -322,7 +315,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 Kennisbank
               </button>
 
-              {/* Ophalen & bezorgen */}
+              {/* Ophalen, bezorgen & servicegebied */}
               <button
                 type="button"
                 onClick={() => handleLinkClick('ophalen-bezorgen')}
@@ -332,20 +325,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                     : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
                 }`}
               >
-                Ophalen &amp; bezorgen
-              </button>
-
-              {/* Buiten Utrecht wat nu */}
-              <button
-                type="button"
-                onClick={() => handleLinkClick('buiten-utrecht')}
-                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
-                  currentPage === 'buiten-utrecht'
-                    ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
-                    : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
-                }`}
-              >
-                Buiten Utrecht, wat nu?
+                Ophalen, bezorgen &amp; servicegebied
               </button>
 
               {/* Subtiele CTA onderaan het mobiele menu: dik gedrukte groene tekst met dropdown */}

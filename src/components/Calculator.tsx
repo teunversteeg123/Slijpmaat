@@ -426,7 +426,7 @@ export const Calculator: React.FC<CalculatorProps> = ({
                     )}
                   </div>
                   <p className="text-xs text-[#657068] mt-1 leading-relaxed">
-                    We komen op de fiets of bakwagen bij je langs binnen ons Utrechtse servicegebied.
+                    Binnen Utrecht komen we op de fiets langs. Voor afspraken verder weg gebruiken we de scooter.
                   </p>
                 </div>
               </div>

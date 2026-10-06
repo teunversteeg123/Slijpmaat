@@ -12,7 +12,6 @@ import { HorecaPage } from './pages/HorecaPage';
 import { DienstDetailPage } from './pages/DienstDetailPage';
 import { WerkwijzePage } from './pages/WerkwijzePage';
 import { ServicegebiedPage } from './pages/ServicegebiedPage';
-import { BuitenUtrechtPage } from './pages/BuitenUtrechtPage';
 import { KennisbankPage } from './pages/KennisbankPage';
 import { ArtikelPage } from './pages/ArtikelPage';
 import { OverOnsPage } from './pages/OverOnsPage';
@@ -52,6 +51,11 @@ export default function App() {
         }, 60);
         return;
       }
+      if (hash === 'buiten-utrecht') {
+        setCurrentPage('ophalen-bezorgen');
+        window.history.replaceState(null, '', '#ophalen-bezorgen');
+        return;
+      }
       const validPages: PageId[] = [
         'home',
         'particulieren',
@@ -64,7 +68,6 @@ export default function App() {
         'werkwijze',
         'prijzen-bestellen',
         'ophalen-bezorgen',
-        'buiten-utrecht',
         'kennisbank',
         'artikel',
         'over-ons',
@@ -108,8 +111,6 @@ export default function App() {
         return <ParticulierenPage onNavigate={handleNavigate} />;
       case 'ophalen-bezorgen':
         return <ServicegebiedPage onNavigate={handleNavigate} />;
-      case 'buiten-utrecht':
-        return <BuitenUtrechtPage onNavigate={handleNavigate} />;
       case 'kennisbank':
         return <KennisbankPage onNavigate={handleNavigate} onSelectArticle={handleSelectArticle} />;
       case 'artikel':

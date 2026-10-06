@@ -4,8 +4,7 @@ export const PHRASE_DICTIONARY: Array<[string, string]> = [
   // Top Announcement & Brand Slogans
   ['Gratis ophalen & bezorgen in Utrecht', 'Free pickup & delivery in Utrecht'],
   ['vanaf 3 messen', 'from 3 knives'],
-  ['Servicegebied Utrecht', 'Service area Utrecht'],
-  ['Buiten Utrecht, wat nu?', 'Outside Utrecht, what now?'],
+  ['Servicegebied & buiten Utrecht', 'Service area & outside Utrecht'],
   ['Buiten Utrecht?', 'Outside Utrecht?'],
   ['WhatsApp je Maat', 'WhatsApp your Mate'],
   ['Stuur je Maat een appje', 'Send your Mate a WhatsApp message'],

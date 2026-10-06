@@ -16,7 +16,6 @@ import {
   Target,
   ShieldCheck,
   CheckCircle2,
-  ExternalLink,
   Users
 } from 'lucide-react';
 
@@ -24,27 +23,20 @@ interface OverOnsPageProps {
   onNavigate?: (page: PageId) => void;
 }
 
-const LinkedInIcon: React.FC<{ className?: string }> = ({ className = 'h-5 w-5' }) => (
-  <svg className={className} viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-    <path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.28 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.75M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
-  </svg>
-);
-
 export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
   const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik las over jullie op de Over Ons pagina en wil graag kennismaken!')}`;
-  const linkedinCompanyUrl = 'https://www.linkedin.com/company/slijpmaat';
 
   // 1. Hoe zijn we begonnen? (3 Mijlpalen in warm cream #F7F4EC)
   const originSteps = [
     {
       num: '1',
       title: 'De frustratie van het botte mes',
-      text: 'Het begon aan onze eigen keukentafel in Utrecht. We hielden van koken, maar ergerden ons mateloos aan botte messen die tomaten pletten, door uien heen ploegden en koken tot een frustratie maakten.',
+      text: 'Het begon aan onze eigen keukentafel in Utrecht. We hielden van koken, maar ergerden ons mateloos aan messen die bot waren. Koken werd simpelweg minder leuk.',
     },
     {
       num: '2',
-      title: 'De ontdekking van de watersteen',
-      text: 'We verdiepten ons in de traditionele Japanse slijpfilosofie: wij kiezen de juiste steen voor elk type mes en staal, en stroppen daarna af op leer. Geen vonkende machines die het staal ontlaten, maar pure controle en spiegelgladde precisie.',
+      title: 'Hoe slijp je nou goed een mes?',
+      text: 'We verdiepten ons in de traditionele Japanse slijpfilosofie: wij kiezen de juiste steen voor elk type mes en staal, en stroppen daarna af op leer. Geen machines die het staal slopen, maar pure controle voor een perfect resultaat.',
     },
     {
       num: '3',
@@ -108,7 +100,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     },
     {
       question: 'Waar in Utrecht zijn jullie gevestigd?',
-      answer: 'Wij werken vanuit huis aan de Gerard Noodtstraat in Utrecht. Omdat we vanuit huis werken en overdag messen ophalen met de bakfiets, hebben we geen openbare inloopwinkel en werken we uitsluitend op afspraak. Zo kunnen we onze volle aandacht aan het slijpwerk besteden.',
+      answer: 'Wij werken vanuit huis aan de Gerard Noodtstraat in Utrecht en hebben geen openbare inloopwinkel. Langsbrengen en ophalen kan daarom alleen op afspraak. Voor onze ophaal- en bezorgservice gebruiken we binnen Utrecht de fiets en voor afspraken verder weg de scooter.',
     },
     {
       question: 'Kan ik ook langskomen om Teun en Mike te ontmoeten?',
@@ -266,7 +258,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
                 Elk mes in Utrecht weer het respect en de scherpte geven die het verdient.
               </h3>
               <p className="mt-4 text-base leading-relaxed text-[#657068]">
-                Koken hoort leuk, ontspannen en veilig te zijn. Wij maken professioneel messenslijpen toegankelijk voor iedereen: van student en thuiskok tot chef-kok, direct aan de voordeur zonder rompslomp.
+                Koken hoort leuk, ontspannen en veilig te zijn. Wij maken professioneel messenslijpen toegankelijk voor iedereen: van student en thuiskok tot chef-kok, direct aan de voordeur zonder gedoe.
               </p>
             </div>
 
@@ -282,7 +274,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
                 Duurzaam behoud als de nieuwe standaard in de keuken.
               </h3>
               <p className="mt-4 text-base leading-relaxed text-[#657068]">
-                In een maatschappij waar spullen snel worden weggegooid, laten wij zien dat goed gereedschap generaties lang meegaat. Met vakkundig onderhoud op waterstenen behoud je kwaliteit en voorkom je onnodig afval.
+                In een maatschappij waar spullen snel worden weggegooid, laten wij zien dat goed gereedschap generaties lang meegaat. Met vakkundig onderhoud behoud je kwaliteit en voorkom je onnodig afval.
               </p>
             </div>
           </div>
@@ -328,83 +320,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 6. WIE ZIJN TEUN & MIKE? + LINKEDIN SECTIE */}
-      <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8 bg-white">
-        <div className="mx-auto max-w-5xl">
-          <div className="mb-10 text-center sm:mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Het team</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
-              Ontmoet Teun &amp; Mike
-            </h2>
-            <p className="mx-auto mt-3 max-w-xl text-base text-[#657068]">
-              De jongens die op de fiets door Utrecht trekken en met precisie achter de stenen staan.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 lg:gap-8">
-            {/* Teun Versteeg */}
-            <div className="rounded-[2.25rem] border border-[#d9e1d7] bg-[#FAFAF8] p-6 sm:p-8 shadow-xs">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B] font-heading font-bold text-sm">
-                  TV
-                </span>
-                <div>
-                  <h3 className="font-heading text-xl font-bold text-[#203728]">Teun Versteeg</h3>
-                  <p className="text-xs font-semibold text-[#3B7F4B]">Mede-oprichter &amp; Messenslijper</p>
-                </div>
-              </div>
-              <p className="text-sm leading-relaxed text-[#657068]">
-                Gefascineerd door de technische kant van metallurgie, slijphoeken en micro-bevels. Zorgt ervoor dat elk mes met chirurgische precisie en minimale weerstand teruggaat naar de eigenaar.
-              </p>
-            </div>
-
-            {/* Mike */}
-            <div className="rounded-[2.25rem] border border-[#d9e1d7] bg-[#FAFAF8] p-6 sm:p-8 shadow-xs">
-              <div className="flex items-center gap-3 mb-4">
-                <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F9E4DE] text-[#C95E3E] font-heading font-bold text-sm">
-                  M
-                </span>
-                <div>
-                  <h3 className="font-heading text-xl font-bold text-[#203728]">Mike</h3>
-                  <p className="text-xs font-semibold text-[#C95E3E]">Mede-oprichter &amp; Messenslijper</p>
-                </div>
-              </div>
-              <p className="text-sm leading-relaxed text-[#657068]">
-                Gepassioneerd kok en het aanspreekpunt voor horeca en particulieren. Weet precies wat een mes op de snijplank moet doen en hoe belangrijk een soepele service voor keukens is.
-              </p>
-            </div>
-          </div>
-
-          {/* LinkedIn Connectie Banner */}
-          <div className="mt-8 rounded-[2.25rem] border border-[#0A66C2]/20 bg-[#F4F8FC] p-6 sm:p-8 flex flex-col sm:flex-row items-center justify-between gap-6 shadow-xs">
-            <div className="flex items-center gap-4 text-center sm:text-left">
-              <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-[#0A66C2] text-white shadow-sm">
-                <LinkedInIcon className="h-7 w-7" />
-              </div>
-              <div>
-                <h4 className="font-heading text-lg font-bold text-[#0A66C2]">
-                  Connect met ons op LinkedIn
-                </h4>
-                <p className="text-xs sm:text-sm text-[#4A6478] mt-0.5">
-                  Volg het verhaal van Slijpmaat, onze zakelijke updates en kijkjes achter de schermen in Utrecht.
-                </p>
-              </div>
-            </div>
-
-            <a
-              href={linkedinCompanyUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 rounded-full bg-[#0A66C2] px-6 py-3 text-xs sm:text-sm font-bold text-white shadow-xs transition-all hover:bg-[#084e96] hover:shadow-md cursor-pointer shrink-0"
-            >
-              <span>Volg op LinkedIn</span>
-              <ExternalLink className="h-4 w-4" />
-            </a>
-          </div>
-        </div>
-      </section>
-
-      {/* 7. GROENE GOLFSECTIE (#3B7F4B met wave dividers) */}
+      {/* 6. GROENE GOLFSECTIE (#3B7F4B met wave dividers) */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
         <svg
           aria-hidden="true"
@@ -437,7 +353,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               Wat kun je van jouw Maat verwachten?
             </h2>
             <p className="mt-4 text-base leading-7 text-[#E8EFE8]">
-              Vier duidelijke principes waarmee we dagelijks op de fiets stappen en messen slijpen.
+              Vier duidelijke principes waarmee we dagelijks op pad gaan en messen slijpen.
             </p>
           </div>
 

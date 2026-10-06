@@ -5,8 +5,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     // Top Bar
     'topbar.free_pickup': 'Gratis ophalen & bezorgen in Utrecht',
     'topbar.min_knives': 'vanaf 3 messen',
-    'topbar.service_area': 'Servicegebied Utrecht',
-    'topbar.outside_utrecht': 'Buiten Utrecht?',
+    'topbar.service_area': 'Servicegebied & buiten Utrecht',
     'topbar.whatsapp': 'WhatsApp je Maat',
 
     // Navigation
@@ -44,8 +43,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
     // Top Bar
     'topbar.free_pickup': 'Free pickup & delivery in Utrecht',
     'topbar.min_knives': 'from 3 knives',
-    'topbar.service_area': 'Service area Utrecht',
-    'topbar.outside_utrecht': 'Outside Utrecht?',
+    'topbar.service_area': 'Service area & outside Utrecht',
     'topbar.whatsapp': 'WhatsApp your Mate',
 
     // Navigation
