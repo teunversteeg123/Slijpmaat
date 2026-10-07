@@ -109,7 +109,7 @@ export const DienstenPage: React.FC<DienstenPageProps> = ({ onNavigate }) => {
                   Geschikt voor alle gladde messen: koksmessen, Sabatier, Wüsthof, Zwilling, schilmessen en fileermessen. Geslepen op een robuuste en vlijmscherpe hoek van 15 tot 20 graden per zijde.
                 </p>
                 <div className="rounded-xl bg-[#FAFAF8] p-3 text-xs font-bold text-[#3B7F4B] border border-[#d9e1d7]/60">
-                  Vaste tarieven: €6,50 (&lt;15 cm) &middot; €8,50 (15–20 cm) &middot; €10,50 (20–25 cm)
+                  Vaste tarieven: €6,50 (&lt;15 cm) &middot; €8,50 (15–19,99 cm) &middot; €10,50 (20–25 cm)
                 </div>
               </div>
 

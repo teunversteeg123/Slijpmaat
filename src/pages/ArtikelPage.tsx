@@ -1,6 +1,7 @@
 import React from 'react';
 import { PageId, Article } from '../types';
 import { ARTICLES, SLIJPMAAT_INFO } from '../data/siteData';
+import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
   ChevronLeft,
   Clock3,
@@ -143,7 +144,16 @@ export const ArtikelPage: React.FC<ArtikelPageProps> = ({
                     onSelectArticle(rel);
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  className="group cursor-pointer rounded-[2rem] border border-[#d9e1d7] bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md flex flex-col justify-between"
+                  onKeyDown={(event) => {
+                    if (event.key === 'Enter' || event.key === ' ') {
+                      event.preventDefault();
+                      onSelectArticle(rel);
+                      window.scrollTo({ top: 0, behavior: 'smooth' });
+                    }
+                  }}
+                  role="link"
+                  tabIndex={0}
+                  className="group cursor-pointer rounded-[2rem] border border-[#d9e1d7] bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] flex flex-col justify-between"
                 >
                   <div>
                     <span className="text-[11px] font-bold uppercase tracking-wider text-[#3B7F4B] bg-[#E8EFE8] px-2.5 py-1 rounded-full">
@@ -165,26 +175,10 @@ export const ArtikelPage: React.FC<ArtikelPageProps> = ({
         </section>
       )}
 
+      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#F9E4DE" toColor="#E87B5B" variant="calm" />
+
       {/* 4. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="artikel-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#FAFAF8] sm:h-14 lg:h-16"
-        >
-          <path fill="currentColor" d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z" />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path fill="currentColor" d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z" />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Zijn jouw messen bot?</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
@@ -214,6 +208,8 @@ export const ArtikelPage: React.FC<ArtikelPageProps> = ({
           </div>
         </div>
       </section>
+
+      <OrganicSectionDivider fromColor="#E87B5B" middleColor="#F9E4DE" toColor="#FFFFFF" variant="rolling" mirror />
     </div>
   );
 };

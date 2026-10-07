@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
+import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
   ArrowRight,
   Clock3,
@@ -9,9 +10,7 @@ import {
   MessageCircle,
   Phone,
   Mail,
-  Send,
-  CheckCircle2,
-  AlertCircle
+  Send
 } from 'lucide-react';
 
 interface ContactPageProps {
@@ -21,7 +20,6 @@ interface ContactPageProps {
 export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
   const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag contact met jullie opnemen!')}`;
 
-  const [submitted, setSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -32,7 +30,18 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    const message = [
+      'Hoi Teun en Mike,',
+      '',
+      `Naam: ${formData.name.trim()}`,
+      `Telefoonnummer: ${formData.phone.trim()}`,
+      `E-mailadres: ${formData.email.trim()}`,
+      `Onderwerp: ${formData.subject}`,
+      '',
+      formData.message.trim(),
+    ].join('\n');
+    const url = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -163,28 +172,19 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
               Stuur een online bericht
             </h2>
             <p className="mt-2 text-sm text-[#657068]">
-              Vul jouw vraag of verzoek in en we nemen doorgaans binnen enkele uren contact met je op.
+              Vul jouw vraag in en open het bericht daarna in WhatsApp. Je controleert en verstuurt het bericht daar zelf.
             </p>
 
-            {submitted ? (
-              <div className="mt-8 rounded-2xl border border-[#3B7F4B]/30 bg-[#E8EFE8] p-8 text-center space-y-3">
-                <CheckCircle2 className="mx-auto h-12 w-12 text-[#3B7F4B]" />
-                <h3 className="font-heading text-2xl font-bold text-[#3B7F4B]">
-                  Bericht succesvol verzonden!
-                </h3>
-                <p className="text-sm text-[#657068]">
-                  Bedankt voor je bericht, {formData.name}. Teun of Mike reageert zo spoedig mogelijk.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="mt-8 space-y-4">
+            <form onSubmit={handleSubmit} className="mt-8 space-y-4">
                 <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
+                    <label htmlFor="contact-name" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
                       Jouw naam *
                     </label>
                     <input
+                      id="contact-name"
                       type="text"
+                      autoComplete="name"
                       required
                       placeholder="Bijv. Sarah de Wit"
                       value={formData.name}
@@ -194,11 +194,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
 
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
+                    <label htmlFor="contact-phone" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
                       Telefoonnummer *
                     </label>
                     <input
+                      id="contact-phone"
                       type="tel"
+                      autoComplete="tel"
                       required
                       placeholder="06 12 34 56 78"
                       value={formData.phone}
@@ -208,11 +210,13 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
+                    <label htmlFor="contact-email" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
                       E-mailadres *
                     </label>
                     <input
+                      id="contact-email"
                       type="email"
+                      autoComplete="email"
                       required
                       placeholder="sarah@voorbeeld.nl"
                       value={formData.email}
@@ -222,10 +226,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
+                    <label htmlFor="contact-subject" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
                       Onderwerp
                     </label>
                     <select
+                      id="contact-subject"
                       value={formData.subject}
                       onChange={(e) => setFormData((p) => ({ ...p, subject: e.target.value }))}
                       className="mt-1.5 w-full rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] px-4 py-3 text-sm text-[#244A30] focus:border-[#3B7F4B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
@@ -239,10 +244,11 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                   </div>
 
                   <div className="sm:col-span-2">
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
+                    <label htmlFor="contact-message" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
                       Jouw bericht *
                     </label>
                     <textarea
+                      id="contact-message"
                       rows={4}
                       required
                       placeholder="Vertel ons over je messen of stel je vraag..."
@@ -259,41 +265,21 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
                     className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-8 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md cursor-pointer"
                   >
                     <Send className="h-4 w-4" />
-                    <span>Verstuur bericht</span>
+                    <span>Open bericht in WhatsApp</span>
                   </button>
+                  <p className="mt-3 text-center text-xs leading-5 text-[#657068]">
+                    Er wordt nog niets verzonden. Je opent eerst WhatsApp en verstuurt het bericht daar zelf.
+                  </p>
                 </div>
-              </form>
-            )}
+            </form>
           </div>
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#F9E4DE" toColor="#E87B5B" variant="scalloped" />
+
       {/* 4. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="contact-footer-banner" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z"
-          />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Altijd bereikbaar</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
@@ -323,6 +309,8 @@ export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      <OrganicSectionDivider fromColor="#E87B5B" middleColor="#F9E4DE" toColor="#FFFFFF" variant="calm" mirror />
     </div>
   );
 };

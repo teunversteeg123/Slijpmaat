@@ -59,6 +59,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
     { id: 'over-ons', labelKey: 'nav.over_ons', defaultLabel: 'Over ons' },
     { id: 'werkwijze', labelKey: 'nav.werkwijze', defaultLabel: 'Werkwijze' },
     { id: 'blogs', labelKey: 'nav.blogs', defaultLabel: 'Blogs' },
+    { id: 'faq', labelKey: 'nav.faq', defaultLabel: 'FAQ' },
   ];
 
   const closeHeaderMenus = () => {
@@ -139,7 +140,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
           </button>
 
           {/* Zone 2: Clean Text Navigation (color: #244A30, hover: #3B7F4B) */}
-          <nav className="hidden lg:flex items-center gap-7 text-sm font-semibold text-[#3B7F4B]">
+          <nav className="hidden lg:flex items-center gap-5 text-sm font-semibold text-[#3B7F4B] xl:gap-7">
             {navLinks.map((link) => {
               const isActive = currentPage === link.id;
               return (
@@ -312,6 +313,19 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 }`}
               >
                 Blogs
+              </button>
+
+              {/* Veelgestelde vragen */}
+              <button
+                type="button"
+                onClick={() => handleLinkClick('faq')}
+                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                  currentPage === 'faq'
+                    ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
+                    : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
+                }`}
+              >
+                FAQ
               </button>
 
               {/* Ophalen, bezorgen & servicegebied */}

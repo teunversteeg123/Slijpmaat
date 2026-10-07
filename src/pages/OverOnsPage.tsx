@@ -3,6 +3,7 @@ import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { UtrechtQuotesSection } from '../components/UtrechtQuotesSection';
+import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
   ArrowDown,
   ArrowRight,
@@ -105,7 +106,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     },
     {
       question: 'Kan ik ook langskomen om Teun en Mike te ontmoeten?',
-      answer: 'Zeker! Als je je messen liever zelf langsbrengt in plaats van gebruik te maken van onze ophaalservice, kun je via WhatsApp eenvoudig een afspraak maken. Wij werken vanuit huis, dus we stemmen vooraf even een handig moment af en laten je graag onze stenen zien.',
+      answer: 'Zeker! Als je je messen liever zelf langsbrengt in plaats van gebruik te maken van onze ophaalservice, kun je via WhatsApp eenvoudig een afspraak maken. Wij werken vanuit huis, dus we stemmen vooraf even een handig moment af.',
     },
   ];
 
@@ -202,6 +203,13 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider
+        fromColor="#FAFAF8"
+        middleColor="#E8EFE8"
+        toColor="#F7F4EC"
+        variant="calm"
+      />
+
       {/* 3. HOE ZIJN WE BEGONNEN? (Warm cream #F7F4EC) */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">
         <div
@@ -235,8 +243,16 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider
+        fromColor="#F7F4EC"
+        middleColor="#F9E4DE"
+        toColor="#FFFFFF"
+        variant="scalloped"
+        mirror
+      />
+
       {/* 4. MISSIE & VISIE (Twee complementaire kaarten) */}
-      <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <section className="relative bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 text-center sm:mb-14">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Waar we voor gaan</p>
@@ -248,33 +264,35 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
             {/* Missie Kaart */}
-            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white p-8 sm:p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B] mb-6">
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#3B7F4B] bg-[#3B7F4B] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10">
+              <div aria-hidden="true" className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-white/6" />
+              <div className="relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/12 text-white">
                 <Target className="h-7 w-7" />
               </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#C95E3E]">
+              <span className="relative text-xs font-bold uppercase tracking-wider text-[#F4B19D]">
                 Onze Missie
               </span>
-              <h3 className="mt-2 font-heading text-2xl sm:text-3xl font-bold text-[#203728]">
+              <h3 className="relative mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
                 Elk mes in Utrecht weer het respect en de scherpte geven die het verdient.
               </h3>
-              <p className="mt-4 text-base leading-relaxed text-[#657068]">
+              <p className="relative mt-4 text-base leading-relaxed text-[#E8EFE8]">
                 Koken hoort leuk, ontspannen en veilig te zijn. Wij maken professioneel messenslijpen toegankelijk voor iedereen: van student en thuiskok tot chef-kok, direct aan de voordeur zonder gedoe.
               </p>
             </div>
 
             {/* Visie Kaart */}
-            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white p-8 sm:p-10 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md">
-              <div className="flex h-14 w-14 items-center justify-center rounded-2xl bg-[#F9E4DE] text-[#C95E3E] mb-6">
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#E87B5B] bg-[#E87B5B] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10">
+              <div aria-hidden="true" className="absolute -bottom-16 -right-10 h-48 w-48 rounded-full bg-white/8" />
+              <div className="relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/18 text-white">
                 <Compass className="h-7 w-7" />
               </div>
-              <span className="text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
+              <span className="relative text-xs font-bold uppercase tracking-wider text-white/85">
                 Onze Visie
               </span>
-              <h3 className="mt-2 font-heading text-2xl sm:text-3xl font-bold text-[#203728]">
+              <h3 className="relative mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
                 Duurzaam behoud als de nieuwe standaard in de keuken.
               </h3>
-              <p className="mt-4 text-base leading-relaxed text-[#657068]">
+              <p className="relative mt-4 text-base leading-relaxed text-[#FFF7F3]">
                 In een maatschappij waar spullen snel worden weggegooid, laten wij zien dat goed gereedschap generaties lang meegaat. Met vakkundig onderhoud behoud je kwaliteit en voorkom je onnodig afval.
               </p>
             </div>
@@ -282,7 +300,22 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider
+        fromColor="#FFFFFF"
+        middleColor="#A9C89E"
+        toColor="#3B7F4B"
+        variant="rolling"
+      />
+
       <UtrechtQuotesSection />
+
+      <OrganicSectionDivider
+        fromColor="#3B7F4B"
+        middleColor="#A9C89E"
+        toColor="#FAFAF8"
+        variant="calm"
+        mirror
+      />
 
       {/* 5. ONZE FILOSOFIE (De 3 pijlers van ons ambacht) */}
       <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8 bg-[#FAFAF8] border-t border-[#d9e1d7]/60">
@@ -323,32 +356,15 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider
+        fromColor="#FAFAF8"
+        middleColor="#E8EFE8"
+        toColor="#3B7F4B"
+        variant="scalloped"
+      />
+
       {/* 6. GROENE GOLFSECTIE (#3B7F4B met wave dividers) */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,20 C1180,55 900,10 620,40 C380,68 180,18 0,35 Z"
-          />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 100"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-14 w-full text-white sm:h-20 lg:h-24"
-        >
-          <path
-            fill="currentColor"
-            d="M0,100 L1440,100 L1440,30 C1200,75 920,15 620,55 C380,85 180,25 0,65 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">De Slijpmaat belofte</p>
@@ -376,6 +392,14 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      <OrganicSectionDivider
+        fromColor="#3B7F4B"
+        middleColor="#A9C89E"
+        toColor="#FFFFFF"
+        variant="rolling"
+        mirror
+      />
 
       {/* 8. VEELGESTELDE VRAGEN OVER ONS */}
       <section id="faq" className="relative scroll-mt-24 overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -421,32 +445,15 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider
+        fromColor="#FFFFFF"
+        middleColor="#F9E4DE"
+        toColor="#E87B5B"
+        variant="calm"
+      />
+
       {/* 9. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="over-ons-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z"
-          />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Maak kennis</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
@@ -477,6 +484,14 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      <OrganicSectionDivider
+        fromColor="#E87B5B"
+        middleColor="#F9E4DE"
+        toColor="#FFFFFF"
+        variant="scalloped"
+        mirror
+      />
     </div>
   );
 };

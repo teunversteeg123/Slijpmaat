@@ -22,7 +22,7 @@ export type PageId =
 export interface KnifeOrderState {
   customerType: 'particulier' | 'zakelijk';
   smallKnives: number;    // <15cm (€6.50)
-  normalKnives: number;   // 15-20cm (€8.50)
+  normalKnives: number;   // 15-19.99cm (€8.50)
   largeKnives: number;    // 20-25cm (€10.50)
   extraLargeKnives: number; // >25cm (op aanvraag)
   isStudent: boolean;     // €5 per mes (excl. XL)

@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
+import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import {
   ArrowDown,
@@ -14,7 +15,6 @@ import {
   Sparkles,
   Plus,
   Send,
-  CheckCircle2,
   FileText,
   ShieldCheck
 } from 'lucide-react';
@@ -24,24 +24,38 @@ interface HorecaPageProps {
 }
 
 export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik neem contact op namens een restaurant/horecakeuken in Utrecht voor het slijpen van onze messen.')}`;
+  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Slijpmaat, ik zou graag in contact willen komen voor een zakelijke aanvraag.')}`;
+
+  const businessBasePrices = [
+    SLIJPMAAT_INFO.prices.small,
+    SLIJPMAAT_INFO.prices.normal,
+    SLIJPMAAT_INFO.prices.large,
+    SLIJPMAAT_INFO.prices.extraLarge,
+  ];
 
   // Formulier state (ongewijzigd gehouden voor zakelijke aanvragen)
-  const [formSubmitted, setFormSubmitted] = useState(false);
   const [formData, setFormData] = useState({
     restaurantName: '',
     contactPerson: '',
     phone: '',
-    email: '',
     knifeCount: '10-20 messen',
-    address: '',
-    preferredDay: 'Maandag ophalen, dinsdag terug',
     notes: '',
   });
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    setFormSubmitted(true);
+    const message = [
+      'Hoi Teun en Mike,',
+      '',
+      'Ik wil graag een zakelijke slijpaanvraag bespreken.',
+      `Restaurant / zaak: ${formData.restaurantName.trim()}`,
+      `Contactpersoon: ${formData.contactPerson.trim()}`,
+      `Telefoonnummer: ${formData.phone.trim()}`,
+      `Aantal messen: ${formData.knifeCount}`,
+      formData.notes.trim() ? `Planning / opmerkingen: ${formData.notes.trim()}` : '',
+    ].filter(Boolean).join('\n');
+    const url = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   // 3 Korte stappen vooraf (Warm cream #F7F4EC)
@@ -59,7 +73,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
     {
       num: '3',
       title: 'Scherp voor mise-en-place',
-      text: 'Binnen 24–48 uur leveren we de brigade weer vlijmscherp af vóór de volgende service, inclusief overzichtelijke digitale btw-factuur.',
+      text: 'Binnen 24–48 uur leveren we de brigade weer vlijmscherp af vóór de volgende service, volgens de vooraf afgestemde planning en prijs.',
     },
   ];
 
@@ -85,8 +99,8 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
     },
     {
       step: '4',
-      title: 'Retour & btw-factuur',
-      desc: 'Je messen weer op tijd op de snijplank. Nette digitale factuur op bedrijfsnaam met 14 dagen betaaltermijn.',
+      title: 'Retour & betaling',
+      desc: 'Je messen weer op tijd op de snijplank. Betaalwijze en eventuele factuurgegevens stemmen we vooraf duidelijk af.',
       icon: FileText,
     },
   ];
@@ -98,8 +112,8 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
       answer: 'Jazeker! Dit is de meest gekozen optie door restaurants in Utrecht. We halen de messen op na de zondagservice of op maandagochtend, en leveren ze dinsdag of woensdag ruim voor de middagmise-en-place weer vlijmscherp af. Je brigade zit geen minuut zonder messen.',
     },
     {
-      question: 'Hoe werkt de zakelijke facturatie en btw?',
-      answer: 'Je ontvangt van ons een overzichtelijke digitale btw-factuur (21% btw gespecificeerd) op bedrijfsnaam per e-mail. Je hebt een standaard betaaltermijn van 14 dagen via bankoverschrijving. Geen gedoe met losse bonnetjes of contant geld in de keuken.',
+      question: 'Hoe werken de zakelijke prijs en betaling?',
+      answer: 'Zakelijk slijpen is maatwerk. Vooraf stemmen we aantallen, planning, prijs en betaalwijze duidelijk af. Eventuele factuurgegevens bevestigen we voordat we starten.',
     },
     {
       question: 'Waarom slijpen jullie op waterstenen i.p.v. een snelle bandslijper?',
@@ -141,25 +155,27 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
               Jouw messenbrigade weer scherp. Zonder gedoe.
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Geen sneldraaiende machines die het staal ontlaten. Wij slijpen jullie messen met de hand op Japanse waterstenen. Strak afgestemd op de mise-en-place, gratis opgehaald in Utrecht en heldere btw-facturatie.
+              Geen sneldraaiende machines die het staal ontlaten. Wij slijpen jullie messen met de hand op Japanse waterstenen. Strak afgestemd op de mise-en-place, gratis opgehaald in Utrecht en met duidelijke prijsafspraken vooraf.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
-              <a
-                href="#zakelijk-formulier"
+              <button
+                type="button"
+                onClick={() => document.getElementById('zakelijk-formulier')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
                 className="group inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
               >
                 <span>Vraag zakelijke offerte aan</span>
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
-              </a>
+              </button>
 
-              <a
-                href="#faq"
+              <button
+                type="button"
+                onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
                 className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
               >
                 <span>Ik heb een vraag</span>
                 <ArrowDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
-              </a>
+              </button>
             </div>
           </div>
 
@@ -201,11 +217,13 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <FileText className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Heldere btw-facturatie</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Duidelijke prijsafspraken</span>
             </div>
           </div>
         </div>
       </section>
+
+      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#F7F4EC" variant="scalloped" />
 
       {/* 3. VOORAF: KORTE BEZOEKERSFLOW (Warm cream #F7F4EC) */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">
@@ -242,6 +260,8 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#F7F4EC" middleColor="#F9E4DE" toColor="#FAFAF8" variant="rolling" mirror />
+
       {/* 4. HET BESTELFORMULIER (ZAKELIJK FORMULIER) - Bewaard zoals afgesproken */}
       <section id="zakelijk-formulier" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-4xl">
@@ -254,21 +274,14 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white p-6 shadow-sm sm:p-10 lg:p-12">
-            {formSubmitted ? (
-              <div className="rounded-2xl border border-[#3B7F4B]/30 bg-[#E8EFE8] p-8 text-center">
-                <CheckCircle2 className="mx-auto h-12 w-12 text-[#3B7F4B]" />
-                <h3 className="mt-4 font-heading text-2xl font-bold text-[#3B7F4B]">Bedankt voor je aanvraag!</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#657068]">
-                  Teun of Mike neemt binnen enkele uren contact met je op voor het ophaalmoment en een passende offerte.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="space-y-5">
+            <form onSubmit={handleSubmit} className="space-y-5">
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Restaurant / Zaak *</label>
+                    <label htmlFor="horeca-company" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Restaurant / Zaak *</label>
                     <input
+                      id="horeca-company"
                       type="text"
+                      autoComplete="organization"
                       required
                       placeholder="Bijv. Bistro De Gracht"
                       value={formData.restaurantName}
@@ -277,9 +290,11 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Contactpersoon *</label>
+                    <label htmlFor="horeca-contact-person" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Contactpersoon *</label>
                     <input
+                      id="horeca-contact-person"
                       type="text"
+                      autoComplete="name"
                       required
                       placeholder="Bijv. Chef Dennis"
                       value={formData.contactPerson}
@@ -288,9 +303,11 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Telefoonnummer *</label>
+                    <label htmlFor="horeca-phone" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Telefoonnummer *</label>
                     <input
+                      id="horeca-phone"
                       type="tel"
+                      autoComplete="tel"
                       required
                       placeholder="06 12 34 56 78"
                       value={formData.phone}
@@ -299,8 +316,9 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                     />
                   </div>
                   <div>
-                    <label className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Aantal messen (schatting)</label>
+                    <label htmlFor="horeca-knife-count" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Aantal messen (schatting)</label>
                     <select
+                      id="horeca-knife-count"
                       value={formData.knifeCount}
                       onChange={(e) => setFormData({ ...formData, knifeCount: e.target.value })}
                       className="mt-1.5 w-full rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] px-4 py-3 text-sm text-[#244A30] focus:border-[#3B7F4B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
@@ -314,8 +332,9 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div>
-                  <label className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Opmerkingen of gewenste planning</label>
+                  <label htmlFor="horeca-notes" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Opmerkingen of gewenste planning</label>
                   <textarea
+                    id="horeca-notes"
                     rows={3}
                     placeholder="Bijv. Zondagavond ophalen na de service, dinsdag voor 13:00 retour voor mise-en-place"
                     value={formData.notes}
@@ -330,7 +349,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                     className="group inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-8 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md cursor-pointer"
                   >
                     <Send className="h-4 w-4" />
-                    <span>Verstuur zakelijke aanvraag</span>
+                    <span>Open aanvraag in WhatsApp</span>
                   </button>
 
                   <a
@@ -343,9 +362,53 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                     <span>Of app direct met Teun &amp; Mike</span>
                   </a>
                 </div>
-              </form>
-            )}
+                <p className="text-center text-xs leading-5 text-[#657068] sm:text-left">
+                  Er wordt nog niets verzonden. Je controleert en verstuurt de aanvraag zelf in WhatsApp.
+                </p>
+                <p className="text-center text-[11px] leading-5 text-[#9ca3af] sm:text-left">
+                  Door een aanvraag te doen ga je akkoord met onze{' '}
+                  <a href="#algemene-voorwaarden" className="underline transition-colors hover:text-[#3B7F4B]">
+                    algemene voorwaarden
+                  </a>{' '}
+                  en{' '}
+                  <a href="#privacy" className="underline transition-colors hover:text-[#3B7F4B]">
+                    privacyverklaring
+                  </a>
+                  .
+                </p>
+            </form>
           </div>
+
+          <section aria-labelledby="zakelijke-prijslijst" className="mt-12 border-t border-[#d9e1d7] pt-10 sm:mt-14 sm:pt-12">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Duidelijk vooraf</p>
+            <h3 id="zakelijke-prijslijst" className="mt-2 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
+              Zakelijke prijslijst
+            </h3>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-[#657068] sm:text-base sm:leading-7">
+              Dit zijn onze basistarieven per mes. Alle genoemde prijzen zijn inclusief btw. Voor grotere aantallen stemmen we de planning en een passende offerte vooraf met jullie af.
+            </p>
+
+            <dl className="mt-7 max-w-2xl space-y-3 text-sm sm:text-base">
+              {businessBasePrices.map((item) => (
+                <div key={item.name} className="grid grid-cols-[1fr_auto] items-baseline gap-5">
+                  <dt className="text-[#35443a]">
+                    <span className="font-bold text-[#244A30]">{item.name}</span>
+                    <span className="text-[#657068]"> · {item.size}</span>
+                  </dt>
+                  <dd className="font-bold text-[#3B7F4B] text-right">
+                    {'custom' in item && item.custom ? 'Op aanvraag' : `€${item.price.toFixed(2).replace('.', ',')}`}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+
+            <p className="mt-6 max-w-2xl text-sm leading-6 text-[#657068] sm:text-base sm:leading-7">
+              Kleine chip herstellen: <strong className="text-[#244A30]">+€2,50</strong> per mes, in combinatie met een slijpbeurt. Nieuw profiel aanbrengen: <strong className="text-[#244A30]">+€8,50</strong> per mes en altijd vooraf besproken.
+            </p>
+            <p className="mt-3 max-w-2xl text-sm leading-6 text-[#657068] sm:text-base sm:leading-7">
+              Grote aantallen of terugkerend onderhoud? Vermeld het aantal messen en de gewenste planning in het formulier. Je ontvangt eerst een duidelijke offerte; we starten pas na akkoord.
+            </p>
+          </section>
         </div>
       </section>
 
@@ -356,32 +419,10 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#A9C89E" toColor="#3B7F4B" variant="calm" />
+
       {/* 6. WAT GEBEURT ER NA JE AANVRAAG? (Green section with wave dividers) */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#FAFAF8] sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,20 C1180,55 900,10 620,40 C380,68 180,18 0,35 Z"
-          />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 100"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-14 w-full text-white sm:h-20 lg:h-24"
-        >
-          <path
-            fill="currentColor"
-            d="M0,100 L1440,100 L1440,30 C1200,75 920,15 620,55 C380,85 180,25 0,65 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Wat gebeurt er daarna?</p>
@@ -424,6 +465,8 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#3B7F4B" middleColor="#E8EFE8" toColor="#FFFFFF" variant="scalloped" mirror />
+
       {/* 7. VEELGESTELDE VRAGEN VOOR ZAKELIJKE KLANTEN (Exacte Particulieren-stijl met plusje) */}
       <section id="faq" className="relative scroll-mt-24 overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div
@@ -436,7 +479,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Veelgestelde vragen</p>
             <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Vragen over zakelijk slijpen?</h2>
             <p className="mt-4 text-base leading-7 text-[#657068]">
-              Hier vind je direct antwoord op de meest gestelde vragen van chefs en ondernemers over planning, stenen en facturatie.
+              Hier vind je direct antwoord op de meest gestelde vragen van chefs en ondernemers over planning, stenen, prijzen en betaling.
             </p>
             <a
               href={whatsappUrl}
@@ -468,32 +511,10 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#F9E4DE" toColor="#E87B5B" variant="rolling" />
+
       {/* 8. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="horeca-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z"
-          />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Zakelijk Contact</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
@@ -523,6 +544,8 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      <OrganicSectionDivider fromColor="#E87B5B" middleColor="#F9E4DE" toColor="#FFFFFF" variant="calm" mirror />
     </div>
   );
 };

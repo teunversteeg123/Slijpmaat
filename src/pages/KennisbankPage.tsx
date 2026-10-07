@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { PageId, Article } from '../types';
 import { ARTICLES, SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
+import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
   Search,
   BookOpen,
@@ -210,13 +211,14 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
                 )}
               </div>
 
-              <a
-                href="#artikelen-overzicht"
+              <button
+                type="button"
+                onClick={() => document.getElementById('artikelen-overzicht')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
                 className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
               >
                 <span>Bekijk artikelen &amp; blogs</span>
                 <ArrowRight className="h-4 w-4" />
-              </a>
+              </button>
             </div>
           </div>
 
@@ -289,6 +291,7 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
               <Search className="w-4 h-4 text-[#657068] absolute left-4 top-1/2 -translate-y-1/2" />
               <input
                 type="text"
+                aria-label="Zoek in blogs"
                 placeholder="Zoek in blogs..."
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
@@ -304,7 +307,15 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
               <article
                 key={art.id}
                 onClick={() => handleArticleClick(art)}
-                className="group cursor-pointer rounded-[2rem] border border-[#d9e1d7] bg-white p-6 sm:p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md flex flex-col justify-between"
+                onKeyDown={(event) => {
+                  if (event.key === 'Enter' || event.key === ' ') {
+                    event.preventDefault();
+                    handleArticleClick(art);
+                  }
+                }}
+                role="link"
+                tabIndex={0}
+                className="group cursor-pointer rounded-[2rem] border border-[#d9e1d7] bg-white p-6 sm:p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] flex flex-col justify-between"
               >
                 <div>
                   <div className="flex items-center justify-between text-xs text-[#657068] mb-3.5">
@@ -394,32 +405,10 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#A9C89E" toColor="#3B7F4B" variant="scalloped" />
+
       {/* 5. WAAROM WATERSTEENSLIJPEN (Green section with organic wave dividers matching HomePage) */}
-      <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8 mt-12">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#FAFAF8] sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,20 C1180,55 900,10 620,40 C380,68 180,18 0,35 Z"
-          />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 100"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-14 w-full text-white sm:h-20 lg:h-24"
-        >
-          <path
-            fill="currentColor"
-            d="M0,100 L1440,100 L1440,30 C1200,75 920,15 620,55 C380,85 180,25 0,65 Z"
-          />
-        </svg>
-
+      <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">De essentie van het vak</p>
@@ -453,32 +442,10 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#3B7F4B" middleColor="#F9E4DE" toColor="#E87B5B" variant="rolling" mirror />
+
       {/* 6. BOTTOM CONTACT BANNER with top and bottom wave dividers (Matching HomePage) */}
       <section id="blogs-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z"
-          />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Vraag over jouw mes?</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
@@ -508,6 +475,8 @@ export const KennisbankPage: React.FC<KennisbankPageProps> = ({
           </div>
         </div>
       </section>
+
+      <OrganicSectionDivider fromColor="#E87B5B" middleColor="#F9E4DE" toColor="#FFFFFF" variant="calm" />
     </div>
   );
 };

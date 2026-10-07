@@ -73,7 +73,7 @@ export const Calculator: React.FC<CalculatorProps> = ({
     }
     msg += `\nMessen overzicht:\n`;
     if (state.smallKnives > 0) msg += `- ${state.smallKnives}x Klein mes (<15cm, €6,50)\n`;
-    if (state.normalKnives > 0) msg += `- ${state.normalKnives}x Normaal mes (15-20cm, €8,50)\n`;
+    if (state.normalKnives > 0) msg += `- ${state.normalKnives}x Normaal mes (15-19,99 cm, €8,50)\n`;
     if (state.largeKnives > 0) msg += `- ${state.largeKnives}x Groot mes (20-25cm, €10,50)\n`;
     if (state.extraLargeKnives > 0) msg += `- ${state.extraLargeKnives}x Extra groot mes (>25cm, op aanvraag)\n`;
 
@@ -105,7 +105,7 @@ export const Calculator: React.FC<CalculatorProps> = ({
     const text = generateWhatsAppMessage();
     const url = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent(text)}`;
     if (onOrderInitiated) onOrderInitiated();
-    window.open(url, '_blank');
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   const handleCopyMessage = () => {

@@ -19,7 +19,7 @@ export const SLIJPMAAT_INFO = {
   addressNote: 'Wij werken vanuit huis en hebben geen inloopwinkel. Bezoek en afgifte uitsluitend op afspraak in Utrecht.',
   prices: {
     small: { name: 'Klein mes', size: 'Korter dan 15 cm', price: 6.50, desc: 'Schilmessen, officemessen, kleine tourneermessen' },
-    normal: { name: 'Normaal mes', size: '15 tot 20 cm', price: 8.50, desc: 'Kleine koksmessen, santoku’s, universele messen' },
+    normal: { name: 'Normaal mes', size: '15 tot 19,99 cm', price: 8.50, desc: 'Kleine koksmessen, santoku’s, universele messen' },
     large: { name: 'Groot mes', size: '20 tot en met 25 cm', price: 10.50, desc: 'Chefsmessen, vleesmessen, grote santoku’s' },
     extraLarge: { name: 'Extra groot mes', size: 'Langer dan 25 cm', price: 0, custom: true, desc: 'Zalmmessen, grote trancheermessen (prijs op aanvraag)' },
     student: { name: 'StudentenMaat', price: 5.00, desc: 'Speciaal studententarief per mes (op vertoon geldige collegekaart, extra groot uitgesloten)' },
@@ -403,7 +403,7 @@ export const FAQS = [
   },
   {
     q: 'Wat kost het om mijn keukenmessen te laten slijpen?',
-    a: 'Een klein keukenmes korter dan 15 centimeter kost €6,50. Voor een normaal keukenmes van 15 tot 20 centimeter betaal je €8,50. Een groot keukenmes van 20 tot en met 25 centimeter kost €10,50. Messen langer dan 25 centimeter beoordelen we vooraf en slijpen we op aanvraag. In het bestelformulier zie je vooraf de totale prijs van jouw slijpbeurt, inclusief eventuele reparaties en bezorgkosten.'
+    a: 'Een klein keukenmes korter dan 15 centimeter kost €6,50. Voor een normaal keukenmes van 15 tot 19,99 centimeter betaal je €8,50. Een groot keukenmes van 20 tot en met 25 centimeter kost €10,50. Messen langer dan 25 centimeter beoordelen we vooraf en slijpen we op aanvraag. In het bestelformulier zie je vooraf de berekende prijs; reparaties bespreken we altijd eerst.'
   },
   {
     q: 'Kan mijn Maat chips en beschadigingen in een mes herstellen?',

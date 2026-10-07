@@ -2,6 +2,7 @@ import React from 'react';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
+import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
   ArrowRight,
   CheckCircle2,
@@ -27,24 +28,10 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
 
   // Shared Bottom Contact Banner
   const renderContactBanner = (title: string, desc: string) => (
-    <section className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 1440 60"
-        preserveAspectRatio="none"
-        className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#FAFAF8] sm:h-14 lg:h-16"
-      >
-        <path fill="currentColor" d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z" />
-      </svg>
-      <svg
-        aria-hidden="true"
-        viewBox="0 0 1440 60"
-        preserveAspectRatio="none"
-        className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
-      >
-        <path fill="currentColor" d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z" />
-      </svg>
-      <div className="relative z-10 mx-auto max-w-7xl">
+    <>
+      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#F9E4DE" toColor="#E87B5B" variant="scalloped" />
+      <section className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
+        <div className="relative z-10 mx-auto max-w-7xl">
         <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Direct contact</p>
         <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">{title}</h2>
         <p className="mt-6 max-w-4xl text-lg leading-relaxed text-white/95 sm:text-xl">{desc}</p>
@@ -66,8 +53,10 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
             <Phone className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
           </a>
         </div>
-      </div>
-    </section>
+        </div>
+      </section>
+      <OrganicSectionDivider fromColor="#E87B5B" middleColor="#F9E4DE" toColor="#FFFFFF" variant="calm" mirror />
+    </>
   );
 
   // 1. Keukenmessen slijpen
@@ -78,11 +67,11 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
           <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-16 h-[340px] w-[340px] rounded-full bg-[#E3EFE5] opacity-80 blur-2xl sm:h-[480px] sm:w-[480px] sm:blur-3xl" />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <button
-              onClick={() => onNavigate('diensten')}
+              onClick={() => onNavigate('particulieren')}
               className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#3B7F4B] shadow-2xs hover:bg-[#E8EFE8] transition-colors mb-6 cursor-pointer"
             >
               <ChevronLeft className="h-4 w-4" />
-              <span>Terug naar alle diensten</span>
+              <span>Terug naar particulier</span>
             </button>
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">Slijpdienst Utrecht</p>
             <h1 className="mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
@@ -136,7 +125,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
                     <span className="font-bold text-[#3B7F4B]">€6,50</span>
                   </div>
                   <div className="flex justify-between py-2.5">
-                    <span className="text-[#657068]">Normaal mes (15–20 cm)</span>
+                    <span className="text-[#657068]">Normaal mes (15–19,99 cm)</span>
                     <span className="font-bold text-[#3B7F4B]">€8,50</span>
                   </div>
                   <div className="flex justify-between py-2.5">
@@ -179,11 +168,11 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
           <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-16 h-[340px] w-[340px] rounded-full bg-[#E3EFE5] opacity-80 blur-2xl sm:h-[480px] sm:w-[480px] sm:blur-3xl" />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <button
-              onClick={() => onNavigate('diensten')}
+                  onClick={() => onNavigate('particulieren')}
               className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#3B7F4B] shadow-2xs hover:bg-[#E8EFE8] transition-colors mb-6 cursor-pointer"
             >
               <ChevronLeft className="h-4 w-4" />
-              <span>Terug naar alle diensten</span>
+                  <span>Terug naar particulier</span>
             </button>
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">Japanse Messenslijper Utrecht</p>
             <h1 className="mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
@@ -223,7 +212,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
                     <span className="font-bold text-[#3B7F4B]">€6,50</span>
                   </div>
                   <div className="flex justify-between py-2.5">
-                    <span className="text-[#657068]">Santoku / Nakiri (15–20 cm)</span>
+                    <span className="text-[#657068]">Santoku / Nakiri (15–19,99 cm)</span>
                     <span className="font-bold text-[#3B7F4B]">€8,50</span>
                   </div>
                   <div className="flex justify-between py-2.5">
@@ -257,11 +246,11 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
           <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-16 h-[340px] w-[340px] rounded-full bg-[#F9E4DE] opacity-80 blur-2xl sm:h-[480px] sm:w-[480px] sm:blur-3xl" />
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <button
-              onClick={() => onNavigate('diensten')}
+              onClick={() => onNavigate('particulieren')}
               className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#3B7F4B] shadow-2xs hover:bg-[#E8EFE8] transition-colors mb-6 cursor-pointer"
             >
               <ChevronLeft className="h-4 w-4" />
-              <span>Terug naar alle diensten</span>
+              <span>Terug naar particulier</span>
             </button>
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#C95E3E] sm:text-sm">Mesreparatie Utrecht</p>
             <h1 className="mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
@@ -335,11 +324,11 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
         <div aria-hidden="true" className="pointer-events-none absolute -right-20 -top-16 h-[340px] w-[340px] rounded-full bg-[#E3EFE5] opacity-80 blur-2xl sm:h-[480px] sm:w-[480px] sm:blur-3xl" />
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <button
-            onClick={() => onNavigate('diensten')}
+            onClick={() => onNavigate('particulieren')}
             className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#3B7F4B] shadow-2xs hover:bg-[#E8EFE8] transition-colors mb-6 cursor-pointer"
           >
             <ChevronLeft className="h-4 w-4" />
-            <span>Terug naar alle diensten</span>
+            <span>Terug naar particulier</span>
           </button>
           <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">Eerlijke Criteria</p>
           <h1 className="mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">

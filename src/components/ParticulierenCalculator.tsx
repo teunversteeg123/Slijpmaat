@@ -35,7 +35,7 @@ const KNIFE_CATEGORIES: KnifeCategory[] = [
   {
     id: 1,
     name: 'Normaal mes',
-    sizeDesc: '15 tot 20 cm',
+    sizeDesc: '15 tot 19,99 cm',
     basePrice: 850,
     priceLabel: '€8,50',
     examples: 'Standaard koksmes, Santoku, allrounder',
@@ -44,7 +44,7 @@ const KNIFE_CATEGORIES: KnifeCategory[] = [
   {
     id: 2,
     name: 'Groot mes',
-    sizeDesc: '20 t/m 25 cm',
+    sizeDesc: '20 tot en met 25 cm',
     basePrice: 1050,
     priceLabel: '€10,50',
     examples: 'Groot koksmes, vleesmes, Gyuto'
@@ -268,7 +268,7 @@ export const ParticulierenCalculator: React.FC = () => {
               {showMeasureHelp && (
                 <div className="mt-2.5 pt-2.5 border-t border-[#d9e1d7]/60 text-xs leading-relaxed text-[#657068]">
                   Meet uitsluitend het <strong>lemmet</strong> (het metalen snijgedeelte) recht vanaf de krop/het handvat tot aan de punt.
-                  Het handvat telt niet mee. Tot en met 20 cm lemmet? Kies <em>Normaal mes</em>.
+                  Het handvat telt niet mee. Vanaf 20 cm lemmet kies je <em>Groot mes</em>.
                 </div>
               )}
             </div>
@@ -365,6 +365,8 @@ export const ParticulierenCalculator: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setShowDamageHelp(!showDamageHelp)}
+                aria-expanded={showDamageHelp}
+                aria-controls="calculator-damage-details"
                 className="flex w-full items-center justify-between text-left text-xs font-bold text-[#3B7F4B] hover:text-[#2d633a] cursor-pointer"
               >
                 <span className="flex items-center gap-2">
@@ -378,16 +380,17 @@ export const ParticulierenCalculator: React.FC = () => {
                 />
               </button>
               {showDamageHelp && (
-                <div className="mt-3 pt-3 border-t border-[#d9e1d7]/60 space-y-2 text-xs text-[#657068]">
+                <div id="calculator-damage-details" className="mt-3 pt-3 border-t border-[#d9e1d7]/60 space-y-2 text-xs text-[#657068]">
                   <p>
                     Chips &amp; hapjes in de snede (+&euro;2,50) of een gebroken punt (+&euro;8,50) herstellen we vakkundig.
                     We bespreken eventuele reparaties altijd eerst even vooraf.
                   </p>
                   <div>
-                    <label className="block text-xs font-semibold text-[#203728] mt-2 mb-1">
+                    <label htmlFor="calculator-damage-notes" className="block text-xs font-semibold text-[#203728] mt-2 mb-1">
                       Eventuele opmerking over beschadigingen (optioneel):
                     </label>
                     <textarea
+                      id="calculator-damage-notes"
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
                       maxLength={500}
@@ -646,7 +649,7 @@ export const ParticulierenCalculator: React.FC = () => {
               </div>
               <p className="mt-2 text-[11px] text-[#657068] leading-tight">
                 {totalKnives > 0
-                  ? 'Alle prijzen inclusief BTW. Betaling pas achteraf via een eenvoudig Tikkie!'
+                  ? 'Je ziet hier de berekende prijs. Eventuele reparaties bespreken we altijd vooraf.'
                   : 'Kies hiernaast je messen om direct de prijs te zien.'}
               </p>
             </div>
