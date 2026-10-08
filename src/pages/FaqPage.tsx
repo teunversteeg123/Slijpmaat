@@ -16,14 +16,20 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] pb-8 pt-4 sm:pb-12 sm:pt-6 lg:pb-16">
-        <div
+      <section className="relative overflow-hidden bg-[#FAFAF8] px-4 pb-16 pt-8 sm:px-6 sm:pb-24 sm:pt-12 lg:px-8 lg:pb-28 lg:pt-16">
+        <svg
           aria-hidden="true"
-          className="pointer-events-none absolute -right-20 -top-16 h-[340px] w-[340px] rounded-full bg-[#E3EFE5] opacity-80 blur-2xl sm:h-[480px] sm:w-[480px] sm:blur-3xl lg:-right-10 lg:top-2 lg:h-[560px] lg:w-[560px]"
-        />
+          viewBox="0 0 520 520"
+          className="pointer-events-none absolute -right-20 top-4 hidden h-[520px] w-[520px] text-[#E8EFE8] opacity-75 lg:block"
+        >
+          <path
+            fill="currentColor"
+            d="M416 72c58 48 88 135 78 213-11 78-62 147-132 181-69 34-157 34-221-4-64-39-104-116-100-193 4-76 53-151 120-194 67-42 197-51 255-3Z"
+          />
+        </svg>
 
-        <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mx-auto max-w-3xl text-center">
+        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-20">
+          <div className="max-w-2xl">
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
               Vragen &amp; antwoorden
             </p>
@@ -34,11 +40,11 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
               Van veilig verpakken tot ophalen, soorten messen en het slijpproces zelf. Hieronder vind je alle antwoorden overzichtelijk bij elkaar.
             </p>
 
-            <div className="mt-7 flex flex-wrap items-center justify-center gap-3 sm:gap-4">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <button
                 type="button"
                 onClick={() => onNavigate('particulieren')}
-                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
+                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base"
               >
                 <span>Plan een slijpbeurt</span>
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
@@ -52,6 +58,24 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
                 <MessageCircle className="h-4 w-4" />
                 <span>Stel je vraag via WhatsApp</span>
               </a>
+            </div>
+          </div>
+
+          <div className="relative mx-auto w-full max-w-xl">
+            <div
+              aria-hidden="true"
+              className="pointer-events-none absolute -bottom-6 -left-5 h-44 w-44 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] sm:-bottom-8 sm:-left-8 sm:h-56 sm:w-56"
+            />
+            <div className="relative aspect-[4/3] overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg lg:aspect-square">
+              <img
+                src="/assets/faq-slijpmaat-kaartje-bessen.jpeg"
+                alt="Slijpmaat-kaartje tussen oranje bessen en groene bladeren"
+                className="h-full w-full object-cover object-center"
+                fetchPriority="high"
+              />
+              <div className="absolute bottom-4 left-4 rounded-full border border-white/15 bg-[#203728]/85 px-4 py-2 text-xs font-bold text-white shadow-md backdrop-blur-xs">
+                FAQ · Vragen &amp; antwoorden
+              </div>
             </div>
           </div>
         </div>

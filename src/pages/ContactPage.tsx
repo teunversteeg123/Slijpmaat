@@ -1,10 +1,8 @@
 import React, { useState } from 'react';
-import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
-  ArrowRight,
   Clock3,
   MapPin,
   MessageCircle,
@@ -13,11 +11,7 @@ import {
   Send
 } from 'lucide-react';
 
-interface ContactPageProps {
-  onNavigate: (page: PageId) => void;
-}
-
-export const ContactPage: React.FC<ContactPageProps> = ({ onNavigate }) => {
+export const ContactPage: React.FC = () => {
   const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag contact met jullie opnemen!')}`;
 
   const [formData, setFormData] = useState({

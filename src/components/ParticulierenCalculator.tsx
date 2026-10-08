@@ -1,17 +1,14 @@
-import React, { useState, useId } from 'react';
+import React, { useState } from 'react';
 import {
   Plus,
   Minus,
   MessageCircle,
-  HelpCircle,
   Sparkles,
-  MapPin,
   Check,
   AlertCircle,
   ChevronDown,
   Info
 } from 'lucide-react';
-import { SLIJPMAAT_INFO } from '../data/siteData';
 
 interface KnifeCategory {
   id: number;
@@ -678,11 +675,11 @@ export const ParticulierenCalculator: React.FC = () => {
 
             <p className="mt-3 text-center text-[11px] text-[#9ca3af]">
               Door te bestellen ga je akkoord met onze{' '}
-              <a href="#algemene-voorwaarden" className="underline hover:text-[#3B7F4B]">
+              <a href="/algemene-voorwaarden" className="underline hover:text-[#3B7F4B]">
                 algemene voorwaarden
               </a>{' '}
               en{' '}
-              <a href="#privacy" className="underline hover:text-[#3B7F4B]">
+              <a href="/privacyverklaring" className="underline hover:text-[#3B7F4B]">
                 privacyverklaring
               </a>
               .

@@ -16,10 +16,6 @@ import {
   Bike,
   Plus,
   X,
-  Utensils,
-  Building2,
-  Calendar,
-  Sparkles,
   Maximize2
 } from 'lucide-react';
 

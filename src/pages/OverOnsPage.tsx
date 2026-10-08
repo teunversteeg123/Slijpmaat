@@ -5,20 +5,16 @@ import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSect
 import { UtrechtQuotesSection } from '../components/UtrechtQuotesSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
-  ArrowDown,
   ArrowRight,
   Clock3,
   MapPin,
   MessageCircle,
-  Phone,
   Sparkles,
   Heart,
   Plus,
   Compass,
   Target,
-  ShieldCheck,
-  CheckCircle2,
-  Users
+  CheckCircle2
 } from 'lucide-react';
 
 interface OverOnsPageProps {

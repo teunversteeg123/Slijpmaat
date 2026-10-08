@@ -1,7 +1,7 @@
 # Slijpmaat website — audit, prioriteiten en voortgang
 
-Peildatum: 7 oktober 2026  
-Veilige basis: GitHub-commit `164933d` (`main`)
+Peildatum: 8 oktober 2026
+Veilige basis: GitHub-commit `dc810b7` (`main`)
 
 ## Besloten werkvolgorde
 
@@ -26,7 +26,7 @@ Veilige basis: GitHub-commit `164933d` (`main`)
 
 ### Pagina's en routes
 
-Actief: home, particulier, zakelijk/horeca, werkwijze, servicegebied, blogs, artikel, over ons, FAQ, contact, voorwaarden en privacy. Enkele oude of ongebruikte paginaonderdelen staan nog in de broncode en moeten later gecontroleerd en opgeruimd worden.
+Actief: home, particulier, zakelijk/horeca, vier dienstendetails, werkwijze, servicegebied, blogs, artikel, over ons, FAQ, contact, voorwaarden en privacy. Oude zelfstandige pagina's voor diensten, prijzen/bestellen en reviews zijn uit de broncode verwijderd; hun relevante inhoud en oude redirects blijven via de actieve structuur beschikbaar.
 
 De huidige hashroutes zijn bruikbaar voor de lokale proefsite, maar niet geschikt als definitieve SEO-structuur. Zoekmachines zien geen afzonderlijke normale URL's per pagina. Artikelen hebben bovendien geen eigen blijvende URL op basis van hun slug.
 
@@ -74,7 +74,7 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 
 - Geen echte API of server-side verwerking aanwezig; daardoor ontbreken ook servervalidatie, spambeperking en rate limiting.
 - Geen echte geheime sleutel in de broncode aangetroffen.
-- `.env.example`, `metadata.json` en meerdere dependencies bevatten nog oude AI Studio/Gemini-resten die niet door de actieve site worden gebruikt.
+- Oude AI Studio/Gemini-configuratie, ongebruikte serverdependencies en de browserworkaround uit de proefomgeving zijn op 8 oktober verwijderd.
 - Securityheaders en Content Security Policy zijn nog niet geconfigureerd.
 - De WhatsApp-calculatorprijs wordt uitsluitend in de browser berekend en moet als schatting worden behandeld totdat Slijpmaat de aanvraag bevestigt.
 
@@ -82,7 +82,7 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 
 - Grote bronafbeeldingen van circa 4,7–5,3 MB.
 - Video van circa 3,7 MB.
-- Meerdere kaartbestanden waarvan niet allemaal duidelijk is of ze nog nodig zijn.
+- Alleen de actieve HD-servicegebiedkaart is behouden; de vier eerdere kaartvarianten zijn verwijderd.
 - Geen routegebaseerde code-splitting.
 - Mobiele controle moet per actieve pagina op minimaal 320, 375 en 390 px gebeuren; desktop op minimaal 1280 en 1440 px.
 
@@ -98,9 +98,9 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 - [x] Onbevestigde btw-, betaaltermijn-, postverzending- en garantieclaims neutraliseren.
 - [x] Alle actieve routes functioneel testen op mobiel en desktop.
 - [x] Alle CTA's, formulieren, calculatorstappen en foutmeldingen end-to-end testen.
-- [ ] Pagina's controleren op horizontale overflow, afbrekende tekst en te kleine aanraakvlakken.
+- [x] Pagina's controleren op horizontale overflow, afbrekende tekst en te kleine aanraakvlakken.
 - [x] Formulierlabels technisch koppelen aan invoervelden en toetsenbord-/focusgedrag controleren.
-- [ ] Definitieve actieve pagina's en dubbele/ongebruikte componenten opschonen.
+- [x] Definitieve actieve pagina's en dubbele/ongebruikte componenten opschonen.
 - [ ] Besluiten en implementeren welke hosting en normale URL-structuur de React-site krijgt.
 - [ ] Juridische en fiscale gegevens bevestigen voordat voorwaarden en betaalteksten definitief worden.
 
@@ -134,7 +134,25 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 
 ## Eerstvolgende uitvoerstap
 
-Controleer de resterende kleine aanraakvlakken en tekstafbreking visueel, ruim daarna dubbele en ongebruikte componenten op en besluit vervolgens over hosting en normale URL's.
+Kies de hostingprovider en publiceer de huidige build eerst op een tijdelijk testadres of subdomein. Controleer daarna de metadata, redirects en formulieren in die productieachtige omgeving voordat `slijpmaat.nl` wordt omgeschakeld.
+
+## URL- en blogvoorbereiding — 8 oktober 2026
+
+- Alle actieve pagina's gebruiken lokaal normale, leesbare paden zonder hash; browserterug en directe paginalinks werken.
+- Oude hashlinks blijven behouden als compatibele redirects naar de nieuwe paden.
+- Een generieke statische SPA-fallback is toegevoegd, zodat directe paginalinks bij geschikte hosting naar de React-app terugvallen.
+- De blogpagina bevat geen gepubliceerde artikelen, conceptblogs of voorbeeldtegels meer. Ook de artikelroute, voorbeelddata, zoekfunctie en filters zijn verwijderd.
+- De definitieve hostingprovider en DNS-omschakeling van `slijpmaat.nl` zijn nog niet vastgesteld.
+
+## Opschoonronde — 8 oktober 2026
+
+- Negen ongebruikte pagina- en componentbestanden verwijderd, waaronder de oude diensten-, review- en prijzenpagina, twee embedded calculators en het ontwerppaneel.
+- Ongebruikte fictieve reviewdata verwijderd; de actieve Google-reviewcomponent met aangeleverde reviewteksten blijft behouden.
+- Tweeëntwintig dubbele of ongebruikte mediabestanden verwijderd; daarnaast zijn twee oude calculatorbestanden en twee overbodige configuratiebestanden opgeruimd. Alle actieve beelden en video's blijven aanwezig.
+- Ongebruikte AI-, server- en animatiedependencies verwijderd. Het dependencybestand bevat alleen nog pakketten die de actieve frontend of build nodig heeft.
+- De Vite-configuratie en `index.html` zijn ontdaan van AI Studio-specifieke logica. De favicon is expliciet gekoppeld.
+- TypeScript controleert nu standaard op ongebruikte imports, variabelen en parameters.
+- De oude route `#prijzen-bestellen` stuurt bezoekers door naar de actieve particuliere calculator; bestaande redirects voor kennisbank, reviews, Onze Maten en buiten Utrecht blijven behouden.
 
 ## QA-voortgang — 7 oktober 2026
 

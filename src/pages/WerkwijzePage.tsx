@@ -6,7 +6,6 @@ import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
   ArrowRight,
   Clock3,
-  MapPin,
   MessageCircle,
   Phone,
   CheckCircle2,
@@ -14,9 +13,7 @@ import {
   Shield,
   Flame,
   Check,
-  HelpCircle,
   ChevronDown,
-  Layers,
   HeartHandshake,
   Compass,
   AlertCircle

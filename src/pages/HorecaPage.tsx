@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
@@ -7,7 +6,6 @@ import { ResultatenSlider } from '../components/ResultatenSlider';
 import {
   ArrowDown,
   ArrowRight,
-  ChevronLeft,
   Clock3,
   MapPin,
   MessageCircle,
@@ -15,15 +13,10 @@ import {
   Sparkles,
   Plus,
   Send,
-  FileText,
-  ShieldCheck
+  FileText
 } from 'lucide-react';
 
-interface HorecaPageProps {
-  onNavigate?: (page: PageId) => void;
-}
-
-export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
+export const HorecaPage: React.FC = () => {
   const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Slijpmaat, ik zou graag in contact willen komen voor een zakelijke aanvraag.')}`;
 
   const businessBasePrices = [
@@ -367,11 +360,11 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                 </p>
                 <p className="text-center text-[11px] leading-5 text-[#9ca3af] sm:text-left">
                   Door een aanvraag te doen ga je akkoord met onze{' '}
-                  <a href="#algemene-voorwaarden" className="underline transition-colors hover:text-[#3B7F4B]">
+                  <a href="/algemene-voorwaarden" className="underline transition-colors hover:text-[#3B7F4B]">
                     algemene voorwaarden
                   </a>{' '}
                   en{' '}
-                  <a href="#privacy" className="underline transition-colors hover:text-[#3B7F4B]">
+                  <a href="/privacyverklaring" className="underline transition-colors hover:text-[#3B7F4B]">
                     privacyverklaring
                   </a>
                   .

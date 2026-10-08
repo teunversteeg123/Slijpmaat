@@ -1,20 +1,13 @@
 import React from 'react';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
   ArrowRight,
   CheckCircle2,
   XCircle,
   MessageCircle,
-  Sparkles,
-  Utensils,
-  Zap,
-  ShieldCheck,
   ChevronLeft,
-  Clock3,
-  MapPin,
   Phone
 } from 'lucide-react';
 

@@ -3,31 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <script>
-      // Gracefully prevent browser extension / sandbox conflicts with read-only fetch
-      window.addEventListener('error', function(e) {
-        if (e && e.message && typeof e.message === 'string' && e.message.includes('fetch') && e.message.includes('only a getter')) {
-          if (e.preventDefault) e.preventDefault();
-          if (e.stopImmediatePropagation) e.stopImmediatePropagation();
-          return true;
-        }
-      }, true);
-      try {
-        var _proto = typeof Window !== 'undefined' ? Window.prototype : null;
-        if (_proto) {
-          var _desc = Object.getOwnPropertyDescriptor(_proto, 'fetch');
-          if (_desc && !_desc.set && _desc.configurable) {
-            var _cur = _desc.get;
-            Object.defineProperty(_proto, 'fetch', {
-              get: function() { return _cur ? _cur.call(this) : window.fetch; },
-              set: function(fn) { _cur = function() { return fn; }; },
-              configurable: true,
-              enumerable: true
-            });
-          }
-        }
-      } catch (_) {}
-    </script>
+    <link rel="icon" type="image/png" href="/favicon.png" />
     <title>Slijpmaat.nl – Jouw messenslijper in Utrecht | Keukenmessen &amp; Horeca</title>
     <meta name="description" content="Professionele messenslijper in Utrecht voor particulieren en horeca. Handmatig geslepen op Japanse whetstones met minimale materiaalafname. Ophaal- en bezorgservice in Utrecht." />
     <meta property="og:title" content="Slijpmaat.nl – Jouw messenslijper in Utrecht" />
