@@ -170,7 +170,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
               Utrecht en omgeving · Logistiek &amp; Bereikbaarheid
             </p>
             <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
-              Ophalen, bezorgen &amp; langsbrengen.
+              Messen ophalen en bezorgen in Utrecht
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
               Binnen Utrecht halen en bezorgen we met de fiets. Woon je verder weg? Dan kijken we of een afspraak met de scooter mogelijk is. Langsbrengen in Utrecht kan altijd op afspraak.

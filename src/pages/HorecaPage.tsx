@@ -80,8 +80,8 @@ export const HorecaPage: React.FC = () => {
     },
     {
       step: '2',
-      title: 'Ophalen aan de keukendeur',
-      desc: 'Geen gedoe met verzending. We halen de messen persoonlijk op in Utrecht, afgestemd op jullie shifts.',
+      title: 'Brengen, ophalen of lokale service',
+      desc: 'Zakelijke klanten kunnen hun messen op afspraak in Utrecht brengen en ophalen. Binnen Utrecht is ook lokale haal- en brengservice mogelijk.',
       icon: MapPin,
     },
     {
@@ -102,7 +102,7 @@ export const HorecaPage: React.FC = () => {
   const faqs = [
     {
       question: 'Kunnen jullie ophalen na de zondag- of maandagservice?',
-      answer: 'Jazeker! Dit is de meest gekozen optie door restaurants in Utrecht. We halen de messen op na de zondagservice of op maandagochtend, en leveren ze dinsdag of woensdag ruim voor de middagmise-en-place weer vlijmscherp af. Je brigade zit geen minuut zonder messen.',
+      answer: 'Binnen Utrecht kunnen we een haal- en brengmoment afstemmen op jullie service. Kom je van buiten Utrecht, dan kun je de messen op afspraak in Utrecht brengen en ophalen. We spreken de planning altijd vooraf duidelijk af.',
     },
     {
       question: 'Hoe werken de zakelijke prijs en betaling?',
@@ -142,13 +142,13 @@ export const HorecaPage: React.FC = () => {
           {/* Left: Copy & CTAs */}
           <div className="order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0 lg:pl-4 xl:pl-8">
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
-              Voor restaurants, brigades &amp; chefs in Utrecht
+              Voor restaurants, brigades &amp; chefs uit heel Nederland
             </p>
             <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
-              Jouw messenbrigade weer scherp. Zonder gedoe.
+              Professioneel messen slijpen voor horeca
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Geen sneldraaiende machines die het staal ontlaten. Wij slijpen jullie messen met de hand op Japanse waterstenen. Strak afgestemd op de mise-en-place, gratis opgehaald in Utrecht en met duidelijke prijsafspraken vooraf.
+              Wij slijpen jullie messen met de hand op Japanse waterstenen. Zakelijke klanten uit heel Nederland kunnen hun messen op afspraak in Utrecht brengen en ophalen. Binnen Utrecht is ook lokale haal- en brengservice mogelijk.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">

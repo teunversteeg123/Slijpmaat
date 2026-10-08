@@ -18,25 +18,143 @@ import { ContactPage } from './pages/ContactPage';
 import { VoorwaardenPage } from './pages/VoorwaardenPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 
-export default function App() {
-  const pagePaths: Record<PageId, string> = {
-    home: '/',
-    particulieren: '/particulier',
-    horeca: '/zakelijk',
-    'dienst-keukenmessen': '/diensten/keukenmessen-slijpen',
-    'dienst-japanse-messen': '/diensten/japanse-messen-slijpen',
-    'dienst-chips-herstellen': '/diensten/chips-herstellen',
-    'dienst-wel-niet': '/diensten/wat-slijpen-we',
-    werkwijze: '/werkwijze',
-    'ophalen-bezorgen': '/servicegebied',
-    blogs: '/blogs',
-    'over-ons': '/over-ons',
-    faq: '/veelgestelde-vragen',
-    contact: '/contact',
-    'algemene-voorwaarden': '/algemene-voorwaarden',
-    privacy: '/privacyverklaring',
-  };
+const pagePaths: Record<PageId, string> = {
+  home: '/',
+  particulieren: '/particulier',
+  horeca: '/zakelijk',
+  'dienst-keukenmessen': '/diensten/keukenmessen-slijpen',
+  'dienst-japanse-messen': '/diensten/japanse-messen-slijpen',
+  'dienst-chips-herstellen': '/diensten/chips-herstellen',
+  'dienst-wel-niet': '/diensten/wat-slijpen-we',
+  werkwijze: '/werkwijze',
+  'ophalen-bezorgen': '/servicegebied',
+  blogs: '/blogs',
+  'over-ons': '/over-ons',
+  faq: '/veelgestelde-vragen',
+  contact: '/contact',
+  'algemene-voorwaarden': '/algemene-voorwaarden',
+  privacy: '/privacyverklaring',
+};
 
+type SeoMetadata = {
+  title: string;
+  description: string;
+  index: boolean;
+};
+
+const seoMetadata: Record<PageId, SeoMetadata> = {
+  home: {
+    title: 'Messen slijpen Utrecht · Ophalen & bezorgen · Slijpmaat',
+    description:
+      'Laat je keukenmessen slijpen in Utrecht. Slijpmaat haalt ze thuis of op de zaak op, slijpt ze met de hand op waterstenen en brengt ze scherp terug.',
+    index: true,
+  },
+  particulieren: {
+    title: 'Keukenmessen slijpen Utrecht · Prijzen · Slijpmaat',
+    description:
+      'Bereken direct de prijs voor het slijpen van je keukenmessen. Ophalen en bezorgen in Utrecht of zelf brengen op afspraak bij Slijpmaat.',
+    index: true,
+  },
+  horeca: {
+    title: 'Horeca messen slijpen · Zakelijk · Slijpmaat',
+    description:
+      'Professioneel messen slijpen voor horeca uit heel Nederland. Breng en haal je messen op afspraak in Utrecht; lokale service in Utrecht is mogelijk.',
+    index: true,
+  },
+  'dienst-keukenmessen': {
+    title: 'Keukenmessen slijpen op waterstenen · Slijpmaat',
+    description:
+      'Laat gladde keukenmessen en koksmessen zorgvuldig met de hand slijpen op Japanse waterstenen, met aandacht voor snede, staal en profiel.',
+    index: true,
+  },
+  'dienst-japanse-messen': {
+    title: 'Japanse messen laten slijpen · Slijpmaat',
+    description:
+      'Slijpmaat slijpt Japanse keukenmessen met de hand op waterstenen, afgestemd op het staal, het profiel en de conditie van de snede.',
+    index: true,
+  },
+  'dienst-chips-herstellen': {
+    title: 'Chip in keukenmes laten herstellen · Slijpmaat',
+    description:
+      'Kleine chips en beschadigde punten kunnen vaak worden hersteld. Stuur eerst een foto, dan beoordeelt Slijpmaat de schade en mogelijkheden.',
+    index: true,
+  },
+  'dienst-wel-niet': {
+    title: 'Welke messen slijpen wij? · Slijpmaat',
+    description:
+      'Bekijk welke gladde keukenmessen Slijpmaat aanneemt, welke beschadigingen mogelijk te herstellen zijn en waarom kartelmessen niet worden aangenomen.',
+    index: true,
+  },
+  werkwijze: {
+    title: 'Messen slijpen op waterstenen · Werkwijze · Slijpmaat',
+    description:
+      'Bekijk hoe Slijpmaat keukenmessen beoordeelt, met de hand slijpt op Japanse waterstenen en zorgvuldig afwerkt op leer.',
+    index: true,
+  },
+  'ophalen-bezorgen': {
+    title: 'Messen ophalen en bezorgen Utrecht · Slijpmaat',
+    description:
+      'Bekijk waar Slijpmaat keukenmessen ophaalt en terugbrengt in Utrecht. Controleer je postcode of maak een afspraak om je messen zelf te brengen.',
+    index: true,
+  },
+  blogs: {
+    title: 'Blogs over messen slijpen en onderhoud · Slijpmaat',
+    description:
+      'Binnenkort lees je hier praktische artikelen van Slijpmaat over keukenmessen, onderhoud, veilig gebruik en professioneel slijpen.',
+    index: false,
+  },
+  'over-ons': {
+    title: 'Over Slijpmaat · Messenslijper uit Utrecht',
+    description:
+      'Lees hoe Teun en Mike Slijpmaat begonnen en waarom zij keukenmessen met de hand slijpen voor duurzaam behoud en langdurig snijplezier.',
+    index: true,
+  },
+  faq: {
+    title: 'Veelgestelde vragen over messen slijpen · Slijpmaat',
+    description:
+      'Antwoorden over prijzen, soorten messen, veilig verpakken, ophalen en bezorgen, langsbrengen, betalen en het handmatige slijpproces.',
+    index: true,
+  },
+  contact: {
+    title: 'Contact met Slijpmaat · Messenslijper Utrecht',
+    description:
+      'Neem contact op met Slijpmaat voor een afspraak, zakelijke aanvraag of advies over je keukenmessen. Je spreekt direct met Teun of Mike.',
+    index: true,
+  },
+  'algemene-voorwaarden': {
+    title: 'Algemene voorwaarden · Slijpmaat',
+    description: 'Lees de algemene voorwaarden die gelden voor opdrachten, afspraken en dienstverlening van Slijpmaat.',
+    index: false,
+  },
+  privacy: {
+    title: 'Privacyverklaring · Slijpmaat',
+    description:
+      'Lees hoe Slijpmaat persoonsgegevens verwerkt, beveiligt en bewaart en welke privacyrechten je daarbij hebt.',
+    index: false,
+  },
+};
+
+const setMetaContent = (selector: string, attribute: 'name' | 'property', key: string, content: string) => {
+  let element = document.head.querySelector<HTMLMetaElement>(selector);
+  if (!element) {
+    element = document.createElement('meta');
+    element.setAttribute(attribute, key);
+    document.head.appendChild(element);
+  }
+  element.content = content;
+};
+
+const setCanonical = (url: string) => {
+  let element = document.head.querySelector<HTMLLinkElement>('link[rel="canonical"]');
+  if (!element) {
+    element = document.createElement('link');
+    element.rel = 'canonical';
+    document.head.appendChild(element);
+  }
+  element.href = url;
+};
+
+export default function App() {
   const pageFromPath = (pathname: string): PageId | null => {
     const normalizedPath = pathname !== '/' ? pathname.replace(/\/$/, '') : pathname;
     const match = Object.entries(pagePaths).find(([, path]) => path === normalizedPath);
@@ -44,6 +162,21 @@ export default function App() {
   };
 
   const [currentPage, setCurrentPage] = useState<PageId>(() => pageFromPath(window.location.pathname) ?? 'home');
+
+  useEffect(() => {
+    const metadata = seoMetadata[currentPage];
+    const canonicalUrl = `https://slijpmaat.nl${pagePaths[currentPage]}`;
+
+    document.title = metadata.title;
+    setMetaContent('meta[name="description"]', 'name', 'description', metadata.description);
+    setMetaContent('meta[name="robots"]', 'name', 'robots', metadata.index ? 'index,follow' : 'noindex,follow');
+    setMetaContent('meta[property="og:title"]', 'property', 'og:title', metadata.title);
+    setMetaContent('meta[property="og:description"]', 'property', 'og:description', metadata.description);
+    setMetaContent('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+    setMetaContent('meta[name="twitter:title"]', 'name', 'twitter:title', metadata.title);
+    setMetaContent('meta[name="twitter:description"]', 'name', 'twitter:description', metadata.description);
+    setCanonical(canonicalUrl);
+  }, [currentPage]);
 
   const handleNavigate = (page: PageId) => {
     setCurrentPage(page);

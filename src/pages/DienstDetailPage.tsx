@@ -68,7 +68,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
             </button>
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">Slijpdienst Utrecht</p>
             <h1 className="mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
-              Keukenmessen slijpen in Utrecht
+              Keukenmessen slijpen op Japanse waterstenen
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl">
               Vakkundig handmatig geslepen op professionele Shapton Pro waterstenen. Voor Europese koksmessen, Sabatiers, groentemessen en allround keukengereedschap.
@@ -169,7 +169,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
             </button>
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">Japanse Messenslijper Utrecht</p>
             <h1 className="mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
-              Japanse messen slijpen op whetstones
+              Japanse messen zorgvuldig laten slijpen
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl">
               Voor Santoku’s, Gyuto’s, Nakiri’s, Petty’s en Deba messen. Handmatig geslepen met respect voor de harde staalkern (VG-10, Shirogami, Aogami).
@@ -247,7 +247,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
             </button>
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#C95E3E] sm:text-sm">Mesreparatie Utrecht</p>
             <h1 className="mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
-              Chips &amp; beschadigingen herstellen
+              Chips en beschadigingen in keukenmessen herstellen
             </h1>
             <p className="mt-5 max-w-3xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl">
               Een hapje uit de snede of een afgebroken punt? Gooi je mes niet weg. Met gedoseerde materiaalafname brengen we de harmonieuze snijlijn weer terug.
@@ -325,7 +325,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
           </button>
           <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">Eerlijke Criteria</p>
           <h1 className="mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
-            Wat slijpen we wel &amp; niet?
+            Welke messen slijpt Slijpmaat wel en niet?
           </h1>
           <p className="mt-5 max-w-3xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl">
             Wij geloven in focus en ambacht. Hierdoor leveren we topkwaliteit op gladde keukenmessen. Bekijk hieronder exact wat je wel en niet kunt aanbieden.

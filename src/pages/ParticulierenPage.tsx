@@ -117,7 +117,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
               Voor particulieren in Utrecht
             </p>
             <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
-              Je messen weer scherp. Zonder gedoe.
+              Keukenmessen laten slijpen in Utrecht
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
               Wij halen je keukenmessen thuis op in Utrecht, slijpen ze zorgvuldig met de hand op Japanse waterstenen en brengen ze weer vlijmscherp terug.

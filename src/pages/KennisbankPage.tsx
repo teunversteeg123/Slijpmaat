@@ -20,7 +20,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
               Kennis &amp; onderhoud
             </p>
             <h1 className="mt-4 font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
-              Slijpmaat Blogs
+              Blogs over messen slijpen en onderhoud
             </h1>
             <p className="mt-6 max-w-xl text-base leading-7 text-[#657068] sm:text-lg">
               Hier delen we binnenkort praktische kennis over scherpe messen, onderhoud en veilig gebruik in de keuken.
