@@ -3,8 +3,7 @@ export type Language = 'nl' | 'en';
 export const TRANSLATIONS: Record<Language, Record<string, string>> = {
   nl: {
     // Top Bar
-    'topbar.free_pickup': 'Gratis ophalen & bezorgen in Utrecht',
-    'topbar.min_knives': 'vanaf 3 messen',
+    'topbar.free_pickup': 'Gratis ophalen & bezorgen in Utrecht vanaf €35 bestelwaarde',
     'topbar.service_area': 'Servicegebied',
     'topbar.whatsapp': 'WhatsApp je Maat',
 
@@ -41,8 +40,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
   },
   en: {
     // Top Bar
-    'topbar.free_pickup': 'Free pickup & delivery in Utrecht',
-    'topbar.min_knives': 'from 3 knives',
+    'topbar.free_pickup': 'Free pickup & delivery in Utrecht from €35 order value',
     'topbar.service_area': 'Service area',
     'topbar.whatsapp': 'WhatsApp your Mate',
 

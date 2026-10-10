@@ -9,6 +9,11 @@ import {
   ChevronDown,
   Info
 } from 'lucide-react';
+import {
+  FREE_DELIVERY_THRESHOLD_CENTS,
+  getDeliveryFeeCents,
+  getDeliveryZone,
+} from '../data/delivery';
 
 interface KnifeCategory {
   id: number;
@@ -56,21 +61,8 @@ const KNIFE_CATEGORIES: KnifeCategory[] = [
   }
 ];
 
-// Postcode zones matching Slijpmaat logistics
-const ZONE_FREE = ['3513', '3514', '3515', '3552', '3561', '3571'];
-const ZONE_STANDARD = [
-  '3511', '3512', '3521', '3531', '3532', '3533', '3534',
-  '3551', '3553', '3554', '3562', '3563', '3564', '3566',
-  '3572', '3573', '3581', '3582', '3583'
-];
-const ZONE_OUTER = [
-  '3522', '3523', '3524', '3525', '3526', '3527', '3528',
-  '3541', '3542', '3543', '3544', '3545', '3555', '3565',
-  '3584', '3585'
-];
-
 export const ParticulierenCalculator: React.FC = () => {
-  const [counts, setCounts] = useState<number[]>([1, 2, 0, 0]); // start with 3 typical knives for instant preview
+  const [counts, setCounts] = useState<number[]>([1, 2, 0, 0]); // typical mix for an instant preview
   const [isStudent, setIsStudent] = useState<boolean>(false);
   const [selfDropoff, setSelfDropoff] = useState<boolean>(false);
   const [postcode, setPostcode] = useState<string>('3513');
@@ -105,23 +97,14 @@ export const ParticulierenCalculator: React.FC = () => {
   const finalSharpeningCents = standardSharpeningCents - studentDiscountCents;
 
   // Delivery fee calculation
-  let deliveryFeeCents: number | null = null;
-  let isOutsideArea = false;
-
-  if (selfDropoff) {
-    deliveryFeeCents = 0;
-  } else if (isValidDutchPostcode) {
-    if (ZONE_FREE.includes(prefix4)) {
-      deliveryFeeCents = 0;
-    } else if (ZONE_STANDARD.includes(prefix4)) {
-      deliveryFeeCents = totalKnives >= 3 ? 0 : 450;
-    } else if (ZONE_OUTER.includes(prefix4)) {
-      deliveryFeeCents = totalKnives >= 3 ? 0 : 525;
-    } else {
-      isOutsideArea = true;
-      deliveryFeeCents = null;
-    }
-  }
+  const deliveryZone = isValidDutchPostcode ? getDeliveryZone(prefix4) : 'outside';
+  const isOutsideArea = isValidDutchPostcode && deliveryZone === 'outside';
+  const deliveryFeeCents = selfDropoff
+    ? 0
+    : isValidDutchPostcode
+      ? getDeliveryFeeCents(prefix4, finalSharpeningCents, false)
+      : null;
+  const amountUntilFreeDeliveryCents = Math.max(0, FREE_DELIVERY_THRESHOLD_CENTS - finalSharpeningCents);
 
   // Format currency
   const formatEuro = (cents: number) => {
@@ -416,7 +399,7 @@ export const ParticulierenCalculator: React.FC = () => {
               </h3>
             </div>
             <p className="mt-2 text-sm text-[#657068]">
-              Vanaf 3 messen gratis ophalen én thuisbezorgen binnen ons bezorggebied in Utrecht.
+              Vanaf €35 bestelwaarde gratis ophalen én thuisbezorgen binnen Utrecht.
             </p>
 
             {/* Service Choice */}
@@ -437,7 +420,7 @@ export const ParticulierenCalculator: React.FC = () => {
                   {!selfDropoff && <Check className="h-4 w-4 text-[#3B7F4B]" />}
                 </div>
                 <span className="text-xs text-[#657068] mt-1">
-                  Aan huis in Utrecht. Gratis vanaf 3 messen.
+                  Aan huis in Utrecht. Gratis vanaf €35 bestelwaarde.
                 </span>
               </button>
 
@@ -510,7 +493,7 @@ export const ParticulierenCalculator: React.FC = () => {
                 <div className="rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] p-3 text-xs leading-relaxed text-[#203728]">
                   {!cleanPostcode || cleanPostcode.length < 4 ? (
                     <span className="text-[#657068]">
-                      Vul je postcode in om te zien of je in ons gratis bezorggebied valt.
+                      Vul je postcode in om je bezorgtarief te bekijken.
                     </span>
                   ) : isOutsideArea ? (
                     <span className="text-[#C95E3E] font-medium">
@@ -524,9 +507,15 @@ export const ParticulierenCalculator: React.FC = () => {
                   ) : (
                     <span className="text-[#203728]">
                       <strong>{formatEuro(deliveryFeeCents!)}</strong> voor ophalen én terugbrengen.{' '}
-                      <span className="text-[#3B7F4B] font-semibold">
-                        Voeg nog {3 - totalKnives} {3 - totalKnives === 1 ? 'mes' : 'messen'} toe voor GRATIS bezorging!
-                      </span>
+                      {hasExtraLarge ? (
+                        <span className="text-[#3B7F4B] font-semibold">
+                          Vanaf €35 bestelwaarde is ophalen en bezorgen gratis; bij extra grote messen bevestigen we dit in de offerte.
+                        </span>
+                      ) : (
+                        <span className="text-[#3B7F4B] font-semibold">
+                          Nog {formatEuro(amountUntilFreeDeliveryCents)} aan slijpwerk tot gratis ophalen en bezorgen.
+                        </span>
+                      )}
                     </span>
                   )}
                 </div>

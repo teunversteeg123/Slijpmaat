@@ -49,7 +49,7 @@ export const SlijpmaatFaqSection: React.FC<SlijpmaatFaqSectionProps> = ({
                     <ul className="grid gap-2 pl-5 sm:grid-cols-2">
                       {faq.items?.map((item) => <li key={item} className="list-disc pl-1">{item}</li>)}
                     </ul>
-                    {faq.a.includes('Vul in het bestelformulier') && <p>Vul in het bestelformulier je postcode in om de bezorgprijs te bekijken. Vanaf drie messen komen we gratis langs.</p>}
+                    {faq.a.includes('Vul in het bestelformulier') && <p>Vul in het bestelformulier je postcode in om de bezorgprijs te bekijken. Vanaf €35 bestelwaarde komen we binnen Utrecht gratis langs. Voor de buitenring, waaronder Kanaleneiland en Leidsche Rijn, is het tarief onder €35 precies €7,25.</p>}
                     {faq.a.includes('Woon je in een van deze gebieden?') && <p>Woon je in een van deze gebieden? Stuur je Maat via WhatsApp je postcode en het aantal messen. Dan laten we je weten wanneer we kunnen langskomen en wat de bezorgkosten zijn.</p>}
                   </div>
                 ) : <p>{faq.a}</p>}

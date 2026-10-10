@@ -14,7 +14,7 @@ const QUICK_LINKS: Array<{ label: string; page: PageId }> = [
   { label: 'Over ons', page: 'over-ons' },
   { label: 'Werkwijze', page: 'werkwijze' },
   { label: 'Plan mijn slijpbeurt', page: 'particulieren' },
-  { label: 'Ophalen & servicegebied', page: 'ophalen-bezorgen' },
+  { label: 'Servicegebied & langskomen', page: 'ophalen-bezorgen' },
   { label: 'Veelgestelde vragen', page: 'faq' },
   { label: 'Contact', page: 'contact' },
 ];

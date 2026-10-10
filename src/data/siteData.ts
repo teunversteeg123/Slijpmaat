@@ -15,16 +15,17 @@ export const SLIJPMAAT_INFO = {
 };
 
 export const SERVICE_AREAS = [
-  { district: 'Binnenstad', zip: '3511, 3512', note: 'Gratis ophalen/bezorgen vanaf 3 messen' },
-  { district: 'Oost / Wilhelminapark', zip: '3581, 3582, 3583', note: 'Gratis ophalen/bezorgen vanaf 3 messen' },
-  { district: 'Wittevrouwen / Buiten Wittevrouwen', zip: '3572', note: 'Gratis ophalen/bezorgen vanaf 3 messen' },
-  { district: 'Noordoost / Tuindorp / Tuinwijk', zip: '3571, 3573', note: 'Gratis ophalen/bezorgen vanaf 3 messen' },
-  { district: 'Lombok / Nieuw Engeland', zip: '3531, 3532', note: 'Gratis ophalen/bezorgen vanaf 3 messen' },
-  { district: 'Zuid / Tolsteeg / Hoograven', zip: '3523, 3524, 3525', note: 'Gratis ophalen/bezorgen vanaf 3 messen' },
-  { district: 'West / Oog in Al', zip: '3533', note: 'Gratis ophalen/bezorgen vanaf 3 messen' },
-  { district: 'Noordwest / Ondiep / Pijlsweerd', zip: '3513, 3551, 3552', note: 'Gratis ophalen/bezorgen vanaf 3 messen' },
-  { district: 'Overvecht', zip: '3561 - 3564', note: 'Gratis ophalen/bezorgen vanaf 3 messen' },
-  { district: 'Leidsche Rijn / Vleuten / De Meern', zip: '3451 - 3545', note: 'In overleg / vaste ophaaldagen' },
+  { district: 'Binnenstad', zip: '3511, 3512', note: 'Gratis vanaf €35 bestelwaarde' },
+  { district: 'Oost / Wilhelminapark', zip: '3581, 3582, 3583', note: 'Gratis vanaf €35 bestelwaarde' },
+  { district: 'Wittevrouwen / Buiten Wittevrouwen', zip: '3572', note: 'Gratis vanaf €35 bestelwaarde' },
+  { district: 'Noordoost / Tuindorp / Tuinwijk', zip: '3571, 3573', note: 'Gratis vanaf €35 bestelwaarde' },
+  { district: 'Lombok / Nieuw Engeland', zip: '3531, 3532', note: 'Gratis vanaf €35 bestelwaarde' },
+  { district: 'Zuid / Tolsteeg / Hoograven', zip: '3523, 3524, 3525', note: 'Gratis vanaf €35 bestelwaarde' },
+  { district: 'Zuidwest / Kanaleneiland', zip: '3521, 3522, 3526, 3527', note: 'Onder €35: €7,25' },
+  { district: 'West / Oog in Al', zip: '3533', note: 'Gratis vanaf €35 bestelwaarde' },
+  { district: 'Noordwest / Ondiep / Pijlsweerd', zip: '3513, 3551, 3552', note: 'Gratis vanaf €35 bestelwaarde' },
+  { district: 'Overvecht', zip: '3561 - 3564', note: 'Gratis vanaf €35 bestelwaarde' },
+  { district: 'Leidsche Rijn', zip: '3528, 3541, 3543 - 3545', note: 'Onder €35: €7,25' },
   { district: 'Buiten Utrecht (bijv. Zeist, Hilversum, Amersfoort)', zip: 'Overig NL', note: 'Op afspraak langsbrengen en ophalen in Utrecht' }
 ];
 
@@ -63,7 +64,7 @@ export const FAQS = [
   },
   {
     q: 'In welke Utrechtse wijken en postcodes haalt mijn Maat messen op?',
-    a: 'Je Maat haalt keukenmessen op in de volgende Utrechtse wijken en postcodegebieden:\n• Binnenstad en centrum: 3511 en 3512\n• Noordwest – Pijlsweerd, Ondiep en Zuilen: 3513 en 3551 t/m 3555\n• Noordoost – Tuinwijk, Tuindorp, Wittevrouwen en Voordorp: 3514, 3515 en 3571 t/m 3573\n• Overvecht: 3561 t/m 3566\n• Oost – Oudwijk, Abstede, Wilhelminapark en Rijnsweerd: 3581 t/m 3585\n• Zuid – Tolsteeg, Hoograven en Lunetten: 3523 t/m 3525\n• Zuidwest – Dichterswijk, Rivierenwijk, Transwijk en Kanaleneiland: 3521, 3522, 3526 en 3527\n• West – Lombok, Oog in Al en Nieuw Engeland: 3531 t/m 3534 en 3542\n• Leidsche Rijn – Terwijde, Het Zand, Parkwijk en Langerak: 3528, 3541 en 3543 t/m 3545\n\nVul in het bestelformulier je postcode in om de bezorgprijs te bekijken. Vanaf drie messen komen we gratis langs.',
+    a: 'Je Maat haalt keukenmessen op in de volgende Utrechtse wijken en postcodegebieden:\n• Binnenstad en centrum: 3511 en 3512\n• Noordwest – Pijlsweerd, Ondiep en Zuilen: 3513 en 3551 t/m 3555\n• Noordoost – Tuinwijk, Tuindorp, Wittevrouwen en Voordorp: 3514, 3515 en 3571 t/m 3573\n• Overvecht: 3561 t/m 3566\n• Oost – Oudwijk, Abstede, Wilhelminapark en Rijnsweerd: 3581 t/m 3585\n• Zuid – Tolsteeg, Hoograven en Lunetten: 3523 t/m 3525\n• Zuidwest – Dichterswijk, Rivierenwijk, Transwijk en Kanaleneiland: 3521, 3522, 3526 en 3527\n• West – Lombok, Oog in Al en Nieuw Engeland: 3531 t/m 3534 en 3542\n• Leidsche Rijn – Terwijde, Het Zand, Parkwijk en Langerak: 3528, 3541 en 3543 t/m 3545\n\nVul in het bestelformulier je postcode in om de bezorgprijs te bekijken. Vanaf €35 bestelwaarde komen we binnen Utrecht gratis langs. Voor de buitenring, waaronder Kanaleneiland en Leidsche Rijn, is het tarief onder €35 precies €7,25.',
     items: [
       'Binnenstad en centrum: 3511 en 3512',
       'Noordwest – Pijlsweerd, Ondiep en Zuilen: 3513 en 3551 t/m 3555',

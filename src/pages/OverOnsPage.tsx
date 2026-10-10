@@ -76,7 +76,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     },
     {
       title: 'Gratis ophalen & brengen',
-      desc: 'Vanaf 3 messen halen we ze gratis op aan huis in heel Utrecht.',
+      desc: 'Vanaf €35 bestelwaarde halen we ze gratis op aan huis in Utrecht.',
       icon: MapPin,
     },
     {
@@ -193,7 +193,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen in Utrecht</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf €35</span>
             </div>
           </div>
         </div>

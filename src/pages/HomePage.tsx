@@ -30,7 +30,7 @@ const quickSteps = [
 ];
 
 const qualities = [
-  { title: 'Lokaal in Utrecht', text: 'Ophalen en terugbrengen in Utrecht en omgeving, zonder pakket of winkelbezoek.', icon: MapPin },
+  { title: 'Lokaal in Utrecht', text: 'Ophalen en terugbrengen binnen Utrecht, of vanuit heel Nederland op afspraak zelf langskomen.', icon: MapPin },
   { title: 'Makkelijk geregeld', text: 'Snel contact via WhatsApp, duidelijke afspraken en geen ingewikkeld proces.', icon: MessageCircle },
   { title: 'Duidelijke prijzen', text: 'Je ziet vooraf wat het slijpen kost. Reparaties bespreken we altijd eerst.', icon: CircleDollarSign },
   { title: 'Langer plezier van je mes', text: 'Goed onderhoud verlengt de levensduur van je messen en voorkomt onnodig vervangen.', icon: Leaf },
@@ -184,7 +184,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis bezorging vanaf 3 messen</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
             </div>
           </div>
         </div>
@@ -203,7 +203,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="relative mx-auto max-w-7xl">
           <div className="mb-8 max-w-2xl sm:mb-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Kies wat bij je past</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Thuiskeuken of professionele keuken?</h2>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Thuiskok of professionele keuken</h2>
             <p className="mt-3 text-base leading-7 text-[#657068]">Je krijgt meteen de informatie, prijzen en manier van plannen die voor jou relevant zijn.</p>
           </div>
 

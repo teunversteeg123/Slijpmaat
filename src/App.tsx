@@ -92,9 +92,9 @@ const seoMetadata: Record<PageId, SeoMetadata> = {
     index: true,
   },
   'ophalen-bezorgen': {
-    title: 'Messen ophalen en bezorgen Utrecht · Slijpmaat',
+    title: 'Messen slijpen Utrecht & zelf langsbrengen · Slijpmaat',
     description:
-      'Bekijk waar Slijpmaat keukenmessen ophaalt en terugbrengt in Utrecht. Controleer je postcode of maak een afspraak om je messen zelf te brengen.',
+      'Slijpmaat haalt en bezorgt messen binnen Utrecht. Kom vanuit heel Nederland op afspraak langs; ook voor horeca, chefs en complete messenrollen.',
     index: true,
   },
   blogs: {

@@ -101,8 +101,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
             className="flex items-center justify-center gap-1.5 sm:gap-2 text-center sm:text-left text-white hover:text-[#E8EFE8] transition-colors cursor-pointer"
           >
             <span className="flex h-2 w-2 shrink-0 rounded-full bg-white animate-pulse" />
-            <span className="font-semibold">{t('topbar.free_pickup', 'Gratis ophalen & bezorgen in Utrecht')}</span>
-            <span className="text-[#E8EFE8] hidden md:inline">&middot; {t('topbar.min_knives', 'vanaf 3 messen')}</span>
+            <span className="font-semibold">{t('topbar.free_pickup', 'Gratis ophalen & bezorgen in Utrecht vanaf €35 bestelwaarde')}</span>
           </button>
 
           <div className="hidden sm:flex items-center gap-3 sm:gap-4 text-xs font-semibold">
@@ -338,7 +337,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                     : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
                 }`}
               >
-                Ophalen, bezorgen &amp; servicegebied
+                Ophalen, bezorgen &amp; langskomen
               </button>
 
               {/* Subtiele CTA onderaan het mobiele menu: dik gedrukte groene tekst met dropdown */}

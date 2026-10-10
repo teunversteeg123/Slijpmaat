@@ -2,8 +2,7 @@
 
 export const PHRASE_DICTIONARY: Array<[string, string]> = [
   // Top Announcement & Brand Slogans
-  ['Gratis ophalen & bezorgen in Utrecht', 'Free pickup & delivery in Utrecht'],
-  ['vanaf 3 messen', 'from 3 knives'],
+  ['Gratis ophalen & bezorgen in Utrecht vanaf €35 bestelwaarde', 'Free pickup & delivery in Utrecht from €35 order value'],
   ['Servicegebied', 'Service area'],
   ['Buiten Utrecht?', 'Outside Utrecht?'],
   ['WhatsApp je Maat', 'WhatsApp your Mate'],
@@ -121,7 +120,7 @@ export const PHRASE_DICTIONARY: Array<[string, string]> = [
   // Business / Horeca
   ['Voor Horeca & Chefs', 'For Hospitality & Chefs'],
   ['Horeca & Bedrijven', 'Restaurants & Businesses'],
-  ['Vaste slijpcyclus voor jouw keukenbrigade', 'Regular sharpening schedule for your kitchen team'],
+  ['Vaste slijpafspraak voor jouw keukenteam', 'Regular sharpening schedule for your kitchen team'],
   ['Leenmessen beschikbaar tijdens het slijpen', 'Loan knives available during sharpening'],
   ['Snelle service & facturatie achteraf', 'Fast turnaround & invoice on account'],
   ['Vraag een gratis proefmes aan', 'Request a free trial knife'],

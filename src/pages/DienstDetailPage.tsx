@@ -142,7 +142,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
 
               <div className="rounded-2xl border border-[#d9e1d7] bg-[#F7F4EC] p-5 text-xs text-[#657068] leading-relaxed">
                 <strong className="text-[#3B7F4B] block mb-1">Ophaalservice Utrecht:</strong>
-                Vanaf 3 messen gratis aan huis opgehaald en binnen 24–48 uur vlijmscherp terugbezorgd.
+                Vanaf €35 bestelwaarde gratis aan huis opgehaald en binnen 24–48 uur vlijmscherp terugbezorgd.
               </div>
             </div>
           </div>

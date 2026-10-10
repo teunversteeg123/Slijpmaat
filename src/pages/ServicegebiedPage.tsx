@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO, SERVICE_AREAS } from '../data/siteData';
+import {
+  getDeliveryFeeCents,
+  getDeliveryZone,
+} from '../data/delivery';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
@@ -12,8 +16,9 @@ import {
   MessageCircle,
   ArrowRight,
   ArrowDown,
-  Phone,
   Bike,
+  Utensils,
+  Building2,
   Plus,
   X,
   Maximize2
@@ -27,12 +32,12 @@ const serviceSteps = [
   {
     number: '01',
     title: 'Aanvraag & afspraak',
-    text: 'Stuur een berichtje via WhatsApp of bereken je prijs. We stemmen direct een ophaalmoment af dat jou uitkomt.'
+    text: 'Bereken je prijs en plan een haal- en brengmoment binnen Utrecht dat bij je past.'
   },
   {
     number: '02',
     title: 'Wij halen ze op',
-    text: 'Binnen Utrecht komen we op de fiets langs aan je voordeur of horecakeuken. Voor afspraken verder weg gebruiken we de scooter.'
+    text: 'Binnen Utrecht komen we op de fiets langs aan je voordeur of horecakeuken.'
   },
   {
     number: '03',
@@ -48,12 +53,12 @@ const serviceSteps = [
 
 const serviceFaqs = [
   {
-    q: 'Vanaf hoeveel messen is het ophalen en bezorgen gratis?',
-    a: 'Vanaf 3 messen halen we jouw messen gratis op én brengen we ze gratis terug binnen ons vaste Utrechtse servicegebied. Laat je 1 of 2 messen slijpen? Dan hangen de bezorgkosten af van je postcode; controleer die eenvoudig met de postcodecheck op deze pagina.'
+    q: 'Vanaf welke bestelwaarde is ophalen en bezorgen gratis?',
+    a: 'Vanaf €35 bestelwaarde halen we jouw messen gratis op én brengen we ze gratis terug binnen Utrecht. Onder €35 hangt het tarief af van je postcode; controleer dit eenvoudig met de postcodecheck op deze pagina.'
   },
   {
     q: 'Hoe geef ik mijn messen veilig mee aan de deur?',
-    a: 'We vervoeren je messen in stevige Slijpmaat-vervoerstassen en mesbeschermers, op de fiets of voor afspraken verder weg met de scooter. Wikkel je messen thuis bij voorkeur in een theedoek of handdoek met een elastiek eromheen. Zo blijven je messen en onze vingers heel!'
+    a: 'We vervoeren je messen binnen Utrecht in stevige Slijpmaat-vervoerstassen en mesbeschermers. Wikkel je messen thuis bij voorkeur in een theedoek of handdoek met een elastiek eromheen. Zo blijven je messen en onze vingers heel!'
   },
   {
     q: 'Hoe snel heb ik mijn messen weer terug?',
@@ -64,22 +69,63 @@ const serviceFaqs = [
     a: 'Jazeker! Je bent op afspraak van harte welkom aan de Gerard Noodtstraat in Utrecht. Omdat we vanuit huis werken en geconcentreerd aan de werkbank staan, vragen we je altijd even vooraf een tijdstip af te stemmen via WhatsApp.'
   },
   {
-    q: 'Wat als mijn postcode net buiten Utrecht valt?',
-    a: 'Woon je in Maarssen, Leidsche Rijn rand, De Meern, Zeist of Nieuwegein? Neem gerust even contact op via WhatsApp. Vaak kunnen we in overleg langskomen, of je brengt ze gezellig bij ons langs.'
+    q: 'Kan ik vanuit heel Nederland mijn messen komen brengen?',
+    a: 'Ja. Vanuit heel Nederland kun je op afspraak je gladde keukenmessen in Utrecht brengen en later weer ophalen. Buiten het ondersteunde Utrechtse bezorggebied halen en bezorgen we niet standaard. Stem daarom vooraf via WhatsApp een geschikt breng- en ophaalmoment af.'
+  },
+  {
+    q: 'Kunnen horecaklanten van buiten Utrecht ook een afspraak maken?',
+    a: 'Ja. Restaurants, chefs en andere zakelijke klanten uit heel Nederland kunnen op afspraak messen of een messenrol in Utrecht afleveren en ophalen. Geef vooraf het aantal, de soorten messen, eventuele schade en de gewenste planning door, dan maken we een passend voorstel.'
   }
 ];
 
+const serviceFaqStructuredData = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: serviceFaqs.map((faq) => ({
+    '@type': 'Question',
+    name: faq.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: faq.a,
+    },
+  })),
+};
+
+const formatEuro = (cents: number) => `€${(cents / 100).toFixed(2).replace('.', ',')}`;
+
 export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een vraag over het servicegebied in Utrecht!')}`;
+  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag een afspraak maken om mijn messen in Utrecht te brengen en later op te halen.')}`;
+  const privateAppointmentWhatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag als particulier een afspraak maken om mijn messen in Utrecht te brengen en later op te halen.')}`;
+  const businessAppointmentWhatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag een zakelijke afspraak maken om messen in Utrecht te brengen en later op te halen. Kunnen we het aantal messen, de timing en de afspraak afstemmen?')}`;
 
   const [zipInput, setZipInput] = useState('');
-  const [searchResult, setSearchResult] = useState<{ status: 'success' | 'warning' | 'info'; text: string } | null>(null);
+  const [searchResult, setSearchResult] = useState<{
+    status: 'success' | 'warning' | 'info';
+    text: string;
+    outsideArea?: boolean;
+  } | null>(null);
   const [openFaq, setOpenFaq] = useState<number | null>(null);
   const [isMapOpen, setIsMapOpen] = useState(false);
 
   const [isPlanExpanded, setIsPlanExpanded] = useState(false);
   const planRef = useRef<HTMLDivElement>(null);
   const mapTriggerRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    const structuredData = document.createElement('script');
+    structuredData.id = 'servicegebied-faq-jsonld';
+    structuredData.type = 'application/ld+json';
+    structuredData.text = JSON.stringify(serviceFaqStructuredData);
+    document.head.appendChild(structuredData);
+    return () => structuredData.remove();
+  }, []);
+
+  useEffect(() => {
+    if (window.location.hash !== '#langskomen-van-buiten-utrecht') return;
+    window.requestAnimationFrame(() => {
+      document.getElementById('langskomen-van-buiten-utrecht')?.scrollIntoView({ block: 'start' });
+    });
+  }, []);
 
   useEffect(() => {
     if (!isPlanExpanded) return;
@@ -122,27 +168,35 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
   const handleCheckZip = (e: React.FormEvent) => {
     e.preventDefault();
     const clean = zipInput.trim().toUpperCase().slice(0, 4);
-    const num = parseInt(clean, 10);
-
-    if (num >= 3511 && num <= 3585) {
-      setSearchResult({
-        status: 'success',
-        text: 'Goed nieuws! Jouw postcode valt binnen onze gratis ophaalzone in Utrecht (gratis vanaf 3 messen).'
-      });
-    } else if ((num >= 3450 && num <= 3500) || (num >= 3586 && num <= 3600)) {
+    if (!/^[1-9][0-9]{3}$/.test(clean)) {
       setSearchResult({
         status: 'warning',
-        text: 'Utrechtse rand / Leidsche Rijn / Maarssen: ophalen is mogelijk in overleg, of breng ze langs op afspraak!'
+        text: 'Vul een geldige 4-cijferige postcode in, bijvoorbeeld 3511 of 3572.'
       });
-    } else if (clean.length === 4) {
+      return;
+    }
+
+    const deliveryZone = getDeliveryZone(clean);
+    if (deliveryZone === 'outside') {
       setSearchResult({
         status: 'info',
-        text: 'Buiten ons standaard Utrechtse fietsgebied kijken we of ophalen met de scooter mogelijk is. Je kunt je messen ook op afspraak bij ons langsbrengen.'
+        text: 'Deze postcode ligt buiten ons ondersteunde Utrechtse bezorggebied. Daarom tonen we geen bezorgprijs. Je kunt vanuit heel Nederland op afspraak je messen in Utrecht brengen en later ophalen.',
+        outsideArea: true,
       });
-    } else {
+      return;
+    }
+
+    const deliveryFeeCents = getDeliveryFeeCents(clean, 0, false);
+
+    if (deliveryFeeCents === 0) {
       setSearchResult({
-        status: 'warning',
-        text: 'Vul a.u.b. een geldige 4-cijferige postcode in (bijv. 3511 of 3572).'
+        status: 'success',
+        text: `Voor postcode ${clean} is ophalen en bezorgen ook onder €35 gratis. Vanaf €35 bestelwaarde is dit in heel ons Utrechtse servicegebied gratis.`
+      });
+    } else if (deliveryFeeCents !== null) {
+      setSearchResult({
+        status: 'success',
+        text: `Voor postcode ${clean} kost ophalen en bezorgen onder €35 precies ${formatEuro(deliveryFeeCents)}. Vanaf €35 bestelwaarde is dit gratis.`
       });
     }
   };
@@ -167,13 +221,13 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
           {/* Left: Copy & CTAs */}
           <div className="order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0 lg:pl-4 xl:pl-8">
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
-              Utrecht en omgeving · Logistiek &amp; Bereikbaarheid
+              Bezorgen in Utrecht · Langskomen vanuit heel Nederland
             </p>
             <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
-              Messen ophalen en bezorgen in Utrecht
+              Messen slijpen in Utrecht: laten ophalen of zelf langskomen
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Binnen Utrecht halen en bezorgen we met de fiets. Woon je verder weg? Dan kijken we of een afspraak met de scooter mogelijk is. Langsbrengen in Utrecht kan altijd op afspraak.
+              Binnen Utrecht halen en bezorgen we volgens onze vaste postcode- en tariefregels. Liever zelf langskomen? Iedereen kan op afspraak keukenmessen of horecamessen in Utrecht brengen en later ophalen.
             </p>
 
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
@@ -222,14 +276,13 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                 )}
               </div>
 
-              <button
-                type="button"
-                onClick={() => document.getElementById('postcodecheck')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              <a
+                href="#langskomen-van-buiten-utrecht"
                 className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
               >
-                <span>Check je postcode</span>
+                <span>Kom op afspraak langs</span>
                 <ArrowDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
-              </button>
+              </a>
             </div>
           </div>
 
@@ -309,7 +362,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Dekking in Utrecht</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Postcodecheck &amp; wijken</h2>
             <p className="mt-3 text-base text-[#657068]">
-              Controleer direct of jouw adres in ons gratis ophaalgebied valt.
+              Vul je Utrechtse postcode in. Je ziet direct welk bevestigd tarief onder €35 geldt; vanaf €35 bestelwaarde is ophalen en bezorgen gratis.
             </p>
           </div>
 
@@ -322,21 +375,25 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                 </span>
                 <h3 className="mt-3 font-heading text-xl font-bold leading-tight text-[#3B7F4B] sm:text-2xl">Check jouw postcode</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#657068]">
-                  Vul je 4-cijferige postcode in om te zien of we gratis bij je aan de deur komen.
+                  Vanaf €35 bestelwaarde komen we binnen Utrecht gratis langs. Daaronder rekent de checker met je postcodezone.
                 </p>
               </div>
 
               <form onSubmit={handleCheckZip} className="space-y-3">
-                <div className="flex min-w-0 flex-col gap-3 sm:flex-row sm:gap-2">
-                  <input
-                    type="text"
-                    maxLength={7}
-                    placeholder="Bijv. 3511 of 3572"
-                    aria-label="Viercijferige postcode"
-                    value={zipInput}
-                    onChange={(e) => setZipInput(e.target.value)}
-                    className="min-h-12 w-full min-w-0 flex-1 rounded-2xl border border-[#d9e1d7] bg-white px-4 py-3.5 font-mono text-sm uppercase text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
-                  />
+                <div className="grid min-w-0 gap-3 sm:grid-cols-[minmax(0,1fr)_auto] sm:items-end">
+                  <div className="min-w-0">
+                    <label htmlFor="service-postcode" className="mb-1.5 block text-xs font-bold text-[#244A30]">Postcode</label>
+                    <input
+                      id="service-postcode"
+                      type="text"
+                      inputMode="numeric"
+                      maxLength={7}
+                      placeholder="Bijv. 3511"
+                      value={zipInput}
+                      onChange={(e) => setZipInput(e.target.value)}
+                      className="min-h-12 w-full min-w-0 rounded-2xl border border-[#d9e1d7] bg-white px-4 py-3.5 font-mono text-sm uppercase text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
+                    />
+                  </div>
                   <button
                     type="submit"
                     className="group inline-flex min-h-12 w-full items-center justify-center gap-2 rounded-2xl bg-[#3B7F4B] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#315F3B] sm:w-auto cursor-pointer"
@@ -357,6 +414,15 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                     }`}
                   >
                     {searchResult.text}
+                    {searchResult.outsideArea && (
+                      <a
+                        href="#langskomen-van-buiten-utrecht"
+                        className="mt-3 inline-flex items-center gap-2 rounded-full bg-[#E87B5B] px-4 py-2 text-xs font-bold text-white transition-colors hover:bg-[#C95E3E]"
+                      >
+                        Kom op afspraak langs
+                        <ArrowDown className="h-3.5 w-3.5" aria-hidden="true" />
+                      </a>
+                    )}
                   </div>
                 )}
               </form>
@@ -364,11 +430,11 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
               <div className="space-y-3 border-t border-[#d9e1d7]/70 pt-5 text-xs leading-5 text-[#657068]">
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="min-w-0 font-medium">Gratis ophalen &amp; bezorgen vanaf 3 messen</span>
+                  <span className="min-w-0 font-medium">Gratis ophalen &amp; bezorgen vanaf €35 bestelwaarde</span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="min-w-0 font-medium">Bezorgtarief bij 1 of 2 messen hangt af van je postcode</span>
+                  <span className="min-w-0 font-medium">Tarief onder €35 hangt af van je postcode</span>
                 </div>
                 <div className="flex items-start gap-2.5">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 text-[#3B7F4B] shrink-0" />
@@ -410,57 +476,96 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
 
       <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#F9E4DE" toColor="#F7F4EC" variant="scalloped" mirror />
 
-      {/* 3. KIES WAT BIJ JE PAST: UTRECHT OF BUITEN UTRECHT */}
-      <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">
+      {/* 3. LANGSKOMEN OP AFSPRAAK */}
+      <section id="langskomen-van-buiten-utrecht" className="relative scroll-mt-24 overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">
         <div className="relative mx-auto max-w-7xl">
-          <div className="mb-8 max-w-2xl sm:mb-10">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Locatie &amp; Afspraak</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Woon je in Utrecht of daarbuiten?</h2>
-            <p className="mt-3 text-base leading-7 text-[#657068]">Voor beide situaties hebben we een snelle, prettige oplossing.</p>
+          <div className="mb-8 max-w-4xl sm:mb-10">
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Langskomen op afspraak</p>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Breng je messen langs en maak er een rondje Utrecht van</h2>
+            <p className="mt-3 max-w-3xl text-base leading-7 text-[#657068] sm:text-lg">
+              Of je nu uit Utrecht komt of van verder weg: je bent welkom om je messen op afspraak bij ons af te geven. Plan vooraf via WhatsApp, dan stemmen we het brengmoment én het moment waarop je messen gereed zijn duidelijk met je af.
+            </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-7">
-            <div className="group rounded-[2rem] border border-[#d9e1d7] bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md sm:p-8 flex flex-col justify-between">
-              <div>
-                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B] transition-transform duration-300 group-hover:scale-105">
-                  <Bike className="h-8 w-8" />
+          <div className="overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-sm">
+            <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
+              <div className="bg-[#3B7F4B] p-7 text-white sm:p-10 lg:p-12">
+                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 text-white">
+                  <MapPin className="h-8 w-8" aria-hidden="true" />
                 </span>
-                <h3 className="mt-5 font-heading text-2xl font-bold text-[#3B7F4B]">Binnen Utrecht</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#657068] sm:text-base">
-                  Vanaf 3 messen halen we ze gratis op aan huis of zaak. Binnen 24–48 uur weer vlijmscherp terugbezorgd.
+                <h3 className="mt-6 font-heading text-2xl font-bold sm:text-3xl">Jouw afspraak, helder afgestemd</h3>
+                <p className="mt-3 text-base leading-7 text-white/90">
+                  Geef je messen af, ga tussendoor de stad in en kom terug op het vooraf afgesproken moment. De gereedtijd stemmen we vooraf via WhatsApp met je af.
                 </p>
+                <p className="mt-6 rounded-2xl bg-white/10 p-4 text-sm font-semibold leading-6 text-white/90">
+                  Particulier én zakelijk welkom. Kies hieronder de route die bij je past; beide openen WhatsApp met een passend conceptbericht.
+                </p>
+                <p className="mt-4 text-xs leading-5 text-white/75">Geen vrije inloop: we spreken je breng- en gereedmoment altijd vooraf af.</p>
               </div>
-              <div className="mt-6 pt-4 border-t border-[#d9e1d7]/60">
-                <button
-                  type="button"
-                  onClick={openCalculator}
-                  className="inline-flex items-center gap-2 rounded-full bg-[#3B7F4B] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#315F3B] cursor-pointer"
-                >
-                  <span>Bereken je prijs &amp; bestel</span>
-                  <ArrowRight className="h-4 w-4" />
-                </button>
+
+              <div className="p-7 sm:p-10 lg:p-12">
+                <ol className="space-y-6">
+                  {[
+                    ['1', 'Stuur vooraf een bericht', 'Vertel hoeveel messen je wilt laten slijpen en wanneer je wilt langskomen.'],
+                    ['2', 'Geef je messen af in Utrecht', 'Na de persoonlijke overdracht kun je rustig koffie drinken, winkelen of de stad in.'],
+                    ['3', 'Kom op het afgesproken moment terug', 'Je haalt je messen weer op zodra ze volgens de vooraf afgestemde planning gereed zijn.'],
+                  ].map(([number, title, text]) => (
+                    <li key={number} className="flex gap-4">
+                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-sm font-bold text-[#C95E3E]">{number}</span>
+                      <div>
+                        <h3 className="font-heading text-lg font-bold text-[#3B7F4B]">{title}</h3>
+                        <p className="mt-1 text-sm leading-6 text-[#657068] sm:text-base">{text}</p>
+                      </div>
+                    </li>
+                  ))}
+                </ol>
+
+                <div className="mt-8 rounded-2xl border border-[#E87B5B]/25 bg-[#FCEEE8] p-5">
+                  <p className="font-heading text-base font-bold text-[#C95E3E]">Kom je met een grotere horeca-opdracht?</p>
+                  <p className="mt-1 text-sm leading-6 text-[#657068]">
+                    Stuur eerst een bericht. Dan stemmen we het aantal messen, eventuele schade, de timing en de afspraak goed met elkaar af.
+                  </p>
+                </div>
               </div>
             </div>
 
-            <div className="group rounded-[2rem] border border-[#E87B5B]/35 bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#E87B5B] hover:shadow-md sm:p-8 flex flex-col justify-between">
-              <div>
-                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F9E4DE] text-[#C95E3E] transition-transform duration-300 group-hover:scale-105">
-                  <MapPin className="h-8 w-8" />
-                </span>
-                <h3 className="mt-5 font-heading text-2xl font-bold text-[#C95E3E]">Buiten Utrecht</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#657068] sm:text-base">
-                  We bekijken per aanvraag of ophalen en bezorgen met de scooter mogelijk is. Je kunt je messen ook op afspraak bij ons langsbrengen in Utrecht.
-                </p>
-              </div>
-              <div className="mt-6 pt-4 border-t border-[#E87B5B]/20">
+            <div className="border-t border-[#d9e1d7] bg-[#FAFAF8] p-6 sm:p-8 lg:p-10">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Kies jouw afspraakroute</p>
+              <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
                 <a
-                  href={whatsappUrl}
+                  href={privateAppointmentWhatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2 rounded-full bg-[#E87B5B] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#C95E3E] cursor-pointer"
+                  className="group grid items-center gap-5 rounded-[2rem] border border-[#d9e1d7] bg-white p-6 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:grid-cols-[auto_1fr] sm:p-8"
                 >
-                  <span>Bespreek je locatie</span>
-                  <ArrowRight className="h-4 w-4" />
+                  <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B] transition-transform duration-300 group-hover:scale-105">
+                    <Utensils className="h-7 w-7" aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block font-heading text-2xl font-bold text-[#3B7F4B]">Particulier</span>
+                    <span className="mt-2 block text-sm leading-relaxed text-[#657068] sm:text-base">Plan via WhatsApp wanneer je jouw keukenmessen in Utrecht komt brengen en ophalen.</span>
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#3B7F4B]">
+                      Plan particuliere afspraak <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
+                    </span>
+                  </span>
+                </a>
+
+                <a
+                  href={businessAppointmentWhatsappUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group grid items-center gap-5 rounded-[2rem] border border-[#E87B5B]/35 bg-white p-6 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#E87B5B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#C95E3E] sm:grid-cols-[auto_1fr] sm:p-8"
+                >
+                  <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F9E4DE] text-[#C95E3E] transition-transform duration-300 group-hover:scale-105">
+                    <Building2 className="h-7 w-7" aria-hidden="true" />
+                  </span>
+                  <span>
+                    <span className="block font-heading text-2xl font-bold text-[#C95E3E]">Zakelijk</span>
+                    <span className="mt-2 block text-sm leading-relaxed text-[#657068] sm:text-base">Stem eerst het aantal messen, de timing en jouw afspraak in Utrecht met ons af.</span>
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#C95E3E]">
+                      Plan zakelijke afspraak <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
+                    </span>
+                  </span>
                 </a>
               </div>
             </div>
@@ -485,7 +590,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <Bike className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf 3 messen</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
             </div>
           </div>
         </div>
@@ -517,9 +622,9 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Van voordeur tot vlijmscherp</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-white sm:text-4xl">Hoe werkt de ophaalservice?</h2>
+            <h2 className="mt-3 font-heading text-3xl font-bold text-white sm:text-4xl">Hoe werkt ophalen en bezorgen binnen Utrecht?</h2>
             <p className="mt-4 text-base leading-7 text-[#E8EFE8]">
-              Geen gedoe met inpakdozen of postkantoren. Binnen Utrecht halen we je messen op met de fiets en voor afspraken verder weg gebruiken we de scooter.
+              Geen gedoe met inpakdozen of postkantoren. Binnen het ondersteunde Utrechtse servicegebied halen we je messen op met de fiets en brengen we ze na het slijpen terug.
             </p>
           </div>
 
@@ -554,7 +659,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
         <div className="mx-auto max-w-4xl">
           <div className="mb-10 text-center sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Veelgestelde vragen</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Vragen over ophalen &amp; bezorgen</h2>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Vragen over bezorgen en langskomen</h2>
           </div>
 
           <div className="space-y-3.5">
@@ -595,12 +700,12 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
       {/* 8. BOTTOM CONTACT BANNER with top and bottom wave dividers (Matching HomePage) */}
       <section id="service-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Vragen over ophalen?</p>
+          <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Langskomen op afspraak</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
-            Vraag het direct aan je Maat
+            Plan je breng- en ophaalmoment
           </h2>
           <p className="mt-6 max-w-4xl text-lg leading-relaxed text-white/95 sm:text-xl">
-            Twijfel je of jouw adres binnen onze route valt? Stuur ons je postcode of straatnaam via WhatsApp en we laten het je direct weten.
+            Vanuit heel Nederland kun je op afspraak naar Utrecht komen. Voor horeca stemmen we aantallen, planning en eventuele reparaties vooraf duidelijk af.
           </p>
 
           <div className="mt-10 grid max-w-4xl gap-4 sm:grid-cols-2">
@@ -610,16 +715,17 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
               rel="noopener noreferrer"
               className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl"
             >
-              <span>Stuur je Maat een appje</span>
+              <span>Plan via WhatsApp</span>
               <MessageCircle className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
             </a>
-            <a
-              href="tel:+31682074967"
+            <button
+              type="button"
+              onClick={() => onNavigate('horeca')}
               className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl"
             >
-              <span>Bel je Maat</span>
-              <Phone className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
-            </a>
+              <span>Naar zakelijke aanvraag</span>
+              <ArrowRight className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+            </button>
           </div>
         </div>
       </section>

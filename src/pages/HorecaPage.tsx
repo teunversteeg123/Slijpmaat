@@ -45,6 +45,7 @@ export const HorecaPage: React.FC = () => {
       `Contactpersoon: ${formData.contactPerson.trim()}`,
       `Telefoonnummer: ${formData.phone.trim()}`,
       `Aantal messen: ${formData.knifeCount}`,
+      'Haal- en brengservice binnen Utrecht: gratis vanaf €35 bestelwaarde; onder €35 geldt het postcodeafhankelijke tarief.',
       formData.notes.trim() ? `Planning / opmerkingen: ${formData.notes.trim()}` : '',
     ].filter(Boolean).join('\n');
     const url = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
@@ -60,13 +61,13 @@ export const HorecaPage: React.FC = () => {
     },
     {
       num: '2',
-      title: 'Ophalen na de service',
-      text: 'Wij halen de messenrol of messenblokken direct op bij jullie keukendeur op een rustig moment (bijv. na de zondagservice).',
+      title: 'Ophalen na sluitingstijd',
+      text: 'Wij halen de messenrol of messenblokken direct op bij jullie keukendeur op een rustig moment, bijvoorbeeld na sluitingstijd.',
     },
     {
       num: '3',
-      title: 'Scherp voor mise-en-place',
-      text: 'Binnen 24–48 uur leveren we de brigade weer vlijmscherp af vóór de volgende service, volgens de vooraf afgestemde planning en prijs.',
+      title: 'Scherp voor de volgende werkdag',
+      text: 'Binnen 24–48 uur leveren we de messen weer vlijmscherp af, volgens de vooraf afgestemde planning en prijs.',
     },
   ];
 
@@ -101,7 +102,7 @@ export const HorecaPage: React.FC = () => {
   // 5 Veelgestelde vragen voor Horeca & Zakelijke klanten
   const faqs = [
     {
-      question: 'Kunnen jullie ophalen na de zondag- of maandagservice?',
+      question: 'Kunnen jullie na de zondag- of maandagavond ophalen?',
       answer: 'Binnen Utrecht kunnen we een haal- en brengmoment afstemmen op jullie service. Kom je van buiten Utrecht, dan kun je de messen op afspraak in Utrecht brengen en ophalen. We spreken de planning altijd vooraf duidelijk af.',
     },
     {
@@ -142,7 +143,7 @@ export const HorecaPage: React.FC = () => {
           {/* Left: Copy & CTAs */}
           <div className="order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0 lg:pl-4 xl:pl-8">
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
-              Voor restaurants, brigades &amp; chefs uit heel Nederland
+              Voor restaurants, keukenteams &amp; koks uit heel Nederland
             </p>
             <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
               Professioneel messen slijpen voor horeca
@@ -161,14 +162,13 @@ export const HorecaPage: React.FC = () => {
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
               </button>
 
-              <button
-                type="button"
-                onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              <a
+                href="/servicegebied#langskomen-van-buiten-utrecht"
                 className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
               >
-                <span>Ik heb een vraag</span>
+                <span>Kom op afspraak langs</span>
                 <ArrowDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
-              </button>
+              </a>
             </div>
           </div>
 
@@ -206,7 +206,7 @@ export const HorecaPage: React.FC = () => {
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Afgestemd op mise-en-place</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Afgestemd op jullie planning</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <FileText className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
@@ -229,9 +229,9 @@ export const HorecaPage: React.FC = () => {
           {/* Header */}
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Zo werkt het voor zakelijke keukens</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Eenvoudig geregeld voor jouw brigade</h2>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Eenvoudig geregeld voor jouw keukenteam</h2>
             <p className="mt-3 text-base leading-7 text-[#657068]">
-              Drie duidelijke stappen. We sluiten naadloos aan op jullie keukenschema zodat de service nooit stilvalt.
+              Drie duidelijke stappen. We sluiten aan op jullie keukenplanning, zodat het werk in de keuken doorgaat.
             </p>
           </div>
 
@@ -268,6 +268,9 @@ export const HorecaPage: React.FC = () => {
 
           <div className="overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white p-6 shadow-sm sm:p-10 lg:p-12">
             <form onSubmit={handleSubmit} className="space-y-5">
+                <p className="rounded-2xl border border-[#3B7F4B]/20 bg-[#E8EFE8] p-4 text-sm leading-6 text-[#244A30]">
+                  Binnen Utrecht is ophalen en bezorgen gratis vanaf €35 bestelwaarde. Onder €35 geldt het postcodeafhankelijke tarief; voor de buitenring, waaronder Kanaleneiland en Leidsche Rijn, is dat €7,25.
+                </p>
                 <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
                   <div>
                     <label htmlFor="horeca-company" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Restaurant / Zaak *</label>
@@ -319,7 +322,7 @@ export const HorecaPage: React.FC = () => {
                       <option value="5-10 messen">5 – 10 messen</option>
                       <option value="10-20 messen">10 – 20 messen</option>
                       <option value="20-40 messen">20 – 40 messen</option>
-                      <option value="40+ messen">40+ messen (volledige brigade)</option>
+                      <option value="40+ messen">40+ messen (grote zakelijke aanvraag)</option>
                     </select>
                   </div>
                 </div>
@@ -329,7 +332,7 @@ export const HorecaPage: React.FC = () => {
                   <textarea
                     id="horeca-notes"
                     rows={3}
-                    placeholder="Bijv. Zondagavond ophalen na de service, dinsdag voor 13:00 retour voor mise-en-place"
+                    placeholder="Bijv. Zondagavond ophalen, dinsdag voor 13:00 terug"
                     value={formData.notes}
                     onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                     className="mt-1.5 w-full rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] px-4 py-3 text-sm text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"

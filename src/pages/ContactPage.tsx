@@ -232,7 +232,7 @@ export const ContactPage: React.FC = () => {
                       <option value="Slijpbeurt particulier">Slijpbeurt particulier plannen</option>
                       <option value="Horeca & Restaurant afstemming">Horeca &amp; Zakelijke slijpbeurt</option>
                       <option value="Beschadigd mes / chip beoordeling">Beschadigd mes / chip beoordeling</option>
-                      <option value="Langsbrengen buiten Utrecht">Langsbrengen op afspraak (buiten Utrecht)</option>
+                      <option value="Langsbrengen op afspraak">Messen langsbrengen op afspraak</option>
                       <option value="Overige vraag">Overige vraag</option>
                     </select>
                   </div>
