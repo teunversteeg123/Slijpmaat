@@ -53,6 +53,7 @@ const applyGoogleTranslate = (lang: Language) => {
 
 export const LanguageProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const [language, setLanguageState] = useState<Language>(() => {
+    if (typeof window === 'undefined') return 'nl';
     try {
       const saved = localStorage.getItem(STORAGE_KEY);
       if (saved === 'en' || saved === 'nl') {

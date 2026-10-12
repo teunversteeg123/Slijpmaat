@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { ResultatenSlider } from '../components/ResultatenSlider';
+import { AppointmentDropoffWidget } from '../components/AppointmentDropoffWidget';
 import {
-  ArrowDown,
   ArrowRight,
+  ChevronLeft,
   Clock3,
   MapPin,
   MessageCircle,
@@ -16,7 +18,11 @@ import {
   FileText
 } from 'lucide-react';
 
-export const HorecaPage: React.FC = () => {
+interface HorecaPageProps {
+  onNavigate?: (page: PageId) => void;
+}
+
+export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
   const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Slijpmaat, ik zou graag in contact willen komen voor een zakelijke aanvraag.')}`;
 
   const businessBasePrices = [
@@ -57,12 +63,12 @@ export const HorecaPage: React.FC = () => {
     {
       num: '1',
       title: 'Aanmelden & afstemmen',
-      text: 'Geef via het formulier of WhatsApp door hoeveel messen jullie hebben en wanneer de keuken dicht is of wisselt.',
+      text: 'Geef via het formulier of WhatsApp door hoeveel messen jullie hebben en welk haal- of brengmoment jullie voorkeur heeft.',
     },
     {
       num: '2',
-      title: 'Ophalen na sluitingstijd',
-      text: 'Wij halen de messenrol of messenblokken direct op bij jullie keukendeur op een rustig moment, bijvoorbeeld na sluitingstijd.',
+      title: 'Ophalen op afspraak',
+      text: 'We stemmen vooraf via WhatsApp een rustig ophaalmoment bij jullie keukendeur af.',
     },
     {
       num: '3',
@@ -102,7 +108,7 @@ export const HorecaPage: React.FC = () => {
   // 5 Veelgestelde vragen voor Horeca & Zakelijke klanten
   const faqs = [
     {
-      question: 'Kunnen jullie na de zondag- of maandagavond ophalen?',
+      question: 'Kunnen jullie het ophalen rond onze service plannen?',
       answer: 'Binnen Utrecht kunnen we een haal- en brengmoment afstemmen op jullie service. Kom je van buiten Utrecht, dan kun je de messen op afspraak in Utrecht brengen en ophalen. We spreken de planning altijd vooraf duidelijk af.',
     },
     {
@@ -155,6 +161,15 @@ export const HorecaPage: React.FC = () => {
             <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <button
                 type="button"
+                onClick={() => onNavigate ? onNavigate('home') : (window.location.hash = '#home')}
+                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
+              >
+                <ChevronLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5" aria-hidden="true" />
+                <span>Terug</span>
+              </button>
+
+              <button
+                type="button"
                 onClick={() => document.getElementById('zakelijk-formulier')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
                 className="group inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
               >
@@ -162,13 +177,6 @@ export const HorecaPage: React.FC = () => {
                 <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
               </button>
 
-              <a
-                href="/servicegebied#langskomen-van-buiten-utrecht"
-                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
-              >
-                <span>Kom op afspraak langs</span>
-                <ArrowDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
-              </a>
             </div>
           </div>
 
@@ -319,7 +327,7 @@ export const HorecaPage: React.FC = () => {
                       onChange={(e) => setFormData({ ...formData, knifeCount: e.target.value })}
                       className="mt-1.5 w-full rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] px-4 py-3 text-sm text-[#244A30] focus:border-[#3B7F4B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
                     >
-                      <option value="5-10 messen">5 – 10 messen</option>
+                      <option value="0–10 messen">0–10 messen</option>
                       <option value="10-20 messen">10 – 20 messen</option>
                       <option value="20-40 messen">20 – 40 messen</option>
                       <option value="40+ messen">40+ messen (grote zakelijke aanvraag)</option>
@@ -332,7 +340,7 @@ export const HorecaPage: React.FC = () => {
                   <textarea
                     id="horeca-notes"
                     rows={3}
-                    placeholder="Bijv. Zondagavond ophalen, dinsdag voor 13:00 terug"
+                    placeholder="Bijv. gewenste dag, aantal rondes of bijzonderheden"
                     value={formData.notes}
                     onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
                     className="mt-1.5 w-full rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] px-4 py-3 text-sm text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
@@ -373,6 +381,10 @@ export const HorecaPage: React.FC = () => {
                   .
                 </p>
             </form>
+          </div>
+
+          <div className="mt-12 sm:mt-14">
+            <AppointmentDropoffWidget />
           </div>
 
           <section aria-labelledby="zakelijke-prijslijst" className="mt-12 border-t border-[#d9e1d7] pt-10 sm:mt-14 sm:pt-12">

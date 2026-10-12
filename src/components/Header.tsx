@@ -7,7 +7,7 @@ import { useLanguage } from '../context/LanguageContext';
 import { LanguageSlider } from './LanguageSlider';
 
 interface HeaderProps {
-  currentPage: PageId;
+  currentPage: PageId | null;
   onNavigate: (page: PageId) => void;
 }
 
@@ -58,6 +58,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
     { id: 'home', labelKey: 'nav.home', defaultLabel: 'Home' },
     { id: 'over-ons', labelKey: 'nav.over_ons', defaultLabel: 'Over ons' },
     { id: 'werkwijze', labelKey: 'nav.werkwijze', defaultLabel: 'Werkwijze' },
+    { id: 'ophalen-bezorgen', labelKey: 'nav.servicegebied', defaultLabel: 'Servicegebied' },
     { id: 'blogs', labelKey: 'nav.blogs', defaultLabel: 'Blogs' },
     { id: 'faq', labelKey: 'nav.faq', defaultLabel: 'FAQ' },
   ];
@@ -301,6 +302,19 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 Werkwijze
               </button>
 
+              {/* Servicegebied */}
+              <button
+                type="button"
+                onClick={() => handleLinkClick('ophalen-bezorgen')}
+                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                  currentPage === 'ophalen-bezorgen'
+                    ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
+                    : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
+                }`}
+              >
+                {t('nav.servicegebied', 'Servicegebied')}
+              </button>
+
               {/* Blogs */}
               <button
                 type="button"
@@ -325,19 +339,6 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 }`}
               >
                 FAQ
-              </button>
-
-              {/* Ophalen, bezorgen & servicegebied */}
-              <button
-                type="button"
-                onClick={() => handleLinkClick('ophalen-bezorgen')}
-                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
-                  currentPage === 'ophalen-bezorgen'
-                    ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
-                    : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
-                }`}
-              >
-                Ophalen, bezorgen &amp; langskomen
               </button>
 
               {/* Subtiele CTA onderaan het mobiele menu: dik gedrukte groene tekst met dropdown */}

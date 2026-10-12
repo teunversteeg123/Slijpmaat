@@ -7,6 +7,8 @@ import {
 } from '../data/delivery';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
+import { AppointmentDropoffWidget } from '../components/AppointmentDropoffWidget';
+import { SERVICEGEBIED_FAQS } from '../seo';
 import {
   MapPin,
   Clock3,
@@ -17,8 +19,6 @@ import {
   ArrowRight,
   ArrowDown,
   Bike,
-  Utensils,
-  Building2,
   Plus,
   X,
   Maximize2
@@ -51,52 +51,10 @@ const serviceSteps = [
   },
 ];
 
-const serviceFaqs = [
-  {
-    q: 'Vanaf welke bestelwaarde is ophalen en bezorgen gratis?',
-    a: 'Vanaf €35 bestelwaarde halen we jouw messen gratis op én brengen we ze gratis terug binnen Utrecht. Onder €35 hangt het tarief af van je postcode; controleer dit eenvoudig met de postcodecheck op deze pagina.'
-  },
-  {
-    q: 'Hoe geef ik mijn messen veilig mee aan de deur?',
-    a: 'We vervoeren je messen binnen Utrecht in stevige Slijpmaat-vervoerstassen en mesbeschermers. Wikkel je messen thuis bij voorkeur in een theedoek of handdoek met een elastiek eromheen. Zo blijven je messen en onze vingers heel!'
-  },
-  {
-    q: 'Hoe snel heb ik mijn messen weer terug?',
-    a: 'Meestal al binnen 24 tot uiterlijk 48 uur na ophalen. Heb je een specifieke deadline of kookavond? Laat het ons weten bij het inplannen, dan houden we daar rekening mee.'
-  },
-  {
-    q: 'Kan ik mijn messen ook zelf langsbrengen in Utrecht?',
-    a: 'Jazeker! Je bent op afspraak van harte welkom aan de Gerard Noodtstraat in Utrecht. Omdat we vanuit huis werken en geconcentreerd aan de werkbank staan, vragen we je altijd even vooraf een tijdstip af te stemmen via WhatsApp.'
-  },
-  {
-    q: 'Kan ik vanuit heel Nederland mijn messen komen brengen?',
-    a: 'Ja. Vanuit heel Nederland kun je op afspraak je gladde keukenmessen in Utrecht brengen en later weer ophalen. Buiten het ondersteunde Utrechtse bezorggebied halen en bezorgen we niet standaard. Stem daarom vooraf via WhatsApp een geschikt breng- en ophaalmoment af.'
-  },
-  {
-    q: 'Kunnen horecaklanten van buiten Utrecht ook een afspraak maken?',
-    a: 'Ja. Restaurants, chefs en andere zakelijke klanten uit heel Nederland kunnen op afspraak messen of een messenrol in Utrecht afleveren en ophalen. Geef vooraf het aantal, de soorten messen, eventuele schade en de gewenste planning door, dan maken we een passend voorstel.'
-  }
-];
-
-const serviceFaqStructuredData = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: serviceFaqs.map((faq) => ({
-    '@type': 'Question',
-    name: faq.q,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: faq.a,
-    },
-  })),
-};
-
 const formatEuro = (cents: number) => `€${(cents / 100).toFixed(2).replace('.', ',')}`;
 
 export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate }) => {
   const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag een afspraak maken om mijn messen in Utrecht te brengen en later op te halen.')}`;
-  const privateAppointmentWhatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag als particulier een afspraak maken om mijn messen in Utrecht te brengen en later op te halen.')}`;
-  const businessAppointmentWhatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag een zakelijke afspraak maken om messen in Utrecht te brengen en later op te halen. Kunnen we het aantal messen, de timing en de afspraak afstemmen?')}`;
 
   const [zipInput, setZipInput] = useState('');
   const [searchResult, setSearchResult] = useState<{
@@ -110,15 +68,6 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
   const [isPlanExpanded, setIsPlanExpanded] = useState(false);
   const planRef = useRef<HTMLDivElement>(null);
   const mapTriggerRef = useRef<HTMLButtonElement>(null);
-
-  useEffect(() => {
-    const structuredData = document.createElement('script');
-    structuredData.id = 'servicegebied-faq-jsonld';
-    structuredData.type = 'application/ld+json';
-    structuredData.text = JSON.stringify(serviceFaqStructuredData);
-    document.head.appendChild(structuredData);
-    return () => structuredData.remove();
-  }, []);
 
   useEffect(() => {
     if (window.location.hash !== '#langskomen-van-buiten-utrecht') return;
@@ -353,6 +302,46 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
         </div>
       )}
 
+      {/* 2. TRUST BAR (Zekerheden floating pill) */}
+      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
+          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
+            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
+              <GoogleIcon />
+              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
+            </div>
+            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
+              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24–48 uur retour</span>
+            </div>
+            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
+              <Bike className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* BELANGRIJKE MEDEDELING: GEEN INLOOPWINKEL */}
+      <section className="relative z-20 bg-[#FAFAF8] px-4 py-4 sm:px-6 sm:py-6 lg:px-8">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-[#F7F4EC] p-6 shadow-xs sm:p-8">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-[#E87B5B] shadow-2xs">
+              <AlertTriangle className="h-7 w-7" />
+            </span>
+            <div className="space-y-1">
+              <h2 className="font-heading text-lg font-bold text-[#3B7F4B] sm:text-xl">
+                Slijpmaat heeft géén fysieke winkel, wij werken vanuit huis.
+              </h2>
+              <p className="text-sm leading-relaxed text-[#657068] sm:text-base">
+                Langsbrengen en ophalen kan uitsluitend na voorafgaande afspraak via WhatsApp. Zo zorgen we dat Teun of Mike persoonlijk aanwezig is om jouw messen veilig en met volle aandacht aan te nemen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#FFFFFF" variant="calm" />
 
       {/* 2. POSTCODECHECK & WIJKEN IN UTRECHT */}
@@ -478,144 +467,12 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
 
       {/* 3. LANGSKOMEN OP AFSPRAAK */}
       <section id="langskomen-van-buiten-utrecht" className="relative scroll-mt-24 overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">
-        <div className="relative mx-auto max-w-7xl">
-          <div className="mb-8 max-w-4xl sm:mb-10">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Langskomen op afspraak</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Breng je messen langs en maak er een rondje Utrecht van</h2>
-            <p className="mt-3 max-w-3xl text-base leading-7 text-[#657068] sm:text-lg">
-              Of je nu uit Utrecht komt of van verder weg: je bent welkom om je messen op afspraak bij ons af te geven. Plan vooraf via WhatsApp, dan stemmen we het brengmoment én het moment waarop je messen gereed zijn duidelijk met je af.
-            </p>
-          </div>
-
-          <div className="overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-sm">
-            <div className="grid lg:grid-cols-[0.9fr_1.1fr]">
-              <div className="bg-[#3B7F4B] p-7 text-white sm:p-10 lg:p-12">
-                <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-white/15 text-white">
-                  <MapPin className="h-8 w-8" aria-hidden="true" />
-                </span>
-                <h3 className="mt-6 font-heading text-2xl font-bold sm:text-3xl">Jouw afspraak, helder afgestemd</h3>
-                <p className="mt-3 text-base leading-7 text-white/90">
-                  Geef je messen af, ga tussendoor de stad in en kom terug op het vooraf afgesproken moment. De gereedtijd stemmen we vooraf via WhatsApp met je af.
-                </p>
-                <p className="mt-6 rounded-2xl bg-white/10 p-4 text-sm font-semibold leading-6 text-white/90">
-                  Particulier én zakelijk welkom. Kies hieronder de route die bij je past; beide openen WhatsApp met een passend conceptbericht.
-                </p>
-                <p className="mt-4 text-xs leading-5 text-white/75">Geen vrije inloop: we spreken je breng- en gereedmoment altijd vooraf af.</p>
-              </div>
-
-              <div className="p-7 sm:p-10 lg:p-12">
-                <ol className="space-y-6">
-                  {[
-                    ['1', 'Stuur vooraf een bericht', 'Vertel hoeveel messen je wilt laten slijpen en wanneer je wilt langskomen.'],
-                    ['2', 'Geef je messen af in Utrecht', 'Na de persoonlijke overdracht kun je rustig koffie drinken, winkelen of de stad in.'],
-                    ['3', 'Kom op het afgesproken moment terug', 'Je haalt je messen weer op zodra ze volgens de vooraf afgestemde planning gereed zijn.'],
-                  ].map(([number, title, text]) => (
-                    <li key={number} className="flex gap-4">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-sm font-bold text-[#C95E3E]">{number}</span>
-                      <div>
-                        <h3 className="font-heading text-lg font-bold text-[#3B7F4B]">{title}</h3>
-                        <p className="mt-1 text-sm leading-6 text-[#657068] sm:text-base">{text}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ol>
-
-                <div className="mt-8 rounded-2xl border border-[#E87B5B]/25 bg-[#FCEEE8] p-5">
-                  <p className="font-heading text-base font-bold text-[#C95E3E]">Kom je met een grotere horeca-opdracht?</p>
-                  <p className="mt-1 text-sm leading-6 text-[#657068]">
-                    Stuur eerst een bericht. Dan stemmen we het aantal messen, eventuele schade, de timing en de afspraak goed met elkaar af.
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="border-t border-[#d9e1d7] bg-[#FAFAF8] p-6 sm:p-8 lg:p-10">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Kies jouw afspraakroute</p>
-              <div className="mt-4 grid grid-cols-1 gap-4 md:grid-cols-2">
-                <a
-                  href={privateAppointmentWhatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group grid items-center gap-5 rounded-[2rem] border border-[#d9e1d7] bg-white p-6 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:grid-cols-[auto_1fr] sm:p-8"
-                >
-                  <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B] transition-transform duration-300 group-hover:scale-105">
-                    <Utensils className="h-7 w-7" aria-hidden="true" />
-                  </span>
-                  <span>
-                    <span className="block font-heading text-2xl font-bold text-[#3B7F4B]">Particulier</span>
-                    <span className="mt-2 block text-sm leading-relaxed text-[#657068] sm:text-base">Plan via WhatsApp wanneer je jouw keukenmessen in Utrecht komt brengen en ophalen.</span>
-                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#3B7F4B]">
-                      Plan particuliere afspraak <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
-                    </span>
-                  </span>
-                </a>
-
-                <a
-                  href={businessAppointmentWhatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group grid items-center gap-5 rounded-[2rem] border border-[#E87B5B]/35 bg-white p-6 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#E87B5B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#C95E3E] sm:grid-cols-[auto_1fr] sm:p-8"
-                >
-                  <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F9E4DE] text-[#C95E3E] transition-transform duration-300 group-hover:scale-105">
-                    <Building2 className="h-7 w-7" aria-hidden="true" />
-                  </span>
-                  <span>
-                    <span className="block font-heading text-2xl font-bold text-[#C95E3E]">Zakelijk</span>
-                    <span className="mt-2 block text-sm leading-relaxed text-[#657068] sm:text-base">Stem eerst het aantal messen, de timing en jouw afspraak in Utrecht met ons af.</span>
-                    <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#C95E3E]">
-                      Plan zakelijke afspraak <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
-                    </span>
-                  </span>
-                </a>
-              </div>
-            </div>
-          </div>
+        <div className="relative mx-auto max-w-6xl">
+          <AppointmentDropoffWidget />
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#F7F4EC" middleColor="#E8EFE8" toColor="#FAFAF8" variant="rolling" />
-
-      {/* 4. TRUST BAR (Zekerheden floating pill) */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24–48 uur retour</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <Bike className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. BELANGRIJKE MEDEDELING: GEEN INLOOPWINKEL */}
-      <section className="relative px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-[#F7F4EC] p-6 sm:p-8 shadow-xs">
-          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-[#E87B5B] shadow-2xs">
-              <AlertTriangle className="h-7 w-7" />
-            </span>
-            <div className="space-y-1">
-              <h2 className="font-heading text-lg sm:text-xl font-bold text-[#3B7F4B]">
-                Belangrijk: Slijpmaat heeft géén doorlopende inloopbalie
-              </h2>
-              <p className="text-sm sm:text-base leading-relaxed text-[#657068]">
-                Langsbrengen en ophalen kan uitsluitend na voorafgaande afspraak via WhatsApp. Zo zorgen we dat Teun of Mike persoonlijk aanwezig is om jouw messen veilig en met volle aandacht aan te nemen.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#A9C89E" toColor="#3B7F4B" variant="calm" mirror />
+      <OrganicSectionDivider fromColor="#F7F4EC" middleColor="#A9C89E" toColor="#3B7F4B" variant="calm" mirror />
 
       {/* 6. HOE WERKT DE OPHAALSERVICE (Green section with organic wave dividers matching HomePage) */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
@@ -663,7 +520,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
           </div>
 
           <div className="space-y-3.5">
-            {serviceFaqs.map((faq, index) => {
+            {SERVICEGEBIED_FAQS.map((faq, index) => {
               const isOpen = openFaq === index;
               return (
                 <div

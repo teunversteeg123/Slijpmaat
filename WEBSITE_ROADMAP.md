@@ -1,6 +1,6 @@
 # Slijpmaat website — audit, prioriteiten en voortgang
 
-Peildatum: 8 oktober 2026
+Peildatum: 12 oktober 2026
 Veilige basis: GitHub-commit `dc810b7` (`main`)
 
 ## Besloten werkvolgorde
@@ -18,17 +18,17 @@ Veilige basis: GitHub-commit `dc810b7` (`main`)
 ### Basis
 
 - React 19, TypeScript, Vite 8 en Tailwind CSS 4.
-- De site is een volledig client-side opgebouwde single-page-app.
-- Navigatie gebruikt zelfgebouwde `#hash`-routes in `App.tsx`; er is geen routerpakket.
+- De site gebruikt React in de browser en rendert alle actieve routes tijdens de productiebuild vooraf naar statische HTML.
+- Navigatie gebruikt normale paden via de zelfgebouwde router in `App.tsx`; oude `#hash`-links worden voor compatibiliteit omgezet.
 - Er is geen server-API, database of formulierdienst aanwezig.
-- Er is geen productie-hostingconfiguratie in de repository vastgelegd.
-- De productiebuild werkt. De JavaScript-bundel is circa 543 kB vóór gzip en vraagt later om opsplitsing.
+- Voor statische hosts met Netlify-achtige redirects staat een 404-fallback in `public/_redirects`; de definitieve hostingprovider is nog niet gekozen.
+- De productiebuild werkt. De JavaScript-bundel is circa 539 kB vóór gzip en vraagt later om opsplitsing.
 
 ### Pagina's en routes
 
-Actief: home, particulier, zakelijk/horeca, vier dienstendetails, werkwijze, servicegebied, blogs, artikel, over ons, FAQ, contact, voorwaarden en privacy. Oude zelfstandige pagina's voor diensten, prijzen/bestellen en reviews zijn uit de broncode verwijderd; hun relevante inhoud en oude redirects blijven via de actieve structuur beschikbaar.
+Actief: home, particulier, zakelijk/horeca, vier dienstendetails, werkwijze, servicegebied, blogs, over ons, FAQ, contact, voorwaarden en privacy. Oude zelfstandige pagina's voor diensten, prijzen/bestellen, reviews en het niet-gepubliceerde voorbeeldartikel zijn uit de broncode verwijderd; relevante inhoud en oude hashredirects blijven via de actieve structuur beschikbaar.
 
-De huidige hashroutes zijn bruikbaar voor de lokale proefsite, maar niet geschikt als definitieve SEO-structuur. Zoekmachines zien geen afzonderlijke normale URL's per pagina. Artikelen hebben bovendien geen eigen blijvende URL op basis van hun slug.
+Alle vijftien actieve pagina's hebben een normaal canoniek pad en een eigen vooraf gerenderd HTML-bestand. `Blogs`, `Algemene voorwaarden` en `Privacyverklaring` zijn bewust niet indexeerbaar; de twaalf indexeerbare routes staan in de sitemap.
 
 ### Formulieren en klantgegevens
 
@@ -55,12 +55,12 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 
 ### SEO en rendering
 
-- Eén statische titel en metabeschrijving voor de volledige app.
-- Eén statisch LocalBusiness-schema in `index.html`.
-- Geen unieke metadata, canonicals of social metadata per pagina.
-- Geen `robots.txt`, sitemap of echte 404-pagina.
-- Belangrijke pagina-inhoud ontstaat pas na JavaScript-rendering.
-- Geen `/en/`-structuur.
+- Alle actieve routes hebben unieke statisch aanwezige titels, metabeschrijvingen, canonicals, robots-instructies en Open Graph-/Twittermetadata.
+- De productiebuild rendert H1 en primaire pagina-inhoud naar de ruwe HTML voordat JavaScript draait.
+- Structured data gebruikt WebSite, WebPage en BreadcrumbList; FAQPage staat alleen op routes met overeenkomende zichtbare FAQ-inhoud.
+- Een fysiek `robots.txt`, een sitemap met twaalf indexeerbare canonieke routes en een eigen `noindex`-404 zijn aanwezig.
+- Een lokale HTTP-verificatietest controleert vijftien routes, schema, metadata, statische inhoud, crawlerbestanden en HTTP 404.
+- Geen `/en/`-structuur; de volledige Engelse uitwerking blijft de laatste fase.
 
 ### Privacy en cookies
 
@@ -101,14 +101,14 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 - [x] Pagina's controleren op horizontale overflow, afbrekende tekst en te kleine aanraakvlakken.
 - [x] Formulierlabels technisch koppelen aan invoervelden en toetsenbord-/focusgedrag controleren.
 - [x] Definitieve actieve pagina's en dubbele/ongebruikte componenten opschonen.
-- [ ] Besluiten en implementeren welke hosting en normale URL-structuur de React-site krijgt.
+- [ ] Definitieve hosting kiezen en de voorbereide normale URL-/404-structuur in die omgeving bevestigen.
 - [ ] Juridische en fiscale gegevens bevestigen voordat voorwaarden en betaalteksten definitief worden.
 
 ### P1 — daarna verbeteren
 
-- [ ] SEO-paginastructuur, H1/H2-overzicht en unieke metadata per pagina uitwerken.
-- [ ] Normale URL's en artikel-slugs implementeren; redirecttabel voor oude routes maken.
-- [ ] Canonicals, structured data, `robots.txt`, sitemap en echte 404 toevoegen.
+- [x] SEO-paginastructuur, H1-verdeling en unieke metadata per actieve pagina uitwerken.
+- [x] Normale URL's implementeren en redirects voor oude actieve hashlinks behouden.
+- [x] Canonicals, veilige structured data, `robots.txt`, sitemap, statische prerendering en echte 404 toevoegen.
 - [ ] Bestaande Carrd-URL's, Search Console-data en eventuele analytics-export analyseren.
 - [ ] Cookie- en opslagregister maken en juridische pagina's laten aansluiten op de echte inrichting.
 - [ ] Google Fonts zelf hosten of het externe verzoek expliciet meenemen in de privacy-inrichting.

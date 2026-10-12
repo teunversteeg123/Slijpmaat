@@ -91,18 +91,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
 
           <section>
             <div className={columnHeadClass}>
-              <h2 className="font-heading text-[19px] font-semibold leading-tight tracking-[-0.02em]">Openingstijden</h2>
+              <h2 className="font-heading text-[19px] font-semibold leading-tight tracking-[-0.02em]">Langskomen op afspraak</h2>
             </div>
 
-            <dl className="grid grid-cols-[1fr_auto] gap-x-4 gap-y-2 text-[14px]">
-              <dt>Maandag–zaterdag</dt>
-              <dd className="text-right font-semibold text-[#3B7F4B]">10:00–21:00</dd>
-              <dt>Zondag</dt>
-              <dd className="text-right font-semibold text-[#3B7F4B]">Gesloten</dd>
-            </dl>
-
-            <p className="mb-5 mt-[15px] text-[13px] leading-relaxed text-[#3B7F4B]/80">
-              Geen winkel. Bezoek en afgifte alleen op afspraak.
+            <p className="mb-5 text-[14px] leading-relaxed text-[#3B7F4B]/80">
+              Slijpmaat heeft géén fysieke winkel. Messen langsbrengen en ophalen kan uitsluitend na voorafgaande afspraak via WhatsApp.
             </p>
 
             <div className="flex items-center gap-2.5">

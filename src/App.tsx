@@ -17,122 +17,8 @@ import { FaqPage } from './pages/FaqPage';
 import { ContactPage } from './pages/ContactPage';
 import { VoorwaardenPage } from './pages/VoorwaardenPage';
 import { PrivacyPage } from './pages/PrivacyPage';
-
-const pagePaths: Record<PageId, string> = {
-  home: '/',
-  particulieren: '/particulier',
-  horeca: '/zakelijk',
-  'dienst-keukenmessen': '/diensten/keukenmessen-slijpen',
-  'dienst-japanse-messen': '/diensten/japanse-messen-slijpen',
-  'dienst-chips-herstellen': '/diensten/chips-herstellen',
-  'dienst-wel-niet': '/diensten/wat-slijpen-we',
-  werkwijze: '/werkwijze',
-  'ophalen-bezorgen': '/servicegebied',
-  blogs: '/blogs',
-  'over-ons': '/over-ons',
-  faq: '/veelgestelde-vragen',
-  contact: '/contact',
-  'algemene-voorwaarden': '/algemene-voorwaarden',
-  privacy: '/privacyverklaring',
-};
-
-type SeoMetadata = {
-  title: string;
-  description: string;
-  index: boolean;
-};
-
-const seoMetadata: Record<PageId, SeoMetadata> = {
-  home: {
-    title: 'Messen slijpen Utrecht · Ophalen & bezorgen · Slijpmaat',
-    description:
-      'Laat je keukenmessen slijpen in Utrecht. Slijpmaat haalt ze thuis of op de zaak op, slijpt ze met de hand op waterstenen en brengt ze scherp terug.',
-    index: true,
-  },
-  particulieren: {
-    title: 'Keukenmessen slijpen Utrecht · Prijzen · Slijpmaat',
-    description:
-      'Bereken direct de prijs voor het slijpen van je keukenmessen. Ophalen en bezorgen in Utrecht of zelf brengen op afspraak bij Slijpmaat.',
-    index: true,
-  },
-  horeca: {
-    title: 'Horeca messen slijpen · Zakelijk · Slijpmaat',
-    description:
-      'Professioneel messen slijpen voor horeca uit heel Nederland. Breng en haal je messen op afspraak in Utrecht; lokale service in Utrecht is mogelijk.',
-    index: true,
-  },
-  'dienst-keukenmessen': {
-    title: 'Keukenmessen slijpen op waterstenen · Slijpmaat',
-    description:
-      'Laat gladde keukenmessen en koksmessen zorgvuldig met de hand slijpen op Japanse waterstenen, met aandacht voor snede, staal en profiel.',
-    index: true,
-  },
-  'dienst-japanse-messen': {
-    title: 'Japanse messen laten slijpen · Slijpmaat',
-    description:
-      'Slijpmaat slijpt Japanse keukenmessen met de hand op waterstenen, afgestemd op het staal, het profiel en de conditie van de snede.',
-    index: true,
-  },
-  'dienst-chips-herstellen': {
-    title: 'Chip in keukenmes laten herstellen · Slijpmaat',
-    description:
-      'Kleine chips en beschadigde punten kunnen vaak worden hersteld. Stuur eerst een foto, dan beoordeelt Slijpmaat de schade en mogelijkheden.',
-    index: true,
-  },
-  'dienst-wel-niet': {
-    title: 'Welke messen slijpen wij? · Slijpmaat',
-    description:
-      'Bekijk welke gladde keukenmessen Slijpmaat aanneemt, welke beschadigingen mogelijk te herstellen zijn en waarom kartelmessen niet worden aangenomen.',
-    index: true,
-  },
-  werkwijze: {
-    title: 'Messen slijpen op waterstenen · Werkwijze · Slijpmaat',
-    description:
-      'Bekijk hoe Slijpmaat keukenmessen beoordeelt, met de hand slijpt op Japanse waterstenen en zorgvuldig afwerkt op leer.',
-    index: true,
-  },
-  'ophalen-bezorgen': {
-    title: 'Messen slijpen Utrecht & zelf langsbrengen · Slijpmaat',
-    description:
-      'Slijpmaat haalt en bezorgt messen binnen Utrecht. Kom vanuit heel Nederland op afspraak langs; ook voor horeca, chefs en complete messenrollen.',
-    index: true,
-  },
-  blogs: {
-    title: 'Blogs over messen slijpen en onderhoud · Slijpmaat',
-    description:
-      'Binnenkort lees je hier praktische artikelen van Slijpmaat over keukenmessen, onderhoud, veilig gebruik en professioneel slijpen.',
-    index: false,
-  },
-  'over-ons': {
-    title: 'Over Slijpmaat · Messenslijper uit Utrecht',
-    description:
-      'Lees hoe Teun en Mike Slijpmaat begonnen en waarom zij keukenmessen met de hand slijpen voor duurzaam behoud en langdurig snijplezier.',
-    index: true,
-  },
-  faq: {
-    title: 'Veelgestelde vragen over messen slijpen · Slijpmaat',
-    description:
-      'Antwoorden over prijzen, soorten messen, veilig verpakken, ophalen en bezorgen, langsbrengen, betalen en het handmatige slijpproces.',
-    index: true,
-  },
-  contact: {
-    title: 'Contact met Slijpmaat · Messenslijper Utrecht',
-    description:
-      'Neem contact op met Slijpmaat voor een afspraak, zakelijke aanvraag of advies over je keukenmessen. Je spreekt direct met Teun of Mike.',
-    index: true,
-  },
-  'algemene-voorwaarden': {
-    title: 'Algemene voorwaarden · Slijpmaat',
-    description: 'Lees de algemene voorwaarden die gelden voor opdrachten, afspraken en dienstverlening van Slijpmaat.',
-    index: false,
-  },
-  privacy: {
-    title: 'Privacyverklaring · Slijpmaat',
-    description:
-      'Lees hoe Slijpmaat persoonsgegevens verwerkt, beveiligt en bewaart en welke privacyrechten je daarbij hebt.',
-    index: false,
-  },
-};
+import { NotFoundPage } from './pages/NotFoundPage';
+import { getRouteByPage, getRouteByPath, jsonLdString, NOT_FOUND_SEO, PAGE_PATHS, SITE_URL } from './seo';
 
 const setMetaContent = (selector: string, attribute: 'name' | 'property', key: string, content: string) => {
   let element = document.head.querySelector<HTMLMetaElement>(selector);
@@ -154,18 +40,28 @@ const setCanonical = (url: string) => {
   element.href = url;
 };
 
-export default function App() {
-  const pageFromPath = (pathname: string): PageId | null => {
-    const normalizedPath = pathname !== '/' ? pathname.replace(/\/$/, '') : pathname;
-    const match = Object.entries(pagePaths).find(([, path]) => path === normalizedPath);
-    return match ? (match[0] as PageId) : null;
-  };
+const setStructuredData = (pathname: string) => {
+  let element = document.head.querySelector<HTMLScriptElement>('#route-jsonld');
+  if (!element) {
+    element = document.createElement('script');
+    element.id = 'route-jsonld';
+    element.type = 'application/ld+json';
+    document.head.appendChild(element);
+  }
+  element.text = jsonLdString(pathname);
+};
 
-  const [currentPage, setCurrentPage] = useState<PageId>(() => pageFromPath(window.location.pathname) ?? 'home');
+type AppProps = {
+  initialPath?: string;
+};
+
+export default function App({ initialPath }: AppProps) {
+  const browserPath = typeof window !== 'undefined' ? window.location.pathname : '/';
+  const [currentPage, setCurrentPage] = useState<PageId | null>(() => getRouteByPath(initialPath ?? browserPath)?.pageId ?? null);
 
   useEffect(() => {
-    const metadata = seoMetadata[currentPage];
-    const canonicalUrl = `https://slijpmaat.nl${pagePaths[currentPage]}`;
+    const metadata = currentPage ? getRouteByPage(currentPage) : NOT_FOUND_SEO;
+    const canonicalUrl = `${SITE_URL}${metadata.path}`;
 
     document.title = metadata.title;
     setMetaContent('meta[name="description"]', 'name', 'description', metadata.description);
@@ -176,11 +72,12 @@ export default function App() {
     setMetaContent('meta[name="twitter:title"]', 'name', 'twitter:title', metadata.title);
     setMetaContent('meta[name="twitter:description"]', 'name', 'twitter:description', metadata.description);
     setCanonical(canonicalUrl);
+    setStructuredData(metadata.path);
   }, [currentPage]);
 
   const handleNavigate = (page: PageId) => {
     setCurrentPage(page);
-    const nextPath = pagePaths[page];
+    const nextPath = PAGE_PATHS[page];
     if (window.location.pathname !== nextPath || window.location.hash) {
       window.history.pushState(null, '', nextPath);
     }
@@ -219,7 +116,7 @@ export default function App() {
       };
       if (hash === 'prijzen-bestellen') {
         setCurrentPage('particulieren');
-        window.history.replaceState(null, '', pagePaths.particulieren);
+        window.history.replaceState(null, '', PAGE_PATHS.particulieren);
         window.setTimeout(() => {
           document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 60);
@@ -227,7 +124,7 @@ export default function App() {
       }
       if (hash === 'onze-maten' || hash === 'reviews') {
         setCurrentPage('over-ons');
-        window.history.replaceState(null, '', pagePaths['over-ons']);
+        window.history.replaceState(null, '', PAGE_PATHS['over-ons']);
         window.setTimeout(() => {
           document.getElementById('utrechtse-quotes')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         }, 60);
@@ -236,13 +133,12 @@ export default function App() {
       if (legacyHashPages[hash]) {
         const page = legacyHashPages[hash];
         setCurrentPage(page);
-        window.history.replaceState(null, '', pagePaths[page]);
+        window.history.replaceState(null, '', PAGE_PATHS[page]);
         return;
       }
 
-      const page = pageFromPath(window.location.pathname);
-      setCurrentPage(page ?? 'home');
-      if (!page) window.history.replaceState(null, '', pagePaths.home);
+      const route = getRouteByPath(window.location.pathname);
+      setCurrentPage(route?.pageId ?? null);
     };
 
     window.addEventListener('popstate', syncLocation);
@@ -261,7 +157,7 @@ export default function App() {
       case 'particulieren':
         return <ParticulierenPage onNavigate={handleNavigate} />;
       case 'horeca':
-        return <HorecaPage />;
+        return <HorecaPage onNavigate={handleNavigate} />;
       case 'dienst-keukenmessen':
       case 'dienst-japanse-messen':
       case 'dienst-chips-herstellen':
@@ -284,7 +180,7 @@ export default function App() {
       case 'privacy':
         return <PrivacyPage onNavigate={handleNavigate} />;
       default:
-        return <HomePage onNavigate={handleNavigate} />;
+        return <NotFoundPage onNavigate={handleNavigate} />;
     }
   };
 
