@@ -19,6 +19,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
   const [isVisible, setIsVisible] = useState(true);
   const [isScrolled, setIsScrolled] = useState(false);
   const lastScrollY = useRef(0);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileMenuScrollYRef = useRef(0);
+  const mobileMenuScrollCapturedRef = useRef(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -53,6 +56,33 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
     window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!mobileMenuOpen) return;
+
+    const previousDocumentOverflow = document.documentElement.style.overflow;
+    const previousOverscrollBehavior = document.body.style.overscrollBehavior;
+    const lockedScrollY = mobileMenuScrollYRef.current;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key !== 'Escape') return;
+      setMobileMenuOpen(false);
+      setMobilePrijzenOpen(false);
+      setMobilePlanOpen(false);
+      window.requestAnimationFrame(() => mobileMenuButtonRef.current?.focus({ preventScroll: true }));
+    };
+
+    document.documentElement.style.overflow = 'hidden';
+    document.body.style.overscrollBehavior = 'none';
+    document.addEventListener('keydown', handleKeyDown);
+    window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'auto' });
+
+    return () => {
+      document.documentElement.style.overflow = previousDocumentOverflow;
+      document.body.style.overscrollBehavior = previousOverscrollBehavior;
+      document.removeEventListener('keydown', handleKeyDown);
+      window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'auto' });
+    };
+  }, [mobileMenuOpen]);
 
   const navLinks: { id: PageId; labelKey: string; defaultLabel: string }[] = [
     { id: 'home', labelKey: 'nav.home', defaultLabel: 'Home' },
@@ -208,10 +238,32 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
             {/* Mobile Hamburger Button */}
             <button
-              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="lg:hidden p-2 rounded-full border-2 border-[#3B7F4B] text-[#3B7F4B] bg-[#F7F4EC] hover:bg-[#E8EFE8] transition-colors"
+              ref={mobileMenuButtonRef}
+              onPointerDown={() => {
+                if (mobileMenuOpen) return;
+                mobileMenuScrollYRef.current = window.scrollY;
+                mobileMenuScrollCapturedRef.current = true;
+              }}
+              onKeyDown={(event) => {
+                if (mobileMenuOpen || (event.key !== 'Enter' && event.key !== ' ')) return;
+                mobileMenuScrollYRef.current = window.scrollY;
+                mobileMenuScrollCapturedRef.current = true;
+              }}
+              onClick={() => {
+                if (mobileMenuOpen) {
+                  closeHeaderMenus();
+                } else {
+                  if (!mobileMenuScrollCapturedRef.current) {
+                    mobileMenuScrollYRef.current = window.scrollY;
+                  }
+                  mobileMenuScrollCapturedRef.current = false;
+                  setMobileMenuOpen(true);
+                }
+              }}
+              className="flex h-11 w-11 items-center justify-center rounded-full border-2 border-[#3B7F4B] bg-[#F7F4EC] text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] lg:hidden"
               aria-label={mobileMenuOpen ? 'Menu sluiten' : 'Menu openen'}
               aria-expanded={mobileMenuOpen}
+              aria-controls="mobile-navigation-drawer"
             >
               {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
@@ -220,13 +272,17 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
         {/* Mobile Navigation Drawer */}
         {mobileMenuOpen && (
-          <div className="lg:hidden border-b border-[#3B7F4B]/20 bg-[#F7F4EC] px-4 pt-3 pb-6 space-y-2 shadow-xl max-h-[calc(100vh-5rem)] overflow-y-auto">
-            <nav className="flex flex-col space-y-1">
+          <div
+            id="mobile-navigation-drawer"
+            className="mobile-menu-drawer absolute inset-x-0 top-full flex min-h-0 flex-col border-b border-[#3B7F4B]/20 bg-[#F7F4EC] shadow-xl lg:hidden"
+          >
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-2">
+              <nav aria-label="Mobiele hoofdnavigatie" className="flex flex-col gap-0.5">
               {/* Home */}
               <button
                 type="button"
                 onClick={() => handleLinkClick('home')}
-                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'home'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
                     : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
@@ -240,7 +296,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 <button
                   type="button"
                   onClick={() => setMobilePrijzenOpen(!mobilePrijzenOpen)}
-                  className={`w-full flex items-center justify-between px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                  className={`flex min-h-11 w-full items-center justify-between rounded-lg px-3 py-2 text-[15px] font-semibold transition-colors ${
                     currentPage === 'particulieren' || currentPage === 'horeca'
                       ? 'text-[#3B7F4B] font-bold'
                       : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
@@ -255,12 +311,12 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                   />
                 </button>
                 {mobilePrijzenOpen && (
-                  <div className="ml-4 pl-4 py-1.5 space-y-2 border-l-2 border-[#3B7F4B]/30">
+                  <div className="ml-4 border-l-2 border-[#3B7F4B]/30 py-0.5 pl-3">
                     <button
                       type="button"
                       translate="no"
                       onClick={() => handlePriceClick('particulieren', 'calculator')}
-                      className="notranslate block w-full text-left text-sm font-medium text-[#3B7F4B]/75 hover:text-[#3B7F4B] transition-colors py-1"
+                      className="notranslate block min-h-11 w-full rounded-lg px-2 py-2 text-left text-sm font-medium text-[#3B7F4B]/75 transition-colors hover:bg-black/5 hover:text-[#3B7F4B]"
                     >
                       Particulier
                     </button>
@@ -268,7 +324,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                       type="button"
                       translate="no"
                       onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')}
-                      className="notranslate block w-full text-left text-sm font-medium text-[#3B7F4B]/75 hover:text-[#3B7F4B] transition-colors py-1"
+                      className="notranslate block min-h-11 w-full rounded-lg px-2 py-2 text-left text-sm font-medium text-[#3B7F4B]/75 transition-colors hover:bg-black/5 hover:text-[#3B7F4B]"
                     >
                       Zakelijk
                     </button>
@@ -280,7 +336,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               <button
                 type="button"
                 onClick={() => handleLinkClick('over-ons')}
-                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'over-ons'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
                     : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
@@ -293,7 +349,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               <button
                 type="button"
                 onClick={() => handleLinkClick('werkwijze')}
-                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'werkwijze'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
                     : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
@@ -306,7 +362,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               <button
                 type="button"
                 onClick={() => handleLinkClick('ophalen-bezorgen')}
-                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'ophalen-bezorgen'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
                     : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
@@ -319,7 +375,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               <button
                 type="button"
                 onClick={() => handleLinkClick('blogs')}
-                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'blogs'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
                     : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
@@ -332,7 +388,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               <button
                 type="button"
                 onClick={() => handleLinkClick('faq')}
-                className={`text-left px-3 py-2.5 rounded-lg text-base font-semibold transition-colors ${
+                className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'faq'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
                     : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
@@ -341,13 +397,24 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 FAQ
               </button>
 
-              {/* Subtiele CTA onderaan het mobiele menu: dik gedrukte groene tekst met dropdown */}
-              <div className="pt-3 mt-2 border-t border-[#3B7F4B]/15">
+              {/* Mobile Language Switcher Slider */}
+              <div className="mt-1 flex min-h-11 items-center justify-between border-t border-[#3B7F4B]/15 px-3 pt-1">
+                <span className="text-xs font-bold text-[#3B7F4B] uppercase tracking-wider">
+                  Taal / Language
+                </span>
+                <LanguageSlider />
+              </div>
+              </nav>
+            </div>
+
+            {/* CTA stays visible; only the navigation region above may scroll. */}
+            <div className="shrink-0 border-t border-[#3B7F4B]/15 bg-[#F7F4EC] px-4 pt-2.5">
                 <button
                   type="button"
                   onClick={() => setMobilePlanOpen(!mobilePlanOpen)}
-                  className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-[#E8EFE8]/70 hover:bg-[#E8EFE8] transition-colors text-left"
+                  className="flex min-h-11 w-full items-center justify-between rounded-xl bg-[#E8EFE8]/70 px-3 py-2 text-left transition-colors hover:bg-[#E8EFE8]"
                   aria-expanded={mobilePlanOpen}
+                  aria-controls="mobile-plan-options"
                 >
                   <span className="font-heading text-base font-bold text-[#3B7F4B]">
                     Plan je slijpbeurt
@@ -360,11 +427,11 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 </button>
 
                 {mobilePlanOpen && (
-                  <div className="mt-2 space-y-1.5 overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-sm animate-in fade-in slide-in-from-top-1 duration-200">
+                  <div id="mobile-plan-options" className="mt-2 space-y-1 overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-1.5 shadow-sm animate-in fade-in slide-in-from-top-1 duration-200">
                     <button
                       type="button"
                       onClick={() => handlePriceClick('particulieren', 'calculator')}
-                      className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]"
+                      className="block min-h-11 w-full rounded-xl px-4 py-2 text-left transition-colors hover:bg-[#E8EFE8]"
                     >
                       <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                       <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
@@ -372,23 +439,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                     <button
                       type="button"
                       onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')}
-                      className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]"
+                      className="block min-h-11 w-full rounded-xl px-4 py-2 text-left transition-colors hover:bg-[#FFF4EF]"
                     >
                       <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
                       <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
                     </button>
                   </div>
                 )}
-              </div>
-
-              {/* Mobile Language Switcher Slider */}
-              <div className="pt-3 mt-3 border-t border-[#3B7F4B]/15 flex items-center justify-between px-3 py-1">
-                <span className="text-xs font-bold text-[#3B7F4B] uppercase tracking-wider">
-                  Taal / Language
-                </span>
-                <LanguageSlider />
-              </div>
-            </nav>
+            </div>
           </div>
         )}
       </header>

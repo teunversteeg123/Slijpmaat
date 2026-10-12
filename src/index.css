@@ -95,6 +95,19 @@ body {
   display: none !important;
 }
 
+.mobile-menu-drawer {
+  height: calc(100vh - 7rem);
+  max-height: calc(100vh - 7rem);
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
+@supports (height: 100dvh) {
+  .mobile-menu-drawer {
+    height: calc(100dvh - 7rem);
+    max-height: calc(100dvh - 7rem);
+  }
+}
+
 /* Shared hero rhythm. Desktop remains page-specific; small screens use one
    consistent hierarchy across all main routes. */
 @media (max-width: 639px) {
