@@ -129,7 +129,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
       {/* Main header */}
       <header className={`bg-[#F7F4EC] border-b border-[#3B7F4B]/20 transition-shadow ${isScrolled ? 'shadow-md' : 'shadow-xs'}`}>
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between gap-4">
+        <div className="max-w-7xl mx-auto flex h-16 items-center justify-between gap-3 px-4 sm:h-20 sm:gap-4 sm:px-6 lg:px-8">
           {/* Zone 1: Wordmark Brand Lockup */}
           <button
             onClick={() => handleLinkClick('home')}

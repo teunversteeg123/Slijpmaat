@@ -16,7 +16,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
       {/* 1. HERO SECTION */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] px-4 pb-16 pt-8 sm:px-6 sm:pb-24 sm:pt-12 lg:px-8 lg:pb-28 lg:pt-16">
+      <section className="site-hero relative overflow-hidden bg-[#FAFAF8] px-4 pb-16 pt-8 sm:px-6 sm:pb-24 sm:pt-12 lg:px-8 lg:pb-28 lg:pt-16">
         <svg
           aria-hidden="true"
           viewBox="0 0 520 520"
@@ -28,19 +28,19 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
           />
         </svg>
 
-        <div className="relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-20">
-          <div className="max-w-2xl">
-            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
+        <div className="site-hero-grid relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-20">
+          <div className="site-hero-copy max-w-2xl">
+            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
               Vragen &amp; antwoorden
             </p>
-            <h1 className="mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
+            <h1 className="site-hero-title mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
               Alles wat je wilt weten over Slijpmaat.
             </h1>
-            <p className="mt-5 text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
+            <p className="site-hero-description mt-5 text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
               Van veilig verpakken tot ophalen, soorten messen en het slijpproces zelf. Hieronder vind je alle antwoorden overzichtelijk bij elkaar.
             </p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <button
                 type="button"
                 onClick={() => onNavigate('particulieren')}
@@ -61,7 +61,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-xl">
+          <div className="site-hero-media relative mx-auto w-full max-w-xl">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-6 -left-5 h-44 w-44 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] sm:-bottom-8 sm:-left-8 sm:h-56 sm:w-56"

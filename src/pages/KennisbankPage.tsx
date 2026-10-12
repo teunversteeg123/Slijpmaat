@@ -13,20 +13,20 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
 
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
-      <section className="relative overflow-hidden px-4 pb-20 pt-12 sm:px-6 sm:pb-28 sm:pt-16 lg:px-8 lg:pb-32 lg:pt-20">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
+      <section className="site-hero relative overflow-hidden px-4 pb-20 pt-12 sm:px-6 sm:pb-28 sm:pt-16 lg:px-8 lg:pb-32 lg:pt-20">
+        <div className="site-hero-grid mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
+          <div className="site-hero-copy">
+            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
               Kennis &amp; onderhoud
             </p>
-            <h1 className="mt-4 font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
+            <h1 className="site-hero-title mt-4 font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
               Blogs over messen slijpen en onderhoud
             </h1>
-            <p className="mt-6 max-w-xl text-base leading-7 text-[#657068] sm:text-lg">
+            <p className="site-hero-description mt-6 max-w-xl text-base leading-7 text-[#657068] sm:text-lg">
               Hier delen we binnenkort praktische kennis over scherpe messen, onderhoud en veilig gebruik in de keuken.
             </p>
 
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row">
+            <div className="site-hero-actions mt-8 flex flex-col gap-3 sm:flex-row">
               <button
                 type="button"
                 onClick={() => onNavigate('particulieren')}
@@ -47,7 +47,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          <div className="relative mx-auto w-full max-w-xl">
+          <div className="site-hero-media relative mx-auto w-full max-w-xl">
             <div aria-hidden="true" className="absolute -bottom-6 -left-6 h-44 w-44 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] sm:h-56 sm:w-56" />
             <div className="relative aspect-[4/3] overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg sm:aspect-square">
               <img

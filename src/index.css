@@ -95,3 +95,61 @@ body {
   display: none !important;
 }
 
+/* Shared hero rhythm. Desktop remains page-specific; small screens use one
+   consistent hierarchy across all main routes. */
+@media (max-width: 639px) {
+  .site-hero {
+    padding-top: 1.25rem;
+    padding-right: 0;
+    padding-bottom: 2.5rem;
+    padding-left: 0;
+  }
+
+  .site-hero-grid {
+    gap: 2rem;
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+
+  .site-hero-copy {
+    min-width: 0;
+    padding-right: 1rem;
+    padding-left: 1rem;
+  }
+
+  .site-hero-eyebrow {
+    line-height: 1.45;
+    letter-spacing: 0.2em;
+  }
+
+  .site-hero-title {
+    max-width: 100%;
+    font-size: clamp(2.35rem, 11.5vw, 3.05rem);
+    line-height: 0.98;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+  }
+
+  .site-hero-description {
+    margin-top: 1.15rem;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+
+  .site-hero-actions {
+    margin-top: 1.5rem;
+    width: 100%;
+  }
+
+  .site-hero-actions > * {
+    width: 100%;
+  }
+
+  .site-hero-media {
+    width: calc(100% - 2rem);
+    max-width: 36rem;
+    margin-right: auto;
+    margin-left: auto;
+  }
+}
+
