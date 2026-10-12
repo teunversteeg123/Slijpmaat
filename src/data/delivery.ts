@@ -21,7 +21,18 @@ export const DELIVERY_FEES_CENTS = {
 
 export type DeliveryZone = 'always-free' | 'standard' | 'outer' | 'outside';
 
-export const getDeliveryZone = (postcodePrefix: string): DeliveryZone => {
+export const normalizeDutchPostcode = (postcode: string): string =>
+  postcode.toUpperCase().replace(/\s/g, '');
+
+export const getDutchPostcodePrefix = (postcode: string): string =>
+  normalizeDutchPostcode(postcode).slice(0, 4);
+
+export const isValidDutchPostcode = (postcode: string): boolean =>
+  /^[1-9][0-9]{3}([A-Z]{2})?$/.test(normalizeDutchPostcode(postcode));
+
+export const getDeliveryZone = (postcode: string): DeliveryZone => {
+  if (!isValidDutchPostcode(postcode)) return 'outside';
+  const postcodePrefix = getDutchPostcodePrefix(postcode);
   if ((ZONE_ALWAYS_FREE as readonly string[]).includes(postcodePrefix)) return 'always-free';
   if ((ZONE_STANDARD as readonly string[]).includes(postcodePrefix)) return 'standard';
   if ((ZONE_OUTER as readonly string[]).includes(postcodePrefix)) return 'outer';
@@ -29,13 +40,13 @@ export const getDeliveryZone = (postcodePrefix: string): DeliveryZone => {
 };
 
 export const getDeliveryFeeCents = (
-  postcodePrefix: string,
+  postcode: string,
   orderValueCents: number,
   selfDropoff: boolean,
 ): number | null => {
   if (selfDropoff) return 0;
 
-  const zone = getDeliveryZone(postcodePrefix);
+  const zone = getDeliveryZone(postcode);
   if (zone === 'outside') return null;
   if (zone === 'always-free' || orderValueCents >= FREE_DELIVERY_THRESHOLD_CENTS) return 0;
   return zone === 'standard' ? DELIVERY_FEES_CENTS.standard : DELIVERY_FEES_CENTS.outer;

@@ -13,6 +13,8 @@ import {
   FREE_DELIVERY_THRESHOLD_CENTS,
   getDeliveryFeeCents,
   getDeliveryZone,
+  isValidDutchPostcode,
+  normalizeDutchPostcode,
 } from '../data/delivery';
 
 interface KnifeCategory {
@@ -74,9 +76,8 @@ export const ParticulierenCalculator: React.FC = () => {
   const [showDamageHelp, setShowDamageHelp] = useState<boolean>(false);
   const [errorMsg, setErrorMsg] = useState<string>('');
 
-  const cleanPostcode = postcode.toUpperCase().replace(/\s/g, '');
-  const prefix4 = cleanPostcode.slice(0, 4);
-  const isValidDutchPostcode = /^[1-9][0-9]{3}([A-Z]{2})?$/.test(cleanPostcode);
+  const cleanPostcode = normalizeDutchPostcode(postcode);
+  const hasValidPostcode = isValidDutchPostcode(postcode);
 
   const totalKnives = counts.reduce((sum, c) => sum + c, 0);
   const hasExtraLarge = counts[3] > 0;
@@ -97,12 +98,12 @@ export const ParticulierenCalculator: React.FC = () => {
   const finalSharpeningCents = standardSharpeningCents - studentDiscountCents;
 
   // Delivery fee calculation
-  const deliveryZone = isValidDutchPostcode ? getDeliveryZone(prefix4) : 'outside';
-  const isOutsideArea = isValidDutchPostcode && deliveryZone === 'outside';
+  const deliveryZone = hasValidPostcode ? getDeliveryZone(postcode) : 'outside';
+  const isOutsideArea = hasValidPostcode && deliveryZone === 'outside';
   const deliveryFeeCents = selfDropoff
     ? 0
-    : isValidDutchPostcode
-      ? getDeliveryFeeCents(prefix4, finalSharpeningCents, false)
+    : hasValidPostcode
+      ? getDeliveryFeeCents(postcode, finalSharpeningCents, false)
       : null;
   const amountUntilFreeDeliveryCents = Math.max(0, FREE_DELIVERY_THRESHOLD_CENTS - finalSharpeningCents);
 
@@ -133,9 +134,9 @@ export const ParticulierenCalculator: React.FC = () => {
       return;
     }
     if (!selfDropoff) {
-      if (!cleanPostcode || cleanPostcode.length < 4) {
+      if (!hasValidPostcode) {
         e.preventDefault();
-        setErrorMsg('Vul je postcode in (minimaal 4 cijfers).');
+        setErrorMsg('Vul een geldige postcode in, bijvoorbeeld 3513 AB.');
         document.getElementById('calc-postcode-input')?.focus();
         return;
       }
@@ -156,7 +157,7 @@ export const ParticulierenCalculator: React.FC = () => {
     } else if (deliveryFeeCents !== null) {
       deliveryText = formatEuro(deliveryFeeCents);
     } else if (isOutsideArea) {
-      deliveryText = 'Op aanvraag (buiten bezorggebied)';
+      deliveryText = 'Haal-/brengmogelijkheid en prijs op aanvraag (buiten vast bezorggebied)';
     }
 
     let totalText = 'Op aanvraag';
@@ -191,7 +192,7 @@ export const ParticulierenCalculator: React.FC = () => {
     lines.push(
       '',
       `Messen slijpen: ${hasExtraLarge ? 'Op aanvraag' : formatEuro(finalSharpeningCents)}`,
-      `Ophalen & bezorgen: ${deliveryText}`,
+      `${selfDropoff ? 'Zelf brengen & ophalen' : 'Ophalen & bezorgen'}: ${deliveryText}`,
       `Totaal geschat: ${totalText}`,
       '(Eventuele reparaties of chips niet inbegrepen)'
     );
@@ -406,7 +407,10 @@ export const ParticulierenCalculator: React.FC = () => {
             <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
               <button
                 type="button"
-                onClick={() => setSelfDropoff(false)}
+                onClick={() => {
+                  setSelfDropoff(false);
+                  setErrorMsg('');
+                }}
                 className={`flex flex-col text-left p-4 rounded-2xl border-2 transition-all cursor-pointer ${
                   !selfDropoff
                     ? 'border-[#3B7F4B] bg-[#E8EFE8]/30 shadow-2xs'
@@ -426,7 +430,10 @@ export const ParticulierenCalculator: React.FC = () => {
 
               <button
                 type="button"
-                onClick={() => setSelfDropoff(true)}
+                onClick={() => {
+                  setSelfDropoff(true);
+                  setErrorMsg('');
+                }}
                 className={`flex flex-col text-left p-4 rounded-2xl border-2 transition-all cursor-pointer ${
                   selfDropoff
                     ? 'border-[#3B7F4B] bg-[#E8EFE8]/30 shadow-2xs'
@@ -460,7 +467,10 @@ export const ParticulierenCalculator: React.FC = () => {
                       id="calc-postcode-input"
                       type="text"
                       value={postcode}
-                      onChange={(e) => setPostcode(e.target.value)}
+                      onChange={(e) => {
+                        setPostcode(e.target.value);
+                        setErrorMsg('');
+                      }}
                       maxLength={7}
                       placeholder="Bijv. 3513 AB"
                       className="w-full rounded-xl border border-[#b6c1b6] bg-white px-3.5 py-2.5 text-sm font-semibold text-[#203728] placeholder-[#9ca3af] focus:border-[#3B7F4B] focus:outline-none focus:ring-1 focus:ring-[#3B7F4B]"
@@ -495,9 +505,13 @@ export const ParticulierenCalculator: React.FC = () => {
                     <span className="text-[#657068]">
                       Vul je postcode in om je bezorgtarief te bekijken.
                     </span>
+                  ) : !hasValidPostcode ? (
+                    <span className="text-[#C95E3E] font-medium">
+                      Vul een geldige postcode in, bijvoorbeeld 3513 AB.
+                    </span>
                   ) : isOutsideArea ? (
                     <span className="text-[#C95E3E] font-medium">
-                      Buiten ons standaard bezorggebied in Utrecht. Mogelijkheden &amp; prijs stemmen we graag met je af!
+                      Buiten ons vaste bezorggebied. Haal-/brengmogelijkheid en prijs zijn op aanvraag, of kom zonder bezorgkosten zelf langs op afspraak.
                     </span>
                   ) : deliveryFeeCents === 0 ? (
                     <span className="text-[#3B7F4B] font-bold flex items-center gap-1.5">

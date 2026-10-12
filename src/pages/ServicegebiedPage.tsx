@@ -4,6 +4,8 @@ import { SLIJPMAAT_INFO, SERVICE_AREAS } from '../data/siteData';
 import {
   getDeliveryFeeCents,
   getDeliveryZone,
+  getDutchPostcodePrefix,
+  isValidDutchPostcode,
 } from '../data/delivery';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
@@ -116,8 +118,8 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
 
   const handleCheckZip = (e: React.FormEvent) => {
     e.preventDefault();
-    const clean = zipInput.trim().toUpperCase().slice(0, 4);
-    if (!/^[1-9][0-9]{3}$/.test(clean)) {
+    const clean = getDutchPostcodePrefix(zipInput);
+    if (!isValidDutchPostcode(zipInput)) {
       setSearchResult({
         status: 'warning',
         text: 'Vul een geldige 4-cijferige postcode in, bijvoorbeeld 3511 of 3572.'
