@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO, SERVICE_AREAS } from '../data/siteData';
+import { DELIVERY_FEES_CENTS, getDeliveryZone } from '../data/delivery';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import {
   MapPin,
@@ -47,8 +48,8 @@ const serviceSteps = [
 
 const serviceFaqs = [
   {
-    q: 'Vanaf hoeveel messen is het ophalen en bezorgen gratis?',
-    a: 'Vanaf 3 messen halen we jouw messen gratis op én brengen we ze gratis terug binnen ons vaste Utrechtse servicegebied. Laat je 1 of 2 messen slijpen? Dan hangen de bezorgkosten af van je postcode; controleer die eenvoudig met de postcodecheck op deze pagina.'
+    q: 'Vanaf welke bestelwaarde is ophalen en bezorgen gratis?',
+    a: 'Vanaf €35 bestelwaarde halen we jouw messen gratis op én brengen we ze gratis terug binnen Utrecht. Onder €35 hangt het tarief af van je postcode; enkele postcodegebieden zijn altijd gratis. Controleer jouw tarief eenvoudig met de postcodecheck op deze pagina.'
   },
   {
     q: 'Hoe geef ik mijn messen veilig mee aan de deur?',
@@ -122,11 +123,22 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
     e.preventDefault();
     const clean = zipInput.trim().toUpperCase().slice(0, 4);
     const num = parseInt(clean, 10);
+    const zone = getDeliveryZone(clean);
 
-    if (num >= 3511 && num <= 3585) {
+    if (zone === 'always-free') {
       setSearchResult({
         status: 'success',
-        text: 'Goed nieuws! Jouw postcode valt binnen onze gratis ophaalzone in Utrecht (gratis vanaf 3 messen).'
+        text: 'Goed nieuws! Voor jouw postcode is ophalen en bezorgen binnen Utrecht altijd gratis.'
+      });
+    } else if (zone === 'standard') {
+      setSearchResult({
+        status: 'success',
+        text: `Jouw postcode valt binnen ons vaste servicegebied. Vanaf €35 bestelwaarde is ophalen en bezorgen gratis; onder €35 kost dit €${(DELIVERY_FEES_CENTS.standard / 100).toFixed(2).replace('.', ',')}.`
+      });
+    } else if (zone === 'outer') {
+      setSearchResult({
+        status: 'success',
+        text: `Jouw postcode valt binnen onze buitenring. Vanaf €35 bestelwaarde is ophalen en bezorgen gratis; onder €35 kost dit €${(DELIVERY_FEES_CENTS.outer / 100).toFixed(2).replace('.', ',')}.`
       });
     } else if ((num >= 3450 && num <= 3500) || (num >= 3586 && num <= 3600)) {
       setSearchResult({
@@ -306,7 +318,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Dekking in Utrecht</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Postcodecheck &amp; wijken</h2>
             <p className="mt-3 text-base text-[#657068]">
-              Controleer direct of jouw adres in ons gratis ophaalgebied valt.
+              Controleer direct of jouw adres binnen ons ophaalgebied valt en welk tarief geldt.
             </p>
           </div>
 
@@ -319,7 +331,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                 </span>
                 <h3 className="mt-3 font-heading text-2xl font-bold text-[#3B7F4B]">Check jouw postcode</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#657068]">
-                  Vul je 4-cijferige postcode in om te zien of we gratis bij je aan de deur komen.
+                  Vul je 4-cijferige postcode in om de mogelijkheid en het juiste ophaal- en bezorgtarief te zien.
                 </p>
               </div>
 
@@ -360,11 +372,11 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
               <div className="space-y-3 border-t border-[#d9e1d7]/70 pt-5 text-xs text-[#657068]">
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="font-medium">Gratis ophalen &amp; bezorgen vanaf 3 messen</span>
+                  <span className="font-medium">Gratis ophalen &amp; bezorgen vanaf €35 bestelwaarde</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="font-medium">Bezorgtarief bij 1 of 2 messen hangt af van je postcode</span>
+                  <span className="font-medium">Onder €35 hangt het tarief af van je postcode</span>
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-[#3B7F4B] shrink-0" />
@@ -419,7 +431,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                 </span>
                 <h3 className="mt-5 font-heading text-2xl font-bold text-[#3B7F4B]">Binnen Utrecht</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#657068] sm:text-base">
-                  Vanaf 3 messen halen we ze gratis op aan huis of zaak. Binnen 24–48 uur weer vlijmscherp terugbezorgd.
+                  Vanaf €35 bestelwaarde halen we ze gratis op aan huis of zaak. Binnen 24–48 uur weer vlijmscherp terugbezorgd.
                 </p>
               </div>
               <div className="mt-6 pt-4 border-t border-[#d9e1d7]/60">
@@ -475,7 +487,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <Bike className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf 3 messen</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf €35</span>
             </div>
           </div>
         </div>
