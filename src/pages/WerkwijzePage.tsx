@@ -2,10 +2,10 @@ import React from 'react';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
-import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
   ArrowRight,
   Clock3,
+  MapPin,
   MessageCircle,
   Phone,
   CheckCircle2,
@@ -13,10 +13,15 @@ import {
   Shield,
   Flame,
   Check,
+  X,
+  HelpCircle,
   ChevronDown,
+  Layers,
   HeartHandshake,
   Compass,
-  AlertCircle
+  AlertCircle,
+  Droplets,
+  Thermometer
 } from 'lucide-react';
 
 interface WerkwijzePageProps {
@@ -138,7 +143,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
       {/* 1. HERO SECTION (Strakke lay-out: tekst links, foto rechts met saliegroene blob) */}
-      <section className="site-hero relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[560px] lg:pb-12">
+      <section className="relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[560px] lg:pb-12">
         {/* Crisp organic SVG blob in top-right background */}
         <svg
           aria-hidden="true"
@@ -151,20 +156,20 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
           />
         </svg>
 
-        <div className="site-hero-grid relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[520px] lg:grid-cols-2 lg:gap-14 lg:py-8 xl:gap-20">
+        <div className="relative z-10 grid grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[520px] lg:grid-cols-2 lg:gap-12 lg:py-8 xl:gap-20">
           {/* Left: Copy & CTAs */}
-          <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0">
-            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
+          <div className="order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0 lg:pl-4 xl:pl-8">
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
               Het Slijpmaat Ambacht
             </p>
-            <h1 className="site-hero-title mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
-              Zo slijpen wij keukenmessen met de hand
+            <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
+              100% met de hand geslepen.
             </h1>
-            <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
+            <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
               Waarom wij weigeren machines te gebruiken: we slijpen volledig met de hand op Japanse waterstenen en leer. Met minimale materiaalafname, maximaal behoud van het profiel en persoonlijke aandacht voor elk mes.
             </p>
 
-            <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <button
                 type="button"
                 onClick={() => onNavigate('particulieren')}
@@ -178,7 +183,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                 href={whatsappUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
+                className="group inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
               >
                 <MessageCircle className="h-4 w-4" />
                 <span>Stel een vraag via WhatsApp</span>
@@ -187,12 +192,12 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Right: Mooie foto met saliegroene blob erachter */}
-          <div className="site-hero-media relative order-2 mx-auto w-full max-w-xl px-4 sm:px-6 lg:order-2 lg:px-0">
+          <div className="order-2 w-full lg:order-2 px-4 sm:px-6 lg:px-0 relative">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
+              className="pointer-events-none absolute -bottom-4 -left-4 sm:-bottom-7 sm:-left-7 h-36 w-36 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg lg:aspect-square">
+            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2rem] bg-white shadow-md sm:aspect-[16/11] sm:rounded-[2.5rem] lg:aspect-square">
               <img
                 src="/assets/werkwijze/03-slijpen.jpg"
                 alt="Teun of Mike slijpt met de hand op Japanse waterstenen"
@@ -258,9 +263,6 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
             <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
               Hoe wij te werk gaan: minimale afname, maximale scherpte
             </h2>
-            <p className="mt-4 text-base leading-7 text-[#657068]">
-              We gaan uiterst zorgvuldig en beheerst te werk. Ons doel is niet om zoveel mogelijk staal weg te slijpen, maar juist zo min mogelijk. Zo behoudt je mes zijn originele lijn en gaat het zo lang mogelijk mee.
-            </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -297,8 +299,6 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
-
-      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#F9E4DE" toColor="#F7F4EC" variant="rolling" />
 
       {/* 5. VOOR ELK MES EEN ANDERE AANPAK (Westers vs. Japans vs. Chips herstel) in warm cream #F7F4EC */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -362,84 +362,332 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#F7F4EC" middleColor="#E8EFE8" toColor="#FFFFFF" variant="scalloped" mirror />
+      {/* 6. VAKMANSCHAP VS. MASSA (Waarom handmatig slijpen superieur is aan machines) */}
+      <section className="relative overflow-hidden bg-[#FAFAF8] px-4 py-16 sm:px-6 sm:py-24 lg:px-8 border-t border-[#d9e1d7]/60">
+        {/* Subtiele organische achtergrondvormen */}
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -left-20 top-1/4 h-80 w-80 rounded-full bg-[#E8EFE8]/60 blur-3xl"
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute -right-20 bottom-1/4 h-80 w-80 rounded-full bg-[#FCEEE8]/50 blur-3xl"
+        />
 
-      {/* 6. WAAROM WIJ WEIGEREN MACHINES TE GEBRUIKEN (Machines vs. Slijpmaat Handwerk) */}
-      <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="mb-12 max-w-2xl sm:mb-16">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Vakmanschap vs. Massa</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+          {/* Header */}
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
+              Vakmanschap vs. Massa
+            </p>
+            <h2 className="mt-3 font-heading text-3xl font-bold leading-tight text-[#3B7F4B] sm:text-4xl lg:text-5xl">
               Waarom handmatig slijpen superieur is aan machines
             </h2>
-            <p className="mt-4 text-base leading-7 text-[#657068]">
+            <p className="mt-4 text-base leading-relaxed text-[#657068] sm:text-lg">
               Snelslijpers in winkelstraten en elektrische bandslijpers draaien om snelheid, niet om behoud. Dit is het verschil:
             </p>
           </div>
 
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-            {/* Kaart 1: Elektrische machines */}
-            <div className="rounded-[2.25rem] border border-[#E87B5B]/30 bg-[#FFF7F3] p-7 sm:p-9 shadow-xs">
-              <div className="flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#F9E4DE] text-[#C95E3E]">
-                  <Flame className="h-6 w-6" />
-                </span>
-                <div>
-                  <h3 className="font-heading text-xl font-bold text-[#C95E3E]">
-                    Elektrische machines &amp; slijpwielen
-                  </h3>
-                  <p className="text-xs font-semibold text-[#C95E3E]/80">
-                    Snel klaar, maar desastreus voor je mes
-                  </p>
+          {/* Dual Comparative Cards */}
+          <div className="mt-12 grid grid-cols-1 gap-6 sm:gap-8 lg:mt-16 lg:grid-cols-2 lg:items-stretch">
+            {/* Kaart 1: Elektrische machines & slijpwielen */}
+            <div className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border border-[#F0C0B2] bg-[#FFFBF8] p-5 sm:p-8 lg:p-10 shadow-xs transition-all duration-300 hover:border-[#E87B5B]/60 hover:shadow-md">
+              <div>
+                {/* Header Rij */}
+                <div className="flex flex-wrap sm:flex-nowrap items-start sm:items-center justify-between gap-3 border-b border-[#F0C0B2]/50 pb-5">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-2xl bg-[#FCEEE8] text-[#C95E3E]">
+                      <Flame className="h-5 w-5 sm:h-6 sm:w-6" />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-[#C95E3E]">
+                        Industriële snelslijpers
+                      </p>
+                      <h3 className="font-heading text-lg font-bold leading-snug text-[#C95E3E] sm:text-2xl">
+                        Elektrische machines &amp; slijpwielen
+                      </h3>
+                    </div>
+                  </div>
+                  <span className="shrink-0 self-start sm:self-auto rounded-full bg-[#FDE7E1] px-3 py-1 text-xs font-bold text-[#C95E3E]">
+                    Niet aanbevolen
+                  </span>
+                </div>
+
+                <p className="mt-4 text-sm font-semibold text-[#C95E3E]/90 sm:text-base">
+                  Snel klaar, maar desastreus voor je mes
+                </p>
+
+                {/* Hitte Waarschuwingsblok */}
+                <div className="mt-5 rounded-2xl border border-[#F0C0B2]/60 bg-white/80 p-3.5 sm:p-4">
+                  <div className="flex items-center gap-3">
+                    <Thermometer className="h-5 w-5 text-[#C95E3E] shrink-0" />
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#C95E3E]">
+                        Gevaarlijke wrijvingshitte
+                      </span>
+                      <p className="text-xs text-[#657068]">
+                        Binnen 3 seconden loopt de temperatuur op tot boven de 200°C.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* De 3 Punten */}
+                <div className="mt-6 space-y-3.5 sm:space-y-4">
+                  <div className="rounded-2xl border border-[#F0C0B2]/40 bg-white/70 p-3.5 sm:p-4 transition-colors hover:bg-white">
+                    <div className="flex items-start gap-3">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FCD8CF] text-[#C95E3E] mt-0.5">
+                        <X className="h-3.5 w-3.5 stroke-[2.5]" />
+                      </span>
+                      <div>
+                        <h4 className="font-heading text-sm font-bold text-[#203728]">
+                          Hitteontlating
+                        </h4>
+                        <p className="mt-1 text-xs leading-relaxed text-[#657068] sm:text-sm">
+                          Binnen enkele seconden loopt de temperatuur op tot boven de 200°C. Het staal wordt zacht en blijft nooit meer lang scherp.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-[#F0C0B2]/40 bg-white/70 p-3.5 sm:p-4 transition-colors hover:bg-white">
+                    <div className="flex items-start gap-3">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FCD8CF] text-[#C95E3E] mt-0.5">
+                        <X className="h-3.5 w-3.5 stroke-[2.5]" />
+                      </span>
+                      <div>
+                        <h4 className="font-heading text-sm font-bold text-[#203728]">
+                          Agressieve staalafname
+                        </h4>
+                        <p className="mt-1 text-xs leading-relaxed text-[#657068] sm:text-sm">
+                          Een schuurband vreet onnodig veel millimeters staal weg, waardoor je mes snel dun en waardeloos wordt.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-[#F0C0B2]/40 bg-white/70 p-3.5 sm:p-4 transition-colors hover:bg-white">
+                    <div className="flex items-start gap-3">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#FCD8CF] text-[#C95E3E] mt-0.5">
+                        <X className="h-3.5 w-3.5 stroke-[2.5]" />
+                      </span>
+                      <div>
+                        <h4 className="font-heading text-sm font-bold text-[#203728]">
+                          Profielverlies
+                        </h4>
+                        <p className="mt-1 text-xs leading-relaxed text-[#657068] sm:text-sm">
+                          De natuurlijke buiging van de snede verdwijnt vaak, waardoor het mes niet meer vlak aansluit op je snijplank.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <ul className="mt-6 space-y-3.5 text-sm text-[#657068]">
-                <li className="flex items-start gap-2.5">
-                  <AlertCircle className="h-4 w-4 shrink-0 text-[#C95E3E] mt-0.5" />
-                  <span><strong>Hitteontlating:</strong> Binnen enkele seconden loopt de temperatuur op tot boven de 200°C. Het staal wordt zacht en blijft nooit meer lang scherp.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <AlertCircle className="h-4 w-4 shrink-0 text-[#C95E3E] mt-0.5" />
-                  <span><strong>Agressieve staalafname:</strong> Een schuurband vreet onnodig veel millimeters staal weg, waardoor je mes snel dun en waardeloos wordt.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <AlertCircle className="h-4 w-4 shrink-0 text-[#C95E3E] mt-0.5" />
-                  <span><strong>Profielverlies:</strong> De natuurlijke buiging van de snede verdwijnt vaak, waardoor het mes niet meer vlak aansluit op je snijplank.</span>
-                </li>
-              </ul>
+              {/* Conclusie */}
+              <div className="mt-7 sm:mt-8 rounded-2xl border border-[#F0C0B2] bg-[#FCEEE8]/80 p-3.5 sm:p-4 text-xs font-semibold text-[#C95E3E] flex items-center gap-2.5">
+                <AlertCircle className="h-4 w-4 shrink-0" />
+                <span>Gevolg: Verlies van hardheid, holgeslepen sneden en een verkorte levensduur.</span>
+              </div>
             </div>
 
-            {/* Kaart 2: Slijpmaat Handwerk */}
-            <div className="rounded-[2.25rem] border-2 border-[#3B7F4B] bg-[#FAFAF8] p-7 sm:p-9 shadow-sm">
-              <div className="flex items-center gap-3">
-                <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B]">
-                  <Shield className="h-6 w-6" />
-                </span>
-                <div>
-                  <h3 className="font-heading text-xl font-bold text-[#3B7F4B]">
-                    Slijpmaat: 100% met de hand op waterstenen
-                  </h3>
-                  <p className="text-xs font-semibold text-[#3B7F4B]">
-                    Duurzaam behoud en spiegelgladde scherpte
-                  </p>
+            {/* Kaart 2: Slijpmaat: 100% met de hand op waterstenen (Hero Card) */}
+            <div className="relative flex flex-col justify-between overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border-2 border-[#3B7F4B] bg-white p-5 sm:p-8 lg:p-10 shadow-[0_16px_40px_rgba(59,127,75,0.08)] transition-all duration-300 hover:shadow-[0_20px_50px_rgba(59,127,75,0.13)]">
+              <div>
+                {/* Header Rij */}
+                <div className="flex flex-wrap sm:flex-nowrap items-start sm:items-center justify-between gap-3 border-b border-[#d9e1d7]/70 pb-5">
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B]">
+                      <Sparkles className="h-5 w-5 sm:h-6 sm:w-6" />
+                    </span>
+                    <div className="min-w-0">
+                      <p className="text-[11px] font-bold uppercase tracking-wider text-[#3B7F4B]">
+                        Traditioneel Japans ambacht
+                      </p>
+                      <h3 className="font-heading text-lg font-bold leading-snug text-[#3B7F4B] sm:text-2xl">
+                        Slijpmaat: 100% met de hand op waterstenen
+                      </h3>
+                    </div>
+                  </div>
+                  <span className="shrink-0 self-start sm:self-auto rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
+                    100% Ambachtelijk
+                  </span>
+                </div>
+
+                <p className="mt-4 text-sm font-semibold text-[#3B7F4B] sm:text-base">
+                  Duurzaam behoud en spiegelgladde scherpte
+                </p>
+
+                {/* Waterkoeling Garantieblok */}
+                <div className="mt-5 rounded-2xl border border-[#A9C89E]/60 bg-[#E8EFE8]/50 p-3.5 sm:p-4">
+                  <div className="flex items-center gap-3">
+                    <Droplets className="h-5 w-5 text-[#3B7F4B] shrink-0" />
+                    <div>
+                      <span className="text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
+                        Constant gekoeld met water
+                      </span>
+                      <p className="text-xs text-[#203728]">
+                        Nul wrijvingshitte (0°C). De fabriekshardheid van het staal blijft 100% intact.
+                      </p>
+                    </div>
+                  </div>
+                </div>
+
+                {/* De 3 Meesterpunten */}
+                <div className="mt-6 space-y-3.5 sm:space-y-4">
+                  <div className="rounded-2xl border border-[#d9e1d7]/80 bg-[#FAFAF8] p-3.5 sm:p-4 transition-colors hover:bg-[#E8EFE8]/30 hover:border-[#3B7F4B]/40">
+                    <div className="flex items-start gap-3">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B] mt-0.5 font-bold">
+                        <Check className="h-3.5 w-3.5 stroke-[2.5]" />
+                      </span>
+                      <div>
+                        <h4 className="font-heading text-sm font-bold text-[#203728]">
+                          Constant gekoeld met water
+                        </h4>
+                        <p className="mt-1 text-xs leading-relaxed text-[#657068] sm:text-sm">
+                          Geen wrijvingshitte. De fabriekshardheid van het staal blijft 100% intact voor langdurig scherptebehoud.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-[#d9e1d7]/80 bg-[#FAFAF8] p-3.5 sm:p-4 transition-colors hover:bg-[#E8EFE8]/30 hover:border-[#3B7F4B]/40">
+                    <div className="flex items-start gap-3">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B] mt-0.5 font-bold">
+                        <Check className="h-3.5 w-3.5 stroke-[2.5]" />
+                      </span>
+                      <div>
+                        <h4 className="font-heading text-sm font-bold text-[#203728]">
+                          Minimale staalafname
+                        </h4>
+                        <p className="mt-1 text-xs leading-relaxed text-[#657068] sm:text-sm">
+                          We halen enkel de botte micro-laag weg. Je lievelingsmes gaat daardoor tientallen jaren mee.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="rounded-2xl border border-[#d9e1d7]/80 bg-[#FAFAF8] p-3.5 sm:p-4 transition-colors hover:bg-[#E8EFE8]/30 hover:border-[#3B7F4B]/40">
+                    <div className="flex items-start gap-3">
+                      <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B] mt-0.5 font-bold">
+                        <Check className="h-3.5 w-3.5 stroke-[2.5]" />
+                      </span>
+                      <div>
+                        <h4 className="font-heading text-sm font-bold text-[#203728]">
+                          Profielbehoud &amp; overleg
+                        </h4>
+                        <p className="mt-1 text-xs leading-relaxed text-[#657068] sm:text-sm">
+                          We respecteren de natuurlijke curve van het mes en stemmen herstelwerk altijd persoonlijk met je af.
+                        </p>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
 
-              <ul className="mt-6 space-y-3.5 text-sm text-[#203728]">
-                <li className="flex items-start gap-2.5">
-                  <Check className="h-4 w-4 shrink-0 text-[#3B7F4B] mt-0.5" />
-                  <span><strong>Constant gekoeld met water:</strong> Geen wrijvingshitte. De fabriekshardheid van het staal blijft 100% intact voor langdurig scherptebehoud.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <Check className="h-4 w-4 shrink-0 text-[#3B7F4B] mt-0.5" />
-                  <span><strong>Minimale staalafname:</strong> We halen enkel de botte micro-laag weg. Je lievelingsmes gaat daardoor tientallen jaren mee.</span>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <Check className="h-4 w-4 shrink-0 text-[#3B7F4B] mt-0.5" />
-                  <span><strong>Profielbehoud &amp; overleg:</strong> We respecteren de natuurlijke curve van het mes en stemmen herstelwerk altijd persoonlijk met je af.</span>
-                </li>
-              </ul>
+              {/* Conclusie */}
+              <div className="mt-7 sm:mt-8 rounded-2xl border border-[#A9C89E] bg-[#E8EFE8] p-3.5 sm:p-4 text-xs font-bold text-[#3B7F4B] flex items-center gap-2.5">
+                <CheckCircle2 className="h-4 w-4 shrink-0" />
+                <span>Resultaat: Vlijmscherpe apex, behoud van geometrie en decennialang plezier van je mes.</span>
+              </div>
+            </div>
+          </div>
+
+          {/* Direct 3-Punts Matrix Overzicht */}
+          <div className="mt-12 rounded-[2rem] border border-[#d9e1d7] bg-white p-6 sm:p-8 shadow-xs">
+            <h4 className="font-heading text-lg font-bold text-[#3B7F4B] sm:text-xl text-center mb-6">
+              Het verschil in één oogopslag
+            </h4>
+            <div className="grid gap-4 md:grid-cols-3">
+              <div className="rounded-2xl border border-[#d9e1d7]/60 bg-[#FAFAF8] p-5">
+                <p className="text-xs font-bold uppercase tracking-wider text-[#657068]">1. Temperatuur &amp; Hardheid</p>
+                <div className="mt-3 space-y-2 text-xs">
+                  <div className="flex items-start gap-2 text-[#C95E3E]">
+                    <X className="h-3.5 w-3.5 shrink-0 mt-0.5 stroke-[2.5]" />
+                    <span><strong>Machines:</strong> &gt;200°C verhitting; staal ontlaat en verliest hardheid</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-[#3B7F4B]">
+                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5 stroke-[2.5]" />
+                    <span><strong>Slijpmaat:</strong> Continu watergekoeld; fabriekshardheid 100% intact</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-[#d9e1d7]/60 bg-[#FAFAF8] p-5">
+                <p className="text-xs font-bold uppercase tracking-wider text-[#657068]">2. Staalafname &amp; Dikte</p>
+                <div className="mt-3 space-y-2 text-xs">
+                  <div className="flex items-start gap-2 text-[#C95E3E]">
+                    <X className="h-3.5 w-3.5 shrink-0 mt-0.5 stroke-[2.5]" />
+                    <span><strong>Machines:</strong> Schuurband vreet millimeters weg; mes snel versleten</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-[#3B7F4B]">
+                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5 stroke-[2.5]" />
+                    <span><strong>Slijpmaat:</strong> Slechts de botte micro-laag; mes gaat decennia mee</span>
+                  </div>
+                </div>
+              </div>
+
+              <div className="rounded-2xl border border-[#d9e1d7]/60 bg-[#FAFAF8] p-5">
+                <p className="text-xs font-bold uppercase tracking-wider text-[#657068]">3. Lemmetprofiel &amp; Curve</p>
+                <div className="mt-3 space-y-2 text-xs">
+                  <div className="flex items-start gap-2 text-[#C95E3E]">
+                    <X className="h-3.5 w-3.5 shrink-0 mt-0.5 stroke-[2.5]" />
+                    <span><strong>Machines:</strong> Vaak holgeslepen; sluit niet meer aan op de snijplank</span>
+                  </div>
+                  <div className="flex items-start gap-2 text-[#3B7F4B]">
+                    <Check className="h-3.5 w-3.5 shrink-0 mt-0.5 stroke-[2.5]" />
+                    <span><strong>Slijpmaat:</strong> Volledig curvebehoud &amp; persoonlijk overleg via app</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Ambachtsbelofte Banner met foto */}
+          <div className="mt-10 overflow-hidden rounded-[2.5rem] bg-[#244A30] text-white shadow-md">
+            <div className="grid items-center gap-6 p-6 sm:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-10">
+              <div>
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A9C89E]">
+                  Onze Belofte aan Jouw Mes
+                </span>
+                <h3 className="mt-3 font-heading text-2xl font-bold leading-snug sm:text-3xl text-white">
+                  Een goed koksmes slijp je met water en geduld — nooit met haast en geweld.
+                </h3>
+                <p className="mt-3 text-sm leading-relaxed text-[#d9e1d7] sm:text-base">
+                  Zowel voor professionele chefsmessen als voor je trouwe keukenmes thuis: bij ons krijgt ieder lemmet de persoonlijke toewijding die het verdient.
+                </p>
+                <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
+                  <button
+                    type="button"
+                    onClick={() => onNavigate('particulieren')}
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:bg-[#C95E3E] cursor-pointer"
+                  >
+                    <span>Plan je slijpbeurt</span>
+                    <ArrowRight className="h-4 w-4" />
+                  </button>
+                  <a
+                    href={whatsappUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:bg-white/20"
+                  >
+                    <MessageCircle className="h-4 w-4" />
+                    <span>Stel een vraag via WhatsApp</span>
+                  </a>
+                </div>
+              </div>
+              <div className="relative aspect-[16/10] overflow-hidden rounded-2xl sm:aspect-[4/3] lg:aspect-square">
+                <img
+                  src="/assets/werkwijze/03-slijpen.jpg"
+                  alt="Met de hand slijpen op waterstenen door Slijpmaat"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#244A30]/70 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute bottom-3 left-3 right-3 rounded-xl bg-black/40 px-3 py-2 text-xs font-semibold text-white backdrop-blur-xs">
+                  <span>100% watergekoeld Japans watersteenslijpen</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -490,10 +738,32 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#F9E4DE" toColor="#E87B5B" variant="calm" />
-
       {/* 8. BOTTOM CONTACT BANNER with top and bottom wave dividers (Vloeit direct over vanaf wit) */}
       <section id="werkwijze-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 60"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
+        >
+          <path
+            fill="currentColor"
+            d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z"
+          />
+        </svg>
+
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 60"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
+        >
+          <path
+            fill="currentColor"
+            d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z"
+          />
+        </svg>
+
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Contact &amp; Advies</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
@@ -523,8 +793,6 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
-
-      <OrganicSectionDivider fromColor="#E87B5B" middleColor="#F9E4DE" toColor="#FFFFFF" variant="rolling" mirror />
     </div>
   );
 };

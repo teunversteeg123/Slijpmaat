@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { HeroVideo } from '../components/HeroVideo';
 import { ResultatenSlider } from '../components/ResultatenSlider';
-import { AppointmentDropoffWidget } from '../components/AppointmentDropoffWidget';
+import { ZakelijkLeenmessenWidget } from '../components/ZakelijkLeenmessenWidget';
+import { ZakelijkFormulier } from '../components/ZakelijkFormulier';
 import {
   ArrowRight,
   ChevronLeft,
@@ -13,10 +14,9 @@ import {
   MapPin,
   MessageCircle,
   Phone,
-  Sparkles,
+  ShieldCheck,
+  FileText,
   Plus,
-  Send,
-  FileText
 } from 'lucide-react';
 
 interface HorecaPageProps {
@@ -33,32 +33,6 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
     SLIJPMAAT_INFO.prices.extraLarge,
   ];
 
-  // Formulier state (ongewijzigd gehouden voor zakelijke aanvragen)
-  const [formData, setFormData] = useState({
-    restaurantName: '',
-    contactPerson: '',
-    phone: '',
-    knifeCount: '10-20 messen',
-    notes: '',
-  });
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const message = [
-      'Hoi Teun en Mike,',
-      '',
-      'Ik wil graag een zakelijke slijpaanvraag bespreken.',
-      `Restaurant / zaak: ${formData.restaurantName.trim()}`,
-      `Contactpersoon: ${formData.contactPerson.trim()}`,
-      `Telefoonnummer: ${formData.phone.trim()}`,
-      `Aantal messen: ${formData.knifeCount}`,
-      'Haal- en brengservice binnen Utrecht: gratis vanaf €35 bestelwaarde; onder €35 geldt het postcodeafhankelijke tarief.',
-      formData.notes.trim() ? `Planning / opmerkingen: ${formData.notes.trim()}` : '',
-    ].filter(Boolean).join('\n');
-    const url = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
-  };
-
   // 3 Korte stappen vooraf (Warm cream #F7F4EC)
   const stepsBefore = [
     {
@@ -74,7 +48,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
     {
       num: '3',
       title: 'Scherp voor de volgende werkdag',
-      text: 'Binnen 24–48 uur leveren we de messen weer vlijmscherp af, volgens de vooraf afgestemde planning en prijs.',
+      text: 'Binnen 24 tot 48 uur leveren we de messen weer vlijmscherp af, volgens de vooraf afgestemde planning en prijs.',
     },
   ];
 
@@ -96,7 +70,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
       step: '3',
       title: 'Handmatig geslepen',
       desc: 'Handmatig geslepen op Japanse Shapton waterstenen. Geen oververhitting of ontlating; het staal blijft bikkelhard.',
-      icon: Sparkles,
+      icon: ShieldCheck,
     },
     {
       step: '4',
@@ -231,7 +205,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
           {/* Header */}
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Zo werkt het voor zakelijke keukens</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Eenvoudig geregeld voor jouw keukenteam</h2>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Eenvoudig geregeld voor jouw keuken</h2>
             <p className="mt-3 text-base leading-7 text-[#657068]">
               Drie duidelijke stappen. We sluiten aan op jullie keukenplanning, zodat het werk in de keuken doorgaat.
             </p>
@@ -257,159 +231,72 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
 
       <OrganicSectionDivider fromColor="#F7F4EC" middleColor="#F9E4DE" toColor="#FAFAF8" variant="rolling" mirror />
 
-      {/* 4. HET BESTELFORMULIER (ZAKELIJK FORMULIER) - Bewaard zoals afgesproken */}
+      {/* 4. HET BESTELFORMULIER (ZAKELIJK FORMULIER) */}
       <section id="zakelijk-formulier" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto max-w-4xl">
+        <div className="mx-auto max-w-6xl">
           <div className="mb-8 text-center sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Zakelijk Formulier</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Zakelijke aanvraag &amp; offerte</h2>
-            <p className="mx-auto mt-3 max-w-xl text-base leading-relaxed text-[#657068]">
+            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-[#657068]">
               Vul je gegevens in of neem direct contact op via WhatsApp. We reageren snel met een helder voorstel en ophaalvoorstel.
             </p>
           </div>
 
-          <div className="overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white p-6 shadow-sm sm:p-10 lg:p-12">
-            <form onSubmit={handleSubmit} className="space-y-5">
-                <p className="rounded-2xl border border-[#3B7F4B]/20 bg-[#E8EFE8] p-4 text-sm leading-6 text-[#244A30]">
-                  Binnen Utrecht is ophalen en bezorgen gratis vanaf €35 bestelwaarde. Onder €35 geldt het postcodeafhankelijke tarief; voor de buitenring, waaronder Kanaleneiland en Leidsche Rijn, is dat €7,25.
-                </p>
-                <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-                  <div>
-                    <label htmlFor="horeca-company" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Restaurant / Zaak *</label>
-                    <input
-                      id="horeca-company"
-                      type="text"
-                      autoComplete="organization"
-                      required
-                      placeholder="Bijv. Bistro De Gracht"
-                      value={formData.restaurantName}
-                      onChange={(e) => setFormData({ ...formData, restaurantName: e.target.value })}
-                      className="mt-1.5 w-full rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] px-4 py-3 text-sm text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="horeca-contact-person" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Contactpersoon *</label>
-                    <input
-                      id="horeca-contact-person"
-                      type="text"
-                      autoComplete="name"
-                      required
-                      placeholder="Bijv. Chef Dennis"
-                      value={formData.contactPerson}
-                      onChange={(e) => setFormData({ ...formData, contactPerson: e.target.value })}
-                      className="mt-1.5 w-full rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] px-4 py-3 text-sm text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="horeca-phone" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Telefoonnummer *</label>
-                    <input
-                      id="horeca-phone"
-                      type="tel"
-                      autoComplete="tel"
-                      required
-                      placeholder="06 12 34 56 78"
-                      value={formData.phone}
-                      onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-                      className="mt-1.5 w-full rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] px-4 py-3 text-sm text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
-                    />
-                  </div>
-                  <div>
-                    <label htmlFor="horeca-knife-count" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Aantal messen (schatting)</label>
-                    <select
-                      id="horeca-knife-count"
-                      value={formData.knifeCount}
-                      onChange={(e) => setFormData({ ...formData, knifeCount: e.target.value })}
-                      className="mt-1.5 w-full rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] px-4 py-3 text-sm text-[#244A30] focus:border-[#3B7F4B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
-                    >
-                      <option value="0–10 messen">0–10 messen</option>
-                      <option value="10-20 messen">10 – 20 messen</option>
-                      <option value="20-40 messen">20 – 40 messen</option>
-                      <option value="40+ messen">40+ messen (grote zakelijke aanvraag)</option>
-                    </select>
-                  </div>
-                </div>
-
-                <div>
-                  <label htmlFor="horeca-notes" className="block text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">Opmerkingen of gewenste planning</label>
-                  <textarea
-                    id="horeca-notes"
-                    rows={3}
-                    placeholder="Bijv. gewenste dag, aantal rondes of bijzonderheden"
-                    value={formData.notes}
-                    onChange={(e) => setFormData({ ...formData, notes: e.target.value })}
-                    className="mt-1.5 w-full rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] px-4 py-3 text-sm text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:bg-white focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
-                  />
-                </div>
-
-                <div className="pt-2 flex flex-col sm:flex-row items-center justify-between gap-4">
-                  <button
-                    type="submit"
-                    className="group inline-flex min-h-12 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-8 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md cursor-pointer"
-                  >
-                    <Send className="h-4 w-4" />
-                    <span>Open aanvraag in WhatsApp</span>
-                  </button>
-
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 text-sm font-bold text-[#3B7F4B] hover:text-[#315F3B]"
-                  >
-                    <MessageCircle className="h-4 w-4" />
-                    <span>Of app direct met Teun &amp; Mike</span>
-                  </a>
-                </div>
-                <p className="text-center text-xs leading-5 text-[#657068] sm:text-left">
-                  Er wordt nog niets verzonden. Je controleert en verstuurt de aanvraag zelf in WhatsApp.
-                </p>
-                <p className="text-center text-[11px] leading-5 text-[#9ca3af] sm:text-left">
-                  Door een aanvraag te doen ga je akkoord met onze{' '}
-                  <a href="/algemene-voorwaarden" className="underline transition-colors hover:text-[#3B7F4B]">
-                    algemene voorwaarden
-                  </a>{' '}
-                  en{' '}
-                  <a href="/privacyverklaring" className="underline transition-colors hover:text-[#3B7F4B]">
-                    privacyverklaring
-                  </a>
-                  .
-                </p>
-            </form>
+          <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-5 shadow-sm sm:p-8 lg:p-10">
+            <ZakelijkFormulier />
           </div>
 
-          <div className="mt-12 sm:mt-14">
-            <AppointmentDropoffWidget />
-          </div>
+          {/* Compacte widget voor tijdelijke leenmessen direct onder het formulier */}
+          <ZakelijkLeenmessenWidget />
 
-          <section aria-labelledby="zakelijke-prijslijst" className="mt-12 border-t border-[#d9e1d7] pt-10 sm:mt-14 sm:pt-12">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Duidelijk vooraf</p>
-            <h3 id="zakelijke-prijslijst" className="mt-2 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
-              Zakelijke prijslijst
-            </h3>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-[#657068] sm:text-base sm:leading-7">
-              Dit zijn onze basistarieven per mes. Alle genoemde prijzen zijn inclusief btw. Voor grotere aantallen stemmen we de planning en een passende offerte vooraf met jullie af.
+          {/* Duidelijke zakelijke prijslijst op bijbehorende stijlvolle wijze onder het formulier */}
+          <section aria-labelledby="zakelijke-prijslijst" className="mt-10 sm:mt-12 rounded-[2rem] border border-[#d9e1d7] bg-white p-6 shadow-xs sm:p-8">
+            <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-3 border-b border-[#d9e1d7]/80 pb-5">
+              <div>
+                <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Duidelijk vooraf</p>
+                <h3 id="zakelijke-prijslijst" className="mt-1.5 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
+                  Zakelijke prijslijst
+                </h3>
+              </div>
+              <p className="text-xs font-semibold text-[#657068]">
+                Basistarieven per mes · Alle prijzen incl. btw
+              </p>
+            </div>
+
+            <p className="mt-4 text-sm leading-6 text-[#657068]">
+              Dit zijn onze basistarieven per mes. Voor grotere aantallen of periodieke keukenservices stemmen we de planning en een passende offerte vooraf met jullie af.
             </p>
 
-            <dl className="mt-7 max-w-2xl space-y-3 text-sm sm:text-base">
+            <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {businessBasePrices.map((item) => (
-                <div key={item.name} className="grid grid-cols-[1fr_auto] items-baseline gap-5">
-                  <dt className="text-[#35443a]">
-                    <span className="font-bold text-[#244A30]">{item.name}</span>
-                    <span className="text-[#657068]"> · {item.size}</span>
-                  </dt>
-                  <dd className="font-bold text-[#3B7F4B] text-right">
-                    {'custom' in item && item.custom ? 'Op aanvraag' : `€${item.price.toFixed(2).replace('.', ',')}`}
-                  </dd>
+                <div
+                  key={item.name}
+                  className="flex flex-col justify-between rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] p-4 transition-all duration-200 hover:border-[#3B7F4B]/40 hover:bg-white"
+                >
+                  <div>
+                    <span className="font-heading text-base font-bold text-[#244A30]">{item.name}</span>
+                    <p className="mt-0.5 text-xs text-[#657068]">{item.size}</p>
+                    {'desc' in item && item.desc && (
+                      <p className="mt-2 text-[11px] leading-4 text-[#657068]/80 line-clamp-2">{item.desc}</p>
+                    )}
+                  </div>
+                  <div className="mt-4 pt-2 border-t border-[#d9e1d7]/60">
+                    <span className="font-heading text-lg font-bold text-[#3B7F4B]">
+                      {'custom' in item && item.custom ? 'Op aanvraag' : `€${item.price.toFixed(2).replace('.', ',')}`}
+                    </span>
+                  </div>
                 </div>
               ))}
-            </dl>
+            </div>
 
-            <p className="mt-6 max-w-2xl text-sm leading-6 text-[#657068] sm:text-base sm:leading-7">
-              Kleine chip herstellen: <strong className="text-[#244A30]">+€2,50</strong> per mes, in combinatie met een slijpbeurt. Nieuw profiel aanbrengen: <strong className="text-[#244A30]">+€8,50</strong> per mes en altijd vooraf besproken.
-            </p>
-            <p className="mt-3 max-w-2xl text-sm leading-6 text-[#657068] sm:text-base sm:leading-7">
-              Grote aantallen of terugkerend onderhoud? Vermeld het aantal messen en de gewenste planning in het formulier. Je ontvangt eerst een duidelijke offerte; we starten pas na akkoord.
-            </p>
+            <div className="mt-6 rounded-xl border border-[#3B7F4B]/20 bg-[#E8EFE8]/60 p-4 text-xs leading-relaxed text-[#244A30] sm:text-sm">
+              <p>
+                <strong>Extra reparaties:</strong> Kleine chip herstellen: <strong className="text-[#3B7F4B]">+€2,50</strong> per mes (in combinatie met een slijpbeurt). Nieuw profiel aanbrengen: <strong className="text-[#3B7F4B]">+€8,50</strong> per mes (altijd vooraf besproken).
+              </p>
+              <p className="mt-1.5 text-[#657068]">
+                Grote aantallen of terugkerend onderhoud? Vermeld het aantal messen en gewenste planning in het formulier. Je ontvangt eerst een duidelijke offerte; we starten pas na akkoord.
+              </p>
+            </div>
           </section>
         </div>
       </section>
@@ -448,7 +335,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                         {step.step}
                       </span>
                       <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B]">
-                        <Icon className="h-5 w-5" />
+                        <Icon strokeWidth={1.75} className="h-5 w-5" />
                       </span>
                     </div>
 

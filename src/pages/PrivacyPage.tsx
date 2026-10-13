@@ -100,5 +100,5 @@ const sections: LegalSection[] = [
 ];
 
 export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onNavigate }) => (
-  <LegalDocumentPage title="Privacyverklaring Slijpmaat" subtitle="Versie 1.0 — Utrecht — juni 2026" sections={sections} onNavigate={onNavigate} />
+  <LegalDocumentPage title="Privacyverklaring Slijpmaat" subtitle="Versie 1.0 · Utrecht · juni 2026" sections={sections} onNavigate={onNavigate} />
 );

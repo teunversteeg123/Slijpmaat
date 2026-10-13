@@ -46,18 +46,18 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
   // 2. Onze Filosofie (3 Kernprincipes)
   const philosophyItems = [
     {
-      title: '100% Handmatig geslepen',
-      desc: 'Droge machines verhitten de apex boven 200°C waardoor staal zacht wordt en snel weer bot is. Onze waterstenen koelen constant. Hierdoor behoudt je mes zijn fabriekshardheid en blijft het wekenlang scherp.',
+      title: 'Met de hand en met aandacht',
+      desc: 'Geen snelle slijpbeurt op een droge machine. Wij slijpen ieder mes met de hand op Japanse waterstenen. Zo houden we controle over de slijphoek en behandelen we ieder mes met de aandacht die het verdient.',
       icon: Sparkles,
     },
     {
-      title: 'Persoonlijk als een goede maat',
-      desc: 'Geen anoniem callcenter of logge logistieke ketens. Je appt direct met Teun of Mike, we halen de messen zelf bij je op in Utrecht en denken eerlijk met je mee over het behoud van je messen.',
+      title: 'Persoonlijk geregeld',
+      desc: 'Bij Slijpmaat heb je direct contact met Teun of Mike. We halen je messen zelf op in Utrecht, slijpen ze zorgvuldig en brengen ze scherp terug. We kijken eerlijk naar wat je mes nodig heeft en denken met je mee.',
       icon: Heart,
     },
     {
-      title: 'Duurzaam behoud boven weggooien',
-      desc: 'Een goed mes kan tientallen jaren meegaan. Ook messen met een afgebroken puntje of flinke hap in de snede herstellen we met liefde. Slijpen is beter voor je portemonnee én voor het milieu.',
+      title: 'Liever herstellen dan vervangen',
+      desc: 'Een goed mes kan jarenlang meegaan. Daarom herstellen we waar mogelijk ook beschadigingen, zoals kleine happen in de snede of een afgebroken punt. Dat is beter voor je portemonnee, je mes én het milieu.',
       icon: Compass,
     },
   ];
@@ -81,7 +81,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     },
     {
       title: 'Betalen pas achteraf',
-      desc: 'Eenvoudig via een Tikkie zodra je tevreden bent met het resultaat.',
+      desc: 'Eenvoudig met contant, Tikkie, een betaalverzoek of factuur.',
       icon: CheckCircle2,
     },
   ];
@@ -217,9 +217,6 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Ons verhaal</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Hoe het begon aan de keukentafel</h2>
-            <p className="mt-3 text-base leading-7 text-[#657068]">
-              Van twee vrienden die gek werden van botte messen, tot de meest geliefde mobiele messenslijper van Utrecht.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
@@ -253,9 +250,6 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           <div className="mb-10 text-center sm:mb-14">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Waar we voor gaan</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Onze Missie &amp; Visie</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-[#657068]">
-              Wat ons drijft om elke dag met precisie achter de waterstenen te staan.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
@@ -319,11 +313,8 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           <div className="mb-10 text-center sm:mb-14">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Vakmanschap</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
-              Onze Slijpfilosofie
+              Onze slijpfilosofie
             </h2>
-            <p className="mx-auto mt-3 max-w-2xl text-base text-[#657068]">
-              Waarom we trouw blijven aan traditionele Japanse waterstenen en nooit snijden in kwaliteit.
-            </p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
@@ -367,9 +358,6 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
             <h2 className="mt-3 font-heading text-3xl font-bold text-white sm:text-4xl">
               Wat kun je van jouw Maat verwachten?
             </h2>
-            <p className="mt-4 text-base leading-7 text-[#E8EFE8]">
-              Vier duidelijke principes waarmee we dagelijks op pad gaan en messen slijpen.
-            </p>
           </div>
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">

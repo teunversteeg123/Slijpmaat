@@ -15,7 +15,7 @@ import {
   X,
 } from 'lucide-react';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT, GoogleReviewsSection } from '../components/GoogleReviewsSection';
-import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
+import { ResultatenSlider } from '../components/ResultatenSlider';
 import { PageId } from '../types';
 
 interface HomePageProps {
@@ -30,7 +30,7 @@ const quickSteps = [
 ];
 
 const qualities = [
-  { title: 'Lokaal in Utrecht', text: 'Ophalen en terugbrengen binnen Utrecht, of vanuit heel Nederland op afspraak zelf langskomen.', icon: MapPin },
+  { title: 'Lokaal in Utrecht', text: 'Ophalen en terugbrengen in Utrecht en omgeving, zonder pakket of winkelbezoek.', icon: MapPin },
   { title: 'Makkelijk geregeld', text: 'Snel contact via WhatsApp, duidelijke afspraken en geen ingewikkeld proces.', icon: MessageCircle },
   { title: 'Duidelijke prijzen', text: 'Je ziet vooraf wat het slijpen kost. Reparaties bespreken we altijd eerst.', icon: CircleDollarSign },
   { title: 'Langer plezier van je mes', text: 'Goed onderhoud verlengt de levensduur van je messen en voorkomt onnodig vervangen.', icon: Leaf },
@@ -76,7 +76,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
       {/* 1. HERO SECTION (Image 2) */}
-      <section className="site-hero relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
+      <section className="relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
         <svg
           aria-hidden="true"
           viewBox="0 0 520 520"
@@ -88,9 +88,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           />
         </svg>
 
-        <div className="site-hero-grid relative z-10 grid grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-12 lg:py-8 xl:gap-20">
+        <div className="relative z-10 grid grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-12 lg:py-8 xl:gap-20">
           {/* Left: Knife revealing brand */}
-          <div className="site-hero-media order-2 w-full lg:order-1">
+          <div className="order-2 w-full lg:order-1">
             <img
               src="/assets/slijpmaat-homepage-hero.jpg"
               alt="Koksmes dat het Slijpmaat-logo zichtbaar maakt"
@@ -100,18 +100,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Right: Copy & CTAs */}
-          <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-2 lg:max-w-2xl lg:px-0 lg:pr-10 xl:pr-16">
-            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
+          <div className="order-1 px-4 sm:px-6 lg:order-2 lg:max-w-2xl lg:px-0 lg:pr-10 xl:pr-16">
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
               Voor particulieren en horeca
             </p>
-            <h1 className="site-hero-title mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
+            <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
               Jouw messenslijper in Utrecht
             </h1>
-            <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
+            <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
               Voor chefs, thuiskoks en horeca. Slijpmaat haalt je messen thuis of op de zaak op, slijpt ze zorgvuldig met de hand op whetstones en brengt ze vlijmscherp terug.
             </p>
 
-            <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <div ref={planRef} className="relative">
                 {!isPlanExpanded ? (
                   <button
@@ -184,13 +184,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis bezorging vanaf 3 messen</span>
             </div>
           </div>
         </div>
       </section>
-
-      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#F7F4EC" variant="calm" />
 
       {/* 3. KIES WAT BIJ JE PAST (Particulieren vs Horeca) */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-24 lg:px-8">
@@ -203,7 +201,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="relative mx-auto max-w-7xl">
           <div className="mb-8 max-w-2xl sm:mb-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Kies wat bij je past</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Thuiskok of professionele keuken</h2>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Thuiskeuken of professionele keuken?</h2>
             <p className="mt-3 text-base leading-7 text-[#657068]">Je krijgt meteen de informatie, prijzen en manier van plannen die voor jou relevant zijn.</p>
           </div>
 
@@ -247,10 +245,34 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#F7F4EC" middleColor="#A9C89E" toColor="#3B7F4B" variant="rolling" mirror />
-
       {/* 4. ZO EENVOUDIG WERKT HET - Vibrant Slijpmaat Green #3B7F4B with organic wave dividers top and bottom */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
+        {/* Organic wave divider at TOP flowing smoothly from #F7F4EC cream into green - NO straight hard line */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 60"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#F7F4EC] sm:h-14 lg:h-16"
+        >
+          <path
+            fill="currentColor"
+            d="M0,0 L1440,0 L1440,20 C1180,55 900,10 620,40 C380,68 180,18 0,35 Z"
+          />
+        </svg>
+
+        {/* Organic wave divider at BOTTOM flowing into white calculator section below */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 100"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute bottom-0 left-0 h-14 w-full text-white sm:h-20 lg:h-24"
+        >
+          <path
+            fill="currentColor"
+            d="M0,100 L1440,100 L1440,30 C1200,75 920,15 620,55 C380,85 180,25 0,65 Z"
+          />
+        </svg>
+
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Van aanvraag tot scherpe messen</p>
@@ -284,8 +306,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#3B7F4B" middleColor="#A9C89E" toColor="#FFFFFF" variant="scalloped" />
-
       {/* 5. CALCULATOR CTA SECTION */}
       <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[2.5rem] border border-[#E87B5B]/20 bg-[#FFF7F3] shadow-sm lg:grid-cols-[1.05fr_0.95fr]">
@@ -293,31 +313,22 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="relative max-w-xl">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Duidelijk vooraf</p>
               <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Bekijk direct wat jouw slijpbeurt kost</h2>
-              <div className="mt-7 grid gap-3 sm:grid-cols-2">
-                <button
-                  type="button"
-                  onClick={openCalculator}
-                  className="group grid min-h-20 grid-cols-[auto_1fr_auto] items-center gap-2.5 rounded-2xl border border-[#d9e1d7] bg-white px-3 py-3 text-left shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#3B7F4B]/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]"
-                >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#E8EFE8] text-[#3B7F4B]">
-                    <Utensils className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <span className="whitespace-nowrap font-heading text-sm font-bold text-[#3B7F4B]">Naar particulier</span>
-                  <ArrowRight className="h-4 w-4 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
-                </button>
-
-                <button
-                  type="button"
-                  onClick={() => onNavigate('horeca')}
-                  className="group grid min-h-20 grid-cols-[auto_1fr_auto] items-center gap-2.5 rounded-2xl border border-[#E87B5B]/35 bg-white px-3 py-3 text-left shadow-xs transition-all duration-200 hover:-translate-y-0.5 hover:border-[#E87B5B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#C95E3E]"
-                >
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-[#F9E4DE] text-[#C95E3E]">
-                    <Building2 className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <span className="whitespace-nowrap font-heading text-sm font-bold text-[#C95E3E]">Naar zakelijk</span>
-                  <ArrowRight className="h-4 w-4 shrink-0 text-[#C95E3E] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
-                </button>
-              </div>
+              <p className="mt-4 text-base leading-7 text-[#657068]">Vul je messen in, zie meteen de prijs en stuur je bestelling daarna eenvoudig via WhatsApp.</p>
+              <button
+                type="button"
+                onClick={openCalculator}
+                className="group mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3 text-sm font-bold text-white transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#244A30]"
+              >
+                <span>Bereken mijn prijs</span>
+                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+              </button>
+              <button
+                type="button"
+                onClick={() => onNavigate('horeca')}
+                className="mt-4 block text-sm font-bold text-[#3B7F4B] underline decoration-[#A9C89E] decoration-2 underline-offset-4 hover:text-[#3B7F4B]"
+              >
+                Zakelijke aanvraag of grotere aantallen?
+              </button>
             </div>
           </div>
 
@@ -340,8 +351,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
-
-      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#E8EFE8" toColor="#FAFAF8" variant="calm" mirror />
 
       {/* 6. TEAM SECTION "WIJ ZIJN TEUN EN MIKE" (Image 1) */}
       <section className="relative overflow-hidden bg-[#FAFAF8] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -379,10 +388,34 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#F9E4DE" toColor="#F7F4EC" variant="scalloped" />
-
       {/* 7. WAAROM SLIJPMAAT & CRAFT STAPPEN - With soft top and bottom wave dividers */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-20 sm:px-6 sm:pb-28 sm:pt-28 lg:px-8">
+        {/* Organic wave divider at TOP flowing from white section into #F7F4EC */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 60"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
+        >
+          <path
+            fill="currentColor"
+            d="M0,0 L1440,0 L1440,15 C1160,50 880,10 600,35 C360,60 160,15 0,30 Z"
+          />
+        </svg>
+
+        {/* Organic wave divider at BOTTOM flowing from #F7F4EC into white Google Reviews section */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 60"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
+        >
+          <path
+            fill="currentColor"
+            d="M0,60 L1440,60 L1440,25 C1180,5 900,45 620,15 C380,45 180,10 0,30 Z"
+          />
+        </svg>
+
         {/* Subtle decorative curved blob */}
         <div
           aria-hidden="true"
@@ -445,10 +478,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#F7F4EC" middleColor="#E8EFE8" toColor="#FFFFFF" variant="rolling" mirror />
-
       {/* 8. GOOGLE REVIEWS SECTION */}
       <GoogleReviewsSection />
+
+      {/* 8B. RESULTATEN FOTO SLIDER (Gereserveerde lege container onder reviews) */}
+      <section className="bg-white px-4 pb-12 pt-0 sm:px-6 sm:pb-20 sm:pt-0 lg:px-8">
+        <div className="mx-auto max-w-[1100px]">
+          <ResultatenSlider />
+        </div>
+      </section>
 
       {/* 9. VEELGESTELDE VRAGEN (FAQ) - No hard top borders, modern card layout */}
       <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -492,10 +530,34 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#F9E4DE" toColor="#E87B5B" variant="calm" />
-
       {/* 10. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="home-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
+        {/* Smooth top wave divider flowing down from white FAQ into coral orange */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 60"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
+        >
+          <path
+            fill="currentColor"
+            d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z"
+          />
+        </svg>
+
+        {/* Smooth bottom wave divider flowing from coral orange into white footer */}
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 60"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
+        >
+          <path
+            fill="currentColor"
+            d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z"
+          />
+        </svg>
+
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Contact</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
@@ -525,8 +587,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
-
-      <OrganicSectionDivider fromColor="#E87B5B" middleColor="#F9E4DE" toColor="#FFFFFF" variant="scalloped" mirror />
     </div>
   );
 };

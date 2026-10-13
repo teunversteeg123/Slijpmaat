@@ -4,8 +4,6 @@ import { SLIJPMAAT_INFO } from '../data/siteData';
 import { ParticulierenCalculator } from '../components/ParticulierenCalculator';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
-import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
-import { HeroVideo } from '../components/HeroVideo';
 import {
   ArrowDown,
   ArrowRight,
@@ -36,7 +34,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     {
       num: '2',
       title: 'Ophalen of langskomen',
-      text: 'Vanaf €35 bestelwaarde gratis opgehaald en thuisbezorgd in Utrecht. Of breng ze langs op afspraak.',
+      text: 'Vanaf 3 messen gratis opgehaald en thuisbezorgd in Utrecht. Of breng ze langs op afspraak.',
     },
     {
       num: '3',
@@ -67,7 +65,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     {
       step: '04',
       title: 'Vlijmscherp terug & achteraf betalen',
-      desc: 'Binnen 24–48 uur staan we weer op de stoep met scherpe messen. Betalen doe je pas achteraf via een eenvoudig Tikkie.',
+      desc: 'Binnen 24–48 uur staan we weer op de stoep met scherpe messen. Eenvoudig met contant, Tikkie, een betaalverzoek of factuur.',
       icon: CreditCard,
     },
   ];
@@ -87,7 +85,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     },
     {
       question: 'Moet ik vooraf betalen?',
-      answer: 'Nee, bij Slijpmaat betaal je pas achteraf. Nadat je messen geslepen zijn en we ze weer bij je thuis afleveren, sturen we een eenvoudig Tikkie of betaalverzoek. Pas als jij tevreden bent met de scherpte!',
+      answer: 'Nee, bij Slijpmaat betaal je pas achteraf. Nadat je messen geslepen zijn en we ze weer bij je thuis afleveren, betaal je eenvoudig met contant, Tikkie, een betaalverzoek of factuur. Pas als jij tevreden bent met de scherpte!',
     },
     {
       question: 'Wat als mijn mes een chip of hapje heeft?',
@@ -98,7 +96,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
       {/* 1. HERO SECTION (Zonder wazige gloed, met herkenbare organische blobs) */}
-      <section className="site-hero relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
+      <section className="relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
         {/* Crisp organic SVG blob in top-right background (geen wazige gloed, maar duidelijke blob-vorm) */}
         <svg
           aria-hidden="true"
@@ -111,51 +109,56 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           />
         </svg>
 
-        <div className="site-hero-grid relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-14 lg:py-8 xl:gap-20">
+        <div className="relative z-10 grid grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-12 lg:py-8 xl:gap-20">
           {/* Left: Copy & CTAs */}
-          <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0">
-            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
+          <div className="order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0 lg:pl-4 xl:pl-8">
+            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
               Voor particulieren in Utrecht
             </p>
-            <h1 className="site-hero-title mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
-              Keukenmessen laten slijpen in Utrecht
+            <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
+              Je messen weer scherp. Zonder gedoe.
             </h1>
-            <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
+            <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
               Wij halen je keukenmessen thuis op in Utrecht, slijpen ze zorgvuldig met de hand op Japanse waterstenen en brengen ze weer vlijmscherp terug.
             </p>
 
-            <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <button
                 type="button"
                 onClick={() => onNavigate ? onNavigate('home') : (window.location.hash = '#home')}
-                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
+                className="group inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
               >
                 <ChevronLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5" aria-hidden="true" />
                 <span>Terug</span>
               </button>
 
-              <button
-                type="button"
-                onClick={() => document.getElementById('faq')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
-                className="group inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
+              <a
+                href="#faq"
+                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
               >
                 <span>Ik heb een vraag</span>
                 <ArrowDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
-              </button>
+              </a>
             </div>
           </div>
 
           {/* Right: Tomatenvideo met herkenbare organische blob erachter */}
-          <div className="site-hero-media relative order-2 w-full px-4 sm:px-6 lg:order-2 lg:px-0">
+          <div className="order-2 w-full lg:order-2 px-3 sm:px-6 lg:px-0 relative">
             {/* Karakteristieke saliegroene organische blob (zoals op Homepage en Over Ons) */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
+              className="pointer-events-none absolute -bottom-4 -left-2 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 mx-auto aspect-[4/3] w-[92%] overflow-hidden rounded-[2rem] bg-[#203728] shadow-xs sm:aspect-[16/11] sm:w-[70%] sm:rounded-[2.5rem] lg:aspect-square">
-              <HeroVideo
+            <div className="relative z-10 w-full aspect-[4/3] sm:aspect-[16/11] lg:aspect-square overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] bg-[#203728] shadow-md">
+              <video
+                className="h-full w-full object-cover"
                 src="/assets/tomaat-website-video.mp4"
-                ariaLabel="Een scherp keukenmes snijdt soepel door een tomaat"
+                autoPlay
+                muted
+                loop
+                playsInline
+                preload="auto"
+                aria-label="Een scherp keukenmes snijdt soepel door een tomaat"
               />
             </div>
           </div>
@@ -177,13 +180,11 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis bezorging vanaf 3 messen</span>
             </div>
           </div>
         </div>
       </section>
-
-      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#F7F4EC" variant="calm" />
 
       {/* 3. VOORAF: KORTE BEZOEKERSFLOW (Warm cream #F7F4EC) */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">
@@ -220,8 +221,6 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#F7F4EC" middleColor="#F9E4DE" toColor="#FAFAF8" variant="scalloped" mirror />
-
       {/* 4. HET BESTELFORMULIER (CALCULATOR) - Volledig geintegreerd, zonder zakelijk knip */}
       <section id="calculator" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-6xl">
@@ -246,10 +245,32 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#3B7F4B" variant="rolling" />
-
       {/* 6. EXTRA INFO OVER HET PROCES NÁ DE BESTELLING (Green section with wave dividers) */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 60"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#FAFAF8] sm:h-14 lg:h-16"
+        >
+          <path
+            fill="currentColor"
+            d="M0,0 L1440,0 L1440,20 C1180,55 900,10 620,40 C380,68 180,18 0,35 Z"
+          />
+        </svg>
+
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 100"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute bottom-0 left-0 h-14 w-full text-white sm:h-20 lg:h-24"
+        >
+          <path
+            fill="currentColor"
+            d="M0,100 L1440,100 L1440,30 C1200,75 920,15 620,55 C380,85 180,25 0,65 Z"
+          />
+        </svg>
+
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Wat gebeurt er daarna?</p>
@@ -285,8 +306,6 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           </div>
         </div>
       </section>
-
-      <OrganicSectionDivider fromColor="#3B7F4B" middleColor="#A9C89E" toColor="#FFFFFF" variant="calm" mirror />
 
       {/* 6. DE 5 BIJBEHORENDE FAQS (Exacte homepage stijl met draaiend plusje) */}
       <section id="faq" className="relative scroll-mt-24 overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -332,10 +351,32 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#F9E4DE" toColor="#E87B5B" variant="scalloped" />
-
       {/* 7. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="particulieren-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 60"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
+        >
+          <path
+            fill="currentColor"
+            d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z"
+          />
+        </svg>
+
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 1440 60"
+          preserveAspectRatio="none"
+          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
+        >
+          <path
+            fill="currentColor"
+            d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z"
+          />
+        </svg>
+
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Contact</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
@@ -365,8 +406,6 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           </div>
         </div>
       </section>
-
-      <OrganicSectionDivider fromColor="#E87B5B" middleColor="#F9E4DE" toColor="#FFFFFF" variant="rolling" mirror />
     </div>
   );
 };

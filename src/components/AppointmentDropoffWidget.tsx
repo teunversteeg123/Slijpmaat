@@ -13,12 +13,14 @@ export const AppointmentDropoffWidget: React.FC = () => (
         <p className="inline-flex rounded-full bg-[#F9E4DE] px-4 py-2 text-xs font-bold uppercase tracking-[0.2em] text-[#244A30]">
           Alleen op afspraak
         </p>
-        <h2 className="mt-5 font-heading text-3xl font-bold leading-tight text-[#3B7F4B] sm:text-4xl lg:text-5xl">Kom langs op afspraak</h2>
+        <h2 className="mt-5 font-heading text-3xl font-bold leading-tight text-[#3B7F4B] sm:text-4xl lg:text-5xl">
+          Kom langs op afspraak
+        </h2>
         <p className="mt-4 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg">
-          Geef je messen af in Utrecht, ga gerust de stad in en kom terug op het vooraf afgestemde gereedmoment.
+          Klanten van buiten Utrecht en door heel Nederland zijn van harte welkom. Wij werken vanuit huis, dus er is geen open inloopbalie. We plannen daarom vooraf een rustig breng- en ophaalmoment via WhatsApp.
         </p>
         <p className="mt-5 border-l-2 border-[#A9C89E] pl-4 text-sm leading-6 text-[#657068]">
-          Een grotere horeca-opdracht? Vermeld vooraf het aantal messen en de gewenste timing.
+          Zo zorgen Teun of Mike dat we persoonlijk klaarstaan om je messen veilig en met volle aandacht in ontvangst te nemen.
         </p>
       </div>
 
