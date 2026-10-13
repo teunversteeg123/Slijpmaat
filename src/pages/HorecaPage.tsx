@@ -5,7 +5,6 @@ import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSect
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { HeroVideo } from '../components/HeroVideo';
 import { ResultatenSlider } from '../components/ResultatenSlider';
-import { ZakelijkLeenmessenWidget } from '../components/ZakelijkLeenmessenWidget';
 import { ZakelijkFormulier } from '../components/ZakelijkFormulier';
 import {
   ArrowRight,
@@ -245,9 +244,6 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
           <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-5 shadow-sm sm:p-8 lg:p-10">
             <ZakelijkFormulier />
           </div>
-
-          {/* Compacte widget voor tijdelijke leenmessen direct onder het formulier */}
-          <ZakelijkLeenmessenWidget />
 
           {/* Duidelijke zakelijke prijslijst op bijbehorende stijlvolle wijze onder het formulier */}
           <section aria-labelledby="zakelijke-prijslijst" className="mt-10 sm:mt-12 rounded-[2rem] border border-[#d9e1d7] bg-white p-6 shadow-xs sm:p-8">

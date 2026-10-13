@@ -4,6 +4,26 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" type="image/png" href="/favicon.png" />
+    <script>
+      (function() {
+        try {
+          var _fetch = window.fetch;
+          Object.defineProperty(window, 'fetch', {
+            get: function() { return _fetch; },
+            set: function(v) { _fetch = v; },
+            configurable: true,
+            enumerable: true
+          });
+        } catch (e) {}
+
+        window.addEventListener('error', function(event) {
+          if (event && event.filename && event.filename.indexOf('chrome-extension://') !== -1) {
+            event.preventDefault();
+            event.stopImmediatePropagation();
+          }
+        }, true);
+      })();
+    </script>
     <!-- ROUTE_SEO_START -->
     <title>Messen slijpen Utrecht · Ophalen &amp; bezorgen · Slijpmaat</title>
     <meta name="description" content="Laat je keukenmessen slijpen in Utrecht. Slijpmaat haalt ze thuis of op de zaak op, slijpt ze met de hand op waterstenen en brengt ze scherp terug." />

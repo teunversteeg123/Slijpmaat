@@ -52,7 +52,6 @@ export const ZakelijkFormulier: React.FC = () => {
   const [postcode, setPostcode] = useState<string>('3513');
   const [address, setAddress] = useState<string>('');
   const [notes, setNotes] = useState<string>('');
-  const [hasInterestInLoanKnives, setHasInterestInLoanKnives] = useState<boolean>(false);
   const [showGranularKnives, setShowGranularKnives] = useState<boolean>(false);
   const [knifeCounts, setKnifeCounts] = useState<number[]>([0, 0, 0, 0]);
   const [errorMsg, setErrorMsg] = useState<string>('');
@@ -141,10 +140,6 @@ export const ZakelijkFormulier: React.FC = () => {
       });
     } else {
       messageLines.push(`• Aantal messen (schatting): ${selectedEstimate}`);
-    }
-
-    if (hasInterestInLoanKnives) {
-      messageLines.push('• Interesse in tijdelijke leenmessen tijdens slijpen: Ja');
     }
 
     if (notes.trim()) {
@@ -377,26 +372,6 @@ export const ZakelijkFormulier: React.FC = () => {
               )}
             </div>
 
-            {/* Checkbox voor interesse in tijdelijke leenmessen */}
-            <div className="mt-5 rounded-2xl border border-[#d9e1d7]/70 bg-[#FAFBF8] p-4 transition-all duration-200 hover:border-[#3B7F4B]/40">
-              <label className="flex items-start gap-3 cursor-pointer">
-                <input
-                  type="checkbox"
-                  checked={hasInterestInLoanKnives}
-                  onChange={(e) => setHasInterestInLoanKnives(e.target.checked)}
-                  className="mt-0.5 h-5 w-5 rounded border-[#d9e1d7] text-[#3B7F4B] accent-[#3B7F4B] focus:ring-[#3B7F4B]"
-                />
-                <div>
-                  <span className="font-heading text-sm font-bold text-[#203728]">
-                    Interesse in tijdelijke leenmessen tijdens het slijpen
-                  </span>
-                  <p className="text-xs text-[#657068] mt-0.5">
-                    We bereiden leenmessensets voor zodat jullie mise-en-place ongehinderd kan doorgaan. Geef gerust aan of je hier gebruik van wilt maken.
-                  </p>
-                </div>
-              </label>
-            </div>
-
             {/* Opmerkingen of gewenste planning */}
             <div className="mt-5">
               <label
@@ -613,13 +588,6 @@ export const ZakelijkFormulier: React.FC = () => {
                   Binnen 24 tot 48 uur in overleg
                 </span>
               </div>
-
-              {hasInterestInLoanKnives && (
-                <div className="flex justify-between items-start gap-2 text-[#C95E3E]">
-                  <span>Leenmessen:</span>
-                  <span className="font-semibold text-right">Interesse aangegeven</span>
-                </div>
-              )}
             </div>
 
             {/* Offerte & Prijsindicatie Box */}

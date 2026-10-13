@@ -5,18 +5,14 @@ import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSect
 import {
   ArrowRight,
   Clock3,
-  MapPin,
   MessageCircle,
   Phone,
   CheckCircle2,
   Sparkles,
-  Shield,
   Flame,
   Check,
   X,
-  HelpCircle,
   ChevronDown,
-  Layers,
   HeartHandshake,
   Compass,
   AlertCircle,
@@ -644,23 +640,23 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Ambachtsbelofte Banner met foto */}
-          <div className="mt-10 overflow-hidden rounded-[2.5rem] bg-[#244A30] text-white shadow-md">
+          <div className="mt-10 overflow-hidden rounded-[2.5rem] bg-[#3B7F4B] text-white shadow-md">
             <div className="grid items-center gap-6 p-6 sm:p-10 lg:grid-cols-[1.2fr_0.8fr] lg:gap-10">
               <div>
-                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#A9C89E]">
+                <span className="text-xs font-bold uppercase tracking-[0.25em] text-[#E8EFE8]">
                   Onze Belofte aan Jouw Mes
                 </span>
                 <h3 className="mt-3 font-heading text-2xl font-bold leading-snug sm:text-3xl text-white">
-                  Een goed koksmes slijp je met water en geduld — nooit met haast en geweld.
+                  Een goed koksmes slijp je met water en geduld, nooit met haast en geweld.
                 </h3>
-                <p className="mt-3 text-sm leading-relaxed text-[#d9e1d7] sm:text-base">
+                <p className="mt-3 text-sm leading-relaxed text-white/95 sm:text-base">
                   Zowel voor professionele chefsmessen als voor je trouwe keukenmes thuis: bij ons krijgt ieder lemmet de persoonlijke toewijding die het verdient.
                 </p>
                 <div className="mt-6 flex flex-col gap-3 sm:flex-row sm:items-center">
                   <button
                     type="button"
                     onClick={() => onNavigate('particulieren')}
-                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:bg-[#C95E3E] cursor-pointer"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:bg-[#C95E3E] cursor-pointer shadow-sm"
                   >
                     <span>Plan je slijpbeurt</span>
                     <ArrowRight className="h-4 w-4" />
@@ -669,7 +665,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                     href={whatsappUrl}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/20 bg-white/10 px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:bg-white/20"
+                    className="inline-flex min-h-12 items-center justify-center gap-2 rounded-full border border-white/25 bg-white/10 px-6 py-3 text-sm font-bold text-white transition-all duration-200 hover:bg-white/20"
                   >
                     <MessageCircle className="h-4 w-4" />
                     <span>Stel een vraag via WhatsApp</span>
@@ -683,7 +679,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                   className="h-full w-full object-cover"
                   loading="lazy"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#244A30]/70 via-transparent to-transparent pointer-events-none" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#3B7F4B]/70 via-transparent to-transparent pointer-events-none" />
                 <div className="absolute bottom-3 left-3 right-3 rounded-xl bg-black/40 px-3 py-2 text-xs font-semibold text-white backdrop-blur-xs">
                   <span>100% watergekoeld Japans watersteenslijpen</span>
                 </div>

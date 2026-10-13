@@ -15,10 +15,6 @@ import {
   Bike,
   Plus,
   X,
-  Utensils,
-  Building2,
-  Calendar,
-  Sparkles,
   Maximize2
 } from 'lucide-react';
 
@@ -494,7 +490,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
             </span>
             <div className="space-y-1">
               <h2 className="font-heading text-lg sm:text-xl font-bold text-[#3B7F4B]">
-                Belangrijk: Wij werken vanuit huis — langskomen kan alleen op afspraak
+                Belangrijk: Wij werken vanuit huis: langskomen kan alleen op afspraak
               </h2>
               <p className="text-sm sm:text-base leading-relaxed text-[#657068]">
                 Slijpmaat heeft géén openbare inloopbalie of winkel. Omdat wij vanuit huis werken, kan het langsbrengen en ophalen van messen uitsluitend na voorafgaande afspraak via WhatsApp. Zo zorgen we dat Teun of Mike persoonlijk aanwezig is om jouw messen veilig en met volle aandacht aan te nemen.
