@@ -1,78 +1,85 @@
 import React from 'react';
-import PolaroidLineCarousel, { Slide } from './ui/polaroid-line-carousel';
+import PolaroidLineCarousel, { type Slide } from './ui/polaroid-line-carousel';
+
+export type ResultSlide = Slide;
 
 export interface ResultatenSliderProps {
-  slides?: Slide[];
+  slides?: ResultSlide[];
   className?: string;
-  height?: number | string;
 }
 
-const DEFAULT_RESULT_SLIDES: Slide[] = [
+const DEFAULT_RESULT_SLIDES: ResultSlide[] = [
+  {
+    image: '/assets/resultaten/slider/dun-japans-mes-houten-handvat.jpeg',
+    alt: 'Dun Japans mes met houten handvat op een houten snijplank',
+  },
+  {
+    image: '/assets/resultaten/slider/japans-koksmes-blauw-handvat.jpeg',
+    alt: 'Japans koksmes met blauw houten handvat op een houten snijplank',
+  },
+  {
+    image: '/assets/resultaten/slider/japans-koksmes-rood-handvat.jpeg',
+    alt: 'Japans koksmes met rood houten handvat op een houten snijplank',
+  },
+  {
+    image: '/assets/resultaten/slider/japans-hakmes-houten-handvat.jpeg',
+    alt: 'Japans hakmes met houten handvat op een houten snijplank',
+  },
+  {
+    image: '/assets/resultaten/slider/japans-santokumes.jpeg',
+    alt: 'Japans santokumes op een houten snijplank',
+  },
+  {
+    image: '/assets/resultaten/slider/global-koksmes.jpeg',
+    alt: 'Global koksmes op een houten snijplank',
+  },
   {
     image: '/assets/werkwijze/03-slijpen.jpg',
-    title: 'Handmatig op waterstenen',
-    caption: 'Traditioneel Japans slijpambacht op Shapton waterstenen.',
+    alt: 'Een keukenmes wordt met de hand geslepen op een watersteen',
   },
   {
     image: '/assets/resultaten/06-snede-bijl.jpeg',
-    title: 'Vlijmscherpe snede',
-    caption: 'Microscopische braam zorgvuldig verwijderd en afgewerkt op soepel leer.',
+    alt: 'Close-up van de geslepen snede van een bijl',
   },
   {
     image: '/assets/resultaten/07-mes-met-slijpmaat-sticker.jpeg',
-    title: 'Klaar voor de keuken',
-    caption: 'Veilig verpakt en vlijmscherp retour naar jouw snijplank.',
+    alt: 'Geslepen keukenmes met een Slijpmaat-sticker',
   },
   {
     image: '/assets/werkwijze/01-beoordelen.jpg',
-    title: 'Inspectie en profiel',
-    caption: 'Origineel profiel en fabrieksgeometrie van het lemmet gerespecteerd.',
+    alt: 'Slijpmaat beoordeelt de snede van een keukenmes',
   },
   {
     image: '/assets/werkwijze/02-stenen-kiezen.jpg',
-    title: 'De juiste watersteen',
-    caption: 'Afgestemd op het type staal, Europese of Japanse keukenmessen.',
+    alt: 'Japanse waterstenen voor het slijpen van keukenmessen',
   },
   {
     image: '/assets/werkwijze/04-afwerken.jpg',
-    title: 'Afwerken op leren strop',
-    caption: 'Gepolijste apex voor langdurig scherptebehoud zonder wrijvingshitte.',
+    alt: 'Een keukenmes wordt afgewerkt op een leren strop',
   },
 ];
 
 export const ResultatenSlider: React.FC<ResultatenSliderProps> = ({
   slides = DEFAULT_RESULT_SLIDES,
   className = '',
-  height = 480,
-}) => {
-  return (
-    <div
-      className={`relative overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-[#FAFAF8] p-4 sm:p-6 lg:p-8 shadow-xs ${className}`}
-      aria-label="Resultaatfoto's van Slijpmaat"
-    >
-      <div className="mb-2 text-center sm:mb-4">
-        <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">
-          Sfeer &amp; Resultaten
-        </p>
-        <h3 className="mt-1.5 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
-          Vers van de slijpsteen
-        </h3>
-        <p className="mx-auto mt-2 max-w-xl text-xs sm:text-sm text-[#657068]">
-          Sleep aan het touwtje of blader door onze ambachtsfoto&apos;s en resultaten.
-        </p>
-      </div>
-
-      <PolaroidLineCarousel
-        slides={slides}
-        height={height}
-        cardWidth={280}
-        sag={38}
-        swing={1}
-        autoplay={4500}
-        string="#3B7F4B"
-        background="transparent"
-        ink="#203728"
-      />
-    </div>
-  );
-};
+}) =>
+  slides.length > 0 ? (
+    <PolaroidLineCarousel
+      slides={slides}
+      className={className}
+      height="clamp(500px, 56vw, 650px)"
+      cardWidth={310}
+      sag={48}
+      swing={1}
+      autoplay={4500}
+      string="#3B7F4B"
+      background="#FFFFFF"
+      ink="#203728"
+      infinite
+      showDetails={false}
+      showLogo
+      imageFit="contain"
+      expandable
+      ariaLabel="Messenfotocarrousel"
+    />
+  ) : null;

@@ -238,11 +238,9 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         </div>
       </section>
 
-      {/* 5. RESULTATEN SLIDER (Eenvoudige lege container, klaar voor latere foto's) */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] px-4 pb-14 pt-2 sm:px-6 sm:pb-20 sm:pt-4 lg:px-8">
-        <div className="mx-auto max-w-5xl">
-          <ResultatenSlider />
-        </div>
+      {/* 5. PAGINABREDE RESULTATENSLIDER */}
+      <section className="relative overflow-hidden bg-white pb-14 pt-2 sm:pb-20 sm:pt-4" aria-label="Resultaten van Slijpmaat">
+        <ResultatenSlider />
       </section>
 
       {/* 6. EXTRA INFO OVER HET PROCES NÁ DE BESTELLING (Green section with wave dividers) */}
@@ -251,7 +249,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           aria-hidden="true"
           viewBox="0 0 1440 60"
           preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#FAFAF8] sm:h-14 lg:h-16"
+          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
         >
           <path
             fill="currentColor"

@@ -481,11 +481,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* 8. GOOGLE REVIEWS SECTION */}
       <GoogleReviewsSection />
 
-      {/* 8B. RESULTATEN FOTO SLIDER (Gereserveerde lege container onder reviews) */}
-      <section className="bg-white px-4 pb-12 pt-0 sm:px-6 sm:pb-20 sm:pt-0 lg:px-8">
-        <div className="mx-auto max-w-[1100px]">
-          <ResultatenSlider />
-        </div>
+      {/* 8B. PAGINABREDE MESSENFOTO-SLIDER */}
+      <section className="bg-white pb-12 pt-0 sm:pb-20" aria-label="Resultaten van Slijpmaat">
+        <ResultatenSlider />
       </section>
 
       {/* 9. VEELGESTELDE VRAGEN (FAQ) - No hard top borders, modern card layout */}

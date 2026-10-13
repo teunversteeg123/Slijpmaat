@@ -300,14 +300,12 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 5. RESULTATEN SLIDER (Eenvoudige lege container, klaar voor latere horeca-foto's) */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] px-4 pb-14 pt-2 sm:px-6 sm:pb-20 sm:pt-4 lg:px-8">
-        <div className="mx-auto max-w-5xl">
-          <ResultatenSlider />
-        </div>
+      {/* 5. PAGINABREDE RESULTATENSLIDER */}
+      <section className="relative overflow-hidden bg-white pb-14 pt-2 sm:pb-20 sm:pt-4" aria-label="Resultaten van Slijpmaat">
+        <ResultatenSlider />
       </section>
 
-      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#A9C89E" toColor="#3B7F4B" variant="calm" />
+      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#A9C89E" toColor="#3B7F4B" variant="calm" />
 
       {/* 6. WAT GEBEURT ER NA JE AANVRAAG? (Green section with wave dividers) */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
