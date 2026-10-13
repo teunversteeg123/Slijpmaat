@@ -1,99 +1,78 @@
-import React, { useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React from 'react';
+import PolaroidLineCarousel, { Slide } from './ui/polaroid-line-carousel';
 
-/**
- * ResultatenSlider
- * Eenvoudige slider container voor resultaatfoto's.
- * Voeg hieronder in de array 'photos' later eenvoudig je eigen foto's toe:
- * bv. [{ url: '/assets/jouw-foto.jpg', title: 'Koksmes geslepen' }]
- */
-interface SlideItem {
-  url: string;
-  title: string;
+export interface ResultatenSliderProps {
+  slides?: Slide[];
+  className?: string;
+  height?: number | string;
 }
 
-const photos: SlideItem[] = [
+const DEFAULT_RESULT_SLIDES: Slide[] = [
   {
-    url: '/assets/resultaten/06-snede-bijl.jpeg',
-    title: 'De scherpe snede van een bijl',
+    image: '/assets/werkwijze/03-slijpen.jpg',
+    title: 'Handmatig op waterstenen',
+    caption: 'Traditioneel Japans slijpambacht op Shapton waterstenen.',
   },
   {
-    url: '/assets/resultaten/07-mes-met-slijpmaat-sticker.jpeg',
-    title: 'Mes met Slijpmaat-sticker',
+    image: '/assets/resultaten/06-snede-bijl.jpeg',
+    title: 'Vlijmscherpe snede',
+    caption: 'Microscopische braam zorgvuldig verwijderd en afgewerkt op soepel leer.',
+  },
+  {
+    image: '/assets/resultaten/07-mes-met-slijpmaat-sticker.jpeg',
+    title: 'Klaar voor de keuken',
+    caption: 'Veilig verpakt en vlijmscherp retour naar jouw snijplank.',
+  },
+  {
+    image: '/assets/werkwijze/01-beoordelen.jpg',
+    title: 'Inspectie en profiel',
+    caption: 'Origineel profiel en fabrieksgeometrie van het lemmet gerespecteerd.',
+  },
+  {
+    image: '/assets/werkwijze/02-stenen-kiezen.jpg',
+    title: 'De juiste watersteen',
+    caption: 'Afgestemd op het type staal, Europese of Japanse keukenmessen.',
+  },
+  {
+    image: '/assets/werkwijze/04-afwerken.jpg',
+    title: 'Afwerken op leren strop',
+    caption: 'Gepolijste apex voor langdurig scherptebehoud zonder wrijvingshitte.',
   },
 ];
 
-export const ResultatenSlider: React.FC = () => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-
-  const prevSlide = () => {
-    if (photos.length <= 1) return;
-    setCurrentIndex((prev) => (prev === 0 ? photos.length - 1 : prev - 1));
-  };
-
-  const nextSlide = () => {
-    if (photos.length <= 1) return;
-    setCurrentIndex((prev) => (prev === photos.length - 1 ? 0 : prev + 1));
-  };
-
+export const ResultatenSlider: React.FC<ResultatenSliderProps> = ({
+  slides = DEFAULT_RESULT_SLIDES,
+  className = '',
+  height = 480,
+}) => {
   return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-white shadow-sm" aria-label="Resultaatfoto's">
-      <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#203728] sm:aspect-[16/9]">
-        <img
-          src={photos[currentIndex].url}
-          alt=""
-          aria-hidden="true"
-          className="absolute inset-0 h-full w-full scale-110 object-cover opacity-45 blur-xl"
-        />
-        <img
-          src={photos[currentIndex].url}
-          alt={photos[currentIndex].title}
-          loading="lazy"
-          decoding="async"
-          className="relative h-full w-full object-contain"
-        />
-        <div className="absolute bottom-4 left-4 max-w-[calc(100%-2rem)] rounded-xl bg-black/60 px-4 py-2 text-xs font-bold text-white backdrop-blur-xs">
-          {photos[currentIndex].title}
-        </div>
+    <div
+      className={`relative overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-[#FAFAF8] p-4 sm:p-6 lg:p-8 shadow-xs ${className}`}
+      aria-label="Resultaatfoto's van Slijpmaat"
+    >
+      <div className="mb-2 text-center sm:mb-4">
+        <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">
+          Sfeer &amp; Resultaten
+        </p>
+        <h3 className="mt-1.5 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
+          Vers van de slijpsteen
+        </h3>
+        <p className="mx-auto mt-2 max-w-xl text-xs sm:text-sm text-[#657068]">
+          Sleep aan het touwtje of blader door onze ambachtsfoto&apos;s en resultaten.
+        </p>
       </div>
 
-      {photos.length > 1 && (
-        <div className="flex items-center justify-between p-4 bg-white border-t border-[#d9e1d7]/60">
-          <div className="flex items-center gap-1.5">
-            {photos.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => setCurrentIndex(i)}
-                aria-label={`Toon foto ${i + 1}: ${photos[i].title}`}
-                aria-current={i === currentIndex ? 'true' : undefined}
-                className={`h-2 rounded-full transition-all ${
-                  i === currentIndex ? 'w-6 bg-[#E87B5B]' : 'w-2 bg-[#d9e1d7]'
-                }`}
-              />
-            ))}
-          </div>
-
-          <div className="flex items-center gap-2">
-            <button
-              type="button"
-              onClick={prevSlide}
-              aria-label="Vorige resultaatfoto"
-              className="flex h-9 w-9 items-center justify-center rounded-full border border-[#d9e1d7] bg-white text-[#203728] hover:bg-[#E8EFE8] cursor-pointer"
-            >
-              <ChevronLeft className="h-4 w-4" />
-            </button>
-            <button
-              type="button"
-              onClick={nextSlide}
-              aria-label="Volgende resultaatfoto"
-              className="flex h-9 w-9 items-center justify-center rounded-full bg-[#E87B5B] text-white hover:bg-[#C95E3E] cursor-pointer"
-            >
-              <ChevronRight className="h-4 w-4" />
-            </button>
-          </div>
-        </div>
-      )}
+      <PolaroidLineCarousel
+        slides={slides}
+        height={height}
+        cardWidth={280}
+        sag={38}
+        swing={1}
+        autoplay={4500}
+        string="#3B7F4B"
+        background="transparent"
+        ink="#203728"
+      />
     </div>
   );
 };

@@ -276,10 +276,13 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                       <p className="mt-2 text-[11px] leading-4 text-[#657068]/80 line-clamp-2">{item.desc}</p>
                     )}
                   </div>
-                  <div className="mt-4 pt-2 border-t border-[#d9e1d7]/60">
+                  <div className="mt-4 pt-2 border-t border-[#d9e1d7]/60 flex items-baseline justify-between">
                     <span className="font-heading text-lg font-bold text-[#3B7F4B]">
                       {'custom' in item && item.custom ? 'Op aanvraag' : `€${item.price.toFixed(2).replace('.', ',')}`}
                     </span>
+                    {!('custom' in item && item.custom) && (
+                      <span className="text-[11px] font-semibold text-[#657068]">incl. btw</span>
+                    )}
                   </div>
                 </div>
               ))}
@@ -287,7 +290,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
 
             <div className="mt-6 rounded-xl border border-[#3B7F4B]/20 bg-[#E8EFE8]/60 p-4 text-xs leading-relaxed text-[#244A30] sm:text-sm">
               <p>
-                <strong>Extra reparaties:</strong> Kleine chip herstellen: <strong className="text-[#3B7F4B]">+€2,50</strong> per mes (in combinatie met een slijpbeurt). Nieuw profiel aanbrengen: <strong className="text-[#3B7F4B]">+€8,50</strong> per mes (altijd vooraf besproken).
+                <strong>Extra reparaties (incl. btw):</strong> Kleine chip herstellen: <strong className="text-[#3B7F4B]">+€2,50</strong> per mes (in combinatie met een slijpbeurt). Nieuw profiel aanbrengen: <strong className="text-[#3B7F4B]">+€8,50</strong> per mes (altijd vooraf besproken).
               </p>
               <p className="mt-1.5 text-[#657068]">
                 Grote aantallen of terugkerend onderhoud? Vermeld het aantal messen en gewenste planning in het formulier. Je ontvangt eerst een duidelijke offerte; we starten pas na akkoord.

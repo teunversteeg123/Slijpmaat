@@ -11,7 +11,9 @@ import {
   UtensilsCrossed,
   ChevronDown,
   Plus,
-  Minus
+  Minus,
+  MapPin,
+  Sparkles
 } from 'lucide-react';
 import {
   getDeliveryFeeCents,
@@ -37,9 +39,9 @@ interface KnifeRow {
 }
 
 const KNIFE_ROWS: KnifeRow[] = [
-  { name: 'Klein mes', sizeDesc: 'Korter dan 15 cm', priceCents: 650, priceLabel: '€6,50' },
-  { name: 'Normaal mes', sizeDesc: '15 tot 19,99 cm', priceCents: 850, priceLabel: '€8,50' },
-  { name: 'Groot mes', sizeDesc: '20 tot en met 25 cm', priceCents: 1050, priceLabel: '€10,50' },
+  { name: 'Klein mes', sizeDesc: 'Korter dan 15 cm', priceCents: 650, priceLabel: '€6,50 (incl. btw)' },
+  { name: 'Normaal mes', sizeDesc: '15 tot 19,99 cm', priceCents: 850, priceLabel: '€8,50 (incl. btw)' },
+  { name: 'Groot mes', sizeDesc: '20 tot en met 25 cm', priceCents: 1050, priceLabel: '€10,50 (incl. btw)' },
   { name: 'Extra groot mes', sizeDesc: 'Langer dan 25 cm', priceCents: 0, priceLabel: 'Op aanvraag' },
 ];
 
@@ -165,7 +167,7 @@ export const ZakelijkFormulier: React.FC = () => {
           {/* STAP 1: Restaurant & Contactpersoon */}
           <div className="rounded-[2rem] border border-[#d9e1d7] bg-white p-6 sm:p-8 shadow-xs">
             <div className="flex items-center gap-3">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-sm font-bold text-[#3B7F4B]">
+              <span className="flex h-9 w-9 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-sm sm:text-base font-bold text-[#3B7F4B]">
                 1
               </span>
               <h3 className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">
@@ -180,9 +182,9 @@ export const ZakelijkFormulier: React.FC = () => {
               <div>
                 <label
                   htmlFor="zakelijk-restaurant"
-                  className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
+                  className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
                 >
-                  <Building2 strokeWidth={1.75} className="h-4 w-4 text-[#3B7F4B]" />
+                  <Building2 strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
                   <span>Restaurant / Zaak *</span>
                 </label>
                 <input
@@ -203,9 +205,9 @@ export const ZakelijkFormulier: React.FC = () => {
                 <div>
                   <label
                     htmlFor="zakelijk-contact"
-                    className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
+                    className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
                   >
-                    <ChefHat strokeWidth={1.75} className="h-4 w-4 text-[#3B7F4B]" />
+                    <ChefHat strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
                     <span>Contactpersoon *</span>
                   </label>
                   <input
@@ -225,9 +227,9 @@ export const ZakelijkFormulier: React.FC = () => {
                 <div>
                   <label
                     htmlFor="zakelijk-phone"
-                    className="flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
+                    className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
                   >
-                    <Phone strokeWidth={1.75} className="h-4 w-4 text-[#3B7F4B]" />
+                    <Phone strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
                     <span>Telefoonnummer *</span>
                   </label>
                   <input
@@ -250,7 +252,7 @@ export const ZakelijkFormulier: React.FC = () => {
           {/* STAP 2: Aantal messen & Wensen */}
           <div className="rounded-[2rem] border border-[#d9e1d7] bg-white p-6 sm:p-8 shadow-xs">
             <div className="flex items-center gap-3">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-sm font-bold text-[#3B7F4B]">
+              <span className="flex h-9 w-9 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-sm sm:text-base font-bold text-[#3B7F4B]">
                 2
               </span>
               <h3 className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">
@@ -287,7 +289,11 @@ export const ZakelijkFormulier: React.FC = () => {
                         <span className="font-heading text-sm font-bold text-[#203728]">
                           {opt.label}
                         </span>
-                        {isSelected && <Check strokeWidth={2} className="h-4 w-4 text-[#3B7F4B]" />}
+                        {isSelected && (
+                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#3B7F4B] text-white">
+                            <Check strokeWidth={2.5} className="h-3.5 w-3.5" />
+                          </span>
+                        )}
                       </div>
                       <span className="text-xs text-[#657068] mt-1">
                         {opt.desc}
@@ -304,19 +310,21 @@ export const ZakelijkFormulier: React.FC = () => {
             </div>
 
             {/* Accordion voor optioneel specificeren per mesformaat (zoals Particulieren Calculator) */}
-            <div className="mt-5 rounded-xl border border-[#d9e1d7]/70 bg-[#FAFAF8] p-3.5">
+            <div className="mt-5 rounded-2xl border border-[#d9e1d7]/80 bg-[#FAFAF8] p-3.5 sm:p-4">
               <button
                 type="button"
                 onClick={() => setShowGranularKnives(!showGranularKnives)}
-                className="flex w-full items-center justify-between text-left text-xs font-bold text-[#3B7F4B] hover:text-[#2d633a] cursor-pointer"
+                className="flex w-full items-center justify-between text-left text-xs sm:text-sm font-bold text-[#3B7F4B] hover:text-[#2d633a] cursor-pointer"
               >
-                <span className="flex items-center gap-2">
-                  <UtensilsCrossed strokeWidth={1.75} className="h-4 w-4 text-[#3B7F4B]" />
+                <span className="flex items-center gap-2.5">
+                  <span className="flex h-7 w-7 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-lg bg-[#E8EFE8] text-[#3B7F4B]">
+                    <UtensilsCrossed strokeWidth={2} className="h-4 w-4" />
+                  </span>
                   <span>Optioneel: exacte aantallen per formaat opgeven ({granularTotalKnives} geselecteerd)</span>
                 </span>
                 <ChevronDown
-                  strokeWidth={2}
-                  className={`h-4 w-4 transition-transform duration-200 ${
+                  strokeWidth={2.5}
+                  className={`h-5 w-5 shrink-0 transition-transform duration-200 ${
                     showGranularKnives ? 'rotate-180' : ''
                   }`}
                 />
@@ -327,11 +335,11 @@ export const ZakelijkFormulier: React.FC = () => {
                   {KNIFE_ROWS.map((row, idx) => (
                     <div
                       key={row.name}
-                      className="py-3 first:pt-1 last:pb-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2"
+                      className="py-3 first:pt-1 last:pb-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5"
                     >
                       <div>
                         <span className="font-heading text-sm font-bold text-[#203728]">{row.name}</span>
-                        <p className="text-xs text-[#657068]">{row.sizeDesc} &bull; {row.priceLabel}</p>
+                        <p className="text-xs text-[#657068]">{row.sizeDesc} &bull; <strong className="text-[#3B7F4B]">{row.priceLabel}</strong></p>
                       </div>
                       <div className="flex items-center rounded-xl border border-[#d9e1d7] bg-white shadow-2xs self-end sm:self-auto">
                         <button
@@ -339,20 +347,20 @@ export const ZakelijkFormulier: React.FC = () => {
                           onClick={() => updateKnifeCount(idx, -1)}
                           disabled={knifeCounts[idx] === 0}
                           aria-label={`Minder ${row.name}`}
-                          className="flex h-9 w-9 items-center justify-center text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed rounded-l-xl"
+                          className="flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed rounded-l-xl"
                         >
-                          <Minus strokeWidth={2} className="h-3.5 w-3.5" />
+                          <Minus strokeWidth={2.25} className="h-4.5 w-4.5 sm:h-4 sm:w-4 shrink-0" />
                         </button>
-                        <span className="w-8 text-center font-heading text-sm font-bold text-[#203728]">
+                        <span className="w-10 sm:w-8 text-center font-heading text-base sm:text-sm font-bold text-[#203728]">
                           {knifeCounts[idx]}
                         </span>
                         <button
                           type="button"
                           onClick={() => updateKnifeCount(idx, 1)}
                           aria-label={`Meer ${row.name}`}
-                          className="flex h-9 w-9 items-center justify-center text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] cursor-pointer rounded-r-xl"
+                          className="flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] cursor-pointer rounded-r-xl"
                         >
-                          <Plus strokeWidth={2} className="h-3.5 w-3.5" />
+                          <Plus strokeWidth={2.25} className="h-4.5 w-4.5 sm:h-4 sm:w-4 shrink-0" />
                         </button>
                       </div>
                     </div>
@@ -376,9 +384,10 @@ export const ZakelijkFormulier: React.FC = () => {
             <div className="mt-5">
               <label
                 htmlFor="zakelijk-notes"
-                className="block text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
+                className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
               >
-                Opmerkingen of gewenste planning
+                <MessageCircle strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
+                <span>Opmerkingen of gewenste planning</span>
               </label>
               <textarea
                 id="zakelijk-notes"
@@ -394,7 +403,7 @@ export const ZakelijkFormulier: React.FC = () => {
           {/* STAP 3: Ophalen of Langskomen? */}
           <div className="rounded-[2rem] border border-[#d9e1d7] bg-white p-6 sm:p-8 shadow-xs">
             <div className="flex items-center gap-3">
-              <span className="flex h-8 w-8 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-sm font-bold text-[#3B7F4B]">
+              <span className="flex h-9 w-9 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-sm sm:text-base font-bold text-[#3B7F4B]">
                 3
               </span>
               <h3 className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">
@@ -402,32 +411,42 @@ export const ZakelijkFormulier: React.FC = () => {
               </h3>
             </div>
             <p className="mt-2 text-sm text-[#657068]">
-              Binnen Utrecht is ophalen en bezorgen gratis vanaf €35 bestelwaarde. Of breng de messen langs op afspraak.
+              Binnen Utrecht is ophalen en bezorgen gratis vanaf €35 bestelwaarde (incl. btw). Of breng de messen langs op afspraak.
             </p>
 
             {/* Service Toggle Kaarten */}
-            <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               <button
                 type="button"
                 onClick={() => {
                   setServiceType('bezorging');
                   setErrorMsg('');
                 }}
-                className={`flex flex-col text-left p-4 rounded-2xl border-2 transition-all cursor-pointer ${
+                className={`flex flex-col text-left p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer ${
                   serviceType === 'bezorging'
                     ? 'border-[#3B7F4B] bg-[#E8EFE8]/30 shadow-2xs'
                     : 'border-[#d9e1d7] bg-[#FAFAF8] hover:border-[#3B7F4B]/40'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-heading text-sm font-bold text-[#203728] flex items-center gap-1.5">
-                    <Truck strokeWidth={1.75} className="h-4 w-4 text-[#3B7F4B]" />
-                    <span>Ik wil gebruikmaken van de bezorgservice</span>
-                  </span>
-                  {serviceType === 'bezorging' && <Check strokeWidth={2} className="h-4 w-4 text-[#3B7F4B]" />}
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className={`flex h-11 w-11 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-2xl transition-colors ${
+                      serviceType === 'bezorging' ? 'bg-[#3B7F4B] text-white' : 'bg-[#E8EFE8] text-[#3B7F4B]'
+                    }`}>
+                      <Truck strokeWidth={2} className="h-5.5 w-5.5 sm:h-5 sm:w-5" />
+                    </span>
+                    <span className="font-heading text-sm sm:text-base font-bold text-[#203728]">
+                      Bezorgservice Utrecht
+                    </span>
+                  </div>
+                  {serviceType === 'bezorging' && (
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#3B7F4B] text-white">
+                      <Check strokeWidth={2.5} className="h-3.5 w-3.5" />
+                    </span>
+                  )}
                 </div>
-                <span className="text-xs text-[#657068] mt-1.5">
-                  Ophalen &amp; weer bezorgen bij jullie keukendeur binnen Utrecht. Gratis vanaf €35.
+                <span className="text-xs sm:text-sm text-[#657068] mt-2.5">
+                  Ophalen &amp; weer bezorgen bij jullie keukendeur binnen Utrecht. Gratis vanaf €35 (incl. btw).
                 </span>
               </button>
 
@@ -437,20 +456,30 @@ export const ZakelijkFormulier: React.FC = () => {
                   setServiceType('langskomen');
                   setErrorMsg('');
                 }}
-                className={`flex flex-col text-left p-4 rounded-2xl border-2 transition-all cursor-pointer ${
+                className={`flex flex-col text-left p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer ${
                   serviceType === 'langskomen'
                     ? 'border-[#3B7F4B] bg-[#E8EFE8]/30 shadow-2xs'
                     : 'border-[#d9e1d7] bg-[#FAFAF8] hover:border-[#3B7F4B]/40'
                 }`}
               >
-                <div className="flex items-center justify-between">
-                  <span className="font-heading text-sm font-bold text-[#203728] flex items-center gap-1.5">
-                    <Calendar strokeWidth={1.75} className="h-4 w-4 text-[#3B7F4B]" />
-                    <span>Ik kom langs op afspraak</span>
-                  </span>
-                  {serviceType === 'langskomen' && <Check strokeWidth={2} className="h-4 w-4 text-[#3B7F4B]" />}
+                <div className="flex items-start justify-between gap-3">
+                  <div className="flex items-center gap-3">
+                    <span className={`flex h-11 w-11 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-2xl transition-colors ${
+                      serviceType === 'langskomen' ? 'bg-[#3B7F4B] text-white' : 'bg-[#E8EFE8] text-[#3B7F4B]'
+                    }`}>
+                      <Calendar strokeWidth={2} className="h-5.5 w-5.5 sm:h-5 sm:w-5" />
+                    </span>
+                    <span className="font-heading text-sm sm:text-base font-bold text-[#203728]">
+                      Langsbrengen op afspraak
+                    </span>
+                  </div>
+                  {serviceType === 'langskomen' && (
+                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#3B7F4B] text-white">
+                      <Check strokeWidth={2.5} className="h-3.5 w-3.5" />
+                    </span>
+                  )}
                 </div>
-                <span className="text-xs text-[#657068] mt-1.5">
+                <span className="text-xs sm:text-sm text-[#657068] mt-2.5">
                   Aan de werkbank in Utrecht. Geen inloopbalie, afspraak vooraf via WhatsApp.
                 </span>
               </button>
@@ -463,9 +492,10 @@ export const ZakelijkFormulier: React.FC = () => {
                   <div>
                     <label
                       htmlFor="zakelijk-postcode"
-                      className="block text-xs font-bold text-[#203728] uppercase tracking-wider mb-1"
+                      className="flex items-center gap-2 text-xs font-bold text-[#203728] uppercase tracking-wider mb-1"
                     >
-                      Postcode (Utrecht) *
+                      <MapPin strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
+                      <span>Postcode (Utrecht) *</span>
                     </label>
                     <input
                       id="zakelijk-postcode"
@@ -487,9 +517,10 @@ export const ZakelijkFormulier: React.FC = () => {
                   <div>
                     <label
                       htmlFor="zakelijk-address"
-                      className="block text-xs font-bold text-[#203728] uppercase tracking-wider mb-1"
+                      className="flex items-center gap-2 text-xs font-bold text-[#203728] uppercase tracking-wider mb-1"
                     >
-                      Straat en huisnummer (optioneel)
+                      <Building2 strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
+                      <span>Straat en huisnummer (optioneel)</span>
                     </label>
                     <input
                       id="zakelijk-address"
@@ -506,7 +537,7 @@ export const ZakelijkFormulier: React.FC = () => {
                 <div className="rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] p-3 text-xs leading-relaxed text-[#203728]">
                   {!cleanPostcode || cleanPostcode.length < 4 ? (
                     <span className="text-[#657068]">
-                      Vul een postcode in om de bezorgmogelijkheid te controleren. Binnen Utrecht gratis vanaf €35 bestelwaarde.
+                      Vul een postcode in om de bezorgmogelijkheid te controleren. Binnen Utrecht gratis vanaf €35 bestelwaarde (incl. btw).
                     </span>
                   ) : !hasValidPostcode ? (
                     <span className="text-[#C95E3E] font-medium">
@@ -517,13 +548,13 @@ export const ZakelijkFormulier: React.FC = () => {
                       Buiten ons vaste bezorggebied Utrecht. Haal- en brengservice op aanvraag, of kies &apos;Ik kom langs op afspraak&apos; zonder bezorgkosten.
                     </span>
                   ) : deliveryFeeCents === 0 ? (
-                    <span className="text-[#3B7F4B] font-bold flex items-center gap-1.5">
-                      <Check strokeWidth={2} className="h-4 w-4 shrink-0" />
-                      Ophalen en bezorgen aan de keukendeur is gratis voor jullie bestelling!
+                    <span className="text-[#3B7F4B] font-bold flex items-center gap-2">
+                      <Check strokeWidth={2.5} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
+                      <span>Ophalen en bezorgen aan de keukendeur is gratis voor jullie bestelling (vanaf €35 incl. btw)!</span>
                     </span>
                   ) : (
                     <span>
-                      <strong className="text-[#3B7F4B]">Bezorgservice Utrecht:</strong> Binnen Utrecht gratis vanaf €35 bestelwaarde. Onder €35 geldt het bezorgtarief van €{((deliveryFeeCents || 725) / 100).toFixed(2).replace('.', ',')}.
+                      <strong className="text-[#3B7F4B]">Bezorgservice Utrecht:</strong> Binnen Utrecht gratis vanaf €35 bestelwaarde (incl. btw). Onder €35 geldt het bezorgtarief van €{((deliveryFeeCents || 725) / 100).toFixed(2).replace('.', ',')} incl. btw.
                     </span>
                   )}
                 </div>
@@ -592,21 +623,27 @@ export const ZakelijkFormulier: React.FC = () => {
 
             {/* Offerte & Prijsindicatie Box */}
             <div className="rounded-2xl bg-white p-4 sm:p-5 border border-[#d9e1d7]/80 shadow-2xs">
-              <small className="block text-xs font-semibold text-[#657068]">
-                Snel een helder voorstel
-              </small>
+              <div className="flex items-center justify-between">
+                <small className="block text-xs font-semibold text-[#657068]">
+                  Snel een helder voorstel
+                </small>
+                <span className="inline-flex items-center gap-1 rounded-full bg-[#E8EFE8] px-2.5 py-0.5 text-[10px] font-bold text-[#3B7F4B] uppercase tracking-wider">
+                  <Sparkles strokeWidth={2} className="h-3 w-3 shrink-0" />
+                  <span>incl. btw</span>
+                </span>
+              </div>
               <strong className="mt-1 block font-heading text-2xl sm:text-3xl font-bold text-[#3B7F4B]">
                 Offerte via WhatsApp
               </strong>
               <p className="mt-2 text-[11px] text-[#657068] leading-relaxed">
-                Basistarieven vanaf €6,50 per mes (incl. btw). Binnen Utrecht gratis haal- en brengservice vanaf €35. We starten pas na jullie akkoord.
+                Basistarieven vanaf €6,50 per mes (alle prijzen zijn incl. btw). Binnen Utrecht gratis haal- en brengservice vanaf €35 (incl. btw). We starten pas na jullie akkoord.
               </p>
             </div>
 
             {/* Error banner */}
             {errorMsg && (
-              <div className="mt-4 flex items-center gap-2 rounded-xl bg-[#FFF3F1] p-3 text-xs font-semibold text-[#8B2921]">
-                <AlertCircle strokeWidth={1.75} className="h-4 w-4 shrink-0" />
+              <div className="mt-4 flex items-center gap-2.5 rounded-xl bg-[#FFF3F1] p-3 text-xs font-semibold text-[#8B2921]">
+                <AlertCircle strokeWidth={2} className="h-5 w-5 shrink-0 text-[#C95E3E]" />
                 <span>{errorMsg}</span>
               </div>
             )}
@@ -615,9 +652,9 @@ export const ZakelijkFormulier: React.FC = () => {
             <button
               type="button"
               onClick={handleFormSubmit}
-              className="mt-6 group inline-flex w-full min-h-[52px] sm:min-h-[56px] items-center justify-center gap-2.5 rounded-full bg-[#E87B5B] px-4 py-3.5 sm:px-6 sm:py-4 font-heading text-sm sm:text-base font-bold text-white shadow-md transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-lg active:scale-[0.98] cursor-pointer whitespace-nowrap"
+              className="mt-6 group inline-flex w-full min-h-[52px] sm:min-h-[56px] items-center justify-center gap-3 rounded-full bg-[#E87B5B] px-4 py-3.5 sm:px-6 sm:py-4 font-heading text-sm sm:text-base font-bold text-white shadow-md transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-lg active:scale-[0.98] cursor-pointer whitespace-nowrap"
             >
-              <MessageCircle strokeWidth={1.75} className="h-5 w-5 shrink-0 transition-transform duration-200 group-hover:scale-110" />
+              <MessageCircle strokeWidth={2} className="h-6 w-6 shrink-0 transition-transform duration-200 group-hover:scale-110" />
               <span>Open aanvraag in WhatsApp</span>
             </button>
 
@@ -627,9 +664,9 @@ export const ZakelijkFormulier: React.FC = () => {
                 href="https://wa.me/31682074967?text=Hoi%20Teun%20en%20Mike,%20ik%20heb%20een%20vraag%20over%20zakelijk%20messen%20slijpen"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1.5 text-xs font-bold text-[#3B7F4B] hover:text-[#2d633a] transition-colors"
+                className="inline-flex items-center gap-2 text-xs font-bold text-[#3B7F4B] hover:text-[#2d633a] transition-colors"
               >
-                <MessageCircle strokeWidth={1.75} className="h-3.5 w-3.5" />
+                <MessageCircle strokeWidth={2} className="h-4.5 w-4.5 shrink-0 text-[#3B7F4B]" />
                 <span>Of app direct met Teun &amp; Mike</span>
               </a>
             </div>
