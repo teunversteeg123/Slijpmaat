@@ -3,6 +3,8 @@ import { PageId } from './types';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { LanguageProvider } from './context/LanguageContext';
+import { CookieConsentProvider } from './context/CookieConsentContext';
+import { trackPageView } from './utils/analytics';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -73,6 +75,7 @@ export default function App({ initialPath }: AppProps) {
     setMetaContent('meta[name="twitter:description"]', 'name', 'twitter:description', metadata.description);
     setCanonical(canonicalUrl);
     setStructuredData(metadata.path);
+    trackPageView(metadata.path, metadata.title);
   }, [currentPage]);
 
   const handleNavigate = (page: PageId) => {
@@ -186,18 +189,20 @@ export default function App({ initialPath }: AppProps) {
 
   return (
     <LanguageProvider>
-      <div className="min-h-screen flex flex-col bg-[#FAFAF8] text-[#244A30] antialiased font-sans">
-        {/* Top Header */}
-        <Header currentPage={currentPage} onNavigate={handleNavigate} />
+      <CookieConsentProvider>
+        <div className="min-h-screen flex flex-col bg-[#FAFAF8] text-[#244A30] antialiased font-sans">
+          {/* Top Header */}
+          <Header currentPage={currentPage} onNavigate={handleNavigate} />
 
-        {/* Main Page Area */}
-        <main className="flex-1 focus:outline-none" tabIndex={-1}>
-          {renderCurrentPage()}
-        </main>
+          {/* Main Page Area */}
+          <main className="flex-1 focus:outline-none" tabIndex={-1}>
+            {renderCurrentPage()}
+          </main>
 
-        {/* Footer */}
-        <Footer onNavigate={handleNavigate} />
-      </div>
+          {/* Footer */}
+          <Footer onNavigate={handleNavigate} />
+        </div>
+      </CookieConsentProvider>
     </LanguageProvider>
   );
 }

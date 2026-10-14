@@ -174,7 +174,7 @@ const servicegebiedFaqs = [
   },
   {
     q: 'Kan ik mijn messen ook zelf langsbrengen in Utrecht?',
-    a: 'Jazeker! Je bent op afspraak van harte welkom aan de Gerard Noodtstraat in Utrecht. Omdat we vanuit huis werken en geconcentreerd aan de werkbank staan, vragen we je altijd even vooraf een tijdstip af te stemmen via WhatsApp.',
+    a: 'Jazeker! Je bent op afspraak van harte welkom aan de Gerard Noodtstraat in Utrecht. Omdat we vanuit huis werken vragen we je altijd even vooraf een tijdstip af te stemmen via WhatsApp.',
   },
   {
     q: 'Kan ik vanuit heel Nederland mijn messen komen brengen?',

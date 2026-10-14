@@ -46,7 +46,7 @@ Alle vijftien actieve pagina's hebben een normaal canoniek pad en een eigen voor
 - Google Fonts wordt bij paginalaad extern opgehaald.
 - Instagram en Facebook via gewone uitgaande links.
 - Algemene voorwaarden en privacyverklaring linken momenteel naar Google Docs.
-- Geen analytics, advertentiepixel of andere meettracker aangetroffen.
+- Google Analytics 4 is technisch voorbereid, maar wordt pas actief zodra het bevestigde meet-ID via `VITE_GA_MEASUREMENT_ID` is ingesteld en een bezoeker expliciet toestemming geeft. Er is geen advertentiepixel.
 - Geen ingesloten Instagram-, Maps- of YouTube-frame in de actieve pagina's aangetroffen.
 
 ### Taalwissel
@@ -64,11 +64,11 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 
 ### Privacy en cookies
 
-- Geen analytische of marketingcookies aangetroffen.
-- Wel een taalvoorkeur in lokale opslag en een `googtrans`-cookie.
+- Google Analytics 4 en de bijbehorende `_ga`-cookies worden uitsluitend na expliciete toestemming geactiveerd. De Analytics-cookies zijn technisch beperkt tot maximaal 90 dagen; advertentieopslag, Google Signals en advertentiepersonalisatie staan uit.
+- De taalvoorkeur en de maximaal zes maanden geldige cookievoorkeur staan in lokale opslag; de taaloplossing schrijft daarnaast een functionele `googtrans`-cookie wanneer Engels wordt gekozen.
 - Google Fonts maakt direct een externe verbinding.
-- Er is nog geen cookie-inventaris, voorkeurenpaneel of mechanisme om toestemming in te trekken.
-- De juridische pagina's moeten later worden herschreven op basis van de definitieve techniek en bevestigde bedrijfsgegevens.
+- De site heeft een gelijkwaardige accepteren/weigeren-banner en een blijvende ingang `Cookievoorkeuren` in de footer. Intrekken schakelt Analytics uit, verwijdert de bereikbare `_ga`-cookies en herlaadt de pagina zonder Google-tag.
+- Artikel 11 van de privacyverklaring beschrijft de actuele browseropslag, Google Analytics en de mogelijkheid om toestemming in te trekken. De volledige juridische tekst en bedrijfsgegevens blijven vóór lancering een afzonderlijk controlepunt.
 
 ### Beveiliging
 
@@ -110,7 +110,8 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 - [x] Normale URL's implementeren en redirects voor oude actieve hashlinks behouden.
 - [x] Canonicals, veilige structured data, `robots.txt`, sitemap, statische prerendering en echte 404 toevoegen.
 - [ ] Bestaande Carrd-URL's, Search Console-data en eventuele analytics-export analyseren.
-- [ ] Cookie- en opslagregister maken en juridische pagina's laten aansluiten op de echte inrichting.
+- [x] Toestemmingsmechanisme en privacytekst laten aansluiten op de Analytics-inrichting.
+- [ ] Definitief cookie- en opslagregister afronden nadat het echte meet-ID en de GA4-propertyinstellingen zijn bevestigd.
 - [ ] Google Fonts zelf hosten of het externe verzoek expliciet meenemen in de privacy-inrichting.
 - [ ] Securityheaders, CSP en dependency-audit uitvoeren.
 - [ ] Grote afbeeldingen comprimeren en moderne formaten/responsive bronnen gebruiken.
@@ -119,7 +120,7 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 
 ### P2 — later uitbreiden
 
-- [ ] Alleen na een concreet meetdoel analytics toevoegen.
+- [x] Google Analytics 4 technisch achter expliciete toestemming plaatsen; definitief GA4-meet-ID en meetplan blijven nodig voor activering.
 - [ ] Alleen bij echte serverformulieren: servervalidatie, spambeperking, rate limiting en veilige opslag toevoegen.
 - [ ] Alleen na expliciete bevestiging verzending per post, landelijke bezorging of webshopfunctionaliteit toevoegen.
 - [ ] Evaluatie- en onderhoudsritme voor prijzen, teksten, dependencies en juridische pagina's vastleggen.

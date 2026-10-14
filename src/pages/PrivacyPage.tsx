@@ -87,9 +87,12 @@ const sections: LegalSection[] = [
     '10.3 De Klant kan zich altijd afmelden voor marketingberichten door dit via WhatsApp of e-mail aan Slijpmaat door te geven.',
   ] },
   { heading: 'Artikel 11 – Website en cookies', paragraphs: [
-    '11.1 De website van Slijpmaat kan gebruikmaken van technische of functionele cookies die nodig zijn om de website goed te laten werken.',
-    '11.2 Indien Slijpmaat analytische of marketingcookies gebruikt waarvoor toestemming nodig is, vraagt Slijpmaat hiervoor vooraf toestemming via de website.',
-    '11.3 Externe diensten, zoals socialmediaplatforms, formulierdiensten of websitebouwers, kunnen eigen cookies of vergelijkbare technieken gebruiken wanneer de Klant deze diensten gebruikt of bezoekt.',
+    '11.1 De website gebruikt functionele browseropslag om de gekozen taal en de cookievoorkeur van de bezoeker te onthouden. Deze opslag is nodig om de gekozen instellingen uit te voeren. De cookievoorkeur wordt maximaal 6 maanden bewaard en daarna opnieuw gevraagd.',
+    '11.2 Slijpmaat gebruikt Google Analytics 4 uitsluitend nadat de bezoeker hiervoor actief toestemming heeft gegeven. Zonder toestemming wordt de Google Analytics-tag niet geladen en worden geen Analytics-metingen naar Google verstuurd.',
+    '11.3 Na toestemming kan Google Analytics de cookies _ga en _ga_<meet-ID> plaatsen om bezoekers en sessies van elkaar te onderscheiden. Slijpmaat beperkt de levensduur van deze cookies tot maximaal 90 dagen. Google Analytics kan onder meer bezochte pagina’s, sessiegegevens, globale locatie, browser- en apparaatgegevens verwerken.',
+    '11.4 Slijpmaat heeft advertentieopslag, Google Signals en advertentiepersonalisatie voor deze implementatie uitgeschakeld. De Analytics-gegevens worden niet gebruikt om op de website gepersonaliseerde advertenties te tonen.',
+    '11.5 De bezoeker kan Analytics weigeren zonder verlies van de normale websitefuncties. Een eerder gegeven keuze kan via “Cookievoorkeuren” in de footer worden gewijzigd. Bij intrekking stopt de website verdere Analytics-metingen en probeert zij bestaande Google Analytics-cookies te verwijderen.',
+    '11.6 Externe diensten, zoals WhatsApp, Google Maps en socialmediaplatforms, kunnen eigen cookies of vergelijkbare technieken gebruiken nadat de bezoeker bewust naar die externe dienst doorklikt.',
   ] },
   { heading: 'Artikel 12 – Minderjarigen', paragraphs: ['Slijpmaat richt haar diensten niet specifiek op minderjarigen. Indien een minderjarige gebruik wil maken van de diensten van Slijpmaat, moet hiervoor toestemming zijn van een ouder of wettelijke vertegenwoordiger.'] },
   { heading: 'Artikel 13 – Wijzigingen in deze privacyverklaring', paragraphs: ['Slijpmaat mag deze privacyverklaring wijzigen wanneer de dienstverlening, wetgeving of gebruikte systemen veranderen. De meest recente versie wordt beschikbaar gesteld via de website of op verzoek toegestuurd.'] },
@@ -100,5 +103,5 @@ const sections: LegalSection[] = [
 ];
 
 export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onNavigate }) => (
-  <LegalDocumentPage title="Privacyverklaring Slijpmaat" subtitle="Versie 1.0 · Utrecht · juni 2026" sections={sections} onNavigate={onNavigate} />
+  <LegalDocumentPage title="Privacyverklaring Slijpmaat" subtitle="Versie 1.1 · Utrecht · oktober 2026" sections={sections} onNavigate={onNavigate} />
 );

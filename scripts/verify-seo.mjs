@@ -3,14 +3,14 @@ import { createDistServer } from './serve-dist.mjs';
 
 const routes = [
   ['/', true, 'Jouw messenslijper in Utrecht'],
-  ['/particulier', true, 'Keukenmessen laten slijpen in Utrecht'],
+  ['/particulier', true, 'Je messen weer scherp. Zonder gedoe.'],
   ['/zakelijk', true, 'Professioneel messen slijpen voor horeca'],
   ['/diensten/keukenmessen-slijpen', true, 'Keukenmessen slijpen op Japanse waterstenen'],
   ['/diensten/japanse-messen-slijpen', true, 'Japanse messen zorgvuldig laten slijpen'],
   ['/diensten/chips-herstellen', true, 'Chips en beschadigingen in keukenmessen herstellen'],
   ['/diensten/wat-slijpen-we', true, 'Welke messen slijpt Slijpmaat wel en niet?'],
-  ['/werkwijze', true, 'Zo slijpen wij keukenmessen met de hand'],
-  ['/servicegebied', true, 'Messen slijpen in Utrecht: laten ophalen of zelf langskomen'],
+  ['/werkwijze', true, '100% met de hand geslepen.'],
+  ['/servicegebied', true, 'Ophalen, bezorgen &amp; langsbrengen.'],
   ['/blogs', false, 'Blogs over messen slijpen en onderhoud'],
   ['/over-ons', true, 'Twee Utrechtse vrienden met passie voor scherpte.'],
   ['/veelgestelde-vragen', true, 'Alles wat je wilt weten over Slijpmaat.'],

@@ -3,6 +3,7 @@ import { Facebook, Instagram } from 'lucide-react';
 import { SlijpmaatLogo } from './SlijpmaatLogo';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
+import { useCookieConsent } from '../context/CookieConsentContext';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -24,6 +25,8 @@ const columnHeadClass = 'mb-3 flex min-h-[54px] items-center sm:mb-0 sm:h-[68px]
 const footerLinkClass = 'inline-block text-[14px] leading-[1.55] text-[#3B7F4B] transition-transform duration-200 hover:translate-x-[3px] hover:opacity-70 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]';
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
+  const { analyticsAvailable, openCookieSettings } = useCookieConsent();
+
   const handleNav = (page: PageId) => {
     onNavigate(page);
     window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -130,6 +133,11 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <button type="button" onClick={() => handleNav('privacy')} className="cursor-pointer transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]">
               Privacyverklaring
             </button>
+            {analyticsAvailable ? (
+              <button type="button" onClick={openCookieSettings} className="cursor-pointer transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]">
+                Cookievoorkeuren
+              </button>
+            ) : null}
           </div>
         </div>
       </div>

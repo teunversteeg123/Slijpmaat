@@ -61,7 +61,7 @@ const serviceFaqs = [
   },
   {
     q: 'Kan ik mijn messen ook zelf langsbrengen in Utrecht?',
-    a: 'Jazeker! Je bent op afspraak van harte welkom aan de Gerard Noodtstraat in Utrecht. Omdat we vanuit huis werken en geconcentreerd aan de werkbank staan, vragen we je altijd even vooraf een tijdstip af te stemmen via WhatsApp.'
+    a: 'Jazeker! Je bent op afspraak van harte welkom aan de Gerard Noodtstraat in Utrecht. Omdat we vanuit huis werken vragen we je altijd even vooraf een tijdstip af te stemmen via WhatsApp.'
   },
   {
     q: 'Wat als mijn postcode net buiten Utrecht valt?',
@@ -70,7 +70,7 @@ const serviceFaqs = [
 ];
 
 export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een vraag over het servicegebied in Utrecht!')}`;
+  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een vraag over het servicegebied!')}`;
 
   const [zipInput, setZipInput] = useState('');
   const [searchResult, setSearchResult] = useState<{ status: 'success' | 'warning' | 'info'; text: string } | null>(null);
@@ -178,7 +178,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
           {/* Left: Copy & CTAs */}
           <div className="order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0 lg:pl-4 xl:pl-8">
             <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
-              Utrecht en omgeving · Logistiek &amp; Bereikbaarheid
+              Ons servicegebied
             </p>
             <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
               Ophalen, bezorgen &amp; langsbrengen.
@@ -311,7 +311,47 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
         </div>
       )}
 
-      {/* 2. POSTCODECHECK & WIJKEN IN UTRECHT */}
+      {/* 2. TRUST BAR (Zekerheden floating pill) */}
+      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
+          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
+            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
+              <GoogleIcon />
+              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
+            </div>
+            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
+              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24–48 uur retour</span>
+            </div>
+            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
+              <Bike className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf €35</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 3. BELANGRIJKE MEDEDELING: GEEN INLOOPWINKEL */}
+      <section className="relative px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
+        <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-[#F7F4EC] p-6 sm:p-8 shadow-xs">
+          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
+            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-[#E87B5B] shadow-2xs">
+              <AlertTriangle className="h-7 w-7" />
+            </span>
+            <div className="space-y-1">
+              <h2 className="font-heading text-lg sm:text-xl font-bold text-[#3B7F4B]">
+                Belangrijk: Wij werken vanuit huis: langskomen kan alleen op afspraak
+              </h2>
+              <p className="text-sm sm:text-base leading-relaxed text-[#657068]">
+                Slijpmaat heeft géén openbare inloopbalie of winkel. Omdat wij vanuit huis werken, kan het langsbrengen en ophalen van messen uitsluitend na voorafgaande afspraak via WhatsApp. Zo zorgen we dat Teun of Mike persoonlijk aanwezig is om jouw messen veilig en met volle aandacht aan te nemen.
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* 4. POSTCODECHECK & WIJKEN IN UTRECHT */}
       <section id="postcodecheck" className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
@@ -414,7 +454,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
         </div>
       </section>
 
-      {/* 3. KIES WAT BIJ JE PAST: UTRECHT OF BUITEN UTRECHT */}
+      {/* 5. KIES WAT BIJ JE PAST: UTRECHT OF BUITEN UTRECHT */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">
         <div className="relative mx-auto max-w-7xl">
           <div className="mb-8 max-w-2xl sm:mb-10">
@@ -467,46 +507,6 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                   <ArrowRight className="h-4 w-4" />
                 </a>
               </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 4. TRUST BAR (Zekerheden floating pill) */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24–48 uur retour</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <Bike className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf €35</span>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* 5. BELANGRIJKE MEDEDELING: GEEN INLOOPWINKEL */}
-      <section className="relative px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
-        <div className="mx-auto max-w-5xl overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-[#F7F4EC] p-6 sm:p-8 shadow-xs">
-          <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center">
-            <span className="flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl bg-white text-[#E87B5B] shadow-2xs">
-              <AlertTriangle className="h-7 w-7" />
-            </span>
-            <div className="space-y-1">
-              <h2 className="font-heading text-lg sm:text-xl font-bold text-[#3B7F4B]">
-                Belangrijk: Wij werken vanuit huis: langskomen kan alleen op afspraak
-              </h2>
-              <p className="text-sm sm:text-base leading-relaxed text-[#657068]">
-                Slijpmaat heeft géén openbare inloopbalie of winkel. Omdat wij vanuit huis werken, kan het langsbrengen en ophalen van messen uitsluitend na voorafgaande afspraak via WhatsApp. Zo zorgen we dat Teun of Mike persoonlijk aanwezig is om jouw messen veilig en met volle aandacht aan te nemen.
-              </p>
             </div>
           </div>
         </div>
