@@ -22,7 +22,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     {
       num: '2',
       title: 'Ophalen of langskomen',
-      text: 'Vanaf 3 messen gratis opgehaald en thuisbezorgd in Utrecht. Of breng ze langs op afspraak.',
+      text: 'Vanaf €35 bestelwaarde halen en bezorgen we gratis binnen Utrecht. Of breng je messen langs op afspraak.',
     },
     {
       num: '3',
@@ -168,7 +168,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis bezorging vanaf 3 messen</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
             </div>
           </div>
         </div>
