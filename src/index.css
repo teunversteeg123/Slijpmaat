@@ -166,3 +166,25 @@ body {
   }
 }
 
+/* Flaticon UIcons responsive rendering & alignment */
+i[class*="fi-rr-"],
+i[class*="fi-brands-"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 1;
+  vertical-align: middle;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Ensure icons inside flex buttons and items do not shrink or shift */
+.uicon-center {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+

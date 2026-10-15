@@ -1,19 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
-import {
-  ArrowDown,
-  ArrowRight,
-  Building2,
-  Check,
-  CircleDollarSign,
-  Clock3,
-  Leaf,
-  MapPin,
-  MessageCircle,
-  Phone,
-  Plus,
-  Utensils,
-  X,
-} from 'lucide-react';
+import { UIcon, UIconBadge } from '../components/ui/UIcon';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT, GoogleReviewsSection } from '../components/GoogleReviewsSection';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import { PageId } from '../types';
@@ -30,10 +16,10 @@ const quickSteps = [
 ];
 
 const qualities = [
-  { title: 'Lokaal in Utrecht', text: 'Ophalen en terugbrengen in Utrecht en omgeving, zonder pakket of winkelbezoek.', icon: MapPin },
-  { title: 'Makkelijk geregeld', text: 'Snel contact via WhatsApp, duidelijke afspraken en geen ingewikkeld proces.', icon: MessageCircle },
-  { title: 'Duidelijke prijzen', text: 'Je ziet vooraf wat het slijpen kost. Reparaties bespreken we altijd eerst.', icon: CircleDollarSign },
-  { title: 'Langer plezier van je mes', text: 'Goed onderhoud verlengt de levensduur van je messen en voorkomt onnodig vervangen.', icon: Leaf },
+  { title: 'Lokaal in Utrecht', text: 'Ophalen en terugbrengen in Utrecht en omgeving, zonder pakket of winkelbezoek.', icon: 'marker' },
+  { title: 'Makkelijk geregeld', text: 'Snel contact via WhatsApp, duidelijke afspraken en geen ingewikkeld proces.', icon: 'comment-alt' },
+  { title: 'Duidelijke prijzen', text: 'Je ziet vooraf wat het slijpen kost. Reparaties bespreken we altijd eerst.', icon: 'euro' },
+  { title: 'Langer plezier van je mes', text: 'Goed onderhoud verlengt de levensduur van je messen en voorkomt onnodig vervangen.', icon: 'leaf' },
 ];
 
 const craftSteps = [
@@ -120,7 +106,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     className="group inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
                   >
                     <span>Plan mijn slijpbeurt</span>
-                    <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                    <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                   </button>
                 ) : (
                   <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2 rounded-2xl sm:rounded-full bg-[#E87B5B] p-2.5 sm:p-1.5 shadow-md transition-all duration-300 ease-out animate-in fade-in zoom-in-95">
@@ -150,7 +136,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                       className="flex items-center justify-center gap-1.5 py-1 sm:p-2 text-xs sm:text-sm font-semibold text-white/80 hover:text-white rounded-full hover:bg-white/20 transition-all cursor-pointer"
                       aria-label="Sluiten"
                     >
-                      <X className="h-4 w-4" />
+                      <UIcon name="cross-small" className="text-lg" />
                       <span className="sm:hidden">Sluiten</span>
                     </button>
                   </div>
@@ -162,7 +148,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
               >
                 <span>Ik heb een vraag</span>
-                <ArrowDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
+                <UIcon name="arrow-small-down" className="text-lg transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -179,12 +165,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+              <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
               <span className="text-sm font-bold text-[#3B7F4B]">Geslepen binnen 24–48 uur</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis bezorging vanaf €35</span>
+              <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis bezorging vanaf 3 messen</span>
             </div>
           </div>
         </div>
@@ -210,16 +196,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <button
               type="button"
               onClick={() => onNavigate('particulieren')}
-              className="group grid items-center gap-5 rounded-[2rem] border border-[#d9e1d7] bg-white p-6 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:grid-cols-[auto_1fr] sm:p-8"
+              className="group grid items-center gap-5 rounded-[2rem] border border-[#d9e1d7] bg-white p-6 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:grid-cols-[auto_1fr] sm:p-8 cursor-pointer"
             >
-              <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B] transition-transform duration-300 group-hover:scale-105">
-                <Utensils className="h-7 w-7" aria-hidden="true" />
-              </span>
+              <UIconBadge
+                name="utensils"
+                variant="soft"
+                size="xl"
+                rounded="2xl"
+                className="transition-transform duration-300 group-hover:scale-105"
+              />
               <span>
                 <span className="block font-heading text-2xl font-bold text-[#3B7F4B]">Voor particulieren</span>
                 <span className="mt-2 block text-sm leading-relaxed text-[#657068] sm:text-base">Bekijk de prijzen, bereken je slijpbeurt en plan eenvoudig via WhatsApp.</span>
                 <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#3B7F4B]">
-                  Naar particulier <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
+                  Naar particulier <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
                 </span>
               </span>
             </button>
@@ -228,16 +218,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <button
               type="button"
               onClick={() => onNavigate('horeca')}
-              className="group grid items-center gap-5 rounded-[2rem] border border-[#E87B5B]/35 bg-white p-6 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#E87B5B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#C95E3E] sm:grid-cols-[auto_1fr] sm:p-8"
+              className="group grid items-center gap-5 rounded-[2rem] border border-[#E87B5B]/35 bg-white p-6 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#E87B5B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#C95E3E] sm:grid-cols-[auto_1fr] sm:p-8 cursor-pointer"
             >
-              <span className="flex h-16 w-16 items-center justify-center rounded-2xl bg-[#F9E4DE] text-[#C95E3E] transition-transform duration-300 group-hover:scale-105">
-                <Building2 className="h-7 w-7" aria-hidden="true" />
-              </span>
+              <UIconBadge
+                name="building"
+                variant="coral"
+                size="xl"
+                rounded="2xl"
+                className="transition-transform duration-300 group-hover:scale-105"
+              />
               <span>
                 <span className="block font-heading text-2xl font-bold text-[#C95E3E]">Voor horeca</span>
                 <span className="mt-2 block text-sm leading-relaxed text-[#657068] sm:text-base">Stem aantallen, planning en slijprondes af rond jouw professionele keuken.</span>
                 <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#C95E3E]">
-                  Naar zakelijk <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
+                  Naar zakelijk <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
                 </span>
               </span>
             </button>
@@ -293,9 +287,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     {index + 1}
                   </span>
                   {index < quickSteps.length - 1 ? (
-                    <ArrowRight className="hidden h-5 w-5 text-[#A9C89E] transition-transform duration-200 group-hover:translate-x-1 xl:block" aria-hidden="true" />
+                    <UIcon name="arrow-small-right" className="hidden text-xl text-[#A9C89E] transition-transform duration-200 group-hover:translate-x-1 xl:block" aria-hidden="true" />
                   ) : (
-                    <Check className="h-5 w-5 text-[#3B7F4B]" aria-hidden="true" />
+                    <UIcon name="badge-check" className="text-xl text-[#3B7F4B]" aria-hidden="true" />
                   )}
                 </div>
                 <h3 className="mt-5 font-heading text-lg font-bold text-[#3B7F4B]">{step.title}</h3>
@@ -317,15 +311,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={openCalculator}
-                className="group mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3 text-sm font-bold text-white transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#244A30]"
+                className="group mt-7 inline-flex min-h-12 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3 text-sm font-bold text-white transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#244A30] cursor-pointer"
               >
                 <span>Bereken mijn prijs</span>
-                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
               </button>
               <button
                 type="button"
                 onClick={() => onNavigate('horeca')}
-                className="mt-4 block text-sm font-bold text-[#3B7F4B] underline decoration-[#A9C89E] decoration-2 underline-offset-4 hover:text-[#3B7F4B]"
+                className="mt-4 block text-sm font-bold text-[#3B7F4B] underline decoration-[#A9C89E] decoration-2 underline-offset-4 hover:text-[#3B7F4B] cursor-pointer"
               >
                 Zakelijke aanvraag of grotere aantallen?
               </button>
@@ -379,10 +373,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <button
               type="button"
               onClick={() => onNavigate('over-ons')}
-              className="group mt-7 inline-flex items-center gap-2 rounded-full bg-[#3B7F4B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#315F3B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]"
+              className="group mt-7 inline-flex items-center gap-2 rounded-full bg-[#3B7F4B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#315F3B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] cursor-pointer"
             >
               <span>Leer ons kennen</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+              <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </button>
           </div>
         </div>
@@ -431,29 +425,30 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <button
               type="button"
               onClick={() => onNavigate('werkwijze')}
-              className="group inline-flex w-fit items-center gap-2 text-sm font-bold text-[#3B7F4B] transition-colors hover:text-[#3B7F4B]"
+              className="group inline-flex w-fit items-center gap-2 text-sm font-bold text-[#3B7F4B] transition-colors hover:text-[#3B7F4B] cursor-pointer"
             >
               <span>Bekijk onze volledige werkwijze</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+              <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </button>
           </div>
 
           <div className="mt-10 grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
-            {qualities.map((quality) => {
-              const Icon = quality.icon;
-              return (
-                <article
-                  key={quality.title}
-                  className="rounded-[1.75rem] bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-                >
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B]">
-                    <Icon className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <h3 className="mt-5 font-heading text-xl font-bold text-[#3B7F4B]">{quality.title}</h3>
-                  <p className="mt-3 text-sm leading-6 text-[#657068]">{quality.text}</p>
-                </article>
-              );
-            })}
+            {qualities.map((quality) => (
+              <article
+                key={quality.title}
+                className="rounded-[1.75rem] bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+              >
+                <UIconBadge
+                  name={quality.icon}
+                  variant="soft"
+                  size="md"
+                  rounded="2xl"
+                  className="mb-4"
+                />
+                <h3 className="font-heading text-xl font-bold text-[#3B7F4B]">{quality.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#657068]">{quality.text}</p>
+              </article>
+            ))}
           </div>
 
           <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 sm:gap-4">
@@ -481,8 +476,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* 8. GOOGLE REVIEWS SECTION */}
       <GoogleReviewsSection />
 
-      {/* 8B. PAGINABREDE MESSENFOTO-SLIDER */}
-      <section className="bg-white pb-12 pt-0 sm:pb-20" aria-label="Resultaten van Slijpmaat">
+      {/* 8B. RESULTATEN FOTO SLIDER (Volledige breedte over de pagina) */}
+      <section className="relative w-full overflow-hidden bg-white pb-6 pt-2 sm:pb-12 sm:pt-4">
         <ResultatenSlider />
       </section>
 
@@ -502,10 +497,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <button
               type="button"
               onClick={() => onNavigate('faq')}
-              className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#3B7F4B] transition-colors hover:text-[#3B7F4B]"
+              className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#3B7F4B] transition-colors hover:text-[#3B7F4B] cursor-pointer"
             >
               <span>Bekijk alle vragen</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+              <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </button>
           </div>
 
@@ -518,7 +513,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-5 font-heading text-base font-bold text-[#3B7F4B] marker:hidden sm:text-lg">
                   <span>{faq.question}</span>
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B] transition-transform duration-200 group-open:rotate-45">
-                    <Plus className="h-4 w-4" aria-hidden="true" />
+                    <UIcon name="plus" className="text-sm" aria-hidden="true" />
                   </span>
                 </summary>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-[#657068]">{faq.answer}</p>
@@ -573,14 +568,14 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl"
             >
               <span>Stuur je Maat een appje</span>
-              <MessageCircle className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
+              <UIcon name="whatsapp" brand className="text-2xl sm:text-3xl text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
             </a>
             <a
               href="tel:+31682074967"
               className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl"
             >
               <span>Bel je Maat</span>
-              <Phone className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
+              <UIcon name="phone-call" className="text-2xl sm:text-3xl text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
             </a>
           </div>
         </div>

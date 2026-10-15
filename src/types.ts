@@ -9,6 +9,7 @@ export type PageId =
   | 'werkwijze'
   | 'ophalen-bezorgen'
   | 'blogs'
+  | 'blog-hoe-slijp-je-een-mes'
   | 'over-ons'
   | 'faq'
   | 'contact'

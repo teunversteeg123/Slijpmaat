@@ -4,19 +4,7 @@ import { SLIJPMAAT_INFO } from '../data/siteData';
 import { ParticulierenCalculator } from '../components/ParticulierenCalculator';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
-import {
-  ArrowDown,
-  ArrowRight,
-  ChevronLeft,
-  Clock3,
-  MapPin,
-  MessageCircle,
-  Phone,
-  Sparkles,
-  Plus,
-  Package,
-  CreditCard
-} from 'lucide-react';
+import { UIcon, UIconBadge } from '../components/ui/UIcon';
 
 interface ParticulierenPageProps {
   onNavigate?: (page: PageId) => void;
@@ -34,7 +22,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     {
       num: '2',
       title: 'Ophalen of langskomen',
-      text: 'Vanaf €35 bestelwaarde gratis opgehaald en thuisbezorgd in Utrecht. Of breng ze langs op afspraak.',
+      text: 'Vanaf 3 messen gratis opgehaald en thuisbezorgd in Utrecht. Of breng ze langs op afspraak.',
     },
     {
       num: '3',
@@ -48,25 +36,25 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
       step: '01',
       title: 'Persoonlijke afstemming via WhatsApp',
       desc: 'Zodra je jouw bestelling verstuurt, reageert Teun of Mike vlot om het ophaaltijdvak of afgiftemoment met je af te stemmen.',
-      icon: MessageCircle,
+      icon: 'comment-alt',
     },
     {
       step: '02',
       title: 'Messen veilig meegeven',
       desc: 'Rol je messen simpelweg in een schone theedoek of krant. Onze koerier heeft zelf ook veilige transporttassen bij zich.',
-      icon: Package,
+      icon: 'box-alt',
     },
     {
       step: '03',
       title: 'Met de hand geslepen op waterstenen',
       desc: 'Wij werken vanuit huis in Utrecht. Hier beoordelen we de snede zorgvuldig, slijpen we watergekoeld op Japanse whetstones en stroppen we af op leder.',
-      icon: Sparkles,
+      icon: 'sparkles',
     },
     {
       step: '04',
       title: 'Vlijmscherp terug & achteraf betalen',
       desc: 'Binnen 24–48 uur staan we weer op de stoep met scherpe messen. Eenvoudig met contant, Tikkie, een betaalverzoek of factuur.',
-      icon: CreditCard,
+      icon: 'credit-card',
     },
   ];
 
@@ -128,7 +116,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
                 onClick={() => onNavigate ? onNavigate('home') : (window.location.hash = '#home')}
                 className="group inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
               >
-                <ChevronLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5" aria-hidden="true" />
+                <UIcon name="angle-small-left" className="text-lg transition-transform duration-200 group-hover:-translate-x-0.5" aria-hidden="true" />
                 <span>Terug</span>
               </button>
 
@@ -137,7 +125,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
                 className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
               >
                 <span>Ik heb een vraag</span>
-                <ArrowDown className="h-4 w-4 transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
+                <UIcon name="arrow-small-down" className="text-lg transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
               </a>
             </div>
           </div>
@@ -175,12 +163,12 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
               <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+              <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
               <span className="text-sm font-bold text-[#3B7F4B]">Geslepen binnen 24–48 uur</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis bezorging vanaf €35</span>
+              <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis bezorging vanaf 3 messen</span>
             </div>
           </div>
         </div>
@@ -238,8 +226,8 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         </div>
       </section>
 
-      {/* 5. PAGINABREDE RESULTATENSLIDER */}
-      <section className="relative overflow-hidden bg-white pb-14 pt-2 sm:pb-20 sm:pt-4" aria-label="Resultaten van Slijpmaat">
+      {/* 5. RESULTATEN SLIDER (Volledige breedte over de pagina) */}
+      <section className="relative w-full overflow-hidden bg-[#FAFAF8] pb-8 pt-4 sm:pb-14 sm:pt-6">
         <ResultatenSlider />
       </section>
 
@@ -249,7 +237,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           aria-hidden="true"
           viewBox="0 0 1440 60"
           preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
+          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#FAFAF8] sm:h-14 lg:h-16"
         >
           <path
             fill="currentColor"
@@ -279,28 +267,28 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           </div>
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {postOrderSteps.map((step) => {
-              const Icon = step.icon;
-              return (
-                <div
-                  key={step.step}
-                  className="group relative rounded-[1.75rem] bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between"
-                >
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-sm font-bold text-[#C95E3E]">
-                        {step.step}
-                      </span>
-                      <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#E8EFE8] text-[#3B7F4B]">
-                        <Icon className="h-5 w-5" />
-                      </span>
-                    </div>
-                    <h3 className="mt-5 font-heading text-lg font-bold text-[#3B7F4B]">{step.title}</h3>
-                    <p className="mt-2 text-sm leading-6 text-[#657068]">{step.desc}</p>
+            {postOrderSteps.map((step) => (
+              <div
+                key={step.step}
+                className="group relative rounded-[1.75rem] bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between"
+              >
+                <div>
+                  <div className="flex items-center justify-between">
+                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-sm font-bold text-[#C95E3E]">
+                      {step.step}
+                    </span>
+                    <UIconBadge
+                      name={step.icon}
+                      variant="soft"
+                      size="sm"
+                      rounded="xl"
+                    />
                   </div>
+                  <h3 className="mt-5 font-heading text-lg font-bold text-[#3B7F4B]">{step.title}</h3>
+                  <p className="mt-2 text-sm leading-6 text-[#657068]">{step.desc}</p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -326,7 +314,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
               className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#3B7F4B] transition-colors hover:text-[#315F3B]"
             >
               <span>Stel een persoonlijke vraag via WhatsApp</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+              <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </a>
           </div>
 
@@ -339,7 +327,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-5 font-heading text-base font-bold text-[#3B7F4B] marker:hidden sm:text-lg">
                   <span>{faq.question}</span>
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B] transition-transform duration-200 group-open:rotate-45">
-                    <Plus className="h-4 w-4" aria-hidden="true" />
+                    <UIcon name="plus" className="text-sm" aria-hidden="true" />
                   </span>
                 </summary>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-[#657068]">{faq.answer}</p>
@@ -392,14 +380,14 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
               className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl"
             >
               <span>Stuur je Maat een appje</span>
-              <MessageCircle className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
+              <UIcon name="whatsapp" brand className="text-2xl sm:text-3xl text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
             </a>
             <a
               href="tel:+31682074967"
               className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl"
             >
               <span>Bel je Maat</span>
-              <Phone className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
+              <UIcon name="phone-call" className="text-2xl sm:text-3xl text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
             </a>
           </div>
         </div>

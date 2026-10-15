@@ -1,17 +1,10 @@
 "use client"
 
 import * as React from "react"
-import { createPortal } from "react-dom"
 
 /*
- * Polaroid Line Carousel - instant photos pegged to a sagging string. Drag the
- * line (or use the arrows) and the prints slide along it, swinging on their
- * pegs with the speed you give them and settling back with a little
- * overshoot; even at rest they sway in a light breeze. The one in the middle
- * is the one you're looking at.
- *
- * Drag, click a print, arrows and autoplay. Slides without an `image` get a
- * painted landscape, so it works with no assets at all.
+ * Polaroid Line Carousel - instant photos pegged to a sagging string.
+ * Endless continuous loop: drag or click arrows and prints slide along the string indefinitely.
  */
 
 export type LandPalette = "dawn" | "alpine" | "dusk" | "mist"
@@ -21,14 +14,13 @@ export type Slide = {
   title?: string
   caption?: string
   alt?: string
-  /** Palette and seed of the painted landscape used when `image` is empty. */
   palette?: LandPalette
   seed?: number
 }
 
 export type PolaroidLineCarouselProps = {
   slides?: Slide[]
-  /** Any CSS length. Default 420px. */
+  /** Any CSS length. Default 400px. */
   height?: number | string
   /** Width of a print in px (it shrinks on narrow screens). */
   cardWidth?: number
@@ -36,9 +28,9 @@ export type PolaroidLineCarouselProps = {
   sag?: number
   /** How much the prints swing; 0 holds them still. */
   swing?: number
-  /** ms per print; 0 turns autoplay off. It waits while someone is interacting. */
+  /** ms per print; 0 turns autoplay off. */
   autoplay?: number
-  /** Colour of the string and pegs. */
+  /** Colour of the string. */
   string?: string
   background?: string
   ink?: string
@@ -46,23 +38,9 @@ export type PolaroidLineCarouselProps = {
   className?: string
   style?: React.CSSProperties
   ariaLabel?: string
-  /** Keep moving in the same direction after the final slide. */
-  infinite?: boolean
-  /** Show captions and the numeric counter below the line. */
-  showDetails?: boolean
-  /** Show the Slijpmaat logo in the lower edge of every print. */
-  showLogo?: boolean
-  /** Choose whether photographs are cropped or shown in full. */
-  imageFit?: "cover" | "contain"
-  /** Open the centred photograph in a full-screen viewer when selected. */
-  expandable?: boolean
 }
 
 // #region logic
-export function wrap(i: number, n: number): number {
-  return n ? ((i % n) + n) % n : 0
-}
-
 export function clamp(v: number, a: number, b: number): number {
   return Math.min(b, Math.max(a, v))
 }
@@ -80,19 +58,10 @@ export function springStep(x: number, v: number, target: number, dt: number, k =
   return [x + nv * dt, nv]
 }
 
-/** One step of a print's swing. lineVel is the prints' on-screen speed (px/s, + = moving right); a print lags behind the motion, is pulled back by gravity and damped. */
+/** One step of a print's swing. */
 export function swingStep(a: number, w: number, lineVel: number, dt: number, gain: number): [number, number] {
   const nw = w + (-38 * a - 4.2 * w + lineVel * 0.0034 * gain) * dt
   return [clamp(a + nw * dt, -0.6, 0.6), nw]
-}
-
-/** Index of the print nearest the centre for a line offset. */
-export function nearestAt(off: number, spacing: number, n: number): number {
-  return clamp(Math.round(off / spacing), 0, Math.max(0, n - 1))
-}
-
-export function pad2(n: number): string {
-  return n < 10 ? "0" + n : String(n)
 }
 // #endregion logic
 
@@ -125,8 +94,6 @@ function mixRgb(a: string, b: string, t: number): string {
   return "rgb(" + A.map((v, i) => Math.round(v + (B[i] - v) * t)).join(",") + ")"
 }
 
-// A layered-ridge landscape: sky, a low sun, five ridges fading into haze with
-// mist between them, a tree line on the nearest, film grain. Painted once.
 function paintLandscape(seed: number, palette: LandPalette, w = 1600, h = 1000): string {
   if (typeof document === "undefined") return ""
   const c = document.createElement("canvas")
@@ -225,19 +192,17 @@ function paintLandscape(seed: number, palette: LandPalette, w = 1600, h = 1000):
 const DEFAULT_SLIDES: Slide[] = [
   { title: "Koksmes op waterstenen", caption: "Traditioneel Japans slijpambacht op Shapton stenen.", image: "/assets/werkwijze/03-slijpen.jpg" },
   { title: "Vlijmscherpe snede", caption: "Microscopische braam zorgvuldig verwijderd op leer.", image: "/assets/resultaten/06-snede-bijl.jpeg" },
-  { title: "Mes met Slijpmaat sticker", caption: "Klaar voor jarenlang soepel en veilig snijden in de keuken.", image: "/assets/resultaten/07-mes-met-slijpmaat-sticker.jpeg" },
+  { title: "Mes met Slijpmaat sticker", caption: "Klaar voor jarenlang soepel en veilig snijden.", image: "/assets/resultaten/07-mes-met-slijpmaat-sticker.jpeg" },
   { title: "Stenen & profiel", caption: "Nauwkeurige hoekselectie afgestemd op de staalsoort.", image: "/assets/werkwijze/02-stenen-kiezen.jpg" },
   { title: "Lemmet beoordelen", caption: "Originele curve en dikte achter de vouw gerespecteerd.", image: "/assets/werkwijze/01-beoordelen.jpg" },
   { title: "Afwerken op soepel leer", caption: "Gepolijste snede voor langdurig behoud van fabrieksscherpte.", image: "/assets/werkwijze/04-afwerken.jpg" },
 ]
 
-// Every slide as an image URL; slides without one are painted after mount.
 function useSlideImages(slides: Slide[]): string[] {
   const key = slides.map((s) => s.image || (s.palette || "dawn") + ":" + (s.seed ?? 1)).join("|")
   const [painted, setPainted] = React.useState(() => slides.map(() => ""))
   React.useEffect(() => {
     setPainted(slides.map((s, i) => (s.image ? "" : paintLandscape(s.seed ?? i + 1, s.palette || "dawn"))))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [key])
   return slides.map((s, i) => s.image || painted[i] || "")
 }
@@ -248,44 +213,30 @@ const PL_CSS = [
   ".pl-root:focus-visible{box-shadow:inset 0 0 0 2px var(--pl-ink)}",
   ".pl-string{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;overflow:visible}",
   ".pl-card{position:absolute;left:0;top:0;width:var(--pl-cw);transform-origin:50% 0;will-change:transform;cursor:inherit}",
-  ".pl-root[data-expandable='1'] .pl-card[data-on='1'] .pl-shot{cursor:zoom-in}",
-  ".pl-print{margin-top:10px;background:#FFFFFF;padding:12px 12px 0;border-radius:4px;box-shadow:0 3px 6px rgba(32,55,40,.08),0 20px 32px -16px rgba(32,55,40,.22);border:1px solid #d9e1d7;transition:transform .5s cubic-bezier(.2,.7,.2,1),filter .5s ease;position:relative}",
-  ".pl-card[data-on='0'] .pl-print{transform:scale(.9);filter:saturate(.78) brightness(.97)}",
-  ".pl-shot{position:relative;aspect-ratio:1;overflow:hidden;border-radius:2px;background:#E8EFE8}",
-  ".pl-shot img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:var(--pl-fit);display:block;pointer-events:none}",
-  ".pl-note-wrap{position:relative;height:50px;display:flex;align-items:center;padding:0 4px 4px}",
-  ".pl-note{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:13.5px;line-height:1.2;color:#203728;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;padding-right:36px}",
-  ".pl-brand{position:absolute;right:4px;bottom:9px;display:inline-flex;align-items:center;opacity:0.85;pointer-events:none}",
-  ".pl-brand img{height:18px;width:auto;object-fit:contain}",
+  ".pl-print{margin-top:10px;background:#FFFFFF;padding:12px 12px 0;border-radius:6px;box-shadow:0 4px 10px rgba(32,55,40,.07),0 22px 36px -16px rgba(32,55,40,.22);border:1px solid #d9e1d7;transition:transform .4s cubic-bezier(.2,.7,.2,1),filter .4s ease;position:relative}",
+  ".pl-card[data-on='0'] .pl-print{transform:scale(.92);filter:saturate(.85) brightness(.97)}",
+  ".pl-card[data-on='1'] .pl-print{transform:scale(1);filter:none;box-shadow:0 6px 14px rgba(32,55,40,.1),0 28px 44px -16px rgba(32,55,40,.28)}",
+  ".pl-shot{position:relative;aspect-ratio:1;overflow:hidden;border-radius:3px;background:#E8EFE8}",
+  ".pl-shot img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;display:block;pointer-events:none}",
+  ".pl-note-wrap{position:relative;height:42px;display:flex;align-items:center;justify-content:center;padding:0 8px}",
+  ".pl-brand{display:inline-flex;align-items:center;justify-content:center;pointer-events:none}",
+  ".pl-brand img{height:19px;width:auto;max-width:115px;object-fit:contain;opacity:0.95}",
   ".pl-peg{position:absolute;left:50%;top:0;width:11px;height:28px;margin-left:-5.5px;border-radius:3px;background:linear-gradient(90deg,#d4b68e,#f0dcbe 45%,#c49d6b);box-shadow:0 2px 4px rgba(32,55,40,.25)}",
   ".pl-peg::after{content:'';position:absolute;left:4.5px;top:9px;width:2px;height:8px;background:rgba(80,60,30,.45);border-radius:1px}",
-  ".pl-bar{position:absolute;left:clamp(16px,4vw,56px);right:clamp(16px,4vw,56px);bottom:clamp(16px,3vh,32px);display:flex;align-items:center;gap:clamp(12px,2vw,24px);cursor:default}",
-  ".pl-bar[data-details='0']{justify-content:space-between}",
-  ".pl-cap{flex:1;min-width:0;overflow:hidden;padding-bottom:.15em}",
-  ".pl-cap>*{display:block;animation:pl-in .55s cubic-bezier(.2,.8,.2,1) both}",
-  ".pl-title{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:clamp(18px,2.2vw,24px);line-height:1.15;color:#3B7F4B;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}",
-  ".pl-sub{margin-top:3px;font-family:'Inter',sans-serif;font-weight:400;font-size:13px;line-height:1.4;color:#657068}",
-  ".pl-count{font-family:'Instrument Sans',sans-serif;font-weight:700;font-size:13px;letter-spacing:.08em;color:#3B7F4B}",
-  ".pl-count b{color:#203728;font-weight:800}",
-  ".pl-btn{appearance:none;width:42px;height:42px;border-radius:50%;border:1.5px solid #d9e1d7;background:#FFFFFF;color:#203728;display:grid;place-items:center;cursor:pointer;transition:all .2s ease;box-shadow:0 1px 3px rgba(32,55,40,.06)}",
-  ".pl-btn:hover{background:#3B7F4B;color:#FFFFFF;border-color:#3B7F4B;box-shadow:0 4px 10px rgba(59,127,75,.25)}",
+  ".pl-nav-bar{position:absolute;left:0;right:0;bottom:12px;display:flex;align-items:center;justify-content:center;gap:16px;cursor:default;z-index:40;pointer-events:auto}",
+  ".pl-btn{appearance:none;width:44px;height:44px;border-radius:50%;border:1.5px solid #d9e1d7;background:#FFFFFF;color:#203728;display:grid;place-items:center;cursor:pointer;transition:all .2s ease;box-shadow:0 2px 8px rgba(32,55,40,.1)}",
+  ".pl-btn:hover{background:#3B7F4B;color:#FFFFFF;border-color:#3B7F4B;box-shadow:0 4px 14px rgba(59,127,75,.28);transform:scale(1.06)}",
+  ".pl-btn:active{transform:scale(0.95)}",
   ".pl-btn:focus-visible{outline:2px solid #3B7F4B;outline-offset:2px}",
   ".pl-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}",
-  ".pl-lightbox{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:clamp(18px,4vw,56px);background:rgba(16,29,20,.9);backdrop-filter:blur(8px);cursor:zoom-out}",
-  ".pl-lightbox-frame{position:relative;display:grid;place-items:center;max-width:100%;max-height:100%;cursor:default}",
-  ".pl-lightbox-img{display:block;width:auto;height:auto;max-width:92vw;max-height:88vh;object-fit:contain;border-radius:8px;box-shadow:0 24px 80px rgba(0,0,0,.45)}",
-  ".pl-lightbox-close{position:fixed;top:clamp(16px,3vw,32px);right:clamp(16px,3vw,32px);width:46px;height:46px;border:1px solid rgba(255,255,255,.48);border-radius:50%;display:grid;place-items:center;background:rgba(255,255,255,.96);color:#203728;cursor:pointer;box-shadow:0 8px 28px rgba(0,0,0,.22);transition:transform .2s ease,background .2s ease,color .2s ease}",
-  ".pl-lightbox-close:hover{transform:scale(1.05);background:#3B7F4B;color:#fff}",
-  ".pl-lightbox-close:focus-visible{outline:3px solid #fff;outline-offset:3px}",
-  "@keyframes pl-in{from{transform:translateY(100%);opacity:0}to{transform:none;opacity:1}}",
-  "@media (prefers-reduced-motion:reduce){.pl-cap>*{animation:none}.pl-print{transition:none}}",
+  "@media (prefers-reduced-motion:reduce){.pl-print{transition:none}}",
 ].join("\n")
 
 export default function PolaroidLineCarousel({
   slides = DEFAULT_SLIDES,
-  height = 460,
-  cardWidth = 280,
-  sag = 42,
+  height = 400,
+  cardWidth = 260,
+  sag = 38,
   swing = 1,
   autoplay = 4500,
   string = "#3B7F4B",
@@ -295,101 +246,70 @@ export default function PolaroidLineCarousel({
   className,
   style,
   ariaLabel = "Resultaatfoto's carousel",
-  infinite = false,
-  showDetails = true,
-  showLogo = true,
-  imageFit = "cover",
-  expandable = false,
 }: PolaroidLineCarouselProps) {
-  const n = slides.length
-  const renderN = infinite && n > 1 ? n * 3 : n
-  const srcs = useSlideImages(slides)
+  const numBase = slides.length || 1
+
+  // Repeat items in a circular ring so the string spans fully across wide screens without stopping
+  const loopSlides = React.useMemo(() => {
+    if (slides.length === 0) return []
+    let arr = [...slides]
+    while (arr.length < 24) {
+      arr = [...arr, ...slides]
+    }
+    return arr
+  }, [slides])
+
+  const totalItems = loopSlides.length
+  const srcs = useSlideImages(loopSlides)
   const [active, setActive] = React.useState(0)
   const [dragging, setDragging] = React.useState(false)
-  const [expanded, setExpanded] = React.useState<number | null>(null)
-  const [size, setSize] = React.useState({ w: 1200, h: 460, cw: cardWidth })
+  const [size, setSize] = React.useState({ w: 1200, h: 400, cw: cardWidth })
   const rootRef = React.useRef(null as HTMLDivElement | null)
   const pathRef = React.useRef(null as SVGPathElement | null)
-  const closeRef = React.useRef(null as HTMLButtonElement | null)
   const cards = React.useRef([] as (HTMLDivElement | null)[])
   const sim = React.useRef({ off: 0, vel: 0, target: 0, a: [] as number[], w: [] as number[] })
   const drag = React.useRef(null as null | { x: number; off: number; lx: number; lt: number; v: number; moved: boolean })
   const lastTouch = React.useRef(0)
   const activeRef = React.useRef(0)
-  const activeVirtualRef = React.useRef(infinite ? n : 0)
   const opts = React.useRef({ sag, swing })
   opts.current = { sag, swing }
 
   const spacing = size.cw * 1.08
-  const goTo = React.useCallback(
-    (i: number) => {
-      const next = clamp(i, 0, Math.max(0, renderN - 1))
-      activeVirtualRef.current = next
-      sim.current.target = next * spacing
-    },
-    [renderN, spacing],
-  )
+  const totalSpan = totalItems * spacing
 
   React.useEffect(() => {
     const root = rootRef.current
     if (!root) return
     const ro = new ResizeObserver(() => {
       const r = root.getBoundingClientRect()
-      const cw = Math.round(Math.max(160, Math.min(cardWidth, r.width * 0.44, r.height * 0.58)))
+      const cw = Math.round(Math.max(160, Math.min(cardWidth, r.width * 0.44, r.height * 0.6)))
       setSize({ w: r.width, h: r.height, cw })
     })
     ro.observe(root)
     return () => ro.disconnect()
   }, [cardWidth])
 
-  // keep the target on the active print when the spacing changes
-  React.useEffect(() => {
-    const virtual = infinite && n > 1 ? n + activeRef.current : activeRef.current
-    activeVirtualRef.current = virtual
-    sim.current.target = virtual * spacing
-    sim.current.off = virtual * spacing
-  }, [infinite, n, spacing])
-
   React.useEffect(() => {
     onChange?.(active)
   }, [active, onChange])
 
-  const closeExpanded = React.useCallback(() => {
-    setExpanded(null)
-    requestAnimationFrame(() => rootRef.current?.focus())
-  }, [])
-
-  React.useEffect(() => {
-    if (expanded === null) return
-    const previousOverflow = document.body.style.overflow
-    document.body.style.overflow = "hidden"
-    const onWindowKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") closeExpanded()
-    }
-    window.addEventListener("keydown", onWindowKeyDown, true)
-    requestAnimationFrame(() => closeRef.current?.focus())
-    return () => {
-      document.body.style.overflow = previousOverflow
-      window.removeEventListener("keydown", onWindowKeyDown, true)
-    }
-  }, [closeExpanded, expanded])
-
-  // the simulation, written straight to the DOM each frame
+  // Continuous animation loop: wraps cards around seamlessly so scrolling never ends
   React.useEffect(() => {
     const root = rootRef.current
-    if (!root) return
+    if (!root || totalItems === 0) return
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     let visible = true
     let raf = 0
     let prev = performance.now()
     const S = sim.current
+
     const frame = (now: number) => {
       raf = 0
       if (!visible) return
       const dt = Math.min(0.033, (now - prev) / 1000)
       prev = now
       const { w, h, cw } = size
-      const y0 = Math.max(34, h * 0.16)
+      const y0 = Math.max(30, h * 0.15)
       const d = drag.current
       let lineVel: number
       if (d && d.moved) {
@@ -401,51 +321,60 @@ export default function PolaroidLineCarousel({
       }
       const o = opts.current
       const g = reduce ? 0 : o.swing
-      if (!drag.current && infinite && n > 1 && Math.abs(S.off - S.target) < 0.15 && Math.abs(S.vel) < 0.15) {
-        const settled = Math.round(S.target / spacing)
-        if (settled < n) {
-          S.off += n * spacing
-          S.target += n * spacing
-          activeVirtualRef.current = settled + n
-        } else if (settled >= n * 2) {
-          S.off -= n * spacing
-          S.target -= n * spacing
-          activeVirtualRef.current = settled - n
-        }
+
+      // Wrap coordinate space periodically to keep numerical stability
+      if (Math.abs(S.off) > totalSpan * 8) {
+        const wrapChunk = Math.floor(S.off / totalSpan) * totalSpan
+        S.off -= wrapChunk
+        S.target -= wrapChunk
+        if (d) d.off -= wrapChunk
       }
-      const near = nearestAt(S.off, spacing, renderN)
-      for (let i = 0; i < renderN; i++) {
+
+      let closestDist = Infinity
+      let nearestIndex = 0
+
+      for (let i = 0; i < totalItems; i++) {
         const el = cards.current[i]
         if (!el) continue
-        const x = w / 2 + i * spacing - S.off
-        if (x < -cw * 1.5 || x > w + cw * 1.5) {
+
+        // Wrap each card's relative position into a continuous circular window [-totalSpan/2, totalSpan/2)
+        const rawDiff = i * spacing - S.off
+        const diff = ((rawDiff % totalSpan) + totalSpan * 1.5) % totalSpan - totalSpan / 2
+        const x = w / 2 + diff
+        const absDiff = Math.abs(diff)
+
+        if (absDiff < closestDist) {
+          closestDist = absDiff
+          nearestIndex = i % numBase
+        }
+
+        if (x < -cw * 1.6 || x > w + cw * 1.6) {
           el.style.visibility = "hidden"
           continue
         }
         el.style.visibility = "visible"
+        el.setAttribute("data-on", absDiff < spacing * 0.48 ? "1" : "0")
+
         let a = S.a[i] || 0
         let av = S.w[i] || 0
         ;[a, av] = swingStep(a, av, lineVel, dt, g)
         if (g) a += Math.sin(now / 1300 + i * 1.7) * 0.0009 * g
         S.a[i] = a
         S.w[i] = av
+
         const y = stringY(x, w, y0, o.sag) - 6
-        el.style.transform = "translate(" + (x - cw / 2).toFixed(1) + "px," + y.toFixed(1) + "px) rotate(" + a.toFixed(4) + "rad)"
-        const isNear = i === near
-        el.dataset.on = isNear ? "1" : "0"
-        if (isNear) el.removeAttribute("aria-hidden")
-        else el.setAttribute("aria-hidden", "true")
-        el.style.zIndex = String(i === near ? renderN + 1 : renderN - Math.abs(i - near))
+        el.style.transform = `translate(${(x - cw / 2).toFixed(1)}px,${y.toFixed(1)}px) rotate(${a.toFixed(4)}rad)`
+        el.style.zIndex = String(Math.max(1, Math.round(50 - absDiff / 30)))
       }
-      pathRef.current?.setAttribute("d", "M0 " + y0 + " Q" + w / 2 + " " + (y0 + 2 * o.sag) + " " + w + " " + y0)
-      const logicalNear = wrap(near, n)
-      activeVirtualRef.current = near
-      if (logicalNear !== activeRef.current) {
-        activeRef.current = logicalNear
-        setActive(logicalNear)
+
+      pathRef.current?.setAttribute("d", `M0 ${y0} Q${w / 2} ${y0 + 2 * o.sag} ${w} ${y0}`)
+      if (nearestIndex !== activeRef.current) {
+        activeRef.current = nearestIndex
+        setActive(nearestIndex)
       }
       raf = requestAnimationFrame(frame)
     }
+
     const io = new IntersectionObserver(([e]) => {
       visible = e.isIntersecting
       if (visible && !raf) {
@@ -459,23 +388,24 @@ export default function PolaroidLineCarousel({
       cancelAnimationFrame(raf)
       io.disconnect()
     }
-  }, [size, spacing, n, renderN, infinite])
+  }, [size, spacing, totalItems, totalSpan, numBase])
 
-  // autoplay continues forward through the repeated slide sets
+  // Continuous autoplay in an endless loop
   React.useEffect(() => {
-    if (!autoplay || n < 2) return
+    if (!autoplay || numBase < 2) return
     const t = window.setInterval(() => {
       if (document.hidden || drag.current || performance.now() - lastTouch.current < autoplay) return
-      goTo(Math.round(sim.current.target / spacing) + 1)
+      sim.current.target += spacing
     }, autoplay)
     return () => window.clearInterval(t)
-  }, [autoplay, n, goTo])
+  }, [autoplay, numBase, spacing])
 
   const onDown = (e: React.PointerEvent) => {
-    if ((e.target as HTMLElement).closest(".pl-bar")) return
+    if ((e.target as HTMLElement).closest(".pl-nav-bar")) return
     lastTouch.current = performance.now()
     drag.current = { x: e.clientX, off: sim.current.off, lx: e.clientX, lt: e.timeStamp, v: 0, moved: false }
   }
+
   const onMove = (e: React.PointerEvent) => {
     const d = drag.current
     if (!d) return
@@ -490,12 +420,9 @@ export default function PolaroidLineCarousel({
     d.v = 0.7 * ((e.clientX - d.lx) / dt) + 0.3 * d.v
     d.lx = e.clientX
     d.lt = e.timeStamp
-    const max = (renderN - 1) * spacing
-    let off = d.off - dx
-    if (off < 0) off *= 0.35
-    if (off > max) off = max + (off - max) * 0.35
-    sim.current.off = off
+    sim.current.off = d.off - dx
   }
+
   const onUp = (e: React.PointerEvent) => {
     const d = drag.current
     drag.current = null
@@ -504,29 +431,30 @@ export default function PolaroidLineCarousel({
     if (d.moved) {
       setDragging(false)
       sim.current.vel = -d.v * 1000
-      goTo(nearestAt(sim.current.off - d.v * 180, spacing, renderN))
+      sim.current.target = Math.round((sim.current.off - d.v * 180) / spacing) * spacing
       return
     }
     const card = (e.target as HTMLElement).closest("[data-i]")
     if (card) {
-      const index = Number(card.getAttribute("data-i"))
-      if (expandable && index === activeVirtualRef.current) setExpanded(wrap(index, n))
-      else goTo(index)
+      const cardIdx = Number(card.getAttribute("data-i"))
+      const rawDiff = cardIdx * spacing - sim.current.off
+      const diff = ((rawDiff % totalSpan) + totalSpan * 1.5) % totalSpan - totalSpan / 2
+      sim.current.target = sim.current.off + diff
     }
   }
+
+  // Infinite looping forward and backward: never stops
   const step = (dir: number) => {
     lastTouch.current = performance.now()
-    goTo(Math.round(sim.current.target / spacing) + dir)
+    sim.current.target += dir * spacing
   }
+
   const onKey = (e: React.KeyboardEvent) => {
     if (e.key === "ArrowRight") step(1)
     else if (e.key === "ArrowLeft") step(-1)
-    else if (expandable && (e.key === "Enter" || e.key === " ")) setExpanded(activeRef.current)
     else return
     e.preventDefault()
   }
-
-  const s = slides[active] || {}
 
   return (
     <div
@@ -536,14 +464,10 @@ export default function PolaroidLineCarousel({
         height: typeof height === "number" ? `${height}px` : height,
         ["--pl-bg" as string]: background,
         ["--pl-ink" as string]: ink,
-        ["--pl-muted" as string]: "#657068",
-        ["--pl-line" as string]: "#d9e1d7",
         ["--pl-cw" as string]: size.cw + "px",
-        ["--pl-fit" as string]: imageFit,
         ...style,
       }}
       data-drag={dragging ? "1" : "0"}
-      data-expandable={expandable ? "1" : "0"}
       role="region"
       aria-roledescription="carousel"
       aria-label={ariaLabel}
@@ -558,73 +482,57 @@ export default function PolaroidLineCarousel({
       <svg className="pl-string" aria-hidden="true">
         <path ref={pathRef} fill="none" stroke={string} strokeWidth="1.75" strokeLinecap="round" />
       </svg>
-      {Array.from({ length: renderN }, (_, i) => {
-        const logicalIndex = wrap(i, n)
-        const sl = slides[logicalIndex]
-        return (
-          <div key={`${logicalIndex}-${i}`} className="pl-card" data-i={i} data-on={i === activeVirtualRef.current ? "1" : "0"} ref={(el) => void (cards.current[i] = el)} aria-hidden={i === activeVirtualRef.current ? undefined : true}>
-            <div className="pl-print">
-              <div className="pl-shot">
-                {srcs[logicalIndex] ? <img src={srcs[logicalIndex]} alt={sl.alt || sl.title || ""} draggable={false} /> : null}
-              </div>
-              <div className="pl-note-wrap">
-                {showDetails ? <div className="pl-note">{sl.title || ""}</div> : null}
-                {showLogo ? <div className="pl-brand" aria-hidden="true"><img src="/assets/image08.png" alt="" /></div> : null}
+
+      {loopSlides.map((sl, i) => (
+        <div
+          key={i}
+          className="pl-card"
+          data-i={i}
+          data-on={i % numBase === active ? "1" : "0"}
+          ref={(el) => void (cards.current[i] = el)}
+          aria-hidden={i % numBase === active ? undefined : true}
+        >
+          <div className="pl-print">
+            <div className="pl-shot">
+              {srcs[i] ? <img src={srcs[i]} alt={sl.alt || sl.title || ""} draggable={false} /> : null}
+            </div>
+            <div className="pl-note-wrap">
+              <div className="pl-brand" aria-label="Slijpmaat">
+                <img src="/assets/image08.png" alt="Slijpmaat" />
               </div>
             </div>
-            <div className="pl-peg" />
           </div>
-        )
-      })}
-      <div className="pl-bar" data-details={showDetails ? "1" : "0"}>
-        {showDetails ? (
-          <>
-            <div className="pl-cap" key={active} aria-hidden="true">
-              {s.title ? <span className="pl-title">{s.title}</span> : null}
-              {s.caption ? <span className="pl-sub">{s.caption}</span> : null}
-            </div>
-            <span className="pl-count" aria-hidden="true">
-              <b>{pad2(active + 1)}</b> / {pad2(n)}
-            </span>
-          </>
-        ) : null}
-        <button type="button" className="pl-btn" aria-label="Vorige foto" onClick={() => step(-1)}>
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="M10 3 5 8l5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+          <div className="pl-peg" />
+        </div>
+      ))}
+
+      {/* Only Left and Right navigation buttons */}
+      <div className="pl-nav-bar">
+        <button
+          type="button"
+          className="pl-btn"
+          aria-label="Vorige foto"
+          onClick={() => step(-1)}
+        >
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="M10 3 5 8l5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <button type="button" className="pl-btn" aria-label="Volgende foto" onClick={() => step(1)}>
-          <svg width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true">
-            <path d="m6 3 5 5-5 5" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
+        <button
+          type="button"
+          className="pl-btn"
+          aria-label="Volgende foto"
+          onClick={() => step(1)}
+        >
+          <svg width="20" height="20" viewBox="0 0 16 16" fill="none" aria-hidden="true">
+            <path d="m6 3 5 5-5 5" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
       </div>
+
       <div className="pl-sr" aria-live="polite">
-        {"Foto " + (active + 1) + " van " + n + (s.title ? ": " + s.title : "")}
+        {"Foto " + (active + 1) + " van " + numBase + (slides[active]?.title ? ": " + slides[active].title : "")}
       </div>
-      {expanded !== null && srcs[expanded]
-        ? createPortal(
-            <div
-              className="pl-lightbox"
-              role="dialog"
-              aria-modal="true"
-              aria-label="Vergrote foto"
-              onPointerDown={(event) => event.stopPropagation()}
-              onKeyDown={(event) => event.stopPropagation()}
-              onClick={closeExpanded}
-            >
-              <div className="pl-lightbox-frame" onClick={(event) => event.stopPropagation()}>
-                <img className="pl-lightbox-img" src={srcs[expanded]} alt={slides[expanded].alt || slides[expanded].title || "Vergrote resultaatfoto"} />
-              </div>
-              <button ref={closeRef} type="button" className="pl-lightbox-close" aria-label="Vergrote foto sluiten" onClick={closeExpanded}>
-                <svg width="22" height="22" viewBox="0 0 20 20" fill="none" aria-hidden="true">
-                  <path d="m5 5 10 10M15 5 5 15" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-                </svg>
-              </button>
-            </div>,
-            document.body,
-          )
-        : null}
     </div>
   )
 }

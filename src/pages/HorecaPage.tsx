@@ -300,12 +300,12 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 5. PAGINABREDE RESULTATENSLIDER */}
-      <section className="relative overflow-hidden bg-white pb-14 pt-2 sm:pb-20 sm:pt-4" aria-label="Resultaten van Slijpmaat">
+      {/* 5. RESULTATEN SLIDER (Volledige breedte over de pagina) */}
+      <section className="relative w-full overflow-hidden bg-[#FAFAF8] pb-8 pt-4 sm:pb-14 sm:pt-6">
         <ResultatenSlider />
       </section>
 
-      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#A9C89E" toColor="#3B7F4B" variant="calm" />
+      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#A9C89E" toColor="#3B7F4B" variant="calm" />
 
       {/* 6. WAT GEBEURT ER NA JE AANVRAAG? (Green section with wave dividers) */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">

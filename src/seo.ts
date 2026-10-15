@@ -94,6 +94,14 @@ export const ROUTES: RouteSeo[] = [
     index: false,
   },
   {
+    pageId: 'blog-hoe-slijp-je-een-mes',
+    path: '/blogs/hoe-slijp-je-een-mes',
+    label: 'Hoe slijp je een mes?',
+    title: 'Hoe slijp je een mes? Stappenplan met wetsteen | Slijpmaat',
+    description: 'Leer hoe je een keukenmes slijpt op een wetsteen. Ontdek welke slijphoek en korrel je nodig hebt en hoe je een braam goed verwijdert.',
+    index: false,
+  },
+  {
     pageId: 'over-ons',
     path: '/over-ons',
     label: 'Over ons',

@@ -14,6 +14,7 @@ import { DienstDetailPage } from './pages/DienstDetailPage';
 import { WerkwijzePage } from './pages/WerkwijzePage';
 import { ServicegebiedPage } from './pages/ServicegebiedPage';
 import { KennisbankPage } from './pages/KennisbankPage';
+import { BlogHoeSlijpJeEenMesPage } from './pages/BlogHoeSlijpJeEenMesPage';
 import { OverOnsPage } from './pages/OverOnsPage';
 import { FaqPage } from './pages/FaqPage';
 import { ContactPage } from './pages/ContactPage';
@@ -111,6 +112,8 @@ export default function App({ initialPath }: AppProps) {
         'buiten-utrecht': 'ophalen-bezorgen',
         kennisbank: 'blogs',
         blogs: 'blogs',
+        'hoe-slijp-je-een-mes': 'blog-hoe-slijp-je-een-mes',
+        'blog-hoe-slijp-je-een-mes': 'blog-hoe-slijp-je-een-mes',
         'over-ons': 'over-ons',
         faq: 'faq',
         contact: 'contact',
@@ -172,6 +175,8 @@ export default function App({ initialPath }: AppProps) {
         return <ServicegebiedPage onNavigate={handleNavigate} />;
       case 'blogs':
         return <KennisbankPage onNavigate={handleNavigate} />;
+      case 'blog-hoe-slijp-je-een-mes':
+        return <BlogHoeSlijpJeEenMesPage onNavigate={handleNavigate} />;
       case 'over-ons':
         return <OverOnsPage onNavigate={handleNavigate} />;
       case 'faq':

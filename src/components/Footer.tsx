@@ -1,5 +1,5 @@
 import React from 'react';
-import { Facebook, Instagram } from 'lucide-react';
+import { UIcon } from './ui/UIcon';
 import { SlijpmaatLogo } from './SlijpmaatLogo';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
@@ -109,7 +109,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 aria-label="Slijpmaat op Instagram"
                 className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[#3B7F4B] bg-[#3B7F4B] text-white transition-all duration-200 hover:-translate-y-[3px] hover:bg-white hover:text-[#3B7F4B] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]"
               >
-                <Instagram className="h-[19px] w-[19px]" aria-hidden="true" />
+                <UIcon name="instagram" brand className="text-lg" aria-hidden="true" />
               </a>
               <a
                 href="https://www.facebook.com/profile.php?id=61589739536849"
@@ -118,7 +118,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 aria-label="Slijpmaat op Facebook"
                 className="flex h-[42px] w-[42px] items-center justify-center rounded-full border border-[#3B7F4B] bg-[#3B7F4B] text-white transition-all duration-200 hover:-translate-y-[3px] hover:bg-white hover:text-[#3B7F4B] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]"
               >
-                <Facebook className="h-[19px] w-[19px]" aria-hidden="true" />
+                <UIcon name="facebook" brand className="text-lg" aria-hidden="true" />
               </a>
             </div>
           </section>

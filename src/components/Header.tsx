@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { SlijpmaatLogo } from './SlijpmaatLogo';
 import { PageId } from '../types';
-import { Menu, X, ChevronDown, MessageCircle, MapPin } from 'lucide-react';
+import { UIcon } from './ui/UIcon';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { useLanguage } from '../context/LanguageContext';
 import { LanguageSlider } from './LanguageSlider';
@@ -139,18 +139,18 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
             <button
               type="button"
               onClick={() => handleLinkClick('ophalen-bezorgen')}
-              className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1 cursor-pointer shrink-0"
+              className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1.5 cursor-pointer shrink-0"
             >
-              <MapPin className="w-3.5 h-3.5 text-white shrink-0" />
+              <UIcon name="marker" className="text-xs sm:text-sm text-white shrink-0" />
               <span>{t('topbar.service_area', 'Servicegebied')}</span>
             </button>
             <a
               href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!')}`}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1 shrink-0"
+              className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1.5 shrink-0"
             >
-              <MessageCircle className="w-3.5 h-3.5 text-white shrink-0" />
+              <UIcon name="comment-alt" className="text-xs sm:text-sm text-white shrink-0" />
               <span className="hidden sm:inline">{t('topbar.whatsapp', 'WhatsApp je Maat')}</span>
             </a>
           </div>
@@ -191,7 +191,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
             <details name="header-menu" data-header-menu className="group relative">
               <summary className={`relative flex cursor-pointer list-none items-center gap-1.5 py-1 transition-colors marker:hidden hover:text-[#3B7F4B] ${currentPage === 'particulieren' || currentPage === 'horeca' ? 'font-bold text-[#3B7F4B]' : 'text-[#3B7F4B]'}`}>
                 <span>{t('nav.prijzen', 'Prijzen')}</span>
-                <ChevronDown className="h-3.5 w-3.5 transition-transform group-open:rotate-180" aria-hidden="true" />
+                <UIcon name="angle-small-down" className="text-sm transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
                 {(currentPage === 'particulieren' || currentPage === 'horeca') ? <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-[#3B7F4B]" /> : null}
               </summary>
               <div className="absolute left-1/2 top-full z-50 w-60 -translate-x-1/2 pt-3">
@@ -219,7 +219,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 className={`flex cursor-pointer list-none items-center gap-2 rounded-full bg-[#E87B5B] px-5 py-2.5 text-sm font-bold text-white shadow-xs transition-all marker:hidden hover:bg-[#C95E3E] active:scale-[0.98] ${currentPage === 'particulieren' || currentPage === 'horeca' ? 'ring-2 ring-[#C95E3E] ring-offset-2' : ''}`}
               >
                 <span>{t('nav.plan_button', 'Plan je slijpbeurt')}</span>
-                <ChevronDown className="h-4 w-4 transition-transform group-open:rotate-180" aria-hidden="true" />
+                <UIcon name="angle-small-down" className="text-sm transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
               </summary>
 
               <div className="absolute right-0 top-full z-50 w-60 pt-3">
@@ -265,7 +265,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-navigation-drawer"
             >
-              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+              {mobileMenuOpen ? <UIcon name="cross-small" className="text-2xl" /> : <UIcon name="menu-burger" className="text-lg" />}
             </button>
           </div>
         </div>
@@ -304,8 +304,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                   aria-expanded={mobilePrijzenOpen}
                 >
                   <span>Prijzen</span>
-                  <ChevronDown
-                    className={`w-4 h-4 text-[#3B7F4B]/60 transition-transform duration-200 ${
+                  <UIcon
+                    name="angle-small-down"
+                    className={`text-lg text-[#3B7F4B]/60 transition-transform duration-200 ${
                       mobilePrijzenOpen ? 'rotate-180 text-[#3B7F4B]' : ''
                     }`}
                   />
@@ -419,8 +420,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                   <span className="font-heading text-base font-bold text-[#3B7F4B]">
                     Plan je slijpbeurt
                   </span>
-                  <ChevronDown
-                    className={`w-4 h-4 text-[#3B7F4B] transition-transform duration-200 ${
+                  <UIcon
+                    name="angle-small-down"
+                    className={`text-lg text-[#3B7F4B] transition-transform duration-200 ${
                       mobilePlanOpen ? 'rotate-180' : ''
                     }`}
                   />
