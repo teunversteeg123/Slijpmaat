@@ -8,7 +8,6 @@ export interface UIconProps extends React.HTMLAttributes<HTMLElement> {
   size?: UIconSize;
   className?: string;
   title?: string;
-  'aria-hidden'?: boolean;
   'aria-label'?: string;
 }
 
