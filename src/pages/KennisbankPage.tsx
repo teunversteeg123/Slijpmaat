@@ -6,7 +6,6 @@ import {
   MapPin,
   MessageCircle,
   Sparkles,
-  CheckCircle2,
   BookOpen,
   HelpCircle,
   Compass,
@@ -23,25 +22,6 @@ interface KennisbankPageProps {
 
 export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
   const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik las jullie blogs en heb een vraag over het onderhoud van mijn messen!')}`;
-
-  // Meestgestelde onderhoudsvragen voor de FAQ sectie
-  const quickMaintenanceFaqs = [
-    {
-      q: 'Hoe vaak moet een keukenmes geslepen worden?',
-      a: 'Voor de meeste thuiskoks is één tot twee keer per jaar op Japanse waterstenen ideaal. Snijd je dagelijks veel of gebruik je het mes intensief, dan merk je vaak na 3 tot 4 maanden al dat een opfrisbeurt prettig is.',
-      tag: 'Frequentie',
-    },
-    {
-      q: 'Maakt de vaatwasser een mes echt bot?',
-      a: 'Ja, absoluut. Vaatwasmiddelen bevatten agressieve zouten en schuurmiddelen die de flinterdunne snede direct aantasten. Daarnaast botst het lemmet tegen bestekrekjes en zorgt de hoge hitte voor spanning in het staal.',
-      tag: 'Vaatwasser',
-    },
-    {
-      q: 'Waarom geen doortrekslijper gebruiken?',
-      a: 'Doortrekslijpers scheuren met hardmetalen wieltjes grof staal van het lemmet af en laten een gerafelde, zwakke snede achter. Op Japanse waterstenen behoud je de originele geometrie en blijft het mes veel langer scherp.',
-      tag: 'Waterstenen',
-    },
-  ];
 
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
@@ -335,110 +315,6 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
         </div>
 
         <ResultatenSlider />
-      </section>
-
-      <OrganicSectionDivider
-        fromColor="#FFFFFF"
-        middleColor="#E8EFE8"
-        toColor="#FAFAF8"
-        variant="rolling"
-      />
-
-      {/* 5. ONDERHOUD FAQ SECTIE */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl sm:mb-12">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">
-              Onderhoudsvragen
-            </p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
-              Veelgestelde vragen over messenonderhoud
-            </h2>
-            <p className="mt-3 text-base text-[#657068]">
-              De antwoorden die we in de werkplaats het vaakst geven aan thuiskoks en professionele koks.
-            </p>
-          </div>
-
-          <div className="grid gap-6 md:grid-cols-3">
-            {quickMaintenanceFaqs.map((faq, idx) => (
-              <div
-                key={idx}
-                className="flex flex-col justify-between rounded-[2.25rem] border border-[#d9e1d7] bg-white p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
-              >
-                <div>
-                  <span className="rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
-                    {faq.tag}
-                  </span>
-                  <h3 className="mt-4 font-heading text-lg font-bold text-[#203728]">
-                    {faq.q}
-                  </h3>
-                  <p className="mt-3 text-sm leading-relaxed text-[#657068]">
-                    {faq.a}
-                  </p>
-                </div>
-
-                <div className="mt-6 flex items-center gap-2 border-t border-[#d9e1d7]/60 pt-4 text-xs font-bold text-[#3B7F4B]">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-                  <span>Slijpmaat advies</span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* 6. AMBACHTSBELOFTE BANNER (GROEN) */}
-      <section className="px-4 pb-20 pt-4 sm:px-6 sm:pb-28 sm:pt-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-[#3B7F4B] p-8 text-white shadow-md sm:p-12 lg:p-16">
-            <div className="grid items-center gap-8 lg:grid-cols-[1.25fr_0.75fr] lg:gap-12">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#E8EFE8]">
-                  Slijpmaat Ambachtsbelofte
-                </p>
-                <h2 className="mt-2 font-heading text-3xl font-bold text-white sm:text-4xl lg:text-5xl">
-                  Geen tijd om zelf te slijpen?
-                </h2>
-                <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#E8EFE8] sm:text-lg">
-                  Laat je favoriete keukenmessen vakkundig met de hand slijpen op Japanse waterstenen door Teun en Mike. Binnen Utrecht halen we ze aan huis op en bezorgen we ze vlijmscherp terug.
-                </p>
-
-                <div className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
-                  <button
-                    type="button"
-                    onClick={() => onNavigate('particulieren')}
-                    className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-8 py-3.5 text-sm font-bold text-white shadow-sm transition hover:bg-[#C95E3E] cursor-pointer"
-                  >
-                    <span>Plan je slijpbeurt</span>
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-                  </button>
-
-                  <a
-                    href={whatsappUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-white/20"
-                  >
-                    <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                    <span>Stel een vraag via WhatsApp</span>
-                  </a>
-                </div>
-
-                <p className="mt-6 text-xs text-[#E8EFE8]/85 font-medium">
-                  Gratis ophalen en bezorgen in Utrecht vanaf €35 · Binnen 24–48 uur retour
-                </p>
-              </div>
-
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[2rem] border border-white/20 bg-white/10 shadow-lg lg:aspect-square">
-                <img
-                  src="/assets/resultaten/07-mes-met-slijpmaat-sticker.jpeg"
-                  alt="Vlijmscherp koksmes met Slijpmaat sticker klaar voor de keuken"
-                  className="h-full w-full object-cover"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
       </section>
     </div>
   );
