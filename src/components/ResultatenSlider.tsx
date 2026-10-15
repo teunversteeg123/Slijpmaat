@@ -90,6 +90,7 @@ export const ResultatenSlider: React.FC<ResultatenSliderProps> = ({
         string="#3B7F4B"
         background="transparent"
         ink="#203728"
+        expandable
       />
     </div>
   );
