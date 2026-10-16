@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight, Quote } from 'lucide-react';
+import { UIcon } from './ui/UIcon';
 import { GoogleIcon, GOOGLE_REVIEWS } from './GoogleReviewsSection';
 
 const FEATURED_REVIEW_NAMES = [
@@ -124,7 +124,7 @@ export const UtrechtQuotesSection: React.FC = () => {
                 aria-hidden={loopIndex < QUOTE_COUNT || loopIndex >= QUOTE_COUNT * 2 ? true : undefined}
                 className="relative min-h-[240px] min-w-[calc(100vw-2rem)] rounded-[2rem] border border-[#d9e1d7] bg-white p-6 shadow-xs transition-all duration-300 odd:-rotate-[0.35deg] even:rotate-[0.35deg] hover:-translate-y-1 hover:rotate-0 hover:shadow-md sm:min-w-[420px] lg:min-w-[390px]"
               >
-                <Quote className="mb-2 h-6 w-6 text-[#E87B5B]/30" />
+                <UIcon name="quote-right" className="mb-2 text-2xl text-[#E87B5B]/30" />
                 <p className="font-heading text-lg font-bold leading-snug text-[#203728]">
                   &ldquo;{item.text}&rdquo;
                 </p>
@@ -141,11 +141,11 @@ export const UtrechtQuotesSection: React.FC = () => {
         </div>
 
         <div className="mt-5 flex justify-center gap-2.5 sm:justify-end">
-          <button type="button" onClick={() => moveQuotesBy(-1)} className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white text-[#3B7F4B] shadow-[0_8px_20px_rgba(0,0,0,0.16)] transition-colors hover:bg-[#F7F4EC] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white" aria-label="Vorige quote">
-            <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+          <button type="button" onClick={() => moveQuotesBy(-1)} className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white text-[#3B7F4B] shadow-[0_8px_20px_rgba(0,0,0,0.16)] transition-colors hover:bg-[#F7F4EC] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white cursor-pointer" aria-label="Vorige quote">
+            <UIcon name="angle-small-left" className="text-xl" aria-hidden="true" />
           </button>
-          <button type="button" onClick={() => moveQuotesBy(1)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[#E87B5B] text-white shadow-[0_8px_20px_rgba(0,0,0,0.16)] transition-colors hover:bg-[#C95E3E] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white" aria-label="Volgende quote">
-            <ChevronRight className="h-5 w-5" aria-hidden="true" />
+          <button type="button" onClick={() => moveQuotesBy(1)} className="flex h-11 w-11 items-center justify-center rounded-full bg-[#E87B5B] text-white shadow-[0_8px_20px_rgba(0,0,0,0.16)] transition-colors hover:bg-[#C95E3E] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white cursor-pointer" aria-label="Volgende quote">
+            <UIcon name="angle-small-right" className="text-xl" aria-hidden="true" />
           </button>
         </div>
       </div>

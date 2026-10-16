@@ -31,7 +31,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
 
     // Trust bar
     'trust.reviews': 'reviews · 5,0',
-    'trust.delivery': 'Binnen 24–48 uur retour',
+    'trust.delivery': 'Binnen 24-48 uur retour',
     'trust.craft': '100% handmatig geslepen',
 
     // Language Toggle
@@ -69,7 +69,7 @@ export const TRANSLATIONS: Record<Language, Record<string, string>> = {
 
     // Trust bar
     'trust.reviews': 'reviews · 5.0',
-    'trust.delivery': 'Returned within 24–48 hrs',
+    'trust.delivery': 'Returned within 24-48 hrs',
     'trust.craft': '100% hand-sharpened',
 
     // Language Toggle

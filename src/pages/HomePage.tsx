@@ -12,7 +12,7 @@ const quickSteps = [
   { title: 'Plan je slijpbeurt', text: 'Kies je messen en stuur je aanvraag eenvoudig via WhatsApp.' },
   { title: 'Wij halen ze op', text: 'We spreken een duidelijk ophaalmoment in Utrecht met je af.' },
   { title: 'Met de hand geslepen', text: 'We slijpen zorgvuldig op whetstones en stroppen de snede af.' },
-  { title: 'Scherp terug', text: 'We proberen jouw messen binnen 24–48 uur weer terug te leveren.' },
+  { title: 'Scherp terug', text: 'We proberen jouw messen binnen 24-48 uur weer terug te leveren.' },
 ];
 
 const qualities = [
@@ -166,7 +166,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Geslepen binnen 24–48 uur</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Geslepen binnen 24-48 uur</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
@@ -335,12 +335,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="px-2">
               <span className="block font-heading text-2xl font-bold text-white sm:text-3xl">€8,50</span>
               <span className="mt-1 block text-xs font-semibold text-white/85">Normaal</span>
-              <span className="mt-1 block text-[11px] text-white/70">15–19,99 cm</span>
+              <span className="mt-1 block text-[11px] text-white/70">15-19,99 cm</span>
             </div>
             <div className="px-2">
               <span className="block font-heading text-2xl font-bold text-white sm:text-3xl">€10,50</span>
               <span className="mt-1 block text-xs font-semibold text-white/85">Groot</span>
-              <span className="mt-1 block text-[11px] text-white/70">20–25 cm</span>
+              <span className="mt-1 block text-[11px] text-white/70">20-25 cm</span>
             </div>
           </div>
         </div>

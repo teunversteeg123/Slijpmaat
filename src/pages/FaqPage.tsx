@@ -1,5 +1,5 @@
 import React from 'react';
-import { ArrowRight, MessageCircle, Phone, Clock3, ShieldCheck } from 'lucide-react';
+import { UIcon } from '../components/ui/UIcon';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
@@ -44,10 +44,10 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={() => onNavigate('particulieren')}
-                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base"
+                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
               >
                 <span>Plan een slijpbeurt</span>
-                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                <UIcon name="arrow-right" className="text-sm transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
               </button>
               <a
                 href={whatsappUrl}
@@ -55,7 +55,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
                 rel="noopener noreferrer"
                 className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
               >
-                <MessageCircle className="h-4 w-4" />
+                <UIcon name="comment-alt" className="text-sm" />
                 <span>Stel je vraag via WhatsApp</span>
               </a>
             </div>
@@ -91,11 +91,11 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
               <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+              <UIcon name="comment-alt" className="text-base shrink-0 text-[#3B7F4B]" aria-hidden="true" />
               <span className="text-sm font-bold text-[#3B7F4B]">Direct contact via WhatsApp</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <ShieldCheck className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+              <UIcon name="shield-check" className="text-base shrink-0 text-[#3B7F4B]" aria-hidden="true" />
               <span className="text-sm font-bold text-[#3B7F4B]">Duidelijk en eerlijk advies</span>
             </div>
           </div>
@@ -120,7 +120,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2 rounded-full bg-[#E8EFE8] px-5 py-3 text-xs font-bold text-[#3B7F4B] hover:bg-[#d8e8d8] transition-colors"
               >
-                <MessageCircle className="h-4 w-4" />
+                <UIcon name="comment-alt" className="text-sm" />
                 <span>Stel een persoonlijke vraag</span>
               </a>
             </div>
@@ -153,14 +153,14 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
               className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl"
             >
               <span>Stuur je Maat een appje</span>
-              <MessageCircle className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
+              <UIcon name="comment-alt" className="text-2xl shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
             </a>
             <a
               href="tel:+31682074967"
               className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl"
             >
               <span>Bel je Maat</span>
-              <Phone className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
+              <UIcon name="phone-call" className="text-2xl shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
             </a>
           </div>
         </div>

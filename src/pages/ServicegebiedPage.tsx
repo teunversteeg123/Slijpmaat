@@ -42,7 +42,7 @@ const serviceSteps = [
   {
     number: '04',
     title: 'Vlijmscherp retour',
-    text: 'Binnen 24–48 uur brengen we je messen veilig verpakt terug. Eenvoudig met contant, Tikkie, een betaalverzoek of factuur.'
+    text: 'Binnen 24-48 uur brengen we je messen veilig verpakt terug. Eenvoudig met contant, Tikkie, een betaalverzoek of factuur.'
   },
 ];
 
@@ -322,7 +322,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24–48 uur retour</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24-48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <Bike className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
@@ -420,7 +420,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="font-medium">Binnen 24–48 uur weer vlijmscherp terug</span>
+                  <span className="font-medium">Binnen 24-48 uur weer vlijmscherp terug</span>
                 </div>
               </div>
             </div>
@@ -471,7 +471,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                 </span>
                 <h3 className="mt-5 font-heading text-2xl font-bold text-[#3B7F4B]">Binnen Utrecht</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#657068] sm:text-base">
-                  Vanaf €35 bestelwaarde halen we ze gratis op aan huis of zaak. Binnen 24–48 uur weer vlijmscherp terugbezorgd.
+                  Vanaf €35 bestelwaarde halen we ze gratis op aan huis of zaak. Binnen 24-48 uur weer vlijmscherp terugbezorgd.
                 </p>
               </div>
               <div className="mt-6 pt-4 border-t border-[#d9e1d7]/60">

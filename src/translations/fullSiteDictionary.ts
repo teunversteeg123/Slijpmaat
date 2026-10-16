@@ -14,7 +14,7 @@ export const PHRASE_DICTIONARY: Array<[string, string]> = [
   ['Professionele messenslijper in Utrecht voor particulieren en horeca', 'Professional knife sharpener in Utrecht for households and restaurants'],
   ['Handmatig geslepen op Japanse waterstenen', 'Manually sharpened on Japanese whetstones'],
   ['100% handmatig geslepen', '100% hand-sharpened'],
-  ['Binnen 24–48 uur retour', 'Returned within 24–48 hours'],
+  ['Binnen 24-48 uur retour', 'Returned within 24-48 hours'],
   ['reviews op Google', 'reviews on Google'],
   ['reviews · 5,0', 'reviews · 5.0'],
   ['Gemiddeld beoordeeld met een 5.0 uit 5 sterren', 'Average rating of 5.0 out of 5 stars'],

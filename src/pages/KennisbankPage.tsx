@@ -1,15 +1,5 @@
 import type { FC } from 'react';
-import {
-  ArrowRight,
-  Clock,
-  Clock3,
-  MapPin,
-  MessageCircle,
-  Sparkles,
-  BookOpen,
-  HelpCircle,
-  Compass,
-} from 'lucide-react';
+import { UIcon } from '../components/ui/UIcon';
 import type { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
@@ -46,7 +36,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                 className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md active:scale-[0.98] sm:text-base cursor-pointer"
               >
                 <span>Plan een slijpbeurt</span>
-                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                <UIcon name="arrow-right" className="text-sm transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
               </button>
               <a
                 href={whatsappUrl}
@@ -54,7 +44,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                 rel="noopener noreferrer"
                 className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] sm:text-base"
               >
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                <UIcon name="comment-alt" className="text-base" aria-hidden="true" />
                 <span>Stel een vraag via WhatsApp</span>
               </a>
             </div>
@@ -91,11 +81,11 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
               <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews · 5,0</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24–48 uur retour</span>
+              <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
+              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24-48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+              <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
               <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf €35</span>
             </div>
           </div>
@@ -179,7 +169,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
 
                 <div className="mt-6">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
-                    <Sparkles className="h-3.5 w-3.5 text-[#3B7F4B]" aria-hidden="true" />
+                    <UIcon name="sparkles" className="text-xs text-[#3B7F4B]" aria-hidden="true" />
                     <span>Uitgelicht hoofdartikel</span>
                   </div>
 
@@ -210,7 +200,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
 
                 <span className="inline-flex items-center gap-2 rounded-full bg-[#E8EFE8] px-4 py-2 text-xs font-bold text-[#3B7F4B] transition-colors group-hover:bg-[#3B7F4B] group-hover:text-white sm:text-sm">
                   <span>Lees artikel</span>
-                  <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                  <UIcon name="arrow-right" className="text-sm transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                 </span>
               </div>
             </article>
@@ -224,7 +214,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                     <span className="rounded-full bg-[#FCEEE8] px-3 py-1 text-xs font-bold text-[#C95E3E]">
                       In voorbereiding
                     </span>
-                    <Compass className="h-5 w-5 text-[#3B7F4B]" aria-hidden="true" />
+                    <UIcon name="compass" className="text-lg text-[#3B7F4B]" aria-hidden="true" />
                   </div>
 
                   <h3 className="mt-4 font-heading text-lg font-bold text-[#203728]">
@@ -236,7 +226,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-[#A9C89E]">
-                  <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+                  <UIcon name="clock-three" className="text-xs" aria-hidden="true" />
                   <span>Publicatie binnenkort</span>
                 </div>
               </div>
@@ -248,7 +238,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                     <span className="rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
                       In voorbereiding
                     </span>
-                    <BookOpen className="h-5 w-5 text-[#3B7F4B]" aria-hidden="true" />
+                    <UIcon name="book-alt" className="text-lg text-[#3B7F4B]" aria-hidden="true" />
                   </div>
 
                   <h3 className="mt-4 font-heading text-lg font-bold text-[#203728]">
@@ -260,7 +250,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-[#A9C89E]">
-                  <Clock className="h-3.5 w-3.5" aria-hidden="true" />
+                  <UIcon name="clock-three" className="text-xs" aria-hidden="true" />
                   <span>Publicatie binnenkort</span>
                 </div>
               </div>
@@ -269,7 +259,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
               <div className="rounded-[2.25rem] border border-[#3B7F4B]/20 bg-[#E8EFE8]/70 p-6 sm:p-7 shadow-xs">
                 <div className="flex items-center gap-2.5">
                   <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-[#3B7F4B] text-white">
-                    <HelpCircle className="h-5 w-5" aria-hidden="true" />
+                    <UIcon name="interrogation" className="text-base text-white" aria-hidden="true" />
                   </span>
                   <h4 className="font-heading text-base font-bold text-[#203728]">
                     Vraag over jouw mes?
@@ -284,7 +274,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                   rel="noopener noreferrer"
                   className="mt-4 inline-flex items-center gap-2 text-xs font-bold text-[#3B7F4B] hover:underline sm:text-sm"
                 >
-                  <MessageCircle className="h-4 w-4" aria-hidden="true" />
+                  <UIcon name="comment-alt" className="text-sm" aria-hidden="true" />
                   <span>Stuur foto via WhatsApp</span>
                 </a>
               </div>

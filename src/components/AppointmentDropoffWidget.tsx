@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageCircle } from 'lucide-react';
+import { UIcon } from './ui/UIcon';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 
 const appointmentWhatsAppUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag een afspraak maken om mijn messen in Utrecht te brengen en later op te halen.')}`;
@@ -30,7 +30,7 @@ export const AppointmentDropoffWidget: React.FC = () => (
         rel="noopener noreferrer"
         className="group inline-flex min-h-14 w-full items-center justify-center gap-2.5 rounded-full bg-[#3B7F4B] px-7 py-4 font-bold text-white shadow-sm transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#315F3B] hover:shadow-md focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#E87B5B]/50 focus-visible:ring-offset-2 active:scale-[0.98] sm:w-auto sm:min-w-56 sm:text-lg"
       >
-        <MessageCircle className="h-5 w-5" aria-hidden="true" />
+        <UIcon name="comment-alt" className="text-lg" aria-hidden="true" />
         <span>Plan een afspraak</span>
       </a>
     </div>

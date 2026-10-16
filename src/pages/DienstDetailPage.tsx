@@ -118,11 +118,11 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
                     <span className="font-bold text-[#3B7F4B]">€6,50</span>
                   </div>
                   <div className="flex justify-between py-2.5">
-                    <span className="text-[#657068]">Normaal mes (15–19,99 cm)</span>
+                    <span className="text-[#657068]">Normaal mes (15-19,99 cm)</span>
                     <span className="font-bold text-[#3B7F4B]">€8,50</span>
                   </div>
                   <div className="flex justify-between py-2.5">
-                    <span className="text-[#657068]">Groot mes (20–25 cm)</span>
+                    <span className="text-[#657068]">Groot mes (20-25 cm)</span>
                     <span className="font-bold text-[#3B7F4B]">€10,50</span>
                   </div>
                   <div className="flex justify-between py-2.5 text-[#3B7F4B] font-bold">
@@ -142,7 +142,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
 
               <div className="rounded-2xl border border-[#d9e1d7] bg-[#F7F4EC] p-5 text-xs text-[#657068] leading-relaxed">
                 <strong className="text-[#3B7F4B] block mb-1">Ophaalservice Utrecht:</strong>
-                Vanaf €35 bestelwaarde gratis aan huis opgehaald en binnen 24–48 uur vlijmscherp terugbezorgd.
+                Vanaf €35 bestelwaarde gratis aan huis opgehaald en binnen 24-48 uur vlijmscherp terugbezorgd.
               </div>
             </div>
           </div>
@@ -205,11 +205,11 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
                     <span className="font-bold text-[#3B7F4B]">€6,50</span>
                   </div>
                   <div className="flex justify-between py-2.5">
-                    <span className="text-[#657068]">Santoku / Nakiri (15–19,99 cm)</span>
+                    <span className="text-[#657068]">Santoku / Nakiri (15-19,99 cm)</span>
                     <span className="font-bold text-[#3B7F4B]">€8,50</span>
                   </div>
                   <div className="flex justify-between py-2.5">
-                    <span className="text-[#657068]">Gyuto / Chef (20–25 cm)</span>
+                    <span className="text-[#657068]">Gyuto / Chef (20-25 cm)</span>
                     <span className="font-bold text-[#3B7F4B]">€10,50</span>
                   </div>
                 </div>

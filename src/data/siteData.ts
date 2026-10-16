@@ -64,17 +64,17 @@ export const FAQS = [
   },
   {
     q: 'In welke Utrechtse wijken en postcodes haalt mijn Maat messen op?',
-    a: 'Je Maat haalt keukenmessen op in de volgende Utrechtse wijken en postcodegebieden:\n• Binnenstad en centrum: 3511 en 3512\n• Noordwest – Pijlsweerd, Ondiep en Zuilen: 3513 en 3551 t/m 3555\n• Noordoost – Tuinwijk, Tuindorp, Wittevrouwen en Voordorp: 3514, 3515 en 3571 t/m 3573\n• Overvecht: 3561 t/m 3566\n• Oost – Oudwijk, Abstede, Wilhelminapark en Rijnsweerd: 3581 t/m 3585\n• Zuid – Tolsteeg, Hoograven en Lunetten: 3523 t/m 3525\n• Zuidwest – Dichterswijk, Rivierenwijk, Transwijk en Kanaleneiland: 3521, 3522, 3526 en 3527\n• West – Lombok, Oog in Al en Nieuw Engeland: 3531 t/m 3534 en 3542\n• Leidsche Rijn – Terwijde, Het Zand, Parkwijk en Langerak: 3528, 3541 en 3543 t/m 3545\n\nVul in het bestelformulier je postcode in om de bezorgprijs te bekijken. Vanaf €35 bestelwaarde komen we binnen Utrecht gratis langs. Voor de buitenring, waaronder Kanaleneiland en Leidsche Rijn, is het tarief onder €35 precies €7,25.',
+    a: 'Je Maat haalt keukenmessen op in de volgende Utrechtse wijken en postcodegebieden:\n• Binnenstad en centrum: 3511 en 3512\n• Noordwest - Pijlsweerd, Ondiep en Zuilen: 3513 en 3551 t/m 3555\n• Noordoost - Tuinwijk, Tuindorp, Wittevrouwen en Voordorp: 3514, 3515 en 3571 t/m 3573\n• Overvecht: 3561 t/m 3566\n• Oost - Oudwijk, Abstede, Wilhelminapark en Rijnsweerd: 3581 t/m 3585\n• Zuid - Tolsteeg, Hoograven en Lunetten: 3523 t/m 3525\n• Zuidwest - Dichterswijk, Rivierenwijk, Transwijk en Kanaleneiland: 3521, 3522, 3526 en 3527\n• West - Lombok, Oog in Al en Nieuw Engeland: 3531 t/m 3534 en 3542\n• Leidsche Rijn - Terwijde, Het Zand, Parkwijk en Langerak: 3528, 3541 en 3543 t/m 3545\n\nVul in het bestelformulier je postcode in om de bezorgprijs te bekijken. Vanaf €35 bestelwaarde komen we binnen Utrecht gratis langs. Voor de buitenring, waaronder Kanaleneiland en Leidsche Rijn, is het tarief onder €35 precies €7,25.',
     items: [
       'Binnenstad en centrum: 3511 en 3512',
-      'Noordwest – Pijlsweerd, Ondiep en Zuilen: 3513 en 3551 t/m 3555',
-      'Noordoost – Tuinwijk, Tuindorp, Wittevrouwen en Voordorp: 3514, 3515 en 3571 t/m 3573',
+      'Noordwest - Pijlsweerd, Ondiep en Zuilen: 3513 en 3551 t/m 3555',
+      'Noordoost - Tuinwijk, Tuindorp, Wittevrouwen en Voordorp: 3514, 3515 en 3571 t/m 3573',
       'Overvecht: 3561 t/m 3566',
-      'Oost – Oudwijk, Abstede, Wilhelminapark en Rijnsweerd: 3581 t/m 3585',
-      'Zuid – Tolsteeg, Hoograven en Lunetten: 3523 t/m 3525',
-      'Zuidwest – Dichterswijk, Rivierenwijk, Transwijk en Kanaleneiland: 3521, 3522, 3526 en 3527',
-      'West – Lombok, Oog in Al en Nieuw Engeland: 3531 t/m 3534 en 3542',
-      'Leidsche Rijn – Terwijde, Het Zand, Parkwijk en Langerak: 3528, 3541 en 3543 t/m 3545'
+      'Oost - Oudwijk, Abstede, Wilhelminapark en Rijnsweerd: 3581 t/m 3585',
+      'Zuid - Tolsteeg, Hoograven en Lunetten: 3523 t/m 3525',
+      'Zuidwest - Dichterswijk, Rivierenwijk, Transwijk en Kanaleneiland: 3521, 3522, 3526 en 3527',
+      'West - Lombok, Oog in Al en Nieuw Engeland: 3531 t/m 3534 en 3542',
+      'Leidsche Rijn - Terwijde, Het Zand, Parkwijk en Langerak: 3528, 3541 en 3543 t/m 3545'
     ]
   },
   {

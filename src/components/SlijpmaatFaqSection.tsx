@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Plus } from 'lucide-react';
+import { UIcon } from './ui/UIcon';
 import { FAQS } from '../data/siteData';
 
 interface SlijpmaatFaqSectionProps {
@@ -36,7 +36,7 @@ export const SlijpmaatFaqSection: React.FC<SlijpmaatFaqSectionProps> = ({
               >
                 <span className="font-heading text-lg font-bold leading-snug text-[#3B7F4B] sm:text-xl">{faq.q}</span>
                 <span className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors ${isOpen ? 'bg-[#3B7F4B] text-white' : 'bg-[#E8EFE8] text-[#3B7F4B] group-hover:bg-[#DCE8DC]'}`}>
-                  <Plus className={`h-4 w-4 transition-transform ${isOpen ? 'rotate-45' : ''}`} aria-hidden="true" />
+                  <UIcon name="plus" className={`text-xs transition-transform duration-200 ${isOpen ? 'rotate-45' : ''}`} aria-hidden="true" />
                 </span>
               </button>
             </h2>

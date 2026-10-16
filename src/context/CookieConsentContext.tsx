@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useState } from 'react';
-import { X } from 'lucide-react';
+import { UIcon } from '../components/ui/UIcon';
 import {
   disableGoogleAnalytics,
   enableGoogleAnalytics,
@@ -122,9 +122,9 @@ export const CookieConsentProvider = ({ children }: { children: React.ReactNode 
               type="button"
               onClick={() => setSettingsOpen(false)}
               aria-label="Cookie-instellingen sluiten"
-              className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-[#244A30] transition-colors hover:bg-[#E8EFE8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3B7F4B]"
+              className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-[#244A30] transition-colors hover:bg-[#E8EFE8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3B7F4B] cursor-pointer"
             >
-              <X className="h-5 w-5" aria-hidden="true" />
+              <UIcon name="cross-small" className="text-xl" aria-hidden="true" />
             </button>
           ) : null}
 

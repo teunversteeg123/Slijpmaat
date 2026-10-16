@@ -1,5 +1,5 @@
 import React from 'react';
-import { ChevronLeft } from 'lucide-react';
+import { UIcon } from './ui/UIcon';
 import { PageId } from '../types';
 
 export interface LegalSection {
@@ -53,9 +53,9 @@ export const LegalDocumentPage: React.FC<LegalDocumentPageProps> = ({
       <button
         type="button"
         onClick={() => onNavigate('home')}
-        className="mb-9 inline-flex cursor-pointer items-center gap-2 text-sm font-semibold text-[#3B7F4B] transition-colors hover:text-[#244A30] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]"
+        className="mb-9 inline-flex cursor-pointer items-center gap-1.5 text-sm font-semibold text-[#3B7F4B] transition-colors hover:text-[#244A30] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]"
       >
-        <ChevronLeft aria-hidden="true" className="h-4 w-4" />
+        <UIcon name="angle-small-left" aria-hidden="true" className="text-base" />
         Terug naar home
       </button>
 

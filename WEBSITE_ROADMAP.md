@@ -1,4 +1,4 @@
-# Slijpmaat website — audit, prioriteiten en voortgang
+# Slijpmaat website - audit, prioriteiten en voortgang
 
 Peildatum: 12 oktober 2026
 Veilige basis: GitHub-commit `dc810b7` (`main`)
@@ -80,7 +80,7 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 
 ### Snelheid en responsive risico's
 
-- Grote bronafbeeldingen van circa 4,7–5,3 MB.
+- Grote bronafbeeldingen van circa 4,7-5,3 MB.
 - Video van circa 3,7 MB.
 - Alleen de actieve HD-servicegebiedkaart is behouden; de vier eerdere kaartvarianten zijn verwijderd.
 - Geen routegebaseerde code-splitting.
@@ -88,13 +88,13 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 
 ## Prioriteiten
 
-### P0 — noodzakelijk vóór lancering
+### P0 - noodzakelijk vóór lancering
 
 - [x] Veilige GitHub-back-up van de huidige werkende site.
 - [x] Misleidende succesmeldingen uit contact- en zakelijke formulieren verwijderen.
 - [x] Contact- en zakelijke formulieren functioneel koppelen aan door de bezoeker te versturen WhatsApp-berichten.
 - [x] Kapotte interne sprongen naar zakelijk formulier, FAQ en blogoverzicht herstellen.
-- [x] Maatgrens corrigeren: normaal 15–19,99 cm; groot begint bij 20 cm.
+- [x] Maatgrens corrigeren: normaal 15-19,99 cm; groot begint bij 20 cm.
 - [x] Onbevestigde btw-, betaaltermijn-, postverzending- en garantieclaims neutraliseren.
 - [x] Alle actieve routes functioneel testen op mobiel en desktop.
 - [x] Alle CTA's, formulieren, calculatorstappen en foutmeldingen end-to-end testen.
@@ -104,7 +104,7 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 - [ ] Definitieve hosting kiezen en de voorbereide normale URL-/404-structuur in die omgeving bevestigen.
 - [ ] Juridische en fiscale gegevens bevestigen voordat voorwaarden en betaalteksten definitief worden.
 
-### P1 — daarna verbeteren
+### P1 - daarna verbeteren
 
 - [x] SEO-paginastructuur, H1-verdeling en unieke metadata per actieve pagina uitwerken.
 - [x] Normale URL's implementeren en redirects voor oude actieve hashlinks behouden.
@@ -118,14 +118,14 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 - [ ] Routegebaseerde code-splitting en bundeloptimalisatie uitvoeren.
 - [ ] Meetplan voor WhatsApp-klikken, formulieropeningen en calculatorgebruik opstellen zonder persoonsgegevens.
 
-### P2 — later uitbreiden
+### P2 - later uitbreiden
 
 - [x] Google Analytics 4 technisch achter expliciete toestemming plaatsen; definitief GA4-meet-ID en meetplan blijven nodig voor activering.
 - [ ] Alleen bij echte serverformulieren: servervalidatie, spambeperking, rate limiting en veilige opslag toevoegen.
 - [ ] Alleen na expliciete bevestiging verzending per post, landelijke bezorging of webshopfunctionaliteit toevoegen.
 - [ ] Evaluatie- en onderhoudsritme voor prijzen, teksten, dependencies en juridische pagina's vastleggen.
 
-### Laatste fase — Engels
+### Laatste fase - Engels
 
 - [ ] Definitieve Nederlandse inhoud bevriezen.
 - [ ] Complete Engelse routes onder `/en/` maken.
@@ -137,7 +137,7 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 
 Kies de hostingprovider en publiceer de huidige build eerst op een tijdelijk testadres of subdomein. Controleer daarna de metadata, redirects en formulieren in die productieachtige omgeving voordat `slijpmaat.nl` wordt omgeschakeld.
 
-## URL- en blogvoorbereiding — 8 oktober 2026
+## URL- en blogvoorbereiding - 8 oktober 2026
 
 - Alle actieve pagina's gebruiken lokaal normale, leesbare paden zonder hash; browserterug en directe paginalinks werken.
 - Oude hashlinks blijven behouden als compatibele redirects naar de nieuwe paden.
@@ -145,7 +145,7 @@ Kies de hostingprovider en publiceer de huidige build eerst op een tijdelijk tes
 - De blogpagina bevat geen gepubliceerde artikelen, conceptblogs of voorbeeldtegels meer. Ook de artikelroute, voorbeelddata, zoekfunctie en filters zijn verwijderd.
 - De definitieve hostingprovider en DNS-omschakeling van `slijpmaat.nl` zijn nog niet vastgesteld.
 
-## Opschoonronde — 8 oktober 2026
+## Opschoonronde - 8 oktober 2026
 
 - Negen ongebruikte pagina- en componentbestanden verwijderd, waaronder de oude diensten-, review- en prijzenpagina, twee embedded calculators en het ontwerppaneel.
 - Ongebruikte fictieve reviewdata verwijderd; de actieve Google-reviewcomponent met aangeleverde reviewteksten blijft behouden.
@@ -155,7 +155,7 @@ Kies de hostingprovider en publiceer de huidige build eerst op een tijdelijk tes
 - TypeScript controleert nu standaard op ongebruikte imports, variabelen en parameters.
 - De oude route `#prijzen-bestellen` stuurt bezoekers door naar de actieve particuliere calculator; bestaande redirects voor kennisbank, reviews, Onze Maten en buiten Utrecht blijven behouden.
 
-## QA-voortgang — 7 oktober 2026
+## QA-voortgang - 7 oktober 2026
 
 - Alle zestien actieve routes zijn bij 320, 375, 390, 1280 en 1440 px gecontroleerd: tachtig route-breedtecombinaties laden met een H1 en zonder horizontale overflow.
 - Contact, zakelijk en particulier bevatten geen zichtbare invoervelden zonder technisch label of toegankelijke naam.

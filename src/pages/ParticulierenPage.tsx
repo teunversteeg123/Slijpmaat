@@ -27,7 +27,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     {
       num: '3',
       title: 'Snel weer vlijmscherp',
-      text: 'We proberen jouw messen binnen 24–48 uur weer vlijmscherp terug te leveren.',
+      text: 'We proberen jouw messen binnen 24-48 uur weer vlijmscherp terug te leveren.',
     },
   ];
 
@@ -53,7 +53,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     {
       step: '04',
       title: 'Vlijmscherp terug & achteraf betalen',
-      desc: 'Binnen 24–48 uur staan we weer op de stoep met scherpe messen. Eenvoudig met contant, Tikkie, een betaalverzoek of factuur.',
+      desc: 'Binnen 24-48 uur staan we weer op de stoep met scherpe messen. Eenvoudig met contant, Tikkie, een betaalverzoek of factuur.',
       icon: 'credit-card',
     },
   ];
@@ -69,7 +69,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     },
     {
       question: 'Hoe snel heb ik mijn messen weer scherp terug?',
-      answer: 'We proberen jouw messen binnen 24–48 uur weer terug te leveren. We spreken vooraf een duidelijk ophaal- en bezorgmoment met je af, zodat je precies weet wanneer je weer vlijmscherp kunt koken.',
+      answer: 'We proberen jouw messen binnen 24-48 uur weer terug te leveren. We spreken vooraf een duidelijk ophaal- en bezorgmoment met je af, zodat je precies weet wanneer je weer vlijmscherp kunt koken.',
     },
     {
       question: 'Moet ik vooraf betalen?',
@@ -164,7 +164,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Geslepen binnen 24–48 uur</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Geslepen binnen 24-48 uur</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />

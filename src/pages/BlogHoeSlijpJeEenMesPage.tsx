@@ -150,7 +150,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-4">
               <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24–48 uur retour</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24-48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-4">
               <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
@@ -236,7 +236,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                 { title: 'Water of voorgeschreven vloeistof', desc: 'Koelt de snede en spoelt het slijpresidu continu weg.' },
                 { title: 'Steenhouder of vochtige doek', desc: 'Houdt de steen stevig op zijn plek tegen wegglijden.' },
                 { title: 'Schone zachte theedoek', desc: 'Voor het drogen en tussentijds schoonvegen van het lemmet.' },
-                { title: 'Optioneel: fijnere steen (3000–5000)', desc: 'Voor het polijsten en verfijnen van de snede.' },
+                { title: 'Optioneel: fijnere steen (3000-5000)', desc: 'Voor het polijsten en verfijnen van de snede.' },
                 { title: 'Optioneel: watervaste stift', desc: 'Onmisbaar om direct visueel je slijphoek te controleren.' },
               ].map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3 rounded-2xl border border-[#d9e1d7] bg-white p-5 shadow-xs">

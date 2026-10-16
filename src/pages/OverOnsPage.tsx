@@ -4,18 +4,7 @@ import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { UtrechtQuotesSection } from '../components/UtrechtQuotesSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
-import {
-  ArrowRight,
-  Clock3,
-  MapPin,
-  MessageCircle,
-  Sparkles,
-  Heart,
-  Plus,
-  Compass,
-  Target,
-  CheckCircle2
-} from 'lucide-react';
+import { UIcon, UIconBadge } from '../components/ui/UIcon';
 
 interface OverOnsPageProps {
   onNavigate?: (page: PageId) => void;
@@ -39,7 +28,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     {
       num: '3',
       title: 'Slijpmaat: Jouw lokale messenslijper',
-      text: 'Vrienden, familie en al snel Utrechtse restaurants vroegen of we hun messen wilden slijpen. Slijpmaat was geboren: een betrouwbare, persoonlijke vriend aan huis die zorgt voor vlijmscherp gereedschap zonder gedoe.',
+      text: 'Buren, wijkgenoten, thuiskoks en al snel ook Utrechtse horeca vroegen of we hun messen wilden slijpen. Slijpmaat was geboren: een betrouwbare vriend aan huis die zorgt voor vlijmscherp gereedschap voor particulieren én horeca, zonder gedoe.',
     },
   ];
 
@@ -48,17 +37,17 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     {
       title: 'Met de hand en met aandacht',
       desc: 'Geen snelle slijpbeurt op een droge machine. Wij slijpen ieder mes met de hand op Japanse waterstenen. Zo houden we controle over de slijphoek en behandelen we ieder mes met de aandacht die het verdient.',
-      icon: Sparkles,
+      icon: 'sparkles',
     },
     {
       title: 'Persoonlijk geregeld',
       desc: 'Bij Slijpmaat heb je direct contact met Teun of Mike. We halen je messen zelf op in Utrecht, slijpen ze zorgvuldig en brengen ze scherp terug. We kijken eerlijk naar wat je mes nodig heeft en denken met je mee.',
-      icon: Heart,
+      icon: 'heart',
     },
     {
       title: 'Liever herstellen dan vervangen',
       desc: 'Een goed mes kan jarenlang meegaan. Daarom herstellen we waar mogelijk ook beschadigingen, zoals kleine happen in de snede of een afgebroken punt. Dat is beter voor je portemonnee, je mes én het milieu.',
-      icon: Compass,
+      icon: 'compass',
     },
   ];
 
@@ -67,26 +56,54 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     {
       title: 'Altijd direct contact',
       desc: 'App of bel rechtstreeks met Teun en Mike voor advies of planning.',
-      icon: MessageCircle,
+      icon: 'comment-alt',
     },
     {
-      title: '24–48 Uur doorlooptijd',
+      title: '24-48 Uur doorlooptijd',
       desc: 'Je hoeft je favoriete koksmes nooit lang te missen in de keuken.',
-      icon: Clock3,
+      icon: 'clock-three',
     },
     {
       title: 'Gratis ophalen & brengen',
       desc: 'Vanaf €35 bestelwaarde halen we ze gratis op aan huis in Utrecht.',
-      icon: MapPin,
+      icon: 'marker',
     },
     {
       title: 'Betalen pas achteraf',
       desc: 'Eenvoudig met contant, Tikkie, een betaalverzoek of factuur.',
-      icon: CheckCircle2,
+      icon: 'check',
     },
   ];
 
-  // 4. Veelgestelde vragen over Teun & Mike
+  // 4. Actiefoto's van Teun & Mike in actie
+  const actionPhotos = [
+    {
+      image: '/assets/team/teun-en-mike-met-mes.jpg',
+      alt: 'Teun en Mike van Slijpmaat bekijken het vlijmscherpe lemmet van een keukenmes',
+      title: 'Teun & Mike met het resultaat',
+      subtitle: 'Trots op elk vlijmscherp geslepen lemmet',
+    },
+    {
+      image: '/assets/werkwijze/01-beoordelen.jpg',
+      alt: 'Nauwkeurige beoordeling van de snijkant en het originele lemmetprofiel',
+      title: 'Inspectie & geometrie',
+      subtitle: 'Behoud van de originele fabriekscurve',
+    },
+    {
+      image: '/assets/werkwijze/03-slijpen.jpg',
+      alt: 'Handmatig slijpen van een keukenmes op een Japanse watersteen',
+      title: 'Handmatig op waterstenen',
+      subtitle: 'Watergekoeld, zonder wrijvingshitte',
+    },
+    {
+      image: '/assets/werkwijze/04-afwerken.jpg',
+      alt: 'Afwerken en ontbramen van het lemmet op een soepele leren strop',
+      title: 'Afwerken op soepel leer',
+      subtitle: 'Microscopisch ontbraamd en spiegelglad',
+    },
+  ];
+
+  // 5. Veelgestelde vragen over Teun & Mike
   const faqs = [
     {
       question: 'Wie slijpt mijn messen daadwerkelijk?',
@@ -102,7 +119,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     },
     {
       question: 'Kan ik ook langskomen om Teun en Mike te ontmoeten?',
-      answer: 'Zeker! Als je je messen liever zelf langsbrengt in plaats van gebruik te maken van onze ophaalservice, kun je via WhatsApp eenvoudig een afspraak maken. Wij werken vanuit huis, dus we stemmen vooraf even een handig moment af.',
+      answer: 'Zeker! Als je je messen liever zelf langsbrengt in plaats van gebruik te maken van onze ophaalservice, kun je telefonisch of via WhatsApp eenvoudig een afspraak maken. Wij werken vanuit huis, dus we stemmen vooraf even een handig moment af.',
     },
   ];
 
@@ -125,14 +142,16 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         <div className="site-hero-grid relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-14 lg:py-8 xl:gap-20">
           {/* Left: Copy & CTAs */}
           <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0">
-            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
-              Over ons · Leer je Maat kennen
-            </p>
-            <h1 className="site-hero-title mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
+            <div className="mb-2.5">
+              <span className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.24em] text-[#C95E3E] sm:text-sm">
+                OVER ONS · LEER JE MATEN KENNEN
+              </span>
+            </div>
+            <h1 className="site-hero-title mt-2 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
               Twee Utrechtse vrienden met passie voor scherpte.
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Wij zijn Teun en Mike, de oprichters van Slijpmaat. Twee maten uit Utrecht die vonden dat messenslijpen weer ambachtelijk, betrouwbaar en zonder gedoe aan huis geregeld moet worden.
+              Wij zijn Teun en Mike, de oprichters van Slijpmaat. Twee maten uit Utrecht die vonden dat messenslijpen weer ambachtelijk, betrouwbaar en zonder gedoe aan huis geregeld moet worden - voor buren, wijkgenoten, thuiskoks én lokale horecagelegenheden. We halen je messen met de fiets of scooter op in Utrecht en brengen ze vlijmscherp weer thuis.
             </p>
 
             <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
@@ -142,7 +161,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
                 className="group inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
               >
                 <span>Plan een slijpbeurt</span>
-                <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+                <UIcon name="arrow-right" className="text-sm transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
               </button>
 
               <a
@@ -151,7 +170,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
                 rel="noopener noreferrer"
                 className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
               >
-                <MessageCircle className="h-4 w-4" />
+                <UIcon name="comment-alt" className="text-sm" />
                 <span>Stuur je Maat een appje</span>
               </a>
             </div>
@@ -188,11 +207,11 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews · 5,0</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24–48 uur retour</span>
+              <UIcon name="clock-three" className="text-base text-[#3B7F4B] shrink-0" aria-hidden="true" />
+              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24-48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+              <UIcon name="marker" className="text-base text-[#3B7F4B] shrink-0" aria-hidden="true" />
               <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf €35</span>
             </div>
           </div>
@@ -248,33 +267,32 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
       <section className="relative bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 text-center sm:mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Waar we voor gaan</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Onze Missie &amp; Visie</h2>
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Onze Missie &amp; Visie</h2>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {/* Missie Kaart */}
-            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#3B7F4B] bg-[#3B7F4B] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10">
+            {/* Missie Kaart (Diep donkergroen #244A30 per gebruikerswens) */}
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#244A30] bg-[#244A30] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10 text-white">
               <div aria-hidden="true" className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-white/6" />
-              <div className="relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/12 text-white">
-                <Target className="h-7 w-7" />
+              <div className="relative mb-6">
+                <UIconBadge name="target" variant="sage" size="lg" rounded="2xl" />
               </div>
-              <span className="relative text-xs font-bold uppercase tracking-wider text-[#F4B19D]">
+              <span className="relative text-xs font-bold uppercase tracking-wider text-[#A9C89E]">
                 Onze Missie
               </span>
               <h3 className="relative mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
                 Elk mes in Utrecht weer het respect en de scherpte geven die het verdient.
               </h3>
               <p className="relative mt-4 text-base leading-relaxed text-[#E8EFE8]">
-                Koken hoort leuk, ontspannen en veilig te zijn. Wij maken professioneel messenslijpen toegankelijk voor iedereen: van student en thuiskok tot chef-kok, direct aan de voordeur zonder gedoe.
+                Koken hoort leuk, ontspannen en veilig te zijn. Wij maken professioneel messenslijpen toegankelijk voor iedereen: voor particulieren, wijkgenoten, gezinnen en thuiskoks tot professionele chefs in de Utrechtse horeca. Direct aan de voordeur geregeld zonder gedoe.
               </p>
             </div>
 
-            {/* Visie Kaart */}
-            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#E87B5B] bg-[#E87B5B] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10">
+            {/* Visie Kaart (In het warme oranje #E87B5B behouden per gebruikerswens) */}
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#E87B5B] bg-[#E87B5B] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10 text-white">
               <div aria-hidden="true" className="absolute -bottom-16 -right-10 h-48 w-48 rounded-full bg-white/8" />
-              <div className="relative mb-6 flex h-14 w-14 items-center justify-center rounded-2xl bg-white/18 text-white">
-                <Compass className="h-7 w-7" />
+              <div className="relative mb-6">
+                <UIconBadge name="compass" variant="coral" size="lg" rounded="2xl" className="bg-white/20 text-white border-white/20" />
               </div>
               <span className="relative text-xs font-bold uppercase tracking-wider text-white/85">
                 Onze Visie
@@ -283,15 +301,59 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
                 Duurzaam behoud als de nieuwe standaard in de keuken.
               </h3>
               <p className="relative mt-4 text-base leading-relaxed text-[#FFF7F3]">
-                In een maatschappij waar spullen snel worden weggegooid, laten wij zien dat goed gereedschap generaties lang meegaat. Met vakkundig onderhoud behoud je kwaliteit en voorkom je onnodig afval.
+                In een maatschappij waar spullen snel worden weggegooid, laten wij zien dat goed gereedschap een lange levensduur verdient. Met vakkundig handmatig onderhoud behoud je de kwaliteit en voorkom je onnodig afval.
               </p>
             </div>
           </div>
         </div>
       </section>
 
+      {/* 5. TEUN EN MIKE IN ACTIE (Fotogalerij van het ambacht aan de Gerard Noodtstraat) */}
+      <section className="relative overflow-hidden bg-[#FAFAF8] px-4 py-16 sm:px-6 sm:py-24 lg:px-8 border-t border-[#d9e1d7]/60">
+        <div className="relative z-10 mx-auto max-w-7xl">
+          <div className="mb-10 text-center sm:mb-14">
+            <div className="mb-2">
+              <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E] sm:text-sm">
+                AAN HET WERK IN UTRECHT
+              </span>
+            </div>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+              Teun en Mike in actie
+            </h2>
+          </div>
+
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+            {actionPhotos.map((photo) => (
+              <figure
+                key={photo.title}
+                className="group relative overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md flex flex-col"
+              >
+                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#E8EFE8]">
+                  <img
+                    src={photo.image}
+                    alt={photo.alt}
+                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
+                <figcaption className="p-5 flex-1 flex flex-col justify-between">
+                  <div>
+                    <h3 className="font-heading text-base font-bold text-[#203728]">
+                      {photo.title}
+                    </h3>
+                    <p className="mt-1 text-xs text-[#657068] leading-relaxed">
+                      {photo.subtitle}
+                    </p>
+                  </div>
+                </figcaption>
+              </figure>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <OrganicSectionDivider
-        fromColor="#FFFFFF"
+        fromColor="#FAFAF8"
         middleColor="#A9C89E"
         toColor="#3B7F4B"
         variant="rolling"
@@ -307,7 +369,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         mirror
       />
 
-      {/* 5. ONZE FILOSOFIE (De 3 pijlers van ons ambacht) */}
+      {/* 6. ONZE FILOSOFIE (De 3 pijlers van ons ambacht) */}
       <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8 bg-[#FAFAF8] border-t border-[#d9e1d7]/60">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 text-center sm:mb-14">
@@ -318,27 +380,22 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {philosophyItems.map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div
-                  key={idx}
-                  className="rounded-[2rem] border border-[#d9e1d7] bg-white p-7 sm:p-8 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md flex flex-col justify-between"
-                >
-                  <div>
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B]">
-                      <Icon className="h-6 w-6" />
-                    </span>
-                    <h3 className="mt-5 font-heading text-xl font-bold text-[#3B7F4B]">
-                      {item.title}
-                    </h3>
-                    <p className="mt-3 text-sm leading-6 text-[#657068]">
-                      {item.desc}
-                    </p>
-                  </div>
+            {philosophyItems.map((item, idx) => (
+              <div
+                key={idx}
+                className="rounded-[2rem] border border-[#d9e1d7] bg-white p-7 sm:p-8 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md flex flex-col justify-between"
+              >
+                <div>
+                  <UIconBadge name={item.icon} variant="soft" size="md" rounded="2xl" />
+                  <h3 className="mt-5 font-heading text-xl font-bold text-[#3B7F4B]">
+                    {item.title}
+                  </h3>
+                  <p className="mt-3 text-sm leading-6 text-[#657068]">
+                    {item.desc}
+                  </p>
                 </div>
-              );
-            })}
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -350,7 +407,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         variant="scalloped"
       />
 
-      {/* 6. GROENE GOLFSECTIE (#3B7F4B met wave dividers) */}
+      {/* 7. GROENE GOLFSECTIE (#3B7F4B met wave dividers) */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
@@ -361,18 +418,13 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
-            {promises.map((p, idx) => {
-              const Icon = p.icon;
-              return (
-                <div key={idx} className="rounded-[1.75rem] bg-white p-6 shadow-sm">
-                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B]">
-                    <Icon className="h-5 w-5" />
-                  </span>
-                  <h3 className="mt-5 font-heading text-lg font-bold text-[#3B7F4B]">{p.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#657068]">{p.desc}</p>
-                </div>
-              );
-            })}
+            {promises.map((p, idx) => (
+              <div key={idx} className="rounded-[1.75rem] bg-white p-6 shadow-sm">
+                <UIconBadge name={p.icon} variant="soft" size="md" rounded="full" />
+                <h3 className="mt-5 font-heading text-lg font-bold text-[#3B7F4B]">{p.title}</h3>
+                <p className="mt-2 text-sm leading-6 text-[#657068]">{p.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -406,7 +458,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#3B7F4B] transition-colors hover:text-[#315F3B]"
             >
               <span>Stel een persoonlijke vraag via WhatsApp</span>
-              <ArrowRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+              <UIcon name="arrow-right" className="text-sm transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </a>
           </div>
 
@@ -419,7 +471,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
                 <summary className="flex cursor-pointer list-none items-center justify-between gap-5 font-heading text-base font-bold text-[#3B7F4B] marker:hidden sm:text-lg">
                   <span>{faq.question}</span>
                   <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B] transition-transform duration-200 group-open:rotate-45">
-                    <Plus className="h-4 w-4" aria-hidden="true" />
+                    <UIcon name="plus" className="text-xs" aria-hidden="true" />
                   </span>
                 </summary>
                 <p className="mt-3 max-w-2xl text-sm leading-7 text-[#657068]">{faq.answer}</p>
@@ -454,7 +506,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl cursor-pointer"
             >
               <span>Plan mijn slijpbeurt</span>
-              <ArrowRight className="h-7 w-7 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+              <UIcon name="arrow-right" className="text-xl shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
             </button>
             <a
               href={whatsappUrl}
@@ -463,7 +515,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               className="group inline-flex min-h-[72px] items-center justify-between gap-4 rounded-full bg-white px-7 py-4 font-heading text-lg font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:-translate-y-0.5 hover:bg-[#FFF7F3] hover:shadow-lg sm:px-10 sm:text-xl"
             >
               <span>Stuur een appje</span>
-              <MessageCircle className="h-8 w-8 shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
+              <UIcon name="comment-alt" className="text-2xl shrink-0 text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" aria-hidden="true" />
             </a>
           </div>
         </div>

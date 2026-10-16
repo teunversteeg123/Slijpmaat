@@ -5,13 +5,13 @@ import { PageId } from '../types';
 interface PrivacyPageProps { onNavigate: (page: PageId) => void; }
 
 const sections: LegalSection[] = [
-  { heading: 'Artikel 1 – Wie is verantwoordelijk voor jouw gegevens?', paragraphs: [
+  { heading: 'Artikel 1 - Wie is verantwoordelijk voor jouw gegevens?', paragraphs: [
     'Deze privacyverklaring hoort bij Slijpmaat.', 'Handelsnaam: Slijpmaat',
     'Adres: Gerard Noodtstraat 57, 3515 VW Utrecht', 'E-mail: slijpmaat@outlook.com',
     'Telefoon/WhatsApp: 06 82 07 49 67', 'Website: https://slijpmaat.nl',
     'Slijpmaat is verantwoordelijk voor de verwerking van persoonsgegevens zoals beschreven in deze privacyverklaring.',
   ] },
-  { heading: 'Artikel 2 – Welke persoonsgegevens verwerkt Slijpmaat?', paragraphs: [
+  { heading: 'Artikel 2 - Welke persoonsgegevens verwerkt Slijpmaat?', paragraphs: [
     'Slijpmaat verwerkt alleen persoonsgegevens die nodig zijn voor de dienstverlening, klantcommunicatie, administratie en kwaliteitscontrole.',
     'Het kan gaan om de volgende gegevens:', '- naam;', '- adres en woonplaats;',
     '- telefoonnummer en WhatsApp-gegevens;', '- e-mailadres;',
@@ -22,7 +22,7 @@ const sections: LegalSection[] = [
     '- technische gegevens van websitebezoek, voor zover de website of gebruikte tools deze verwerken, zoals browserinformatie, apparaatgegevens of cookies.',
     'Slijpmaat verwerkt geen bijzondere persoonsgegevens, zoals gezondheidsgegevens, religie, politieke voorkeur of BSN, tenzij de Klant deze gegevens ongevraagd zelf deelt en verwerking noodzakelijk is voor afhandeling van de communicatie.',
   ] },
-  { heading: 'Artikel 3 – Waarvoor gebruikt Slijpmaat persoonsgegevens?', paragraphs: [
+  { heading: 'Artikel 3 - Waarvoor gebruikt Slijpmaat persoonsgegevens?', paragraphs: [
     'Slijpmaat gebruikt persoonsgegevens voor de volgende doelen:',
     '- het aannemen, plannen en uitvoeren van slijpopdrachten;', '- het ophalen en terugbezorgen van messen;',
     '- contact met de Klant via WhatsApp, e-mail, telefoon of andere kanalen;',
@@ -32,20 +32,20 @@ const sections: LegalSection[] = [
     '- het behandelen van vragen, klachten, schadeclaims of geschillen;', '- het naleven van wettelijke verplichtingen;',
     '- het tonen van promotioneel beeldmateriaal, alleen wanneer dit niet herleidbaar is tot een persoon of wanneer toestemming is gegeven.',
   ] },
-  { heading: 'Artikel 4 – Op welke grondslagen verwerkt Slijpmaat gegevens?', paragraphs: [
+  { heading: 'Artikel 4 - Op welke grondslagen verwerkt Slijpmaat gegevens?', paragraphs: [
     'Slijpmaat verwerkt persoonsgegevens op basis van de volgende AVG-grondslagen:',
     'Uitvoering van de overeenkomst: gegevens zijn nodig om de slijpservice uit te voeren, contact te houden, messen op te halen en terug te bezorgen.',
     'Wettelijke verplichting: sommige gegevens moeten worden bewaard voor administratie, belastingverplichtingen of boekhouding.',
     'Gerechtvaardigd belang: Slijpmaat mag gegevens gebruiken voor normale bedrijfsvoering, bewijs van de staat van messen, kwaliteitscontrole, beveiliging, klachtenafhandeling en het voorkomen van misverstanden of schadeclaims. Daarbij weegt Slijpmaat steeds af of de privacy van de Klant niet zwaarder weegt.',
     'Toestemming: voor bepaalde verwerkingen, zoals herkenbaar promotioneel gebruik van beeldmateriaal of marketingberichten, vraagt Slijpmaat vooraf toestemming. De Klant kan deze toestemming later intrekken.',
   ] },
-  { heading: 'Artikel 5 – Foto’s van messen', paragraphs: [
+  { heading: 'Artikel 5 - Foto’s van messen', paragraphs: [
     '5.1 Slijpmaat kan vóór en/of na het slijpen foto’s maken van de messen. Deze foto’s worden gebruikt voor interne controle, kwaliteitsbewaking, schadebeoordeling, klachtenafhandeling en bewijs van de staat van de messen bij ontvangst en oplevering.',
     '5.2 Slijpmaat probeert te voorkomen dat op foto’s persoonsgegevens zichtbaar zijn, zoals gezichten, adressen, brieven, kentekens, locatiegegevens of andere herkenbare informatie.',
     '5.3 Foto’s kunnen promotioneel worden gebruikt op bijvoorbeeld de website, Instagram, Facebook of ander marketingmateriaal wanneer de foto’s niet herleidbaar zijn tot een persoon of wanneer de Klant toestemming heeft gegeven.',
     '5.4 De Klant kan voorafgaand aan de opdracht aangeven dat foto’s niet promotioneel gebruikt mogen worden. In dat geval gebruikt Slijpmaat de foto’s alleen intern.',
   ] },
-  { heading: 'Artikel 6 – Met wie deelt Slijpmaat persoonsgegevens?', paragraphs: [
+  { heading: 'Artikel 6 - Met wie deelt Slijpmaat persoonsgegevens?', paragraphs: [
     'Slijpmaat verkoopt geen persoonsgegevens aan derden.',
     'Slijpmaat kan persoonsgegevens delen met of laten verwerken door diensten die nodig zijn voor de bedrijfsvoering, zoals:',
     '- e-maildiensten, zoals Outlook of Microsoft;', '- WhatsApp Business of Meta-diensten voor klantcontact;',
@@ -56,7 +56,7 @@ const sections: LegalSection[] = [
     '- bevoegde instanties wanneer Slijpmaat wettelijk verplicht is gegevens te delen.',
     'Met partijen die namens Slijpmaat persoonsgegevens verwerken, maakt Slijpmaat waar nodig afspraken over beveiliging en vertrouwelijkheid.',
   ] },
-  { heading: 'Artikel 7 – Hoe lang bewaart Slijpmaat persoonsgegevens?', paragraphs: [
+  { heading: 'Artikel 7 - Hoe lang bewaart Slijpmaat persoonsgegevens?', paragraphs: [
     'Slijpmaat bewaart persoonsgegevens niet langer dan nodig is voor het doel waarvoor de gegevens zijn verzameld, tenzij een wettelijke bewaartermijn geldt.',
     'Slijpmaat hanteert in principe de volgende bewaartermijnen:',
     '- klant- en opdrachtgegevens: tot maximaal 2 jaar na de laatste opdracht, tenzij langer nodig is voor administratie, klachten of geschillen;',
@@ -67,13 +67,13 @@ const sections: LegalSection[] = [
     '- gegevens van personen die contact opnemen maar geen opdracht plaatsen: tot maximaal 12 maanden na het laatste contactmoment.',
     'Wanneer gegevens niet langer nodig zijn, verwijdert of anonimiseert Slijpmaat deze waar redelijkerwijs mogelijk.',
   ] },
-  { heading: 'Artikel 8 – Beveiliging', paragraphs: [
+  { heading: 'Artikel 8 - Beveiliging', paragraphs: [
     'Slijpmaat neemt passende technische en organisatorische maatregelen om persoonsgegevens te beschermen tegen verlies, misbruik, onbevoegde toegang en ongewenste openbaarmaking.',
     'Voorbeelden hiervan zijn:', '- toegang tot klantgegevens beperken tot personen die deze nodig hebben;',
     '- gebruik van beveiligde accounts en wachtwoorden;', '- zorgvuldig omgaan met foto’s, formulieren en klantcommunicatie;',
     '- geen onnodige persoonsgegevens publiceren;', '- het verwijderen of anonimiseren van gegevens zodra deze niet meer nodig zijn.',
   ] },
-  { heading: 'Artikel 9 – Rechten van de Klant', paragraphs: [
+  { heading: 'Artikel 9 - Rechten van de Klant', paragraphs: [
     'De Klant heeft op grond van de AVG verschillende rechten. De Klant kan Slijpmaat vragen om:',
     '- inzage in de persoonsgegevens die Slijpmaat verwerkt;', '- correctie van onjuiste of onvolledige gegevens;',
     '- verwijdering van persoonsgegevens;', '- beperking van de verwerking;', '- overdracht van gegevens, voor zover van toepassing;',
@@ -81,12 +81,12 @@ const sections: LegalSection[] = [
     'Een verzoek kan worden gestuurd naar slijpmaat@outlook.com. Slijpmaat reageert in principe binnen één maand na ontvangst van het verzoek. Indien een verzoek complex is of wanneer meerdere verzoeken zijn gedaan, kan deze termijn volgens de AVG worden verlengd.',
     'Slijpmaat kan vragen om aanvullende informatie om te controleren of het verzoek door de juiste persoon wordt gedaan.',
   ] },
-  { heading: 'Artikel 10 – Marketing en klantcontact', paragraphs: [
+  { heading: 'Artikel 10 - Marketing en klantcontact', paragraphs: [
     '10.1 Slijpmaat gebruikt contactgegevens voor communicatie over lopende opdrachten, vragen, betalingen en serviceberichten.',
     '10.2 Slijpmaat mag klanten die eerder een bestelling hebben geplaatst benaderen met marketingberichten, acties of promotionele berichten over vergelijkbare diensten. Dit gebeurt alleen wanneer dit wettelijk is toegestaan.',
     '10.3 De Klant kan zich altijd afmelden voor marketingberichten door dit via WhatsApp of e-mail aan Slijpmaat door te geven.',
   ] },
-  { heading: 'Artikel 11 – Website en cookies', paragraphs: [
+  { heading: 'Artikel 11 - Website en cookies', paragraphs: [
     '11.1 De website gebruikt functionele browseropslag om de gekozen taal en de cookievoorkeur van de bezoeker te onthouden. Deze opslag is nodig om de gekozen instellingen uit te voeren. De cookievoorkeur wordt maximaal 6 maanden bewaard en daarna opnieuw gevraagd.',
     '11.2 Slijpmaat gebruikt Google Analytics 4 uitsluitend nadat de bezoeker hiervoor actief toestemming heeft gegeven. Zonder toestemming wordt de Google Analytics-tag niet geladen en worden geen Analytics-metingen naar Google verstuurd.',
     '11.3 Na toestemming kan Google Analytics de cookies _ga en _ga_<meet-ID> plaatsen om bezoekers en sessies van elkaar te onderscheiden. Slijpmaat beperkt de levensduur van deze cookies tot maximaal 90 dagen. Google Analytics kan onder meer bezochte pagina’s, sessiegegevens, globale locatie, browser- en apparaatgegevens verwerken.',
@@ -94,9 +94,9 @@ const sections: LegalSection[] = [
     '11.5 De bezoeker kan Analytics weigeren zonder verlies van de normale websitefuncties. Een eerder gegeven keuze kan via “Cookievoorkeuren” in de footer worden gewijzigd. Bij intrekking stopt de website verdere Analytics-metingen en probeert zij bestaande Google Analytics-cookies te verwijderen.',
     '11.6 Externe diensten, zoals WhatsApp, Google Maps en socialmediaplatforms, kunnen eigen cookies of vergelijkbare technieken gebruiken nadat de bezoeker bewust naar die externe dienst doorklikt.',
   ] },
-  { heading: 'Artikel 12 – Minderjarigen', paragraphs: ['Slijpmaat richt haar diensten niet specifiek op minderjarigen. Indien een minderjarige gebruik wil maken van de diensten van Slijpmaat, moet hiervoor toestemming zijn van een ouder of wettelijke vertegenwoordiger.'] },
-  { heading: 'Artikel 13 – Wijzigingen in deze privacyverklaring', paragraphs: ['Slijpmaat mag deze privacyverklaring wijzigen wanneer de dienstverlening, wetgeving of gebruikte systemen veranderen. De meest recente versie wordt beschikbaar gesteld via de website of op verzoek toegestuurd.'] },
-  { heading: 'Artikel 14 – Vragen of klachten', paragraphs: [
+  { heading: 'Artikel 12 - Minderjarigen', paragraphs: ['Slijpmaat richt haar diensten niet specifiek op minderjarigen. Indien een minderjarige gebruik wil maken van de diensten van Slijpmaat, moet hiervoor toestemming zijn van een ouder of wettelijke vertegenwoordiger.'] },
+  { heading: 'Artikel 13 - Wijzigingen in deze privacyverklaring', paragraphs: ['Slijpmaat mag deze privacyverklaring wijzigen wanneer de dienstverlening, wetgeving of gebruikte systemen veranderen. De meest recente versie wordt beschikbaar gesteld via de website of op verzoek toegestuurd.'] },
+  { heading: 'Artikel 14 - Vragen of klachten', paragraphs: [
     'Voor vragen over deze privacyverklaring of over de verwerking van persoonsgegevens kan contact worden opgenomen via slijpmaat@outlook.com.',
     'De Klant heeft daarnaast het recht om een klacht in te dienen bij de Autoriteit Persoonsgegevens wanneer de Klant vindt dat Slijpmaat niet zorgvuldig met persoonsgegevens omgaat.',
   ] },

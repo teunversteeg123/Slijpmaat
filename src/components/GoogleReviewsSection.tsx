@@ -1,5 +1,5 @@
 import React, { useCallback, useRef, useState } from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import { UIcon } from './ui/UIcon';
 
 const GOOGLE_REVIEW_URL = 'https://g.page/r/CYtVeBVtieCBEAE/review';
 export const GOOGLE_REVIEW_COUNT = 20;
@@ -94,11 +94,11 @@ export const GoogleReviewsSection: React.FC = () => {
         </div>
 
         <div className="mt-[18px] flex gap-2.5">
-          <button type="button" onClick={() => moveTo(activeIndex - 1)} className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_8px_20px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]" aria-label="Vorige review">
-            <ChevronLeft className="h-5 w-5" aria-hidden="true" />
+          <button type="button" onClick={() => moveTo(activeIndex - 1)} className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_8px_20px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] cursor-pointer" aria-label="Vorige review">
+            <UIcon name="angle-small-left" className="text-xl" aria-hidden="true" />
           </button>
-          <button type="button" onClick={() => moveTo(activeIndex + 1)} className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_8px_20px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]" aria-label="Volgende review">
-            <ChevronRight className="h-5 w-5" aria-hidden="true" />
+          <button type="button" onClick={() => moveTo(activeIndex + 1)} className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_8px_20px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] cursor-pointer" aria-label="Volgende review">
+            <UIcon name="angle-small-right" className="text-xl" aria-hidden="true" />
           </button>
         </div>
 
