@@ -13,7 +13,8 @@ import {
   Plus,
   Minus,
   MapPin,
-  Sparkles
+  ReceiptText,
+  Mail
 } from 'lucide-react';
 import {
   getDeliveryFeeCents,
@@ -21,6 +22,7 @@ import {
   isValidDutchPostcode,
   normalizeDutchPostcode,
 } from '../data/delivery';
+import { SLIJPMAAT_INFO } from '../data/siteData';
 
 type ServiceType = 'bezorging' | 'langskomen';
 
@@ -349,7 +351,7 @@ export const ZakelijkFormulier: React.FC = () => {
                           aria-label={`Minder ${row.name}`}
                           className="flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed rounded-l-xl"
                         >
-                          <Minus strokeWidth={2.25} className="h-4.5 w-4.5 sm:h-4 sm:w-4 shrink-0" />
+                          <Minus aria-hidden="true" strokeWidth={2.25} className="h-5 w-5 sm:h-4 sm:w-4 shrink-0" />
                         </button>
                         <span className="w-10 sm:w-8 text-center font-heading text-base sm:text-sm font-bold text-[#203728]">
                           {knifeCounts[idx]}
@@ -360,7 +362,7 @@ export const ZakelijkFormulier: React.FC = () => {
                           aria-label={`Meer ${row.name}`}
                           className="flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] cursor-pointer rounded-r-xl"
                         >
-                          <Plus strokeWidth={2.25} className="h-4.5 w-4.5 sm:h-4 sm:w-4 shrink-0" />
+                          <Plus aria-hidden="true" strokeWidth={2.25} className="h-5 w-5 sm:h-4 sm:w-4 shrink-0" />
                         </button>
                       </div>
                     </div>
@@ -433,7 +435,7 @@ export const ZakelijkFormulier: React.FC = () => {
                     <span className={`flex h-11 w-11 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-2xl transition-colors ${
                       serviceType === 'bezorging' ? 'bg-[#3B7F4B] text-white' : 'bg-[#E8EFE8] text-[#3B7F4B]'
                     }`}>
-                      <Truck strokeWidth={2} className="h-5.5 w-5.5 sm:h-5 sm:w-5" />
+                      <Truck aria-hidden="true" strokeWidth={2} className="h-6 w-6 shrink-0 sm:h-5 sm:w-5" />
                     </span>
                     <span className="font-heading text-sm sm:text-base font-bold text-[#203728]">
                       Bezorgservice Utrecht
@@ -467,7 +469,7 @@ export const ZakelijkFormulier: React.FC = () => {
                     <span className={`flex h-11 w-11 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-2xl transition-colors ${
                       serviceType === 'langskomen' ? 'bg-[#3B7F4B] text-white' : 'bg-[#E8EFE8] text-[#3B7F4B]'
                     }`}>
-                      <Calendar strokeWidth={2} className="h-5.5 w-5.5 sm:h-5 sm:w-5" />
+                      <Calendar aria-hidden="true" strokeWidth={2} className="h-6 w-6 shrink-0 sm:h-5 sm:w-5" />
                     </span>
                     <span className="font-heading text-sm sm:text-base font-bold text-[#203728]">
                       Langsbrengen op afspraak
@@ -628,7 +630,7 @@ export const ZakelijkFormulier: React.FC = () => {
                   Snel een helder voorstel
                 </small>
                 <span className="inline-flex items-center gap-1 rounded-full bg-[#E8EFE8] px-2.5 py-0.5 text-[10px] font-bold text-[#3B7F4B] uppercase tracking-wider">
-                  <Sparkles strokeWidth={2} className="h-3 w-3 shrink-0" />
+                  <ReceiptText aria-hidden="true" strokeWidth={2} className="h-3.5 w-3.5 shrink-0" />
                   <span>incl. btw</span>
                 </span>
               </div>
@@ -658,21 +660,19 @@ export const ZakelijkFormulier: React.FC = () => {
               <span>Open aanvraag in WhatsApp</span>
             </button>
 
-            {/* Directe link met Teun & Mike */}
+            {/* Alternatieve contactroute per e-mail */}
             <div className="mt-3.5 text-center">
               <a
-                href="https://wa.me/31682074967?text=Hoi%20Teun%20en%20Mike,%20ik%20heb%20een%20vraag%20over%20zakelijk%20messen%20slijpen"
-                target="_blank"
-                rel="noopener noreferrer"
+                href={`mailto:${SLIJPMAAT_INFO.email}?subject=${encodeURIComponent('Zakelijke aanvraag Slijpmaat')}`}
                 className="inline-flex items-center gap-2 text-xs font-bold text-[#3B7F4B] hover:text-[#2d633a] transition-colors"
               >
-                <MessageCircle strokeWidth={2} className="h-4.5 w-4.5 shrink-0 text-[#3B7F4B]" />
-                <span>Of app direct met Teun &amp; Mike</span>
+                <Mail aria-hidden="true" strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B] sm:h-4 sm:w-4" />
+                <span>Of stuur een e-mail naar {SLIJPMAAT_INFO.email}</span>
               </a>
             </div>
 
             <p className="mt-3 text-center text-xs text-[#657068]">
-              Er wordt nog niets verzonden. Je controleert en verstuurt de aanvraag zelf in WhatsApp.
+              Er wordt niets automatisch verzonden. Je controleert en verstuurt je bericht zelf via WhatsApp of e-mail.
             </p>
 
             <p className="mt-3 text-center text-[11px] text-[#9ca3af]">

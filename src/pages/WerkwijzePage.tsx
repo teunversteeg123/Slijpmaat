@@ -3,7 +3,7 @@ import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
-import { UIcon } from '../components/ui/UIcon';
+import { UIcon, UIconBadge } from '../components/ui/UIcon';
 
 interface WerkwijzePageProps {
   onNavigate: (page: PageId) => void;
@@ -87,21 +87,21 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       examples: 'Wüsthof, Zwilling, Sabatier, Diamant Sabatier, Victorinox, etc.',
       angle: 'Slijphoek ca. 15° - 20°',
       desc: 'Westerse messen hebben taaier staal en een rondere snijboog (voor de wiegende snijtechniek). We slijpen een stevige, duurzame snijrand die tegen een stootje kan.',
-      iconName: 'compass',
+      iconName: 'knife-kitchen',
     },
     {
       title: 'Japanse Keukenmessen',
       examples: 'Santoku, Gyuto, Nakiri, VG10, AUS-10, Shirogami & Aogami koolstofstaal',
       angle: 'Slijphoek ca. 12° - 15°',
       desc: 'Japanse messen zijn gemaakt van aanzienlijk harder staal en hebben een dunnere geometrie. We slijpen deze met uiterste precisie op de waterstenen zonder het delicate lemmet te belasten.',
-      iconName: 'sparkles',
+      iconName: 'knife',
     },
     {
       title: 'Chips & Beschadigde Punten',
       examples: 'Happen in de snede, verbogen of afgebroken punten',
       angle: 'Altijd in goed overleg',
       desc: 'Heeft je mes een flinke chip? We herstellen het mes gelijkmatig over de hele lengte zodat het profiel klopt. Vóór we beginnen stemmen we dit altijd even telefonisch of via WhatsApp met je af.',
-      iconName: 'handshake',
+      iconName: 'tools',
     },
   ];
 
@@ -211,10 +211,10 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24-48 uur retour</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <UIcon name="sparkles" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
+              <UIcon name="knife-kitchen" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
               <span className="text-sm font-bold text-[#3B7F4B]">100% handmatig geslepen</span>
             </div>
           </div>
@@ -334,9 +334,13 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
               >
                 <div>
                   <div className="flex items-center justify-between">
-                    <span className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B]">
-                      <UIcon name={type.iconName} className="text-xl text-[#3B7F4B]" aria-hidden="true" />
-                    </span>
+                    <UIconBadge
+                      name={type.iconName}
+                      variant="soft"
+                      size="lg"
+                      rounded="2xl"
+                      aria-label={`Icoon voor ${type.title}`}
+                    />
                     <span className="rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
                       {type.angle}
                     </span>
@@ -508,7 +512,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                 <div className="flex flex-wrap sm:flex-nowrap items-start sm:items-center justify-between gap-3 border-b border-[#d9e1d7]/70 pb-5">
                   <div className="flex items-center gap-3 min-w-0">
                     <span className="flex h-11 w-11 sm:h-12 sm:w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B]">
-                      <UIcon name="sparkles" className="text-xl sm:text-2xl" aria-hidden="true" />
+                      <UIcon name="raindrops" className="text-xl sm:text-2xl" aria-hidden="true" />
                     </span>
                     <div className="min-w-0">
                       <p className="text-[11px] font-bold uppercase tracking-wider text-[#3B7F4B]">
@@ -607,52 +611,51 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
 
       <OrganicSectionDivider
         fromColor="#FAFAF8"
-        middleColor="#A9C89E"
-        toColor="#244A30"
+        middleColor="#E8EFE8"
+        toColor="#3B7F4B"
         variant="scalloped"
       />
 
-      {/* 7. AMBACHTSBELOFTE BANNER (Volledige vloeiende golfsectie in diep woudgroen #244A30) */}
-      <section className="relative overflow-hidden bg-[#244A30] px-4 py-16 sm:px-6 sm:py-24 lg:px-8 text-white">
-        {/* Subtiele organische gloed in achtergrond */}
+      {/* 7. AMBACHTSBELOFTE BANNER */}
+      <section className="relative overflow-hidden bg-[#3B7F4B] px-4 py-16 text-white sm:px-6 sm:py-24 lg:px-8">
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -right-20 -top-20 h-96 w-96 rounded-full bg-[#3B7F4B]/35 blur-3xl"
+          className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-[46%_54%_62%_38%/54%_42%_58%_46%] bg-white/6"
         />
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute -left-20 -bottom-20 h-96 w-96 rounded-full bg-[#E87B5B]/15 blur-3xl"
+          className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 rounded-[58%_42%_48%_52%/44%_58%_42%_56%] bg-[#244A30]/18"
         />
 
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="grid items-center gap-10 lg:grid-cols-[1.18fr_0.82fr] lg:gap-14">
             <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-[#A9C89E]/30 bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.22em] text-[#A9C89E] backdrop-blur-xs">
-                <UIcon name="sparkles" className="text-xs text-[#A9C89E]" />
+              <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">
+                <UIcon name="shield-check" className="text-xs text-[#E8EFE8]" />
                 <span>Onze Belofte aan Jouw Mes</span>
               </div>
 
-              <h2 className="mt-4 font-heading text-3xl font-bold leading-snug sm:text-4xl lg:text-5xl text-white">
+              <h2 className="mt-4 font-heading text-3xl font-bold leading-snug text-white sm:text-4xl lg:text-5xl">
                 Een goed koksmes slijp je met water en geduld,{' '}
-                <span className="text-[#A9C89E]">nooit met haast en geweld.</span>
+                <span className="text-[#E8EFE8]">nooit met haast en geweld.</span>
               </h2>
 
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-[#E8EFE8] sm:text-lg">
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
                 Zowel voor professionele chefsmessen als voor je trouwe keukenmes thuis: bij ons krijgt ieder lemmet de persoonlijke toewijding en rust die het verdient.
               </p>
 
               {/* Kwaliteitskenmerken */}
               <div className="mt-6 flex flex-wrap gap-2.5">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white/95 border border-white/15">
-                  <UIcon name="check" className="text-xs text-[#A9C89E]" />
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white">
+                  <UIcon name="check" className="text-xs text-[#E8EFE8]" />
                   100% watergekoeld
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white/95 border border-white/15">
-                  <UIcon name="check" className="text-xs text-[#A9C89E]" />
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white">
+                  <UIcon name="check" className="text-xs text-[#E8EFE8]" />
                   Fabriekshardheid intact
                 </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white/95 border border-white/15">
-                  <UIcon name="check" className="text-xs text-[#A9C89E]" />
+                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white">
+                  <UIcon name="check" className="text-xs text-[#E8EFE8]" />
                   Afwerking op soepel leer
                 </span>
               </div>
@@ -672,7 +675,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                   href={whatsappUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group inline-flex min-h-13 items-center justify-center gap-2.5 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-[#203728] shadow-md transition-all duration-200 hover:bg-[#F7F4EC] hover:shadow-lg active:scale-[0.98] sm:text-base"
+                  className="group inline-flex min-h-13 items-center justify-center gap-2.5 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:bg-[#F7F4EC] hover:shadow-lg active:scale-[0.98] sm:text-base"
                 >
                   <UIcon name="comment-alt" className="text-base text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" />
                   <span>Stel een vraag via WhatsApp</span>
@@ -704,8 +707,8 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       </section>
 
       <OrganicSectionDivider
-        fromColor="#244A30"
-        middleColor="#A9C89E"
+        fromColor="#3B7F4B"
+        middleColor="#E8EFE8"
         toColor="#FFFFFF"
         variant="calm"
         mirror

@@ -41,13 +41,13 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
     },
     {
       num: '2',
-      title: 'Ophalen op afspraak',
-      text: 'We stemmen vooraf via WhatsApp een rustig ophaalmoment bij jullie keukendeur af.',
+      title: 'Brengen of lokale service',
+      text: 'Zakelijke klanten uit heel Nederland kunnen op afspraak in Utrecht langskomen. Binnen Utrecht stemmen we desgewenst een haal- en brengmoment af.',
     },
     {
       num: '3',
-      title: 'Scherp voor de volgende werkdag',
-      text: 'Binnen 24 tot 48 uur leveren we de messen weer vlijmscherp af, volgens de vooraf afgestemde planning en prijs.',
+      title: 'Scherp volgens afspraak',
+      text: 'Doorgaans leveren we de messen binnen 24 tot 48 uur weer vlijmscherp af, volgens de vooraf afgestemde planning en prijs.',
     },
   ];
 
@@ -56,7 +56,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
     {
       step: '1',
       title: 'Snel voorstel & planning',
-      desc: 'Binnen enkele uren ontvang je van Teun of Mike een helder voorstel en stemmen we het perfecte ophaalmoment af.',
+      desc: 'Je ontvangt van Teun of Mike een helder voorstel en samen stemmen we de planning en de passende haal- of brengroute af.',
       icon: Clock3,
     },
     {
@@ -155,12 +155,12 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Right: Tomatenvideo met herkenbare organische blob erachter (identiek aan Particulieren) */}
-          <div className="site-hero-media relative order-2 w-full px-4 sm:px-6 lg:order-2 lg:px-0">
+          <div className="relative order-2 w-full px-0 sm:px-6 lg:order-2 lg:px-0">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 mx-auto aspect-[4/3] w-[92%] overflow-hidden rounded-[2rem] bg-[#203728] shadow-xs sm:aspect-[16/11] sm:w-[70%] sm:rounded-[2.5rem] lg:aspect-square">
+            <div className="relative z-10 mx-auto aspect-[4/3] w-full overflow-hidden rounded-none bg-[#203728] shadow-xs sm:aspect-[16/11] sm:w-[70%] sm:rounded-[2.5rem] lg:aspect-square">
               <HeroVideo
                 src="/assets/tomaat-website-video.mp4"
                 ariaLabel="Een scherp keukenmes snijdt soepel door een tomaat"
@@ -233,12 +233,9 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
       {/* 4. HET BESTELFORMULIER (ZAKELIJK FORMULIER) */}
       <section id="zakelijk-formulier" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-8 text-center sm:mb-12">
+          <div className="mb-8 text-left sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Zakelijk Formulier</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Zakelijke aanvraag &amp; offerte</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-[#657068]">
-              Vul je gegevens in of neem direct contact op via WhatsApp. We reageren snel met een helder voorstel en ophaalvoorstel.
-            </p>
           </div>
 
           <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-5 shadow-sm sm:p-8 lg:p-10">

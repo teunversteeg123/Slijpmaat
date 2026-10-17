@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { UIcon, UIconBadge } from '../components/ui/UIcon';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT, GoogleReviewsSection } from '../components/GoogleReviewsSection';
 import { ResultatenSlider } from '../components/ResultatenSlider';
+import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { PageId } from '../types';
 
 interface HomePageProps {
@@ -33,7 +34,7 @@ const faqs = [
   { question: 'Hoe geef ik mijn messen veilig mee?', answer: 'We vervoeren je messen veilig in onze eigen ophaal- en bezorgtas. Verpak je messen bij voorkeur extra in een theedoek, krant of messenhoes. Zo blijven je messen én onze vingers heel.' },
   { question: 'Welke soorten messen slijpt mijn Maat?', answer: 'Wij slijpen gladde messen, zoals koksmessen en schilmessen. Speciale messen beoordelen we vooraf. Kartelmessen slijpen we op dit moment niet.' },
   { question: 'Slijpt mijn Maat ook Japanse messen?', answer: 'Ja, Japanse messen slijpen we, maar door het staal en de slijphoek vragen ze vaak om een andere aanpak. Stuur daarom vooraf via WhatsApp een foto en het merk of type van je mes. Je Maat beoordeelt dan of we het mes zorgvuldig kunnen slijpen.' },
-  { question: 'Hoe lang duurt het voordat ik weer scherpe messen heb?', answer: 'We streven ernaar om je messen binnen 48 uur na het ophalen weer vlijmscherp terug te brengen. De exacte doorlooptijd kan variëren door drukte. We spreken vooraf duidelijk af wanneer je messen worden opgehaald en teruggebracht.' },
+  { question: 'Hoe lang duurt het voordat ik weer scherpe messen heb?', answer: 'Doorgaans brengen we je messen binnen 24 tot 48 uur na het ophalen weer vlijmscherp terug. De exacte doorlooptijd kan variëren door drukte. We spreken vooraf duidelijk af wanneer je messen worden opgehaald en teruggebracht.' },
 ];
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
@@ -166,7 +167,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Geslepen binnen 24-48 uur</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
@@ -239,34 +240,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#F7F4EC" middleColor="#A9C89E" toColor="#3B7F4B" variant="rolling" />
+
       {/* 4. ZO EENVOUDIG WERKT HET - Vibrant Slijpmaat Green #3B7F4B with organic wave dividers top and bottom */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
-        {/* Organic wave divider at TOP flowing smoothly from #F7F4EC cream into green - NO straight hard line */}
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#F7F4EC] sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,20 C1180,55 900,10 620,40 C380,68 180,18 0,35 Z"
-          />
-        </svg>
-
-        {/* Organic wave divider at BOTTOM flowing into white calculator section below */}
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 100"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-14 w-full text-white sm:h-20 lg:h-24"
-        >
-          <path
-            fill="currentColor"
-            d="M0,100 L1440,100 L1440,30 C1200,75 920,15 620,55 C380,85 180,25 0,65 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Van aanvraag tot scherpe messen</p>
@@ -299,6 +276,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </ol>
         </div>
       </section>
+
+      <OrganicSectionDivider fromColor="#3B7F4B" middleColor="#A9C89E" toColor="#FFFFFF" variant="rolling" mirror />
 
       {/* 5. CALCULATOR CTA SECTION */}
       <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -382,34 +361,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#F7F4EC" variant="calm" />
+
       {/* 7. WAAROM SLIJPMAAT & CRAFT STAPPEN - With soft top and bottom wave dividers */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-20 sm:px-6 sm:pb-28 sm:pt-28 lg:px-8">
-        {/* Organic wave divider at TOP flowing from white section into #F7F4EC */}
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,15 C1160,50 880,10 600,35 C360,60 160,15 0,30 Z"
-          />
-        </svg>
-
-        {/* Organic wave divider at BOTTOM flowing from #F7F4EC into white Google Reviews section */}
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,60 L1440,60 L1440,25 C1180,5 900,45 620,15 C380,45 180,10 0,30 Z"
-          />
-        </svg>
-
         {/* Subtle decorative curved blob */}
         <div
           aria-hidden="true"
@@ -473,6 +428,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#F7F4EC" middleColor="#F9E4DE" toColor="#FFFFFF" variant="scalloped" mirror />
+
       {/* 8. GOOGLE REVIEWS SECTION */}
       <GoogleReviewsSection />
 
@@ -523,34 +480,10 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#F9E4DE" toColor="#E87B5B" variant="calm" />
+
       {/* 10. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="home-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
-        {/* Smooth top wave divider flowing down from white FAQ into coral orange */}
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z"
-          />
-        </svg>
-
-        {/* Smooth bottom wave divider flowing from coral orange into white footer */}
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Contact</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
@@ -580,6 +513,8 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      <OrganicSectionDivider fromColor="#E87B5B" middleColor="#F9E4DE" toColor="#FFFFFF" variant="scalloped" mirror />
     </div>
   );
 };

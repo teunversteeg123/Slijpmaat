@@ -232,6 +232,7 @@ const PL_CSS = [
   ".pl-btn:hover{background:#3B7F4B;color:#FFFFFF;border-color:#3B7F4B;box-shadow:0 4px 14px rgba(59,127,75,.28);transform:scale(1.06)}",
   ".pl-btn:active{transform:scale(0.95)}",
   ".pl-btn:focus-visible{outline:2px solid #3B7F4B;outline-offset:2px}",
+  "@media (min-width:768px){.pl-nav-bar{bottom:0}}",
   ".pl-sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}",
   ".pl-lightbox{position:fixed;inset:0;z-index:9999;display:grid;place-items:center;padding:clamp(18px,4vw,56px);background:rgba(16,29,20,.9);backdrop-filter:blur(8px);cursor:zoom-out}",
   ".pl-lightbox-frame{position:relative;display:grid;place-items:center;max-width:100%;max-height:100%;cursor:default}",
@@ -284,6 +285,7 @@ export default function PolaroidLineCarousel({
   const drag = React.useRef(null as null | { x: number; off: number; lx: number; lt: number; v: number; moved: boolean })
   const lastTouch = React.useRef(0)
   const activeRef = React.useRef(0)
+  const wakeAnimationRef = React.useRef<() => void>(() => undefined)
   const opts = React.useRef({ sag, swing })
   opts.current = { sag, swing }
 
@@ -408,23 +410,29 @@ export default function PolaroidLineCarousel({
         activeRef.current = nearestIndex
         setActive(nearestIndex)
       }
+      const isMoving = Boolean(d?.moved) || Math.abs(S.target - S.off) > 0.05 || Math.abs(S.vel) > 0.05
+      if (isMoving || o.swing > 0 || autoplay > 0) raf = requestAnimationFrame(frame)
+    }
+
+    const wakeAnimation = () => {
+      if (!visible || raf) return
+      prev = performance.now()
       raf = requestAnimationFrame(frame)
     }
+    wakeAnimationRef.current = wakeAnimation
 
     const io = new IntersectionObserver(([e]) => {
       visible = e.isIntersecting
-      if (visible && !raf) {
-        prev = performance.now()
-        raf = requestAnimationFrame(frame)
-      }
+      if (visible) wakeAnimation()
     })
     io.observe(root)
-    raf = requestAnimationFrame(frame)
+    wakeAnimation()
     return () => {
       cancelAnimationFrame(raf)
       io.disconnect()
+      wakeAnimationRef.current = () => undefined
     }
-  }, [size, spacing, totalItems, totalSpan, numBase])
+  }, [autoplay, size, spacing, totalItems, totalSpan, numBase])
 
   // Continuous autoplay in an endless loop
   React.useEffect(() => {
@@ -432,6 +440,7 @@ export default function PolaroidLineCarousel({
     const t = window.setInterval(() => {
       if (document.hidden || drag.current || performance.now() - lastTouch.current < autoplay) return
       sim.current.target += spacing
+      wakeAnimationRef.current()
     }, autoplay)
     return () => window.clearInterval(t)
   }, [autoplay, numBase, spacing])
@@ -440,6 +449,7 @@ export default function PolaroidLineCarousel({
     if ((e.target as HTMLElement).closest(".pl-nav-bar")) return
     lastTouch.current = performance.now()
     drag.current = { x: e.clientX, off: sim.current.off, lx: e.clientX, lt: e.timeStamp, v: 0, moved: false }
+    wakeAnimationRef.current()
   }
 
   const onMove = (e: React.PointerEvent) => {
@@ -457,6 +467,7 @@ export default function PolaroidLineCarousel({
     d.lx = e.clientX
     d.lt = e.timeStamp
     sim.current.off = d.off - dx
+    wakeAnimationRef.current()
   }
 
   const onUp = (e: React.PointerEvent) => {
@@ -468,6 +479,7 @@ export default function PolaroidLineCarousel({
       setDragging(false)
       sim.current.vel = -d.v * 1000
       sim.current.target = Math.round((sim.current.off - d.v * 180) / spacing) * spacing
+      wakeAnimationRef.current()
       return
     }
     const card = (e.target as HTMLElement).closest(".pl-shot")?.closest("[data-i]")
@@ -476,7 +488,10 @@ export default function PolaroidLineCarousel({
       const rawDiff = cardIdx * spacing - sim.current.off
       const diff = ((rawDiff % totalSpan) + totalSpan * 1.5) % totalSpan - totalSpan / 2
       if (expandable && Math.abs(diff) < spacing * 0.48) setExpanded(cardIdx % numBase)
-      else sim.current.target = sim.current.off + diff
+      else {
+        sim.current.target = sim.current.off + diff
+        wakeAnimationRef.current()
+      }
     }
   }
 
@@ -490,6 +505,7 @@ export default function PolaroidLineCarousel({
   const step = (dir: number) => {
     lastTouch.current = performance.now()
     sim.current.target += dir * spacing
+    wakeAnimationRef.current()
   }
 
   const onKey = (e: React.KeyboardEvent) => {

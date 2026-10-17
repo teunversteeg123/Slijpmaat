@@ -126,7 +126,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
                     <span className="font-bold text-[#3B7F4B]">€10,50</span>
                   </div>
                   <div className="flex justify-between py-2.5 text-[#3B7F4B] font-bold">
-                    <span>StudentenMaat</span>
+                    <span>StudentenMaat (t/m 25 cm)</span>
                     <span>€5,00</span>
                   </div>
                 </div>
@@ -142,7 +142,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
 
               <div className="rounded-2xl border border-[#d9e1d7] bg-[#F7F4EC] p-5 text-xs text-[#657068] leading-relaxed">
                 <strong className="text-[#3B7F4B] block mb-1">Ophaalservice Utrecht:</strong>
-                Vanaf €35 bestelwaarde gratis aan huis opgehaald en binnen 24-48 uur vlijmscherp terugbezorgd.
+                Vanaf €35 bestelwaarde gratis aan huis opgehaald en bezorgd; doorgaans binnen 24-48 uur vlijmscherp terug.
               </div>
             </div>
           </div>
@@ -394,7 +394,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
               </li>
             </ul>
             <div className="pt-2 text-xs text-[#657068] italic border-t border-[#d9e1d7]/60">
-              Door ons strikt te specialiseren in gladde keukenmessen, garanderen we dat jouw culinaire gereedschap met uiterste precisie en voedselveiligheid wordt behandeld.
+              Door ons strikt te specialiseren in gladde keukenmessen, behandelen we jouw culinaire gereedschap zorgvuldig en met aandacht voor precisie en voedselveiligheid.
             </div>
           </div>
         </div>

@@ -7,7 +7,6 @@ import {
   Clock,
   Clock3,
   MapPin,
-  Sparkles,
   Check,
   MessageCircle,
   FileText,
@@ -100,7 +99,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
             </div>
 
             <div className="hidden sm:flex items-center gap-2 rounded-full bg-[#FCEEE8] px-3.5 py-1 text-xs font-bold text-[#C95E3E]">
-              <Sparkles className="h-3.5 w-3.5" aria-hidden="true" />
+              <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />
               <span>Geverifieerd vakkennis</span>
             </div>
           </div>
@@ -150,11 +149,11 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-4">
               <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24-48 uur retour</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-4">
               <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf €35</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
             </div>
           </div>
         </div>
@@ -191,7 +190,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               <div className="rounded-[2.25rem] border border-[#d9e1d7] bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
                 <div className="flex items-center gap-3">
                   <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#FDF0EC] text-[#E87B5B]">
-                    <Sparkles className="h-5 w-5" aria-hidden="true" />
+                    <Check className="h-5 w-5" aria-hidden="true" />
                   </span>
                   <h3 className="font-heading text-lg font-bold text-[#203728]">De tomatentest</h3>
                 </div>
@@ -300,7 +299,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
             <div className="mt-6 rounded-[2.25rem] border-2 border-[#3B7F4B]/30 bg-white p-6 sm:p-8 shadow-sm">
               <div className="flex items-center gap-3">
                 <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#3B7F4B] text-white">
-                  <Sparkles className="h-5 w-5" aria-hidden="true" />
+                  <FileText className="h-5 w-5" aria-hidden="true" />
                 </span>
                 <div>
                   <h3 className="font-heading text-xl font-bold text-[#203728]">

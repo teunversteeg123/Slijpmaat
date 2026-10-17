@@ -3,8 +3,6 @@ import { SlijpmaatLogo } from './SlijpmaatLogo';
 import { PageId } from '../types';
 import { UIcon } from './ui/UIcon';
 import { SLIJPMAAT_INFO } from '../data/siteData';
-import { useLanguage } from '../context/LanguageContext';
-import { LanguageSlider } from './LanguageSlider';
 
 interface HeaderProps {
   currentPage: PageId | null;
@@ -12,7 +10,6 @@ interface HeaderProps {
 }
 
 export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
-  const { t } = useLanguage();
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobilePrijzenOpen, setMobilePrijzenOpen] = useState(false);
   const [mobilePlanOpen, setMobilePlanOpen] = useState(false);
@@ -84,13 +81,13 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
     };
   }, [mobileMenuOpen]);
 
-  const navLinks: { id: PageId; labelKey: string; defaultLabel: string }[] = [
-    { id: 'home', labelKey: 'nav.home', defaultLabel: 'Home' },
-    { id: 'over-ons', labelKey: 'nav.over_ons', defaultLabel: 'Over ons' },
-    { id: 'werkwijze', labelKey: 'nav.werkwijze', defaultLabel: 'Werkwijze' },
-    { id: 'ophalen-bezorgen', labelKey: 'nav.servicegebied', defaultLabel: 'Servicegebied' },
-    { id: 'blogs', labelKey: 'nav.blogs', defaultLabel: 'Blogs' },
-    { id: 'faq', labelKey: 'nav.faq', defaultLabel: 'FAQ' },
+  const navLinks: { id: PageId; label: string }[] = [
+    { id: 'home', label: 'Home' },
+    { id: 'over-ons', label: 'Over ons' },
+    { id: 'werkwijze', label: 'Werkwijze' },
+    { id: 'ophalen-bezorgen', label: 'Servicegebied' },
+    { id: 'blogs', label: 'Blogs' },
+    { id: 'faq', label: 'FAQ' },
   ];
 
   const closeHeaderMenus = () => {
@@ -132,7 +129,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
             className="flex items-center justify-center gap-1.5 sm:gap-2 text-center sm:text-left text-white hover:text-[#E8EFE8] transition-colors cursor-pointer"
           >
             <span className="flex h-2 w-2 shrink-0 rounded-full bg-white animate-pulse" />
-            <span className="font-semibold">{t('topbar.free_pickup', 'Gratis ophalen & bezorgen in Utrecht vanaf €35 bestelwaarde')}</span>
+            <span className="font-semibold">Gratis ophalen &amp; bezorgen in Utrecht vanaf €35 bestelwaarde</span>
           </button>
 
           <div className="hidden sm:flex items-center gap-3 sm:gap-4 text-xs font-semibold">
@@ -142,7 +139,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1.5 cursor-pointer shrink-0"
             >
               <UIcon name="marker" className="text-xs sm:text-sm text-white shrink-0" />
-              <span>{t('topbar.service_area', 'Servicegebied')}</span>
+              <span>Servicegebied</span>
             </button>
             <a
               href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!')}`}
@@ -151,7 +148,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1.5 shrink-0"
             >
               <UIcon name="comment-alt" className="text-xs sm:text-sm text-white shrink-0" />
-              <span className="hidden sm:inline">{t('topbar.whatsapp', 'WhatsApp je Maat')}</span>
+              <span className="hidden sm:inline">WhatsApp je Maat</span>
             </a>
           </div>
         </div>
@@ -181,7 +178,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                     isActive ? 'text-[#3B7F4B] font-bold' : 'text-[#3B7F4B]'
                   }`}
                 >
-                  {t(link.labelKey, link.defaultLabel)}
+                  {link.label}
                   {isActive && (
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#3B7F4B] rounded-full" />
                   )}
@@ -190,47 +187,44 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
             })}
             <details name="header-menu" data-header-menu className="group relative">
               <summary className={`relative flex cursor-pointer list-none items-center gap-1.5 py-1 transition-colors marker:hidden hover:text-[#3B7F4B] ${currentPage === 'particulieren' || currentPage === 'horeca' ? 'font-bold text-[#3B7F4B]' : 'text-[#3B7F4B]'}`}>
-                <span>{t('nav.prijzen', 'Prijzen')}</span>
+                <span>Prijzen</span>
                 <UIcon name="angle-small-down" className="text-sm transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
                 {(currentPage === 'particulieren' || currentPage === 'horeca') ? <span className="absolute bottom-0 left-0 right-0 h-0.5 rounded-full bg-[#3B7F4B]" /> : null}
               </summary>
               <div className="absolute left-1/2 top-full z-50 w-60 -translate-x-1/2 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
                   <button type="button" onClick={() => handlePriceClick('particulieren', 'calculator')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
-                    <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.particulier_sub', 'Naar de prijs- en bestelform')}</span>
+                    <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
                   </button>
                   <button type="button" onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
-                    <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.zakelijk_sub', 'Naar de zakelijke aanvraag')}</span>
+                    <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
                   </button>
                 </div>
               </div>
             </details>
           </nav>
 
-          {/* Zone 3: Primary Action buttons & Language Switcher */}
+          {/* Zone 3: Primary action */}
           <div className="flex items-center gap-2 sm:gap-3">
-            {/* The small language slider switch */}
-            <LanguageSlider />
-
             <details name="header-menu" data-header-menu className="group relative hidden sm:block">
               <summary
                 className={`flex cursor-pointer list-none items-center gap-2 rounded-full bg-[#E87B5B] px-5 py-2.5 text-sm font-bold text-white shadow-xs transition-all marker:hidden hover:bg-[#C95E3E] active:scale-[0.98] ${currentPage === 'particulieren' || currentPage === 'horeca' ? 'ring-2 ring-[#C95E3E] ring-offset-2' : ''}`}
               >
-                <span>{t('nav.plan_button', 'Plan je slijpbeurt')}</span>
+                <span>Plan je slijpbeurt</span>
                 <UIcon name="angle-small-down" className="text-sm transition-transform duration-200 group-open:rotate-180" aria-hidden="true" />
               </summary>
 
               <div className="absolute right-0 top-full z-50 w-60 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
                   <button type="button" onClick={() => handleLinkClick('particulieren')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
-                    <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.particulier_sub', 'Naar de prijs- en bestelform')}</span>
+                    <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
                   </button>
                   <button type="button" onClick={() => handleLinkClick('horeca')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
-                    <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
-                    <span className="mt-0.5 block text-xs text-[#657068]">{t('nav.zakelijk_sub', 'Naar de zakelijke aanvraag')}</span>
+                    <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
+                    <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
                   </button>
                 </div>
               </div>
@@ -315,17 +309,15 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                   <div className="ml-4 border-l-2 border-[#3B7F4B]/30 py-0.5 pl-3">
                     <button
                       type="button"
-                      translate="no"
                       onClick={() => handlePriceClick('particulieren', 'calculator')}
-                      className="notranslate block min-h-11 w-full rounded-lg px-2 py-2 text-left text-sm font-medium text-[#3B7F4B]/75 transition-colors hover:bg-black/5 hover:text-[#3B7F4B]"
+                      className="block min-h-11 w-full rounded-lg px-2 py-2 text-left text-sm font-medium text-[#3B7F4B]/75 transition-colors hover:bg-black/5 hover:text-[#3B7F4B]"
                     >
                       Particulier
                     </button>
                     <button
                       type="button"
-                      translate="no"
                       onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')}
-                      className="notranslate block min-h-11 w-full rounded-lg px-2 py-2 text-left text-sm font-medium text-[#3B7F4B]/75 transition-colors hover:bg-black/5 hover:text-[#3B7F4B]"
+                      className="block min-h-11 w-full rounded-lg px-2 py-2 text-left text-sm font-medium text-[#3B7F4B]/75 transition-colors hover:bg-black/5 hover:text-[#3B7F4B]"
                     >
                       Zakelijk
                     </button>
@@ -369,7 +361,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                     : 'text-[#3B7F4B] hover:text-[#3B7F4B] hover:bg-black/5'
                 }`}
               >
-                {t('nav.servicegebied', 'Servicegebied')}
+                Servicegebied
               </button>
 
               {/* Blogs */}
@@ -398,13 +390,6 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 FAQ
               </button>
 
-              {/* Mobile Language Switcher Slider */}
-              <div className="mt-1 flex min-h-11 items-center justify-between border-t border-[#3B7F4B]/15 px-3 pt-1">
-                <span className="text-xs font-bold text-[#3B7F4B] uppercase tracking-wider">
-                  Taal / Language
-                </span>
-                <LanguageSlider />
-              </div>
               </nav>
             </div>
 
@@ -435,7 +420,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                       onClick={() => handlePriceClick('particulieren', 'calculator')}
                       className="block min-h-11 w-full rounded-xl px-4 py-2 text-left transition-colors hover:bg-[#E8EFE8]"
                     >
-                      <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
+                      <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                       <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
                     </button>
                     <button
@@ -443,7 +428,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                       onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')}
                       className="block min-h-11 w-full rounded-xl px-4 py-2 text-left transition-colors hover:bg-[#FFF4EF]"
                     >
-                      <span translate="no" className="notranslate block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
+                      <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
                       <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
                     </button>
                   </div>

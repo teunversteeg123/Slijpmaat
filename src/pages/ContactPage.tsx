@@ -138,7 +138,7 @@ export const ContactPage: React.FC = () => {
                 <h3 className="font-heading text-lg font-bold text-[#3B7F4B]">Utrecht &middot; Wij werken vanuit huis</h3>
               </div>
               <p className="text-sm leading-relaxed text-[#657068]">
-                <strong className="text-[#3B7F4B]">Let op: wij werken vanuit huis en hebben géén inloopwinkel.</strong> Langsbrengen en ophalen kan uitsluitend na voorafgaande afspraak via WhatsApp. Zo garanderen we dat er iemand klaarstaat om je messen met zorg in ontvangst te nemen.
+                <strong className="text-[#3B7F4B]">Let op: wij werken vanuit huis en hebben géén inloopwinkel.</strong> Langsbrengen en ophalen kan uitsluitend na voorafgaande afspraak via WhatsApp. Zo zorgen we dat Teun of Mike klaarstaat om je messen met zorg in ontvangst te nemen.
               </p>
               <div className="border-t border-[#d9e1d7]/70 pt-3 text-xs font-semibold text-[#3B7F4B]">
                 Adres: {SLIJPMAAT_INFO.fullAddress}
@@ -275,7 +275,7 @@ export const ContactPage: React.FC = () => {
       {/* 4. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="contact-footer-banner" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Altijd bereikbaar</p>
+          <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Persoonlijk contact</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
             Snel antwoord van je Maat
           </h2>

@@ -90,7 +90,7 @@ export const ROUTES: RouteSeo[] = [
     path: '/blogs',
     label: 'Blogs',
     title: 'Blogs over messen slijpen en onderhoud · Slijpmaat',
-    description: 'Binnenkort lees je hier praktische artikelen van Slijpmaat over keukenmessen, onderhoud, veilig gebruik en professioneel slijpen.',
+    description: 'Lees praktische artikelen van Slijpmaat over keukenmessen, onderhoud, veilig gebruik en professioneel slijpen.',
     index: false,
   },
   {

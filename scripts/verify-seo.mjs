@@ -9,7 +9,7 @@ const routes = [
   ['/diensten/japanse-messen-slijpen', true, 'Japanse messen zorgvuldig laten slijpen'],
   ['/diensten/chips-herstellen', true, 'Chips en beschadigingen in keukenmessen herstellen'],
   ['/diensten/wat-slijpen-we', true, 'Welke messen slijpt Slijpmaat wel en niet?'],
-  ['/werkwijze', true, '100% met de hand geslepen.'],
+  ['/werkwijze', true, 'Ieder mes met de hand geslepen.'],
   ['/servicegebied', true, 'Ophalen, bezorgen &amp; langsbrengen.'],
   ['/blogs', false, 'Blogs over messen slijpen en onderhoud'],
   ['/over-ons', true, 'Twee Utrechtse vrienden met passie voor scherpte.'],

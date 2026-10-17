@@ -44,7 +44,7 @@ export const FAQS = [
   },
   {
     q: 'Hoe lang duurt het voordat ik weer scherpe messen heb?',
-    a: 'We streven ernaar om je messen binnen 48 uur na het ophalen weer vlijmscherp terug te brengen. De exacte doorlooptijd kan variëren door drukte. We spreken daarom vooraf duidelijk af wanneer je messen worden opgehaald en teruggebracht.'
+    a: 'Doorgaans brengen we je messen binnen 24 tot 48 uur na het ophalen weer vlijmscherp terug. De exacte doorlooptijd kan variëren door drukte. We spreken daarom vooraf duidelijk af wanneer je messen worden opgehaald en teruggebracht.'
   },
   {
     q: 'Hoe gaat mijn Maat te werk met het slijpen van mijn messen?',
@@ -56,11 +56,11 @@ export const FAQS = [
   },
   {
     q: 'Hoe kan ik mijn Maat betalen?',
-    a: 'Betalen kan makkelijk via Tikkie, betaalverzoek, factuur of contant bij het terugbrengen van de messen.'
+    a: 'Betalen kan makkelijk via Tikkie, betaalverzoek of contant bij het terugbrengen van de messen.'
   },
   {
     q: 'Heeft Slijpmaat een winkel of komt mijn Maat aan huis?',
-    a: 'Slijpmaat heeft geen inloopwinkel. Je kunt wel op afspraak bij ons langskomen om je messen af te geven en weer op te halen. Daarnaast halen we je messen bij je thuis op en brengen we ze na het slijpen netjes terug.'
+    a: 'Slijpmaat heeft geen inloopwinkel. Je kunt wel op afspraak bij ons langskomen om je messen af te geven en weer op te halen. Binnen het ondersteunde Utrechtse servicegebied halen we je messen ook thuis op en brengen we ze na het slijpen netjes terug.'
   },
   {
     q: 'In welke Utrechtse wijken en postcodes haalt mijn Maat messen op?',
@@ -105,6 +105,6 @@ export const FAQS = [
   },
   {
     q: 'Krijg ik als student korting op mijn slijpbeurt?',
-    a: 'Ja. Als StudentenMaat betaal je €5 per keukenmes. Selecteer in het bestelformulier de optie ‘Ik ben een StudentenMaat’. De studentenkorting wordt dan automatisch in de totaalprijs verwerkt.'
+    a: 'Ja. Als StudentenMaat betaal je €5 per klein, normaal of groot keukenmes; extra grote messen zijn uitgesloten en blijven op aanvraag. Selecteer in het bestelformulier de optie ‘Ik ben een StudentenMaat’. De studentenkorting wordt dan automatisch in de totaalprijs verwerkt.'
   }
 ];

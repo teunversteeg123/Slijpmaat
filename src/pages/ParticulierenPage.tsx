@@ -5,6 +5,7 @@ import { ParticulierenCalculator } from '../components/ParticulierenCalculator';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { UIcon, UIconBadge } from '../components/ui/UIcon';
+import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 
 interface ParticulierenPageProps {
   onNavigate?: (page: PageId) => void;
@@ -48,12 +49,12 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
       step: '03',
       title: 'Met de hand geslepen op waterstenen',
       desc: 'Wij werken vanuit huis in Utrecht. Hier beoordelen we de snede zorgvuldig, slijpen we watergekoeld op Japanse whetstones en stroppen we af op leder.',
-      icon: 'sparkles',
+      icon: 'knife-kitchen',
     },
     {
       step: '04',
       title: 'Vlijmscherp terug & achteraf betalen',
-      desc: 'Binnen 24-48 uur staan we weer op de stoep met scherpe messen. Eenvoudig met contant, Tikkie, een betaalverzoek of factuur.',
+      desc: 'Doorgaans staan we binnen 24-48 uur weer op de stoep met scherpe messen. Betalen kan met contant, Tikkie of een betaalverzoek.',
       icon: 'credit-card',
     },
   ];
@@ -73,7 +74,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     },
     {
       question: 'Moet ik vooraf betalen?',
-      answer: 'Nee, bij Slijpmaat betaal je pas achteraf. Nadat je messen geslepen zijn en we ze weer bij je thuis afleveren, betaal je eenvoudig met contant, Tikkie, een betaalverzoek of factuur. Pas als jij tevreden bent met de scherpte!',
+      answer: 'Nee, bij Slijpmaat betaal je pas achteraf. Nadat je messen geslepen zijn en we ze weer bij je thuis afleveren, betaal je eenvoudig met contant, Tikkie of een betaalverzoek.',
     },
     {
       question: 'Wat als mijn mes een chip of hapje heeft?',
@@ -131,13 +132,13 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           </div>
 
           {/* Right: Tomatenvideo met herkenbare organische blob erachter */}
-          <div className="order-2 w-full lg:order-2 px-3 sm:px-6 lg:px-0 relative">
+          <div className="relative order-2 w-full px-0 sm:px-6 lg:order-2 lg:px-0">
             {/* Karakteristieke saliegroene organische blob (zoals op Homepage en Over Ons) */}
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-4 -left-2 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 w-full aspect-[4/3] sm:aspect-[16/11] lg:aspect-square overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] bg-[#203728] shadow-md">
+            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-none bg-[#203728] shadow-md sm:aspect-[16/11] sm:rounded-[2.5rem] lg:aspect-square">
               <video
                 className="h-full w-full object-cover"
                 src="/assets/tomaat-website-video.mp4"
@@ -164,7 +165,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Geslepen binnen 24-48 uur</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
@@ -231,32 +232,10 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         <ResultatenSlider />
       </section>
 
+      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#3B7F4B" variant="scalloped" />
+
       {/* 6. EXTRA INFO OVER HET PROCES NÁ DE BESTELLING (Green section with wave dividers) */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#FAFAF8] sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,20 C1180,55 900,10 620,40 C380,68 180,18 0,35 Z"
-          />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 100"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-14 w-full text-white sm:h-20 lg:h-24"
-        >
-          <path
-            fill="currentColor"
-            d="M0,100 L1440,100 L1440,30 C1200,75 920,15 620,55 C380,85 180,25 0,65 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Wat gebeurt er daarna?</p>
@@ -292,6 +271,8 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           </div>
         </div>
       </section>
+
+      <OrganicSectionDivider fromColor="#3B7F4B" middleColor="#A9C89E" toColor="#FFFFFF" variant="rolling" mirror />
 
       {/* 6. DE 5 BIJBEHORENDE FAQS (Exacte homepage stijl met draaiend plusje) */}
       <section id="faq" className="relative scroll-mt-24 overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -337,32 +318,10 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#F9E4DE" toColor="#E87B5B" variant="calm" />
+
       {/* 7. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="particulieren-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z"
-          />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Contact</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
@@ -392,6 +351,8 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           </div>
         </div>
       </section>
+
+      <OrganicSectionDivider fromColor="#E87B5B" middleColor="#F9E4DE" toColor="#FFFFFF" variant="scalloped" mirror />
     </div>
   );
 };

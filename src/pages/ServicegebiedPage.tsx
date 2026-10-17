@@ -3,6 +3,7 @@ import { PageId } from '../types';
 import { SLIJPMAAT_INFO, SERVICE_AREAS } from '../data/siteData';
 import { DELIVERY_FEES_CENTS, getDeliveryZone } from '../data/delivery';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
+import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import {
   MapPin,
   Clock3,
@@ -42,7 +43,7 @@ const serviceSteps = [
   {
     number: '04',
     title: 'Vlijmscherp retour',
-    text: 'Binnen 24-48 uur brengen we je messen veilig verpakt terug. Eenvoudig met contant, Tikkie, een betaalverzoek of factuur.'
+    text: 'Doorgaans brengen we je messen binnen 24-48 uur veilig verpakt terug. Betalen kan met contant, Tikkie of een betaalverzoek.'
   },
 ];
 
@@ -57,7 +58,7 @@ const serviceFaqs = [
   },
   {
     q: 'Hoe snel heb ik mijn messen weer terug?',
-    a: 'Meestal al binnen 24 tot uiterlijk 48 uur na ophalen. Heb je een specifieke deadline of kookavond? Laat het ons weten bij het inplannen, dan houden we daar rekening mee.'
+    a: 'Doorgaans binnen 24 tot 48 uur na ophalen. Heb je een specifieke deadline of kookavond? Laat het ons weten bij het inplannen, dan stemmen we af wat haalbaar is.'
   },
   {
     q: 'Kan ik mijn messen ook zelf langsbrengen in Utrecht?',
@@ -322,11 +323,11 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24-48 uur retour</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <Bike className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf €35</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
             </div>
           </div>
         </div>
@@ -420,7 +421,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                 </div>
                 <div className="flex items-center gap-2.5">
                   <CheckCircle2 className="h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="font-medium">Binnen 24-48 uur weer vlijmscherp terug</span>
+                  <span className="font-medium">Doorgaans binnen 24-48 uur weer vlijmscherp terug</span>
                 </div>
               </div>
             </div>
@@ -471,7 +472,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                 </span>
                 <h3 className="mt-5 font-heading text-2xl font-bold text-[#3B7F4B]">Binnen Utrecht</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#657068] sm:text-base">
-                  Vanaf €35 bestelwaarde halen we ze gratis op aan huis of zaak. Binnen 24-48 uur weer vlijmscherp terugbezorgd.
+                  Vanaf €35 bestelwaarde halen en bezorgen we ze gratis aan huis of zaak. Doorgaans binnen 24-48 uur weer vlijmscherp terug.
                 </p>
               </div>
               <div className="mt-6 pt-4 border-t border-[#d9e1d7]/60">
@@ -512,32 +513,10 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#3B7F4B" variant="scalloped" />
+
       {/* 6. HOE WERKT DE OPHAALSERVICE (Green section with organic wave dividers matching HomePage) */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-[#FAFAF8] sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,20 C1180,55 900,10 620,40 C380,68 180,18 0,35 Z"
-          />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 100"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-14 w-full text-white sm:h-20 lg:h-24"
-        >
-          <path
-            fill="currentColor"
-            d="M0,100 L1440,100 L1440,30 C1200,75 920,15 620,55 C380,85 180,25 0,65 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Van voordeur tot vlijmscherp</p>
@@ -570,6 +549,8 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
           </ol>
         </div>
       </section>
+
+      <OrganicSectionDivider fromColor="#3B7F4B" middleColor="#A9C89E" toColor="#FFFFFF" variant="rolling" mirror />
 
       {/* 7. FAQ ACCORDION SECTION (Matching HomePage) */}
       <section className="bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
@@ -612,32 +593,10 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
         </div>
       </section>
 
+      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#F9E4DE" toColor="#E87B5B" variant="calm" />
+
       {/* 8. BOTTOM CONTACT BANNER with top and bottom wave dividers (Matching HomePage) */}
       <section id="service-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute left-0 top-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,0 L1440,0 L1440,15 C1120,50 840,10 560,40 C320,65 140,20 0,35 Z"
-          />
-        </svg>
-
-        <svg
-          aria-hidden="true"
-          viewBox="0 0 1440 60"
-          preserveAspectRatio="none"
-          className="pointer-events-none absolute bottom-0 left-0 h-10 w-full text-white sm:h-14 lg:h-16"
-        >
-          <path
-            fill="currentColor"
-            d="M0,60 L1440,60 L1440,20 C1180,55 900,15 620,45 C380,70 180,25 0,40 Z"
-          />
-        </svg>
-
         <div className="relative z-10 mx-auto max-w-7xl">
           <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Vragen over ophalen?</p>
           <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
@@ -667,6 +626,8 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
           </div>
         </div>
       </section>
+
+      <OrganicSectionDivider fromColor="#E87B5B" middleColor="#F9E4DE" toColor="#FFFFFF" variant="scalloped" mirror />
     </div>
   );
 };

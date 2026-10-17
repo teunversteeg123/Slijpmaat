@@ -82,11 +82,11 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24-48 uur retour</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf €35</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
             </div>
           </div>
         </div>
@@ -169,7 +169,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
 
                 <div className="mt-6">
                   <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
-                    <UIcon name="sparkles" className="text-xs text-[#3B7F4B]" aria-hidden="true" />
+                    <UIcon name="book-alt" className="text-xs text-[#3B7F4B]" aria-hidden="true" />
                     <span>Uitgelicht hoofdartikel</span>
                   </div>
 

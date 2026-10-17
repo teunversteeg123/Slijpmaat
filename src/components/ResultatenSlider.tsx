@@ -73,7 +73,7 @@ const DEFAULT_RESULT_SLIDES: Slide[] = [
 export const ResultatenSlider: React.FC<ResultatenSliderProps> = ({
   slides = DEFAULT_RESULT_SLIDES,
   className = '',
-  height = 430,
+  height = 'clamp(430px, 48vw, 480px)',
 }) => {
   return (
     <div
@@ -85,8 +85,8 @@ export const ResultatenSlider: React.FC<ResultatenSliderProps> = ({
         height={height}
         cardWidth={260}
         sag={36}
-        swing={1}
-        autoplay={4500}
+        swing={0}
+        autoplay={0}
         string="#3B7F4B"
         background="transparent"
         ink="#203728"

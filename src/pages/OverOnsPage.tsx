@@ -37,7 +37,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     {
       title: 'Met de hand en met aandacht',
       desc: 'Geen snelle slijpbeurt op een droge machine. Wij slijpen ieder mes met de hand op Japanse waterstenen. Zo houden we controle over de slijphoek en behandelen we ieder mes met de aandacht die het verdient.',
-      icon: 'sparkles',
+      icon: 'hand-holding-heart',
     },
     {
       title: 'Persoonlijk geregeld',
@@ -54,23 +54,23 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
   // 3. Groene sectie beloftes
   const promises = [
     {
-      title: 'Altijd direct contact',
+      title: 'Direct persoonlijk contact',
       desc: 'App of bel rechtstreeks met Teun en Mike voor advies of planning.',
       icon: 'comment-alt',
     },
     {
-      title: '24-48 Uur doorlooptijd',
-      desc: 'Je hoeft je favoriete koksmes nooit lang te missen in de keuken.',
+      title: 'Doorgaans 24-48 uur',
+      desc: 'De exacte doorlooptijd en planning stemmen we vooraf met je af.',
       icon: 'clock-three',
     },
     {
-      title: 'Gratis ophalen & brengen',
-      desc: 'Vanaf €35 bestelwaarde halen we ze gratis op aan huis in Utrecht.',
+      title: 'Gratis ophalen & bezorgen',
+      desc: 'Vanaf €35 bestelwaarde halen en bezorgen we gratis binnen Utrecht.',
       icon: 'marker',
     },
     {
       title: 'Betalen pas achteraf',
-      desc: 'Eenvoudig met contant, Tikkie, een betaalverzoek of factuur.',
+      desc: 'Eenvoudig met contant, Tikkie of een betaalverzoek.',
       icon: 'check',
     },
   ];
@@ -107,7 +107,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
   const faqs = [
     {
       question: 'Wie slijpt mijn messen daadwerkelijk?',
-      answer: 'Elk mes dat bij Slijpmaat binnenkomt wordt hoogstpersoonlijk door Teun of Mike geslepen. We werken niet met wisselende stagiairs of externe partijen. Zo garanderen we constante kwaliteit en persoonlijke zorg voor elk lemmet.',
+      answer: 'Elk mes dat bij Slijpmaat binnenkomt wordt persoonlijk door Teun of Mike geslepen. We werken niet met wisselende stagiairs of externe partijen. Zo krijgt elk lemmet dezelfde zorgvuldige, persoonlijke behandeling.',
     },
     {
       question: 'Welke stenen gebruiken jullie?',
@@ -208,11 +208,11 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
               <UIcon name="clock-three" className="text-base text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Binnen 24-48 uur retour</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
             </div>
             <div className="flex items-center gap-3 sm:justify-center sm:px-5">
               <UIcon name="marker" className="text-base text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen vanaf €35</span>
+              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
             </div>
           </div>
         </div>

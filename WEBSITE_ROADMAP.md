@@ -37,7 +37,6 @@ Alle vijftien actieve pagina's hebben een normaal canoniek pad en een eigen voor
 - Het contactformulier en zakelijke formulier deden vóór deze audit alleen alsof een bericht was verzonden. Ze openen nu een ingevuld WhatsApp-bericht; de bezoeker controleert en verstuurt dit zelf.
 - Er worden geen aanvragen naar een eigen server of database gestuurd.
 - Tijdelijke invoer blijft alleen in React-state in het browsergeheugen.
-- De taalvoorkeur staat in `localStorage`; de huidige taaloplossing schrijft daarnaast een `googtrans`-cookie.
 
 ### Externe diensten
 
@@ -49,9 +48,9 @@ Alle vijftien actieve pagina's hebben een normaal canoniek pad en een eigen voor
 - Google Analytics 4 is technisch voorbereid, maar wordt pas actief zodra het bevestigde meet-ID via `VITE_GA_MEASUREMENT_ID` is ingesteld en een bezoeker expliciet toestemming geeft. Er is geen advertentiepixel.
 - Geen ingesloten Instagram-, Maps- of YouTube-frame in de actieve pagina's aangetroffen.
 
-### Taalwissel
+### Taal
 
-De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en oude Google Translate-cookielogica. Niet alle zichtbare teksten zitten in centrale taalbestanden. Dit wordt bewust pas in de laatste fase herbouwd en volledig gecontroleerd.
+De actieve website is volledig Nederlandstalig. De tijdelijke NL/EN-schakelaar, Engelse vertaallaag, taalopslag en Google Translate-cookielogica zijn verwijderd. Een volledige Engelse versie wordt pas in een latere fase opnieuw ontworpen en gecontroleerd.
 
 ### SEO en rendering
 
@@ -60,12 +59,12 @@ De site combineert centrale vertalingen met een DOM-vertaler, `localStorage` en 
 - Structured data gebruikt WebSite, WebPage en BreadcrumbList; FAQPage staat alleen op routes met overeenkomende zichtbare FAQ-inhoud.
 - Een fysiek `robots.txt`, een sitemap met twaalf indexeerbare canonieke routes en een eigen `noindex`-404 zijn aanwezig.
 - Een lokale HTTP-verificatietest controleert vijftien routes, schema, metadata, statische inhoud, crawlerbestanden en HTTP 404.
-- Geen `/en/`-structuur; de volledige Engelse uitwerking blijft de laatste fase.
+- Geen `/en/`-structuur; de volledige Engelse uitwerking blijft een latere fase.
 
 ### Privacy en cookies
 
 - Google Analytics 4 en de bijbehorende `_ga`-cookies worden uitsluitend na expliciete toestemming geactiveerd. De Analytics-cookies zijn technisch beperkt tot maximaal 90 dagen; advertentieopslag, Google Signals en advertentiepersonalisatie staan uit.
-- De taalvoorkeur en de maximaal zes maanden geldige cookievoorkeur staan in lokale opslag; de taaloplossing schrijft daarnaast een functionele `googtrans`-cookie wanneer Engels wordt gekozen.
+- De maximaal zes maanden geldige cookievoorkeur staat in lokale opslag; er wordt geen taalvoorkeur opgeslagen en de website schrijft geen `googtrans`-cookie meer.
 - Google Fonts maakt direct een externe verbinding.
 - De site heeft een gelijkwaardige accepteren/weigeren-banner en een blijvende ingang `Cookievoorkeuren` in de footer. Intrekken schakelt Analytics uit, verwijdert de bereikbare `_ga`-cookies en herlaadt de pagina zonder Google-tag.
 - Artikel 11 van de privacyverklaring beschrijft de actuele browseropslag, Google Analytics en de mogelijkheid om toestemming in te trekken. De volledige juridische tekst en bedrijfsgegevens blijven vóór lancering een afzonderlijk controlepunt.

@@ -2,7 +2,7 @@ import React, { useCallback, useRef, useState } from 'react';
 import { UIcon } from './ui/UIcon';
 
 const GOOGLE_REVIEW_URL = 'https://g.page/r/CYtVeBVtieCBEAE/review';
-export const GOOGLE_REVIEW_COUNT = 20;
+export const GOOGLE_REVIEW_COUNT = 27;
 
 export const GOOGLE_REVIEWS = [
   { name: 'Arda Brink', text: 'Altijd gedacht dat ik m’n messen zelf prima kon slijpen, maar nu ze door Slijpmaat écht geslepen zijn, merk ik een groot verschil: vlijmscherp! En bovendien een prima service: de geslepen messen werden keurig en veilig ingepakt weer afgeleverd. Fantastisch en bedankt Slijpmaat!' },

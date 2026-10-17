@@ -3,7 +3,7 @@ import {
   Plus,
   Minus,
   MessageCircle,
-  Sparkles,
+  Wrench,
   Check,
   AlertCircle,
   ChevronDown,
@@ -64,7 +64,7 @@ const KNIFE_CATEGORIES: KnifeCategory[] = [
 ];
 
 export const ParticulierenCalculator: React.FC = () => {
-  const [counts, setCounts] = useState<number[]>([1, 2, 0, 0]); // typical mix for an instant preview
+  const [counts, setCounts] = useState<number[]>([0, 0, 0, 0]);
   const [isStudent, setIsStudent] = useState<boolean>(false);
   const [selfDropoff, setSelfDropoff] = useState<boolean>(false);
   const [postcode, setPostcode] = useState<string>('3513');
@@ -351,7 +351,7 @@ export const ParticulierenCalculator: React.FC = () => {
                 className="flex w-full items-center justify-between text-left text-xs font-bold text-[#3B7F4B] hover:text-[#2d633a] cursor-pointer"
               >
                 <span className="flex items-center gap-2">
-                  <Sparkles className="h-4 w-4 text-[#3B7F4B]" />
+                  <Wrench aria-hidden="true" strokeWidth={2} className="h-4 w-4 shrink-0 text-[#3B7F4B]" />
                   <span>Beschadigingen of extra wensen? (chips, reparaties)</span>
                 </span>
                 <ChevronDown
