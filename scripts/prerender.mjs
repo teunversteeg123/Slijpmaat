@@ -15,6 +15,9 @@ const escapeHtml = (value) => value
 
 const renderSeoHead = (metadata, jsonLd) => {
   const canonicalUrl = `https://slijpmaat.nl${metadata.path}`;
+  const socialImage = `https://slijpmaat.nl${metadata.image ?? '/assets/slijpmaat-homepage-hero.jpg'}`;
+  const socialImageAlt = metadata.imageAlt ?? 'Slijpmaat slijpt keukenmessen met de hand in Utrecht';
+  const socialType = metadata.datePublished ? 'article' : 'website';
   const robots = metadata.index ? 'index,follow' : 'noindex,follow';
   return [
     '<!-- ROUTE_SEO_START -->',
@@ -24,19 +27,24 @@ const renderSeoHead = (metadata, jsonLd) => {
     `    <link rel="canonical" href="${canonicalUrl}" />`,
     `    <meta property="og:title" content="${escapeHtml(metadata.title)}" />`,
     `    <meta property="og:description" content="${escapeHtml(metadata.description)}" />`,
-    '    <meta property="og:type" content="website" />',
-    '    <meta property="og:site_name" content="Slijpmaat.nl" />',
+    `    <meta property="og:type" content="${socialType}" />`,
+    '    <meta property="og:site_name" content="Slijpmaat" />',
+    '    <meta property="og:locale" content="nl_NL" />',
     `    <meta property="og:url" content="${canonicalUrl}" />`,
+    `    <meta property="og:image" content="${socialImage}" />`,
+    `    <meta property="og:image:alt" content="${escapeHtml(socialImageAlt)}" />`,
     '    <meta name="twitter:card" content="summary_large_image" />',
     `    <meta name="twitter:title" content="${escapeHtml(metadata.title)}" />`,
     `    <meta name="twitter:description" content="${escapeHtml(metadata.description)}" />`,
+    `    <meta name="twitter:image" content="${socialImage}" />`,
+    `    <meta name="twitter:image:alt" content="${escapeHtml(socialImageAlt)}" />`,
     `    <script id="route-jsonld" type="application/ld+json">${jsonLd}</script>`,
     '    <!-- ROUTE_SEO_END -->',
   ].join('\n');
 };
 
 try {
-  const { prerenderPaths, renderRoute } = await import(pathToFileURL(serverBundle).href);
+  const { indexablePaths, prerenderPaths, renderRoute } = await import(pathToFileURL(serverBundle).href);
 
   for (const pathname of prerenderPaths) {
     const { appHtml, metadata, jsonLd } = renderRoute(pathname);
@@ -59,6 +67,20 @@ try {
       await writeFile(nested404, html, 'utf8');
     }
   }
+
+  const sitemapUrls = indexablePaths
+    .map((pathname) => `  <url><loc>https://slijpmaat.nl${pathname}</loc></url>`)
+    .join('\n');
+  await writeFile(
+    join(distDirectory, 'sitemap.xml'),
+    `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n${sitemapUrls}\n</urlset>\n`,
+    'utf8',
+  );
+  await writeFile(
+    join(distDirectory, 'robots.txt'),
+    'User-agent: *\nAllow: /\n\nSitemap: https://slijpmaat.nl/sitemap.xml\n',
+    'utf8',
+  );
 } finally {
   await rm(join(rootDirectory, '.prerender'), { recursive: true, force: true });
 }

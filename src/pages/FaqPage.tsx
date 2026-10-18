@@ -1,17 +1,17 @@
 import React from 'react';
 import { UIcon } from '../components/ui/UIcon';
 import { PageId } from '../types';
-import { SLIJPMAAT_INFO } from '../data/siteData';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { SlijpmaatFaqSection } from '../components/SlijpmaatFaqSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
+import { TrustBar } from '../components/TrustBar';
+import { createWhatsAppUrl } from '../utils/contact';
 
 interface FaqPageProps {
   onNavigate: (page: PageId) => void;
 }
 
 export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een vraag over het slijpen van mijn messen!')}`;
+  const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik heb een vraag over het slijpen van mijn messen!');
 
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
@@ -81,26 +81,12 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. TRUST BAR */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <UIcon name="comment-alt" className="text-base shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Direct contact via WhatsApp</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <UIcon name="shield-check" className="text-base shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Duidelijk en eerlijk advies</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrustBar
+        items={[
+          { icon: <UIcon name="comment-alt" className="text-base shrink-0 text-[#3B7F4B]" aria-hidden="true" />, text: 'Direct contact via WhatsApp' },
+          { icon: <UIcon name="shield-check" className="text-base shrink-0 text-[#3B7F4B]" aria-hidden="true" />, text: 'Duidelijk en eerlijk advies' },
+        ]}
+      />
 
       {/* 3. FAQ ACCORDION SECTION */}
       <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8">

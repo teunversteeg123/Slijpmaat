@@ -1,17 +1,23 @@
-import type { FC } from 'react';
+import type { FC, MouseEvent } from 'react';
 import { UIcon } from '../components/ui/UIcon';
 import type { PageId } from '../types';
-import { SLIJPMAAT_INFO } from '../data/siteData';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { ResultatenSlider } from '../components/ResultatenSlider';
+import { TrustBar } from '../components/TrustBar';
+import { PAGE_PATHS } from '../seo';
+import { createWhatsAppUrl } from '../utils/contact';
 
 interface KennisbankPageProps {
   onNavigate: (page: PageId) => void;
 }
 
 export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik las jullie blogs en heb een vraag over het onderhoud van mijn messen!')}`;
+  const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik las jullie blogs en heb een vraag over het onderhoud van mijn messen!');
+  const handleArticleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+    if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    onNavigate('blog-hoe-slijp-je-een-mes');
+  };
 
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
@@ -71,26 +77,13 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. TRUST BAR (Zekerheden) */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews · 5,0</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrustBar
+        showRating
+        items={[
+          { icon: <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Doorgaans binnen 24-48 uur retour' },
+          { icon: <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Gratis ophalen & bezorgen vanaf €35' },
+        ]}
+      />
 
       <OrganicSectionDivider
         fromColor="#FAFAF8"
@@ -115,7 +108,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
               Uitgelichte kennis uit onze werkplaats
             </h2>
             <p className="mt-3 text-base text-[#657068]">
-              Geen vage marketingpraatjes, maar heldere instructies gebaseerd op duizenden uren ervaring met stalen en Japanse waterstenen.
+              Heldere instructies vanuit onze eigen slijppraktijk, aangevuld met uitleg over staal, slijphoeken en Japanse waterstenen.
             </p>
           </div>
 
@@ -138,9 +131,9 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
           <div className="grid gap-8 lg:grid-cols-3">
             {/* HOOFDTEGEL: HOE SLIJP JE EEN MES */}
             <article className="group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white p-6 sm:p-8 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-[#3B7F4B]/50 hover:shadow-xl lg:col-span-2">
-              <button
-                type="button"
-                onClick={() => onNavigate('blog-hoe-slijp-je-een-mes')}
+              <a
+                href={PAGE_PATHS['blog-hoe-slijp-je-een-mes']}
+                onClick={handleArticleClick}
                 className="absolute inset-0 z-20 h-full w-full cursor-pointer rounded-[2.5rem] focus:outline-none focus:ring-2 focus:ring-[#3B7F4B] focus:ring-offset-2"
                 aria-label="Lees artikel: Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug"
               />

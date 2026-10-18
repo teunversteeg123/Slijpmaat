@@ -134,7 +134,7 @@ export const CookieConsentProvider = ({ children }: { children: React.ReactNode 
               Help je ons de website verbeteren?
             </h2>
             <p id="cookie-consent-description" className="mt-3 max-w-2xl text-sm leading-6 text-[#4F5F54]">
-              Noodzakelijke opslag onthoudt onder meer je taalkeuze. Met jouw toestemming gebruiken we Google Analytics om geaggregeerde gebruiksstatistieken te bekijken. Analytics wordt niet geladen voordat je toestemming geeft.
+              Noodzakelijke opslag onthoudt je cookiekeuze. Met jouw toestemming gebruiken we Google Analytics om geaggregeerde gebruiksstatistieken te bekijken. Analytics wordt niet geladen voordat je toestemming geeft.
             </p>
             <a
               href="/privacyverklaring"

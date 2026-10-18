@@ -8,35 +8,20 @@ export const SLIJPMAAT_INFO = {
     normal: { name: 'Normaal mes', size: '15 tot 19,99 cm', price: 8.50, desc: 'Kleine koksmessen, santoku’s, universele messen' },
     large: { name: 'Groot mes', size: '20 tot en met 25 cm', price: 10.50, desc: 'Chefsmessen, vleesmessen, grote santoku’s' },
     extraLarge: { name: 'Extra groot mes', size: 'Langer dan 25 cm', price: 0, custom: true, desc: 'Zalmmessen, grote trancheermessen (prijs op aanvraag)' },
-    student: { name: 'StudentenMaat', price: 5.00, desc: 'Speciaal studententarief per mes (op vertoon geldige collegekaart, extra groot uitgesloten)' },
+    student: { name: 'StudentenMaat', price: 5.00, desc: 'Speciaal studententarief voor kleine, normale en grote messen (extra groot uitgesloten)' },
     chipRepair: { name: 'Kleine chip herstellen', price: 2.50, desc: 'Verwijderen van een kleine hap uit de snede op grove korrelsteen' },
     profileRepair: { name: 'Nieuw profiel aanbrengen', price: 8.50, desc: 'Herstellen van een ernstig vervormde snede, doorgebogen buik of afgebroken punt' }
   }
 };
 
-export const SERVICE_AREAS = [
-  { district: 'Binnenstad', zip: '3511, 3512', note: 'Gratis vanaf €35 bestelwaarde' },
-  { district: 'Oost / Wilhelminapark', zip: '3581, 3582, 3583', note: 'Gratis vanaf €35 bestelwaarde' },
-  { district: 'Wittevrouwen / Buiten Wittevrouwen', zip: '3572', note: 'Gratis vanaf €35 bestelwaarde' },
-  { district: 'Noordoost / Tuindorp / Tuinwijk', zip: '3571, 3573', note: 'Gratis vanaf €35 bestelwaarde' },
-  { district: 'Lombok / Nieuw Engeland', zip: '3531, 3532', note: 'Gratis vanaf €35 bestelwaarde' },
-  { district: 'Zuid / Tolsteeg / Hoograven', zip: '3523, 3524, 3525', note: 'Gratis vanaf €35 bestelwaarde' },
-  { district: 'Zuidwest / Kanaleneiland', zip: '3521, 3522, 3526, 3527', note: 'Onder €35: €7,25' },
-  { district: 'West / Oog in Al', zip: '3533', note: 'Gratis vanaf €35 bestelwaarde' },
-  { district: 'Noordwest / Ondiep / Pijlsweerd', zip: '3513, 3551, 3552', note: 'Gratis vanaf €35 bestelwaarde' },
-  { district: 'Overvecht', zip: '3561 - 3564', note: 'Gratis vanaf €35 bestelwaarde' },
-  { district: 'Leidsche Rijn', zip: '3528, 3541, 3543 - 3545', note: 'Onder €35: €7,25' },
-  { district: 'Buiten Utrecht (bijv. Zeist, Hilversum, Amersfoort)', zip: 'Overig NL', note: 'Op afspraak langsbrengen en ophalen in Utrecht' }
-];
-
 export const FAQS = [
   {
     q: 'Hoe geef ik mijn messen veilig mee?',
-    a: 'We vervoeren je messen veilig in onze eigen ophaal- en bezorgtas. Verpak je messen bij voorkeur extra in een theedoek, krant of messenhoes. Zo blijven je messen én onze vingers heel.'
+    a: 'Verpak je messen bij voorkeur in een theedoek, handdoek, krant of passende messenhoes en zet de verpakking goed vast. Zo kunnen we de messen veilig aannemen en vervoeren.'
   },
   {
     q: 'Welke typen / soorten messen slijpt mijn Maat?',
-    a: 'Wij slijpen alle gladde messen, zoals koksmessen, schilmessen en andere gladde messen. Speciale messen beoordelen we vooraf. Kartelmessen slijpen we op dit moment niet.'
+    a: 'Wij slijpen gladde keukenmessen, zoals koksmessen, schilmessen en andere messen met een gladde snede. Speciale messen beoordelen we vooraf. Kartelmessen slijpen we op dit moment niet.'
   },
   {
     q: 'Slijpt mijn Maat ook Japanse messen?',
@@ -79,7 +64,7 @@ export const FAQS = [
   },
   {
     q: 'Kan mijn Maat ook buiten het vaste bezorggebied langskomen?',
-    a: 'Ja, op aanvraag halen we ook keukenmessen op in Vleuten-De Meern en verschillende plaatsen rondom Utrecht:\n• Vleuten en Vleuterweide: 3451 en 3452\n• De Meern en Veldhuizen: 3453 en 3454\n• Haarzuilens: 3455\n• Rijnenburg: 3546\n• Nieuwegein: 3431 t/m 3439\n• Houten: 3991 t/m 3995\n• Maarssen: 3601 t/m 3608\n• De Bilt: 3731 en 3732\n\nWoon je in een van deze gebieden? Stuur je Maat via WhatsApp je postcode en het aantal messen. Dan laten we je weten wanneer we kunnen langskomen en wat de bezorgkosten zijn.',
+    a: 'Buiten het vaste Utrechtse bezorggebied halen en bezorgen we niet standaard. Voor Vleuten-De Meern en plaatsen rondom Utrecht kan vervoer soms afzonderlijk worden afgesproken:\n• Vleuten en Vleuterweide: 3451 en 3452\n• De Meern en Veldhuizen: 3453 en 3454\n• Haarzuilens: 3455\n• Rijnenburg: 3546\n• Nieuwegein: 3431 t/m 3439\n• Houten: 3991 t/m 3995\n• Maarssen: 3601 t/m 3608\n• De Bilt: 3731 en 3732\n\nStuur vooraf je postcode en het aantal messen via WhatsApp. We bevestigen dan of vervoer mogelijk is en wat het kost. Zelf brengen en later ophalen in Utrecht kan altijd op afspraak.',
     items: [
       'Vleuten en Vleuterweide: 3451 en 3452',
       'De Meern en Veldhuizen: 3453 en 3454',
@@ -107,4 +92,31 @@ export const FAQS = [
     q: 'Krijg ik als student korting op mijn slijpbeurt?',
     a: 'Ja. Als StudentenMaat betaal je €5 per klein, normaal of groot keukenmes; extra grote messen zijn uitgesloten en blijven op aanvraag. Selecteer in het bestelformulier de optie ‘Ik ben een StudentenMaat’. De studentenkorting wordt dan automatisch in de totaalprijs verwerkt.'
   }
+];
+
+export const SERVICEGEBIED_FAQS = [
+  {
+    q: 'Waar zie ik het bezorgtarief voor mijn postcode?',
+    a: 'Gebruik de postcodechecker en het wijkoverzicht bovenaan deze pagina. Beide gebruiken dezelfde centrale tarieftabel en tonen welk ophaal- en bezorgtarief voor jouw postcode geldt.',
+  },
+  {
+    q: 'Hoe geef ik mijn messen veilig mee aan de deur?',
+    a: 'Verpak je messen bij voorkeur in een theedoek, handdoek of passende messenhoes en zet de verpakking goed vast. Zo kunnen we de messen veilig aannemen en vervoeren.',
+  },
+  {
+    q: 'Hoe snel heb ik mijn messen weer terug?',
+    a: 'Doorgaans binnen 24 tot 48 uur na ophalen. De exacte doorlooptijd kan variëren door drukte. Heb je een specifieke deadline of kookavond? Laat het ons weten, dan stemmen we vooraf af wat haalbaar is.',
+  },
+  {
+    q: 'Kan ik mijn messen zelf langsbrengen in Utrecht?',
+    a: 'Ja. Je bent op afspraak welkom aan de Gerard Noodtstraat in Utrecht. Omdat we vanuit huis werken, stemmen we vooraf via WhatsApp een geschikt breng- en ophaalmoment af.',
+  },
+  {
+    q: 'Wat als mijn postcode buiten het vaste bezorggebied valt?',
+    a: 'Buiten het vaste Utrechtse bezorggebied halen en bezorgen we niet standaard. Stuur vooraf je postcode en het aantal messen via WhatsApp; dan bevestigen we of vervoer mogelijk is en wat het kost. Zelf brengen en later ophalen in Utrecht kan altijd op afspraak.',
+  },
+  {
+    q: 'Kunnen zakelijke klanten van buiten Utrecht ook terecht?',
+    a: 'Ja. Restaurants, chefs en andere zakelijke klanten uit heel Nederland kunnen hun messen op afspraak in Utrecht brengen en later ophalen. Geef vooraf het aantal, de soorten messen, eventuele schade en de gewenste planning door, dan maken we een passend voorstel.',
+  },
 ];

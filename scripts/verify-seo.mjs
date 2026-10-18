@@ -11,7 +11,8 @@ const routes = [
   ['/diensten/wat-slijpen-we', true, 'Welke messen slijpt Slijpmaat wel en niet?'],
   ['/werkwijze', true, 'Ieder mes met de hand geslepen.'],
   ['/servicegebied', true, 'Ophalen, bezorgen &amp; langsbrengen.'],
-  ['/blogs', false, 'Blogs over messen slijpen en onderhoud'],
+  ['/blogs', true, 'Blogs over messen slijpen en onderhoud'],
+  ['/blogs/hoe-slijp-je-een-mes', true, 'Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug'],
   ['/over-ons', true, 'Twee Utrechtse vrienden met passie voor scherpte.'],
   ['/veelgestelde-vragen', true, 'Alles wat je wilt weten over Slijpmaat.'],
   ['/contact', true, 'Contact met je Maat.'],
@@ -24,6 +25,31 @@ const match = (html, expression, label, pathname) => {
   if (!value) throw new Error(`${pathname}: ${label} ontbreekt`);
   return value;
 };
+
+const decodeHtml = (value) => value
+  .replace(/<[^>]+>/g, ' ')
+  .replace(/•/g, ' ')
+  .replace(/&amp;/g, '&')
+  .replace(/&quot;/g, '"')
+  .replace(/&#x27;|&#39;/g, "'")
+  .replace(/&lt;/g, '<')
+  .replace(/&gt;/g, '>')
+  .replace(/&nbsp;/g, ' ')
+  .replace(/\s+/g, ' ')
+  .trim();
+
+const forbiddenClaims = [
+  /collegekaart/i,
+  /duizenden uren/i,
+  /uiterlijk 48 uur/i,
+  /200\s*°?C/i,
+  /0\s*°?C/i,
+  /99%/i,
+  /fabriekshardheid/i,
+  /vervoerstassen/i,
+  /messenbeschermers/i,
+  /wurgcontract/i,
+];
 
 const server = createDistServer();
 server.listen(0, '127.0.0.1');
@@ -44,27 +70,70 @@ try {
     const canonical = match(html, /<link rel="canonical" href="(.*?)"/s, 'canonical', pathname);
     const robots = match(html, /<meta name="robots" content="(.*?)"/s, 'robots', pathname);
     const rootHtml = match(html, /<div id="root">([\s\S]*)<\/div>\s*<\/body>/s, 'statische rootinhoud', pathname);
+    const rootText = decodeHtml(rootHtml);
     const jsonLd = match(html, /<script id="route-jsonld" type="application\/ld\+json">(.*?)<\/script>/s, 'JSON-LD', pathname);
     const schema = JSON.parse(jsonLd);
     const schemaTypes = schema['@graph'].map((item) => item['@type']);
+    const h1Count = [...rootHtml.matchAll(/<h1\b/gi)].length;
+    const socialImage = match(html, /<meta property="og:image" content="(.*?)"/s, 'og:image', pathname);
+    const socialImageAlt = match(html, /<meta property="og:image:alt" content="(.*?)"/s, 'og:image:alt', pathname);
+    const socialType = match(html, /<meta property="og:type" content="(.*?)"/s, 'og:type', pathname);
+    const twitterImage = match(html, /<meta name="twitter:image" content="(.*?)"/s, 'twitter:image', pathname);
 
     if (!rootHtml.includes(expectedH1)) throw new Error(`${pathname}: verwachte primaire tekst ontbreekt in ruwe HTML`);
+    if (h1Count !== 1) throw new Error(`${pathname}: ${h1Count} H1-elementen gevonden, verwacht exact 1`);
     if (canonical !== `https://slijpmaat.nl${pathname}`) throw new Error(`${pathname}: onjuiste canonical ${canonical}`);
     if (robots !== (indexable ? 'index,follow' : 'noindex,follow')) throw new Error(`${pathname}: onjuiste robots ${robots}`);
+    if (!socialImage.startsWith('https://slijpmaat.nl/assets/')) throw new Error(`${pathname}: onjuiste absolute og:image`);
+    if (!socialImageAlt.trim()) throw new Error(`${pathname}: lege og:image:alt`);
+    if (twitterImage !== socialImage) throw new Error(`${pathname}: twitter:image wijkt af van og:image`);
+    if (socialType !== (pathname === '/blogs/hoe-slijp-je-een-mes' ? 'article' : 'website')) throw new Error(`${pathname}: onjuist og:type ${socialType}`);
+    const socialImageResponse = await fetch(`${baseUrl}${new URL(socialImage).pathname}`);
+    if (socialImageResponse.status !== 200 || !socialImageResponse.headers.get('content-type')?.startsWith('image/')) {
+      throw new Error(`${pathname}: social-afbeelding is niet als afbeelding bereikbaar`);
+    }
     if (!schemaTypes.includes('WebSite') || !schemaTypes.includes('WebPage')) throw new Error(`${pathname}: WebSite/WebPage-schema ontbreekt`);
     if (pathname !== '/' && !schemaTypes.includes('BreadcrumbList')) throw new Error(`${pathname}: BreadcrumbList ontbreekt`);
     if ((pathname === '/servicegebied' || pathname === '/veelgestelde-vragen') !== schemaTypes.includes('FAQPage')) {
       throw new Error(`${pathname}: FAQPage-schema komt niet overeen met zichtbare FAQ-inhoud`);
     }
+    const faqSchema = schema['@graph'].find((item) => item['@type'] === 'FAQPage');
+    for (const item of faqSchema?.mainEntity ?? []) {
+      const question = decodeHtml(item.name);
+      const answer = decodeHtml(item.acceptedAnswer?.text ?? '');
+      if (!rootText.includes(question) || !rootText.includes(answer)) {
+        throw new Error(`${pathname}: FAQ-schema bevat tekst die niet exact zichtbaar is: ${question}`);
+      }
+    }
+    const articleSchema = schema['@graph'].find((item) => item['@type'] === 'BlogPosting');
+    if (pathname === '/blogs/hoe-slijp-je-een-mes') {
+      if (!articleSchema?.headline || !articleSchema?.image?.length || !articleSchema?.datePublished || !articleSchema?.dateModified || !articleSchema?.author?.length) {
+        throw new Error(`${pathname}: BlogPosting-schema is onvolledig`);
+      }
+    } else if (articleSchema) {
+      throw new Error(`${pathname}: onverwacht BlogPosting-schema`);
+    }
     if (schemaTypes.some((type) => type === 'LocalBusiness' || type === 'Organization')) throw new Error(`${pathname}: onbevestigd bedrijfsschema gevonden`);
+    for (const expression of forbiddenClaims) {
+      if (expression.test(rootText)) throw new Error(`${pathname}: onbevestigde of te absolute claim gevonden: ${expression}`);
+    }
 
-    results.push({ pathname, title, description, canonical });
+    results.push({ pathname, title, description, canonical, rootHtml });
   }
 
   const unique = (values) => new Set(values).size === values.length;
   if (!unique(results.map((result) => result.title))) throw new Error('Titles zijn niet uniek');
   if (!unique(results.map((result) => result.description))) throw new Error('Descriptions zijn niet uniek');
   if (!unique(results.map((result) => result.canonical))) throw new Error('Canonicals zijn niet uniek');
+
+  const internalHrefs = new Set(
+    results.flatMap(({ rootHtml }) => [...rootHtml.matchAll(/href="(\/[^"#?]*)/g)].map((result) => result[1])),
+  );
+  for (const [pathname, indexable] of routes) {
+    if (indexable && pathname !== '/' && !internalHrefs.has(pathname)) {
+      throw new Error(`${pathname}: geen crawlbare interne link gevonden`);
+    }
+  }
 
   const robotsResponse = await fetch(`${baseUrl}/robots.txt`);
   const robotsText = await robotsResponse.text();

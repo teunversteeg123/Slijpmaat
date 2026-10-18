@@ -41,8 +41,13 @@ export const SlijpmaatFaqSection: React.FC<SlijpmaatFaqSectionProps> = ({
               </button>
             </h2>
 
-            {isOpen && (
-              <div id={`faq-answer-${index}`} role="region" aria-labelledby={`faq-question-${index}`} className="max-w-3xl pb-7 pr-12 text-sm leading-7 text-[#657068] sm:text-base">
+              <div
+                id={`faq-answer-${index}`}
+                role="region"
+                aria-labelledby={`faq-question-${index}`}
+                hidden={!isOpen}
+                className="max-w-3xl pb-7 pr-12 text-sm leading-7 text-[#657068] sm:text-base"
+              >
                 {hasList ? (
                   <div className="space-y-4">
                     <p>{faq.a.split('\n•')[0]}</p>
@@ -50,11 +55,10 @@ export const SlijpmaatFaqSection: React.FC<SlijpmaatFaqSectionProps> = ({
                       {faq.items?.map((item) => <li key={item} className="list-disc pl-1">{item}</li>)}
                     </ul>
                     {faq.a.includes('Vul in het bestelformulier') && <p>Vul in het bestelformulier je postcode in om de bezorgprijs te bekijken. Vanaf €35 bestelwaarde komen we binnen Utrecht gratis langs. Voor de buitenring, waaronder Kanaleneiland en Leidsche Rijn, is het tarief onder €35 precies €7,25.</p>}
-                    {faq.a.includes('Woon je in een van deze gebieden?') && <p>Woon je in een van deze gebieden? Stuur je Maat via WhatsApp je postcode en het aantal messen. Dan laten we je weten wanneer we kunnen langskomen en wat de bezorgkosten zijn.</p>}
+                    {faq.a.includes('Stuur vooraf je postcode') && <p>Stuur vooraf je postcode en het aantal messen via WhatsApp. We bevestigen dan of vervoer mogelijk is en wat het kost. Zelf brengen en later ophalen in Utrecht kan altijd op afspraak.</p>}
                   </div>
                 ) : <p>{faq.a}</p>}
               </div>
-            )}
           </article>
         );
       })}

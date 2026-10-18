@@ -4,6 +4,8 @@ import { SlijpmaatLogo } from './SlijpmaatLogo';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { useCookieConsent } from '../context/CookieConsentContext';
+import { PAGE_PATHS } from '../seo';
+import { createWhatsAppUrl } from '../utils/contact';
 
 interface FooterProps {
   onNavigate: (page: PageId) => void;
@@ -18,11 +20,15 @@ const QUICK_LINKS: Array<{ label: string; page: PageId }> = [
   { label: 'Servicegebied & langskomen', page: 'ophalen-bezorgen' },
   { label: 'Veelgestelde vragen', page: 'faq' },
   { label: 'Contact', page: 'contact' },
+  { label: 'Keukenmessen slijpen', page: 'dienst-keukenmessen' },
+  { label: 'Japanse messen slijpen', page: 'dienst-japanse-messen' },
+  { label: 'Chips herstellen', page: 'dienst-chips-herstellen' },
+  { label: 'Welke messen slijpen we?', page: 'dienst-wel-niet' },
 ];
 
 const columnClass = 'border-b border-[#3B7F4B]/20 pb-7 sm:border-0 sm:pb-0';
 const columnHeadClass = 'mb-3 flex min-h-[54px] items-center sm:mb-0 sm:h-[68px]';
-const footerLinkClass = 'inline-block text-[14px] leading-[1.55] text-[#3B7F4B] transition-transform duration-200 hover:translate-x-[3px] hover:opacity-70 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]';
+const footerLinkClass = 'inline-flex min-h-8 items-center text-[14px] leading-[1.55] text-[#3B7F4B] transition-transform duration-200 hover:translate-x-[3px] hover:opacity-70 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] sm:min-h-0';
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
   const { analyticsAvailable, openCookieSettings } = useCookieConsent();
@@ -32,20 +38,26 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
 
+  const handleInternalClick = (event: React.MouseEvent<HTMLAnchorElement>, page: PageId) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    handleNav(page);
+  };
+
   return (
     <footer className="bg-white font-sans text-[15px] leading-[1.6] text-[#3B7F4B]">
       <div className="mx-auto w-full max-w-[1180px] px-[22px] pb-[22px] pt-[46px] sm:px-7 sm:pb-6 sm:pt-16">
         <div className="grid grid-cols-1 gap-7 sm:grid-cols-2 sm:gap-x-[50px] sm:gap-y-11 lg:grid-cols-4 lg:gap-12">
           <section className={columnClass} aria-label="Slijpmaat en Google">
             <div className={columnHeadClass}>
-              <button
-                type="button"
-                onClick={() => handleNav('home')}
+              <a
+                href={PAGE_PATHS.home}
+                onClick={(event) => handleInternalClick(event, 'home')}
                 className="cursor-pointer rounded-md focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] p-0 flex items-center text-left"
                 aria-label="Slijpmaat home"
               >
                 <SlijpmaatLogo variant="dark" className="[&_img]:h-10 sm:[&_img]:h-11 [&_img]:w-auto block" />
-              </button>
+              </a>
             </div>
 
             <a href={MAPS_URL} target="_blank" rel="noopener noreferrer" className={footerLinkClass}>
@@ -61,9 +73,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <ul className="m-0 grid list-none gap-2 p-0">
               {QUICK_LINKS.map((link) => (
                 <li key={link.page}>
-                  <button type="button" onClick={() => handleNav(link.page)} className={`${footerLinkClass} cursor-pointer text-left`}>
+                  <a href={PAGE_PATHS[link.page]} onClick={(event) => handleInternalClick(event, link.page)} className={`${footerLinkClass} cursor-pointer text-left`}>
                     {link.label}
-                  </button>
+                  </a>
                 </li>
               ))}
             </ul>
@@ -82,7 +94,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
               <a href={`tel:${SLIJPMAAT_INFO.whatsappNumber}`} className={footerLinkClass}>06 82074967</a>
               <a href={`mailto:${SLIJPMAAT_INFO.email}`} className={footerLinkClass}>{SLIJPMAAT_INFO.email}</a>
               <a
-                href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Slijpmaat, ik heb een vraag.')}`}
+                href={createWhatsAppUrl('Hoi Slijpmaat, ik heb een vraag.')}
                 target="_blank"
                 rel="noopener noreferrer"
                 className={`${footerLinkClass} font-semibold`}
@@ -134,14 +146,14 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
         <div className="mt-[38px] flex flex-col-reverse items-start gap-6 border-t border-[#3B7F4B]/25 pt-[22px] text-left text-[13px] sm:mt-[52px] sm:flex-row sm:items-center sm:justify-between">
           <p>© {new Date().getFullYear()} Slijpmaat.nl. Alle rechten voorbehouden.</p>
           <div className="flex flex-col items-start gap-2 sm:flex-row sm:flex-wrap sm:items-center sm:justify-end sm:gap-x-[22px]">
-            <button type="button" onClick={() => handleNav('algemene-voorwaarden')} className="cursor-pointer transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]">
+            <a href={PAGE_PATHS['algemene-voorwaarden']} onClick={(event) => handleInternalClick(event, 'algemene-voorwaarden')} className="inline-flex min-h-8 cursor-pointer items-center transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] sm:min-h-0">
               Algemene voorwaarden
-            </button>
-            <button type="button" onClick={() => handleNav('privacy')} className="cursor-pointer transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]">
+            </a>
+            <a href={PAGE_PATHS.privacy} onClick={(event) => handleInternalClick(event, 'privacy')} className="inline-flex min-h-8 cursor-pointer items-center transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] sm:min-h-0">
               Privacyverklaring
-            </button>
+            </a>
             {analyticsAvailable ? (
-              <button type="button" onClick={openCookieSettings} className="cursor-pointer transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]">
+              <button type="button" onClick={openCookieSettings} className="inline-flex min-h-8 cursor-pointer items-center transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] sm:min-h-0">
                 Cookievoorkeuren
               </button>
             ) : null}

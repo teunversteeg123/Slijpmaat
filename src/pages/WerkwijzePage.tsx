@@ -1,16 +1,16 @@
 import React from 'react';
 import { PageId } from '../types';
-import { SLIJPMAAT_INFO } from '../data/siteData';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { UIcon, UIconBadge } from '../components/ui/UIcon';
+import { TrustBar } from '../components/TrustBar';
+import { createWhatsAppUrl } from '../utils/contact';
 
 interface WerkwijzePageProps {
   onNavigate: (page: PageId) => void;
 }
 
 export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een vraag over jullie werkwijze en het slijpen van mijn messen!')}`;
+  const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik heb een vraag over jullie werkwijze en het slijpen van mijn messen!');
 
   // De 4 kernstappen van hoe we omgaan met elk mes (foto + toelichting in 1 geïntegreerde aanpak)
   const processPhases = [
@@ -35,16 +35,16 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
     {
       num: '03',
       title: 'Volledig met de hand op waterstenen',
-      desc: 'Geen elektrische slijptollen of hete bandslijpers. Onze stenen worden continu met water gespoeld. Zo ontstaat er nul wrijvingshitte en behoudt het staal 100% van zijn fabriekshardheid.',
+      desc: 'We slijpen met de hand op natte waterstenen. Daardoor houden we controle over de slijphoek, de materiaalafname en de afwerking van ieder mes.',
       badge: '100% Handwerk',
-      highlight: 'Geen machines of hitte',
+      highlight: 'Controle over hoek en afname',
       image: '/assets/werkwijze/03-slijpen.jpg',
       alt: 'Een keukenmes wordt met de hand geslepen op een Japanse watersteen',
     },
     {
       num: '04',
       title: 'Afwerken en ontbramen op leer',
-      desc: 'Tot slot verwijderen we de microscopische braam vederlicht en stroppen we de snede af op een soepele leren strop met fijne diamantpasta. Het resultaat is een spiegelgladde snede die moeiteloos snijdt.',
+      desc: 'Tot slot verwijderen we de braam zorgvuldig en stroppen we de snede af op een soepele leren strop met polijstpasta. Daarna controleren we of het mes over de volledige snede soepel snijdt.',
       badge: 'Leren strop',
       highlight: 'Vlijmscherp & braamvrij',
       image: '/assets/werkwijze/04-afwerken.jpg',
@@ -93,7 +93,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       title: 'Japanse Keukenmessen',
       examples: 'Santoku, Gyuto, Nakiri, VG10, AUS-10, Shirogami & Aogami koolstofstaal',
       angle: 'Slijphoek ca. 12° - 15°',
-      desc: 'Japanse messen zijn gemaakt van aanzienlijk harder staal en hebben een dunnere geometrie. We slijpen deze met uiterste precisie op de waterstenen zonder het delicate lemmet te belasten.',
+      desc: 'Veel Japanse messen combineren relatief hard staal met een dunne geometrie. We beoordelen de bestaande snijvouw en kiezen een passende steen en slijphoek voor het specifieke mes.',
       iconName: 'knife',
     },
     {
@@ -109,19 +109,19 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
   const faqs = [
     {
       q: 'Gaat er veel staal van mijn mes af tijdens het slijpen?',
-      a: 'Nee, juist niet! Dat is precies de reden dat we met de hand op waterstenen slijpen. Fabrieksmachines en doortrekslijpers vreten onnodig veel staal weg. Wij nemen alleen de beschadigde micro-laag weg en bouwen de snede met minimale materiaalafname opnieuw op. Zo gaat je favoriete mes een leven lang mee.',
+      a: 'Handmatig slijpen op waterstenen geeft ons veel controle over de slijphoek, druk en materiaalafname. We verwijderen wat nodig is om de snede opnieuw op te bouwen en proberen daarbij het profiel en de levensduur van het mes zo goed mogelijk te behouden.',
     },
     {
       q: 'Slijpen jullie ook Japanse messen?',
-      a: 'Jazeker! We hebben veel ervaring met Japanse koksmessen van zowel roestvrij staal (zoals VG10 en SG2/R2) als traditioneel Japans koolstofstaal (zoals wit en blauw papierstaal). Omdat we watergekoeld met de hand slijpen, is dit de veiligste methode voor hard Japans staal.',
+      a: 'Ja. Japanse koksmessen kunnen sterk verschillen in staal, geometrie en slijpvorm. Stuur bij een bijzonder, kostbaar of enkelzijdig geslepen mes vooraf een foto en het merk of type; dan beoordelen we welke behandeling passend is.',
     },
     {
       q: 'Er zit een flinke chip of hap in mijn lemmet. Kunnen jullie dat maken?',
-      a: 'In 99% van de gevallen wel! We kiezen de juiste steen om de chip geleidelijk en gecontroleerd weg te werken. We trekken de snijlijn dan over de hele lengte subtiel bij, zodat het mes zijn oorspronkelijke profiel en snijgemak behoudt. Bij grote beschadigingen overleggen we altijd eerst even telefonisch of via WhatsApp.',
+      a: 'Kleine chips en beschadigde punten kunnen we vaak herstellen. We beoordelen eerst hoeveel materiaal daarvoor moet worden verwijderd en wat dit voor het profiel betekent. Bij grotere schade bespreken we de mogelijkheden en prijs altijd vooraf via WhatsApp of telefonisch.',
     },
     {
       q: 'Waarom gebruiken jullie géén elektrische machines?',
-      a: 'Elektrische slijpers en bandslijpers draaien duizenden toeren per minuut. Binnen enkele seconden loopt de temperatuur op de snede op tot boven de 200°C. Daardoor ontlaat het staal en verliest het zijn fabriekshardheid. Het mes lijkt heel even scherp, maar is na twee uien alweer bot. Handmatig op waterstenen blijft het mes koel en vlijmscherp.',
+      a: 'Bij machinaal slijpen hangen warmteontwikkeling en materiaalafname af van de machine, snelheid, korrel en uitvoering. Wij kiezen voor handmatig slijpen op waterstenen omdat we daarmee de hoek, druk en materiaalafname per mes nauwkeurig kunnen sturen.',
     },
     {
       q: 'Wat doen jullie met de originele hoek van mijn mes?',
@@ -200,26 +200,13 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. TRUST BAR (Zekerheden) */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews · 5,0</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <UIcon name="knife-kitchen" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">100% handmatig geslepen</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrustBar
+        showRating
+        items={[
+          { icon: <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Doorgaans binnen 24-48 uur retour' },
+          { icon: <UIcon name="knife-kitchen" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: '100% handmatig geslepen' },
+        ]}
+      />
 
       {/* 3. CRAFT PHOTO STRIP (De 4 beelden van het ambacht) */}
       <section className="relative px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
@@ -395,10 +382,10 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
               Vakmanschap vs Massa
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold leading-tight text-[#3B7F4B] sm:text-4xl lg:text-5xl">
-              Waarom handmatig slijpen superieur is aan machines
+              Waarom wij bewust met de hand slijpen
             </h2>
             <p className="mt-4 text-base leading-relaxed text-[#657068] sm:text-lg">
-              Snelslijpers in winkelstraten en elektrische bandslijpers draaien om snelheid, niet om behoud. Dit is het verschil:
+              Iedere slijpmethode staat of valt met de uitvoering. Dit is waarom handmatig watersteenslijpen bij onze werkwijze past:
             </p>
           </div>
 
@@ -423,12 +410,12 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                     </div>
                   </div>
                   <span className="shrink-0 self-start sm:self-auto rounded-full bg-[#FDE7E1] px-3 py-1 text-xs font-bold text-[#C95E3E]">
-                    Niet aanbevolen
+                    Minder controle zonder goede afstelling
                   </span>
                 </div>
 
                 <p className="mt-4 text-sm font-semibold text-[#C95E3E]/90 sm:text-base">
-                  Snel klaar, maar desastreus voor je mes
+                  Resultaat hangt sterk af van machine en uitvoering
                 </p>
 
                 {/* Hitte Waarschuwingsblok */}
@@ -437,10 +424,10 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                     <UIcon name="thermometer-half" className="text-lg text-[#C95E3E] shrink-0" aria-hidden="true" />
                     <div>
                       <span className="text-xs font-bold uppercase tracking-wider text-[#C95E3E]">
-                        Gevaarlijke wrijvingshitte
+                        Warmte bij hoge snelheid
                       </span>
                       <p className="text-xs text-[#657068]">
-                        Binnen 3 seconden loopt de temperatuur op tot boven de 200°C.
+                        Hoge snelheid kan bij onzorgvuldig gebruik extra warmte aan de dunne snijkant veroorzaken.
                       </p>
                     </div>
                   </div>
@@ -455,10 +442,10 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                       </span>
                       <div>
                         <h4 className="font-heading text-sm font-bold text-[#203728]">
-                          Hitteontlating
+                          Warmteontwikkeling
                         </h4>
                         <p className="mt-1 text-xs leading-relaxed text-[#657068] sm:text-sm">
-                          Binnen enkele seconden loopt de temperatuur op tot boven de 200°C. Het staal wordt zacht en blijft nooit meer lang scherp.
+                          Zonder goede koeling en techniek kan plaatselijke warmte ontstaan. De werkelijke temperatuur verschilt per methode en uitvoering.
                         </p>
                       </div>
                     </div>
@@ -474,7 +461,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                           Agressieve staalafname
                         </h4>
                         <p className="mt-1 text-xs leading-relaxed text-[#657068] sm:text-sm">
-                          Een schuurband vreet onnodig veel millimeters staal weg, waardoor je mes snel dun en waardeloos wordt.
+                          Een grove of verkeerd ingestelde machine kan sneller materiaal verwijderen dan voor de snede nodig is.
                         </p>
                       </div>
                     </div>
@@ -490,7 +477,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                           Profielverlies
                         </h4>
                         <p className="mt-1 text-xs leading-relaxed text-[#657068] sm:text-sm">
-                          De natuurlijke buiging van de snede verdwijnt vaak, waardoor het mes niet meer vlak aansluit op je snijplank.
+                          Zonder aandacht voor het volledige profiel kan de snijlijn ongelijk worden en minder goed op de snijplank aansluiten.
                         </p>
                       </div>
                     </div>
@@ -501,7 +488,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
               {/* Conclusie */}
               <div className="mt-7 sm:mt-8 rounded-2xl border border-[#F0C0B2] bg-[#FCEEE8]/80 p-3.5 sm:p-4 text-xs font-semibold text-[#C95E3E] flex items-center gap-2.5">
                 <UIcon name="exclamation" className="text-sm shrink-0" aria-hidden="true" />
-                <span>Gevolg: Verlies van hardheid, holgeslepen sneden en een verkorte levensduur.</span>
+                <span>Aandachtspunt: snelheid, koeling, druk en profielcontrole bepalen samen het resultaat.</span>
               </div>
             </div>
 
@@ -529,7 +516,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                 </div>
 
                 <p className="mt-4 text-sm font-semibold text-[#3B7F4B] sm:text-base">
-                  Duurzaam behoud en spiegelgladde scherpte
+                  Controle over hoek, profiel en materiaalafname
                 </p>
 
                 {/* Waterkoeling Garantieblok */}
@@ -541,7 +528,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                         Constant gekoeld met water
                       </span>
                       <p className="text-xs text-[#203728]">
-                        Nul wrijvingshitte (0°C). De fabriekshardheid van het staal blijft 100% intact.
+                        De steen wordt nat gebruikt en we werken zonder sneldraaiende machine aan de snijkant.
                       </p>
                     </div>
                   </div>
@@ -559,7 +546,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                           Constant gekoeld met water
                         </h4>
                         <p className="mt-1 text-xs leading-relaxed text-[#657068] sm:text-sm">
-                          Geen wrijvingshitte. De fabriekshardheid van het staal blijft 100% intact voor langdurig scherptebehoud.
+                          Door rustig met de hand te werken houden we controle over druk, slijphoek en warmteontwikkeling aan de snede.
                         </p>
                       </div>
                     </div>
@@ -575,7 +562,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                           Minimale staalafname
                         </h4>
                         <p className="mt-1 text-xs leading-relaxed text-[#657068] sm:text-sm">
-                          We halen enkel de botte micro-laag weg. Je lievelingsmes gaat daardoor tientallen jaren mee.
+                          We verwijderen gericht wat nodig is om de snede te herstellen en beperken onnodige materiaalafname.
                         </p>
                       </div>
                     </div>
@@ -602,7 +589,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
               {/* Conclusie */}
               <div className="mt-7 sm:mt-8 rounded-2xl border border-[#A9C89E] bg-[#E8EFE8] p-3.5 sm:p-4 text-xs font-bold text-[#3B7F4B] flex items-center gap-2.5">
                 <UIcon name="check" className="text-sm shrink-0" aria-hidden="true" />
-                <span>Resultaat: Vlijmscherpe apex, behoud van geometrie en een lange levensduur van je mes.</span>
+                <span>Doel: een scherpe, bruikbare snede met aandacht voor geometrie en duurzaam behoud.</span>
               </div>
             </div>
           </div>
@@ -648,11 +635,11 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
               <div className="mt-6 flex flex-wrap gap-2.5">
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white">
                   <UIcon name="check" className="text-xs text-[#E8EFE8]" />
-                  100% watergekoeld
+                  Nat geslepen op waterstenen
                 </span>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white">
                   <UIcon name="check" className="text-xs text-[#E8EFE8]" />
-                  Fabriekshardheid intact
+                  Gerichte materiaalafname
                 </span>
                 <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white">
                   <UIcon name="check" className="text-xs text-[#E8EFE8]" />
@@ -698,7 +685,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
                 />
                 <div className="absolute bottom-4 left-4 right-4 sm:right-auto z-10 flex items-center gap-2 rounded-full bg-[#203728]/90 px-4 py-2.5 backdrop-blur-md text-xs font-bold text-white shadow-lg border border-white/15">
                   <span className="flex h-2 w-2 rounded-full bg-[#4CAF50] animate-pulse" />
-                  <span>100% watergekoeld · Japans watersteenslijpen</span>
+                  <span>Handmatig · Japans watersteenslijpen</span>
                 </div>
               </div>
             </div>

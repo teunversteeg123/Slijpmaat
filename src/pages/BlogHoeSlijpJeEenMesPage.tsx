@@ -5,25 +5,24 @@ import {
   Calendar,
   CheckCircle2,
   Clock,
-  Clock3,
-  MapPin,
   Check,
   MessageCircle,
   FileText,
   AlertCircle,
 } from 'lucide-react';
 import type { PageId } from '../types';
-import { SLIJPMAAT_INFO } from '../data/siteData';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { ResultatenSlider } from '../components/ResultatenSlider';
+import { TrustBar } from '../components/TrustBar';
+import { UIcon } from '../components/ui/UIcon';
+import { createWhatsAppUrl } from '../utils/contact';
 
 interface BlogHoeSlijpJeEenMesPageProps {
   onNavigate: (page: PageId) => void;
 }
 
 export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik las jullie blog over messen slijpen en wil graag advies over mijn mes.')}`;
+  const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik las jullie blog over messen slijpen en wil graag advies over mijn mes.');
 
   return (
     <article className="overflow-hidden bg-[#FAFAF8]">
@@ -58,7 +57,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
           <button
             type="button"
             onClick={() => onNavigate('blogs')}
-            className="group mb-6 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#3B7F4B] transition hover:text-[#203728] sm:text-sm"
+            className="group mb-6 inline-flex min-h-11 items-center gap-2 py-2 text-xs font-bold uppercase tracking-wider text-[#3B7F4B] transition hover:text-[#203728] sm:min-h-0 sm:py-0 sm:text-sm"
           >
             <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
             Terug naar alle blogs
@@ -132,32 +131,20 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               className="h-[280px] w-full object-cover sm:h-[400px] lg:h-[460px]"
             />
             <figcaption className="bg-white px-5 py-3 text-xs text-[#657068] sm:text-sm">
-              Handmatig slijpen op Japanse waterstenen in onze Utrechtse werkplaats. Constante hoek, waterkoeling en minimale staalafname staan centraal.
+              Handmatig slijpen op Japanse waterstenen in onze Utrechtse werkruimte. Een constante hoek, nat slijpen en beheerste materiaalafname staan centraal.
             </figcaption>
           </figure>
         </div>
       </header>
 
-      {/* 3. TRUST BAR */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-2 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-4xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-4">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews · 5,0</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-4">
-              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-4">
-              <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrustBar
+        compact
+        showRating
+        items={[
+          { icon: <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Doorgaans binnen 24-48 uur retour' },
+          { icon: <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Gratis ophalen & bezorgen vanaf €35' },
+        ]}
+      />
 
       <OrganicSectionDivider
         fromColor="#FAFAF8"
@@ -366,7 +353,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                 title: 'Maak de slijpsteen klaar',
                 content:
                   'Week of bevochtig de steen volgens de instructies van de fabrikant. Leg hem op een stevige, stroeve ondergrond (bijvoorbeeld een rubberen houder of een vochtige theedoek) en houd tijdens het slijpen voldoende water op het oppervlak.',
-                highlight: 'Stabiel & watergekoeld',
+                highlight: 'Stabiel & goed bevochtigd',
               },
               {
                 step: '02',
@@ -401,7 +388,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                 title: 'Verfijn en ontbraam de snede',
                 content:
                   'Gebruik steeds minder druk. Heb je een fijnere steen, dan kun je daarmee de slijpsporen verfijnen. Was bij het wisselen van steen eerst het mes en je handen, zodat achtergebleven grove slijpdeeltjes geen krassen veroorzaken. Eindig met een paar heel lichte, afwisselende halen. Voor een extra nette afwerking kun je het mes daarna op leer stroppen. Beweeg het mes op een strop altijd met de rug voorop, anders snijd je in het leer.',
-                highlight: 'Afstroppen op leer met diamantpasta',
+                highlight: 'Afstroppen op leer',
               },
               {
                 step: '07',

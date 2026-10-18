@@ -84,6 +84,13 @@
 /* Shared hero rhythm. Desktop remains page-specific; small screens use one
    consistent hierarchy across all main routes. */
 @media (max-width: 639px) {
+  /* Prevent iOS Safari from zooming when a visitor focuses a form field. */
+  input:not([type='checkbox']):not([type='radio']),
+  textarea,
+  select {
+    font-size: 1rem;
+  }
+
   .site-hero {
     padding-top: 1.25rem;
     padding-right: 0;

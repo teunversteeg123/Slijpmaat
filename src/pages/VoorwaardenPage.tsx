@@ -7,10 +7,10 @@ interface VoorwaardenPageProps { onNavigate: (page: PageId) => void; }
 const sections: LegalSection[] = [
   { heading: 'Artikel 1 - Definities', paragraphs: [
     'In deze algemene voorwaarden wordt verstaan onder:',
-    'Slijpmaat: de onderneming of handelsnaam Slijpmaat, gevestigd te Utrecht, die diensten aanbiedt op het gebied van het slijpen, onderhouden, ophalen en terugbrengen van keukenmessen en aanverwante snijgereedschappen.',
+    'Slijpmaat: de onderneming of handelsnaam Slijpmaat, gevestigd te Utrecht, die diensten aanbiedt op het gebied van het slijpen, onderhouden, ophalen en terugbrengen van gladde keukenmessen.',
     'Klant: iedere natuurlijke persoon of rechtspersoon die gebruikmaakt van de diensten van Slijpmaat. Waar in deze voorwaarden onderscheid wordt gemaakt tussen een consument en een zakelijke klant, wordt onder consument verstaan: een natuurlijke persoon die niet handelt voor doeleinden die verband houden met zijn of haar handels-, bedrijfs-, ambachts- of beroepsactiviteit. Onder zakelijke klant wordt verstaan: iedere klant die handelt in de uitoefening van een beroep of bedrijf.',
-    'Overeenkomst: iedere afspraak tussen Slijpmaat en de Klant over het slijpen, onderhouden, ophalen, terugbezorgen en/of vervoeren van keukenmessen en aanverwante snijgereedschappen.',
-    'Messen: de door de Klant aangeboden keukenmessen en aanverwante snijgereedschappen die door Slijpmaat worden beoordeeld, vervoerd, geslepen, onderhouden of terugbezorgd.',
+    'Overeenkomst: iedere afspraak tussen Slijpmaat en de Klant over het slijpen, onderhouden, ophalen, terugbezorgen en/of vervoeren van gladde keukenmessen.',
+    'Messen: de door de Klant aangeboden gladde keukenmessen die door Slijpmaat worden beoordeeld, vervoerd, geslepen, onderhouden of terugbezorgd.',
     'Opdracht: de concrete aanvraag van de Klant voor de dienstverlening van Slijpmaat.',
   ] },
   { heading: 'Artikel 2 - Gegevens van Slijpmaat', paragraphs: [
@@ -38,9 +38,9 @@ const sections: LegalSection[] = [
     '5.5 Slijpmaat mag een behandeling beperken, aanpassen of stoppen indien tijdens de werkzaamheden blijkt dat verder slijpen niet verantwoord is of tot disproportioneel materiaalverlies zou leiden. In dat geval informeert Slijpmaat de Klant zo spoedig mogelijk.',
   ] },
   { heading: 'Artikel 6 - Messen buiten het standaard dienstenaanbod', paragraphs: [
-    '6.1 Slijpmaat is gespecialiseerd in reguliere Europese keukenmessen en vergelijkbare keukenmessen.',
-    '6.2 Traditionele, handgemaakte of hoogwaardige Japanse messen, messen met een eenzijdige slijphoek, damaststalen messen, extreem dun uitgeslepen messen, messen met bijzondere staalsoorten en messen met een zeer hoge vervangingswaarde vallen buiten het standaard dienstenaanbod.',
-    '6.3 Slijpmaat behandelt de in artikel 6.2 genoemde messen uitsluitend indien dit vooraf uitdrukkelijk schriftelijk of digitaal is overeengekomen. Zonder zo’n afspraak mag Slijpmaat deze messen weigeren of onbewerkt teruggeven.',
+    '6.1 Slijpmaat slijpt reguliere gladde Europese en Japanse keukenmessen. Kartelmessen en ander gereedschap vallen buiten het standaard dienstenaanbod.',
+    '6.2 Bijzondere, handgemaakte, zeer kostbare of enkelzijdig geslepen messen en messen met een uitzonderlijk dunne geometrie of bijzondere staalsoort worden vooraf afzonderlijk beoordeeld.',
+    '6.3 Slijpmaat behandelt de in artikel 6.2 genoemde messen alleen nadat vooraf digitaal of schriftelijk is afgestemd welke behandeling passend is. Zonder zo’n afspraak mag Slijpmaat deze messen weigeren of onbewerkt teruggeven.',
     '6.4 Indien de Klant zonder duidelijke melding een bijzonder, kwetsbaar of kostbaar mes aanbiedt, is Slijpmaat niet aansprakelijk voor afwijkingen in het slijpresultaat die voortvloeien uit de bijzondere eigenschappen, constructie of staat van het mes, voor zover wettelijk toegestaan.',
   ] },
   { heading: 'Artikel 7 - Ophalen, aanlevering, verpakking en terugbezorging', paragraphs: [

@@ -1,8 +1,8 @@
 import React from 'react';
 import { UIcon } from './ui/UIcon';
-import { SLIJPMAAT_INFO } from '../data/siteData';
+import { createWhatsAppUrl } from '../utils/contact';
 
-const appointmentWhatsAppUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag een afspraak maken om mijn messen in Utrecht te brengen en later op te halen.')}`;
+const appointmentWhatsAppUrl = createWhatsAppUrl('Hoi Teun en Mike, ik wil graag een afspraak maken om mijn messen in Utrecht te brengen en later op te halen.');
 
 export const AppointmentDropoffWidget: React.FC = () => (
   <div className="relative overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-sm">

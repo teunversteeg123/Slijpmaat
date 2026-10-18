@@ -14,6 +14,18 @@ export const ZONE_OUTER = [
   '3584', '3585'
 ] as const;
 
+export const SERVICE_AREA_GROUPS = [
+  { district: 'Binnenstad & centrum', postcodes: ['3511', '3512'] },
+  { district: 'Noordoost · Tuinwijk, Tuindorp, Wittevrouwen & Voordorp', postcodes: ['3514', '3515', '3571', '3572', '3573'] },
+  { district: 'Noordwest · Pijlsweerd, Ondiep & Zuilen', postcodes: ['3513', '3551', '3552', '3553', '3554', '3555'] },
+  { district: 'Overvecht', postcodes: ['3561', '3562', '3563', '3564', '3565', '3566'] },
+  { district: 'Oost · Oudwijk, Wilhelminapark & Rijnsweerd', postcodes: ['3581', '3582', '3583', '3584', '3585'] },
+  { district: 'Zuid · Tolsteeg, Hoograven & Lunetten', postcodes: ['3523', '3524', '3525'] },
+  { district: 'Zuidwest · Dichterswijk, Rivierenwijk, Transwijk & Kanaleneiland', postcodes: ['3521', '3522', '3526', '3527'] },
+  { district: 'West · Lombok, Oog in Al & Nieuw Engeland', postcodes: ['3531', '3532', '3533', '3534', '3542'] },
+  { district: 'Leidsche Rijn · Terwijde, Het Zand, Parkwijk & Langerak', postcodes: ['3528', '3541', '3543', '3544', '3545'] },
+] as const;
+
 export const DELIVERY_FEES_CENTS = {
   standard: 450,
   outer: 725,

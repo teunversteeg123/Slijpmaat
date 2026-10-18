@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { UIcon, UIconBadge } from '../components/ui/UIcon';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT, GoogleReviewsSection } from '../components/GoogleReviewsSection';
+import { GoogleReviewsSection } from '../components/GoogleReviewsSection';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
+import { TrustBar } from '../components/TrustBar';
 import { PageId } from '../types';
+import { createWhatsAppUrl } from '../utils/contact';
 
 interface HomePageProps {
   onNavigate: (page: PageId) => void;
@@ -17,7 +19,7 @@ const quickSteps = [
 ];
 
 const qualities = [
-  { title: 'Lokaal in Utrecht', text: 'Ophalen en terugbrengen in Utrecht en omgeving, zonder pakket of winkelbezoek.', icon: 'marker' },
+  { title: 'Lokaal in Utrecht', text: 'Ophalen en terugbrengen binnen het Utrechtse servicegebied, zonder pakket of winkelbezoek.', icon: 'marker' },
   { title: 'Makkelijk geregeld', text: 'Snel contact via WhatsApp, duidelijke afspraken en geen ingewikkeld proces.', icon: 'comment-alt' },
   { title: 'Duidelijke prijzen', text: 'Je ziet vooraf wat het slijpen kost. Reparaties bespreken we altijd eerst.', icon: 'euro' },
   { title: 'Langer plezier van je mes', text: 'Goed onderhoud verlengt de levensduur van je messen en voorkomt onnodig vervangen.', icon: 'leaf' },
@@ -38,7 +40,7 @@ const faqs = [
 ];
 
 export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/31682074967?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!')}`;
+  const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!');
   const [isPlanExpanded, setIsPlanExpanded] = useState(false);
   const planRef = useRef<HTMLDivElement>(null);
 
@@ -156,26 +158,19 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. TRUST BAR (Zekerheden) - Floating pill container without hard full-width horizontal lines */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrustBar
+        items={[
+          { icon: <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Doorgaans binnen 24-48 uur retour' },
+          { icon: <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Gratis ophalen & bezorgen vanaf €35' },
+        ]}
+      />
+
+      <OrganicSectionDivider
+        fromColor="#FAFAF8"
+        middleColor="#E8EFE8"
+        toColor="#F7F4EC"
+        variant="calm"
+      />
 
       {/* 3. KIES WAT BIJ JE PAST (Particulieren vs Horeca) */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-24 lg:px-8">
@@ -286,7 +281,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <div className="relative max-w-xl">
               <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Duidelijk vooraf</p>
               <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Bekijk direct wat jouw slijpbeurt kost</h2>
-              <p className="mt-4 text-base leading-7 text-[#657068]">Vul je messen in, zie meteen de prijs en stuur je bestelling daarna eenvoudig via WhatsApp.</p>
               <button
                 type="button"
                 onClick={openCalculator}

@@ -2,6 +2,10 @@ import assert from 'node:assert/strict';
 import test from 'node:test';
 import {
   FREE_DELIVERY_THRESHOLD_CENTS,
+  SERVICE_AREA_GROUPS,
+  ZONE_ALWAYS_FREE,
+  ZONE_OUTER,
+  ZONE_STANDARD,
   getDeliveryFeeCents,
   getDeliveryZone,
   getDutchPostcodePrefix,
@@ -53,4 +57,18 @@ test('alle bevestigde postcodegroepen blijven centraal ingedeeld', () => {
   assert.equal(getDeliveryZone('3583 AA'), 'standard');
   assert.equal(getDeliveryZone('3585 AA'), 'outer');
   assert.equal(getDeliveryZone('1234 AB'), 'outside');
+});
+
+test('wijkoverzicht bevat iedere bevestigde postcode precies één keer met hetzelfde tarief', () => {
+  const listedPostcodes = SERVICE_AREA_GROUPS.flatMap((area) => area.postcodes);
+  const confirmedPostcodes = [...ZONE_ALWAYS_FREE, ...ZONE_STANDARD, ...ZONE_OUTER];
+
+  assert.equal(new Set(listedPostcodes).size, listedPostcodes.length);
+  assert.deepEqual([...listedPostcodes].sort(), [...confirmedPostcodes].sort());
+
+  for (const postcode of listedPostcodes) {
+    const zone = getDeliveryZone(postcode);
+    const expectedFee = zone === 'always-free' ? 0 : zone === 'standard' ? 450 : 725;
+    assert.equal(getDeliveryFeeCents(postcode, 0, false), expectedFee);
+  }
 });

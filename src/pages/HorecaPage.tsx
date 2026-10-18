@@ -1,11 +1,12 @@
 import React from 'react';
 import { PageId } from '../types';
 import { SLIJPMAAT_INFO } from '../data/siteData';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { HeroVideo } from '../components/HeroVideo';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import { ZakelijkFormulier } from '../components/ZakelijkFormulier';
+import { TrustBar } from '../components/TrustBar';
+import { createWhatsAppUrl } from '../utils/contact';
 import {
   ArrowRight,
   ChevronLeft,
@@ -23,7 +24,7 @@ interface HorecaPageProps {
 }
 
 export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Slijpmaat, ik zou graag in contact willen komen voor een zakelijke aanvraag.')}`;
+  const whatsappUrl = createWhatsAppUrl('Hoi Slijpmaat, ik zou graag in contact willen komen voor een zakelijke aanvraag.');
 
   const businessBasePrices = [
     SLIJPMAAT_INFO.prices.small,
@@ -68,7 +69,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
     {
       step: '3',
       title: 'Handmatig geslepen',
-      desc: 'Handmatig geslepen op Japanse Shapton waterstenen. Geen oververhitting of ontlating; het staal blijft bikkelhard.',
+      desc: 'Handmatig geslepen op Japanse Shapton-waterstenen, met controle over slijphoek, profiel en materiaalafname.',
       icon: ShieldCheck,
     },
     {
@@ -91,15 +92,15 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
     },
     {
       question: 'Waarom slijpen jullie op waterstenen i.p.v. een snelle bandslijper?',
-      answer: 'Sneldraaiende slijpmachines en bandslijpers genereren wrijvingshitte die de dunne snijkant binnen seconden boven de 200°C verhit. Hierdoor ontlaat het geharde staal, wordt het zacht en is het mes snel weer bot. Bovendien slijpen machines onnodig veel staal weg. Onze waterstenen koelen constant, waardoor messen jarenlang meegaan en hun vlijmscherpe standtijd behouden.',
+      answer: 'Bij machinaal slijpen hangen warmteontwikkeling en materiaalafname sterk af van de machine, korrel, snelheid en vakkennis. Wij kiezen voor handmatig slijpen op waterstenen omdat we daarmee de slijphoek, het profiel en de materiaalafname per mes nauwkeurig kunnen sturen.',
     },
     {
       question: 'Slijpen jullie zowel restaurant-messen als persoonlijke messen van koks?',
-      answer: 'Absoluut. Veel chefs en koks geven hun eigen Japanse messen (zoals Global, MAC, Kai Shun of handgesmede koolstofstalen messen) mee in dezelfde messenrol met de algemene keukensnijders van het restaurant. We beoordelen elk mes individueel en passen de slijphoek aan op het type staal en gebruik.',
+      answer: 'Ja. We kunnen zowel algemene keukenmessen van het restaurant als persoonlijke messen van koks beoordelen. We bekijken ieder mes afzonderlijk en stemmen de behandeling af op het type mes, het staal, de staat en het gebruik.',
     },
     {
       question: 'Kunnen we een periodiek schema of vaste slijpronde afspreken?',
-      answer: 'Ja, dat kan heel laagdrempelig. Veel keukens kiezen voor een vaste ronde per 4, 6 of 8 weken. We sturen dan een paar dagen van tevoren even een appje ter herinnering. Je zit nooit vast aan een wurgcontract of langdurige verplichting; we slijpen alleen wanneer jullie messen eraan toe zijn.',
+      answer: 'Ja. Terugkerend onderhoud en grotere aantallen zijn maatwerk. We stemmen vooraf af welke frequentie, aantallen en rondes bij jullie keuken passen en bevestigen planning en prijs voordat we starten.',
     },
   ];
 
@@ -170,26 +171,12 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. TRUST BAR (Zekerheden voor de horeca) */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Afgestemd op jullie planning</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <FileText className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Duidelijke prijsafspraken</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrustBar
+        items={[
+          { icon: <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />, text: 'Afgestemd op jullie planning' },
+          { icon: <FileText className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />, text: 'Duidelijke prijsafspraken' },
+        ]}
+      />
 
       <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#F7F4EC" variant="scalloped" />
 

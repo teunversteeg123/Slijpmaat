@@ -16,6 +16,8 @@ import {
   isValidDutchPostcode,
   normalizeDutchPostcode,
 } from '../data/delivery';
+import { createWhatsAppUrl } from '../utils/contact';
+import { formatEuroCents } from '../utils/format';
 
 interface KnifeCategory {
   id: number;
@@ -108,10 +110,6 @@ export const ParticulierenCalculator: React.FC = () => {
   const amountUntilFreeDeliveryCents = Math.max(0, FREE_DELIVERY_THRESHOLD_CENTS - finalSharpeningCents);
 
   // Format currency
-  const formatEuro = (cents: number) => {
-    return '€' + (cents / 100).toFixed(2).replace('.', ',');
-  };
-
   const updateCount = (idx: number, delta: number) => {
     setCounts((prev) => {
       const next = [...prev];
@@ -155,14 +153,14 @@ export const ParticulierenCalculator: React.FC = () => {
     } else if (deliveryFeeCents === 0) {
       deliveryText = 'Gratis';
     } else if (deliveryFeeCents !== null) {
-      deliveryText = formatEuro(deliveryFeeCents);
+      deliveryText = formatEuroCents(deliveryFeeCents);
     } else if (isOutsideArea) {
       deliveryText = 'Haal-/brengmogelijkheid en prijs op aanvraag (buiten vast bezorggebied)';
     }
 
     let totalText = 'Op aanvraag';
     if (!hasExtraLarge && deliveryFeeCents !== null && !isOutsideArea) {
-      totalText = formatEuro(finalSharpeningCents + deliveryFeeCents);
+      totalText = formatEuroCents(finalSharpeningCents + deliveryFeeCents);
     }
 
     const lines = [
@@ -184,14 +182,14 @@ export const ParticulierenCalculator: React.FC = () => {
       if (counts[idx] > 0) {
         const itemPrice = idx === 3
           ? 'Op aanvraag'
-          : formatEuro(counts[idx] * (isStudent ? 500 : cat.basePrice));
+          : formatEuroCents(counts[idx] * (isStudent ? 500 : cat.basePrice));
         lines.push(`${counts[idx]} × ${cat.name} (${cat.sizeDesc}): ${itemPrice}`);
       }
     });
 
     lines.push(
       '',
-      `Messen slijpen: ${hasExtraLarge ? 'Op aanvraag' : formatEuro(finalSharpeningCents)}`,
+      `Messen slijpen: ${hasExtraLarge ? 'Op aanvraag' : formatEuroCents(finalSharpeningCents)}`,
       `${selfDropoff ? 'Zelf brengen & ophalen' : 'Ophalen & bezorgen'}: ${deliveryText}`,
       `Totaal geschat: ${totalText}`,
       '(Eventuele reparaties of chips niet inbegrepen)'
@@ -206,8 +204,7 @@ export const ParticulierenCalculator: React.FC = () => {
       selfDropoff ? 'Wanneer kan ik mijn messen brengen?' : 'Wanneer kan mijn Maat langskomen?'
     );
 
-    const waUrl = `https://wa.me/31682074967?text=${encodeURIComponent(lines.join('\n'))}`;
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    window.open(createWhatsAppUrl(lines.join('\n')), '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -260,7 +257,7 @@ export const ParticulierenCalculator: React.FC = () => {
                 const count = counts[idx];
                 const currentPrice = idx === 3
                   ? 'Op aanvraag'
-                  : formatEuro(isStudent ? 500 : cat.basePrice);
+                  : formatEuroCents(isStudent ? 500 : cat.basePrice);
 
                 return (
                   <div
@@ -335,7 +332,7 @@ export const ParticulierenCalculator: React.FC = () => {
                     Ik ben een StudentenMaat (&euro;5,00 per mes)
                   </span>
                   <p className="text-xs text-[#657068] mt-0.5">
-                    Geldig voor kleine, normale en grote messen op vertoon van je geldige collegekaart bij afgifte.
+                    Geldig voor kleine, normale en grote messen. Extra grote messen blijven op aanvraag.
                   </p>
                 </div>
               </label>
@@ -520,14 +517,14 @@ export const ParticulierenCalculator: React.FC = () => {
                     </span>
                   ) : (
                     <span className="text-[#203728]">
-                      <strong>{formatEuro(deliveryFeeCents!)}</strong> voor ophalen én terugbrengen.{' '}
+                      <strong>{formatEuroCents(deliveryFeeCents!)}</strong> voor ophalen én terugbrengen.{' '}
                       {hasExtraLarge ? (
                         <span className="text-[#3B7F4B] font-semibold">
                           Vanaf €35 bestelwaarde is ophalen en bezorgen gratis; bij extra grote messen bevestigen we dit in de offerte.
                         </span>
                       ) : (
                         <span className="text-[#3B7F4B] font-semibold">
-                          Nog {formatEuro(amountUntilFreeDeliveryCents)} aan slijpwerk tot gratis ophalen en bezorgen.
+                          Nog {formatEuroCents(amountUntilFreeDeliveryCents)} aan slijpwerk tot gratis ophalen en bezorgen.
                         </span>
                       )}
                     </span>
@@ -578,7 +575,7 @@ export const ParticulierenCalculator: React.FC = () => {
                   if (counts[idx] === 0) return null;
                   const itemPrice = idx === 3
                     ? 'Op aanvraag'
-                    : formatEuro(counts[idx] * (isStudent ? 500 : cat.basePrice));
+                    : formatEuroCents(counts[idx] * (isStudent ? 500 : cat.basePrice));
                   return (
                     <div key={cat.id} className="flex justify-between items-center text-xs sm:text-sm">
                       <span className="text-[#203728] font-medium">
@@ -598,7 +595,7 @@ export const ParticulierenCalculator: React.FC = () => {
               <div className="flex justify-between items-center">
                 <span className="text-[#657068]">Messen slijpen:</span>
                 <span className="font-heading font-bold">
-                  {hasExtraLarge ? 'Op aanvraag' : formatEuro(standardSharpeningCents)}
+                  {hasExtraLarge ? 'Op aanvraag' : formatEuroCents(standardSharpeningCents)}
                 </span>
               </div>
 
@@ -606,7 +603,7 @@ export const ParticulierenCalculator: React.FC = () => {
                 <div className="flex justify-between items-center text-[#C95E3E]">
                   <span>StudentenMaat voordeel:</span>
                   <span className="font-heading font-bold">
-                    &minus; {formatEuro(studentDiscountCents)}
+                    &minus; {formatEuroCents(studentDiscountCents)}
                   </span>
                 </div>
               )}
@@ -624,7 +621,7 @@ export const ParticulierenCalculator: React.FC = () => {
                       : 'Postcode nodig'
                     : deliveryFeeCents === 0
                     ? 'Gratis'
-                    : formatEuro(deliveryFeeCents)}
+                    : formatEuroCents(deliveryFeeCents)}
                 </span>
               </div>
             </div>
@@ -643,7 +640,7 @@ export const ParticulierenCalculator: React.FC = () => {
                   <strong className="font-heading text-3xl sm:text-4xl font-bold text-[#3B7F4B]">
                     {hasExtraLarge || isOutsideArea
                       ? 'Op aanvraag'
-                      : formatEuro(finalSharpeningCents + (deliveryFeeCents || 0))}
+                      : formatEuroCents(finalSharpeningCents + (deliveryFeeCents || 0))}
                   </strong>
                 </div>
               </div>

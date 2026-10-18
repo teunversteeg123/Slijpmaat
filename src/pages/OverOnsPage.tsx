@@ -1,17 +1,17 @@
 import React from 'react';
 import { PageId } from '../types';
-import { SLIJPMAAT_INFO } from '../data/siteData';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { UtrechtQuotesSection } from '../components/UtrechtQuotesSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { UIcon, UIconBadge } from '../components/ui/UIcon';
+import { TrustBar } from '../components/TrustBar';
+import { createWhatsAppUrl } from '../utils/contact';
 
 interface OverOnsPageProps {
   onNavigate?: (page: PageId) => void;
 }
 
 export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik las over jullie op de Over Ons pagina en wil graag kennismaken!')}`;
+  const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik las over jullie op de Over Ons pagina en wil graag kennismaken!');
 
   // 1. Hoe zijn we begonnen? (3 Mijlpalen in warm cream #F7F4EC)
   const originSteps = [
@@ -23,7 +23,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     {
       num: '2',
       title: 'Hoe slijp je nou goed een mes?',
-      text: 'We verdiepten ons in de traditionele Japanse slijpfilosofie: wij kiezen de juiste steen voor elk type mes en staal, en stroppen daarna af op leer. Geen machines die het staal slopen, maar pure controle voor een perfect resultaat.',
+      text: 'We verdiepten ons in de traditionele Japanse slijpfilosofie: de staat van ieder mes beoordelen, een passende steen kiezen en de snede daarna zorgvuldig afwerken op leer. Handmatig werken geeft ons controle over slijphoek, profiel en materiaalafname.',
     },
     {
       num: '3',
@@ -93,13 +93,13 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
       image: '/assets/werkwijze/03-slijpen.jpg',
       alt: 'Handmatig slijpen van een keukenmes op een Japanse watersteen',
       title: 'Handmatig op waterstenen',
-      subtitle: 'Watergekoeld, zonder wrijvingshitte',
+      subtitle: 'Nat geslepen met beheerste materiaalafname',
     },
     {
       image: '/assets/werkwijze/04-afwerken.jpg',
       alt: 'Afwerken en ontbramen van het lemmet op een soepele leren strop',
       title: 'Afwerken op soepel leer',
-      subtitle: 'Microscopisch ontbraamd en spiegelglad',
+      subtitle: 'Zorgvuldig ontbraamd en afgewerkt',
     },
   ];
 
@@ -111,11 +111,11 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     },
     {
       question: 'Welke stenen gebruiken jullie?',
-      answer: 'We werken met professionele Japanse waterstenen. Voor elk mes en elk staalsoort kiezen wij de juiste steen om de snede perfect op te bouwen. Daarna stroppen we elk mes af op leer met fijne diamantpasta voor een zuivere, braamvrije snijkant.',
+      answer: 'We werken met professionele Japanse waterstenen. Per mes kijken we naar de staalsoort, het profiel en de conditie van de snede. Daarna werken we het mes af op leer met polijstpasta en controleren we het resultaat.',
     },
     {
       question: 'Waar in Utrecht zijn jullie gevestigd?',
-      answer: 'Wij werken vanuit huis aan de Gerard Noodtstraat in Utrecht en hebben geen openbare inloopwinkel. Langsbrengen en ophalen kan daarom alleen op afspraak. Voor onze ophaal- en bezorgservice gebruiken we binnen Utrecht de fiets en voor afspraken verder weg de scooter.',
+      answer: 'Wij werken vanuit huis aan de Gerard Noodtstraat in Utrecht en hebben geen openbare inloopwinkel. Langsbrengen en ophalen kan daarom alleen op afspraak. Binnen Utrecht gebruiken we voor onze ophaal- en bezorgservice de fiets; vervoer verder weg bevestigen we alleen na een afzonderlijke afspraak.',
     },
     {
       question: 'Kan ik ook langskomen om Teun en Mike te ontmoeten?',
@@ -197,26 +197,13 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 2. TRUST BAR (Zekerheden) */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews · 5,0</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <UIcon name="clock-three" className="text-base text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <UIcon name="marker" className="text-base text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrustBar
+        showRating
+        items={[
+          { icon: <UIcon name="clock-three" className="text-base text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Doorgaans binnen 24-48 uur retour' },
+          { icon: <UIcon name="marker" className="text-base text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Gratis ophalen & bezorgen vanaf €35' },
+        ]}
+      />
 
       <OrganicSectionDivider
         fromColor="#FAFAF8"

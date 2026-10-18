@@ -1,8 +1,8 @@
 import React from 'react';
 
-export type UIconSize = 'xs' | 'sm' | 'base' | 'md' | 'lg' | 'xl' | '2xl';
+type UIconSize = 'xs' | 'sm' | 'base' | 'md' | 'lg' | 'xl' | '2xl';
 
-export interface UIconProps extends React.HTMLAttributes<HTMLElement> {
+interface UIconProps extends React.HTMLAttributes<HTMLElement> {
   name: string;
   brand?: boolean;
   size?: UIconSize;
@@ -51,7 +51,7 @@ export const UIcon: React.FC<UIconProps> = ({
   );
 };
 
-export type UIconBadgeVariant =
+type UIconBadgeVariant =
   | 'soft'
   | 'green'
   | 'sage'
@@ -61,9 +61,9 @@ export type UIconBadgeVariant =
   | 'white'
   | 'dark';
 
-export type UIconBadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
+type UIconBadgeSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
 
-export interface UIconBadgeProps {
+interface UIconBadgeProps {
   name: string;
   brand?: boolean;
   variant?: UIconBadgeVariant;

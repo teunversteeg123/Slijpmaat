@@ -1,18 +1,18 @@
 import React from 'react';
 import { PageId } from '../types';
-import { SLIJPMAAT_INFO } from '../data/siteData';
 import { ParticulierenCalculator } from '../components/ParticulierenCalculator';
 import { ResultatenSlider } from '../components/ResultatenSlider';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { UIcon, UIconBadge } from '../components/ui/UIcon';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
+import { TrustBar } from '../components/TrustBar';
+import { createWhatsAppUrl } from '../utils/contact';
 
 interface ParticulierenPageProps {
   onNavigate?: (page: PageId) => void;
 }
 
 export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!')}`;
+  const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!');
 
   const stepsBefore = [
     {
@@ -48,7 +48,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     {
       step: '03',
       title: 'Met de hand geslepen op waterstenen',
-      desc: 'Wij werken vanuit huis in Utrecht. Hier beoordelen we de snede zorgvuldig, slijpen we watergekoeld op Japanse whetstones en stroppen we af op leder.',
+      desc: 'Wij werken vanuit huis in Utrecht. Hier beoordelen we de snede zorgvuldig, slijpen we nat op Japanse waterstenen en stroppen we af op leer.',
       icon: 'knife-kitchen',
     },
     {
@@ -78,7 +78,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     },
     {
       question: 'Wat als mijn mes een chip of hapje heeft?',
-      answer: 'Kleine chips (≤2 mm) of beschadigde punten kunnen we vakkundig herstellen. Wij kiezen de juiste herstelsteen om het profiel weer strak te krijgen. Vermeld dit gerust bij je aanvraag of stuur vooraf een foto via WhatsApp, dan bekijken we direct wat er nodig is.',
+      answer: 'Kleine chips of beschadigde punten kunnen we vaak herstellen. Wij beoordelen de schade en kiezen een passende herstelsteen om het profiel weer strak te krijgen. Vermeld dit bij je aanvraag of stuur vooraf een foto via WhatsApp, dan bekijken we wat er nodig is.',
     },
   ];
 
@@ -154,26 +154,12 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         </div>
       </section>
 
-      {/* 2. TRUST BAR (Zekerheden) */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrustBar
+        items={[
+          { icon: <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Doorgaans binnen 24-48 uur retour' },
+          { icon: <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Gratis ophalen & bezorgen vanaf €35' },
+        ]}
+      />
 
       {/* 3. VOORAF: KORTE BEZOEKERSFLOW (Warm cream #F7F4EC) */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">

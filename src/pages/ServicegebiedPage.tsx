@@ -1,9 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { PageId } from '../types';
-import { SLIJPMAAT_INFO, SERVICE_AREAS } from '../data/siteData';
-import { DELIVERY_FEES_CENTS, getDeliveryZone } from '../data/delivery';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
+import { SERVICEGEBIED_FAQS } from '../data/siteData';
+import { getDeliveryFeeCents, getDeliveryZone, isValidDutchPostcode, SERVICE_AREA_GROUPS } from '../data/delivery';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
+import { TrustBar } from '../components/TrustBar';
+import { createWhatsAppUrl } from '../utils/contact';
+import { formatEuroCents } from '../utils/format';
 import {
   MapPin,
   Clock3,
@@ -47,31 +49,8 @@ const serviceSteps = [
   },
 ];
 
-const serviceFaqs = [
-  {
-    q: 'Vanaf welke bestelwaarde is ophalen en bezorgen gratis?',
-    a: 'Vanaf €35 bestelwaarde halen we jouw messen gratis op én brengen we ze gratis terug binnen Utrecht. Onder €35 hangt het tarief af van je postcode; enkele postcodegebieden zijn altijd gratis. Controleer jouw tarief eenvoudig met de postcodecheck op deze pagina.'
-  },
-  {
-    q: 'Hoe geef ik mijn messen veilig mee aan de deur?',
-    a: 'We vervoeren je messen in stevige Slijpmaat-vervoerstassen en mesbeschermers, op de fiets of voor afspraken verder weg met de scooter. Wikkel je messen thuis bij voorkeur in een theedoek of handdoek met een elastiek eromheen. Zo blijven je messen en onze vingers heel!'
-  },
-  {
-    q: 'Hoe snel heb ik mijn messen weer terug?',
-    a: 'Doorgaans binnen 24 tot 48 uur na ophalen. Heb je een specifieke deadline of kookavond? Laat het ons weten bij het inplannen, dan stemmen we af wat haalbaar is.'
-  },
-  {
-    q: 'Kan ik mijn messen ook zelf langsbrengen in Utrecht?',
-    a: 'Jazeker! Je bent op afspraak van harte welkom aan de Gerard Noodtstraat in Utrecht. Omdat we vanuit huis werken vragen we je altijd even vooraf een tijdstip af te stemmen via WhatsApp.'
-  },
-  {
-    q: 'Wat als mijn postcode net buiten Utrecht valt?',
-    a: 'Woon je in Maarssen, Leidsche Rijn rand, De Meern, Zeist of Nieuwegein? Neem gerust even contact op via WhatsApp. Vaak kunnen we in overleg langskomen, of je brengt ze gezellig bij ons langs.'
-  }
-];
-
 export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een vraag over het servicegebied!')}`;
+  const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik heb een vraag over het servicegebied!');
 
   const [zipInput, setZipInput] = useState('');
   const [searchResult, setSearchResult] = useState<{ status: 'success' | 'warning' | 'info'; text: string } | null>(null);
@@ -122,39 +101,38 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
 
   const handleCheckZip = (e: React.FormEvent) => {
     e.preventDefault();
-    const clean = zipInput.trim().toUpperCase().slice(0, 4);
-    const num = parseInt(clean, 10);
+    const clean = zipInput.trim().toUpperCase();
+
+    if (!isValidDutchPostcode(clean)) {
+      setSearchResult({
+        status: 'warning',
+        text: 'Vul een geldige Nederlandse postcode in, bijvoorbeeld 3511 of 3511 AB.'
+      });
+      return;
+    }
+
     const zone = getDeliveryZone(clean);
+    const fee = getDeliveryFeeCents(clean, 0, false);
 
     if (zone === 'always-free') {
       setSearchResult({
         status: 'success',
-        text: 'Goed nieuws! Voor jouw postcode is ophalen en bezorgen binnen Utrecht altijd gratis.'
+        text: 'Tarief onder €35: gratis ophalen en bezorgen.'
       });
     } else if (zone === 'standard') {
       setSearchResult({
         status: 'success',
-        text: `Jouw postcode valt binnen ons vaste servicegebied. Vanaf €35 bestelwaarde is ophalen en bezorgen gratis; onder €35 kost dit €${(DELIVERY_FEES_CENTS.standard / 100).toFixed(2).replace('.', ',')}.`
+        text: `Tarief onder €35: ${formatEuroCents(fee ?? 0)} voor ophalen en bezorgen.`
       });
     } else if (zone === 'outer') {
       setSearchResult({
         status: 'success',
-        text: `Jouw postcode valt binnen onze buitenring. Vanaf €35 bestelwaarde is ophalen en bezorgen gratis; onder €35 kost dit €${(DELIVERY_FEES_CENTS.outer / 100).toFixed(2).replace('.', ',')}.`
-      });
-    } else if ((num >= 3450 && num <= 3500) || (num >= 3586 && num <= 3600)) {
-      setSearchResult({
-        status: 'warning',
-        text: 'Utrechtse rand / Leidsche Rijn / Maarssen: ophalen is mogelijk in overleg, of breng ze langs op afspraak!'
-      });
-    } else if (clean.length === 4) {
-      setSearchResult({
-        status: 'info',
-        text: 'Buiten ons standaard Utrechtse fietsgebied kijken we of ophalen met de scooter mogelijk is. Je kunt je messen ook op afspraak bij ons langsbrengen.'
+        text: `Tarief onder €35: ${formatEuroCents(fee ?? 0)} voor ophalen en bezorgen.`
       });
     } else {
       setSearchResult({
-        status: 'warning',
-        text: 'Vul a.u.b. een geldige 4-cijferige postcode in (bijv. 3511 of 3572).'
+        status: 'info',
+        text: 'Deze postcode valt buiten ons vaste bezorggebied. Vraag vervoer apart aan of breng je messen op afspraak langs in Utrecht.'
       });
     }
   };
@@ -312,26 +290,12 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
         </div>
       )}
 
-      {/* 2. TRUST BAR (Zekerheden floating pill) */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Doorgaans binnen 24-48 uur retour</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <Bike className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gratis ophalen &amp; bezorgen vanaf €35</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrustBar
+        items={[
+          { icon: <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />, text: 'Doorgaans binnen 24-48 uur retour' },
+          { icon: <Bike className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />, text: 'Ophalen & bezorgen binnen Utrecht' },
+        ]}
+      />
 
       {/* 3. BELANGRIJKE MEDEDELING: GEEN INLOOPWINKEL */}
       <section className="relative px-4 py-8 sm:px-6 sm:py-10 lg:px-8">
@@ -355,101 +319,120 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
       {/* 4. POSTCODECHECK & WIJKEN IN UTRECHT */}
       <section id="postcodecheck" className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl sm:mb-12">
+          <div className="mb-8 max-w-3xl sm:mb-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Dekking in Utrecht</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Postcodecheck &amp; wijken</h2>
-            <p className="mt-3 text-base text-[#657068]">
-              Controleer direct of jouw adres binnen ons ophaalgebied valt en welk tarief geldt.
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Postcodes, wijken &amp; bezorgtarieven</h2>
+            <p className="mt-3 text-base leading-7 text-[#657068]">
+              Vanaf €35 bestelwaarde is ophalen en bezorgen binnen het ondersteunde Utrechtse gebied gratis. Hieronder staan uitsluitend de tarieven voor bestellingen onder €35.
             </p>
           </div>
 
-          <div className="grid gap-8 lg:grid-cols-12 lg:items-start">
-            <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-[#FAFAF8] p-7 sm:p-9 shadow-xs space-y-6 lg:col-span-5">
-              <div>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
-                  <Search className="h-3.5 w-3.5" />
-                  Direct controleren
-                </span>
-                <h3 className="mt-3 font-heading text-2xl font-bold text-[#3B7F4B]">Check jouw postcode</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#657068]">
-                  Vul je 4-cijferige postcode in om de mogelijkheid en het juiste ophaal- en bezorgtarief te zien.
-                </p>
-              </div>
-
-              <form onSubmit={handleCheckZip} className="space-y-3">
-                <div className="flex gap-2">
-                  <input
-                    type="text"
-                    maxLength={7}
-                    placeholder="Bijv. 3511 of 3572"
-                    value={zipInput}
-                    onChange={(e) => setZipInput(e.target.value)}
-                    className="flex-1 rounded-2xl border border-[#d9e1d7] bg-white px-4 py-3.5 font-mono text-sm uppercase text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
-                  />
-                  <button
-                    type="submit"
-                    className="group inline-flex items-center gap-2 rounded-2xl bg-[#3B7F4B] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#315F3B] cursor-pointer"
-                  >
-                    <span>Check</span>
-                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
-                  </button>
+          <div className="min-w-0 space-y-6">
+            <div className="min-w-0 rounded-[2.25rem] border border-[#d9e1d7] bg-[#FAFAF8] p-5 shadow-xs sm:p-7">
+              <div className="grid min-w-0 gap-5 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-end">
+                <div>
+                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
+                    <Search className="h-3.5 w-3.5" />
+                    Postcodechecker
+                  </span>
+                  <h3 className="mt-3 font-heading text-2xl font-bold text-[#3B7F4B]">Wat betaal je onder €35?</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-[#657068]">
+                    Vul vier cijfers of je volledige postcode in. De uitkomst komt rechtstreeks uit dezelfde tarieftabel als het overzicht hieronder.
+                  </p>
                 </div>
 
-                {searchResult && (
-                  <div
-                    className={`rounded-2xl border p-4 text-xs font-semibold leading-relaxed transition-all ${
-                      searchResult.status === 'success'
-                        ? 'border-[#3B7F4B]/30 bg-[#E8EFE8] text-[#3B7F4B]'
-                        : searchResult.status === 'warning'
-                        ? 'border-[#E87B5B]/30 bg-[#FFF4EF] text-[#C95E3E]'
-                        : 'border-[#d9e1d7] bg-white text-[#244A30]'
-                    }`}
-                  >
-                    {searchResult.text}
+                <form onSubmit={handleCheckZip} className="min-w-0 space-y-3">
+                  <div className="flex min-w-0 flex-col gap-2 sm:flex-row">
+                    <label htmlFor="service-postcode" className="sr-only">Postcode</label>
+                    <input
+                      id="service-postcode"
+                      type="text"
+                      inputMode="text"
+                      autoComplete="postal-code"
+                      maxLength={7}
+                      placeholder="Bijv. 3511 of 3511 AB"
+                      value={zipInput}
+                      onChange={(e) => setZipInput(e.target.value)}
+                      className="min-w-0 w-full flex-1 rounded-2xl border border-[#d9e1d7] bg-white px-4 py-3.5 font-mono text-base uppercase text-[#244A30] placeholder-[#657068]/60 focus:border-[#3B7F4B] focus:outline-none focus:ring-2 focus:ring-[#3B7F4B]/20"
+                    />
+                    <button
+                      type="submit"
+                      className="group inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-[#3B7F4B] px-6 py-3.5 text-sm font-bold text-white shadow-sm transition-all hover:bg-[#315F3B] cursor-pointer sm:w-auto"
+                    >
+                      <span>Controleer tarief</span>
+                      <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                    </button>
                   </div>
-                )}
-              </form>
 
-              <div className="space-y-3 border-t border-[#d9e1d7]/70 pt-5 text-xs text-[#657068]">
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="font-medium">Gratis ophalen &amp; bezorgen vanaf €35 bestelwaarde</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="font-medium">Onder €35 hangt het tarief af van je postcode</span>
-                </div>
-                <div className="flex items-center gap-2.5">
-                  <CheckCircle2 className="h-4 w-4 text-[#3B7F4B] shrink-0" />
-                  <span className="font-medium">Doorgaans binnen 24-48 uur weer vlijmscherp terug</span>
-                </div>
+                  {searchResult && (
+                    <div
+                      aria-live="polite"
+                      className={`rounded-2xl border p-4 text-sm font-semibold leading-relaxed transition-all ${
+                        searchResult.status === 'success'
+                          ? 'border-[#3B7F4B]/30 bg-[#E8EFE8] text-[#3B7F4B]'
+                          : searchResult.status === 'warning'
+                          ? 'border-[#E87B5B]/30 bg-[#FFF4EF] text-[#C95E3E]'
+                          : 'border-[#d9e1d7] bg-white text-[#244A30]'
+                      }`}
+                    >
+                      {searchResult.text}
+                    </div>
+                  )}
+                </form>
               </div>
             </div>
 
-            <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-7 sm:p-9 shadow-xs space-y-5 lg:col-span-7">
-              <div>
-                <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Wijken &amp; Buurten</p>
-                <h3 className="mt-2 font-heading text-2xl font-bold text-[#3B7F4B]">Binnen ons vaste servicegebied</h3>
-                <p className="mt-2 text-sm text-[#657068]">
-                  Onder andere in deze bekende Utrechtse wijken fietsen we wekelijks rond:
+            <div className="min-w-0 overflow-hidden rounded-[2.25rem] border border-[#d9e1d7] bg-white shadow-xs">
+              <div className="border-b border-[#d9e1d7] bg-[#F7F4EC] px-5 py-5 sm:px-7">
+                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
+                  <Bike className="h-3.5 w-3.5" />
+                  Tarieven onder €35
+                </span>
+                <h3 className="mt-3 font-heading text-2xl font-bold text-[#3B7F4B]">Overzicht per wijk en postcode</h3>
+                <p className="mt-2 text-sm leading-relaxed text-[#657068]">
+                  Iedere postcode toont het vaste ophaal- en bezorgtarief dat geldt wanneer je bestelling lager is dan €35.
                 </p>
               </div>
 
-              <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
-                {SERVICE_AREAS.map((area, idx) => (
-                  <div
-                    key={idx}
-                    className="flex items-start gap-3 rounded-2xl border border-[#d9e1d7]/70 bg-[#FAFAF8] p-3.5 text-xs transition-all duration-200 hover:border-[#3B7F4B]/50 hover:bg-white hover:shadow-xs"
-                  >
-                    <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#3B7F4B]" />
-                    <div>
-                      <span className="block font-heading text-sm font-bold text-[#3B7F4B]">{area.district}</span>
-                      <span className="font-mono text-[11px] text-[#657068]">{area.zip}</span>
-                      <span className="mt-0.5 block text-[11px] font-semibold text-[#C95E3E]">{area.note}</span>
+              <div className="divide-y divide-[#d9e1d7]/80">
+                {SERVICE_AREA_GROUPS.map((area) => (
+                  <div key={area.district} className="grid min-w-0 gap-3 px-5 py-5 sm:px-7 lg:grid-cols-[minmax(230px,0.85fr)_minmax(0,1.65fr)] lg:items-start lg:gap-8">
+                    <div className="flex min-w-0 items-start gap-3">
+                      <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+                      <h4 className="min-w-0 break-words font-heading text-sm font-bold leading-6 text-[#3B7F4B] sm:text-base">{area.district}</h4>
+                    </div>
+                    <div className="flex min-w-0 flex-wrap gap-2">
+                      {area.postcodes.map((postcode) => {
+                        const deliveryFee = getDeliveryFeeCents(postcode, 0, false);
+                        const feeLabel = deliveryFee === 0 ? 'Gratis' : formatEuroCents(deliveryFee ?? 0);
+
+                        return (
+                          <span key={postcode} className="inline-flex min-w-0 items-center overflow-hidden rounded-full border border-[#d9e1d7] bg-[#FAFAF8] text-xs font-bold">
+                            <span className="px-3 py-2 font-mono text-[#244A30]">{postcode}</span>
+                            <span className={`border-l border-[#d9e1d7] px-3 py-2 ${deliveryFee === 0 ? 'bg-[#E8EFE8] text-[#3B7F4B]' : 'bg-[#FFF4EF] text-[#C95E3E]'}`}>
+                              {feeLabel}
+                            </span>
+                          </span>
+                        );
+                      })}
                     </div>
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="flex flex-col items-start justify-between gap-4 rounded-[2rem] bg-[#E8EFE8] px-5 py-5 sm:flex-row sm:items-center sm:px-7">
+              <p className="max-w-2xl text-sm font-medium leading-6 text-[#3B7F4B]">
+                Weet je jouw tarief? Bereken daarna je volledige bestelling met messen, eventuele reparaties en bezorgkosten.
+              </p>
+              <button
+                type="button"
+                onClick={openCalculator}
+                className="group inline-flex min-h-12 w-full shrink-0 items-center justify-center gap-2 rounded-full bg-[#3B7F4B] px-6 py-3 text-sm font-bold text-white transition-all hover:bg-[#315F3B] sm:w-auto"
+              >
+                <span>Bereken je prijs &amp; bestel</span>
+                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" aria-hidden="true" />
+              </button>
             </div>
           </div>
         </div>
@@ -472,7 +455,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                 </span>
                 <h3 className="mt-5 font-heading text-2xl font-bold text-[#3B7F4B]">Binnen Utrecht</h3>
                 <p className="mt-2 text-sm leading-relaxed text-[#657068] sm:text-base">
-                  Vanaf €35 bestelwaarde halen en bezorgen we ze gratis aan huis of zaak. Doorgaans binnen 24-48 uur weer vlijmscherp terug.
+                  Controleer hierboven je postcode en tarief. Daarna kun je direct je volledige bestelling berekenen en plannen.
                 </p>
               </div>
               <div className="mt-6 pt-4 border-t border-[#d9e1d7]/60">
@@ -561,7 +544,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
           </div>
 
           <div className="space-y-3.5">
-            {serviceFaqs.map((faq, index) => {
+            {SERVICEGEBIED_FAQS.map((faq, index) => {
               const isOpen = openFaq === index;
               return (
                 <div
@@ -573,19 +556,22 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                     onClick={() => setOpenFaq(isOpen ? null : index)}
                     className="flex w-full items-center justify-between p-5 text-left font-heading text-base font-bold text-[#3B7F4B] sm:p-6 sm:text-lg cursor-pointer"
                     aria-expanded={isOpen}
+                    aria-controls={`servicegebied-faq-${index}`}
                   >
                     <span>{faq.q}</span>
                     <span className={`ml-4 flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-white text-[#3B7F4B] shadow-2xs transition-transform duration-200 ${isOpen ? 'rotate-45' : ''}`}>
                       <Plus className="h-5 w-5" />
                     </span>
                   </button>
-                  {isOpen && (
-                    <div className="border-t border-[#d9e1d7]/60 px-5 pb-6 pt-3 sm:px-6">
+                    <div
+                      id={`servicegebied-faq-${index}`}
+                      hidden={!isOpen}
+                      className="border-t border-[#d9e1d7]/60 px-5 pb-6 pt-3 sm:px-6"
+                    >
                       <p className="text-sm leading-relaxed text-[#657068] sm:text-base">
                         {faq.a}
                       </p>
                     </div>
-                  )}
                 </div>
               );
             })}

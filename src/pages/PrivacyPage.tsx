@@ -87,7 +87,7 @@ const sections: LegalSection[] = [
     '10.3 De Klant kan zich altijd afmelden voor marketingberichten door dit via WhatsApp of e-mail aan Slijpmaat door te geven.',
   ] },
   { heading: 'Artikel 11 - Website en cookies', paragraphs: [
-    '11.1 De website gebruikt functionele browseropslag om de gekozen taal en de cookievoorkeur van de bezoeker te onthouden. Deze opslag is nodig om de gekozen instellingen uit te voeren. De cookievoorkeur wordt maximaal 6 maanden bewaard en daarna opnieuw gevraagd.',
+    '11.1 De website gebruikt functionele browseropslag om de cookievoorkeur van de bezoeker te onthouden. Deze opslag is nodig om de gekozen instelling uit te voeren. De cookievoorkeur wordt maximaal 6 maanden bewaard en daarna opnieuw gevraagd.',
     '11.2 Slijpmaat gebruikt Google Analytics 4 uitsluitend nadat de bezoeker hiervoor actief toestemming heeft gegeven. Zonder toestemming wordt de Google Analytics-tag niet geladen en worden geen Analytics-metingen naar Google verstuurd.',
     '11.3 Na toestemming kan Google Analytics de cookies _ga en _ga_<meet-ID> plaatsen om bezoekers en sessies van elkaar te onderscheiden. Slijpmaat beperkt de levensduur van deze cookies tot maximaal 90 dagen. Google Analytics kan onder meer bezochte pagina’s, sessiegegevens, globale locatie, browser- en apparaatgegevens verwerken.',
     '11.4 Slijpmaat heeft advertentieopslag, Google Signals en advertentiepersonalisatie voor deze implementatie uitgeschakeld. De Analytics-gegevens worden niet gebruikt om op de website gepersonaliseerde advertenties te tonen.',

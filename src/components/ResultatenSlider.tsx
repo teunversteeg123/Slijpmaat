@@ -1,7 +1,7 @@
 import React from 'react';
-import PolaroidLineCarousel, { Slide } from './ui/polaroid-line-carousel';
+import PolaroidLineCarousel, { type Slide } from './ui/polaroid-line-carousel';
 
-export interface ResultatenSliderProps {
+interface ResultatenSliderProps {
   slides?: Slide[];
   className?: string;
   height?: number | string;

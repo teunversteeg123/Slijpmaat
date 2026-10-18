@@ -1,7 +1,7 @@
 import React from 'react';
 import { PageId } from '../types';
-import { SLIJPMAAT_INFO } from '../data/siteData';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
+import { createWhatsAppUrl } from '../utils/contact';
 import {
   ArrowRight,
   CheckCircle2,
@@ -17,7 +17,7 @@ interface DienstDetailProps {
 }
 
 export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNavigate }) => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een vraag over een specifieke slijpdienst!')}`;
+  const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik heb een vraag over een specifieke slijpdienst!');
 
   // Shared Bottom Contact Banner
   const renderContactBanner = (title: string, desc: string) => (
@@ -61,7 +61,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <button
               onClick={() => onNavigate('particulieren')}
-              className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#3B7F4B] shadow-2xs hover:bg-[#E8EFE8] transition-colors mb-6 cursor-pointer"
+              className="mb-6 inline-flex min-h-11 items-center gap-1 rounded-full bg-white px-4 py-2.5 text-xs font-bold text-[#3B7F4B] shadow-2xs transition-colors hover:bg-[#E8EFE8] cursor-pointer sm:min-h-0 sm:py-1.5"
             >
               <ChevronLeft className="h-4 w-4" />
               <span>Terug naar particulier</span>
@@ -102,7 +102,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
                   </li>
                   <li className="flex items-start gap-3">
                     <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-bold text-xs text-[#3B7F4B]">4</span>
-                    <span><strong>Leren strop:</strong> We halen het mes over een met polijstpasta behandelde leren strop. De braam is 100% verdwenen en het mes glijdt moeiteloos door papier.</span>
+                    <span><strong>Leren strop:</strong> We halen het mes over een met polijstpasta behandelde leren strop en controleren daarna de snede over de volledige lengte.</span>
                   </li>
                 </ol>
               </div>
@@ -162,7 +162,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <button
                   onClick={() => onNavigate('particulieren')}
-              className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#3B7F4B] shadow-2xs hover:bg-[#E8EFE8] transition-colors mb-6 cursor-pointer"
+              className="mb-6 inline-flex min-h-11 items-center gap-1 rounded-full bg-white px-4 py-2.5 text-xs font-bold text-[#3B7F4B] shadow-2xs transition-colors hover:bg-[#E8EFE8] cursor-pointer sm:min-h-0 sm:py-1.5"
             >
               <ChevronLeft className="h-4 w-4" />
                   <span>Terug naar particulier</span>
@@ -183,12 +183,12 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
               <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-7 sm:p-10 shadow-xs space-y-5">
                 <h2 className="font-heading text-2xl font-bold text-[#3B7F4B]">Waarom Japanse messen speciale zorg vragen</h2>
                 <p className="text-sm leading-relaxed text-[#657068]">
-                  Japanse messen zijn gemaakt van aanzienlijk harder staal (59 tot 64 HRC) dan traditionele Europese messen. Hierdoor kan het lemmet veel dunner worden uitgeslepen onder een spitse hoek van 12 tot 15 graden. Droge machinale slijpers zijn dodelijk voor dit staal: de hitte sloopt de harding en micro-chips breken direct uit.
+                  Veel Japanse keukenmessen combineren relatief hard staal met een dunne geometrie en een fijne snijhoek. Daarom beoordelen we per mes de staalsoort, bestaande snijvouw, symmetrie en conditie. Zo kiezen we een passende slijphoek en steen zonder algemene waarden op ieder Japans mes toe te passen.
                 </p>
 
                 <h3 className="font-heading text-xl font-bold text-[#3B7F4B] pt-3">De Japanse waterstenen van Slijpmaat</h3>
                 <p className="text-sm leading-relaxed text-[#657068]">
-                  Wij beoordelen elk Japans mes vooraf op de staalkern en symmetrie (50/50 of traditioneel asymmetrisch 70/30). Vervolgens kiezen wij de juiste stenen die passen bij de hardheid van het staal en sluiten we af op een leren strop met diamantpasta voor een zuivere spiegelpolijsting.
+                  Wij beoordelen elk Japans mes vooraf op staal, profiel en symmetrie. Vervolgens kiezen we passende waterstenen en werken we de snede gecontroleerd af op leer met polijstpasta. Bij bijzondere of enkelzijdig geslepen messen vragen we vooraf om een foto en aanvullende informatie.
                 </p>
               </div>
             </div>
@@ -240,7 +240,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
           <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
             <button
               onClick={() => onNavigate('particulieren')}
-              className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#3B7F4B] shadow-2xs hover:bg-[#E8EFE8] transition-colors mb-6 cursor-pointer"
+              className="mb-6 inline-flex min-h-11 items-center gap-1 rounded-full bg-white px-4 py-2.5 text-xs font-bold text-[#3B7F4B] shadow-2xs transition-colors hover:bg-[#E8EFE8] cursor-pointer sm:min-h-0 sm:py-1.5"
             >
               <ChevronLeft className="h-4 w-4" />
               <span>Terug naar particulier</span>
@@ -261,7 +261,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
               <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-7 sm:p-10 shadow-xs space-y-5">
                 <h2 className="font-heading text-2xl font-bold text-[#3B7F4B]">Hoe ontstaat een chip en hoe lossen we dit op?</h2>
                 <p className="text-sm leading-relaxed text-[#657068]">
-                  Als een hard koksmes per ongeluk een botje, avocado-pit of harde ondergrond raakt, kan een stukje staal van 0,5 mm tot 2 mm uitbreken. Als je alleen lokaal slijpt, ontstaat er een holle deuk in je snede waardoor het mes de snijplank niet meer raakt.
+                  Als een koksmes per ongeluk een botje, avocadopit of harde ondergrond raakt, kan een stukje uit de snede breken. Alleen lokaal slijpen kan de snijlijn ongelijk maken, waardoor het mes de snijplank niet meer overal goed raakt.
                 </p>
 
                 <h3 className="font-heading text-xl font-bold text-[#3B7F4B] pt-3">De aanpak van Slijpmaat</h3>
@@ -277,7 +277,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
                 <div className="divide-y divide-[#E87B5B]/20 text-sm">
                   <div className="py-2.5">
                     <div className="flex justify-between">
-                      <span className="font-semibold text-[#244A30]">Kleine chip (&le;2 mm)</span>
+                      <span className="font-semibold text-[#244A30]">Kleine chip</span>
                       <span className="font-bold text-[#C95E3E]">+€2,50</span>
                     </div>
                     <p className="text-xs text-[#657068] mt-0.5">Bovenop het basisslijptarief van het mes.</p>
@@ -292,7 +292,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
                 </div>
 
                 <a
-                  href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik heb een mes met een chip. Hierbij een foto ter beoordeling!')}`}
+                  href={createWhatsAppUrl('Hoi Teun en Mike, ik heb een mes met een chip. Hierbij een foto ter beoordeling!')}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-[#E87B5B] py-3 text-center text-sm font-bold text-white shadow-sm hover:bg-[#C95E3E] transition-all"
@@ -318,7 +318,7 @@ export const DienstDetailPage: React.FC<DienstDetailProps> = ({ pageId, onNaviga
         <div className="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <button
             onClick={() => onNavigate('particulieren')}
-            className="inline-flex items-center gap-1 rounded-full bg-white px-4 py-1.5 text-xs font-bold text-[#3B7F4B] shadow-2xs hover:bg-[#E8EFE8] transition-colors mb-6 cursor-pointer"
+            className="mb-6 inline-flex min-h-11 items-center gap-1 rounded-full bg-white px-4 py-2.5 text-xs font-bold text-[#3B7F4B] shadow-2xs transition-colors hover:bg-[#E8EFE8] cursor-pointer sm:min-h-0 sm:py-1.5"
           >
             <ChevronLeft className="h-4 w-4" />
             <span>Terug naar particulier</span>

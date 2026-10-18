@@ -2,7 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { SlijpmaatLogo } from './SlijpmaatLogo';
 import { PageId } from '../types';
 import { UIcon } from './ui/UIcon';
-import { SLIJPMAAT_INFO } from '../data/siteData';
+import { PAGE_PATHS } from '../seo';
+import { createWhatsAppUrl } from '../utils/contact';
 
 interface HeaderProps {
   currentPage: PageId | null;
@@ -112,6 +113,22 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
     }, 60);
   };
 
+  const handleInternalClick = (event: React.MouseEvent<HTMLAnchorElement>, pageId: PageId) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    handleLinkClick(pageId);
+  };
+
+  const handlePriceLinkClick = (
+    event: React.MouseEvent<HTMLAnchorElement>,
+    pageId: 'particulieren' | 'horeca',
+    targetId: 'calculator' | 'zakelijk-formulier',
+  ) => {
+    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+    event.preventDefault();
+    handlePriceClick(pageId, targetId);
+  };
+
   const isHeaderVisible = isVisible || mobileMenuOpen;
 
   return (
@@ -123,26 +140,26 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
       {/* Top Announcement Bar: #3B7F4B (Slijpmaat Groen) with White text */}
       <div className="bg-[#3B7F4B] text-white text-[11px] sm:text-xs py-2 px-3 sm:px-4 select-none">
         <div className="max-w-7xl mx-auto flex items-center justify-center sm:justify-between gap-3">
-          <button
-            type="button"
-            onClick={() => handleLinkClick('ophalen-bezorgen')}
+          <a
+            href={PAGE_PATHS['ophalen-bezorgen']}
+            onClick={(event) => handleInternalClick(event, 'ophalen-bezorgen')}
             className="flex items-center justify-center gap-1.5 sm:gap-2 text-center sm:text-left text-white hover:text-[#E8EFE8] transition-colors cursor-pointer"
           >
             <span className="flex h-2 w-2 shrink-0 rounded-full bg-white animate-pulse" />
             <span className="font-semibold">Gratis ophalen &amp; bezorgen in Utrecht vanaf €35 bestelwaarde</span>
-          </button>
+          </a>
 
           <div className="hidden sm:flex items-center gap-3 sm:gap-4 text-xs font-semibold">
-            <button
-              type="button"
-              onClick={() => handleLinkClick('ophalen-bezorgen')}
+            <a
+              href={PAGE_PATHS['ophalen-bezorgen']}
+              onClick={(event) => handleInternalClick(event, 'ophalen-bezorgen')}
               className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1.5 cursor-pointer shrink-0"
             >
               <UIcon name="marker" className="text-xs sm:text-sm text-white shrink-0" />
               <span>Servicegebied</span>
-            </button>
+            </a>
             <a
-              href={`https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!')}`}
+              href={createWhatsAppUrl('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!')}
               target="_blank"
               rel="noopener noreferrer"
               className="text-white hover:text-[#E8EFE8] transition-colors flex items-center gap-1.5 shrink-0"
@@ -158,22 +175,24 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
       <header className={`bg-[#F7F4EC] border-b border-[#3B7F4B]/20 transition-shadow ${isScrolled ? 'shadow-md' : 'shadow-xs'}`}>
         <div className="max-w-7xl mx-auto flex h-16 items-center justify-between gap-3 px-4 sm:h-20 sm:gap-4 sm:px-6 lg:px-8">
           {/* Zone 1: Wordmark Brand Lockup */}
-          <button
-            onClick={() => handleLinkClick('home')}
+          <a
+            href={PAGE_PATHS.home}
+            onClick={(event) => handleInternalClick(event, 'home')}
             className="flex items-center gap-2 group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#3B7F4B] rounded-lg p-1"
             aria-label="Slijpmaat home"
           >
             <SlijpmaatLogo variant="dark" size="lg" />
-          </button>
+          </a>
 
           {/* Zone 2: Clean Text Navigation (color: #244A30, hover: #3B7F4B) */}
           <nav className="hidden lg:flex items-center gap-5 text-sm font-semibold text-[#3B7F4B] xl:gap-7">
             {navLinks.map((link) => {
               const isActive = currentPage === link.id;
               return (
-                <button
+                <a
                   key={link.id}
-                  onClick={() => handleLinkClick(link.id)}
+                  href={PAGE_PATHS[link.id]}
+                  onClick={(event) => handleInternalClick(event, link.id)}
                   className={`relative py-1 transition-colors whitespace-nowrap cursor-pointer hover:text-[#3B7F4B] ${
                     isActive ? 'text-[#3B7F4B] font-bold' : 'text-[#3B7F4B]'
                   }`}
@@ -182,7 +201,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                   {isActive && (
                     <span className="absolute bottom-0 left-0 right-0 h-0.5 bg-[#3B7F4B] rounded-full" />
                   )}
-                </button>
+                </a>
               );
             })}
             <details name="header-menu" data-header-menu className="group relative">
@@ -193,14 +212,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               </summary>
               <div className="absolute left-1/2 top-full z-50 w-60 -translate-x-1/2 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
-                  <button type="button" onClick={() => handlePriceClick('particulieren', 'calculator')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
+                  <a href={`${PAGE_PATHS.particulieren}#calculator`} onClick={(event) => handlePriceLinkClick(event, 'particulieren', 'calculator')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
                     <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
-                  </button>
-                  <button type="button" onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
+                  </a>
+                  <a href={`${PAGE_PATHS.horeca}#zakelijk-formulier`} onClick={(event) => handlePriceLinkClick(event, 'horeca', 'zakelijk-formulier')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
                     <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </details>
@@ -218,14 +237,14 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
               <div className="absolute right-0 top-full z-50 w-60 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
-                  <button type="button" onClick={() => handleLinkClick('particulieren')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
+                  <a href={PAGE_PATHS.particulieren} onClick={(event) => handleInternalClick(event, 'particulieren')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
                     <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
-                  </button>
-                  <button type="button" onClick={() => handleLinkClick('horeca')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
+                  </a>
+                  <a href={PAGE_PATHS.horeca} onClick={(event) => handleInternalClick(event, 'horeca')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
                     <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
-                  </button>
+                  </a>
                 </div>
               </div>
             </details>
@@ -273,9 +292,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
             <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain px-4 py-2">
               <nav aria-label="Mobiele hoofdnavigatie" className="flex flex-col gap-0.5">
               {/* Home */}
-              <button
-                type="button"
-                onClick={() => handleLinkClick('home')}
+              <a
+                href={PAGE_PATHS.home}
+                onClick={(event) => handleInternalClick(event, 'home')}
                 className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'home'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
@@ -283,7 +302,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 }`}
               >
                 Home
-              </button>
+              </a>
 
               {/* Prijzen with collapsible sub-options */}
               <div>
@@ -307,28 +326,28 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 </button>
                 {mobilePrijzenOpen && (
                   <div className="ml-4 border-l-2 border-[#3B7F4B]/30 py-0.5 pl-3">
-                    <button
-                      type="button"
-                      onClick={() => handlePriceClick('particulieren', 'calculator')}
+                    <a
+                      href={`${PAGE_PATHS.particulieren}#calculator`}
+                      onClick={(event) => handlePriceLinkClick(event, 'particulieren', 'calculator')}
                       className="block min-h-11 w-full rounded-lg px-2 py-2 text-left text-sm font-medium text-[#3B7F4B]/75 transition-colors hover:bg-black/5 hover:text-[#3B7F4B]"
                     >
                       Particulier
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')}
+                    </a>
+                    <a
+                      href={`${PAGE_PATHS.horeca}#zakelijk-formulier`}
+                      onClick={(event) => handlePriceLinkClick(event, 'horeca', 'zakelijk-formulier')}
                       className="block min-h-11 w-full rounded-lg px-2 py-2 text-left text-sm font-medium text-[#3B7F4B]/75 transition-colors hover:bg-black/5 hover:text-[#3B7F4B]"
                     >
                       Zakelijk
-                    </button>
+                    </a>
                   </div>
                 )}
               </div>
 
               {/* Over ons */}
-              <button
-                type="button"
-                onClick={() => handleLinkClick('over-ons')}
+              <a
+                href={PAGE_PATHS['over-ons']}
+                onClick={(event) => handleInternalClick(event, 'over-ons')}
                 className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'over-ons'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
@@ -336,12 +355,12 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 }`}
               >
                 Over ons
-              </button>
+              </a>
 
               {/* Werkwijze */}
-              <button
-                type="button"
-                onClick={() => handleLinkClick('werkwijze')}
+              <a
+                href={PAGE_PATHS.werkwijze}
+                onClick={(event) => handleInternalClick(event, 'werkwijze')}
                 className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'werkwijze'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
@@ -349,12 +368,12 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 }`}
               >
                 Werkwijze
-              </button>
+              </a>
 
               {/* Servicegebied */}
-              <button
-                type="button"
-                onClick={() => handleLinkClick('ophalen-bezorgen')}
+              <a
+                href={PAGE_PATHS['ophalen-bezorgen']}
+                onClick={(event) => handleInternalClick(event, 'ophalen-bezorgen')}
                 className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'ophalen-bezorgen'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
@@ -362,12 +381,12 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 }`}
               >
                 Servicegebied
-              </button>
+              </a>
 
               {/* Blogs */}
-              <button
-                type="button"
-                onClick={() => handleLinkClick('blogs')}
+              <a
+                href={PAGE_PATHS.blogs}
+                onClick={(event) => handleInternalClick(event, 'blogs')}
                 className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'blogs'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
@@ -375,12 +394,12 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 }`}
               >
                 Blogs
-              </button>
+              </a>
 
               {/* Veelgestelde vragen */}
-              <button
-                type="button"
-                onClick={() => handleLinkClick('faq')}
+              <a
+                href={PAGE_PATHS.faq}
+                onClick={(event) => handleInternalClick(event, 'faq')}
                 className={`min-h-11 rounded-lg px-3 py-2 text-left text-[15px] font-semibold transition-colors ${
                   currentPage === 'faq'
                     ? 'text-[#3B7F4B] font-bold bg-[#E8EFE8]/70'
@@ -388,7 +407,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 }`}
               >
                 FAQ
-              </button>
+              </a>
 
               </nav>
             </div>
@@ -415,22 +434,22 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
                 {mobilePlanOpen && (
                   <div id="mobile-plan-options" className="mt-2 space-y-1 overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-1.5 shadow-sm animate-in fade-in slide-in-from-top-1 duration-200">
-                    <button
-                      type="button"
-                      onClick={() => handlePriceClick('particulieren', 'calculator')}
+                    <a
+                      href={`${PAGE_PATHS.particulieren}#calculator`}
+                      onClick={(event) => handlePriceLinkClick(event, 'particulieren', 'calculator')}
                       className="block min-h-11 w-full rounded-xl px-4 py-2 text-left transition-colors hover:bg-[#E8EFE8]"
                     >
                       <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                       <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => handlePriceClick('horeca', 'zakelijk-formulier')}
+                    </a>
+                    <a
+                      href={`${PAGE_PATHS.horeca}#zakelijk-formulier`}
+                      onClick={(event) => handlePriceLinkClick(event, 'horeca', 'zakelijk-formulier')}
                       className="block min-h-11 w-full rounded-xl px-4 py-2 text-left transition-colors hover:bg-[#FFF4EF]"
                     >
                       <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
                       <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
-                    </button>
+                    </a>
                   </div>
                 )}
             </div>

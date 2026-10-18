@@ -23,6 +23,8 @@ import {
   normalizeDutchPostcode,
 } from '../data/delivery';
 import { SLIJPMAAT_INFO } from '../data/siteData';
+import { createWhatsAppUrl } from '../utils/contact';
+import { formatEuroCents } from '../utils/format';
 
 type ServiceType = 'bezorging' | 'langskomen';
 
@@ -156,8 +158,7 @@ export const ZakelijkFormulier: React.FC = () => {
       'Alvast bedankt!'
     );
 
-    const waUrl = `https://wa.me/31682074967?text=${encodeURIComponent(messageLines.join('\n'))}`;
-    window.open(waUrl, '_blank', 'noopener,noreferrer');
+    window.open(createWhatsAppUrl(messageLines.join('\n')), '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -556,7 +557,7 @@ export const ZakelijkFormulier: React.FC = () => {
                     </span>
                   ) : (
                     <span>
-                      <strong className="text-[#3B7F4B]">Bezorgservice Utrecht:</strong> Binnen Utrecht gratis vanaf €35 bestelwaarde (incl. btw). Onder €35 geldt het bezorgtarief van €{((deliveryFeeCents || 725) / 100).toFixed(2).replace('.', ',')} incl. btw.
+                      <strong className="text-[#3B7F4B]">Bezorgservice Utrecht:</strong> Binnen Utrecht gratis vanaf €35 bestelwaarde (incl. btw). Onder €35 geldt het bezorgtarief van {formatEuroCents(deliveryFeeCents || 725)} incl. btw.
                     </span>
                   )}
                 </div>

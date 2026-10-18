@@ -20,7 +20,7 @@ import { ContactPage } from './pages/ContactPage';
 import { VoorwaardenPage } from './pages/VoorwaardenPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { NotFoundPage } from './pages/NotFoundPage';
-import { getRouteByPage, getRouteByPath, jsonLdString, NOT_FOUND_SEO, PAGE_PATHS, SITE_URL } from './seo';
+import { getRouteByPage, getRouteByPath, getSocialImageAlt, getSocialImageUrl, jsonLdString, NOT_FOUND_SEO, PAGE_PATHS, SITE_URL } from './seo';
 
 const setMetaContent = (selector: string, attribute: 'name' | 'property', key: string, content: string) => {
   let element = document.head.querySelector<HTMLMetaElement>(selector);
@@ -57,6 +57,28 @@ type AppProps = {
   initialPath?: string;
 };
 
+const LEGACY_HASH_PAGES: Readonly<Record<string, PageId>> = {
+  home: 'home',
+  particulieren: 'particulieren',
+  horeca: 'horeca',
+  'dienst-keukenmessen': 'dienst-keukenmessen',
+  'dienst-japanse-messen': 'dienst-japanse-messen',
+  'dienst-chips-herstellen': 'dienst-chips-herstellen',
+  'dienst-wel-niet': 'dienst-wel-niet',
+  werkwijze: 'werkwijze',
+  'ophalen-bezorgen': 'ophalen-bezorgen',
+  'buiten-utrecht': 'ophalen-bezorgen',
+  kennisbank: 'blogs',
+  blogs: 'blogs',
+  'hoe-slijp-je-een-mes': 'blog-hoe-slijp-je-een-mes',
+  'blog-hoe-slijp-je-een-mes': 'blog-hoe-slijp-je-een-mes',
+  'over-ons': 'over-ons',
+  faq: 'faq',
+  contact: 'contact',
+  'algemene-voorwaarden': 'algemene-voorwaarden',
+  privacy: 'privacy',
+};
+
 export default function App({ initialPath }: AppProps) {
   const browserPath = typeof window !== 'undefined' ? window.location.pathname : '/';
   const [currentPage, setCurrentPage] = useState<PageId | null>(() => getRouteByPath(initialPath ?? browserPath)?.pageId ?? null);
@@ -70,9 +92,15 @@ export default function App({ initialPath }: AppProps) {
     setMetaContent('meta[name="robots"]', 'name', 'robots', metadata.index ? 'index,follow' : 'noindex,follow');
     setMetaContent('meta[property="og:title"]', 'property', 'og:title', metadata.title);
     setMetaContent('meta[property="og:description"]', 'property', 'og:description', metadata.description);
+    setMetaContent('meta[property="og:type"]', 'property', 'og:type', 'datePublished' in metadata && metadata.datePublished ? 'article' : 'website');
     setMetaContent('meta[property="og:url"]', 'property', 'og:url', canonicalUrl);
+    setMetaContent('meta[property="og:locale"]', 'property', 'og:locale', 'nl_NL');
+    setMetaContent('meta[property="og:image"]', 'property', 'og:image', getSocialImageUrl(metadata));
+    setMetaContent('meta[property="og:image:alt"]', 'property', 'og:image:alt', getSocialImageAlt(metadata));
     setMetaContent('meta[name="twitter:title"]', 'name', 'twitter:title', metadata.title);
     setMetaContent('meta[name="twitter:description"]', 'name', 'twitter:description', metadata.description);
+    setMetaContent('meta[name="twitter:image"]', 'name', 'twitter:image', getSocialImageUrl(metadata));
+    setMetaContent('meta[name="twitter:image:alt"]', 'name', 'twitter:image:alt', getSocialImageAlt(metadata));
     setCanonical(canonicalUrl);
     setStructuredData(metadata.path);
     trackPageView(metadata.path, metadata.title);
@@ -98,27 +126,6 @@ export default function App({ initialPath }: AppProps) {
         }, 60);
         return;
       }
-      const legacyHashPages: Record<string, PageId> = {
-        home: 'home',
-        particulieren: 'particulieren',
-        horeca: 'horeca',
-        'dienst-keukenmessen': 'dienst-keukenmessen',
-        'dienst-japanse-messen': 'dienst-japanse-messen',
-        'dienst-chips-herstellen': 'dienst-chips-herstellen',
-        'dienst-wel-niet': 'dienst-wel-niet',
-        werkwijze: 'werkwijze',
-        'ophalen-bezorgen': 'ophalen-bezorgen',
-        'buiten-utrecht': 'ophalen-bezorgen',
-        kennisbank: 'blogs',
-        blogs: 'blogs',
-        'hoe-slijp-je-een-mes': 'blog-hoe-slijp-je-een-mes',
-        'blog-hoe-slijp-je-een-mes': 'blog-hoe-slijp-je-een-mes',
-        'over-ons': 'over-ons',
-        faq: 'faq',
-        contact: 'contact',
-        'algemene-voorwaarden': 'algemene-voorwaarden',
-        privacy: 'privacy',
-      };
       if (hash === 'prijzen-bestellen') {
         setCurrentPage('particulieren');
         window.history.replaceState(null, '', PAGE_PATHS.particulieren);
@@ -135,8 +142,8 @@ export default function App({ initialPath }: AppProps) {
         }, 60);
         return;
       }
-      if (legacyHashPages[hash]) {
-        const page = legacyHashPages[hash];
+      if (LEGACY_HASH_PAGES[hash]) {
+        const page = LEGACY_HASH_PAGES[hash];
         setCurrentPage(page);
         window.history.replaceState(null, '', PAGE_PATHS[page]);
         return;

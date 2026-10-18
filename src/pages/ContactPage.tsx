@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { SLIJPMAAT_INFO } from '../data/siteData';
-import { GoogleIcon, GOOGLE_REVIEW_COUNT } from '../components/GoogleReviewsSection';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
+import { TrustBar } from '../components/TrustBar';
+import { createWhatsAppUrl } from '../utils/contact';
 import {
-  Clock3,
   MapPin,
   MessageCircle,
   Phone,
@@ -12,7 +12,7 @@ import {
 } from 'lucide-react';
 
 export const ContactPage: React.FC = () => {
-  const whatsappUrl = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent('Hoi Teun en Mike, ik wil graag contact met jullie opnemen!')}`;
+  const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik wil graag contact met jullie opnemen!');
 
   const [formData, setFormData] = useState({
     name: '',
@@ -34,8 +34,7 @@ export const ContactPage: React.FC = () => {
       '',
       formData.message.trim(),
     ].join('\n');
-    const url = `https://wa.me/${SLIJPMAAT_INFO.whatsappNumber.replace('+', '')}?text=${encodeURIComponent(message)}`;
-    window.open(url, '_blank', 'noopener,noreferrer');
+    window.open(createWhatsAppUrl(message), '_blank', 'noopener,noreferrer');
   };
 
   return (
@@ -81,26 +80,12 @@ export const ContactPage: React.FC = () => {
         </div>
       </section>
 
-      {/* 2. TRUST BAR */}
-      <section aria-label="Zekerheden" className="relative z-20 px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-5xl rounded-2xl border border-[#d9e1d7]/70 bg-white/95 px-6 py-4 shadow-[0_4px_24px_rgba(36,74,48,0.04)] backdrop-blur-xs">
-          <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
-            <div className="flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <GoogleIcon />
-              <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
-              <span className="text-sm font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 sm:px-5">
-              <Clock3 className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Gemiddeld binnen 1 uur reactie</span>
-            </div>
-            <div className="flex items-center gap-3 sm:justify-center sm:px-5">
-              <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-              <span className="text-sm font-bold text-[#3B7F4B]">Uitsluitend op afspraak</span>
-            </div>
-          </div>
-        </div>
-      </section>
+      <TrustBar
+        items={[
+          { icon: <MessageCircle className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />, text: 'Gemiddeld binnen 1 uur reactie' },
+          { icon: <MapPin className="h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />, text: 'Uitsluitend op afspraak' },
+        ]}
+      />
 
       {/* 3. CONTACT CHANNELS & FORM */}
       <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
