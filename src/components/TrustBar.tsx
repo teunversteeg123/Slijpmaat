@@ -12,7 +12,7 @@ type TrustBarProps = {
   compact?: boolean;
 };
 
-export const TrustBar = ({ items, showRating = false, compact = false }: TrustBarProps) => {
+export const TrustBar = ({ items, showRating: _showRating = false, compact = false }: TrustBarProps) => {
   const sectionSpacing = compact ? 'py-2' : 'py-3';
   const maxWidth = compact ? 'max-w-4xl' : 'max-w-5xl';
   const itemPadding = compact ? 'sm:px-4' : 'sm:px-5';
@@ -23,9 +23,8 @@ export const TrustBar = ({ items, showRating = false, compact = false }: TrustBa
         <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
           <div className={`flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 ${itemPadding}`}>
             <GoogleIcon />
-            <span className="text-sm leading-none tracking-[0.06em] text-[#FABB05]" aria-label="5 van de 5 sterren">★★★★★</span>
             <span className="text-sm font-bold text-[#3B7F4B]">
-              {GOOGLE_REVIEW_COUNT} reviews{showRating ? ' · 5,0' : ''}
+              5,0 · {GOOGLE_REVIEW_COUNT} reviews
             </span>
           </div>
           {items.map((item, index) => (

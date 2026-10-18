@@ -24,12 +24,15 @@ export const UtrechtQuotesSection: React.FC = () => {
   const physicalIndexRef = useRef(QUOTE_COUNT);
   const scrollEndTimerRef = useRef<number | null>(null);
 
+  const [isPaused, setIsPaused] = useState(false);
+
   const scrollToPhysicalIndex = useCallback((index: number, behavior: ScrollBehavior) => {
     const track = trackRef.current;
     const card = track?.children.item(index) as HTMLElement | null;
 
     if (track && card) {
-      track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior });
+      const scrollTarget = card.offsetLeft - track.offsetLeft - (track.clientWidth - card.clientWidth) / 2;
+      track.scrollTo({ left: Math.max(0, scrollTarget), behavior });
     }
   }, []);
 
@@ -48,10 +51,14 @@ export const UtrechtQuotesSection: React.FC = () => {
     if (scrollEndTimerRef.current !== null) window.clearTimeout(scrollEndTimerRef.current);
     scrollEndTimerRef.current = window.setTimeout(() => {
       const cards = Array.from(track.children) as HTMLElement[];
+      if (cards.length === 0) return;
+      const trackCenter = track.scrollLeft + track.clientWidth / 2;
       const closestIndex = cards.reduce((closest, card, index) => {
-        const currentDistance = Math.abs(card.offsetLeft - track.offsetLeft - track.scrollLeft);
+        const cardCenter = card.offsetLeft - track.offsetLeft + card.clientWidth / 2;
+        const currentDistance = Math.abs(cardCenter - trackCenter);
         const closestCard = cards[closest];
-        const closestDistance = Math.abs(closestCard.offsetLeft - track.offsetLeft - track.scrollLeft);
+        const closestCenter = closestCard.offsetLeft - track.offsetLeft + closestCard.clientWidth / 2;
+        const closestDistance = Math.abs(closestCenter - trackCenter);
         return currentDistance < closestDistance ? index : closest;
       }, 0);
 
@@ -74,14 +81,14 @@ export const UtrechtQuotesSection: React.FC = () => {
   }, [scrollToPhysicalIndex]);
 
   useEffect(() => {
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    if (isPaused || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const autoAdvance = window.setTimeout(() => {
       moveQuotesBy(1);
-    }, 5200);
+    }, 6000);
 
     return () => window.clearTimeout(autoAdvance);
-  }, [moveQuotesBy, quoteIndex]);
+  }, [moveQuotesBy, quoteIndex, isPaused]);
 
   useEffect(() => () => {
     if (scrollEndTimerRef.current !== null) window.clearTimeout(scrollEndTimerRef.current);
@@ -91,6 +98,13 @@ export const UtrechtQuotesSection: React.FC = () => {
     <section
       id="utrechtse-quotes"
       className="relative scroll-mt-24 overflow-hidden bg-[#3B7F4B] px-4 py-16 sm:px-6 sm:py-24 lg:px-8"
+      onMouseEnter={() => setIsPaused(true)}
+      onMouseLeave={() => setIsPaused(false)}
+      onTouchStart={() => setIsPaused(true)}
+      onTouchEnd={() => {
+        // Resume after 4 seconds of idle
+        setTimeout(() => setIsPaused(false), 4000);
+      }}
     >
       <div
         aria-hidden="true"
@@ -98,17 +112,17 @@ export const UtrechtQuotesSection: React.FC = () => {
       />
 
       <div className="relative mx-auto max-w-6xl">
-        <div className="mb-10 text-center sm:mb-14">
+        <div className="mb-8 text-center sm:mb-12">
           <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#F4B19D]">Wat mensen roepen</p>
           <h2 className="mt-2 font-heading text-3xl font-bold text-white sm:text-4xl">
             Quotes uit de Utrechtse keukens
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-base text-[#E8EFE8]">
+          <p className="mx-auto mt-3 max-w-xl text-sm sm:text-base text-[#E8EFE8]">
             Korte reacties van thuiskoks en koks zodra ze hun geslepen messen weer vastpakken.
           </p>
         </div>
 
-        <div className="relative left-1/2 w-screen -translate-x-1/2">
+        <div className="relative mx-auto w-full overflow-hidden">
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 left-0 z-10 hidden w-10 bg-linear-to-r from-[#3B7F4B] to-transparent sm:block lg:w-16" />
           <div aria-hidden="true" className="pointer-events-none absolute inset-y-0 right-0 z-10 hidden w-10 bg-linear-to-l from-[#3B7F4B] to-transparent sm:block lg:w-16" />
           <div
@@ -116,23 +130,25 @@ export const UtrechtQuotesSection: React.FC = () => {
             onScroll={handleQuoteScroll}
             role="region"
             aria-label="Korte citaten uit Google-reviews"
-            className="flex gap-5 overflow-x-auto overscroll-x-contain px-4 py-3 sm:px-16 lg:px-24 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex gap-4 sm:gap-6 overflow-x-auto overscroll-x-contain py-4 px-3 sm:px-8 snap-x snap-mandatory [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           >
             {LOOPED_QUOTES.map((item, loopIndex) => (
               <article
                 key={`${Math.floor(loopIndex / QUOTE_COUNT)}-${item.name}`}
                 aria-hidden={loopIndex < QUOTE_COUNT || loopIndex >= QUOTE_COUNT * 2 ? true : undefined}
-                className="relative min-h-[240px] min-w-[calc(100vw-2rem)] rounded-[2rem] border border-[#d9e1d7] bg-white p-6 shadow-xs transition-all duration-300 odd:-rotate-[0.35deg] even:rotate-[0.35deg] hover:-translate-y-1 hover:rotate-0 hover:shadow-md sm:min-w-[420px] lg:min-w-[390px]"
+                className="relative flex flex-col justify-between min-h-[250px] sm:min-h-[240px] w-[85vw] max-w-[340px] min-w-[85vw] sm:w-[380px] sm:min-w-[380px] lg:w-[360px] lg:min-w-[360px] snap-center shrink-0 rounded-[2rem] border border-[#d9e1d7] bg-white p-5 sm:p-7 shadow-xs transition-all duration-300 hover:shadow-md"
               >
-                <UIcon name="quote-right" className="mb-2 text-2xl text-[#E87B5B]/30" />
-                <p className="font-heading text-lg font-bold leading-snug text-[#203728]">
-                  &ldquo;{item.text}&rdquo;
-                </p>
-                <div className="absolute inset-x-6 bottom-6 flex items-center justify-between gap-3 border-t border-[#d9e1d7]/50 pt-4 text-xs">
-                  <span className="font-bold text-[#3B7F4B]">{item.name}</span>
-                  <span className="inline-flex items-center gap-1.5 rounded-full bg-[#FCEEE8] px-2.5 py-1 font-bold text-[#C95E3E]" aria-label="5 van de 5 sterren op Google">
+                <div>
+                  <UIcon name="quote-right" className="mb-2 text-xl sm:text-2xl text-[#E87B5B]/30" aria-hidden="true" />
+                  <p className="font-heading text-[15px] sm:text-base lg:text-lg font-bold leading-relaxed sm:leading-snug text-[#203728]">
+                    &ldquo;{item.text}&rdquo;
+                  </p>
+                </div>
+                <div className="mt-4 sm:mt-5 flex items-center justify-between gap-3 border-t border-[#d9e1d7]/60 pt-3.5 text-xs">
+                  <span className="font-bold text-[#3B7F4B] truncate">{item.name}</span>
+                  <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#FCEEE8] px-2.5 py-1 font-bold text-[#C95E3E]">
                     <GoogleIcon />
-                    <span aria-hidden="true">★★★★★</span>
+                    <span>5,0 op Google</span>
                   </span>
                 </div>
               </article>
@@ -140,7 +156,7 @@ export const UtrechtQuotesSection: React.FC = () => {
           </div>
         </div>
 
-        <div className="mt-5 flex justify-center gap-2.5 sm:justify-end">
+        <div className="mt-6 flex justify-center gap-3 sm:justify-end">
           <button type="button" onClick={() => moveQuotesBy(-1)} className="flex h-11 w-11 items-center justify-center rounded-full border border-white/25 bg-white text-[#3B7F4B] shadow-[0_8px_20px_rgba(0,0,0,0.16)] transition-colors hover:bg-[#F7F4EC] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white cursor-pointer" aria-label="Vorige quote">
             <UIcon name="angle-small-left" className="text-xl" aria-hidden="true" />
           </button>

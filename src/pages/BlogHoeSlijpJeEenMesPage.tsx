@@ -1,684 +1,944 @@
-import type { FC } from 'react';
-import {
-  ArrowLeft,
-  ArrowRight,
-  Calendar,
-  CheckCircle2,
-  Clock,
-  Check,
-  MessageCircle,
-  FileText,
-  AlertCircle,
-} from 'lucide-react';
+import { useState, useEffect, useMemo, type FC } from 'react';
 import type { PageId } from '../types';
-import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import { TrustBar } from '../components/TrustBar';
 import { UIcon } from '../components/ui/UIcon';
-import { createWhatsAppUrl } from '../utils/contact';
 
 interface BlogHoeSlijpJeEenMesPageProps {
   onNavigate: (page: PageId) => void;
 }
 
+interface NavSection {
+  id: string;
+  title: string;
+  shortTitle: string;
+  category: string;
+  keywords: string[];
+}
+
+const SECTIONS: NavSection[] = [
+  {
+    id: 'inleiding',
+    title: 'Inleiding & het korte antwoord',
+    shortTitle: 'Korte antwoord',
+    category: 'Basis',
+    keywords: ['inleiding', 'basis', 'snede', 'braam', 'korte antwoord'],
+  },
+  {
+    id: 'diagnose',
+    title: 'Wanneer is je mes toe aan een slijpbeurt?',
+    shortTitle: 'Diagnose & tests',
+    category: 'Diagnose',
+    keywords: ['tomatentest', 'papiertest', 'bot mes', 'scherpte testen', 'diagnose', 'wanneer slijpen'],
+  },
+  {
+    id: 'benodigdheden',
+    title: 'Wat heb je nodig om zelf te slijpen?',
+    shortTitle: 'Benodigdheden',
+    category: 'Voorbereiding',
+    keywords: ['watersteen', 'korrel 1000', 'wetsteen', 'slijpsteen', 'theedoek', 'materiaal', 'spullen'],
+  },
+  {
+    id: 'wetsteen-weken',
+    title: 'Moet een wetsteen altijd weken in water?',
+    shortTitle: 'Feit of fabel: weken',
+    category: 'Kennis',
+    keywords: ['weken', 'splash and go', 'water', 'feit fabel', 'poreus', 'holle steen'],
+  },
+  {
+    id: 'slijphoek',
+    title: 'Welke slijphoek moet je gebruiken?',
+    shortTitle: 'Slijphoek & stifttruc',
+    category: 'Techniek',
+    keywords: ['slijphoek', 'graden', '15 graden', '20 graden', 'stifttruc', 'geometrie'],
+  },
+  {
+    id: 'stappenplan',
+    title: 'Het 7-stappenplan: van hiel tot punt',
+    shortTitle: 'Het 7-stappenplan',
+    category: 'Stappen',
+    keywords: ['stappenplan', 'stap voor stap', 'stap 1', 'stap 2', 'stap 3', 'stap 4', 'stap 5', 'stap 6', 'stap 7', 'braam', 'ontbramen'],
+  },
+  {
+    id: 'fouten',
+    title: 'De 5 meest gemaakte fouten',
+    shortTitle: '5 veelgemaakte fouten',
+    category: 'Valkuilen',
+    keywords: ['fouten', 'valkuilen', 'druk zetten', 'hoek veranderen', 'braam missen'],
+  },
+  {
+    id: 'aanzetten-vs-slijpen',
+    title: 'Aanzetten vs. slijpen: het verschil',
+    shortTitle: 'Aanzetstaal vs slijpen',
+    category: 'Onderscheid',
+    keywords: ['aanzetstaal', 'staal richten', 'microbraam', 'verschil', 'slijpen'],
+  },
+  {
+    id: 'wanneer-uitbesteden',
+    title: 'Wanneer kun je beter professioneel laten slijpen?',
+    shortTitle: 'Professioneel laten doen',
+    category: 'Advies',
+    keywords: ['uitbesteden', 'chips', 'happen', 'punt gebroken', 'kostbaar mes', 'vakman'],
+  },
+  {
+    id: 'onderhoud',
+    title: '4 gouden regels voor scherptebehoud',
+    shortTitle: 'Onderhoud & tips',
+    category: 'Nazorg',
+    keywords: ['snijplank', 'vaatwasser', 'onderhoud', 'bewaren', 'scherp houden'],
+  },
+];
+
 export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ onNavigate }) => {
-  const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik las jullie blog over messen slijpen en wil graag advies over mijn mes.');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [activeSectionId, setActiveSectionId] = useState<string>('inleiding');
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  // Filter sections based on search query
+  const filteredSections = useMemo(() => {
+    const q = searchQuery.trim().toLowerCase();
+    if (!q) return SECTIONS;
+    return SECTIONS.filter(
+      (sec) =>
+        sec.title.toLowerCase().includes(q) ||
+        sec.category.toLowerCase().includes(q) ||
+        sec.keywords.some((k) => k.toLowerCase().includes(q))
+    );
+  }, [searchQuery]);
+
+  // Scrollspy: update active section as user scrolls
+  useEffect(() => {
+    const handleScroll = () => {
+      const scrollY = window.scrollY + 180;
+      for (let i = SECTIONS.length - 1; i >= 0; i--) {
+        const el = document.getElementById(SECTIONS[i].id);
+        if (el && el.offsetTop <= scrollY) {
+          setActiveSectionId(SECTIONS[i].id);
+          break;
+        }
+      }
+    };
+
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    handleScroll();
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollToSection = (id: string) => {
+    const el = document.getElementById(id);
+    if (el) {
+      const topOffset = el.getBoundingClientRect().top + window.scrollY - 90;
+      window.scrollTo({ top: topOffset, behavior: 'smooth' });
+      setActiveSectionId(id);
+      setMobileMenuOpen(false);
+    }
+  };
 
   return (
-    <article className="overflow-hidden bg-[#FAFAF8]">
+    <article className="min-h-screen bg-white text-[#244A30] font-sans">
       {/* 1. KRUIMELPAD */}
-      <nav aria-label="Kruimelpad" className="border-b border-[#d9e1d7] bg-white px-4 py-3 sm:px-6 lg:px-8">
-        <div className="mx-auto flex max-w-5xl items-center gap-2 text-xs font-medium text-[#657068] sm:text-sm">
+      <nav aria-label="Kruimelpad" className="border-b border-[#E8EFE8] bg-white px-4 py-3 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl items-center gap-2 text-xs font-semibold text-[#3B7F4B] sm:text-sm">
           <button
             type="button"
             onClick={() => onNavigate('home')}
-            className="transition hover:text-[#3B7F4B]"
+            className="transition hover:text-[#203728] cursor-pointer"
           >
             Home
           </button>
-          <span aria-hidden="true" className="text-[#a1aca4]">/</span>
+          <span aria-hidden="true" className="text-[#A9C89E]">/</span>
           <button
             type="button"
             onClick={() => onNavigate('blogs')}
-            className="transition hover:text-[#3B7F4B]"
+            className="transition hover:text-[#203728] cursor-pointer"
           >
             Blogs
           </button>
-          <span aria-hidden="true" className="text-[#a1aca4]">/</span>
-          <span className="truncate text-[#244A30] font-semibold" aria-current="page">
+          <span aria-hidden="true" className="text-[#A9C89E]">/</span>
+          <span className="truncate text-[#244A30] font-bold" aria-current="page">
             Hoe slijp je een mes?
           </span>
         </div>
       </nav>
 
-      {/* 2. HERO SECTIE */}
-      <header className="relative px-4 pb-12 pt-8 sm:px-6 sm:pb-16 sm:pt-12 lg:px-8">
-        <div className="mx-auto max-w-4xl">
+      {/* 2. ARTIKEL INTRODUCTIE & HEADER (WITTE ACHTERGROND, GROENE TYPOGRAFIE, GEEN FOTO) */}
+      <header className="border-b border-[#E8EFE8] bg-white px-4 pb-10 pt-8 sm:px-6 sm:pb-12 sm:pt-12 lg:px-8">
+        <div className="mx-auto max-w-7xl">
           <button
             type="button"
             onClick={() => onNavigate('blogs')}
-            className="group mb-6 inline-flex min-h-11 items-center gap-2 py-2 text-xs font-bold uppercase tracking-wider text-[#3B7F4B] transition hover:text-[#203728] sm:min-h-0 sm:py-0 sm:text-sm"
+            className="group mb-5 inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#3B7F4B] transition hover:text-[#203728] cursor-pointer sm:text-sm"
           >
-            <ArrowLeft className="h-4 w-4 transition-transform group-hover:-translate-x-1" aria-hidden="true" />
+            <UIcon name="arrow-left" className="text-sm transition-transform group-hover:-translate-x-1" aria-hidden="true" />
             Terug naar alle blogs
           </button>
 
-          <div className="flex flex-wrap items-center gap-2.5 sm:gap-3">
+          <div className="flex flex-wrap items-center gap-3">
             <span className="inline-flex items-center rounded-full bg-[#E8EFE8] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
               Stappenplan &amp; Ambacht
             </span>
-            <span className="inline-flex items-center gap-1.5 text-xs text-[#657068] sm:text-sm">
-              <Calendar className="h-3.5 w-3.5 text-[#3B7F4B]" aria-hidden="true" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#3B7F4B] sm:text-sm">
+              <UIcon name="calendar" className="text-xs text-[#3B7F4B]" aria-hidden="true" />
               15 oktober 2026
             </span>
-            <span className="inline-flex items-center gap-1.5 text-xs text-[#657068] sm:text-sm">
-              <Clock className="h-3.5 w-3.5 text-[#3B7F4B]" aria-hidden="true" />
+            <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#3B7F4B] sm:text-sm">
+              <UIcon name="clock-three" className="text-xs text-[#3B7F4B]" aria-hidden="true" />
               7 min leestijd
             </span>
           </div>
 
-          <h1 className="mt-4 font-heading text-3xl font-bold leading-tight tracking-tight text-[#203728] sm:text-4xl lg:text-5xl">
+          <h1 className="mt-4 max-w-4xl font-heading text-3xl font-black leading-[1.08] tracking-tight text-[#244A30] sm:text-4xl lg:text-5xl">
             Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug
           </h1>
 
           {/* Auteursblok Teun & Mike */}
-          <div className="mt-6 flex items-center justify-between border-y border-[#d9e1d7] py-4">
+          <div className="mt-6 flex flex-wrap items-center justify-between gap-4 border-t border-[#E8EFE8] pt-5">
             <div className="flex items-center gap-3.5">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[#E8EFE8] text-sm font-bold text-[#3B7F4B]">
+              <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-[#E8EFE8] text-base font-bold text-[#3B7F4B]">
                 S
               </div>
               <div>
-                <p className="text-sm font-bold text-[#203728] sm:text-base">
+                <p className="text-sm font-bold text-[#244A30] sm:text-base">
                   Door Teun en Mike van Slijpmaat
                 </p>
-                <p className="text-xs text-[#657068]">
+                <p className="text-xs text-[#3B7F4B]/80 font-medium">
                   Ambachtelijke messenslijpers uit Utrecht · Laatst gecontroleerd: 15 oktober 2026
                 </p>
               </div>
             </div>
 
-            <div className="hidden sm:flex items-center gap-2 rounded-full bg-[#FCEEE8] px-3.5 py-1 text-xs font-bold text-[#C95E3E]">
-              <CheckCircle2 className="h-3.5 w-3.5" aria-hidden="true" />
+            <div className="inline-flex items-center gap-1.5 rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
+              <UIcon name="check" className="text-xs text-[#3B7F4B]" aria-hidden="true" />
               <span>Geverifieerd vakkennis</span>
             </div>
           </div>
-
-          {/* Lead introductie */}
-          <p className="mt-8 text-lg font-medium leading-relaxed text-[#203728] sm:text-xl sm:leading-relaxed">
-            Een keukenmes slijp je door met een slijpsteen gecontroleerd een klein beetje staal van beide kanten van de snede te verwijderen. Houd de bestaande slijphoek zo constant mogelijk, werk van de hiel naar de punt en slijp door tot je over de hele snede een kleine braam voelt. Daarna verfijn je de snede met lichte halen.
-          </p>
-
-          <p className="mt-4 text-base leading-7 text-[#657068] sm:text-lg">
-            Dat is het korte antwoord. Klinkt overzichtelijk, toch? Dat is het ook, zolang je rustig werkt en weet waarop je moet letten. In deze blog nemen we je stap voor stap mee in ons ambacht.
-          </p>
-
-          {/* Afbakeningskader */}
-          <aside className="mt-8 rounded-2xl border-l-4 border-[#3B7F4B] bg-[#E8EFE8]/70 p-5 text-sm leading-relaxed text-[#203728]" aria-label="Belangrijke afbakening">
-            <div className="flex items-center gap-2 font-bold text-[#3B7F4B]">
-              <AlertCircle className="h-4 w-4" aria-hidden="true" />
-              <span>Belangrijke afbakening</span>
-            </div>
-            <p className="mt-1 text-[#505d54]">
-              Deze uitleg is bedoeld voor gewone stalen keukenmessen met een gladde, aan twee kanten geslepen snede. Kartelmessen, keramische messen en bijzondere enkelzijdig geslepen messen vragen een heel andere aanpak.
-            </p>
-          </aside>
-
-          {/* Uitgelichte foto */}
-          <figure className="mt-8 overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-md">
-            <img
-              src="/assets/werkwijze/03-slijpen.jpg"
-              alt="Handmatig messen slijpen op Japanse waterstenen bij Slijpmaat in Utrecht"
-              className="h-[280px] w-full object-cover sm:h-[400px] lg:h-[460px]"
-            />
-            <figcaption className="bg-white px-5 py-3 text-xs text-[#657068] sm:text-sm">
-              Handmatig slijpen op Japanse waterstenen in onze Utrechtse werkruimte. Een constante hoek, nat slijpen en beheerste materiaalafname staan centraal.
-            </figcaption>
-          </figure>
         </div>
       </header>
 
-      <TrustBar
-        compact
-        showRating
-        items={[
-          { icon: <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Doorgaans binnen 24-48 uur retour' },
-          { icon: <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Gratis ophalen & bezorgen vanaf €35' },
-        ]}
-      />
-
-      <OrganicSectionDivider
-        fromColor="#FAFAF8"
-        middleColor="#E8EFE8"
-        toColor="#F7F4EC"
-        variant="calm"
-      />
-
-      {/* 4. INHOUDSSECTIE IN WARM CREAM #F7F4EC (Wanneer slijpen & Benodigdheden) */}
-      <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">
-        <div className="relative mx-auto max-w-4xl space-y-16">
-
-          {/* SECTIE: WANNEER IS JE MES TOE AAN EEN SLIJPBEURT */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#C95E3E]">
-              Diagnose &amp; Signalen
-            </p>
-            <h2 className="mt-2 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
-              Wanneer is je mes toe aan een slijpbeurt?
-            </h2>
-            <p className="mt-4 leading-7 text-[#505d54]">
-              Een bot mes herken je meestal tijdens het koken. De tomaat wordt eerder geplet dan gesneden, een ui glijdt onder de snede vandaan of je moet ineens veel meer kracht zetten. Dat is niet alleen irritant: door harder te duwen heb je ook minder controle over je mes, waardoor het risico op uitschieten flink toeneemt.
-            </p>
-
-            <p className="mt-4 font-semibold text-[#203728]">
-              Twijfel je over de scherpte? Doe een van deze twee simpele tests:
-            </p>
-
-            <div className="mt-6 grid gap-5 sm:grid-cols-2">
-              <div className="rounded-[2.25rem] border border-[#d9e1d7] bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#FDF0EC] text-[#E87B5B]">
-                    <Check className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <h3 className="font-heading text-lg font-bold text-[#203728]">De tomatentest</h3>
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-[#657068]">
-                  Zet het mes op de gladde schil en maak zonder veel neerwaartse druk een rustige snijbeweging. Een scherp mes pakt direct in de schil zonder de tomaat in te drukken of te kneuzen.
-                </p>
-              </div>
-
-              <div className="rounded-[2.25rem] border border-[#d9e1d7] bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md">
-                <div className="flex items-center gap-3">
-                  <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E8EFE8] text-[#3B7F4B]">
-                    <FileText className="h-5 w-5" aria-hidden="true" />
-                  </span>
-                  <h3 className="font-heading text-lg font-bold text-[#203728]">De papiertest</h3>
-                </div>
-                <p className="mt-3 text-sm leading-relaxed text-[#657068]">
-                  Probeer vanaf de bovenrand soepel door een los vel printpapier te snijden. Blijft het mes halverwege haken of scheurt het papier? Dan is de snede micro-beschadigd of bot.
-                </p>
-              </div>
-            </div>
-
-            <p className="mt-6 text-xs sm:text-sm text-[#657068] italic">
-              Hoe vaak je moet slijpen, verschilt per mes en gebruiker. Het staal, je snijplank, de manier van opbergen en hoe vaak je kookt spelen allemaal mee. Kijk daarom vooral naar hoe het mes snijdt, niet alleen naar de kalender.
-            </p>
-          </div>
-
-          {/* SECTIE: BENODIGDHEDEN */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#3B7F4B]">
-              Gereedschap &amp; Voorbereiding
-            </p>
-            <h2 className="mt-2 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
-              Wat heb je nodig om zelf een mes te slijpen?
-            </h2>
-            <p className="mt-4 leading-7 text-[#505d54]">
-              Voor een bot maar onbeschadigd keukenmes heb je geen complete machinale werkplaats nodig. Met deze ambachtelijke basis kom je een heel eind:
-            </p>
-
-            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              {[
-                { title: 'Vlakke slijpsteen korrel 1000', desc: 'Het meest praktische beginpunt voor normaal periodiek onderhoud.' },
-                { title: 'Water of voorgeschreven vloeistof', desc: 'Koelt de snede en spoelt het slijpresidu continu weg.' },
-                { title: 'Steenhouder of vochtige doek', desc: 'Houdt de steen stevig op zijn plek tegen wegglijden.' },
-                { title: 'Schone zachte theedoek', desc: 'Voor het drogen en tussentijds schoonvegen van het lemmet.' },
-                { title: 'Optioneel: fijnere steen (3000-5000)', desc: 'Voor het polijsten en verfijnen van de snede.' },
-                { title: 'Optioneel: watervaste stift', desc: 'Onmisbaar om direct visueel je slijphoek te controleren.' },
-              ].map((item, idx) => (
-                <li key={idx} className="flex items-start gap-3 rounded-2xl border border-[#d9e1d7] bg-white p-5 shadow-xs">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-                  <div>
-                    <h4 className="text-sm font-bold text-[#203728]">{item.title}</h4>
-                    <p className="text-xs leading-5 text-[#657068]">{item.desc}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-6 rounded-2xl border border-[#E87B5B]/30 bg-[#FCEEE8] p-5 text-sm leading-relaxed text-[#203728]">
-              <strong className="block font-bold text-[#C95E3E]">Let op bij zichtbare schade:</strong>
-              Heeft de snede duidelijke chips, happen of een afgebroken punt? Dan is vaak een grovere steen en meer ervaring nodig. Met een grove steen verdwijnt veel sneller materiaal. Dat is handig bij reparaties, maar minder vergevingsgezind als je nog aan het oefenen bent.
-            </div>
-          </div>
-
-          {/* SECTIE: MOET EEN WETSTEEN ALTIJD WEKEN? */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#3B7F4B]">
-              Feit of Fabel
-            </p>
-            <h2 className="mt-2 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
-              Moet een wetsteen altijd in het water?
-            </h2>
-            <p className="mt-4 leading-7 text-[#505d54]">
-              Nee. Dit is een van de tips die online vaak te algemeen wordt uitgelegd.
-            </p>
-            <p className="mt-3 leading-7 text-[#505d54]">
-              Sommige traditionele waterstenen moeten enkele minuten weken totdat er geen belletjes meer opstijgen. Andere zijn direct klaar voor gebruik en hebben alleen wat water op het oppervlak nodig. De Shapton-stenen waarmee wij in de werkplaats slijpen zijn bijvoorbeeld zogeheten <code className="rounded bg-[#E8EFE8] px-1.5 py-0.5 text-xs font-mono font-bold text-[#3B7F4B]">splash-and-go</code> stenen. Volgens Shapton hoeven deze na een korte voorbereiding vóór het eerste gebruik niet telkens langdurig te worden geweekt.
-            </p>
-            <p className="mt-3 leading-7 text-[#505d54]">
-              Controleer dus altijd de instructies van jouw specifieke steen. Te lang weken kan bepaalde slijpstenen juist poreus, zacht of breekbaar maken.
-            </p>
-
-            <div className="mt-6 rounded-[2.25rem] border border-[#d9e1d7] bg-white p-6 shadow-xs">
-              <h3 className="font-heading text-base font-bold text-[#203728]">Belangrijk: houd je slijpsteen altijd vlak</h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#657068]">
-                Een slijpsteen slijt tijdens gebruik langzaam hol in het midden. Op een holle steen wordt het onmogelijk om de snede gelijkmatig en strak onder dezelfde hoek te raken. Vlak de steen daarom regelmatig af met een afvlakplaat of diamantsteen.
-              </p>
-            </div>
-          </div>
-
-          {/* SECTIE: WELKE SLIJPHOEK GEBRUIKEN? */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#C95E3E]">
-              Geometrie &amp; Scherpte
-            </p>
-            <h2 className="mt-2 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
-              Welke slijphoek moet je gebruiken?
-            </h2>
-            <p className="mt-4 leading-7 text-[#505d54]">
-              De bestaande hoek van je mes is altijd het beste vertrekpunt. Veel Japanse keukenmessen worden rond <strong>15 graden per kant</strong> geslepen en veel westerse messen rond <strong>20 graden per kant</strong>. Zie dat als een richtlijn, niet als een natuurwet. Het merk, het staal en de manier waarop het mes is gemaakt kunnen daarvan afwijken.
-            </p>
-            <p className="mt-3 leading-7 text-[#505d54]">
-              Een kleinere hoek kan extreem soepel snijden, maar maakt de snede ook kwetsbaarder. Een grotere hoek geeft de snede meer ondersteuning en duurzaamheid. Voor een beginner is een <em>constante</em> hoek veel belangrijker dan een perfect getal dat tijdens iedere haal verandert.
-            </p>
-
-            {/* STIFTRUC KAART */}
-            <div className="mt-6 rounded-[2.25rem] border-2 border-[#3B7F4B]/30 bg-white p-6 sm:p-8 shadow-sm">
-              <div className="flex items-center gap-3">
-                <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#3B7F4B] text-white">
-                  <FileText className="h-5 w-5" aria-hidden="true" />
-                </span>
-                <div>
-                  <h3 className="font-heading text-xl font-bold text-[#203728]">
-                    Handige pro-tip: controleer de hoek met een stift
-                  </h3>
-                  <p className="text-xs text-[#657068]">Zo zie je exact waar de steen het metaal raakt</p>
-                </div>
-              </div>
-
-              <p className="mt-4 text-sm leading-relaxed text-[#505d54]">
-                Kleur het smalle slijpvlak direct boven de snede licht in met een watervaste stift. Maak één of twee rustige halen over de steen en bekijk waar de inkt is verdwenen:
-              </p>
-
-              <div className="mt-4 grid gap-3 sm:grid-cols-3">
-                <div className="rounded-2xl bg-[#FCEEE8] p-4 text-xs text-[#203728]">
-                  <strong className="block font-bold text-[#C95E3E] mb-1">Inkt bovenaan weg?</strong>
-                  Je houdt het mes waarschijnlijk te vlak. Til de rug een fractie op.
-                </div>
-                <div className="rounded-2xl bg-[#FCEEE8] p-4 text-xs text-[#203728]">
-                  <strong className="block font-bold text-[#C95E3E] mb-1">Alleen onderkant weg?</strong>
-                  Het mes staat te steil. Laat de rug van het mes iets zakken.
-                </div>
-                <div className="rounded-2xl bg-[#E8EFE8] p-4 text-xs text-[#203728]">
-                  <strong className="block font-bold text-[#3B7F4B] mb-1">Gelijkmatig verdwenen?</strong>
-                  Je volgt de bestaande hoek en geometrie uitstekend!
-                </div>
-              </div>
-
-              <p className="mt-4 text-xs text-[#657068]">
-                Maak het lemmet daarna even schoon met een doekje en je kunt vol vertrouwen beginnen.
-              </p>
-            </div>
-          </div>
-
+      {/* SNEL BALK TRUSTBAR VOOR EXTRA VERTROUWEN */}
+      <div className="border-b border-[#E8EFE8] bg-white">
+        <div className="mx-auto max-w-7xl">
+          <TrustBar
+            compact
+            showRating
+            items={[
+              { icon: <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Binnen 24-48 uur retour' },
+              { icon: <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Gratis ophalen & bezorgen in Utrecht vanaf €35' },
+            ]}
+          />
         </div>
-      </section>
+      </div>
 
-      <OrganicSectionDivider
-        fromColor="#F7F4EC"
-        middleColor="#E8EFE8"
-        toColor="#FFFFFF"
-        variant="calm"
-      />
+      {/* 3. MOBIELE ZOEK- EN SNELNAVIGATIE BALK (VOOR SMARTPHONES EN TABLETS) */}
+      <div className="sticky top-0 z-30 border-b border-[#d9e1d7] bg-white/95 px-4 py-3 shadow-xs backdrop-blur-md lg:hidden">
+        <div className="flex items-center justify-between gap-2">
+          <button
+            type="button"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            className="flex flex-1 items-center justify-between rounded-xl border border-[#d9e1d7] bg-[#F7F4EC] px-3.5 py-2 text-xs font-bold text-[#244A30]"
+            aria-expanded={mobileMenuOpen}
+          >
+            <div className="flex items-center gap-2 truncate">
+              <UIcon name="list" className="text-sm text-[#3B7F4B] shrink-0" aria-hidden="true" />
+              <span className="truncate">
+                {SECTIONS.find((s) => s.id === activeSectionId)?.shortTitle || 'Inhoud & snel naar onderwerp'}
+              </span>
+            </div>
+            <UIcon
+              name={mobileMenuOpen ? 'angle-small-up' : 'angle-small-down'}
+              className="text-base text-[#3B7F4B] shrink-0"
+              aria-hidden="true"
+            />
+          </button>
 
-      {/* 5. HET 7-STAPPENPLAN IN HET WIT #FFFFFF */}
-      <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto max-w-4xl">
-          <div className="mb-10 max-w-2xl sm:mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#3B7F4B]">
-              Stap voor Stap
-            </p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
-              Een mes slijpen in zeven stappen
-            </h2>
-            <p className="mt-3 text-base text-[#657068]">
-              Neem rustig de tijd. Snelheid is niet belangrijk bij handmatig slijpen; controle, rust en een vaste hoek wel.
-            </p>
+          <button
+            type="button"
+            onClick={() => onNavigate('particulieren')}
+            className="shrink-0 rounded-xl bg-[#3B7F4B] px-3 py-2 text-xs font-bold text-white shadow-xs"
+          >
+            Laten slijpen
+          </button>
+        </div>
+
+        {/* UITKLAPBARE MOBIELE ZOEK- EN KEUZE-INDEX */}
+        {mobileMenuOpen && (
+          <div className="mt-2 max-h-[65vh] overflow-y-auto rounded-2xl border border-[#d9e1d7] bg-white p-3 shadow-xl">
+            <div className="relative mb-2.5">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Zoek in dit artikel..."
+                className="w-full rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] py-2 pl-9 pr-8 text-xs text-[#244A30] placeholder:text-[#3B7F4B]/60 focus:border-[#3B7F4B] focus:outline-none"
+              />
+              <UIcon name="search" className="absolute left-3 top-2.5 text-xs text-[#3B7F4B]" aria-hidden="true" />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2.5 top-2 text-xs font-bold text-[#3B7F4B] hover:text-[#203728]"
+                  aria-label="Zoekopdracht wissen"
+                >
+                  <UIcon name="cross-small" className="text-base" aria-hidden="true" />
+                </button>
+              )}
+            </div>
+
+            <div className="space-y-1">
+              {filteredSections.map((sec, idx) => (
+                <button
+                  key={sec.id}
+                  type="button"
+                  onClick={() => scrollToSection(sec.id)}
+                  className={`flex w-full items-center justify-between rounded-lg px-2.5 py-2 text-left text-xs transition ${
+                    activeSectionId === sec.id
+                      ? 'bg-[#E8EFE8] font-bold text-[#244A30]'
+                      : 'text-[#244A30] hover:bg-[#FAFAF8]'
+                  }`}
+                >
+                  <span className="truncate">
+                    <span className="mr-1.5 font-mono text-[#3B7F4B] font-bold">{idx + 1}.</span>
+                    {sec.title}
+                  </span>
+                  <UIcon name="angle-small-right" className="text-xs text-[#3B7F4B] shrink-0" aria-hidden="true" />
+                </button>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
+
+      {/* 4. HOOFDCONTAINER: RECHTSTREEKS AAN HET BEGIN DE ZOEKBANK & INHOUDSOPGAVE (NIET-STICKY OP DESKTOP) */}
+      <div className="mx-auto max-w-4xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
+        
+        {/* DESKTOP ZOEKBANK & INHOUDSOPGAVE AAN HET BEGIN (SCROLLT GEWOON MEE, BLIJFT NIET STAAN) */}
+        <section aria-label="Inhoudsopgave en zoekbank" className="hidden lg:block mb-12 rounded-3xl border border-[#d9e1d7] bg-[#FAFAF8] p-7 shadow-xs">
+          <div className="flex items-center justify-between gap-6 border-b border-[#d9e1d7]/70 pb-5">
+            <div>
+              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+                Snelgids &amp; Zoekbank
+              </span>
+              <h2 className="mt-1 font-heading text-xl font-black text-[#244A30]">
+                Inhoudsopgave: spring direct naar een onderdeel
+              </h2>
+              <p className="mt-0.5 text-xs text-[#3B7F4B]/80 font-medium">
+                Typ een zoekterm of klik op een hoofdstuk om er direct naartoe te scrollen.
+              </p>
+            </div>
+
+            {/* ZOEKVELD OP DESKTOP */}
+            <div className="relative w-80 shrink-0">
+              <input
+                type="text"
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                placeholder="Zoek onderwerp of trefwoord..."
+                className="w-full rounded-xl border border-[#d9e1d7] bg-white py-2.5 pl-9 pr-8 text-xs text-[#244A30] placeholder:text-[#3B7F4B]/60 transition focus:border-[#3B7F4B] focus:bg-white focus:outline-none focus:ring-1 focus:ring-[#3B7F4B]"
+              />
+              <UIcon name="search" className="absolute left-3 top-3 text-xs text-[#3B7F4B]" aria-hidden="true" />
+              {searchQuery && (
+                <button
+                  type="button"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute right-2.5 top-2.5 text-xs text-[#3B7F4B] hover:text-[#203728] cursor-pointer"
+                  aria-label="Wissen"
+                >
+                  <UIcon name="cross-small" className="text-base" aria-hidden="true" />
+                </button>
+              )}
+            </div>
           </div>
 
-          <ol className="space-y-6">
-            {[
-              {
-                step: '01',
-                title: 'Maak de slijpsteen klaar',
-                content:
-                  'Week of bevochtig de steen volgens de instructies van de fabrikant. Leg hem op een stevige, stroeve ondergrond (bijvoorbeeld een rubberen houder of een vochtige theedoek) en houd tijdens het slijpen voldoende water op het oppervlak.',
-                highlight: 'Stabiel & goed bevochtigd',
-              },
-              {
-                step: '02',
-                title: 'Zoek de bestaande slijphoek',
-                content:
-                  'Plaats de hiel van het mes op de steen. Kantel het lemmet totdat het bestaande slijpvlak goed contact maakt. Houd het handvat stevig vast. Met de vingers van je andere hand geef je lichte druk op het deel van de snede waaraan je werkt.',
-                highlight: 'Bestaande geometrie volgen',
-              },
-              {
-                step: '03',
-                title: 'Werk rustig van hiel naar punt',
-                content:
-                  'Beweeg het mes gecontroleerd over de steen. Je kunt lange halen maken of de snede in kleinere delen behandelen. Zorg in beide gevallen dat de hiel, het midden en de punt allemaal aan bod komen. Bij de ronde punt til je het handvat geleidelijk iets op, zodat de slijphoek contact blijft houden met de steen.',
-                highlight: 'Volledige snede behandelen',
-              },
-              {
-                step: '04',
-                title: 'Slijp tot je een braam voelt',
-                content:
-                  'Een braam is een flinterdun opstaand randje metaal aan de andere kant van de snede. De braam vertelt je dat je helemaal tot aan de apex hebt geslepen. Controleer de hiel, het midden en de punt. Beweeg je vingertop voorzichtig vanaf het blad richting de snede (dwars op de snede). Ga NOOIT met je vinger in de lengterichting langs een scherp mes! Voel je de braam over de volledige lengte? Dan is deze zijde klaar.',
-                highlight: 'Braamcontrole over hele lengte',
-              },
-              {
-                step: '05',
-                title: 'Draai het mes om',
-                content:
-                  'Herhaal dezelfde beweging aan de andere zijde. Houd opnieuw de hoek zo constant mogelijk en werk door tot de braam naar de eerste kant is verplaatst. Je hoeft geen vast aantal halen te tellen. Het ene mes vormt sneller een braam dan het andere. Kijk en voel wat er daadwerkelijk met de snede gebeurt.',
-                highlight: 'Gelijke afname aan beide kanten',
-              },
-              {
-                step: '06',
-                title: 'Verfijn en ontbraam de snede',
-                content:
-                  'Gebruik steeds minder druk. Heb je een fijnere steen, dan kun je daarmee de slijpsporen verfijnen. Was bij het wisselen van steen eerst het mes en je handen, zodat achtergebleven grove slijpdeeltjes geen krassen veroorzaken. Eindig met een paar heel lichte, afwisselende halen. Voor een extra nette afwerking kun je het mes daarna op leer stroppen. Beweeg het mes op een strop altijd met de rug voorop, anders snijd je in het leer.',
-                highlight: 'Afstroppen op leer',
-              },
-              {
-                step: '07',
-                title: 'Maak het mes schoon en test de scherpte',
-                content:
-                  'Spoel het slijpresidu weg en droog het mes direct goed af. Pak vervolgens opnieuw een vel papier of een tomaat. Snijdt het mes over de hele lengte soepel, zonder veel druk? Dan heb je goed werk geleverd.',
-                highlight: 'Schoon, droog & vlijmscherp',
-              },
-            ].map((item) => (
-              <li
-                key={item.step}
-                className="group relative flex flex-col justify-between rounded-[2.25rem] border border-[#d9e1d7] bg-[#FAFAF8] p-6 sm:p-8 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:bg-white hover:shadow-md"
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E8EFE8] font-heading text-sm font-bold text-[#3B7F4B] transition-colors group-hover:bg-[#3B7F4B] group-hover:text-white">
-                      {item.step}
+          {/* 2-KOLOMS RASTER MET KLIKBARE HOOFDSTUKKEN */}
+          <nav aria-label="Hoofdstukken in dit artikel" className="mt-5 grid grid-cols-2 gap-2.5">
+            {filteredSections.length === 0 ? (
+              <p className="col-span-2 py-4 text-center text-xs text-[#3B7F4B]/70 italic">
+                Geen onderdelen gevonden voor &ldquo;{searchQuery}&rdquo;.
+              </p>
+            ) : (
+              filteredSections.map((sec, idx) => (
+                <button
+                  key={sec.id}
+                  type="button"
+                  onClick={() => scrollToSection(sec.id)}
+                  className="group flex items-center justify-between rounded-xl border border-[#d9e1d7]/60 bg-white px-4 py-3 text-left text-xs transition hover:border-[#3B7F4B] hover:bg-[#E8EFE8]/50 shadow-2xs cursor-pointer"
+                >
+                  <div className="flex items-center gap-3 min-w-0">
+                    <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-mono text-[10px] font-bold text-[#3B7F4B] group-hover:bg-[#3B7F4B] group-hover:text-white transition-colors">
+                      {idx + 1}
                     </span>
-                    <span className="rounded-full bg-[#E8EFE8] px-3.5 py-1 text-xs font-bold text-[#3B7F4B]">
-                      Stap {item.step}
+                    <span className="truncate font-semibold text-[#244A30] group-hover:text-[#203728]">
+                      {sec.title}
                     </span>
                   </div>
+                  <UIcon name="angle-small-right" className="text-xs text-[#3B7F4B] shrink-0 transition-transform group-hover:translate-x-1" aria-hidden="true" />
+                </button>
+              ))
+            )}
+          </nav>
+        </section>
 
-                  <h3 className="mt-4 font-heading text-xl font-bold text-[#203728]">
-                    {item.title}
-                  </h3>
+        {/* VOLLEDIGE ARTIKELTEKST (WITTE ACHTERGROND, GROENE TYPOGRAFIE) */}
+        <main className="min-w-0">
 
-                  <p className="mt-3 text-sm leading-relaxed text-[#505d54] sm:text-base sm:leading-relaxed">
-                    {item.content}
+            {/* SECTIE 1: INLEIDING & KORTE ANTWOORD */}
+            <section id="inleiding" className="scroll-mt-24 pb-12 border-b border-[#E8EFE8]">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+                Inleiding &amp; Snel Samengevat
+              </span>
+              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+                Het korte antwoord: hoe slijp je een keukenmes?
+              </h2>
+
+              <p className="mt-4 text-base sm:text-lg font-medium leading-relaxed text-[#244A30]">
+                Een keukenmes slijp je door met een slijpsteen gecontroleerd een klein beetje staal van beide kanten van de snede te verwijderen. Houd de bestaande slijphoek zo constant mogelijk, werk van de hiel naar de punt en slijp door tot je over de hele snede een kleine braam voelt. Daarna verfijn je de snede met lichte halen en ontbraam je het lemmet.
+              </p>
+
+              <p className="mt-4 text-base leading-relaxed text-[#244A30]">
+                Dat is de kern van het ambacht. Klinkt overzichtelijk, toch? Dat is het ook, zolang je rustig werkt en begrijpt wat er op microscopisch niveau met de staalstructuur gebeurt. In deze uitgebreide gids leggen we je stap voor stap uit hoe je veilig en gecontroleerd te werk gaat.
+              </p>
+
+              {/* AFBAKENING KADER / BULLET WIDGET */}
+              <div className="mt-6 rounded-2xl border border-[#3B7F4B]/25 bg-[#F7F4EC] p-5 text-sm leading-relaxed text-[#244A30]">
+                <div className="flex items-center gap-2 font-bold text-[#3B7F4B]">
+                  <UIcon name="exclamation" className="text-base text-[#3B7F4B]" aria-hidden="true" />
+                  <span>Belangrijke afbakening vooraf</span>
+                </div>
+                <p className="mt-1.5 text-xs sm:text-sm text-[#244A30]/90">
+                  Deze uitleg is specifiek geschreven voor gewone stalen keukenmessen met een gladde, aan twee kanten geslepen snede (zowel Europese koksmessen als tweezijdig geslepen Japanse Santoku&apos;s en Gyuto&apos;s). Kartelmessen, keramische messen en traditionele enkelzijdige Japanse messen (zoals Deba of Yanagiba) vereisen een geheel andere techniek.
+                </p>
+              </div>
+            </section>
+
+            {/* SECTIE 2: DIAGNOSE - WANNEER IS JE MES TOE AAN EEN SLIJPBEURT */}
+            <section id="diagnose" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+                Diagnose &amp; Signalen
+              </span>
+              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+                Wanneer is je mes toe aan een slijpbeurt?
+              </h2>
+
+              <p className="mt-4 text-base leading-relaxed text-[#244A30]">
+                Een bot mes herken je meestal vanzelf tijdens het koken. De tomaat wordt eerder geplet dan doorgesneden, een uitje glijdt onder de snede vandaan of je merkt dat je ineens flink kracht moet zetten. Dat is niet alleen zonde van je ingrediënten: door harder te drukken verlies je controle over het lemmet, waardoor de kans op uitschieten fors toeneemt. Een scherp mes is daarom vele malen veiliger in de keuken dan een bot mes.
+              </p>
+
+              <p className="mt-4 text-base font-bold text-[#244A30]">
+                Twijfel je over de huidige scherpte? Doe een van deze twee betrouwbare praktijktests:
+              </p>
+
+              {/* BULLET WIDGET: DE TWEE TESTS */}
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#E8EFE8] text-[#3B7F4B]">
+                      <UIcon name="check" className="text-sm font-bold" aria-hidden="true" />
+                    </span>
+                    <h3 className="font-heading text-base font-bold text-[#244A30]">
+                      1. De tomatentest
+                    </h3>
+                  </div>
+                  <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-[#244A30]/85">
+                    Leg het mes zonder neerwaartse druk op de gladde schil van een rijpe tomaat en trek het rustig naar je toe. Een scherp mes bijt direct in de schil zonder het vruchtvlees in te drukken.
                   </p>
                 </div>
 
-                <div className="mt-5 flex items-center gap-2 border-t border-[#d9e1d7]/60 pt-4 text-xs font-bold text-[#3B7F4B]">
-                  <CheckCircle2 className="h-4 w-4 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-                  <span>{item.highlight}</span>
+                <div className="rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-5">
+                  <div className="flex items-center gap-2.5">
+                    <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#E8EFE8] text-[#3B7F4B]">
+                      <UIcon name="check" className="text-sm font-bold" aria-hidden="true" />
+                    </span>
+                    <h3 className="font-heading text-base font-bold text-[#244A30]">
+                      2. De papiertest
+                    </h3>
+                  </div>
+                  <p className="mt-2.5 text-xs sm:text-sm leading-relaxed text-[#244A30]/85">
+                    Houd een vel los printpapier verticaal vast en snijd er van boven naar beneden doorheen. Blijft het mes haken of scheurt het papier? Dan zitten er bramen of botte plekken in de snede.
+                  </p>
                 </div>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </section>
+              </div>
 
-      <OrganicSectionDivider
-        fromColor="#FFFFFF"
-        middleColor="#E8EFE8"
-        toColor="#FAFAF8"
-        variant="rolling"
-      />
+              <p className="mt-4 text-xs sm:text-sm italic text-[#3B7F4B]/80">
+                Tip van Teun &amp; Mike: Kijk naar hoe het mes in de praktijk snijdt, niet puur naar de kalender. De staalhardheid, je snijplank en je gebruik bepalen het slijpritme.
+              </p>
+            </section>
 
-      {/* 6. DE 5 MEEST GEMAAKTE FOUTEN & AANZETTEN VS SLIJPEN */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto max-w-4xl space-y-16">
+            {/* SECTIE 3: WAT HEB JE NODIG */}
+            <section id="benodigdheden" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+                Gereedschap &amp; Voorbereiding
+              </span>
+              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+                Wat heb je nodig om zelf een mes te slijpen?
+              </h2>
 
-          {/* DE 5 FOUTEN */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#C95E3E]">
-              Valkuilen Voorkomen
-            </p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
-              De vijf fouten die we het vaakst zien
-            </h2>
-            <p className="mt-3 text-base text-[#657068]">
-              Bij het beoordelen van messen in onze werkplaats zien we regelmatig dezelfde problemen terugkomen.
-            </p>
+              <p className="mt-4 text-base leading-relaxed text-[#244A30]">
+                Voor een bot maar onbeschadigd keukenmes heb je geen kostbare machines of ingewikkelde opstelling nodig. Met een degelijke ambachtelijke basis kun je thuis uitstekend aan de slag:
+              </p>
 
-            <div className="mt-8 space-y-4">
-              {[
-                {
-                  num: '1',
-                  fout: 'Steeds van hoek veranderen',
-                  uitleg: 'Als je bij iedere beweging een andere hoek gebruikt, wordt de snede rond (convex) in plaats van strak scherp. Maak je beweging kleiner, werk langzamer en controleer tussendoor met de stifttruc.',
-                },
-                {
-                  num: '2',
-                  fout: 'Te veel druk zetten',
-                  uitleg: 'Harder duwen betekent niet automatisch sneller of beter slijpen. Veel druk maakt het lastiger om de beweging te controleren en kan een grote, hardnekkige braam veroorzaken. Verminder de druk steeds verder tijdens de afwerking.',
-                },
-                {
-                  num: '3',
-                  fout: 'Alleen het aantal halen tellen',
-                  uitleg: 'Twintig halen helpen weinig als de hiel al goed is en de punt nog niet geraakt wordt. De braam en het slijpbeeld vertellen je meer dan een willekeurig getal.',
-                },
-                {
-                  num: '4',
-                  fout: 'Te snel naar een fijne steen gaan',
-                  uitleg: 'Een fijne steen kan een goede snede polijsten en verfijnen, maar geen onvoltooide snede redden. Zorg eerst dat je op de eerdere steen over de hele lengte een duidelijke braam hebt gevormd.',
-                },
-                {
-                  num: '5',
-                  fout: 'Iedere slijpsteen op dezelfde manier behandelen',
-                  uitleg: 'Niet iedere steen moet weken en niet iedere steen gebruikt hetzelfde slijpmiddel. Volg de aanwijzingen van de fabrikant. Dat scheelt frustratie en een beschadigde steen.',
-                },
-              ].map((item) => (
-                <div
-                  key={item.num}
-                  className="flex items-start gap-4 rounded-[2rem] border border-[#d9e1d7] bg-white p-6 shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md"
-                >
-                  <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-2xl bg-[#FCEEE8] font-heading text-sm font-bold text-[#C95E3E]">
-                    {item.num}
+              {/* BULLET WIDGET VOOR BENODIGDHEDEN */}
+              <div className="mt-6 rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-6">
+                <h3 className="font-heading text-base font-bold text-[#244A30] mb-4">
+                  De basisuitrusting op een rij:
+                </h3>
+                <ul className="space-y-3">
+                  {[
+                    { title: 'Vlakke watersteen korrel 1000', desc: 'Het ideale startpunt voor normaal periodiek onderhoud en het herstellen van de basischerpte.' },
+                    { title: 'Water of geschikt slijpvocht', desc: 'Koelt de snede continu en voert losgekomen metaal- en steendeeltjes direct af.' },
+                    { title: 'Steenhouder of vochtige theedoek', desc: 'Cruciaal voor de veiligheid: de steen mag tijdens het slijpen absoluut niet wegglijden.' },
+                    { title: 'Schone zachte droogdoek', desc: 'Om het lemmet tussendoor droog te vegen en de controle op braamvorming te vergemakkelijken.' },
+                    { title: 'Optioneel: fijnere steen (korrel 3000-5000)', desc: 'Voor koks die de snede spiegelglad willen polijsten voor een zijdezachte snede.' },
+                    { title: 'Optioneel: watervaste stift (marker)', desc: 'Onmisbaar om visueel te controleren of je de juiste hoek raakt over het hele lemmet.' },
+                  ].map((item, i) => (
+                    <li key={i} className="flex items-start gap-3">
+                      <span className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[#3B7F4B] text-white">
+                        <UIcon name="check" className="text-[10px]" aria-hidden="true" />
+                      </span>
+                      <div className="text-xs sm:text-sm">
+                        <strong className="font-bold text-[#244A30]">{item.title}: </strong>
+                        <span className="text-[#244A30]/85">{item.desc}</span>
+                      </div>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* WAARSCHUWING BIJ SCHADE */}
+              <div className="mt-5 rounded-2xl border border-[#E87B5B]/30 bg-[#FCEEE8] p-5 text-xs sm:text-sm text-[#244A30]">
+                <strong className="block font-bold text-[#C95E3E] mb-1">
+                  Let op bij zichtbare happen of chips in de snede:
+                </strong>
+                Heeft het mes deuken, chips of een afgebroken punt? Dan red je het met alleen een 1000-steen niet en heb je een grove steen (korrel 240-400) nodig. Omdat grof slijpen snel veel staal weghaalt, vereist dit extra ervaring om de geometrie niet te verpesten.
+              </div>
+            </section>
+
+            {/* SECTIE 4: MOET EEN WETSTEEN ALTIJD WEKEN */}
+            <section id="wetsteen-weken" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+                Feit of Fabel
+              </span>
+              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+                Moet een wetsteen altijd weken in het water?
+              </h2>
+
+              <p className="mt-4 text-base leading-relaxed text-[#244A30]">
+                Kort en krachtig: <strong>nee, lang niet altijd.</strong> Dit is een van de tips die op internet vaak zonder nuance wordt gekopieerd.
+              </p>
+
+              <p className="mt-3 text-base leading-relaxed text-[#244A30]">
+                Sommige traditionele waterstenen (zoals poreuze klei- of magnesiumstenen) moeten inderdaad 5 tot 15 minuten in een bak water liggen totdat er geen luchtbelletjes meer opstijgen. Maar veel moderne professionele slijpstenen zijn zogeheten <em>splash-and-go</em> stenen (zoals de Shapton Pro en Glass stenen die wij in onze Utrechtse werkplaats gebruiken). Deze hebben alleen een scheutje water op het oppervlak nodig en zijn direct startklaar.
+              </p>
+
+              <p className="mt-3 text-base leading-relaxed text-[#244A30]">
+                Te lang weken kan bepaalde splash-and-go stenen juist zacht, poreus of bros maken. Raadpleeg dus altijd de fabrikantinstructies van jouw slijpsteen.
+              </p>
+
+              {/* BULLET WIDGET: VLAKHOUDEN VAN DE STEEN */}
+              <div className="mt-5 rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-5">
+                <div className="flex items-center gap-2 font-bold text-[#244A30]">
+                  <UIcon name="interrogation" className="text-sm text-[#3B7F4B]" aria-hidden="true" />
+                  <span>Cruciaal voor succes: houd je slijpsteen altijd vlak</span>
+                </div>
+                <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#244A30]/85">
+                  Tijdens het slijpen slijt een steen in het midden sneller dan aan de randen. Op een holle steen is het mathematisch onmogelijk om een constante slijphoek over de volledige lengte van het lemmet aan te houden. Vlak de steen daarom regelmatig af met een speciale diamantafvlakplaat.
+                </p>
+              </div>
+            </section>
+
+            {/* SECTIE 5: WELKE SLIJPHOEK GEBRUIKEN */}
+            <section id="slijphoek" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+                Geometrie &amp; Slijphoek
+              </span>
+              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+                Welke slijphoek moet je aanhouden?
+              </h2>
+
+              <p className="mt-4 text-base leading-relaxed text-[#244A30]">
+                De bestaande fabriekshoek van het mes is altijd het beste vertrekpunt. Als algemene richtlijn geldt:
+              </p>
+
+              {/* BULLET WIDGET RICHTLIJNEN */}
+              <div className="mt-4 grid gap-3 sm:grid-cols-2">
+                <div className="rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] p-4 text-xs sm:text-sm">
+                  <span className="font-bold text-[#3B7F4B]">Japanse keukenmessen:</span>
+                  <p className="mt-1 text-[#244A30]/85">
+                    Meestal circa <strong>15 graden per kant</strong> (totaal 30° inclusief). Dunner lemmet, hard staal, extreem scherp maar iets gevoeliger voor zijwaartse druk.
+                  </p>
+                </div>
+                <div className="rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] p-4 text-xs sm:text-sm">
+                  <span className="font-bold text-[#3B7F4B]">Europese &amp; Duitse messen:</span>
+                  <p className="mt-1 text-[#244A30]/85">
+                    Meestal circa <strong>18 tot 20 graden per kant</strong> (totaal 36°-40°). Taai staal, robuustere snede die beter bestand is tegen stoten en zwaardere taken.
+                  </p>
+                </div>
+              </div>
+
+              <p className="mt-4 text-base leading-relaxed text-[#244A30]">
+                Onthoud: een <em>constante</em> hoek vasthouden is tien keer belangrijker dan precies 15 of 17 graden bereiken. Als je hoek tijdens de haal zwabbert, rond je de snede juist af in plaats van hem scherp te maken.
+              </p>
+
+              {/* DE STIFTTRUC WIDGET */}
+              <div className="mt-6 rounded-2xl border-2 border-[#3B7F4B]/30 bg-[#F7F4EC] p-6">
+                <div className="flex items-center gap-2.5">
+                  <span className="flex h-8 w-8 items-center justify-center rounded-xl bg-[#3B7F4B] text-white">
+                    <UIcon name="document" className="text-sm font-bold" aria-hidden="true" />
                   </span>
                   <div>
-                    <h3 className="font-heading text-base font-bold text-[#203728] sm:text-lg">
-                      {item.fout}
+                    <h3 className="font-heading text-base font-bold text-[#244A30]">
+                      De Stifttruc: controleer direct je hoek
                     </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-[#657068]">
-                      {item.uitleg}
-                    </p>
+                    <p className="text-xs text-[#3B7F4B]">De beproefde methode uit onze eigen werkplaats</p>
                   </div>
                 </div>
-              ))}
-            </div>
-          </div>
 
-          {/* AANZETTEN VS SLIJPEN */}
-          <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-7 sm:p-10 shadow-xs">
-            <span className="rounded-full bg-[#E8EFE8] px-3.5 py-1 text-xs font-bold text-[#3B7F4B]">
-              Belangrijk verschil
-            </span>
-            <h2 className="mt-3 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
-              Aanzetten en slijpen zijn niet hetzelfde
-            </h2>
-            <div className="mt-5 grid gap-6 sm:grid-cols-2">
-              <div className="rounded-2xl bg-[#FAFAF8] p-5 border border-[#d9e1d7]/60">
-                <h3 className="font-heading text-base font-bold text-[#203728]">Aanzetten (staal richten)</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#657068]">
-                  Een traditioneel glad of geribbeld aanzetstaal haalt <em>geen</em> staal weg. Het duwt alleen een omgekrulde microbraam weer rechtop. Een mes dat echt bot is, wordt hier niet meer scherp van.
+                <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[#244A30]">
+                  Kleur het smalle geslepen facetje direct boven de snede in met een zwarte watervaste stift. Maak vervolgens één rustige haal over de steen en bekijk waar de inkt is verdwenen:
                 </p>
-              </div>
 
-              <div className="rounded-2xl bg-[#E8EFE8]/60 p-5 border border-[#3B7F4B]/20">
-                <h3 className="font-heading text-base font-bold text-[#3B7F4B]">Slijpen (nieuwe snede)</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#505d54]">
-                  Bij slijpen neem je met waterstenen gecontroleerd een micro-laagje metaal af om twee nieuwe facetten te laten samenkomen in een vlijmscherpe apex.
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* WANNEER LATEN SLIJPEN */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#3B7F4B]">
-              Professioneel Uitbesteden
-            </p>
-            <h2 className="mt-2 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
-              Wanneer kun je een mes beter laten slijpen?
-            </h2>
-            <p className="mt-3 text-base text-[#657068]">
-              Zelf slijpen is fantastisch als hobby. In deze situaties is professionele hulp vaak een verstandigere keuze:
-            </p>
-
-            <ul className="mt-6 grid gap-3 sm:grid-cols-2">
-              {[
-                'Er zitten chips of happen in de snede',
-                'De punt van het mes is verbogen of afgebroken',
-                'Het mes heeft een complexe of onbekende geometrie',
-                'Je krijgt de slijphoek met de hand niet constant',
-                'Het betreft een dierbaar of kostbaar koksmes',
-                'Je wilt geen waterstenen aanschaffen of onderhouden',
-              ].map((reason, idx) => (
-                <li key={idx} className="flex items-center gap-3 rounded-2xl border border-[#d9e1d7] bg-white px-5 py-4 text-sm text-[#203728] shadow-xs">
-                  <Check className="h-4 w-4 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-                  <span className="font-medium">{reason}</span>
-                </li>
-              ))}
-            </ul>
-
-            <div className="mt-4 rounded-xl bg-[#F4F7F4] p-4 text-xs leading-5 text-[#657068]">
-              <strong>Let op:</strong> Kartelmessen vragen specialistisch gereedschap en vallen buiten dit stappenplan. Slijpmaat neemt kartelmessen niet aan.
-            </div>
-          </div>
-
-          {/* GOUDEN REGELS VOOR ONDERHOUD */}
-          <div>
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#C95E3E]">
-              Scherptebehoud
-            </p>
-            <h2 className="mt-2 font-heading text-2xl font-bold text-[#3B7F4B] sm:text-3xl">
-              Zo blijft je mes langer scherp
-            </h2>
-            <p className="mt-3 text-base text-[#657068]">
-              Wat je tussen twee slijpbeurten door doet is minstens zo belangrijk voor het behoud van fabrieksscherpte:
-            </p>
-
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-              {[
-                { title: 'Snijd alleen op hout of zacht kunststof', desc: 'Vermijd glas, marmer, graniet of keramiek; die maken een snede direct bot.' },
-                { title: 'Was altijd met de hand', desc: 'Nooit in de vaatwasser. Agressieve zouten en hitte tasten staal en hecht onherroepelijk aan.' },
-                { title: 'Berg je mes beschermd op', desc: 'In een houten messenblok, aan een magneetstrip of in een stevige beschermhoes.' },
-                { title: 'Schuif met de rug van het mes', desc: 'Schuif gesneden uien of kruiden altijd met de botte rug van de snijplank, nooit met de snede.' },
-              ].map((tip, idx) => (
-                <div key={idx} className="rounded-[2.25rem] border border-[#d9e1d7] bg-white p-6 shadow-xs">
-                  <h3 className="font-heading text-base font-bold text-[#3B7F4B]">{tip.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#657068]">{tip.desc}</p>
+                <div className="mt-3 grid gap-2.5 sm:grid-cols-3">
+                  <div className="rounded-xl bg-white p-3 text-xs text-[#244A30] border border-[#d9e1d7]">
+                    <strong className="block text-[#C95E3E] font-bold">Inkt bovenaan weg?</strong>
+                    Je houdt het mes te vlak. Til de rug een fractie op.
+                  </div>
+                  <div className="rounded-xl bg-white p-3 text-xs text-[#244A30] border border-[#d9e1d7]">
+                    <strong className="block text-[#C95E3E] font-bold">Alleen uiterste rand weg?</strong>
+                    Je houdt het mes te steil. Laat de rug iets zakken.
+                  </div>
+                  <div className="rounded-xl bg-[#E8EFE8] p-3 text-xs text-[#244A30] border border-[#3B7F4B]/30">
+                    <strong className="block text-[#3B7F4B] font-bold">Overal gelijk weg?</strong>
+                    Perfecte hoek! Je volgt de exacte snede.
+                  </div>
                 </div>
-              ))}
-            </div>
-          </div>
+              </div>
+            </section>
 
+            {/* SECTIE 6: HET 7-STAPPENPLAN */}
+            <section id="stappenplan" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+                Stap voor Stap
+              </span>
+              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+                Het stappenplan: een mes slijpen in 7 stappen
+              </h2>
+
+              <p className="mt-4 text-base leading-relaxed text-[#244A30]">
+                Neem rustig de tijd. Handmatig slijpen is een beheerst ambacht; haastige bewegingen zorgen voor uitschieters en een onregelmatige snede.
+              </p>
+
+              <div className="mt-8 space-y-8">
+                {[
+                  {
+                    step: '01',
+                    title: 'Slijpsteen klaarzetten en stabiliseren',
+                    prose:
+                      'Bevochtig of bewater de steen volgens de voorschriften van de fabrikant. Plaats de steen op een stroeve houder of op een klamme theedoek op je werkblad. Zorg dat de steen op een comfortabele werkhoogte ligt en tijdens het slijpen met geen millimeter verschuift.',
+                    bullet: 'Stabiele ondergrond, constante waterfilm op het oppervlak.',
+                  },
+                  {
+                    step: '02',
+                    title: 'De slijphoek opzoeken en fixeren',
+                    prose:
+                      'Zet de hiel van het mes op de steen. Kantel het blad voorzichtig tot het bestaande slijpvlak vlak aansluit op het steenoppervlak (of gebruik de stifttruc om dit te verifiëren). Vergrendel je pols: de beweging moet soepel vanuit je armen en schouders komen, niet vanuit een zwabberende pols.',
+                    bullet: 'Pols vergrendelen, beweging vanuit de elleboog en schouders.',
+                  },
+                  {
+                    step: '03',
+                    title: 'Beheerst slijpen van hiel naar punt',
+                    prose:
+                      'Beweeg het lemmet gecontroleerd over de steen. Zorg dat de hiel, het rechte middenstuk en de gebogen punt allemaal gelijkmatig behandeld worden. Bij de punt van het mes til je je handvat een fractie mee op, zodat ook de kromming van het lemmet dezelfde slijphoek behoudt.',
+                    bullet: 'Lichte gelijkmatige druk, handvat licht optillen bij de ronding van de punt.',
+                  },
+                  {
+                    step: '04',
+                    title: 'Braamvorming controleren over de hele lengte',
+                    prose:
+                      'Blijf deze zijde slijpen totdat je aan de tegenoverliggende kant over de volledige lengte van de snede een microscopisch opstaand randje metaal voelt: de braam. Voel altijd voorzichtig dwars van de snede af met je vingertop, nooit in de lengterichting van het mes! Pas wanneer de braam overal voelbaar is, heeft het staal de apex bereikt.',
+                    bullet: 'Controleer hiel, midden én punt; dwars op de snede voelen.',
+                  },
+                  {
+                    step: '05',
+                    title: 'Draai het mes om en herhaal aan de andere zijde',
+                    prose:
+                      'Draai het mes om en slijp de andere kant onder exact dezelfde slijphoek. Werk door totdat de braam zich nu naar de eerste zijde heeft verplaatst. Zorg voor een gelijk aantal effectieve halen zodat het mes symmetrisch gecentreerd blijft.',
+                    bullet: 'Symmetrische materiaalafname aan beide kanten van de snede.',
+                  },
+                  {
+                    step: '06',
+                    title: 'Verfijnen en de braam verwijderen (ontbramen)',
+                    prose:
+                      'Zodra beide kanten geslepen zijn, verlaag je de druk drastisch. Maak om en om enkele heel lichte halen over de steen om de braam af te breken. Heb je een fijnere steen (korrel 3000+) of een leren strop met polijstpasta? Gebruik deze nu om de snede te ontbramen en spiegelglad af te werken.',
+                    bullet: 'Vederlichte afwerkhalingen, eventueel afwerken op leer.',
+                  },
+                  {
+                    step: '07',
+                    title: 'Mes grondig reinigen en scherpte testen',
+                    prose:
+                      'Spoel alle resten slijpslurry en metaaldeeltjes grondig af onder de kraan en droog het lemmet direct af met een schone theedoek. Voer vervolgens de tomaat- of papiertest uit. Het mes glijdt nu zonder enige weerstand door het materiaal.',
+                    bullet: 'Grondig drogen, direct testen, vlijmscherp resultaat.',
+                  },
+                ].map((s) => (
+                  <div key={s.step} className="border-l-2 border-[#3B7F4B]/30 pl-5 sm:pl-7">
+                    <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
+                      <span>Stap {s.step}</span>
+                    </div>
+                    <h3 className="mt-1 font-heading text-lg sm:text-xl font-bold text-[#244A30]">
+                      {s.title}
+                    </h3>
+                    <p className="mt-2 text-base leading-relaxed text-[#244A30]">
+                      {s.prose}
+                    </p>
+
+                    {/* BULLET WIDGET PER STAP */}
+                    <div className="mt-3 inline-flex items-center gap-2 rounded-xl bg-[#F7F4EC] px-3.5 py-1.5 text-xs font-semibold text-[#244A30] border border-[#d9e1d7]">
+                      <UIcon name="check" className="text-xs text-[#3B7F4B] shrink-0" aria-hidden="true" />
+                      <span>{s.bullet}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* SECTIE 7: DE 5 MEEST GEMAAKTE FOUTEN */}
+            <section id="fouten" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+                Valkuilen Voorkomen
+              </span>
+              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+                De vijf fouten die we het vaakst tegenkomen
+              </h2>
+
+              <p className="mt-4 text-base leading-relaxed text-[#244A30]">
+                Wanneer klanten ons vragen waarom hun eigen slijppoging niet het gewenste scheermesresultaat opleverde, ligt de oorzaak vrijwel altijd bij een van deze vijf veelgemaakte vergissingen:
+              </p>
+
+              {/* BULLET WIDGET: 5 FOUTEN MET UITLEG */}
+              <div className="mt-6 space-y-3.5">
+                {[
+                  {
+                    num: '1',
+                    fout: 'Steeds van slijphoek veranderen tijdens de beweging',
+                    uitleg: 'Als je handvat tijdens de haal omhoog en omlaag beweegt, ontstaat een bolle (convexe) stompe snede in plaats van een vlijmscherpe facetlijn. Beweeg rustiger en fixeer je pols.',
+                  },
+                  {
+                    num: '2',
+                    fout: 'Veel te veel spierkracht zetten op het lemmet',
+                    uitleg: 'Drukken zorgt niet voor snellere scherpte, maar buigt de fijne snede om en beschadigt je slijpsteen. Laat de korrels van de watersteen het werk doen met beheersing.',
+                  },
+                  {
+                    num: '3',
+                    fout: 'Alleen maar halen tellen in plaats van de braam controleren',
+                    uitleg: 'Zeggen "ik doe twintig halen per kant" werkt niet. Het ene mes heeft harder staal dan het andere. Stop pas als je daadwerkelijk een braam voelt over de volledige snede.',
+                  },
+                  {
+                    num: '4',
+                    fout: 'Te snel overstappen naar een te fijne polijststeen',
+                    uitleg: 'Een fijne steen (korrel 3000 of 6000) kan een snede glanzend polijsten, maar kan geen botte vouw opnieuw scherp maken. De basischerpte móét op korrel 1000 al 100% aanwezig zijn.',
+                  },
+                  {
+                    num: '5',
+                    fout: 'De slijpsteen tussentijds niet afvlakken',
+                    uitleg: 'Een hol gesleten steen raakt alleen de zijkanten en mist het midden van je mes. Houd je slijpstenen altijd strak waterpas met een diamantafvlakker.',
+                  },
+                ].map((item) => (
+                  <div key={item.num} className="rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-4 sm:p-5 flex items-start gap-3.5">
+                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#E8EFE8] font-mono text-xs font-bold text-[#3B7F4B]">
+                      {item.num}
+                    </span>
+                    <div className="text-xs sm:text-sm">
+                      <strong className="block font-bold text-[#244A30] text-sm sm:text-base mb-0.5">
+                        {item.fout}
+                      </strong>
+                      <span className="text-[#244A30]/85 leading-relaxed">{item.uitleg}</span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+            {/* SECTIE 8: AANZETTEN VS SLIJPEN */}
+            <section id="aanzetten-vs-slijpen" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+                Belangrijk Verschil
+              </span>
+              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+                Aanzetstaal vs. Slijpen: wat is het verschil?
+              </h2>
+
+              <p className="mt-4 text-base leading-relaxed text-[#244A30]">
+                Veel mensen halen aanzetten en slijpen door elkaar. Toch doen ze iets wezenlijk anders met het metaal van je mes:
+              </p>
+
+              {/* BULLET WIDGET VERGELIJKING */}
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                <div className="rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-5">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
+                    Aanzetten (staal richten)
+                  </span>
+                  <h3 className="mt-1 font-heading text-base font-bold text-[#244A30]">
+                    Met een klassiek aanzetstaal
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#244A30]/85">
+                    Een regulier stalen aanzetstaal haalt <strong>geen</strong> staal weg. Het duwt alleen microscopisch omgekrulde braampjes weer tijdelijk recht. Zodra een mes écht bot is afgesleten, heeft aanzetten geen enkel effect meer.
+                  </p>
+                </div>
+
+                <div className="rounded-2xl border border-[#3B7F4B]/30 bg-[#E8EFE8]/50 p-5">
+                  <span className="text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
+                    Slijpen (nieuwe snede)
+                  </span>
+                  <h3 className="mt-1 font-heading text-base font-bold text-[#244A30]">
+                    Met waterstenen op de werkbank
+                  </h3>
+                  <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#244A30]">
+                    Bij slijpen neemt de slijpsteen gecontroleerd een microscopisch laagje metaal af aan weerszijden van de snede. Hierdoor ontmoeten de facetten elkaar weer in een vlijmscherpe punt (apex).
+                  </p>
+                </div>
+              </div>
+            </section>
+
+            {/* SECTIE 9: WANNEER PROFESSIONEEL LATEN SLIJPEN */}
+            <section id="wanneer-uitbesteden" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+                Professioneel Uitbesteden
+              </span>
+              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+                Wanneer kun je een mes beter laten slijpen?
+              </h2>
+
+              <p className="mt-4 text-base leading-relaxed text-[#244A30]">
+                Zelf je messen slijpen op Japanse waterstenen is een prachtige, rustgevende hobby. Toch zijn er situaties waarin professionele hulp van Slijpmaat verstandiger en veiliger is:
+              </p>
+
+              {/* BULLET WIDGET REDENEN */}
+              <div className="mt-5 rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-5">
+                <ul className="grid gap-2.5 sm:grid-cols-2 text-xs sm:text-sm">
+                  {[
+                    'Er zitten chips, deuken of happen in de snede',
+                    'De punt van het koksmes is verbogen of afgebroken',
+                    'Het lemmet is te dik geworden en moet worden uitgedund',
+                    'Je hebt een dierbaar Japans koksmes (VG-10, Aogami, SG2)',
+                    'Je vindt het lastig om een constante hoek vast te houden',
+                    'Je hebt geen tijd of zin om waterstenen te onderhouden',
+                  ].map((reason, idx) => (
+                    <li key={idx} className="flex items-center gap-2.5">
+                      <UIcon name="check" className="text-xs text-[#3B7F4B] shrink-0" aria-hidden="true" />
+                      <span className="text-[#244A30] font-medium">{reason}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* CTA KADER MET ACTIEKNOPPEN */}
+              <div className="mt-6 rounded-2xl bg-[#E8EFE8] p-6 text-center sm:text-left sm:flex sm:items-center sm:justify-between sm:gap-6">
+                <div>
+                  <h3 className="font-heading text-base sm:text-lg font-bold text-[#244A30]">
+                    Geen zin om zelf te klooien met waterstenen?
+                  </h3>
+                  <p className="mt-1 text-xs sm:text-sm text-[#3B7F4B]">
+                    Wij halen je messen in Utrecht aan huis op, slijpen ze met de hand op waterstenen en brengen ze binnen 24-48 uur vlijmscherp terug.
+                  </p>
+                </div>
+                <button
+                  type="button"
+                  onClick={() => onNavigate('particulieren')}
+                  className="mt-4 sm:mt-0 inline-flex shrink-0 items-center gap-2 rounded-xl bg-[#3B7F4B] px-5 py-2.5 text-xs sm:text-sm font-bold text-white shadow-xs transition hover:bg-[#203728] cursor-pointer"
+                >
+                  <span>Bekijk tarieven</span>
+                  <UIcon name="arrow-right" className="text-xs" aria-hidden="true" />
+                </button>
+              </div>
+            </section>
+
+            {/* SECTIE 10: ONDERHOUD & 4 GOUDEN REGELS */}
+            <section id="onderhoud" className="scroll-mt-24 py-12">
+              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+                Scherptebehoud
+              </span>
+              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+                Vier gouden regels: zo blijft je mes veel langer scherp
+              </h2>
+
+              <p className="mt-4 text-base leading-relaxed text-[#244A30]">
+                Hoe je tussen twee slijpbeurten met je mes omgaat, bepaalt voor 90% hoe lang die fabrieksscherpte blijft:
+              </p>
+
+              {/* BULLET WIDGET 4 GOUDEN REGELS */}
+              <div className="mt-5 grid gap-3.5 sm:grid-cols-2">
+                {[
+                  {
+                    rule: '1. Snijd alleen op hout of zacht kunststof',
+                    desc: 'Vermijd glas, marmer, graniet, leisteen of borden. Harde oppervlakken rollen een vlijmscherpe vouw binnen één snijbeweging om.',
+                  },
+                  {
+                    rule: '2. Was een goed mes altijd met de hand af',
+                    desc: 'Nooit in de vaatwasser. De agressieve vaatwaszouten, het schudden tegen ander bestek en de hoge hitte tasten de snede onherstelbaar aan.',
+                  },
+                  {
+                    rule: '3. Berg het mes veilig en beschermd op',
+                    desc: 'Niet los in de keukenla waar het tegen ander metaal botst. Gebruik een houten messenblok, een magneetstrip of een stevige lemmetbeschermer.',
+                  },
+                  {
+                    rule: '4. Schuif gesneden voedsel met de rug',
+                    desc: 'Schuif gesneden kruiden of uien van je plank met de botte bovenkant van het lemmet, nooit met de vlijmscherpe snede.',
+                  },
+                ].map((item, idx) => (
+                  <div key={idx} className="rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-4 sm:p-5">
+                    <h3 className="font-heading text-sm sm:text-base font-bold text-[#3B7F4B]">
+                      {item.rule}
+                    </h3>
+                    <p className="mt-1.5 text-xs sm:text-sm leading-relaxed text-[#244A30]/85">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
+          </main>
         </div>
-      </section>
 
-      {/* 7. RESULTATEN SLIDER (Authentieke waslijn van geslepen messen) */}
-      <section className="relative w-full overflow-hidden bg-white py-12 sm:py-16">
-        <div className="mb-6 px-4 text-center sm:mb-8 sm:px-6">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#C95E3E]">
-            Sfeer &amp; Resultaten
-          </p>
-          <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
-            Vers van de slijpsteen
-          </h2>
-          <p className="mx-auto mt-2 max-w-xl text-xs sm:text-sm text-[#657068]">
-            Elk mes dat we slijpen wordt met de hand behandeld en vlijmscherp afgeleverd.
-          </p>
-        </div>
-
-        <ResultatenSlider />
-      </section>
-
-      {/* 8. GROENE CTA BANNER */}
-      <section className="px-4 pb-20 pt-6 sm:px-6 sm:pb-28 sm:pt-10 lg:px-8">
-        <div className="mx-auto max-w-5xl">
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-[#3B7F4B] p-8 text-white shadow-md sm:p-12 lg:p-14">
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#E8EFE8]">
-              Slijpmaat Service Utrecht
-            </p>
-            <h2 className="mt-2 font-heading text-2xl font-bold text-white sm:text-3xl lg:text-4xl">
-              Liever scherp zonder zelf te slijpen?
+      {/* 5. SLIDER MET RESULTATEN (WASLIJN MET ECHTE GESLEPEN MESSEN) */}
+      <section className="border-t border-[#E8EFE8] bg-white py-12 sm:py-16">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-6 text-center">
+            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
+              Sfeer &amp; Resultaten
+            </span>
+            <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              Vers van de slijpsteen in Utrecht
             </h2>
-            <p className="mt-4 max-w-2xl text-base leading-relaxed text-[#E8EFE8] sm:text-lg">
-              Een slijpsteen kopen, de juiste hoek zoeken en rustig oefenen kan verrassend leuk zijn. Heb je daar geen tijd voor of wil je je favoriete keukenmes niet als proefkonijn gebruiken? Dan regelen wij het graag voor je.
-            </p>
-            <p className="mt-3 max-w-2xl text-sm leading-relaxed text-[#E8EFE8]">
-              Slijpmaat slijpt gladde keukenmessen met de hand op Japanse Shapton Pro-stenen. Daarna stroppen we de snede af op leer. Binnen Utrecht halen we messen volgens ons servicegebied op en brengen we ze doorgaans binnen 24 tot 48 uur terug. Je kunt je messen ook op afspraak in Utrecht brengen en later weer ophalen.
-            </p>
-
-            <div className="mt-8 flex flex-col gap-3.5 sm:flex-row sm:items-center">
-              <button
-                type="button"
-                onClick={() => onNavigate('particulieren')}
-                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-8 py-3.5 text-sm font-bold text-white shadow-md transition hover:bg-[#C95E3E] cursor-pointer"
-              >
-                <span>Bekijk de prijzen en plan je slijpbeurt</span>
-                <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" aria-hidden="true" />
-              </button>
-
-              <a
-                href={whatsappUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-white/40 bg-white/10 px-7 py-3.5 text-sm font-bold text-white transition hover:bg-white/20"
-              >
-                <MessageCircle className="h-4 w-4" aria-hidden="true" />
-                <span>Stel een vraag via WhatsApp</span>
-              </a>
-            </div>
-
-            <p className="mt-6 text-xs text-[#E8EFE8]/80 font-medium">
-              Je messen weer scherp. Zonder gedoe.
+            <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-[#3B7F4B]/80">
+              Bekijk hoe keukenmessen er na het handmatig watersteenslijpen en ontbramen uitzien.
             </p>
           </div>
 
-          {/* ONDERSTE NAVIGATIEKNOPPEN */}
-          <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-[#d9e1d7] pt-8 sm:flex-row">
-            <button
-              type="button"
-              onClick={() => onNavigate('blogs')}
-              className="inline-flex items-center gap-2 rounded-full border border-[#d9e1d7] bg-white px-6 py-3 text-sm font-bold text-[#203728] shadow-xs transition hover:bg-[#E8EFE8]"
-            >
-              <ArrowLeft className="h-4 w-4" aria-hidden="true" />
-              Terug naar alle blogs
-            </button>
-
-            <button
-              type="button"
-              onClick={() => onNavigate('particulieren')}
-              className="inline-flex items-center gap-2 rounded-full bg-[#3B7F4B] px-6 py-3 text-sm font-bold text-white shadow-xs transition hover:bg-[#203728]"
-            >
-              Prijzen &amp; Slijpbeurt plannen
-              <ArrowRight className="h-4 w-4" aria-hidden="true" />
-            </button>
-          </div>
+          <ResultatenSlider />
         </div>
       </section>
 
-      <OrganicSectionDivider
-        fromColor="#FAFAF8"
-        middleColor="#A9C89E"
-        toColor="#FFFFFF"
-        variant="rolling"
-      />
+      {/* 6. BOTTOM NAVIGATIE BALK */}
+      <footer className="border-t border-[#E8EFE8] bg-[#FAFAF8] px-4 py-8 sm:px-6 lg:px-8">
+        <div className="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 sm:flex-row">
+          <button
+            type="button"
+            onClick={() => onNavigate('blogs')}
+            className="inline-flex items-center gap-2 rounded-xl border border-[#d9e1d7] bg-white px-5 py-2.5 text-xs font-bold text-[#244A30] shadow-xs transition hover:bg-[#E8EFE8] cursor-pointer"
+          >
+            <UIcon name="arrow-left" className="text-xs" aria-hidden="true" />
+            Terug naar alle blogs
+          </button>
+
+          <button
+            type="button"
+            onClick={() => onNavigate('particulieren')}
+            className="inline-flex items-center gap-2 rounded-xl bg-[#3B7F4B] px-6 py-2.5 text-xs font-bold text-white shadow-xs transition hover:bg-[#203728] cursor-pointer"
+          >
+            <span>Tarieven bekijken &amp; afspraak maken</span>
+            <UIcon name="arrow-right" className="text-xs" aria-hidden="true" />
+          </button>
+        </div>
+      </footer>
     </article>
   );
 };

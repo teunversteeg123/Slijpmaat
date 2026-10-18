@@ -207,7 +207,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                     <span className="rounded-full bg-[#FCEEE8] px-3 py-1 text-xs font-bold text-[#C95E3E]">
                       In voorbereiding
                     </span>
-                    <UIcon name="compass" className="text-lg text-[#3B7F4B]" aria-hidden="true" />
+                    <UIcon name="compass-alt" className="text-lg text-[#3B7F4B]" aria-hidden="true" />
                   </div>
 
                   <h3 className="mt-4 font-heading text-lg font-bold text-[#203728]">

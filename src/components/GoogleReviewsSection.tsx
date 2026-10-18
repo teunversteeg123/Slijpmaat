@@ -65,10 +65,9 @@ export const GoogleReviewsSection: React.FC = () => {
         </h2>
 
         <div className="mb-[18px] flex flex-col items-start justify-between gap-4 rounded-[18px] border border-[#d9e1d7] bg-white px-5 py-[18px] shadow-[0_8px_24px_rgba(36,74,48,0.05)] sm:flex-row sm:items-center">
-          <div className="flex flex-wrap items-center gap-2.5 font-black text-[#3B7F4B]">
+          <div className="flex flex-wrap items-center gap-2.5 font-bold text-[#3B7F4B]">
             <span>Slijpmaat op Google</span>
-            <span className="text-[22px] leading-none tracking-[1px] text-[#FFCD00]" aria-label="5 van de 5 sterren">★★★★★</span>
-            <span className="text-[14px] font-bold text-[#3B7F4B]">{GOOGLE_REVIEW_COUNT} reviews · 5,0 op Google</span>
+            <span className="text-[14px] text-[#3B7F4B]">· {GOOGLE_REVIEW_COUNT} reviews · 5,0 score</span>
           </div>
         </div>
 
@@ -83,9 +82,9 @@ export const GoogleReviewsSection: React.FC = () => {
             <article key={review.name} className="min-h-[270px] min-w-full snap-start rounded-[20px] border border-[#d9e1d7] bg-white p-6 shadow-[0_12px_32px_rgba(36,74,48,0.06)] sm:p-[34px] md:min-w-[calc((100%-1rem)/2)]">
               <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E8EFE8] pb-4">
                 <h3 className="font-heading text-[22px] font-black leading-[1.18] text-[#3B7F4B] sm:text-[26px]">{review.name}</h3>
-                <div className="inline-flex items-center gap-2 whitespace-nowrap text-[18px] font-black tracking-[1px] text-[#FFCD00]" aria-label="5 van de 5 sterren op Google">
-                  <span>★★★★★</span>
+                <div className="inline-flex items-center gap-1.5 rounded-full bg-[#E8EFE8] px-2.5 py-1 text-xs font-bold text-[#3B7F4B]">
                   <GoogleIcon />
+                  <span>5,0 review</span>
                 </div>
               </div>
               {review.text ? <p className="mt-5 text-[15px] leading-[1.65] text-[#4F6354] sm:text-[17px]">{review.text}</p> : null}

@@ -47,7 +47,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     {
       title: 'Liever herstellen dan vervangen',
       desc: 'Een goed mes kan jarenlang meegaan. Daarom herstellen we waar mogelijk ook beschadigingen, zoals kleine happen in de snede of een afgebroken punt. Dat is beter voor je portemonnee, je mes én het milieu.',
-      icon: 'compass',
+      icon: 'recycle',
     },
   ];
 
@@ -279,7 +279,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
             <div className="relative overflow-hidden rounded-[2.5rem] border border-[#E87B5B] bg-[#E87B5B] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10 text-white">
               <div aria-hidden="true" className="absolute -bottom-16 -right-10 h-48 w-48 rounded-full bg-white/8" />
               <div className="relative mb-6">
-                <UIconBadge name="compass" variant="coral" size="lg" rounded="2xl" className="bg-white/20 text-white border-white/20" />
+                <UIconBadge name="compass-alt" variant="coral" size="lg" rounded="2xl" className="bg-white/20 text-white border-white/20" />
               </div>
               <span className="relative text-xs font-bold uppercase tracking-wider text-white/85">
                 Onze Visie

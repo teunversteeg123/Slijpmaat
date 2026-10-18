@@ -110,8 +110,8 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             </div>
 
             <dl className="mb-4 grid grid-cols-[auto_1fr] gap-x-4 gap-y-1 text-[14px] leading-relaxed text-[#3B7F4B]">
-              <dt className="font-semibold">Ma–za</dt>
-              <dd>10:00–21:00</dd>
+              <dt className="font-semibold">Ma-za</dt>
+              <dd>10:00-21:00</dd>
               <dt className="font-semibold">Zo</dt>
               <dd>Gesloten</dd>
             </dl>
