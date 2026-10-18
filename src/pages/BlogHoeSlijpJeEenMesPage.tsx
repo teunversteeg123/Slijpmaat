@@ -398,6 +398,21 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                 Dat is de kern van het ambacht. Klinkt overzichtelijk, toch? Dat is het ook, zolang je rustig werkt en begrijpt wat er op microscopisch niveau met de staalstructuur gebeurt. In deze uitgebreide gids leggen we je stap voor stap uit hoe je veilig en gecontroleerd te werk gaat.
               </p>
 
+              <figure className="mt-7 overflow-hidden rounded-3xl border border-[#d9e1d7] bg-[#FAFAF8] shadow-sm">
+                <img
+                  src="/assets/blog/mes-slijpen-detail-pexels-airam-dato-on.jpg"
+                  alt="Een kok slijpt een keukenmes met de hand op een wetsteen"
+                  className="h-64 w-full object-cover object-[center_72%] sm:h-96"
+                  loading="eager"
+                />
+                <figcaption className="px-4 py-3 text-xs leading-relaxed text-[#244A30]/75 sm:px-5 sm:text-sm">
+                  Handmatig slijpen geeft controle over de hoek, druk en materiaalafname langs de volledige snede.{' '}
+                  <a href="https://www.pexels.com/photo/person-sharpening-a-knife-9424944/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#3B7F4B]/35 underline-offset-2 hover:text-[#3B7F4B]">
+                    Foto: Airam Dato-on via Pexels
+                  </a>
+                </figcaption>
+              </figure>
+
               {/* AFBAKENING KADER / BULLET WIDGET */}
               <div className="mt-6 rounded-2xl border border-[#3B7F4B]/25 bg-[#F7F4EC] p-5 text-sm leading-relaxed text-[#244A30]">
                 <div className="flex items-center gap-2 font-bold text-[#3B7F4B]">
@@ -484,7 +499,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                 <ul className="space-y-3">
                   {[
                     { title: 'Vlakke watersteen korrel 1000', desc: 'Het ideale startpunt voor normaal periodiek onderhoud en het herstellen van de basischerpte.' },
-                    { title: 'Water of geschikt slijpvocht', desc: 'Koelt de snede continu en voert losgekomen metaal- en steendeeltjes direct af.' },
+                    { title: 'Water', desc: 'Koelt de snede continu en voert losgekomen metaal- en steendeeltjes direct af.' },
                     { title: 'Steenhouder of vochtige theedoek', desc: 'Cruciaal voor de veiligheid: de steen mag tijdens het slijpen absoluut niet wegglijden.' },
                     { title: 'Schone zachte droogdoek', desc: 'Om het lemmet tussendoor droog te vegen en de controle op braamvorming te vergemakkelijken.' },
                     { title: 'Optioneel: fijnere steen (korrel 3000-5000)', desc: 'Voor koks die de snede spiegelglad willen polijsten voor een zijdezachte snede.' },
@@ -532,6 +547,21 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               <p className="mt-3 text-base leading-relaxed text-[#244A30]">
                 Te lang weken kan bepaalde splash-and-go stenen juist zacht, poreus of bros maken. Raadpleeg dus altijd de fabrikantinstructies van jouw slijpsteen.
               </p>
+
+              <figure className="mt-7 overflow-hidden rounded-3xl border border-[#d9e1d7] bg-[#FAFAF8] shadow-sm">
+                <img
+                  src="/assets/blog/mes-slijpen-water-wetsteen-pexels-airam-dato-on.jpg"
+                  alt="Water wordt op een wetsteen gegoten tijdens het handmatig slijpen van een keukenmes"
+                  className="h-56 w-full object-cover object-center sm:h-80"
+                  loading="lazy"
+                />
+                <figcaption className="px-4 py-3 text-xs leading-relaxed text-[#244A30]/75 sm:px-5 sm:text-sm">
+                  Water voert slijpsel af en houdt het contact met de wetsteen gelijkmatig. Controleer altijd of jouw steen geweekt moet worden of direct met water gebruikt kan worden.{' '}
+                  <a href="https://www.pexels.com/photo/person-holding-stainless-steel-knife-9424942/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#3B7F4B]/35 underline-offset-2 hover:text-[#3B7F4B]">
+                    Foto: Airam Dato-on via Pexels
+                  </a>
+                </figcaption>
+              </figure>
 
               {/* BULLET WIDGET: VLAKHOUDEN VAN DE STEEN */}
               <div className="mt-5 rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-5">
@@ -697,6 +727,21 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                   </div>
                 ))}
               </div>
+
+              <figure className="mt-9 overflow-hidden rounded-3xl border border-[#d9e1d7] bg-[#FAFAF8] shadow-sm">
+                <img
+                  src="/assets/blog/scherp-mes-tomatentest-pexels-rdne.jpg"
+                  alt="Een scherp keukenmes snijdt door een rode tomaat op een houten snijplank"
+                  className="h-56 w-full object-cover object-center sm:h-80"
+                  loading="lazy"
+                />
+                <figcaption className="px-4 py-3 text-xs leading-relaxed text-[#244A30]/75 sm:px-5 sm:text-sm">
+                  Een gelijkmatig geslepen mes snijdt zonder veel druk door de schil van een rijpe tomaat.{' '}
+                  <a href="https://www.pexels.com/photo/chef-cutting-tomato-on-cutting-board-10432691/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#3B7F4B]/35 underline-offset-2 hover:text-[#3B7F4B]">
+                    Foto: RDNE Stock project via Pexels
+                  </a>
+                </figcaption>
+              </figure>
             </section>
 
             {/* SECTIE 7: DE 5 MEEST GEMAAKTE FOUTEN */}
