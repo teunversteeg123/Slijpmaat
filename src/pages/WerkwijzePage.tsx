@@ -282,6 +282,28 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
               </div>
             ))}
           </div>
+
+          <figure className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-[#FAFAF8] shadow-sm sm:mt-16">
+            <div className="border-b border-[#d9e1d7]/80 px-5 py-5 sm:px-8 sm:py-6">
+              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">
+                Van bot naar scherp
+              </p>
+              <h3 className="mt-2 font-heading text-xl font-bold text-[#203728] sm:text-2xl">
+                Wat er tijdens het slijpen met de snede gebeurt
+              </h3>
+              <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#657068] sm:text-base">
+                De snede wordt opnieuw gevormd, krijgt tijdens het slijpen een fijne braam en wordt daarna zorgvuldig ontbraamd en afgewerkt.
+              </p>
+            </div>
+            <div className="bg-[#eeeeee] p-3 sm:p-6">
+              <img
+                src="/assets/werkwijze/slijpproces-snede.png"
+                alt="Diagram van een botte messnede, het slijpproces, de gevormde braam en de uiteindelijke scherpe snede"
+                className="h-auto w-full object-contain"
+                loading="lazy"
+              />
+            </div>
+          </figure>
         </div>
       </section>
 
@@ -384,9 +406,6 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
             <h2 className="mt-3 font-heading text-3xl font-bold leading-tight text-[#3B7F4B] sm:text-4xl lg:text-5xl">
               Waarom wij bewust met de hand slijpen
             </h2>
-            <p className="mt-4 text-base leading-relaxed text-[#657068] sm:text-lg">
-              Iedere slijpmethode staat of valt met de uitvoering. Dit is waarom handmatig watersteenslijpen bij onze werkwijze past:
-            </p>
           </div>
 
           {/* Dual Comparative Cards */}
@@ -599,109 +618,12 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       <OrganicSectionDivider
         fromColor="#FAFAF8"
         middleColor="#E8EFE8"
-        toColor="#3B7F4B"
-        variant="scalloped"
-      />
-
-      {/* 7. AMBACHTSBELOFTE BANNER */}
-      <section className="relative overflow-hidden bg-[#3B7F4B] px-4 py-16 text-white sm:px-6 sm:py-24 lg:px-8">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-24 -top-24 h-80 w-80 rounded-[46%_54%_62%_38%/54%_42%_58%_46%] bg-white/6"
-        />
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -bottom-28 -left-20 h-72 w-72 rounded-[58%_42%_48%_52%/44%_58%_42%_56%] bg-[#244A30]/18"
-        />
-
-        <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="grid items-center gap-10 lg:grid-cols-[1.18fr_0.82fr] lg:gap-14">
-            <div>
-              <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 px-3.5 py-1 text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">
-                <UIcon name="shield-check" className="text-xs text-[#E8EFE8]" />
-                <span>Onze Belofte aan Jouw Mes</span>
-              </div>
-
-              <h2 className="mt-4 font-heading text-3xl font-bold leading-snug text-white sm:text-4xl lg:text-5xl">
-                Een goed koksmes slijp je met water en geduld,{' '}
-                <span className="text-[#E8EFE8]">nooit met haast en geweld.</span>
-              </h2>
-
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/90 sm:text-lg">
-                Zowel voor professionele chefsmessen als voor je trouwe keukenmes thuis: bij ons krijgt ieder lemmet de persoonlijke toewijding en rust die het verdient.
-              </p>
-
-              {/* Kwaliteitskenmerken */}
-              <div className="mt-6 flex flex-wrap gap-2.5">
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white">
-                  <UIcon name="check" className="text-xs text-[#E8EFE8]" />
-                  Nat geslepen op waterstenen
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white">
-                  <UIcon name="check" className="text-xs text-[#E8EFE8]" />
-                  Gerichte materiaalafname
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3.5 py-1.5 text-xs font-semibold text-white">
-                  <UIcon name="check" className="text-xs text-[#E8EFE8]" />
-                  Afwerking op soepel leer
-                </span>
-              </div>
-
-              {/* Knoppen met uitstekend contrast */}
-              <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
-                <button
-                  type="button"
-                  onClick={() => onNavigate('particulieren')}
-                  className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-md transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-lg active:scale-[0.98] sm:text-base cursor-pointer"
-                >
-                  <span>Plan je slijpbeurt</span>
-                  <UIcon name="arrow-right" className="text-sm transition-transform duration-200 group-hover:translate-x-1" />
-                </button>
-
-                <a
-                  href={whatsappUrl}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group inline-flex min-h-13 items-center justify-center gap-2.5 rounded-full bg-white px-7 py-3.5 text-sm font-bold text-[#3B7F4B] shadow-md transition-all duration-200 hover:bg-[#F7F4EC] hover:shadow-lg active:scale-[0.98] sm:text-base"
-                >
-                  <UIcon name="comment-alt" className="text-base text-[#3B7F4B] transition-transform duration-200 group-hover:scale-110" />
-                  <span>Stel een vraag via WhatsApp</span>
-                </a>
-              </div>
-            </div>
-
-            {/* Rechts: Mooi ingelijste foto met zwevende badge */}
-            <div className="relative mx-auto w-full max-w-md lg:max-w-none">
-              <div
-                aria-hidden="true"
-                className="pointer-events-none absolute -bottom-4 -right-4 sm:-bottom-6 sm:-right-6 h-36 w-36 sm:h-48 sm:w-48 rounded-[40%_60%_60%_40%/50%_40%_60%_50%] bg-[#A9C89E]/25 transition-transform duration-500 hover:scale-105"
-              />
-              <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-white/20 bg-[#203728] shadow-2xl sm:aspect-[16/11] lg:aspect-square">
-                <img
-                  src="/assets/werkwijze/03-slijpen.jpg"
-                  alt="Met de hand slijpen op Japanse waterstenen door Slijpmaat"
-                  className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
-                  loading="lazy"
-                />
-                <div className="absolute bottom-4 left-4 right-4 sm:right-auto z-10 flex items-center gap-2 rounded-full bg-[#203728]/90 px-4 py-2.5 backdrop-blur-md text-xs font-bold text-white shadow-lg border border-white/15">
-                  <span className="flex h-2 w-2 rounded-full bg-[#4CAF50] animate-pulse" />
-                  <span>Handmatig · Japans watersteenslijpen</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <OrganicSectionDivider
-        fromColor="#3B7F4B"
-        middleColor="#E8EFE8"
         toColor="#FFFFFF"
         variant="calm"
         mirror
       />
 
-      {/* 8. VEELGESTELDE VRAGEN OVER ONZE WERKWIJZE (Rustige witte achtergrond met cards) */}
+      {/* 7. VEELGESTELDE VRAGEN OVER ONZE WERKWIJZE (Rustige witte achtergrond met cards) */}
       <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
