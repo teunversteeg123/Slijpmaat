@@ -150,14 +150,14 @@ export const CookieConsentProvider = ({ children }: { children: React.ReactNode 
               onClick={rejectAnalytics}
               className="min-h-12 rounded-full border-2 border-[#3B7F4B] bg-white px-5 py-3 text-sm font-bold text-[#244A30] transition-colors hover:bg-[#E8EFE8] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]"
             >
-              Alleen noodzakelijk
+              Alleen noodzakelijke cookies
             </button>
             <button
               type="button"
               onClick={acceptAnalytics}
               className="min-h-12 rounded-full border-2 border-[#3B7F4B] bg-white px-5 py-3 text-sm font-bold text-[#244A30] transition-colors hover:bg-[#E8EFE8] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]"
             >
-              Google Analytics toestaan
+              Alles toestaan
             </button>
           </div>
         </aside>
