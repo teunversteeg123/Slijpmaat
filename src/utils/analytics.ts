@@ -1,6 +1,7 @@
 const measurementId = import.meta.env.VITE_GA_MEASUREMENT_ID?.trim() ?? '';
 
 type GtagArguments = [command: string, ...parameters: unknown[]];
+type AnalyticsEventParameters = Record<string, string | number | boolean>;
 
 declare global {
   interface Window {
@@ -14,7 +15,6 @@ const GA_COOKIE_LIFETIME_SECONDS = 60 * 60 * 24 * 90;
 
 let consentDefaultsSet = false;
 let analyticsInitialized = false;
-let analyticsConsentGranted = false;
 let lastTrackedPath = '';
 let pendingPageView: { path: string; title: string } | null = null;
 
@@ -40,12 +40,13 @@ export const setDefaultGoogleConsent = () => {
     ad_storage: 'denied',
     ad_user_data: 'denied',
     ad_personalization: 'denied',
+    ads_data_redaction: true,
   });
   consentDefaultsSet = true;
 };
 
 const sendPageView = ({ path, title }: { path: string; title: string }) => {
-  if (!analyticsInitialized || !analyticsConsentGranted || path === lastTrackedPath) return;
+  if (!analyticsInitialized || path === lastTrackedPath) return;
 
   ensureGtag()?.('event', 'page_view', {
     page_path: path,
@@ -63,18 +64,17 @@ export const trackPageView = (path: string, title: string) => {
   sendPageView(pageView);
 };
 
-export const enableGoogleAnalytics = () => {
+export const trackAnalyticsEvent = (eventName: string, parameters: AnalyticsEventParameters = {}) => {
+  if (!analyticsInitialized || typeof window === 'undefined') return;
+
+  ensureGtag()?.('event', eventName, parameters);
+};
+
+export const initializeGoogleAnalytics = () => {
   if (!isAnalyticsConfigured || typeof window === 'undefined') return;
 
   setDefaultGoogleConsent();
   const gtag = ensureGtag();
-  analyticsConsentGranted = true;
-  gtag?.('consent', 'update', {
-    analytics_storage: 'granted',
-    ad_storage: 'denied',
-    ad_user_data: 'denied',
-    ad_personalization: 'denied',
-  });
 
   if (!analyticsInitialized) {
     const script = document.createElement('script');
@@ -94,6 +94,19 @@ export const enableGoogleAnalytics = () => {
   }
 
   sendPageView(pendingPageView ?? { path: window.location.pathname, title: document.title });
+};
+
+export const enableGoogleAnalytics = () => {
+  if (!isAnalyticsConfigured || typeof window === 'undefined') return;
+
+  setDefaultGoogleConsent();
+  ensureGtag()?.('consent', 'update', {
+    analytics_storage: 'granted',
+    ad_storage: 'denied',
+    ad_user_data: 'denied',
+    ad_personalization: 'denied',
+  });
+  initializeGoogleAnalytics();
 };
 
 const expireCookie = (name: string, domain?: string) => {
@@ -123,7 +136,6 @@ export const disableGoogleAnalytics = () => {
   if (typeof window === 'undefined') return;
 
   setDefaultGoogleConsent();
-  analyticsConsentGranted = false;
   ensureGtag()?.('consent', 'update', {
     analytics_storage: 'denied',
     ad_storage: 'denied',

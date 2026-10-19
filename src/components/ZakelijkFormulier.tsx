@@ -25,6 +25,7 @@ import {
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { createWhatsAppUrl } from '../utils/contact';
 import { formatEuroCents } from '../utils/format';
+import { trackAnalyticsEvent } from '../utils/analytics';
 
 type ServiceType = 'bezorging' | 'langskomen';
 
@@ -158,6 +159,14 @@ export const ZakelijkFormulier: React.FC = () => {
       'Alvast bedankt!'
     );
 
+    trackAnalyticsEvent('generate_lead', {
+      lead_type: 'business_request',
+      contact_method: 'whatsapp',
+      service_type: serviceType,
+      delivery_zone: serviceType === 'langskomen' ? 'self_dropoff' : deliveryZone,
+      knife_count: granularTotalKnives,
+      estimate_band: isGranularActive ? 'specified' : selectedEstimate,
+    });
     window.open(createWhatsAppUrl(messageLines.join('\n')), '_blank', 'noopener,noreferrer');
   };
 

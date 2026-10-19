@@ -18,6 +18,7 @@ import {
 } from '../data/delivery';
 import { createWhatsAppUrl } from '../utils/contact';
 import { formatEuroCents } from '../utils/format';
+import { trackAnalyticsEvent } from '../utils/analytics';
 
 interface KnifeCategory {
   id: number;
@@ -204,6 +205,18 @@ export const ParticulierenCalculator: React.FC = () => {
       selfDropoff ? 'Wanneer kan ik mijn messen brengen?' : 'Wanneer kan mijn Maat langskomen?'
     );
 
+    trackAnalyticsEvent('generate_lead', {
+      lead_type: 'consumer_order',
+      contact_method: 'whatsapp',
+      knife_count: totalKnives,
+      estimated_value: hasExtraLarge || deliveryFeeCents === null || isOutsideArea
+        ? finalSharpeningCents / 100
+        : (finalSharpeningCents + deliveryFeeCents) / 100,
+      service_type: selfDropoff ? 'self_dropoff' : 'pickup_delivery',
+      delivery_zone: selfDropoff ? 'self_dropoff' : deliveryZone,
+      student_rate: isStudent,
+      has_extra_large: hasExtraLarge,
+    });
     window.open(createWhatsAppUrl(lines.join('\n')), '_blank', 'noopener,noreferrer');
   };
 

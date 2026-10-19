@@ -3,8 +3,10 @@ import { UIcon } from '../components/ui/UIcon';
 import {
   disableGoogleAnalytics,
   enableGoogleAnalytics,
+  initializeGoogleAnalytics,
   isAnalyticsConfigured,
   setDefaultGoogleConsent,
+  trackAnalyticsEvent,
 } from '../utils/analytics';
 
 type ConsentChoice = 'accepted' | 'rejected' | null;
@@ -73,12 +75,53 @@ export const CookieConsentProvider = ({ children }: { children: React.ReactNode 
     if (storedConsent?.analytics && isAnalyticsConfigured) {
       setChoice('accepted');
       enableGoogleAnalytics();
-    } else if (storedConsent) {
-      setChoice('rejected');
-      disableGoogleAnalytics();
+    } else {
+      if (storedConsent) {
+        setChoice('rejected');
+        disableGoogleAnalytics();
+      }
+      initializeGoogleAnalytics();
     }
 
     setIsReady(true);
+
+    const trackContactClick = (event: MouseEvent) => {
+      if (!(event.target instanceof Element)) return;
+
+      const link = event.target.closest<HTMLAnchorElement>('a[href]');
+      if (!link) return;
+
+      const href = link.href;
+      const linkText = link.textContent?.replace(/\s+/g, ' ').trim().slice(0, 100) || 'Onbekende link';
+
+      if (href.startsWith('https://wa.me/')) {
+        trackAnalyticsEvent('contact_click', {
+          contact_method: 'whatsapp',
+          link_text: linkText,
+          page_path: window.location.pathname,
+        });
+      } else if (href.startsWith('tel:')) {
+        trackAnalyticsEvent('contact_click', {
+          contact_method: 'phone',
+          link_text: linkText,
+          page_path: window.location.pathname,
+        });
+      } else if (href.startsWith('mailto:')) {
+        trackAnalyticsEvent('contact_click', {
+          contact_method: 'email',
+          link_text: linkText,
+          page_path: window.location.pathname,
+        });
+      } else if (href.startsWith('https://g.page/')) {
+        trackAnalyticsEvent('review_click', {
+          link_text: linkText,
+          page_path: window.location.pathname,
+        });
+      }
+    };
+
+    document.addEventListener('click', trackContactClick);
+    return () => document.removeEventListener('click', trackContactClick);
   }, []);
 
   const acceptAnalytics = useCallback(() => {
@@ -134,7 +177,7 @@ export const CookieConsentProvider = ({ children }: { children: React.ReactNode 
               Help je ons de website verbeteren?
             </h2>
             <p id="cookie-consent-description" className="mt-3 max-w-2xl text-sm leading-6 text-[#4F5F54]">
-              Noodzakelijke opslag onthoudt je cookiekeuze. Met jouw toestemming gebruiken we Google Analytics om geaggregeerde gebruiksstatistieken te bekijken. Analytics wordt niet geladen voordat je toestemming geeft.
+              Noodzakelijke opslag onthoudt je keuze. Zonder toestemming gebruikt Google Analytics beperkte metingen zonder Analytics-cookies. Met jouw toestemming krijgen we completere gebruiksstatistieken en mag Analytics cookies plaatsen.
             </p>
             <a
               href="/privacyverklaring"

@@ -3,6 +3,7 @@ import { SLIJPMAAT_INFO } from '../data/siteData';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { TrustBar } from '../components/TrustBar';
 import { createWhatsAppUrl } from '../utils/contact';
+import { trackAnalyticsEvent } from '../utils/analytics';
 import {
   MapPin,
   MessageCircle,
@@ -34,6 +35,11 @@ export const ContactPage: React.FC = () => {
       '',
       formData.message.trim(),
     ].join('\n');
+    trackAnalyticsEvent('generate_lead', {
+      lead_type: 'general_contact',
+      contact_method: 'whatsapp',
+      subject: formData.subject,
+    });
     window.open(createWhatsAppUrl(message), '_blank', 'noopener,noreferrer');
   };
 

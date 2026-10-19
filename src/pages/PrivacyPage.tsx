@@ -88,10 +88,10 @@ const sections: LegalSection[] = [
   ] },
   { heading: 'Artikel 11 - Website en cookies', paragraphs: [
     '11.1 De website gebruikt functionele browseropslag om de cookievoorkeur van de bezoeker te onthouden. Deze opslag is nodig om de gekozen instelling uit te voeren. De cookievoorkeur wordt maximaal 6 maanden bewaard en daarna opnieuw gevraagd.',
-    '11.2 Slijpmaat gebruikt Google Analytics 4 uitsluitend nadat de bezoeker hiervoor actief toestemming heeft gegeven. Zonder toestemming wordt de Google Analytics-tag niet geladen en worden geen Analytics-metingen naar Google verstuurd.',
-    '11.3 Na toestemming kan Google Analytics de cookies _ga en _ga_<meet-ID> plaatsen om bezoekers en sessies van elkaar te onderscheiden. Slijpmaat beperkt de levensduur van deze cookies tot maximaal 90 dagen. Google Analytics kan onder meer bezochte pagina’s, sessiegegevens, globale locatie, browser- en apparaatgegevens verwerken.',
-    '11.4 Slijpmaat heeft advertentieopslag, Google Signals en advertentiepersonalisatie voor deze implementatie uitgeschakeld. De Analytics-gegevens worden niet gebruikt om op de website gepersonaliseerde advertenties te tonen.',
-    '11.5 De bezoeker kan Analytics weigeren zonder verlies van de normale websitefuncties. Een eerder gegeven keuze kan via “Cookievoorkeuren” in de footer worden gewijzigd. Bij intrekking stopt de website verdere Analytics-metingen en probeert zij bestaande Google Analytics-cookies te verwijderen.',
+    '11.2 Slijpmaat gebruikt Google Analytics 4 met Advanced Consent Mode. De Google Analytics-tag wordt bij ieder bezoek geladen met Analytics-opslag standaard geweigerd. Zolang geen toestemming is gegeven, plaatst of leest Google Analytics geen Analytics-cookies en verstuurt de tag beperkte metingen zonder cookie-ID. Deze metingen kunnen onder meer de bezochte pagina, het tijdstip, de verwijzende pagina, globale locatie, browser- en apparaatgegevens en de toestemmingsstatus bevatten.',
+    '11.3 Na actieve toestemming mag Google Analytics de cookies _ga en _ga_<meet-ID> plaatsen om bezoekers en sessies van elkaar te onderscheiden en completere gebruiksstatistieken te leveren. Slijpmaat beperkt de levensduur van deze cookies tot maximaal 90 dagen.',
+    '11.4 Slijpmaat heeft advertentieopslag, Google Signals en advertentiepersonalisatie voor deze implementatie uitgeschakeld. De Analytics-gegevens worden niet gebruikt om op de website gepersonaliseerde advertenties te tonen. Slijpmaat meet daarnaast algemene contact- en aanvraagacties, maar stuurt daarbij geen namen, adressen, telefoonnummers, e-mailadressen of vrije berichttekst naar Google Analytics.',
+    '11.5 De bezoeker kan Analytics-cookies weigeren zonder verlies van de normale websitefuncties. In dat geval blijft alleen de beperkte cookieloze meting uit artikel 11.2 actief. Een eerder gegeven keuze kan via “Cookievoorkeuren” in de footer worden gewijzigd. Bij intrekking schakelt de website Analytics-opslag uit en probeert zij bestaande Google Analytics-cookies te verwijderen.',
     '11.6 Externe diensten, zoals WhatsApp, Google Maps en socialmediaplatforms, kunnen eigen cookies of vergelijkbare technieken gebruiken nadat de bezoeker bewust naar die externe dienst doorklikt.',
   ] },
   { heading: 'Artikel 12 - Minderjarigen', paragraphs: ['Slijpmaat richt haar diensten niet specifiek op minderjarigen. Indien een minderjarige gebruik wil maken van de diensten van Slijpmaat, moet hiervoor toestemming zijn van een ouder of wettelijke vertegenwoordiger.'] },
@@ -103,5 +103,5 @@ const sections: LegalSection[] = [
 ];
 
 export const PrivacyPage: React.FC<PrivacyPageProps> = ({ onNavigate }) => (
-  <LegalDocumentPage title="Privacyverklaring Slijpmaat" subtitle="Versie 1.1 · Utrecht · oktober 2026" sections={sections} onNavigate={onNavigate} />
+  <LegalDocumentPage title="Privacyverklaring Slijpmaat" subtitle="Versie 1.2 · Utrecht · oktober 2026" sections={sections} onNavigate={onNavigate} />
 );
