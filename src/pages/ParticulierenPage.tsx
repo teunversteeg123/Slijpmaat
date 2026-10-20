@@ -85,7 +85,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
       {/* 1. HERO SECTION (Zonder wazige gloed, met herkenbare organische blobs) */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
+      <section className="site-hero relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
         {/* Crisp organic SVG blob in top-right background (geen wazige gloed, maar duidelijke blob-vorm) */}
         <svg
           aria-hidden="true"
@@ -98,20 +98,20 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           />
         </svg>
 
-        <div className="relative z-10 grid grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-12 lg:py-8 xl:gap-20">
+        <div className="site-hero-grid relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-14 lg:py-8 xl:gap-20">
           {/* Left: Copy & CTAs */}
-          <div className="order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0 lg:pl-4 xl:pl-8">
-            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
+          <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0">
+            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
               Voor particulieren in Utrecht
             </p>
-            <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
+            <h1 className="site-hero-title mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
               Je messen weer scherp. Zonder gedoe.
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
+            <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
               Wij halen je keukenmessen thuis op in Utrecht, slijpen ze zorgvuldig met de hand op Japanse waterstenen en brengen ze weer vlijmscherp terug.
             </p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <button
                 type="button"
                 onClick={() => onNavigate ? onNavigate('home') : (window.location.hash = '#home')}
@@ -132,13 +132,13 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           </div>
 
           {/* Right: Tomatenvideo met herkenbare organische blob erachter */}
-          <div className="relative order-2 w-full px-0 sm:px-6 lg:order-2 lg:px-0">
+          <div className="site-hero-media relative order-2 mx-auto w-full max-w-xl px-4 sm:px-6 lg:order-2 lg:px-0">
             {/* Karakteristieke saliegroene organische blob (zoals op Homepage en Over Ons) */}
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-4 -left-2 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
+              className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-none bg-[#203728] shadow-md sm:aspect-[16/11] sm:rounded-[2.5rem] lg:aspect-square">
+            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-[#203728] shadow-lg lg:aspect-square">
               <video
                 className="h-full w-full object-cover"
                 src="/assets/tomaat-website-video.mp4"

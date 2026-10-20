@@ -132,7 +132,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
       {/* 1. HERO SECTION (Strakke lay-out: tekst links, foto rechts met saliegroene blob) */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[560px] lg:pb-12">
+      <section className="site-hero relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
         {/* Crisp organic SVG blob in top-right background */}
         <svg
           aria-hidden="true"
@@ -145,22 +145,22 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
           />
         </svg>
 
-        <div className="relative z-10 grid grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[520px] lg:grid-cols-2 lg:gap-12 lg:py-8 xl:gap-20">
+        <div className="site-hero-grid relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-14 lg:py-8 xl:gap-20">
           {/* Left: Copy & CTAs */}
-          <div className="order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0 lg:pl-4 xl:pl-8">
+          <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0">
             <div className="mb-2">
-              <span className="text-xs font-bold uppercase tracking-[0.24em] text-[#244A30] sm:text-sm">
+              <span className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.24em] text-[#244A30] sm:text-sm">
                 HET SLIJPMAAT AMBACHT
               </span>
             </div>
-            <h1 className="mt-2 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
+            <h1 className="site-hero-title mt-2 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
               Ieder mes met de hand geslepen.
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
+            <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
               Bij Slijpmaat kiezen we bewust voor handmatig slijpen. We behandelen ieder mes met de hand op Japanse waterstenen en werken de snede zorgvuldig af op leer. Zo zorgen we voor minimale materiaalafname, behoud van het originele lemmetprofiel en een lange levensduur van je mes.
             </p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <button
                 type="button"
                 onClick={() => onNavigate('particulieren')}
@@ -182,19 +182,23 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Right: Mooie foto met saliegroene blob erachter */}
-          <div className="order-2 w-full lg:order-2 px-4 sm:px-6 lg:px-0 relative">
+          {/* Right: Foto in dezelfde compacte kaartopmaak als de hero van Over ons */}
+          <div className="site-hero-media relative order-2 mx-auto w-full max-w-xl px-4 sm:px-6 lg:order-2 lg:px-0">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-4 -left-4 sm:-bottom-7 sm:-left-7 h-36 w-36 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
+              className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2rem] bg-white shadow-md sm:aspect-[16/11] sm:rounded-[2.5rem] lg:aspect-square">
+            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg lg:aspect-square">
               <img
                 src="/assets/werkwijze/03-slijpen.jpg"
                 alt="Teun of Mike slijpt met de hand op Japanse waterstenen"
-                className="h-full w-full object-cover transition-transform duration-700 hover:scale-105"
+                className="h-full w-full object-cover"
                 loading="eager"
               />
+              <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 rounded-full border border-white/10 bg-[#203728]/85 px-4 py-2 text-xs font-bold text-white shadow-md backdrop-blur-xs">
+                <span className="flex h-2.5 w-2.5 rounded-full bg-[#4CAF50]" />
+                <span>100% handmatig · Japanse waterstenen</span>
+              </div>
             </div>
           </div>
         </div>

@@ -155,13 +155,13 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Right: Tomatenvideo met herkenbare organische blob erachter (identiek aan Particulieren) */}
-          <div className="relative order-2 w-full px-0 sm:px-6 lg:order-2 lg:px-0">
+          {/* Right: Tomatenvideo in dezelfde begrensde kaartopmaak als Over ons */}
+          <div className="site-hero-media relative order-2 mx-auto w-full max-w-xl px-4 sm:px-6 lg:order-2 lg:px-0">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 mx-auto aspect-[4/3] w-full overflow-hidden rounded-none bg-[#203728] shadow-xs sm:aspect-[16/11] sm:w-[70%] sm:rounded-[2.5rem] lg:aspect-square">
+            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-[#203728] shadow-lg lg:aspect-square">
               <HeroVideo
                 src="/assets/tomaat-website-video.mp4"
                 ariaLabel="Een scherp keukenmes snijdt soepel door een tomaat"

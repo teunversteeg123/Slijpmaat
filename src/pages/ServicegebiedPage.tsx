@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { PageId } from '../types';
 import { SERVICEGEBIED_FAQS } from '../data/siteData';
-import { getDeliveryFeeCents, getDeliveryZone, isValidDutchPostcode, SERVICE_AREA_GROUPS } from '../data/delivery';
+import { getDeliveryFeeCents, getDeliveryZone, isValidDutchPostcode } from '../data/delivery';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { TrustBar } from '../components/TrustBar';
 import { createWhatsAppUrl } from '../utils/contact';
@@ -140,7 +140,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
       {/* 1. HERO SECTION (Over ons stijl: links tekst & CTAs, rechts foto met organische mint blob & dark pill) */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
+      <section className="site-hero relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
         {/* Crisp organic SVG blob in top-right background (geen wazige gloed) */}
         <svg
           aria-hidden="true"
@@ -153,20 +153,20 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
           />
         </svg>
 
-        <div className="relative z-10 grid grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-12 lg:py-8 xl:gap-20">
+        <div className="site-hero-grid relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-14 lg:py-8 xl:gap-20">
           {/* Left: Copy & CTAs */}
-          <div className="order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0 lg:pl-4 xl:pl-8">
-            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
+          <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0">
+            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
               Ons servicegebied
             </p>
-            <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
+            <h1 className="site-hero-title mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
               Ophalen, bezorgen &amp; langsbrengen.
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
+            <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
               Binnen Utrecht halen en bezorgen we met de fiets. Woon je verder weg? Dan kijken we of een afspraak met de scooter mogelijk is. Langsbrengen in Utrecht kan altijd op afspraak.
             </p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <div ref={planRef} className="relative">
                 {!isPlanExpanded ? (
                   <button
@@ -224,7 +224,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
           </div>
 
           {/* Right: Utrechtse wijkkaart met indicatieve markering van het vaste servicegebied */}
-          <div className="order-2 w-full lg:order-2 px-4 sm:px-6 lg:px-0 relative">
+          <div className="site-hero-media relative order-2 mx-auto w-full max-w-xl px-4 sm:px-6 lg:order-2 lg:px-0">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
@@ -316,12 +316,12 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
         </div>
       </section>
 
-      {/* 4. POSTCODECHECK & WIJKEN IN UTRECHT */}
+      {/* 4. POSTCODECHECK IN UTRECHT */}
       <section id="postcodecheck" className="scroll-mt-24 bg-white px-4 py-16 sm:px-6 sm:py-20 lg:px-8">
         <div className="mx-auto max-w-7xl">
           <div className="mb-8 max-w-3xl sm:mb-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Dekking in Utrecht</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Postcodes, wijken &amp; bezorgtarieven</h2>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Postcodecheck &amp; bezorgtarieven</h2>
           </div>
 
           <div className="min-w-0 space-y-6">
@@ -373,45 +373,6 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                     </div>
                   )}
                 </form>
-              </div>
-            </div>
-
-            <div className="min-w-0 overflow-hidden rounded-[2.25rem] border border-[#d9e1d7] bg-white shadow-xs">
-              <div className="border-b border-[#d9e1d7] bg-[#F7F4EC] px-5 py-5 sm:px-7">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
-                  <Bike className="h-3.5 w-3.5" />
-                  Tarieven onder €35
-                </span>
-                <h3 className="mt-3 font-heading text-2xl font-bold text-[#3B7F4B]">Overzicht per wijk en postcode</h3>
-                <p className="mt-2 text-sm leading-relaxed text-[#657068]">
-                  Iedere postcode toont het vaste ophaal- en bezorgtarief dat geldt wanneer je bestelling lager is dan €35.
-                </p>
-              </div>
-
-              <div className="divide-y divide-[#d9e1d7]/80">
-                {SERVICE_AREA_GROUPS.map((area) => (
-                  <div key={area.district} className="grid min-w-0 gap-3 px-5 py-5 sm:px-7 lg:grid-cols-[minmax(230px,0.85fr)_minmax(0,1.65fr)] lg:items-start lg:gap-8">
-                    <div className="flex min-w-0 items-start gap-3">
-                      <MapPin className="mt-0.5 h-5 w-5 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-                      <h4 className="min-w-0 break-words font-heading text-sm font-bold leading-6 text-[#3B7F4B] sm:text-base">{area.district}</h4>
-                    </div>
-                    <div className="flex min-w-0 flex-wrap gap-2">
-                      {area.postcodes.map((postcode) => {
-                        const deliveryFee = getDeliveryFeeCents(postcode, 0, false);
-                        const feeLabel = deliveryFee === 0 ? 'Gratis' : formatEuroCents(deliveryFee ?? 0);
-
-                        return (
-                          <span key={postcode} className="inline-flex min-w-0 items-center overflow-hidden rounded-full border border-[#d9e1d7] bg-[#FAFAF8] text-xs font-bold">
-                            <span className="px-3 py-2 font-mono text-[#244A30]">{postcode}</span>
-                            <span className={`border-l border-[#d9e1d7] px-3 py-2 ${deliveryFee === 0 ? 'bg-[#E8EFE8] text-[#3B7F4B]' : 'bg-[#FFF4EF] text-[#C95E3E]'}`}>
-                              {feeLabel}
-                            </span>
-                          </span>
-                        );
-                      })}
-                    </div>
-                  </div>
-                ))}
               </div>
             </div>
 
