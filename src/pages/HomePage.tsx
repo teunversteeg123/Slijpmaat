@@ -192,19 +192,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <button
               type="button"
               onClick={() => onNavigate('particulieren')}
-              className="group grid items-center gap-5 rounded-[2rem] border border-[#d9e1d7] bg-white p-6 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:grid-cols-[auto_1fr] sm:p-8 cursor-pointer"
+              className="group flex items-center gap-4 sm:gap-6 rounded-[2rem] border border-[#d9e1d7] bg-white p-5 sm:p-7 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] cursor-pointer"
             >
               <UIconBadge
                 name="utensils"
                 variant="soft"
                 size="xl"
                 rounded="2xl"
-                className="transition-transform duration-300 group-hover:scale-105"
+                className="shrink-0 transition-transform duration-300 group-hover:scale-105"
               />
-              <span>
-                <span className="block font-heading text-2xl font-bold text-[#3B7F4B]">Voor particulieren</span>
-                <span className="mt-2 block text-sm leading-relaxed text-[#657068] sm:text-base">Bekijk de prijzen, bereken je slijpbeurt en plan eenvoudig via WhatsApp.</span>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#3B7F4B]">
+              <span className="flex-1 min-w-0">
+                <span className="block font-heading text-xl sm:text-2xl font-bold text-[#3B7F4B]">Voor particulieren</span>
+                <span className="mt-1 sm:mt-1.5 inline-flex items-center gap-1.5 text-sm font-bold text-[#3B7F4B]">
                   Naar particulier <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
                 </span>
               </span>
@@ -214,19 +213,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <button
               type="button"
               onClick={() => onNavigate('horeca')}
-              className="group grid items-center gap-5 rounded-[2rem] border border-[#E87B5B]/35 bg-white p-6 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#E87B5B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#C95E3E] sm:grid-cols-[auto_1fr] sm:p-8 cursor-pointer"
+              className="group flex items-center gap-4 sm:gap-6 rounded-[2rem] border border-[#E87B5B]/35 bg-white p-5 sm:p-7 text-left shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#E87B5B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#C95E3E] cursor-pointer"
             >
               <UIconBadge
                 name="building"
                 variant="coral"
                 size="xl"
                 rounded="2xl"
-                className="transition-transform duration-300 group-hover:scale-105"
+                className="shrink-0 transition-transform duration-300 group-hover:scale-105"
               />
-              <span>
-                <span className="block font-heading text-2xl font-bold text-[#C95E3E]">Voor horeca</span>
-                <span className="mt-2 block text-sm leading-relaxed text-[#657068] sm:text-base">Stem aantallen, planning en slijprondes af rond jouw professionele keuken.</span>
-                <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-bold text-[#C95E3E]">
+              <span className="flex-1 min-w-0">
+                <span className="block font-heading text-xl sm:text-2xl font-bold text-[#C95E3E]">Voor horeca</span>
+                <span className="mt-1 sm:mt-1.5 inline-flex items-center gap-1.5 text-sm font-bold text-[#C95E3E]">
                   Naar zakelijk <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1.5" aria-hidden="true" />
                 </span>
               </span>
@@ -243,9 +241,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Van aanvraag tot scherpe messen</p>
             <h2 className="mt-3 font-heading text-3xl font-bold text-white sm:text-4xl">Zo eenvoudig werkt het</h2>
-            <p className="mt-4 text-base leading-7 text-[#E8EFE8]">
-              Vier duidelijke stappen. Je weet vooraf wanneer we komen, wat het kost en wanneer je messen terug zijn.
-            </p>
           </div>
 
           <ol className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -444,7 +439,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="max-w-md">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Veelgestelde vragen</p>
             <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Eerst nog iets weten?</h2>
-            <p className="mt-4 text-base leading-7 text-[#657068]">Bekijk de antwoorden over ophalen, soorten messen en de doorlooptijd.</p>
             <button
               type="button"
               onClick={() => onNavigate('faq')}

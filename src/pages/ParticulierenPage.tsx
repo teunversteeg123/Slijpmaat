@@ -23,7 +23,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     {
       num: '2',
       title: 'Ophalen of langskomen',
-      text: 'Vanaf €35 bestelwaarde halen en bezorgen we gratis binnen Utrecht. Of breng je messen langs op afspraak.',
+      text: 'Vanaf €35 halen en bezorgen we gratis binnen Utrecht. Of breng je messen langs op afspraak.',
     },
     {
       num: '3',
@@ -161,8 +161,8 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         ]}
       />
 
-      {/* 3. VOORAF: KORTE BEZOEKERSFLOW (Warm cream #F7F4EC) */}
-      <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">
+      {/* 3. VOORAF: KORTE BEZOEKERSFLOW (Warm cream #F7F4EC) - Compact & horizontaal */}
+      <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-14 lg:px-8">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -left-20 top-1/4 h-72 w-72 rounded-[55%_45%_60%_40%/50%_55%_45%_50%] bg-[#E8EFE8]/70"
@@ -170,26 +170,25 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
 
         <div className="relative mx-auto max-w-7xl">
           {/* Header */}
-          <div className="mb-10 max-w-2xl sm:mb-12">
+          <div className="mb-6 max-w-2xl sm:mb-8">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Zo werkt het voor particulieren</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Eenvoudig van bot naar vlijmscherp</h2>
-            <p className="mt-3 text-base leading-7 text-[#657068]">
-              Drie simpele stappen. Geen pakketjes of winkelbezoek nodig: wij regelen het bij jou aan huis.
-            </p>
           </div>
 
-          {/* 3 Korte Stappen */}
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+          {/* 3 Korte Stappen - Horizontale layout & minder hoog */}
+          <div className="grid grid-cols-1 gap-3 sm:gap-4 md:grid-cols-3 md:gap-5">
             {stepsBefore.map((item) => (
               <div
                 key={item.num}
-                className="group relative rounded-[2rem] border border-[#d9e1d7] bg-white p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md"
+                className="group relative flex items-start gap-3.5 rounded-2xl border border-[#d9e1d7] bg-white p-4 sm:p-5 shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:border-[#3B7F4B]/50 hover:shadow-md"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-sm font-bold text-[#C95E3E]">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-xs font-bold text-[#C95E3E] mt-0.5">
                   {item.num}
                 </span>
-                <h3 className="mt-5 font-heading text-xl font-bold text-[#3B7F4B]">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#657068]">{item.text}</p>
+                <div className="flex-1 min-w-0">
+                  <h3 className="font-heading text-base font-bold text-[#3B7F4B]">{item.title}</h3>
+                  <p className="mt-1 text-xs sm:text-sm leading-relaxed text-[#657068]">{item.text}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -202,9 +201,6 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           <div className="mb-8 text-center sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Bestelformulier</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Bereken direct je prijs &amp; bestel</h2>
-            <p className="mx-auto mt-3 max-w-2xl text-base leading-relaxed text-[#657068]">
-              Kies het aantal messen, vul je postcode in en verstuur je bestelling via WhatsApp. Je ziet meteen vooraf de exacte prijs inclusief bezorging.
-            </p>
           </div>
 
           <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-5 shadow-sm sm:p-8 lg:p-10">
@@ -220,37 +216,35 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
 
       <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#3B7F4B" variant="scalloped" />
 
-      {/* 6. EXTRA INFO OVER HET PROCES NÁ DE BESTELLING (Green section with wave dividers) */}
-      <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
+      {/* 6. EXTRA INFO OVER HET PROCES NÁ DE BESTELLING (Green section with wave dividers) - Compact & horizontaal */}
+      <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-14 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl sm:mb-12">
+          <div className="mb-8 max-w-2xl sm:mb-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Wat gebeurt er daarna?</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-white sm:text-4xl">Wat gebeurt er na je bestelling?</h2>
-            <p className="mt-4 text-base leading-7 text-[#E8EFE8]">
-              Geen onduidelijkheid of stilte. Zo verloopt het proces vanaf het moment dat je op de WhatsApp-knop drukt.
-            </p>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-white sm:text-4xl">Wat gebeurt er na je bestelling?</h2>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 md:gap-5">
             {postOrderSteps.map((step) => (
               <div
                 key={step.step}
-                className="group relative rounded-[1.75rem] bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between"
+                className="group relative flex items-start gap-3.5 rounded-2xl bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg sm:p-5"
               >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-sm font-bold text-[#C95E3E]">
-                      {step.step}
-                    </span>
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-xs font-bold text-[#C95E3E]">
+                  {step.step}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="font-heading text-base font-bold text-[#3B7F4B]">{step.title}</h3>
                     <UIconBadge
                       name={step.icon}
                       variant="soft"
-                      size="sm"
-                      rounded="xl"
+                      size="xs"
+                      rounded="lg"
+                      className="shrink-0"
                     />
                   </div>
-                  <h3 className="mt-5 font-heading text-lg font-bold text-[#3B7F4B]">{step.title}</h3>
-                  <p className="mt-2 text-sm leading-6 text-[#657068]">{step.desc}</p>
+                  <p className="mt-1 text-xs leading-5 text-[#657068] sm:text-sm sm:leading-6">{step.desc}</p>
                 </div>
               </div>
             ))}
@@ -271,9 +265,6 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
           <div className="max-w-md">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Veelgestelde vragen</p>
             <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Vragen over het slijpen?</h2>
-            <p className="mt-4 text-base leading-7 text-[#657068]">
-              Hier vind je direct antwoord op de meest gestelde vragen van thuiskoks over ophalen, veilig inpakken en betaling.
-            </p>
             <a
               href={whatsappUrl}
               target="_blank"

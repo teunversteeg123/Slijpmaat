@@ -92,34 +92,32 @@ export const ZakelijkFormulier: React.FC = () => {
     setErrorMsg('');
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
+  const buildMessageLines = (): string[] | null => {
     if (!restaurantName.trim()) {
       setErrorMsg('Vul de naam van jouw restaurant of zaak in.');
       document.getElementById('zakelijk-restaurant')?.focus();
-      return;
+      return null;
     }
     if (!contactPerson.trim()) {
       setErrorMsg('Vul de naam van de contactpersoon in.');
       document.getElementById('zakelijk-contact')?.focus();
-      return;
+      return null;
     }
     if (!phone.trim()) {
       setErrorMsg('Vul een telefoonnummer in waarop we jullie kunnen bereiken.');
       document.getElementById('zakelijk-phone')?.focus();
-      return;
+      return null;
     }
 
     if (serviceType === 'bezorging') {
       if (!hasValidPostcode) {
         setErrorMsg('Vul een geldige Utrechtse postcode in (bijv. 3513 AB).');
         document.getElementById('zakelijk-postcode')?.focus();
-        return;
+        return null;
       }
     }
 
-    // Build the WhatsApp message
+    // Build the message
     const messageLines = [
       'Hoi Teun en Mike (Slijpmaat),',
       '',
@@ -159,6 +157,14 @@ export const ZakelijkFormulier: React.FC = () => {
       'Alvast bedankt!'
     );
 
+    return messageLines;
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const messageLines = buildMessageLines();
+    if (!messageLines) return;
+
     trackAnalyticsEvent('generate_lead', {
       lead_type: 'business_request',
       contact_method: 'whatsapp',
@@ -168,6 +174,24 @@ export const ZakelijkFormulier: React.FC = () => {
       estimate_band: isGranularActive ? 'specified' : selectedEstimate,
     });
     window.open(createWhatsAppUrl(messageLines.join('\n')), '_blank', 'noopener,noreferrer');
+  };
+
+  const handleEmailSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const messageLines = buildMessageLines();
+    if (!messageLines) return;
+
+    trackAnalyticsEvent('generate_lead', {
+      lead_type: 'business_request',
+      contact_method: 'email',
+      service_type: serviceType,
+      delivery_zone: serviceType === 'langskomen' ? 'self_dropoff' : deliveryZone,
+      knife_count: granularTotalKnives,
+      estimate_band: isGranularActive ? 'specified' : selectedEstimate,
+    });
+    const subject = encodeURIComponent(`Zakelijke aanvraag Slijpmaat - ${restaurantName.trim()}`);
+    const body = encodeURIComponent(messageLines.join('\n'));
+    window.location.href = `mailto:${SLIJPMAAT_INFO.email}?subject=${subject}&body=${body}`;
   };
 
   return (
@@ -186,9 +210,6 @@ export const ZakelijkFormulier: React.FC = () => {
                 Jouw keuken &amp; contact
               </h3>
             </div>
-            <p className="mt-2 text-sm text-[#657068]">
-              Vul jullie bedrijfsgegevens in. We stemmen alle communicatie direct en persoonlijk af via WhatsApp.
-            </p>
 
             <div className="mt-6 space-y-4">
               <div>
@@ -271,9 +292,6 @@ export const ZakelijkFormulier: React.FC = () => {
                 Aantal messen &amp; planning
               </h3>
             </div>
-            <p className="mt-2 text-sm text-[#657068]">
-              Kies het geschatte volume of specificeer optioneel jullie exacte messenset.
-            </p>
 
             {/* Range Selectie Kaarten */}
             <div className="mt-5">
@@ -422,9 +440,6 @@ export const ZakelijkFormulier: React.FC = () => {
                 Ophalen of langskomen?
               </h3>
             </div>
-            <p className="mt-2 text-sm text-[#657068]">
-              Binnen Utrecht is ophalen en bezorgen gratis vanaf €35 bestelwaarde (incl. btw). Of breng de messen langs op afspraak.
-            </p>
 
             {/* Service Toggle Kaarten */}
             <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
@@ -647,8 +662,8 @@ export const ZakelijkFormulier: React.FC = () => {
               <strong className="mt-1 block font-heading text-2xl sm:text-3xl font-bold text-[#3B7F4B]">
                 Offerte via WhatsApp
               </strong>
-              <p className="mt-2 text-[11px] text-[#657068] leading-relaxed">
-                Basistarieven vanaf €6,50 per mes (alle prijzen zijn incl. btw). Binnen Utrecht gratis haal- en brengservice vanaf €35 (incl. btw). We starten pas na jullie akkoord.
+              <p className="mt-2 text-xs font-semibold text-[#657068] leading-relaxed">
+                Incl. btw · We starten pas na jullie akkoord
               </p>
             </div>
 
@@ -670,16 +685,15 @@ export const ZakelijkFormulier: React.FC = () => {
               <span>Open aanvraag in WhatsApp</span>
             </button>
 
-            {/* Alternatieve contactroute per e-mail */}
-            <div className="mt-3.5 text-center">
-              <a
-                href={`mailto:${SLIJPMAAT_INFO.email}?subject=${encodeURIComponent('Zakelijke aanvraag Slijpmaat')}`}
-                className="inline-flex items-center gap-2 text-xs font-bold text-[#3B7F4B] hover:text-[#2d633a] transition-colors"
-              >
-                <Mail aria-hidden="true" strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B] sm:h-4 sm:w-4" />
-                <span>Of stuur een e-mail naar {SLIJPMAAT_INFO.email}</span>
-              </a>
-            </div>
+            {/* Dunne groene knop: Open aanvraag in e-mail */}
+            <button
+              type="button"
+              onClick={handleEmailSubmit}
+              className="mt-3 group inline-flex w-full min-h-[44px] sm:min-h-[46px] items-center justify-center gap-2.5 rounded-full border border-[#3B7F4B] bg-white px-4 py-2.5 font-heading text-sm sm:text-base font-semibold text-[#3B7F4B] shadow-2xs transition-all duration-200 hover:bg-[#3B7F4B] hover:text-white active:scale-[0.98] cursor-pointer whitespace-nowrap"
+            >
+              <Mail aria-hidden="true" strokeWidth={2} className="h-4.5 w-4.5 shrink-0 text-[#3B7F4B] transition-colors group-hover:text-white" />
+              <span>Open aanvraag in e-mail</span>
+            </button>
 
             <p className="mt-3 text-center text-xs text-[#657068]">
               Er wordt niets automatisch verzonden. Je controleert en verstuurt je bericht zelf via WhatsApp of e-mail.

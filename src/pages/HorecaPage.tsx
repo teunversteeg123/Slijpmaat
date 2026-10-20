@@ -180,8 +180,8 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
 
       <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#F7F4EC" variant="scalloped" />
 
-      {/* 3. VOORAF: KORTE BEZOEKERSFLOW (Warm cream #F7F4EC) */}
-      <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-20 lg:px-8">
+      {/* 3. VOORAF: KORTE BEZOEKERSFLOW (Warm cream #F7F4EC) - Compact & horizontaal */}
+      <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-14 lg:px-8">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -left-20 top-1/4 h-72 w-72 rounded-[55%_45%_60%_40%/50%_55%_45%_50%] bg-[#E8EFE8]/70"
@@ -189,26 +189,25 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
 
         <div className="relative mx-auto max-w-7xl">
           {/* Header */}
-          <div className="mb-10 max-w-2xl sm:mb-12">
+          <div className="mb-8 max-w-2xl sm:mb-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Zo werkt het voor zakelijke keukens</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Eenvoudig geregeld voor jouw keuken</h2>
-            <p className="mt-3 text-base leading-7 text-[#657068]">
-              Drie duidelijke stappen. We sluiten aan op jullie keukenplanning, zodat het werk in de keuken doorgaat.
-            </p>
           </div>
 
           {/* 3 Korte Stappen */}
-          <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-5">
             {stepsBefore.map((item) => (
               <div
                 key={item.num}
-                className="group relative rounded-[2rem] border border-[#d9e1d7] bg-white p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md"
+                className="group relative flex items-start gap-3.5 rounded-2xl border border-[#d9e1d7] bg-white p-4 shadow-xs transition-all duration-300 hover:-translate-y-0.5 hover:border-[#3B7F4B]/50 hover:shadow-md sm:p-5"
               >
-                <span className="flex h-11 w-11 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-sm font-bold text-[#C95E3E]">
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-xs font-bold text-[#C95E3E]">
                   {item.num}
                 </span>
-                <h3 className="mt-5 font-heading text-xl font-bold text-[#3B7F4B]">{item.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#657068]">{item.text}</p>
+                <div className="min-w-0 flex-1">
+                  <h3 className="font-heading text-base font-bold text-[#3B7F4B] sm:text-lg">{item.title}</h3>
+                  <p className="mt-1 text-xs leading-5 text-[#657068] sm:text-sm sm:leading-6">{item.text}</p>
+                </div>
               </div>
             ))}
           </div>
@@ -242,10 +241,6 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
                 Basistarieven per mes · Alle prijzen incl. btw
               </p>
             </div>
-
-            <p className="mt-4 text-sm leading-6 text-[#657068]">
-              Dit zijn onze basistarieven per mes. Voor grotere aantallen of periodieke keukenservices stemmen we de planning en een passende offerte vooraf met jullie af.
-            </p>
 
             <div className="mt-6 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4">
               {businessBasePrices.map((item) => (
@@ -291,40 +286,36 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
 
       <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#A9C89E" toColor="#3B7F4B" variant="calm" />
 
-      {/* 6. WAT GEBEURT ER NA JE AANVRAAG? (Green section with wave dividers) */}
-      <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
+      {/* 6. WAT GEBEURT ER NA JE AANVRAAG? (Green section with wave dividers) - Compact & horizontaal */}
+      <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-14 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl sm:mb-12">
+          <div className="mb-8 max-w-2xl sm:mb-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Wat gebeurt er daarna?</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-white sm:text-4xl">Wat gebeurt er na je aanvraag?</h2>
-            <p className="mt-4 text-base leading-7 text-[#E8EFE8]">
-              Geen ingewikkelde contracten of wachttijden. Zo verloopt de afstemming en het slijpproces voor jullie keuken.
-            </p>
+            <h2 className="mt-2 font-heading text-3xl font-bold text-white sm:text-4xl">Wat gebeurt er na je aanvraag?</h2>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 md:gap-5">
             {postOrderSteps.map((step) => {
               const Icon = step.icon;
               return (
                 <div
                   key={step.step}
-                  className="group relative rounded-[1.75rem] bg-white p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg flex flex-col justify-between"
+                  className="group relative flex items-start gap-3.5 rounded-2xl bg-white p-4 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg sm:p-5"
                 >
-                  <div>
-                    <div className="flex items-center justify-between">
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-sm font-bold text-[#C95E3E]">
-                        {step.step}
-                      </span>
-                      <span className="flex h-10 w-10 items-center justify-center rounded-full bg-[#E8EFE8] text-[#3B7F4B]">
-                        <Icon strokeWidth={1.75} className="h-5 w-5" />
+                  <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-xs font-bold text-[#C95E3E]">
+                    {step.step}
+                  </span>
+                  <div className="min-w-0 flex-1">
+                    <div className="flex items-center justify-between gap-2">
+                      <h3 className="font-heading text-base font-bold text-[#3B7F4B]">
+                        {step.title}
+                      </h3>
+                      <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-lg bg-[#E8EFE8] text-[#3B7F4B]">
+                        <Icon strokeWidth={1.75} className="h-4 w-4" />
                       </span>
                     </div>
 
-                    <h3 className="mt-5 font-heading text-lg font-bold text-[#3B7F4B]">
-                      {step.title}
-                    </h3>
-
-                    <p className="mt-2 text-sm leading-6 text-[#657068]">
+                    <p className="mt-1 text-xs leading-5 text-[#657068] sm:text-sm sm:leading-6">
                       {step.desc}
                     </p>
                   </div>

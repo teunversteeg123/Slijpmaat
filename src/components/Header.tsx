@@ -143,10 +143,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
           <a
             href={PAGE_PATHS['ophalen-bezorgen']}
             onClick={(event) => handleInternalClick(event, 'ophalen-bezorgen')}
-            className="flex items-center justify-center gap-1.5 sm:gap-2 text-center sm:text-left text-white hover:text-[#E8EFE8] transition-colors cursor-pointer"
+            className="text-center sm:text-left text-white hover:text-[#E8EFE8] transition-colors cursor-pointer"
           >
-            <span className="flex h-2 w-2 shrink-0 rounded-full bg-white animate-pulse" />
-            <span className="font-semibold">Gratis ophalen &amp; bezorgen in Utrecht vanaf €35 bestelwaarde</span>
+            <span className="font-semibold">Gratis ophalen &amp; bezorgen in Utrecht vanaf €35</span>
           </a>
 
           <div className="hidden sm:flex items-center gap-3 sm:gap-4 text-xs font-semibold">
