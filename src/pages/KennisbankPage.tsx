@@ -107,9 +107,6 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
             <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
               Uitgelichte kennis uit onze werkplaats
             </h2>
-            <p className="mt-3 text-base text-[#657068]">
-              Heldere instructies vanuit onze eigen slijppraktijk, aangevuld met uitleg over staal, slijphoeken en Japanse waterstenen.
-            </p>
           </div>
 
           {/* ONDERWERPEN PILLS */}
@@ -169,10 +166,6 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                   <h3 className="mt-2 font-heading text-2xl font-bold leading-tight text-[#203728] transition-colors duration-200 group-hover:text-[#3B7F4B] sm:text-3xl">
                     Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug
                   </h3>
-
-                  <p className="mt-4 text-base leading-relaxed text-[#657068]">
-                    Een compleet en nuchter stappenplan voor het slijpen van keukenmessen op een wetsteen. Inclusief slijphoeken, de stifttruc, braamcontrole en de vijf meest gemaakte fouten.
-                  </p>
                 </div>
               </div>
 
@@ -292,9 +285,6 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
           <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
             Vers van de slijpsteen
           </h2>
-          <p className="mx-auto mt-2 max-w-xl text-xs sm:text-sm text-[#657068]">
-            Bekijk hoe keukenmessen er na het watersteenslijpen en stroppen op leer uitzien.
-          </p>
         </div>
 
         <ResultatenSlider />

@@ -323,16 +323,13 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
         />
 
         <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="mb-12 max-w-2xl sm:mb-16">
+          <div className="mb-10 max-w-2xl sm:mb-12">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">
               Maatwerk per lemmet
             </p>
             <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
               Elk mes vraagt om een eigen behandeling
             </h2>
-            <p className="mt-4 text-base leading-7 text-[#657068]">
-              Geen enkel mes is hetzelfde. Een robuust Duits koksmes vraagt om een andere geometrie dan een flinterdunne Japanse Santoku. We stemmen hoek, stenen en druk exact af op het staal.
-            </p>
           </div>
 
           <div className="grid gap-6 md:grid-cols-3">

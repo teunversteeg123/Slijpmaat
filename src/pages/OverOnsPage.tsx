@@ -75,33 +75,13 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     },
   ];
 
-  // 4. Actiefoto's van Teun & Mike in actie
-  const actionPhotos = [
-    {
-      image: '/assets/team/teun-en-mike-met-mes.jpg',
-      alt: 'Teun en Mike van Slijpmaat bekijken het vlijmscherpe lemmet van een keukenmes',
-      title: 'Teun & Mike met het resultaat',
-      subtitle: 'Trots op elk vlijmscherp geslepen lemmet',
-    },
-    {
-      image: '/assets/werkwijze/01-beoordelen.jpg',
-      alt: 'Nauwkeurige beoordeling van de snijkant en het originele lemmetprofiel',
-      title: 'Inspectie & geometrie',
-      subtitle: 'Behoud van de originele fabriekscurve',
-    },
-    {
-      image: '/assets/werkwijze/03-slijpen.jpg',
-      alt: 'Handmatig slijpen van een keukenmes op een Japanse watersteen',
-      title: 'Handmatig op waterstenen',
-      subtitle: 'Nat geslepen met beheerste materiaalafname',
-    },
-    {
-      image: '/assets/werkwijze/04-afwerken.jpg',
-      alt: 'Afwerken en ontbramen van het lemmet op een soepele leren strop',
-      title: 'Afwerken op soepel leer',
-      subtitle: 'Zorgvuldig ontbraamd en afgewerkt',
-    },
-  ];
+  // 4. Uitgelichte foto van Teun & Mike in actie
+  const featuredPhoto = {
+    image: '/assets/team/teun-en-mike-met-mes.jpg',
+    alt: 'Teun en Mike van Slijpmaat bekijken het vlijmscherpe lemmet van een keukenmes',
+    title: 'Teun & Mike met het resultaat',
+    subtitle: 'Trots op elk vlijmscherp geslepen lemmet',
+  };
 
   // 5. Veelgestelde vragen over Teun & Mike
   const faqs = [
@@ -151,7 +131,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               Twee Utrechtse vrienden met passie voor scherpte.
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Wij zijn Teun en Mike, de oprichters van Slijpmaat. Twee maten uit Utrecht die vonden dat messenslijpen weer ambachtelijk, betrouwbaar en zonder gedoe aan huis geregeld moet worden - voor buren, wijkgenoten, thuiskoks én lokale horecagelegenheden. We halen je messen met de fiets of scooter op in Utrecht en brengen ze vlijmscherp weer thuis.
+              Wij zijn Teun en Mike, de oprichters van Slijpmaat. Twee maten uit Utrecht die vonden dat messenslijpen weer ambachtelijk, betrouwbaar en zonder gedoe aan huis geregeld moet worden - voor buren, wijkgenoten, thuiskoks én landelijke horecagelegenheden. We halen je messen met de fiets of scooter op in Utrecht en brengen ze vlijmscherp weer thuis.
             </p>
 
             <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
@@ -309,32 +289,25 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
             </h2>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {actionPhotos.map((photo) => (
-              <figure
-                key={photo.title}
-                className="group relative overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-white shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:shadow-md flex flex-col"
-              >
-                <div className="relative aspect-[4/3] w-full overflow-hidden bg-[#E8EFE8]">
-                  <img
-                    src={photo.image}
-                    alt={photo.alt}
-                    className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                </div>
-                <figcaption className="p-5 flex-1 flex flex-col justify-between">
-                  <div>
-                    <h3 className="font-heading text-base font-bold text-[#203728]">
-                      {photo.title}
-                    </h3>
-                    <p className="mt-1 text-xs text-[#657068] leading-relaxed">
-                      {photo.subtitle}
-                    </p>
-                  </div>
-                </figcaption>
-              </figure>
-            ))}
+          <div className="mx-auto max-w-3xl lg:max-w-4xl">
+            <figure className="group relative overflow-hidden rounded-[2rem] sm:rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-xs transition-all duration-300 hover:shadow-md flex flex-col">
+              <div className="relative aspect-[4/3] sm:aspect-[16/10] lg:aspect-[16/9] w-full overflow-hidden bg-[#E8EFE8]">
+                <img
+                  src={featuredPhoto.image}
+                  alt={featuredPhoto.alt}
+                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.02]"
+                  loading="lazy"
+                />
+              </div>
+              <figcaption className="p-5 sm:p-7 text-left">
+                <h3 className="font-heading text-lg sm:text-2xl font-bold text-[#203728]">
+                  {featuredPhoto.title}
+                </h3>
+                <p className="mt-1 sm:mt-2 text-xs sm:text-base text-[#657068] leading-relaxed">
+                  {featuredPhoto.subtitle}
+                </p>
+              </figcaption>
+            </figure>
           </div>
         </div>
       </section>
@@ -404,12 +377,28 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
             </h2>
           </div>
 
-          <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-4">
+          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-4 sm:gap-5">
             {promises.map((p, idx) => (
-              <div key={idx} className="rounded-[1.75rem] bg-white p-6 shadow-sm">
-                <UIconBadge name={p.icon} variant="soft" size="md" rounded="full" />
-                <h3 className="mt-5 font-heading text-lg font-bold text-[#3B7F4B]">{p.title}</h3>
-                <p className="mt-2 text-sm leading-6 text-[#657068]">{p.desc}</p>
+              <div
+                key={idx}
+                className="group relative flex items-start gap-3.5 rounded-2xl bg-white p-4.5 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lg sm:p-5"
+              >
+                <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#F9E4DE] font-heading text-sm font-bold text-[#C95E3E] mt-0.5">
+                  {idx + 1}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <div className="flex items-center justify-between gap-2">
+                    <h3 className="font-heading text-base font-bold text-[#3B7F4B]">{p.title}</h3>
+                    <UIconBadge
+                      name={p.icon}
+                      variant="soft"
+                      size="xs"
+                      rounded="lg"
+                      className="shrink-0"
+                    />
+                  </div>
+                  <p className="mt-1 text-xs leading-5 text-[#657068] sm:text-sm sm:leading-6">{p.desc}</p>
+                </div>
               </div>
             ))}
           </div>

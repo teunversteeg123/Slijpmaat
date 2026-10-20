@@ -184,7 +184,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           <div className="mb-8 max-w-2xl sm:mb-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Kies wat bij je past</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Thuiskeuken of professionele keuken?</h2>
-            <p className="mt-3 text-base leading-7 text-[#657068]">Je krijgt meteen de informatie, prijzen en manier van plannen die voor jou relevant zijn.</p>
           </div>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-7">

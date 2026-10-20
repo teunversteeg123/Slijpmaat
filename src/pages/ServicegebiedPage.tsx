@@ -322,9 +322,6 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
           <div className="mb-8 max-w-3xl sm:mb-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Dekking in Utrecht</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Postcodes, wijken &amp; bezorgtarieven</h2>
-            <p className="mt-3 text-base leading-7 text-[#657068]">
-              Vanaf €35 bestelwaarde is ophalen en bezorgen binnen het ondersteunde Utrechtse gebied gratis. Hieronder staan uitsluitend de tarieven voor bestellingen onder €35.
-            </p>
           </div>
 
           <div className="min-w-0 space-y-6">
@@ -336,9 +333,6 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
                     Postcodechecker
                   </span>
                   <h3 className="mt-3 font-heading text-2xl font-bold text-[#3B7F4B]">Wat betaal je onder €35?</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-[#657068]">
-                    Vul vier cijfers of je volledige postcode in. De uitkomst komt rechtstreeks uit dezelfde tarieftabel als het overzicht hieronder.
-                  </p>
                 </div>
 
                 <form onSubmit={handleCheckZip} className="min-w-0 space-y-3">
@@ -444,7 +438,6 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
           <div className="mb-8 max-w-2xl sm:mb-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Locatie &amp; Afspraak</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Woon je in Utrecht of daarbuiten?</h2>
-            <p className="mt-3 text-base leading-7 text-[#657068]">Voor beide situaties hebben we een snelle, prettige oplossing.</p>
           </div>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-7">
@@ -501,12 +494,9 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
       {/* 6. HOE WERKT DE OPHAALSERVICE (Green section with organic wave dividers matching HomePage) */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl sm:mb-12">
+          <div className="mb-8 max-w-2xl sm:mb-10">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Van voordeur tot vlijmscherp</p>
             <h2 className="mt-3 font-heading text-3xl font-bold text-white sm:text-4xl">Hoe werkt de ophaalservice?</h2>
-            <p className="mt-4 text-base leading-7 text-[#E8EFE8]">
-              Geen gedoe met inpakdozen of postkantoren. Binnen Utrecht halen we je messen op met de fiets en voor afspraken verder weg gebruiken we de scooter.
-            </p>
           </div>
 
           <ol className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">

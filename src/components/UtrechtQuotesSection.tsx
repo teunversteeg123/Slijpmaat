@@ -117,9 +117,6 @@ export const UtrechtQuotesSection: React.FC = () => {
           <h2 className="mt-2 font-heading text-3xl font-bold text-white sm:text-4xl">
             Quotes uit de Utrechtse keukens
           </h2>
-          <p className="mx-auto mt-3 max-w-xl text-sm sm:text-base text-[#E8EFE8]">
-            Korte reacties van thuiskoks en koks zodra ze hun geslepen messen weer vastpakken.
-          </p>
         </div>
 
         <div className="relative mx-auto w-full overflow-hidden">
