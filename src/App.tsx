@@ -3,7 +3,7 @@ import { PageId } from './types';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { CookieConsentProvider } from './context/CookieConsentContext';
-import { trackPageView } from './utils/analytics';
+import { trackAnalyticsEvent, trackPageView } from './utils/analytics';
 
 // Pages
 import { HomePage } from './pages/HomePage';
@@ -107,8 +107,17 @@ export default function App({ initialPath }: AppProps) {
   }, [currentPage]);
 
   const handleNavigate = (page: PageId) => {
-    setCurrentPage(page);
     const nextPath = PAGE_PATHS[page];
+    const fromPath = currentPage ? PAGE_PATHS[currentPage] : window.location.pathname;
+
+    if (fromPath !== nextPath) {
+      trackAnalyticsEvent('navigation_click', {
+        from_path: fromPath,
+        to_path: nextPath,
+      });
+    }
+
+    setCurrentPage(page);
     if (window.location.pathname !== nextPath || window.location.hash) {
       window.history.pushState(null, '', nextPath);
     }

@@ -39,6 +39,8 @@ const decodeHtml = (value) => value
   .trim();
 
 const forbiddenClaims = [
+  /vanaf\s+(?:drie|3)\s+messen/i,
+  /gratis[^.]{0,80}(?:drie|3)\s+messen/i,
   /collegekaart/i,
   /duizenden uren/i,
   /uiterlijk 48 uur/i,

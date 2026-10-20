@@ -20,6 +20,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
   const mobileMenuScrollYRef = useRef(0);
   const mobileMenuScrollCapturedRef = useRef(false);
+  const restoreScrollOnMenuCloseRef = useRef(true);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -78,7 +79,9 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
       document.documentElement.style.overflow = previousDocumentOverflow;
       document.body.style.overscrollBehavior = previousOverscrollBehavior;
       document.removeEventListener('keydown', handleKeyDown);
-      window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'auto' });
+      if (restoreScrollOnMenuCloseRef.current) {
+        window.scrollTo({ top: lockedScrollY, left: 0, behavior: 'auto' });
+      }
     };
   }, [mobileMenuOpen]);
 
@@ -100,33 +103,18 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
   };
 
   const handleLinkClick = (pageId: PageId) => {
+    if (mobileMenuOpen) {
+      restoreScrollOnMenuCloseRef.current = false;
+    }
     onNavigate(pageId);
     closeHeaderMenus();
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const handlePriceClick = (pageId: 'particulieren' | 'horeca', targetId: 'calculator' | 'zakelijk-formulier') => {
-    onNavigate(pageId);
-    closeHeaderMenus();
-    window.setTimeout(() => {
-      document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 60);
+    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   };
 
   const handleInternalClick = (event: React.MouseEvent<HTMLAnchorElement>, pageId: PageId) => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
     handleLinkClick(pageId);
-  };
-
-  const handlePriceLinkClick = (
-    event: React.MouseEvent<HTMLAnchorElement>,
-    pageId: 'particulieren' | 'horeca',
-    targetId: 'calculator' | 'zakelijk-formulier',
-  ) => {
-    if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
-    event.preventDefault();
-    handlePriceClick(pageId, targetId);
   };
 
   const isHeaderVisible = isVisible || mobileMenuOpen;
@@ -211,11 +199,11 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
               </summary>
               <div className="absolute left-1/2 top-full z-50 w-60 -translate-x-1/2 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
-                  <a href={`${PAGE_PATHS.particulieren}#calculator`} onClick={(event) => handlePriceLinkClick(event, 'particulieren', 'calculator')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
+                  <a href={PAGE_PATHS.particulieren} onClick={(event) => handleInternalClick(event, 'particulieren')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
                     <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
                   </a>
-                  <a href={`${PAGE_PATHS.horeca}#zakelijk-formulier`} onClick={(event) => handlePriceLinkClick(event, 'horeca', 'zakelijk-formulier')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
+                  <a href={PAGE_PATHS.horeca} onClick={(event) => handleInternalClick(event, 'horeca')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
                     <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
                   </a>
@@ -269,6 +257,7 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                     mobileMenuScrollYRef.current = window.scrollY;
                   }
                   mobileMenuScrollCapturedRef.current = false;
+                  restoreScrollOnMenuCloseRef.current = true;
                   setMobileMenuOpen(true);
                 }
               }}
@@ -326,15 +315,15 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 {mobilePrijzenOpen && (
                   <div className="ml-4 border-l-2 border-[#3B7F4B]/30 py-0.5 pl-3">
                     <a
-                      href={`${PAGE_PATHS.particulieren}#calculator`}
-                      onClick={(event) => handlePriceLinkClick(event, 'particulieren', 'calculator')}
+                      href={PAGE_PATHS.particulieren}
+                      onClick={(event) => handleInternalClick(event, 'particulieren')}
                       className="block min-h-11 w-full rounded-lg px-2 py-2 text-left text-sm font-medium text-[#3B7F4B]/75 transition-colors hover:bg-black/5 hover:text-[#3B7F4B]"
                     >
                       Particulier
                     </a>
                     <a
-                      href={`${PAGE_PATHS.horeca}#zakelijk-formulier`}
-                      onClick={(event) => handlePriceLinkClick(event, 'horeca', 'zakelijk-formulier')}
+                      href={PAGE_PATHS.horeca}
+                      onClick={(event) => handleInternalClick(event, 'horeca')}
                       className="block min-h-11 w-full rounded-lg px-2 py-2 text-left text-sm font-medium text-[#3B7F4B]/75 transition-colors hover:bg-black/5 hover:text-[#3B7F4B]"
                     >
                       Zakelijk
@@ -434,16 +423,16 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 {mobilePlanOpen && (
                   <div id="mobile-plan-options" className="mt-2 space-y-1 overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-1.5 shadow-sm animate-in fade-in slide-in-from-top-1 duration-200">
                     <a
-                      href={`${PAGE_PATHS.particulieren}#calculator`}
-                      onClick={(event) => handlePriceLinkClick(event, 'particulieren', 'calculator')}
+                      href={PAGE_PATHS.particulieren}
+                      onClick={(event) => handleInternalClick(event, 'particulieren')}
                       className="block min-h-11 w-full rounded-xl px-4 py-2 text-left transition-colors hover:bg-[#E8EFE8]"
                     >
                       <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                       <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
                     </a>
                     <a
-                      href={`${PAGE_PATHS.horeca}#zakelijk-formulier`}
-                      onClick={(event) => handlePriceLinkClick(event, 'horeca', 'zakelijk-formulier')}
+                      href={PAGE_PATHS.horeca}
+                      onClick={(event) => handleInternalClick(event, 'horeca')}
                       className="block min-h-11 w-full rounded-xl px-4 py-2 text-left transition-colors hover:bg-[#FFF4EF]"
                     >
                       <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
