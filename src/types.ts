@@ -12,6 +12,5 @@ export type PageId =
   | 'blog-hoe-slijp-je-een-mes'
   | 'over-ons'
   | 'faq'
-  | 'contact'
   | 'algemene-voorwaarden'
   | 'privacy';

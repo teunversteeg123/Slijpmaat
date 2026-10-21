@@ -3,6 +3,7 @@ import type { PageId } from '../types';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import { TrustBar } from '../components/TrustBar';
 import { UIcon } from '../components/ui/UIcon';
+import { PAGE_PATHS } from '../seo';
 
 interface BlogHoeSlijpJeEenMesPageProps {
   onNavigate: (page: PageId) => void;
@@ -853,6 +854,10 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
               <p className="mt-4 text-base leading-relaxed text-[#244A30]">
                 Zelf je messen slijpen op Japanse waterstenen is een prachtige, rustgevende hobby. Toch zijn er situaties waarin professionele hulp van Slijpmaat verstandiger en veiliger is:
+              </p>
+
+              <p className="mt-3 text-base leading-relaxed text-[#244A30]">
+                Lees hoe Slijpmaat <a href={PAGE_PATHS['dienst-keukenmessen']} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">keukenmessen met de hand slijpt</a>, bekijk onze aanpak voor <a href={PAGE_PATHS['dienst-japanse-messen']} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">Japanse messen</a> of ga direct naar de <a href={PAGE_PATHS.particulieren} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">prijzen en afspraak</a>.
               </p>
 
               {/* BULLET WIDGET REDENEN */}

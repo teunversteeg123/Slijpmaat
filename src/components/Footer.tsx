@@ -19,7 +19,6 @@ const QUICK_LINKS: Array<{ label: string; page: PageId }> = [
   { label: 'Plan mijn slijpbeurt', page: 'particulieren' },
   { label: 'Servicegebied & langskomen', page: 'ophalen-bezorgen' },
   { label: 'Veelgestelde vragen', page: 'faq' },
-  { label: 'Contact', page: 'contact' },
   { label: 'Keukenmessen slijpen', page: 'dienst-keukenmessen' },
   { label: 'Japanse messen slijpen', page: 'dienst-japanse-messen' },
   { label: 'Chips herstellen', page: 'dienst-chips-herstellen' },

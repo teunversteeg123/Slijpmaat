@@ -180,7 +180,7 @@ export const CookieConsentProvider = ({ children }: { children: React.ReactNode 
               Noodzakelijke opslag onthoudt je keuze. Zonder toestemming gebruikt Google Analytics beperkte metingen zonder Analytics-cookies. Met jouw toestemming krijgen we completere gebruiksstatistieken en mag Analytics cookies plaatsen.
             </p>
             <a
-              href="/privacyverklaring"
+              href="/privacyverklaring/"
               className="mt-3 inline-block text-sm font-semibold text-[#3B7F4B] underline decoration-[#3B7F4B]/40 underline-offset-4 hover:decoration-[#3B7F4B] focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]"
             >
               Lees hoe we cookies gebruiken

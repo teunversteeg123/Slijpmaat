@@ -26,13 +26,13 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
         <div className="site-hero-grid mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="site-hero-copy">
             <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.24em] text-[#3B7F4B] sm:text-sm">
-              Kennis &amp; Ambacht · Slijpmaat Utrecht
+              Kennis &amp; Ambacht · Voor heel Nederland
             </p>
             <h1 className="site-hero-title mt-3 font-heading text-4xl font-bold leading-[1.04] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
               Blogs over messen slijpen en onderhoud
             </h1>
             <p className="site-hero-description mt-5 max-w-xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Praktische gidsen, stappenplannen en vakkennis van jouw Utrechtse messenslijpers. Leer hoe je je messen in topconditie houdt en waarom handmatig watersteenslijpen het verschil maakt.
+              Praktische gidsen, stappenplannen en vakkennis over keukenmessen. Leer hoe je je messen in topconditie houdt en wanneer handmatig watersteenslijpen het verschil maakt.
             </p>
 
             <div className="site-hero-actions mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">

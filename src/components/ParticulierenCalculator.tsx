@@ -688,11 +688,11 @@ export const ParticulierenCalculator: React.FC = () => {
 
             <p className="mt-3 text-center text-[11px] text-[#9ca3af]">
               Door te bestellen ga je akkoord met onze{' '}
-              <a href="/algemene-voorwaarden" className="underline hover:text-[#3B7F4B]">
+              <a href="/algemene-voorwaarden/" className="underline hover:text-[#3B7F4B]">
                 algemene voorwaarden
               </a>{' '}
               en{' '}
-              <a href="/privacyverklaring" className="underline hover:text-[#3B7F4B]">
+              <a href="/privacyverklaring/" className="underline hover:text-[#3B7F4B]">
                 privacyverklaring
               </a>
               .

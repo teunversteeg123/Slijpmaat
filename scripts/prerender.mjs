@@ -54,14 +54,14 @@ try {
 
     const outputFile = pathname === '/'
       ? join(distDirectory, 'index.html')
-      : pathname === '/404'
+      : pathname === '/404/'
         ? join(distDirectory, '404.html')
         : join(distDirectory, pathname.slice(1), 'index.html');
 
     await mkdir(dirname(outputFile), { recursive: true });
     await writeFile(outputFile, html, 'utf8');
 
-    if (pathname === '/404') {
+    if (pathname === '/404/') {
       const nested404 = join(distDirectory, '404', 'index.html');
       await mkdir(dirname(nested404), { recursive: true });
       await writeFile(nested404, html, 'utf8');

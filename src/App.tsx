@@ -16,7 +16,6 @@ import { KennisbankPage } from './pages/KennisbankPage';
 import { BlogHoeSlijpJeEenMesPage } from './pages/BlogHoeSlijpJeEenMesPage';
 import { OverOnsPage } from './pages/OverOnsPage';
 import { FaqPage } from './pages/FaqPage';
-import { ContactPage } from './pages/ContactPage';
 import { VoorwaardenPage } from './pages/VoorwaardenPage';
 import { PrivacyPage } from './pages/PrivacyPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -74,7 +73,6 @@ const LEGACY_HASH_PAGES: Readonly<Record<string, PageId>> = {
   'blog-hoe-slijp-je-een-mes': 'blog-hoe-slijp-je-een-mes',
   'over-ons': 'over-ons',
   faq: 'faq',
-  contact: 'contact',
   'algemene-voorwaarden': 'algemene-voorwaarden',
   privacy: 'privacy',
 };
@@ -128,6 +126,14 @@ export default function App({ initialPath }: AppProps) {
   useEffect(() => {
     const syncLocation = () => {
       const hash = window.location.hash.replace('#', '');
+      if (window.location.pathname === '/contact' || window.location.pathname === '/contact/' || hash === 'contact') {
+        setCurrentPage('home');
+        window.history.replaceState(null, '', '/#home-contact');
+        window.setTimeout(() => {
+          document.getElementById('home-contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 60);
+        return;
+      }
       if (hash === 'home-contact') {
         setCurrentPage('home');
         window.setTimeout(() => {
@@ -196,8 +202,6 @@ export default function App({ initialPath }: AppProps) {
         return <OverOnsPage onNavigate={handleNavigate} />;
       case 'faq':
         return <FaqPage onNavigate={handleNavigate} />;
-      case 'contact':
-        return <ContactPage />;
       case 'algemene-voorwaarden':
         return <VoorwaardenPage onNavigate={handleNavigate} />;
       case 'privacy':

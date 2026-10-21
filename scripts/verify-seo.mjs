@@ -1,23 +1,23 @@
 import { once } from 'node:events';
+import { readFile } from 'node:fs/promises';
 import { createDistServer } from './serve-dist.mjs';
 
 const routes = [
   ['/', true, 'Jouw messenslijper in Utrecht'],
-  ['/particulier', true, 'Je messen weer scherp. Zonder gedoe.'],
-  ['/zakelijk', true, 'Professioneel messen slijpen voor horeca'],
-  ['/diensten/keukenmessen-slijpen', true, 'Keukenmessen slijpen op Japanse waterstenen'],
-  ['/diensten/japanse-messen-slijpen', true, 'Japanse messen zorgvuldig laten slijpen'],
-  ['/diensten/chips-herstellen', true, 'Chips en beschadigingen in keukenmessen herstellen'],
-  ['/diensten/wat-slijpen-we', true, 'Welke messen slijpt Slijpmaat wel en niet?'],
-  ['/werkwijze', true, 'Ieder mes met de hand geslepen.'],
-  ['/servicegebied', true, 'Ophalen, bezorgen &amp; langsbrengen.'],
-  ['/blogs', true, 'Blogs over messen slijpen en onderhoud'],
-  ['/blogs/hoe-slijp-je-een-mes', true, 'Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug'],
-  ['/over-ons', true, 'Twee Utrechtse vrienden met passie voor scherpte.'],
-  ['/veelgestelde-vragen', true, 'Alles wat je wilt weten over Slijpmaat.'],
-  ['/contact', true, 'Contact met je Maat.'],
-  ['/algemene-voorwaarden', false, 'Algemene voorwaarden Slijpmaat'],
-  ['/privacyverklaring', false, 'Privacyverklaring Slijpmaat'],
+  ['/particulier/', true, 'Je messen weer scherp. Zonder gedoe.'],
+  ['/zakelijk/', true, 'Professioneel messen slijpen voor horeca'],
+  ['/diensten/keukenmessen-slijpen/', true, 'Keukenmessen slijpen op Japanse waterstenen'],
+  ['/diensten/japanse-messen-slijpen/', true, 'Japanse messen zorgvuldig laten slijpen'],
+  ['/diensten/chips-herstellen/', true, 'Chips en beschadigingen in keukenmessen herstellen'],
+  ['/diensten/wat-slijpen-we/', true, 'Welke messen slijpt Slijpmaat wel en niet?'],
+  ['/werkwijze/', true, 'Ieder mes met de hand geslepen.'],
+  ['/servicegebied/', true, 'Ophalen, bezorgen &amp; langsbrengen.'],
+  ['/blogs/', true, 'Blogs over messen slijpen en onderhoud'],
+  ['/blogs/hoe-slijp-je-een-mes/', true, 'Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug'],
+  ['/over-ons/', true, 'Twee Utrechtse vrienden met passie voor scherpte.'],
+  ['/veelgestelde-vragen/', true, 'Alles wat je wilt weten over Slijpmaat.'],
+  ['/algemene-voorwaarden/', false, 'Algemene voorwaarden Slijpmaat'],
+  ['/privacyverklaring/', false, 'Privacyverklaring Slijpmaat'],
 ];
 
 const match = (html, expression, label, pathname) => {
@@ -89,14 +89,14 @@ try {
     if (!socialImage.startsWith('https://slijpmaat.nl/assets/')) throw new Error(`${pathname}: onjuiste absolute og:image`);
     if (!socialImageAlt.trim()) throw new Error(`${pathname}: lege og:image:alt`);
     if (twitterImage !== socialImage) throw new Error(`${pathname}: twitter:image wijkt af van og:image`);
-    if (socialType !== (pathname === '/blogs/hoe-slijp-je-een-mes' ? 'article' : 'website')) throw new Error(`${pathname}: onjuist og:type ${socialType}`);
+    if (socialType !== (pathname === '/blogs/hoe-slijp-je-een-mes/' ? 'article' : 'website')) throw new Error(`${pathname}: onjuist og:type ${socialType}`);
     const socialImageResponse = await fetch(`${baseUrl}${new URL(socialImage).pathname}`);
     if (socialImageResponse.status !== 200 || !socialImageResponse.headers.get('content-type')?.startsWith('image/')) {
       throw new Error(`${pathname}: social-afbeelding is niet als afbeelding bereikbaar`);
     }
     if (!schemaTypes.includes('WebSite') || !schemaTypes.includes('WebPage')) throw new Error(`${pathname}: WebSite/WebPage-schema ontbreekt`);
     if (pathname !== '/' && !schemaTypes.includes('BreadcrumbList')) throw new Error(`${pathname}: BreadcrumbList ontbreekt`);
-    if ((pathname === '/servicegebied' || pathname === '/veelgestelde-vragen') !== schemaTypes.includes('FAQPage')) {
+    if ((pathname === '/servicegebied/' || pathname === '/veelgestelde-vragen/') !== schemaTypes.includes('FAQPage')) {
       throw new Error(`${pathname}: FAQPage-schema komt niet overeen met zichtbare FAQ-inhoud`);
     }
     const faqSchema = schema['@graph'].find((item) => item['@type'] === 'FAQPage');
@@ -108,7 +108,7 @@ try {
       }
     }
     const articleSchema = schema['@graph'].find((item) => item['@type'] === 'BlogPosting');
-    if (pathname === '/blogs/hoe-slijp-je-een-mes') {
+    if (pathname === '/blogs/hoe-slijp-je-een-mes/') {
       if (!articleSchema?.headline || !articleSchema?.image?.length || !articleSchema?.datePublished || !articleSchema?.dateModified || !articleSchema?.author?.length) {
         throw new Error(`${pathname}: BlogPosting-schema is onvolledig`);
       }
@@ -147,6 +147,14 @@ try {
   const sitemapUrls = [...sitemap.matchAll(/<loc>(.*?)<\/loc>/g)].map((result) => result[1]);
   const expectedUrls = routes.filter(([, indexable]) => indexable).map(([pathname]) => `https://slijpmaat.nl${pathname}`);
   if (JSON.stringify(sitemapUrls) !== JSON.stringify(expectedUrls)) throw new Error('Sitemap bevat niet exact de indexeerbare canonieke routes');
+
+  const redirects = await readFile(new URL('../dist/_redirects', import.meta.url), 'utf8');
+  if (!redirects.split(/\r?\n/).includes('/contact /#home-contact 301')) {
+    throw new Error('Permanente redirect van /contact naar /#home-contact ontbreekt');
+  }
+  if (!redirects.split(/\r?\n/).includes('/contact/ /#home-contact 301')) {
+    throw new Error('Permanente redirect van /contact/ naar /#home-contact ontbreekt');
+  }
 
   const missingResponse = await fetch(`${baseUrl}/dit-pad-bestaat-niet-9f3c`);
   const missingHtml = await missingResponse.text();

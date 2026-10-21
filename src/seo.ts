@@ -31,7 +31,7 @@ const ROUTES: RouteSeo[] = [
   },
   {
     pageId: 'particulieren',
-    path: '/particulier',
+    path: '/particulier/',
     label: 'Particulier',
     title: 'Keukenmessen slijpen Utrecht · Prijzen · Slijpmaat',
     description: 'Bereken direct je slijpprijs. In Utrecht is ophalen en bezorgen gratis vanaf €35 bestelwaarde; daaronder geldt het tarief voor je postcode.',
@@ -41,9 +41,9 @@ const ROUTES: RouteSeo[] = [
   },
   {
     pageId: 'horeca',
-    path: '/zakelijk',
+    path: '/zakelijk/',
     label: 'Zakelijk',
-    title: 'Horeca messen slijpen · Zakelijk · Slijpmaat',
+    title: 'Professioneel horeca messen slijpen · Slijpmaat',
     description: 'Professioneel messen slijpen voor horeca uit heel Nederland. Breng en haal je messen op afspraak in Utrecht; lokale service in Utrecht is mogelijk.',
     index: true,
     image: '/assets/tomaat-video-poster.jpg',
@@ -51,27 +51,27 @@ const ROUTES: RouteSeo[] = [
   },
   {
     pageId: 'dienst-keukenmessen',
-    path: '/diensten/keukenmessen-slijpen',
+    path: '/diensten/keukenmessen-slijpen/',
     label: 'Keukenmessen slijpen',
-    title: 'Keukenmessen slijpen op waterstenen · Slijpmaat',
-    description: 'Laat gladde keukenmessen en koksmessen zorgvuldig met de hand slijpen op Japanse waterstenen, met aandacht voor snede, staal en profiel.',
+    title: 'Keukenmessen laten slijpen in Utrecht · Slijpmaat',
+    description: 'Laat gladde keukenmessen en koksmessen in Utrecht zorgvuldig met de hand slijpen op Japanse waterstenen, met aandacht voor snede, staal en profiel.',
     index: true,
     image: '/assets/werkwijze/03-slijpen.jpg',
     imageAlt: 'Keukenmes wordt met de hand geslepen op een Japanse watersteen',
   },
   {
     pageId: 'dienst-japanse-messen',
-    path: '/diensten/japanse-messen-slijpen',
+    path: '/diensten/japanse-messen-slijpen/',
     label: 'Japanse messen slijpen',
-    title: 'Japanse messen laten slijpen · Slijpmaat',
-    description: 'Slijpmaat slijpt Japanse keukenmessen met de hand op waterstenen, afgestemd op het staal, het profiel en de conditie van de snede.',
+    title: 'Japanse messen slijpen in Utrecht · Slijpmaat',
+    description: 'Laat Japanse keukenmessen in Utrecht met de hand slijpen op waterstenen, afgestemd op het staal, het profiel en de conditie van de snede.',
     index: true,
     image: '/assets/werkwijze/03-slijpen.jpg',
     imageAlt: 'Japans keukenmes wordt zorgvuldig op een watersteen geslepen',
   },
   {
     pageId: 'dienst-chips-herstellen',
-    path: '/diensten/chips-herstellen',
+    path: '/diensten/chips-herstellen/',
     label: 'Chips herstellen',
     title: 'Chip in keukenmes laten herstellen · Slijpmaat',
     description: 'Kleine chips en beschadigde punten kunnen vaak worden hersteld. Stuur eerst een foto, dan beoordeelt Slijpmaat de schade en mogelijkheden.',
@@ -81,7 +81,7 @@ const ROUTES: RouteSeo[] = [
   },
   {
     pageId: 'dienst-wel-niet',
-    path: '/diensten/wat-slijpen-we',
+    path: '/diensten/wat-slijpen-we/',
     label: 'Wat slijpen we?',
     title: 'Welke messen slijpen wij? · Slijpmaat',
     description: 'Bekijk welke gladde keukenmessen Slijpmaat aanneemt, welke beschadigingen mogelijk te herstellen zijn en waarom kartelmessen niet worden aangenomen.',
@@ -91,7 +91,7 @@ const ROUTES: RouteSeo[] = [
   },
   {
     pageId: 'werkwijze',
-    path: '/werkwijze',
+    path: '/werkwijze/',
     label: 'Werkwijze',
     title: 'Messen slijpen op waterstenen · Werkwijze · Slijpmaat',
     description: 'Bekijk hoe Slijpmaat keukenmessen beoordeelt, met de hand slijpt op Japanse waterstenen en zorgvuldig afwerkt op leer.',
@@ -101,7 +101,7 @@ const ROUTES: RouteSeo[] = [
   },
   {
     pageId: 'ophalen-bezorgen',
-    path: '/servicegebied',
+    path: '/servicegebied/',
     label: 'Servicegebied',
     title: 'Messen slijpen Utrecht & zelf langsbrengen · Slijpmaat',
     description: 'Bekijk het Utrechtse servicegebied: gratis ophalen en bezorgen vanaf €35 bestelwaarde, daaronder €0, €4,50 of €7,25 volgens je postcode.',
@@ -111,7 +111,7 @@ const ROUTES: RouteSeo[] = [
   },
   {
     pageId: 'blogs',
-    path: '/blogs',
+    path: '/blogs/',
     label: 'Blogs',
     title: 'Blogs over messen slijpen en onderhoud · Slijpmaat',
     description: 'Lees praktische artikelen van Slijpmaat over keukenmessen, onderhoud, veilig gebruik en professioneel slijpen.',
@@ -121,7 +121,7 @@ const ROUTES: RouteSeo[] = [
   },
   {
     pageId: 'blog-hoe-slijp-je-een-mes',
-    path: '/blogs/hoe-slijp-je-een-mes',
+    path: '/blogs/hoe-slijp-je-een-mes/',
     label: 'Hoe slijp je een mes?',
     title: 'Hoe slijp je een mes? Stappenplan met wetsteen | Slijpmaat',
     description: 'Leer hoe je een keukenmes slijpt op een wetsteen. Ontdek welke slijphoek en korrel je nodig hebt en hoe je een braam goed verwijdert.',
@@ -133,7 +133,7 @@ const ROUTES: RouteSeo[] = [
   },
   {
     pageId: 'over-ons',
-    path: '/over-ons',
+    path: '/over-ons/',
     label: 'Over ons',
     title: 'Over Slijpmaat · Messenslijper uit Utrecht',
     description: 'Lees hoe Teun en Mike Slijpmaat begonnen en waarom zij keukenmessen met de hand slijpen voor duurzaam behoud en langdurig snijplezier.',
@@ -143,7 +143,7 @@ const ROUTES: RouteSeo[] = [
   },
   {
     pageId: 'faq',
-    path: '/veelgestelde-vragen',
+    path: '/veelgestelde-vragen/',
     label: 'Veelgestelde vragen',
     title: 'Veelgestelde vragen over messen slijpen · Slijpmaat',
     description: 'Antwoorden over messen slijpen, prijzen en vervoer. Gratis ophalen en bezorgen in Utrecht vanaf €35; daaronder geldt het postcodetarief.',
@@ -152,16 +152,8 @@ const ROUTES: RouteSeo[] = [
     imageAlt: 'Slijpmaat-kaartje tussen oranje bessen',
   },
   {
-    pageId: 'contact',
-    path: '/contact',
-    label: 'Contact',
-    title: 'Contact met Slijpmaat · Messenslijper Utrecht',
-    description: 'Neem contact op met Slijpmaat voor een afspraak, zakelijke aanvraag of advies over je keukenmessen. Je spreekt direct met Teun of Mike.',
-    index: true,
-  },
-  {
     pageId: 'algemene-voorwaarden',
-    path: '/algemene-voorwaarden',
+    path: '/algemene-voorwaarden/',
     label: 'Algemene voorwaarden',
     title: 'Algemene voorwaarden · Slijpmaat',
     description: 'Lees de algemene voorwaarden die gelden voor opdrachten, afspraken en dienstverlening van Slijpmaat.',
@@ -169,7 +161,7 @@ const ROUTES: RouteSeo[] = [
   },
   {
     pageId: 'privacy',
-    path: '/privacyverklaring',
+    path: '/privacyverklaring/',
     label: 'Privacyverklaring',
     title: 'Privacyverklaring · Slijpmaat',
     description: 'Lees hoe Slijpmaat persoonsgegevens verwerkt, beveiligt en bewaart en welke privacyrechten je daarbij hebt.',
@@ -178,7 +170,7 @@ const ROUTES: RouteSeo[] = [
 ];
 
 export const NOT_FOUND_SEO = {
-  path: '/404',
+  path: '/404/',
   label: 'Pagina niet gevonden',
   title: 'Pagina niet gevonden · Slijpmaat',
   description: 'Deze pagina bestaat niet of is verplaatst. Ga terug naar Slijpmaat of kies een van de beschikbare pagina’s.',
@@ -195,7 +187,8 @@ export const getSocialImageAlt = (metadata: Pick<RouteSeo, 'imageAlt'>) => metad
 
 const normalizePath = (pathname: string) => {
   const path = pathname.split(/[?#]/, 1)[0] || '/';
-  return path !== '/' ? path.replace(/\/+$/, '') : path;
+  if (path === '/') return path;
+  return `${path.replace(/\/+$/, '')}/`;
 };
 
 export const getRouteByPath = (pathname: string) => {
@@ -242,13 +235,13 @@ const getStructuredData = (pathname: string) => {
     const breadcrumbItems = route.pageId === 'blog-hoe-slijp-je-een-mes'
       ? [
           { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-          { '@type': 'ListItem', position: 2, name: 'Blogs', item: `${SITE_URL}/blogs` },
+          { '@type': 'ListItem', position: 2, name: 'Blogs', item: `${SITE_URL}/blogs/` },
           { '@type': 'ListItem', position: 3, name: route.label, item: canonicalUrl },
         ]
       : route.pageId.startsWith('dienst-')
         ? [
             { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-            { '@type': 'ListItem', position: 2, name: 'Particulier', item: `${SITE_URL}/particulier` },
+            { '@type': 'ListItem', position: 2, name: 'Particulier', item: `${SITE_URL}/particulier/` },
             { '@type': 'ListItem', position: 3, name: route.label, item: canonicalUrl },
           ]
         : [
