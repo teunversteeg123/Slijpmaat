@@ -5,7 +5,7 @@ type AnalyticsEventParameters = Record<string, string | number | boolean>;
 
 declare global {
   interface Window {
-    dataLayer?: GtagArguments[];
+    dataLayer?: unknown[];
     gtag?: (...args: GtagArguments) => void;
   }
 }
@@ -15,6 +15,7 @@ const GA_COOKIE_LIFETIME_SECONDS = 60 * 60 * 24 * 90;
 
 let consentDefaultsSet = false;
 let analyticsInitialized = false;
+let analyticsConsentGranted = false;
 let lastTrackedPath = '';
 let pendingPageView: { path: string; title: string } | null = null;
 
@@ -24,9 +25,11 @@ const ensureGtag = () => {
   if (typeof window === 'undefined') return null;
 
   window.dataLayer = window.dataLayer ?? [];
-  window.gtag = window.gtag ?? ((...args: GtagArguments) => {
-    window.dataLayer?.push(args);
-  });
+  // gtag.js leest de standaard arguments-objecten uit de dataLayer.
+  // Een restparameter-array wordt door Tag Assistant niet als gtag-aanroep verwerkt.
+  window.gtag = window.gtag ?? function (..._args: GtagArguments) {
+    window.dataLayer?.push(arguments);
+  };
 
   return window.gtag;
 };
@@ -45,8 +48,8 @@ export const setDefaultGoogleConsent = () => {
   consentDefaultsSet = true;
 };
 
-const sendPageView = ({ path, title }: { path: string; title: string }) => {
-  if (!analyticsInitialized || path === lastTrackedPath) return;
+const sendPageView = ({ path, title }: { path: string; title: string }, force = false) => {
+  if (!analyticsInitialized || (!force && path === lastTrackedPath)) return;
 
   ensureGtag()?.('event', 'page_view', {
     page_path: path,
@@ -100,13 +103,21 @@ export const enableGoogleAnalytics = () => {
   if (!isAnalyticsConfigured || typeof window === 'undefined') return;
 
   setDefaultGoogleConsent();
+  const wasInitialized = analyticsInitialized;
+  const wasGranted = analyticsConsentGranted;
   ensureGtag()?.('consent', 'update', {
     analytics_storage: 'granted',
     ad_storage: 'denied',
     ad_user_data: 'denied',
     ad_personalization: 'denied',
   });
+  analyticsConsentGranted = true;
   initializeGoogleAnalytics();
+
+  // Een eerdere cookieloze page_view wordt na acceptatie niet vanzelf opnieuw verzonden.
+  if (wasInitialized && !wasGranted) {
+    sendPageView(pendingPageView ?? { path: window.location.pathname, title: document.title }, true);
+  }
 };
 
 const expireCookie = (name: string, domain?: string) => {
@@ -135,6 +146,7 @@ const clearGoogleAnalyticsCookies = () => {
 export const disableGoogleAnalytics = () => {
   if (typeof window === 'undefined') return;
 
+  analyticsConsentGranted = false;
   setDefaultGoogleConsent();
   ensureGtag()?.('consent', 'update', {
     analytics_storage: 'denied',
