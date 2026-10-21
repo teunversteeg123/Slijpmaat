@@ -63,7 +63,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
             />
             <div className="relative aspect-[4/3] overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg sm:aspect-square">
               <img
-                src="/assets/kennisbank-slijpmaat-kaartje-planten.jpeg"
+                src="/assets/kennisbank-slijpmaat-kaartje-planten.webp"
                 alt="Slijpmaat-kaartje tussen groene planten in de werkplaats"
                 className="h-full w-full object-cover object-center"
                 fetchPriority="high"
@@ -138,7 +138,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
               <div>
                 <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[2rem] bg-[#203728] sm:aspect-[2/1]">
                   <img
-                    src="/assets/werkwijze/03-slijpen.jpg"
+                    src="/assets/werkwijze/03-slijpen.webp"
                     alt="Handmatig messen slijpen op Japanse waterstenen bij Slijpmaat"
                     className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
                   />

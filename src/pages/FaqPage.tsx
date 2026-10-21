@@ -68,7 +68,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
             />
             <div className="relative aspect-[4/3] overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg lg:aspect-square">
               <img
-                src="/assets/faq-slijpmaat-kaartje-bessen.jpeg"
+                src="/assets/faq-slijpmaat-kaartje-bessen.webp"
                 alt="Slijpmaat-kaartje tussen oranje bessen en groene bladeren"
                 className="h-full w-full object-cover object-center"
                 fetchPriority="high"

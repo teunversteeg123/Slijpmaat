@@ -77,7 +77,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
 
   // 4. Uitgelichte foto van Teun & Mike in actie
   const featuredPhoto = {
-    image: '/assets/team/teun-en-mike-met-mes.jpg',
+    image: '/assets/team/teun-en-mike-met-mes.webp',
     alt: 'Teun en Mike van Slijpmaat bekijken het vlijmscherpe lemmet van een keukenmes',
     title: 'Teun & Mike met het resultaat',
     subtitle: 'Trots op elk vlijmscherp geslepen lemmet',
@@ -164,7 +164,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
             />
             <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg lg:aspect-square">
               <img
-                src="/assets/team/teun-en-mike-samen.jpg"
+                src="/assets/team/teun-en-mike-samen.webp"
                 alt="Teun en Mike van Slijpmaat samen in Utrecht"
                 className="h-full w-full object-cover object-[center_35%]"
               />

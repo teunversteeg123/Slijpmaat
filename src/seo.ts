@@ -36,7 +36,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Keukenmessen slijpen Utrecht · Prijzen · Slijpmaat',
     description: 'Bereken direct je slijpprijs. In Utrecht is ophalen en bezorgen gratis vanaf €35 bestelwaarde; daaronder geldt het tarief voor je postcode.',
     index: true,
-    image: '/assets/tomaat-video-poster.jpg',
+    image: '/assets/tomaat-video-poster.webp',
     imageAlt: 'Scherp keukenmes snijdt een tomaat op een houten snijplank',
   },
   {
@@ -46,7 +46,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Professioneel horeca messen slijpen · Slijpmaat',
     description: 'Professioneel messen slijpen voor horeca uit heel Nederland. Breng en haal je messen op afspraak in Utrecht; lokale service in Utrecht is mogelijk.',
     index: true,
-    image: '/assets/tomaat-video-poster.jpg',
+    image: '/assets/tomaat-video-poster.webp',
     imageAlt: 'Scherp keukenmes snijdt een tomaat voor een zakelijke slijpservice',
   },
   {
@@ -56,7 +56,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Keukenmessen laten slijpen in Utrecht · Slijpmaat',
     description: 'Laat gladde keukenmessen en koksmessen in Utrecht zorgvuldig met de hand slijpen op Japanse waterstenen, met aandacht voor snede, staal en profiel.',
     index: true,
-    image: '/assets/werkwijze/03-slijpen.jpg',
+    image: '/assets/werkwijze/03-slijpen.webp',
     imageAlt: 'Keukenmes wordt met de hand geslepen op een Japanse watersteen',
   },
   {
@@ -66,7 +66,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Japanse messen slijpen in Utrecht · Slijpmaat',
     description: 'Laat Japanse keukenmessen in Utrecht met de hand slijpen op waterstenen, afgestemd op het staal, het profiel en de conditie van de snede.',
     index: true,
-    image: '/assets/werkwijze/03-slijpen.jpg',
+    image: '/assets/werkwijze/03-slijpen.webp',
     imageAlt: 'Japans keukenmes wordt zorgvuldig op een watersteen geslepen',
   },
   {
@@ -76,7 +76,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Chip in keukenmes laten herstellen · Slijpmaat',
     description: 'Kleine chips en beschadigde punten kunnen vaak worden hersteld. Stuur eerst een foto, dan beoordeelt Slijpmaat de schade en mogelijkheden.',
     index: true,
-    image: '/assets/werkwijze/01-beoordelen.jpg',
+    image: '/assets/werkwijze/01-beoordelen.webp',
     imageAlt: 'Slijpmaat beoordeelt de beschadigde snede van een keukenmes',
   },
   {
@@ -86,7 +86,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Welke messen slijpen wij? · Slijpmaat',
     description: 'Bekijk welke gladde keukenmessen Slijpmaat aanneemt, welke beschadigingen mogelijk te herstellen zijn en waarom kartelmessen niet worden aangenomen.',
     index: true,
-    image: '/assets/werkwijze/01-beoordelen.jpg',
+    image: '/assets/werkwijze/01-beoordelen.webp',
     imageAlt: 'Controle van de snede en het profiel van een keukenmes',
   },
   {
@@ -96,7 +96,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Messen slijpen op waterstenen · Werkwijze · Slijpmaat',
     description: 'Bekijk hoe Slijpmaat keukenmessen beoordeelt, met de hand slijpt op Japanse waterstenen en zorgvuldig afwerkt op leer.',
     index: true,
-    image: '/assets/werkwijze/03-slijpen.jpg',
+    image: '/assets/werkwijze/03-slijpen.webp',
     imageAlt: 'Handmatig slijpen op Japanse waterstenen bij Slijpmaat',
   },
   {
@@ -106,7 +106,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Messen slijpen Utrecht & zelf langsbrengen · Slijpmaat',
     description: 'Bekijk het Utrechtse servicegebied: gratis ophalen en bezorgen vanaf €35 bestelwaarde, daaronder €0, €4,50 of €7,25 volgens je postcode.',
     index: true,
-    image: '/assets/kaart-utrecht-bezorggebied-statisch-hd.png',
+    image: '/assets/kaart-utrecht-bezorggebied-statisch-hd.webp',
     imageAlt: 'Kaart van het Utrechtse servicegebied van Slijpmaat',
   },
   {
@@ -116,7 +116,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Blogs over messen slijpen en onderhoud · Slijpmaat',
     description: 'Lees praktische artikelen van Slijpmaat over keukenmessen, onderhoud, veilig gebruik en professioneel slijpen.',
     index: true,
-    image: '/assets/kennisbank-slijpmaat-kaartje-planten.jpeg',
+    image: '/assets/kennisbank-slijpmaat-kaartje-planten.webp',
     imageAlt: 'Slijpmaat-kaartje tussen groene planten bij de blogs',
   },
   {
@@ -126,7 +126,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Hoe slijp je een mes? Stappenplan met wetsteen | Slijpmaat',
     description: 'Leer hoe je een keukenmes slijpt op een wetsteen. Ontdek welke slijphoek en korrel je nodig hebt en hoe je een braam goed verwijdert.',
     index: true,
-    image: '/assets/werkwijze/03-slijpen.jpg',
+    image: '/assets/werkwijze/03-slijpen.webp',
     imageAlt: 'Keukenmes wordt met de hand geslepen op een wetsteen',
     datePublished: '2026-10-15',
     dateModified: '2026-10-17',
@@ -138,7 +138,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Over Slijpmaat · Messenslijper uit Utrecht',
     description: 'Lees hoe Teun en Mike Slijpmaat begonnen en waarom zij keukenmessen met de hand slijpen voor duurzaam behoud en langdurig snijplezier.',
     index: true,
-    image: '/assets/team/teun-en-mike-samen.jpg',
+    image: '/assets/team/teun-en-mike-samen.webp',
     imageAlt: 'Teun en Mike, de oprichters van Slijpmaat',
   },
   {
@@ -148,7 +148,7 @@ const ROUTES: RouteSeo[] = [
     title: 'Veelgestelde vragen over messen slijpen · Slijpmaat',
     description: 'Antwoorden over messen slijpen, prijzen en vervoer. Gratis ophalen en bezorgen in Utrecht vanaf €35; daaronder geldt het postcodetarief.',
     index: true,
-    image: '/assets/faq-slijpmaat-kaartje-bessen.jpeg',
+    image: '/assets/faq-slijpmaat-kaartje-bessen.webp',
     imageAlt: 'Slijpmaat-kaartje tussen oranje bessen',
   },
   {

@@ -731,7 +731,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
               <figure className="mt-9 overflow-hidden rounded-3xl border border-[#d9e1d7] bg-[#FAFAF8] shadow-sm">
                 <img
-                  src="/assets/blog/scherp-mes-tomatentest-pexels-rdne.jpg"
+                  src="/assets/blog/scherp-mes-tomatentest-pexels-rdne.webp"
                   alt="Een scherp keukenmes snijdt door een rode tomaat op een houten snijplank"
                   className="h-56 w-full object-cover object-center sm:h-80"
                   loading="lazy"

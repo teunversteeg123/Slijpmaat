@@ -8,6 +8,7 @@ import { createPortal } from "react-dom"
 
 export type Slide = {
   image: string
+  thumbnail?: string
   title?: string
   alt?: string
 }
@@ -124,6 +125,7 @@ export default function PolaroidLineCarousel({
 
   const totalItems = loopSlides.length
   const srcs = loopSlides.map((slide) => slide.image)
+  const thumbnailSrcs = loopSlides.map((slide) => slide.thumbnail ?? slide.image)
   const [active, setActive] = React.useState(0)
   const [dragging, setDragging] = React.useState(false)
   const [expanded, setExpanded] = React.useState<number | null>(null)
@@ -406,7 +408,15 @@ export default function PolaroidLineCarousel({
         >
           <div className="pl-print">
             <div className="pl-shot">
-              {srcs[i] ? <img src={srcs[i]} alt={sl.alt || sl.title || ""} draggable={false} /> : null}
+              {thumbnailSrcs[i] ? (
+                <img
+                  src={thumbnailSrcs[i]}
+                  alt={sl.alt || sl.title || ""}
+                  draggable={false}
+                  loading="lazy"
+                  decoding="async"
+                />
+              ) : null}
             </div>
             <div className="pl-note-wrap">
               <div className="pl-brand" aria-label="Slijpmaat">

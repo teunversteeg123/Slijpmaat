@@ -20,7 +20,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       desc: 'We bekijken eerst het staal, de bestaande snijhoek en de kromming van het lemmet. Elk mes is uniek: we volgen de bestaande snede nauwkeurig en respecteren het originele lemmetprofiel.',
       badge: 'Inspectie & Analyse',
       highlight: 'Origineel profiel behouden',
-      image: '/assets/werkwijze/01-beoordelen.jpg',
+      image: '/assets/werkwijze/01-beoordelen.webp',
       alt: 'Slijpmaat beoordeelt de snede en het profiel van een keukenmes',
     },
     {
@@ -29,7 +29,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       desc: 'Elk mes en elke staalsoort vraagt om een eigen aanpak. Wij kiezen nauwkeurig de juiste watersteen voor jouw lemmet. We werken zeer beheerst: we halen alleen weg wat strikt nodig is voor een vlijmscherp resultaat, voor een maximale levensduur van je mes.',
       badge: 'De juiste watersteen',
       highlight: 'Minimale staalafname',
-      image: '/assets/werkwijze/02-stenen-kiezen.jpg',
+      image: '/assets/werkwijze/02-stenen-kiezen.webp',
       alt: 'Japanse whetstones waterstenen die Slijpmaat gebruikt',
     },
     {
@@ -38,7 +38,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       desc: 'We slijpen met de hand op natte waterstenen. Daardoor houden we controle over de slijphoek, de materiaalafname en de afwerking van ieder mes.',
       badge: '100% Handwerk',
       highlight: 'Controle over hoek en afname',
-      image: '/assets/werkwijze/03-slijpen.jpg',
+      image: '/assets/werkwijze/03-slijpen.webp',
       alt: 'Een keukenmes wordt met de hand geslepen op een Japanse watersteen',
     },
     {
@@ -47,7 +47,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       desc: 'Tot slot verwijderen we de braam zorgvuldig en stroppen we de snede af op een soepele leren strop met polijstpasta. Daarna controleren we of het mes over de volledige snede soepel snijdt.',
       badge: 'Leren strop',
       highlight: 'Vlijmscherp & braamvrij',
-      image: '/assets/werkwijze/04-afwerken.jpg',
+      image: '/assets/werkwijze/04-afwerken.webp',
       alt: 'Een keukenmes wordt gepolijst en afgestropt op een leren strop',
     },
   ];
@@ -57,25 +57,25 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
     {
       number: 'STAP 01',
       title: 'Beoordelen & inspectie',
-      image: '/assets/werkwijze/01-beoordelen.jpg',
+      image: '/assets/werkwijze/01-beoordelen.webp',
       alt: 'Slijpmaat beoordeelt de snede en het profiel van een keukenmes',
     },
     {
       number: 'STAP 02',
       title: 'De juiste watersteen kiezen',
-      image: '/assets/werkwijze/02-stenen-kiezen.jpg',
+      image: '/assets/werkwijze/02-stenen-kiezen.webp',
       alt: 'Japanse waterstenen die Slijpmaat gebruikt',
     },
     {
       number: 'STAP 03',
       title: 'Handmatig slijpen met water',
-      image: '/assets/werkwijze/03-slijpen.jpg',
+      image: '/assets/werkwijze/03-slijpen.webp',
       alt: 'Een keukenmes wordt met de hand geslepen op een Japanse watersteen',
     },
     {
       number: 'STAP 04',
       title: 'Afwerken en ontbramen op leer',
-      image: '/assets/werkwijze/04-afwerken.jpg',
+      image: '/assets/werkwijze/04-afwerken.webp',
       alt: 'Een keukenmes wordt gepolijst en afgestropt op een leren strop',
     },
   ];
@@ -190,7 +190,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
             />
             <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg lg:aspect-square">
               <img
-                src="/assets/werkwijze/03-slijpen.jpg"
+                src="/assets/werkwijze/03-slijpen.webp"
                 alt="Teun of Mike slijpt met de hand op Japanse waterstenen"
                 className="h-full w-full object-cover"
                 loading="eager"

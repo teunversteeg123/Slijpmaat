@@ -26,10 +26,10 @@ const qualities = [
 ];
 
 const craftSteps = [
-  { number: '01', title: 'Snede beoordelen', image: '/assets/werkwijze/01-beoordelen.jpg', alt: 'Slijpmaat beoordeelt de snede van een keukenmes' },
-  { number: '02', title: 'Steen kiezen', image: '/assets/werkwijze/02-stenen-kiezen.jpg', alt: 'Japanse whetstones die Slijpmaat gebruikt voor het slijpen' },
-  { number: '03', title: 'Scherpte opbouwen', image: '/assets/werkwijze/03-slijpen.jpg', alt: 'Een keukenmes wordt met de hand geslepen op een whetstone' },
-  { number: '04', title: 'Snede afwerken', image: '/assets/werkwijze/04-afwerken.jpg', alt: 'Een keukenmes wordt afgewerkt op een leren strop' },
+  { number: '01', title: 'Snede beoordelen', image: '/assets/werkwijze/01-beoordelen.webp', alt: 'Slijpmaat beoordeelt de snede van een keukenmes' },
+  { number: '02', title: 'Steen kiezen', image: '/assets/werkwijze/02-stenen-kiezen.webp', alt: 'Japanse whetstones die Slijpmaat gebruikt voor het slijpen' },
+  { number: '03', title: 'Scherpte opbouwen', image: '/assets/werkwijze/03-slijpen.webp', alt: 'Een keukenmes wordt met de hand geslepen op een whetstone' },
+  { number: '04', title: 'Snede afwerken', image: '/assets/werkwijze/04-afwerken.webp', alt: 'Een keukenmes wordt afgewerkt op een leren strop' },
 ];
 
 const faqs = [
@@ -323,7 +323,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               aria-hidden="true"
             />
             <img
-              src="/assets/team/teun-en-mike-met-mes.jpg"
+              src="/assets/team/teun-en-mike-met-mes.webp"
               alt="Teun en Mike van Slijpmaat met een keukenmes"
               className="relative z-10 aspect-[3/2] w-full rounded-[2rem] object-cover shadow-sm transition-transform duration-500 hover:scale-[1.01]"
               loading="lazy"

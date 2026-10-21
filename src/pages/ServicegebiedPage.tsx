@@ -237,7 +237,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
               className="group relative z-10 block aspect-[3/2] w-full cursor-zoom-in overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white text-left shadow-lg transition-shadow hover:shadow-xl focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B]"
             >
               <img
-                src="/assets/kaart-utrecht-bezorggebied-statisch-hd.png"
+                src="/assets/kaart-utrecht-bezorggebied-statisch-hd.webp"
                 alt="Statische straatkaart van Utrecht met het vaste Slijpmaat-bezorggebied en de gebieden op aanvraag"
                 className="h-full w-full origin-top-left scale-110 object-cover transition-transform duration-300 group-hover:scale-[1.13]"
                 fetchPriority="high"
@@ -278,7 +278,7 @@ export const ServicegebiedPage: React.FC<ServicegebiedPageProps> = ({ onNavigate
 
             <div className="mt-10 overflow-hidden rounded-2xl border border-white/30 bg-white shadow-2xl sm:mt-8 sm:rounded-[2rem]">
               <img
-                src="/assets/kaart-utrecht-bezorggebied-statisch-hd.png"
+                src="/assets/kaart-utrecht-bezorggebied-statisch-hd.webp"
                 alt="Vergrote straatkaart van Utrecht met het vaste Slijpmaat-bezorggebied en de gebieden op aanvraag"
                 className="max-h-[82vh] w-full object-contain"
               />
