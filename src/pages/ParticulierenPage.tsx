@@ -198,12 +198,12 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
       {/* 4. HET BESTELFORMULIER (CALCULATOR) - Volledig geintegreerd, zonder zakelijk knip */}
       <section id="calculator" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-6xl">
-          <div className="mb-8 text-center sm:mb-12">
+          <div className="mb-8 text-left sm:mb-12 sm:text-center">
             <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Bestelformulier</p>
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Bereken direct je prijs &amp; bestel</h2>
           </div>
 
-          <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-5 shadow-sm sm:p-8 lg:p-10">
+          <div className="sm:rounded-[2.5rem] sm:border sm:border-[#d9e1d7] sm:bg-white sm:p-8 sm:shadow-sm lg:p-10">
             <ParticulierenCalculator />
           </div>
         </div>

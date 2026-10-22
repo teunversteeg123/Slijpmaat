@@ -1,718 +1,216 @@
 import React, { useState } from 'react';
-import {
-  Building2,
-  ChefHat,
-  Phone,
-  Truck,
-  Calendar,
-  Check,
-  MessageCircle,
-  AlertCircle,
-  UtensilsCrossed,
-  ChevronDown,
-  Plus,
-  Minus,
-  MapPin,
-  ReceiptText,
-  Mail
-} from 'lucide-react';
-import {
-  getDeliveryFeeCents,
-  getDeliveryZone,
-  isValidDutchPostcode,
-  normalizeDutchPostcode,
-} from '../data/delivery';
+import { AlertCircle, Check, Mail, MapPin, MessageCircle, ReceiptText } from 'lucide-react';
+import { getDeliveryZone, isValidDutchPostcode, normalizeDutchPostcode } from '../data/delivery';
 import { SLIJPMAAT_INFO } from '../data/siteData';
-import { createWhatsAppUrl } from '../utils/contact';
-import { formatEuroCents } from '../utils/format';
 import { trackAnalyticsEvent } from '../utils/analytics';
+import { createWhatsAppUrl } from '../utils/contact';
 
 type ServiceType = 'bezorging' | 'langskomen';
 
 const ESTIMATE_OPTIONS = [
-  { id: '0-10', label: '0 tot 10 messen', desc: 'Kleine brigade of proefset' },
-  { id: '10-20', label: '10 tot 20 messen', desc: 'Meest gekozen voor restaurants', badge: 'Meest gekozen' },
-  { id: '20-40', label: '20 tot 40 messen', desc: 'Volledige keukenset of team' },
-  { id: '40+', label: '40+ messen', desc: 'Grote zakelijke aanvraag of catering' },
+  { value: '0 tot 10 messen', label: '0 tot 10 messen' },
+  { value: '10 tot 20 messen', label: '10 tot 20 messen · Meest gekozen' },
+  { value: '20 tot 40 messen', label: '20 tot 40 messen' },
+  { value: '40+ messen', label: '40+ messen' },
 ];
-
-interface KnifeRow {
-  name: string;
-  sizeDesc: string;
-  priceCents: number;
-  priceLabel: string;
-}
-
-const KNIFE_ROWS: KnifeRow[] = [
-  { name: 'Klein mes', sizeDesc: 'Korter dan 15 cm', priceCents: 650, priceLabel: '€6,50 (incl. btw)' },
-  { name: 'Normaal mes', sizeDesc: '15 tot 19,99 cm', priceCents: 850, priceLabel: '€8,50 (incl. btw)' },
-  { name: 'Groot mes', sizeDesc: '20 tot en met 25 cm', priceCents: 1050, priceLabel: '€10,50 (incl. btw)' },
-  { name: 'Extra groot mes', sizeDesc: 'Langer dan 25 cm', priceCents: 0, priceLabel: 'Op aanvraag' },
-];
+const SELF_DROPOFF_ADDRESS = 'Scheernoordsstraat 75, Utrecht';
 
 export const ZakelijkFormulier: React.FC = () => {
-  const [restaurantName, setRestaurantName] = useState<string>('');
-  const [contactPerson, setContactPerson] = useState<string>('');
-  const [phone, setPhone] = useState<string>('');
-  const [selectedEstimate, setSelectedEstimate] = useState<string>('10 tot 20 messen');
+  const [restaurantName, setRestaurantName] = useState('');
+  const [contactPerson, setContactPerson] = useState('');
+  const [phone, setPhone] = useState('');
+  const [selectedEstimate, setSelectedEstimate] = useState('');
+  const [notes, setNotes] = useState('');
   const [serviceType, setServiceType] = useState<ServiceType>('bezorging');
-  const [postcode, setPostcode] = useState<string>('3513');
-  const [address, setAddress] = useState<string>('');
-  const [notes, setNotes] = useState<string>('');
-  const [showGranularKnives, setShowGranularKnives] = useState<boolean>(false);
-  const [knifeCounts, setKnifeCounts] = useState<number[]>([0, 0, 0, 0]);
-  const [errorMsg, setErrorMsg] = useState<string>('');
+  const [postcode, setPostcode] = useState('');
+  const [address, setAddress] = useState('');
+  const [errorMsg, setErrorMsg] = useState('');
 
   const cleanPostcode = normalizeDutchPostcode(postcode);
   const hasValidPostcode = isValidDutchPostcode(postcode);
   const deliveryZone = hasValidPostcode ? getDeliveryZone(postcode) : 'outside';
   const isOutsideArea = hasValidPostcode && deliveryZone === 'outside';
 
-  const granularTotalKnives = knifeCounts.reduce((sum, n) => sum + n, 0);
-  const isGranularActive = granularTotalKnives > 0;
-
-  // Calculate estimated total if granular counts are filled
-  const granularSharpeningCents = KNIFE_ROWS.reduce((total, row, idx) => {
-    return total + knifeCounts[idx] * row.priceCents;
-  }, 0);
-
-  // Delivery fee estimation
-  const deliveryFeeCents = serviceType === 'langskomen'
-    ? 0
-    : hasValidPostcode
-      ? getDeliveryFeeCents(postcode, granularSharpeningCents || 5000, false)
-      : null;
-
-  const updateKnifeCount = (index: number, delta: number) => {
-    setKnifeCounts((prev) => {
-      const next = [...prev];
-      next[index] = Math.max(0, Math.min(99, next[index] + delta));
-      return next;
-    });
-    setErrorMsg('');
+  const focusWithError = (message: string, id: string) => {
+    setErrorMsg(message);
+    document.getElementById(id)?.focus();
+    return null;
   };
 
   const buildMessageLines = (): string[] | null => {
-    if (!restaurantName.trim()) {
-      setErrorMsg('Vul de naam van jouw restaurant of zaak in.');
-      document.getElementById('zakelijk-restaurant')?.focus();
-      return null;
-    }
-    if (!contactPerson.trim()) {
-      setErrorMsg('Vul de naam van de contactpersoon in.');
-      document.getElementById('zakelijk-contact')?.focus();
-      return null;
-    }
-    if (!phone.trim()) {
-      setErrorMsg('Vul een telefoonnummer in waarop we jullie kunnen bereiken.');
-      document.getElementById('zakelijk-phone')?.focus();
-      return null;
-    }
+    if (!restaurantName.trim()) return focusWithError('Vul de naam van jullie restaurant of zaak in.', 'zakelijk-restaurant');
+    if (!contactPerson.trim()) return focusWithError('Vul de naam van de contactpersoon in.', 'zakelijk-contact');
+    if (!phone.trim()) return focusWithError('Vul een telefoonnummer in waarop we jullie kunnen bereiken.', 'zakelijk-phone');
+    if (!selectedEstimate) return focusWithError('Selecteer een schatting van het aantal messen.', 'zakelijk-estimate');
+    if (serviceType === 'bezorging' && !hasValidPostcode) return focusWithError('Vul een geldige postcode in, bijvoorbeeld 3513 AB.', 'zakelijk-postcode');
+    if (serviceType === 'bezorging' && !address.trim()) return focusWithError('Vul de straat en het huisnummer van jullie zaak in.', 'zakelijk-address');
 
-    if (serviceType === 'bezorging') {
-      if (!hasValidPostcode) {
-        setErrorMsg('Vul een geldige Utrechtse postcode in (bijv. 3513 AB).');
-        document.getElementById('zakelijk-postcode')?.focus();
-        return null;
-      }
-    }
-
-    // Build the message
     const messageLines = [
       'Hoi Teun en Mike (Slijpmaat),',
       '',
-      'Wij willen graag een zakelijke aanvraag & offerte voor onze messen:',
+      'Wij willen graag een zakelijke aanvraag en offerte voor onze messen:',
       '',
-      `• Restaurant / Zaak: ${restaurantName.trim()}`,
+      `• Restaurant / zaak: ${restaurantName.trim()}`,
       `• Contactpersoon: ${contactPerson.trim()}`,
       `• Telefoonnummer: ${phone.trim()}`,
-      `• Gewenste service: ${serviceType === 'bezorging' ? 'Bezorgservice aan de keukendeur in Utrecht' : 'Langsbrengen op afspraak aan de werkbank'}`,
+      `• Aantal messen (schatting): ${selectedEstimate}`,
+      `• Gewenste service: ${serviceType === 'bezorging' ? 'Ophalen en bezorgen in Utrecht' : 'Zelf langsbrengen op afspraak'}`,
     ];
 
-    if (serviceType === 'bezorging') {
-      messageLines.push(`• Postcode: ${cleanPostcode}`);
-      if (address.trim()) {
-        messageLines.push(`• Adres: ${address.trim()}`);
-      }
-    }
-
-    if (isGranularActive) {
-      messageLines.push('', `Aantal messen (${granularTotalKnives} gespecificeerd):`);
-      KNIFE_ROWS.forEach((row, idx) => {
-        if (knifeCounts[idx] > 0) {
-          messageLines.push(`  - ${knifeCounts[idx]}x ${row.name} (${row.sizeDesc})`);
-        }
-      });
-    } else {
-      messageLines.push(`• Aantal messen (schatting): ${selectedEstimate}`);
-    }
-
-    if (notes.trim()) {
-      messageLines.push('', `Opmerkingen / planning: ${notes.trim()}`);
-    }
-
-    messageLines.push(
-      '',
-      'Kunnen jullie ons een voorstel en planning sturen?',
-      'Alvast bedankt!'
-    );
-
+    if (serviceType === 'bezorging') messageLines.push(`• Adres: ${address.trim()}, ${cleanPostcode}`);
+    else messageLines.push(`• Afspraaklocatie: ${SELF_DROPOFF_ADDRESS}`);
+    if (notes.trim()) messageLines.push('', `Opmerkingen / planning: ${notes.trim()}`);
+    messageLines.push('', 'Kunnen jullie ons een voorstel inclusief btw en een planning sturen?', 'Alvast bedankt!');
     return messageLines;
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  const openRequest = (contactMethod: 'whatsapp' | 'email') => {
     const messageLines = buildMessageLines();
     if (!messageLines) return;
-
+    setErrorMsg('');
     trackAnalyticsEvent('generate_lead', {
       lead_type: 'business_request',
-      contact_method: 'whatsapp',
+      contact_method: contactMethod,
       service_type: serviceType,
       delivery_zone: serviceType === 'langskomen' ? 'self_dropoff' : deliveryZone,
-      knife_count: granularTotalKnives,
-      estimate_band: isGranularActive ? 'specified' : selectedEstimate,
+      estimate_band: selectedEstimate,
     });
-    window.open(createWhatsAppUrl(messageLines.join('\n')), '_blank', 'noopener,noreferrer');
-  };
 
-  const handleEmailSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    const messageLines = buildMessageLines();
-    if (!messageLines) return;
-
-    trackAnalyticsEvent('generate_lead', {
-      lead_type: 'business_request',
-      contact_method: 'email',
-      service_type: serviceType,
-      delivery_zone: serviceType === 'langskomen' ? 'self_dropoff' : deliveryZone,
-      knife_count: granularTotalKnives,
-      estimate_band: isGranularActive ? 'specified' : selectedEstimate,
-    });
+    if (contactMethod === 'whatsapp') {
+      window.open(createWhatsAppUrl(messageLines.join('\n')), '_blank', 'noopener,noreferrer');
+      return;
+    }
     const subject = encodeURIComponent(`Zakelijke aanvraag Slijpmaat - ${restaurantName.trim()}`);
     const body = encodeURIComponent(messageLines.join('\n'));
     window.location.href = `mailto:${SLIJPMAAT_INFO.email}?subject=${subject}&body=${body}`;
   };
 
+  const inputClass = 'w-full rounded-xl border border-[#b6c1b6] bg-white px-3.5 py-2.5 text-sm text-[#203728] placeholder-[#9ca3af] focus:border-[#3B7F4B] focus:outline-none focus:ring-1 focus:ring-[#3B7F4B]';
+
   return (
     <div className="w-full">
-      <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-10 items-start">
-        {/* Linkerkolom: Formulier stappen */}
-        <div className="lg:col-span-7 space-y-8">
-
-          {/* STAP 1: Restaurant & Contactpersoon */}
-          <div className="rounded-[2rem] border border-[#d9e1d7] bg-white p-6 sm:p-8 shadow-xs">
-            <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-sm sm:text-base font-bold text-[#3B7F4B]">
-                1
-              </span>
-              <h3 className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">
-                Jouw keuken &amp; contact
-              </h3>
+      <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-cols-12 lg:gap-8">
+        <div className="rounded-[1.75rem] border border-[#d9e1d7] bg-white p-4 shadow-xs sm:p-7 lg:col-span-7">
+          <section aria-labelledby="business-contact-heading">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-xs font-bold text-[#3B7F4B]">1</span>
+              <h3 id="business-contact-heading" className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">Jouw zaak &amp; contact</h3>
             </div>
-
-            <div className="mt-6 space-y-4">
+            <div className="mt-4 space-y-3">
               <div>
-                <label
-                  htmlFor="zakelijk-restaurant"
-                  className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
-                >
-                  <Building2 strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
-                  <span>Restaurant / Zaak *</span>
-                </label>
-                <input
-                  id="zakelijk-restaurant"
-                  type="text"
-                  required
-                  placeholder="Bijv. Bistro De Gracht"
-                  value={restaurantName}
-                  onChange={(e) => {
-                    setRestaurantName(e.target.value);
-                    setErrorMsg('');
-                  }}
-                  className="w-full rounded-xl border border-[#b6c1b6] bg-white px-3.5 py-2.5 text-sm font-semibold text-[#203728] placeholder-[#9ca3af] focus:border-[#3B7F4B] focus:outline-none focus:ring-1 focus:ring-[#3B7F4B]"
-                />
+                <label htmlFor="zakelijk-restaurant" className="mb-1 block text-xs font-bold text-[#203728]">Restaurant / zaak</label>
+                <input id="zakelijk-restaurant" type="text" required autoComplete="organization" value={restaurantName} onChange={(event) => { setRestaurantName(event.target.value); setErrorMsg(''); }} placeholder="Bistro De Gracht" className={inputClass} />
               </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <div>
-                  <label
-                    htmlFor="zakelijk-contact"
-                    className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
-                  >
-                    <ChefHat strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
-                    <span>Contactpersoon *</span>
-                  </label>
-                  <input
-                    id="zakelijk-contact"
-                    type="text"
-                    required
-                    placeholder="Bijv. Chef Dennis"
-                    value={contactPerson}
-                    onChange={(e) => {
-                      setContactPerson(e.target.value);
-                      setErrorMsg('');
-                    }}
-                    className="w-full rounded-xl border border-[#b6c1b6] bg-white px-3.5 py-2.5 text-sm text-[#203728] placeholder-[#9ca3af] focus:border-[#3B7F4B] focus:outline-none focus:ring-1 focus:ring-[#3B7F4B]"
-                  />
+                  <label htmlFor="zakelijk-contact" className="mb-1 block text-xs font-bold text-[#203728]">Contactpersoon</label>
+                  <input id="zakelijk-contact" type="text" required autoComplete="name" value={contactPerson} onChange={(event) => { setContactPerson(event.target.value); setErrorMsg(''); }} placeholder="Dennis de Vries" className={inputClass} />
                 </div>
-
                 <div>
-                  <label
-                    htmlFor="zakelijk-phone"
-                    className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
-                  >
-                    <Phone strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
-                    <span>Telefoonnummer *</span>
-                  </label>
-                  <input
-                    id="zakelijk-phone"
-                    type="tel"
-                    required
-                    placeholder="06 12 34 56 78"
-                    value={phone}
-                    onChange={(e) => {
-                      setPhone(e.target.value);
-                      setErrorMsg('');
-                    }}
-                    className="w-full rounded-xl border border-[#b6c1b6] bg-white px-3.5 py-2.5 text-sm text-[#203728] placeholder-[#9ca3af] focus:border-[#3B7F4B] focus:outline-none focus:ring-1 focus:ring-[#3B7F4B]"
-                  />
+                  <label htmlFor="zakelijk-phone" className="mb-1 block text-xs font-bold text-[#203728]">Telefoonnummer</label>
+                  <input id="zakelijk-phone" type="tel" required autoComplete="tel" value={phone} onChange={(event) => { setPhone(event.target.value); setErrorMsg(''); }} placeholder="06 12 34 56 78" className={inputClass} />
                 </div>
               </div>
             </div>
-          </div>
+          </section>
 
-          {/* STAP 2: Aantal messen & Wensen */}
-          <div className="rounded-[2rem] border border-[#d9e1d7] bg-white p-6 sm:p-8 shadow-xs">
-            <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-sm sm:text-base font-bold text-[#3B7F4B]">
-                2
-              </span>
-              <h3 className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">
-                Aantal messen &amp; planning
-              </h3>
+          <section aria-labelledby="business-estimate-heading" className="mt-5 border-t border-[#d9e1d7] pt-5 sm:mt-7 sm:pt-7">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-xs font-bold text-[#3B7F4B]">2</span>
+              <h3 id="business-estimate-heading" className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">Aantal messen &amp; planning</h3>
             </div>
-
-            {/* Range Selectie Kaarten */}
-            <div className="mt-5">
-              <label className="block text-xs font-bold uppercase tracking-wider text-[#203728] mb-2.5">
-                Aantal messen (schatting) *
-              </label>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                {ESTIMATE_OPTIONS.map((opt) => {
-                  const isSelected = selectedEstimate === opt.label && !isGranularActive;
-                  return (
-                    <button
-                      key={opt.id}
-                      type="button"
-                      onClick={() => {
-                        setSelectedEstimate(opt.label);
-                        setErrorMsg('');
-                      }}
-                      className={`flex flex-col text-left p-4 rounded-2xl border-2 transition-all cursor-pointer ${
-                        isSelected
-                          ? 'border-[#3B7F4B] bg-[#E8EFE8]/30 shadow-2xs'
-                          : 'border-[#d9e1d7] bg-[#FAFAF8] hover:border-[#3B7F4B]/40'
-                      }`}
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="font-heading text-sm font-bold text-[#203728]">
-                          {opt.label}
-                        </span>
-                        {isSelected && (
-                          <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#3B7F4B] text-white">
-                            <Check strokeWidth={2.5} className="h-3.5 w-3.5" />
-                          </span>
-                        )}
-                      </div>
-                      <span className="text-xs text-[#657068] mt-1">
-                        {opt.desc}
-                      </span>
-                      {opt.badge && (
-                        <span className="mt-2 inline-flex w-fit rounded-full bg-[#E87B5B]/15 px-2 py-0.5 text-[10px] font-bold text-[#C95E3E] uppercase tracking-wider">
-                          {opt.badge}
-                        </span>
-                      )}
-                    </button>
-                  );
-                })}
+            <div className="mt-4 grid gap-3 sm:grid-cols-2">
+              <div>
+                <label htmlFor="zakelijk-estimate" className="mb-1 block text-xs font-bold text-[#203728]">Geschat aantal messen</label>
+                <select id="zakelijk-estimate" required value={selectedEstimate} onChange={(event) => { setSelectedEstimate(event.target.value); setErrorMsg(''); }} className={`${inputClass} min-h-11 font-semibold`}>
+                  <option value="" disabled>Selecteer aantal messen</option>
+                  {ESTIMATE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
+                </select>
+              </div>
+              <div>
+                <label htmlFor="zakelijk-notes" className="mb-1 block text-xs font-bold text-[#203728]">Opmerking voor planning</label>
+                <textarea id="zakelijk-notes" rows={2} value={notes} onChange={(event) => setNotes(event.target.value)} placeholder="Gewenste dag of bijzonderheden" className={`${inputClass} min-h-11 resize-y`} />
               </div>
             </div>
+          </section>
 
-            {/* Accordion voor optioneel specificeren per mesformaat (zoals Particulieren Calculator) */}
-            <div className="mt-5 rounded-2xl border border-[#d9e1d7]/80 bg-[#FAFAF8] p-3.5 sm:p-4">
-              <button
-                type="button"
-                onClick={() => setShowGranularKnives(!showGranularKnives)}
-                className="flex w-full items-center justify-between text-left text-xs sm:text-sm font-bold text-[#3B7F4B] hover:text-[#2d633a] cursor-pointer"
-              >
-                <span className="flex items-center gap-2.5">
-                  <span className="flex h-7 w-7 sm:h-7 sm:w-7 shrink-0 items-center justify-center rounded-lg bg-[#E8EFE8] text-[#3B7F4B]">
-                    <UtensilsCrossed strokeWidth={2} className="h-4 w-4" />
-                  </span>
-                  <span>Optioneel: exacte aantallen per formaat opgeven ({granularTotalKnives} geselecteerd)</span>
-                </span>
-                <ChevronDown
-                  strokeWidth={2.5}
-                  className={`h-5 w-5 shrink-0 transition-transform duration-200 ${
-                    showGranularKnives ? 'rotate-180' : ''
-                  }`}
-                />
+          <section aria-labelledby="business-delivery-heading" className="mt-5 border-t border-[#d9e1d7] pt-5 sm:mt-7 sm:pt-7">
+            <div className="flex items-center gap-2.5">
+              <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-xs font-bold text-[#3B7F4B]">3</span>
+              <h3 id="business-delivery-heading" className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">Ophalen of langskomen?</h3>
+            </div>
+            <div className="mt-3 grid grid-cols-2 gap-2.5">
+              <button type="button" aria-pressed={serviceType === 'bezorging'} onClick={() => { setServiceType('bezorging'); setErrorMsg(''); }} className={`min-h-[68px] rounded-2xl border-2 p-3 text-left ${serviceType === 'bezorging' ? 'border-[#3B7F4B] bg-[#E8EFE8]/60' : 'border-[#d9e1d7] bg-white'}`}>
+                <span className="flex items-start justify-between gap-1 font-heading text-sm font-bold text-[#203728]">Ophalen &amp; bezorgen{serviceType === 'bezorging' ? <Check className="h-4 w-4 shrink-0 text-[#3B7F4B]" aria-hidden="true" /> : null}</span>
+                <span className="mt-1 block text-[10px] leading-snug text-[#657068] sm:text-xs">Bezorgservice Utrecht</span>
               </button>
-
-              {showGranularKnives && (
-                <div className="mt-3 pt-3 border-t border-[#d9e1d7]/60 divide-y divide-[#d9e1d7]/60">
-                  {KNIFE_ROWS.map((row, idx) => (
-                    <div
-                      key={row.name}
-                      className="py-3 first:pt-1 last:pb-1 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5"
-                    >
-                      <div>
-                        <span className="font-heading text-sm font-bold text-[#203728]">{row.name}</span>
-                        <p className="text-xs text-[#657068]">{row.sizeDesc} &bull; <strong className="text-[#3B7F4B]">{row.priceLabel}</strong></p>
-                      </div>
-                      <div className="flex items-center rounded-xl border border-[#d9e1d7] bg-white shadow-2xs self-end sm:self-auto">
-                        <button
-                          type="button"
-                          onClick={() => updateKnifeCount(idx, -1)}
-                          disabled={knifeCounts[idx] === 0}
-                          aria-label={`Minder ${row.name}`}
-                          className="flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] disabled:opacity-30 disabled:hover:bg-transparent cursor-pointer disabled:cursor-not-allowed rounded-l-xl"
-                        >
-                          <Minus aria-hidden="true" strokeWidth={2.25} className="h-5 w-5 sm:h-4 sm:w-4 shrink-0" />
-                        </button>
-                        <span className="w-10 sm:w-8 text-center font-heading text-base sm:text-sm font-bold text-[#203728]">
-                          {knifeCounts[idx]}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => updateKnifeCount(idx, 1)}
-                          aria-label={`Meer ${row.name}`}
-                          className="flex h-11 w-11 sm:h-10 sm:w-10 items-center justify-center text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] cursor-pointer rounded-r-xl"
-                        >
-                          <Plus aria-hidden="true" strokeWidth={2.25} className="h-5 w-5 sm:h-4 sm:w-4 shrink-0" />
-                        </button>
-                      </div>
-                    </div>
-                  ))}
-                  {isGranularActive && (
-                    <div className="pt-2 text-right">
-                      <button
-                        type="button"
-                        onClick={() => setKnifeCounts([0, 0, 0, 0])}
-                        className="text-xs text-[#C95E3E] underline hover:text-[#a84729] cursor-pointer"
-                      >
-                        Herstel naar schatting ({selectedEstimate})
-                      </button>
-                    </div>
-                  )}
-                </div>
-              )}
-            </div>
-
-            {/* Opmerkingen of gewenste planning */}
-            <div className="mt-5">
-              <label
-                htmlFor="zakelijk-notes"
-                className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#203728] mb-1.5"
-              >
-                <MessageCircle strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
-                <span>Opmerkingen of gewenste planning</span>
-              </label>
-              <textarea
-                id="zakelijk-notes"
-                rows={3}
-                placeholder="Bijv. gewenste dag, aantal rondes of bijzonderheden"
-                value={notes}
-                onChange={(e) => setNotes(e.target.value)}
-                className="w-full rounded-xl border border-[#b6c1b6] bg-white p-3.5 text-sm text-[#203728] placeholder-[#9ca3af] focus:border-[#3B7F4B] focus:outline-none focus:ring-1 focus:ring-[#3B7F4B]"
-              />
-            </div>
-          </div>
-
-          {/* STAP 3: Ophalen of Langskomen? */}
-          <div className="rounded-[2rem] border border-[#d9e1d7] bg-white p-6 sm:p-8 shadow-xs">
-            <div className="flex items-center gap-3">
-              <span className="flex h-9 w-9 sm:h-9 sm:w-9 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-sm sm:text-base font-bold text-[#3B7F4B]">
-                3
-              </span>
-              <h3 className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">
-                Ophalen of langskomen?
-              </h3>
-            </div>
-
-            {/* Service Toggle Kaarten */}
-            <div className="mt-5 grid grid-cols-1 sm:grid-cols-2 gap-3.5">
-              <button
-                type="button"
-                onClick={() => {
-                  setServiceType('bezorging');
-                  setErrorMsg('');
-                }}
-                className={`flex flex-col text-left p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer ${
-                  serviceType === 'bezorging'
-                    ? 'border-[#3B7F4B] bg-[#E8EFE8]/30 shadow-2xs'
-                    : 'border-[#d9e1d7] bg-[#FAFAF8] hover:border-[#3B7F4B]/40'
-                }`}
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <span className={`flex h-11 w-11 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-2xl transition-colors ${
-                      serviceType === 'bezorging' ? 'bg-[#3B7F4B] text-white' : 'bg-[#E8EFE8] text-[#3B7F4B]'
-                    }`}>
-                      <Truck aria-hidden="true" strokeWidth={2} className="h-6 w-6 shrink-0 sm:h-5 sm:w-5" />
-                    </span>
-                    <span className="font-heading text-sm sm:text-base font-bold text-[#203728]">
-                      Bezorgservice Utrecht
-                    </span>
-                  </div>
-                  {serviceType === 'bezorging' && (
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#3B7F4B] text-white">
-                      <Check strokeWidth={2.5} className="h-3.5 w-3.5" />
-                    </span>
-                  )}
-                </div>
-                <span className="text-xs sm:text-sm text-[#657068] mt-2.5">
-                  Ophalen &amp; weer bezorgen bij jullie keukendeur binnen Utrecht. Gratis vanaf €35 (incl. btw).
-                </span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setServiceType('langskomen');
-                  setErrorMsg('');
-                }}
-                className={`flex flex-col text-left p-4 sm:p-5 rounded-2xl border-2 transition-all cursor-pointer ${
-                  serviceType === 'langskomen'
-                    ? 'border-[#3B7F4B] bg-[#E8EFE8]/30 shadow-2xs'
-                    : 'border-[#d9e1d7] bg-[#FAFAF8] hover:border-[#3B7F4B]/40'
-                }`}
-              >
-                <div className="flex items-start justify-between gap-3">
-                  <div className="flex items-center gap-3">
-                    <span className={`flex h-11 w-11 sm:h-10 sm:w-10 shrink-0 items-center justify-center rounded-2xl transition-colors ${
-                      serviceType === 'langskomen' ? 'bg-[#3B7F4B] text-white' : 'bg-[#E8EFE8] text-[#3B7F4B]'
-                    }`}>
-                      <Calendar aria-hidden="true" strokeWidth={2} className="h-6 w-6 shrink-0 sm:h-5 sm:w-5" />
-                    </span>
-                    <span className="font-heading text-sm sm:text-base font-bold text-[#203728]">
-                      Langsbrengen op afspraak
-                    </span>
-                  </div>
-                  {serviceType === 'langskomen' && (
-                    <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-[#3B7F4B] text-white">
-                      <Check strokeWidth={2.5} className="h-3.5 w-3.5" />
-                    </span>
-                  )}
-                </div>
-                <span className="text-xs sm:text-sm text-[#657068] mt-2.5">
-                  Aan de werkbank in Utrecht. Geen inloopbalie, afspraak vooraf via WhatsApp.
-                </span>
+              <button type="button" aria-pressed={serviceType === 'langskomen'} onClick={() => { setServiceType('langskomen'); setErrorMsg(''); }} className={`min-h-[68px] rounded-2xl border-2 p-3 text-left ${serviceType === 'langskomen' ? 'border-[#3B7F4B] bg-[#E8EFE8]/60' : 'border-[#d9e1d7] bg-white'}`}>
+                <span className="flex items-start justify-between gap-1 font-heading text-sm font-bold text-[#203728]">Zelf langskomen{serviceType === 'langskomen' ? <Check className="h-4 w-4 shrink-0 text-[#3B7F4B]" aria-hidden="true" /> : null}</span>
+                <span className="mt-1 block text-[10px] leading-snug text-[#657068] sm:text-xs">Op afspraak · gratis</span>
               </button>
             </div>
 
-            {/* Bezorgadres & Postcode als bezorging gekozen is */}
             {serviceType === 'bezorging' ? (
-              <div className="mt-6 space-y-4 pt-4 border-t border-[#d9e1d7]/60">
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div className="mt-4">
+                <div className="grid gap-3 sm:grid-cols-2">
                   <div>
-                    <label
-                      htmlFor="zakelijk-postcode"
-                      className="flex items-center gap-2 text-xs font-bold text-[#203728] uppercase tracking-wider mb-1"
-                    >
-                      <MapPin strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
-                      <span>Postcode (Utrecht) *</span>
-                    </label>
-                    <input
-                      id="zakelijk-postcode"
-                      type="text"
-                      value={postcode}
-                      onChange={(e) => {
-                        setPostcode(e.target.value);
-                        setErrorMsg('');
-                      }}
-                      maxLength={7}
-                      placeholder="Bijv. 3513 AB"
-                      className="w-full rounded-xl border border-[#b6c1b6] bg-white px-3.5 py-2.5 text-sm font-semibold text-[#203728] placeholder-[#9ca3af] focus:border-[#3B7F4B] focus:outline-none focus:ring-1 focus:ring-[#3B7F4B]"
-                    />
-                    <p className="mt-1 text-[11px] text-[#657068]">
-                      4 cijfers zijn genoeg om het bezorgtarief te verifiëren.
-                    </p>
+                    <label htmlFor="zakelijk-postcode" className="mb-1 block text-xs font-bold text-[#203728]">Postcode</label>
+                    <input id="zakelijk-postcode" type="text" required maxLength={7} autoComplete="postal-code" value={postcode} onChange={(event) => { setPostcode(event.target.value); setErrorMsg(''); }} placeholder="3513 AB" className={`${inputClass} font-semibold`} />
                   </div>
-
                   <div>
-                    <label
-                      htmlFor="zakelijk-address"
-                      className="flex items-center gap-2 text-xs font-bold text-[#203728] uppercase tracking-wider mb-1"
-                    >
-                      <Building2 strokeWidth={2} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
-                      <span>Straat en huisnummer (optioneel)</span>
-                    </label>
-                    <input
-                      id="zakelijk-address"
-                      type="text"
-                      value={address}
-                      onChange={(e) => setAddress(e.target.value)}
-                      maxLength={100}
-                      placeholder="Bijv. Oudegracht 120"
-                      className="w-full rounded-xl border border-[#b6c1b6] bg-white px-3.5 py-2.5 text-sm text-[#203728] placeholder-[#9ca3af] focus:border-[#3B7F4B] focus:outline-none focus:ring-1 focus:ring-[#3B7F4B]"
-                    />
+                    <label htmlFor="zakelijk-address" className="mb-1 block text-xs font-bold text-[#203728]">Straat en huisnummer</label>
+                    <input id="zakelijk-address" type="text" required maxLength={100} autoComplete="street-address" value={address} onChange={(event) => { setAddress(event.target.value); setErrorMsg(''); }} placeholder="Oudegracht 120" className={inputClass} />
                   </div>
                 </div>
-
-                <div className="rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] p-3 text-xs leading-relaxed text-[#203728]">
-                  {!cleanPostcode || cleanPostcode.length < 4 ? (
-                    <span className="text-[#657068]">
-                      Vul een postcode in om de bezorgmogelijkheid te controleren. Binnen Utrecht gratis vanaf €35 bestelwaarde (incl. btw).
-                    </span>
-                  ) : !hasValidPostcode ? (
-                    <span className="text-[#C95E3E] font-medium">
-                      Vul een geldige postcode in, bijvoorbeeld 3513 AB.
-                    </span>
-                  ) : isOutsideArea ? (
-                    <span className="text-[#C95E3E] font-medium">
-                      Buiten ons vaste bezorggebied Utrecht. Haal- en brengservice op aanvraag, of kies &apos;Ik kom langs op afspraak&apos; zonder bezorgkosten.
-                    </span>
-                  ) : deliveryFeeCents === 0 ? (
-                    <span className="text-[#3B7F4B] font-bold flex items-center gap-2">
-                      <Check strokeWidth={2.5} className="h-5 w-5 shrink-0 text-[#3B7F4B]" />
-                      <span>Ophalen en bezorgen aan de keukendeur is gratis voor jullie bestelling (vanaf €35 incl. btw)!</span>
-                    </span>
-                  ) : (
-                    <span>
-                      <strong className="text-[#3B7F4B]">Bezorgservice Utrecht:</strong> Binnen Utrecht gratis vanaf €35 bestelwaarde (incl. btw). Onder €35 geldt het bezorgtarief van {formatEuroCents(deliveryFeeCents || 725)} incl. btw.
-                    </span>
-                  )}
+                <div aria-live="polite" className="mt-2.5 rounded-xl bg-[#FAFAF8] px-3 py-2.5 text-xs leading-relaxed text-[#203728]">
+                  {!cleanPostcode || cleanPostcode.length < 4 ? <span className="text-[#657068]">Vul de postcode van jullie zaak in voor de bezorgmogelijkheid.</span> : !hasValidPostcode ? <span className="font-medium text-[#C95E3E]">Vul een geldige postcode in, bijvoorbeeld 3513 AB.</span> : isOutsideArea ? <span className="font-medium text-[#C95E3E]">Buiten het vaste bezorggebied: mogelijkheid en prijs op aanvraag.</span> : <span className="flex items-center gap-1.5 font-bold text-[#3B7F4B]"><Check className="h-4 w-4" aria-hidden="true" />Ophalen en bezorgen is mogelijk in jullie gebied.</span>}
                 </div>
               </div>
             ) : (
-              <div className="mt-6 pt-4 border-t border-[#d9e1d7]/60">
-                <div className="rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] p-3 text-xs leading-relaxed text-[#203728]">
-                  <p>
-                    <strong className="text-[#3B7F4B]">Kom langs op afspraak:</strong> Wij werken vanuit huis aan de werkbank (Gerard Noodtstraat 57, Utrecht). Er is géén doorlopende inloopbalie. We stemmen het breng- en ophaalmoment via WhatsApp vooraf persoonlijk af. Klanten uit heel Nederland zijn welkom.
-                  </p>
-                </div>
+              <div className="mt-4 flex items-start gap-2.5 rounded-xl bg-[#E8EFE8]/60 px-3.5 py-3 text-sm text-[#203728]">
+                <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[#3B7F4B]" aria-hidden="true" />
+                <span><strong>Afspraaklocatie:</strong><br />{SELF_DROPOFF_ADDRESS}</span>
               </div>
             )}
-          </div>
+          </section>
         </div>
 
-        {/* Rechterkolom: Sticky Overzicht & Direct WhatsApp Order (stijl van Particulieren) */}
-        <div className="lg:col-span-5 lg:sticky lg:top-24">
-          <div className="overflow-hidden rounded-[2.25rem] border border-[#d9e1d7] bg-[#FAFAF8] p-5 sm:p-7 lg:p-8 shadow-md">
-            <div className="flex items-center justify-between border-b border-[#d9e1d7]/70 pb-4">
-              <h3 className="font-heading text-xl font-bold text-[#3B7F4B]">
-                Jouw zakelijke aanvraag
-              </h3>
-              <span className="rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
-                {isGranularActive ? `${granularTotalKnives} messen` : selectedEstimate}
-              </span>
+        <aside className="lg:sticky lg:top-24 lg:col-span-5" aria-labelledby="business-summary-heading">
+          <div className="overflow-hidden rounded-[1.75rem] border border-[#d9e1d7] bg-[#FAFAF8] p-4 shadow-sm sm:p-6 lg:p-7">
+            <div className="flex items-center justify-between gap-3 border-b border-[#d9e1d7] pb-3">
+              <h3 id="business-summary-heading" className="font-heading text-xl font-bold text-[#3B7F4B]">Jouw zakelijke aanvraag</h3>
+              <span className="shrink-0 rounded-full bg-[#E8EFE8] px-2.5 py-1 text-xs font-bold text-[#3B7F4B]">{selectedEstimate || 'Aantal kiezen'}</span>
             </div>
-
-            {/* Overzicht van ingevulde velden */}
-            <div className="my-5 space-y-2.5 border-b border-[#d9e1d7]/70 pb-5 text-xs sm:text-sm text-[#203728]">
-              <div className="flex justify-between items-start gap-2">
-                <span className="text-[#657068]">Zaak:</span>
-                <span className="font-semibold text-right">
-                  {restaurantName.trim() || <span className="text-[#9ca3af] italic">Nog in te vullen</span>}
-                </span>
-              </div>
-
-              <div className="flex justify-between items-start gap-2">
-                <span className="text-[#657068]">Contactpersoon:</span>
-                <span className="font-semibold text-right">
-                  {contactPerson.trim() || <span className="text-[#9ca3af] italic">Nog in te vullen</span>}
-                </span>
-              </div>
-
-              <div className="flex justify-between items-start gap-2">
-                <span className="text-[#657068]">Telefoon:</span>
-                <span className="font-semibold text-right">
-                  {phone.trim() || <span className="text-[#9ca3af] italic">06 ...</span>}
-                </span>
-              </div>
-
-              <div className="flex justify-between items-start gap-2">
-                <span className="text-[#657068]">Service:</span>
-                <span className="font-semibold text-right text-[#3B7F4B]">
-                  {serviceType === 'bezorging' ? 'Bezorgservice Utrecht' : 'Langsbrengen op afspraak'}
-                </span>
-              </div>
-
-              <div className="flex justify-between items-start gap-2">
-                <span className="text-[#657068]">Doorlooptijd:</span>
-                <span className="font-semibold text-right">
-                  Binnen 24 tot 48 uur in overleg
-                </span>
-              </div>
+            <div className="space-y-2 border-b border-[#d9e1d7] py-4 text-xs sm:text-sm">
+              <SummaryRow label="Zaak" value={restaurantName.trim() || 'Nog in te vullen'} />
+              <SummaryRow label="Contactpersoon" value={contactPerson.trim() || 'Nog in te vullen'} />
+              <SummaryRow label="Telefoon" value={phone.trim() || 'Nog in te vullen'} />
+              <SummaryRow label="Aantal" value={selectedEstimate || 'Nog te kiezen'} />
+              <SummaryRow label="Service" value={serviceType === 'bezorging' ? 'Ophalen & bezorgen' : 'Zelf langskomen'} accent />
             </div>
-
-            {/* Offerte & Prijsindicatie Box */}
-            <div className="rounded-2xl bg-white p-4 sm:p-5 border border-[#d9e1d7]/80 shadow-2xs">
-              <div className="flex items-center justify-between">
-                <small className="block text-xs font-semibold text-[#657068]">
-                  Snel een helder voorstel
-                </small>
-                <span className="inline-flex items-center gap-1 rounded-full bg-[#E8EFE8] px-2.5 py-0.5 text-[10px] font-bold text-[#3B7F4B] uppercase tracking-wider">
-                  <ReceiptText aria-hidden="true" strokeWidth={2} className="h-3.5 w-3.5 shrink-0" />
-                  <span>incl. btw</span>
-                </span>
+            <div className="mt-4 rounded-2xl border border-[#d9e1d7] bg-white p-4">
+              <div className="flex items-center justify-between gap-3">
+                <span className="text-xs font-semibold text-[#657068]">Zakelijke offerte</span>
+                <span className="inline-flex items-center gap-1 rounded-full bg-[#E8EFE8] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#3B7F4B]"><ReceiptText className="h-3.5 w-3.5" aria-hidden="true" />incl. btw</span>
               </div>
-              <strong className="mt-1 block font-heading text-2xl sm:text-3xl font-bold text-[#3B7F4B]">
-                Offerte via WhatsApp
-              </strong>
-              <p className="mt-2 text-xs font-semibold text-[#657068] leading-relaxed">
-                Incl. btw · We starten pas na jullie akkoord
-              </p>
+              <strong className="mt-1 block font-heading text-3xl font-bold text-[#3B7F4B]">Prijs op maat</strong>
+              <p className="mt-1 text-xs text-[#657068]">We starten pas nadat jullie akkoord zijn met het voorstel.</p>
             </div>
-
-            {/* Error banner */}
-            {errorMsg && (
-              <div className="mt-4 flex items-center gap-2.5 rounded-xl bg-[#FFF3F1] p-3 text-xs font-semibold text-[#8B2921]">
-                <AlertCircle strokeWidth={2} className="h-5 w-5 shrink-0 text-[#C95E3E]" />
-                <span>{errorMsg}</span>
-              </div>
-            )}
-
-            {/* Hoofdknop: Open aanvraag in WhatsApp */}
-            <button
-              type="button"
-              onClick={handleFormSubmit}
-              className="mt-6 group inline-flex w-full min-h-[52px] sm:min-h-[56px] items-center justify-center gap-3 rounded-full bg-[#E87B5B] px-4 py-3.5 sm:px-6 sm:py-4 font-heading text-sm sm:text-base font-bold text-white shadow-md transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-lg active:scale-[0.98] cursor-pointer whitespace-nowrap"
-            >
-              <MessageCircle strokeWidth={2} className="h-6 w-6 shrink-0 transition-transform duration-200 group-hover:scale-110" />
-              <span>Open aanvraag in WhatsApp</span>
-            </button>
-
-            {/* Dunne groene knop: Open aanvraag in e-mail */}
-            <button
-              type="button"
-              onClick={handleEmailSubmit}
-              className="mt-3 group inline-flex w-full min-h-[44px] sm:min-h-[46px] items-center justify-center gap-2.5 rounded-full border border-[#3B7F4B] bg-white px-4 py-2.5 font-heading text-sm sm:text-base font-semibold text-[#3B7F4B] shadow-2xs transition-all duration-200 hover:bg-[#3B7F4B] hover:text-white active:scale-[0.98] cursor-pointer whitespace-nowrap"
-            >
-              <Mail aria-hidden="true" strokeWidth={2} className="h-4.5 w-4.5 shrink-0 text-[#3B7F4B] transition-colors group-hover:text-white" />
-              <span>Open aanvraag in e-mail</span>
-            </button>
-
-            <p className="mt-3 text-center text-xs text-[#657068]">
-              Er wordt niets automatisch verzonden. Je controleert en verstuurt je bericht zelf via WhatsApp of e-mail.
-            </p>
-
-            <p className="mt-3 text-center text-[11px] text-[#9ca3af]">
-              Door een aanvraag te doen ga je akkoord met onze{' '}
-              <a href="/algemene-voorwaarden/" className="underline hover:text-[#3B7F4B]">
-                algemene voorwaarden
-              </a>{' '}
-              en{' '}
-              <a href="/privacyverklaring/" className="underline hover:text-[#3B7F4B]">
-                privacyverklaring
-              </a>
-              .
-            </p>
+            {errorMsg ? <div role="alert" className="mt-3 flex items-center gap-2 rounded-xl bg-[#FFF3F1] p-3 text-xs font-semibold text-[#8B2921]"><AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" /><span>{errorMsg}</span></div> : null}
+            <button type="button" onClick={() => openRequest('whatsapp')} className="group mt-4 inline-flex min-h-[52px] w-full items-center justify-center gap-2.5 rounded-full bg-[#E87B5B] px-4 py-3.5 font-heading text-sm font-bold text-white shadow-md transition hover:bg-[#C95E3E] hover:shadow-lg active:scale-[0.98] sm:text-base"><MessageCircle className="h-5 w-5 shrink-0 transition-transform group-hover:scale-110" aria-hidden="true" /><span>Open aanvraag in WhatsApp</span></button>
+            <button type="button" onClick={() => openRequest('email')} className="group mt-2.5 inline-flex min-h-[48px] w-full items-center justify-center gap-2.5 rounded-full border border-[#3B7F4B] bg-white px-4 py-3 font-heading text-sm font-bold text-[#3B7F4B] transition hover:bg-[#E8EFE8] active:scale-[0.98] sm:text-base"><Mail className="h-5 w-5 shrink-0" aria-hidden="true" /><span>Open aanvraag in e-mail</span></button>
+            <p className="mt-2.5 text-center text-xs text-[#657068]">Je controleert en verstuurt het bericht zelf. We reageren binnen twee uur.</p>
+            <p className="mt-2.5 text-center text-[11px] leading-relaxed text-[#9ca3af]">Door een aanvraag te doen ga je akkoord met onze <a href="/algemene-voorwaarden/" className="underline hover:text-[#3B7F4B]">algemene voorwaarden</a> en <a href="/privacyverklaring/" className="underline hover:text-[#3B7F4B]">privacyverklaring</a>.</p>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   );
 };
+
+const SummaryRow: React.FC<{ label: string; value: string; accent?: boolean }> = ({ label, value, accent = false }) => (
+  <div className="flex items-start justify-between gap-3">
+    <span className="text-[#657068]">{label}</span>
+    <span className={`max-w-[60%] text-right font-semibold ${accent ? 'text-[#3B7F4B]' : 'text-[#203728]'}`}>{value}</span>
+  </div>
+);

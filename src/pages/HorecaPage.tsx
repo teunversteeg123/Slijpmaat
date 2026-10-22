@@ -224,7 +224,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
             <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Zakelijke aanvraag &amp; offerte</h2>
           </div>
 
-          <div className="rounded-[2.5rem] border border-[#d9e1d7] bg-white p-5 shadow-sm sm:p-8 lg:p-10">
+          <div className="sm:rounded-[2.5rem] sm:border sm:border-[#d9e1d7] sm:bg-white sm:p-8 sm:shadow-sm lg:p-10">
             <ZakelijkFormulier />
           </div>
 
