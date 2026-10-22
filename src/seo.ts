@@ -24,7 +24,7 @@ const ROUTES: RouteSeo[] = [
     path: '/',
     label: 'Home',
     title: 'Messen slijpen Utrecht · Ophalen & bezorgen · Slijpmaat',
-    description: 'Laat je keukenmessen slijpen in Utrecht. Gratis ophalen en bezorgen vanaf €35 bestelwaarde; daaronder gelden de postcodegebonden tarieven.',
+    description: 'Mes laten slijpen in Utrecht? Slijpmaat maakt messen van thuiskoks en chefs met de hand weer scherp. We halen ze op en bezorgen ze meestal binnen 48 uur terug.',
     index: true,
     image: '/assets/slijpmaat-homepage-hero.jpg',
     imageAlt: 'Koksmes bij Slijpmaat in Utrecht',
@@ -48,46 +48,6 @@ const ROUTES: RouteSeo[] = [
     index: true,
     image: '/assets/tomaat-video-poster.webp',
     imageAlt: 'Scherp keukenmes snijdt een tomaat voor een zakelijke slijpservice',
-  },
-  {
-    pageId: 'dienst-keukenmessen',
-    path: '/diensten/keukenmessen-slijpen/',
-    label: 'Keukenmessen slijpen',
-    title: 'Keukenmessen laten slijpen in Utrecht · Slijpmaat',
-    description: 'Laat gladde keukenmessen en koksmessen in Utrecht zorgvuldig met de hand slijpen op Japanse waterstenen, met aandacht voor snede, staal en profiel.',
-    index: true,
-    image: '/assets/werkwijze/03-slijpen.webp',
-    imageAlt: 'Keukenmes wordt met de hand geslepen op een Japanse watersteen',
-  },
-  {
-    pageId: 'dienst-japanse-messen',
-    path: '/diensten/japanse-messen-slijpen/',
-    label: 'Japanse messen slijpen',
-    title: 'Japanse messen slijpen in Utrecht · Slijpmaat',
-    description: 'Laat Japanse keukenmessen in Utrecht met de hand slijpen op waterstenen, afgestemd op het staal, het profiel en de conditie van de snede.',
-    index: true,
-    image: '/assets/werkwijze/03-slijpen.webp',
-    imageAlt: 'Japans keukenmes wordt zorgvuldig op een watersteen geslepen',
-  },
-  {
-    pageId: 'dienst-chips-herstellen',
-    path: '/diensten/chips-herstellen/',
-    label: 'Chips herstellen',
-    title: 'Chip in keukenmes laten herstellen · Slijpmaat',
-    description: 'Kleine chips en beschadigde punten kunnen vaak worden hersteld. Stuur eerst een foto, dan beoordeelt Slijpmaat de schade en mogelijkheden.',
-    index: true,
-    image: '/assets/werkwijze/01-beoordelen.webp',
-    imageAlt: 'Slijpmaat beoordeelt de beschadigde snede van een keukenmes',
-  },
-  {
-    pageId: 'dienst-wel-niet',
-    path: '/diensten/wat-slijpen-we/',
-    label: 'Wat slijpen we?',
-    title: 'Welke messen slijpen wij? · Slijpmaat',
-    description: 'Bekijk welke gladde keukenmessen Slijpmaat aanneemt, welke beschadigingen mogelijk te herstellen zijn en waarom kartelmessen niet worden aangenomen.',
-    index: true,
-    image: '/assets/werkwijze/01-beoordelen.webp',
-    imageAlt: 'Controle van de snede en het profiel van een keukenmes',
   },
   {
     pageId: 'werkwijze',
@@ -238,16 +198,10 @@ const getStructuredData = (pathname: string) => {
           { '@type': 'ListItem', position: 2, name: 'Blogs', item: `${SITE_URL}/blogs/` },
           { '@type': 'ListItem', position: 3, name: route.label, item: canonicalUrl },
         ]
-      : route.pageId.startsWith('dienst-')
-        ? [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-            { '@type': 'ListItem', position: 2, name: 'Particulier', item: `${SITE_URL}/particulier/` },
-            { '@type': 'ListItem', position: 3, name: route.label, item: canonicalUrl },
-          ]
-        : [
-            { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
-            { '@type': 'ListItem', position: 2, name: route.label, item: canonicalUrl },
-          ];
+      : [
+          { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
+          { '@type': 'ListItem', position: 2, name: route.label, item: canonicalUrl },
+        ];
 
     graph.push({
       '@type': 'BreadcrumbList',

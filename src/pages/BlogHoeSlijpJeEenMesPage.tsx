@@ -857,7 +857,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               </p>
 
               <p className="mt-3 text-base leading-relaxed text-[#244A30]">
-                Lees hoe Slijpmaat <a href={PAGE_PATHS['dienst-keukenmessen']} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">keukenmessen met de hand slijpt</a>, bekijk onze aanpak voor <a href={PAGE_PATHS['dienst-japanse-messen']} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">Japanse messen</a> of ga direct naar de <a href={PAGE_PATHS.particulieren} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">prijzen en afspraak</a>.
+                Bekijk <a href={PAGE_PATHS.werkwijze} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">hoe Slijpmaat je messen met de hand slijpt</a> of ga direct naar de <a href={PAGE_PATHS.particulieren} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">prijzen en afspraak</a>.
               </p>
 
               {/* BULLET WIDGET REDENEN */}

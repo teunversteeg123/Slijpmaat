@@ -9,7 +9,6 @@ import { trackAnalyticsEvent, trackPageView } from './utils/analytics';
 import { HomePage } from './pages/HomePage';
 import { ParticulierenPage } from './pages/ParticulierenPage';
 import { HorecaPage } from './pages/HorecaPage';
-import { DienstDetailPage } from './pages/DienstDetailPage';
 import { WerkwijzePage } from './pages/WerkwijzePage';
 import { ServicegebiedPage } from './pages/ServicegebiedPage';
 import { KennisbankPage } from './pages/KennisbankPage';
@@ -60,10 +59,10 @@ const LEGACY_HASH_PAGES: Readonly<Record<string, PageId>> = {
   home: 'home',
   particulieren: 'particulieren',
   horeca: 'horeca',
-  'dienst-keukenmessen': 'dienst-keukenmessen',
-  'dienst-japanse-messen': 'dienst-japanse-messen',
-  'dienst-chips-herstellen': 'dienst-chips-herstellen',
-  'dienst-wel-niet': 'dienst-wel-niet',
+  'dienst-keukenmessen': 'particulieren',
+  'dienst-japanse-messen': 'particulieren',
+  'dienst-chips-herstellen': 'particulieren',
+  'dienst-wel-niet': 'particulieren',
   werkwijze: 'werkwijze',
   'ophalen-bezorgen': 'ophalen-bezorgen',
   'buiten-utrecht': 'ophalen-bezorgen',
@@ -126,6 +125,11 @@ export default function App({ initialPath }: AppProps) {
   useEffect(() => {
     const syncLocation = () => {
       const hash = window.location.hash.replace('#', '');
+      if (/^\/diensten\/(keukenmessen-slijpen|japanse-messen-slijpen|chips-herstellen|wat-slijpen-we)\/?$/.test(window.location.pathname)) {
+        setCurrentPage('particulieren');
+        window.history.replaceState(null, '', PAGE_PATHS.particulieren);
+        return;
+      }
       if (window.location.pathname === '/contact' || window.location.pathname === '/contact/' || hash === 'contact') {
         setCurrentPage('home');
         window.history.replaceState(null, '', '/#home-contact');
@@ -185,11 +189,6 @@ export default function App({ initialPath }: AppProps) {
         return <ParticulierenPage onNavigate={handleNavigate} />;
       case 'horeca':
         return <HorecaPage onNavigate={handleNavigate} />;
-      case 'dienst-keukenmessen':
-      case 'dienst-japanse-messen':
-      case 'dienst-chips-herstellen':
-      case 'dienst-wel-niet':
-        return <DienstDetailPage pageId={currentPage} onNavigate={handleNavigate} />;
       case 'werkwijze':
         return <WerkwijzePage onNavigate={handleNavigate} />;
       case 'ophalen-bezorgen':

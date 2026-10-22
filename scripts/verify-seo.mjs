@@ -6,10 +6,6 @@ const routes = [
   ['/', true, 'Jouw messenslijper in Utrecht'],
   ['/particulier/', true, 'Je messen weer scherp. Zonder gedoe.'],
   ['/zakelijk/', true, 'Professioneel messen slijpen voor horeca'],
-  ['/diensten/keukenmessen-slijpen/', true, 'Keukenmessen slijpen op Japanse waterstenen'],
-  ['/diensten/japanse-messen-slijpen/', true, 'Japanse messen zorgvuldig laten slijpen'],
-  ['/diensten/chips-herstellen/', true, 'Chips en beschadigingen in keukenmessen herstellen'],
-  ['/diensten/wat-slijpen-we/', true, 'Welke messen slijpt Slijpmaat wel en niet?'],
   ['/werkwijze/', true, 'Ieder mes met de hand geslepen.'],
   ['/servicegebied/', true, 'Ophalen, bezorgen &amp; langsbrengen.'],
   ['/blogs/', true, 'Blogs over messen slijpen en onderhoud'],
@@ -73,6 +69,11 @@ try {
     const robots = match(html, /<meta name="robots" content="(.*?)"/s, 'robots', pathname);
     const rootHtml = match(html, /<div id="root">([\s\S]*)<\/div>\s*<\/body>/s, 'statische rootinhoud', pathname);
     const rootText = decodeHtml(rootHtml);
+    if (!rootText.includes('KvK: 42198662')) throw new Error(`${pathname}: KvK-nummer ontbreekt`);
+    if (rootHtml.includes('href="/diensten/')) throw new Error(`${pathname}: link naar verwijderde dienstpagina`);
+    if (pathname === '/' && description !== 'Mes laten slijpen in Utrecht? Slijpmaat maakt messen van thuiskoks en chefs met de hand weer scherp. We halen ze op en bezorgen ze meestal binnen 48 uur terug.') {
+      throw new Error('Homepage gebruikt niet de bevestigde metabeschrijving');
+    }
     const jsonLd = match(html, /<script id="route-jsonld" type="application\/ld\+json">(.*?)<\/script>/s, 'JSON-LD', pathname);
     const schema = JSON.parse(jsonLd);
     const schemaTypes = schema['@graph'].map((item) => item['@type']);
@@ -149,6 +150,14 @@ try {
   if (JSON.stringify(sitemapUrls) !== JSON.stringify(expectedUrls)) throw new Error('Sitemap bevat niet exact de indexeerbare canonieke routes');
 
   const redirects = await readFile(new URL('../dist/_redirects', import.meta.url), 'utf8');
+  for (const slug of ['keukenmessen-slijpen', 'japanse-messen-slijpen', 'chips-herstellen', 'wat-slijpen-we']) {
+    for (const suffix of ['', '/']) {
+      const pathname = `/diensten/${slug}${suffix}`;
+      if (!redirects.split(/\r?\n/).includes(`${pathname} /particulier/ 301`)) throw new Error(`${pathname}: permanente redirect ontbreekt`);
+      const response = await fetch(`${baseUrl}${pathname}`, { redirect: 'manual' });
+      if (response.status !== 301 || response.headers.get('location') !== '/particulier/') throw new Error(`${pathname}: onjuiste HTTP-redirect`);
+    }
+  }
   if (!redirects.split(/\r?\n/).includes('/contact /#home-contact 301')) {
     throw new Error('Permanente redirect van /contact naar /#home-contact ontbreekt');
   }

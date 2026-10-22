@@ -19,10 +19,6 @@ const QUICK_LINKS: Array<{ label: string; page: PageId }> = [
   { label: 'Plan mijn slijpbeurt', page: 'particulieren' },
   { label: 'Servicegebied & langskomen', page: 'ophalen-bezorgen' },
   { label: 'Veelgestelde vragen', page: 'faq' },
-  { label: 'Keukenmessen slijpen', page: 'dienst-keukenmessen' },
-  { label: 'Japanse messen slijpen', page: 'dienst-japanse-messen' },
-  { label: 'Chips herstellen', page: 'dienst-chips-herstellen' },
-  { label: 'Welke messen slijpen we?', page: 'dienst-wel-niet' },
 ];
 
 const columnClass = 'border-b border-[#3B7F4B]/20 pb-7 sm:border-0 sm:pb-0';
@@ -30,7 +26,7 @@ const columnHeadClass = 'mb-3 flex min-h-[54px] items-center sm:mb-0 sm:h-[68px]
 const footerLinkClass = 'inline-flex min-h-8 items-center text-[14px] leading-[1.55] text-[#3B7F4B] transition-transform duration-200 hover:translate-x-[3px] hover:opacity-70 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] sm:min-h-0';
 
 export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
-  const { analyticsAvailable, openCookieSettings } = useCookieConsent();
+  const { openCookieSettings } = useCookieConsent();
 
   const handleNav = (page: PageId) => {
     onNavigate(page);
@@ -101,6 +97,7 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
                 Stuur je Maat een appje
               </a>
             </address>
+            <p className="mt-3 text-[14px]">KvK: {SLIJPMAAT_INFO.kvkNumber}</p>
           </section>
 
           <section>
@@ -151,11 +148,9 @@ export const Footer: React.FC<FooterProps> = ({ onNavigate }) => {
             <a href={PAGE_PATHS.privacy} onClick={(event) => handleInternalClick(event, 'privacy')} className="inline-flex min-h-8 cursor-pointer items-center transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] sm:min-h-0">
               Privacyverklaring
             </a>
-            {analyticsAvailable ? (
               <button type="button" onClick={openCookieSettings} className="inline-flex min-h-8 cursor-pointer items-center transition-opacity hover:opacity-65 focus-visible:rounded-sm focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#3B7F4B] sm:min-h-0">
                 Cookievoorkeuren
               </button>
-            ) : null}
           </div>
         </div>
       </div>

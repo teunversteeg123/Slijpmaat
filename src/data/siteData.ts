@@ -3,6 +3,7 @@ export const SLIJPMAAT_INFO = {
   whatsappNumber: '+31682074967',
   whatsappDisplay: '06 82 07 49 67',
   email: 'slijpmaat@outlook.com',
+  kvkNumber: '42198662',
   prices: {
     small: { name: 'Klein mes', size: 'Korter dan 15 cm', price: 6.50, desc: 'Schilmessen, officemessen, kleine tourneermessen' },
     normal: { name: 'Normaal mes', size: '15 tot 19,99 cm', price: 8.50, desc: 'Kleine koksmessen, santoku’s, universele messen' },
