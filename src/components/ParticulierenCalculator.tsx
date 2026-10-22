@@ -306,7 +306,6 @@ export const ParticulierenCalculator: React.FC = () => {
                 onClick={() => {
                   const willOpen = !showSpecialRequest;
                   setShowSpecialRequest(willOpen);
-                  if (willOpen && counts[3] === 0) updateCount(3, 1);
                 }}
                 aria-expanded={showSpecialRequest}
                 aria-controls="calculator-special-request"

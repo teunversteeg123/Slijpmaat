@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { AlertCircle, Check, Mail, MapPin, MessageCircle, ReceiptText } from 'lucide-react';
+import React, { useRef, useState } from 'react';
+import { AlertCircle, Check, ChevronDown, Mail, MapPin, MessageCircle, ReceiptText } from 'lucide-react';
 import { getDeliveryZone, isValidDutchPostcode, normalizeDutchPostcode } from '../data/delivery';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 import { trackAnalyticsEvent } from '../utils/analytics';
@@ -8,14 +8,15 @@ import { createWhatsAppUrl } from '../utils/contact';
 type ServiceType = 'bezorging' | 'langskomen';
 
 const ESTIMATE_OPTIONS = [
-  { value: '0 tot 10 messen', label: '0 tot 10 messen' },
-  { value: '10 tot 20 messen', label: '10 tot 20 messen · Meest gekozen' },
-  { value: '20 tot 40 messen', label: '20 tot 40 messen' },
-  { value: '40+ messen', label: '40+ messen' },
+  { value: '0 tot 10 messen', recommended: false },
+  { value: '10 tot 20 messen', recommended: true },
+  { value: '20 tot 40 messen', recommended: false },
+  { value: '40+ messen', recommended: false },
 ];
 const SELF_DROPOFF_ADDRESS = 'Scheernoordsstraat 75, Utrecht';
 
 export const ZakelijkFormulier: React.FC = () => {
+  const estimateMenuRef = useRef<HTMLDetailsElement>(null);
   const [restaurantName, setRestaurantName] = useState('');
   const [contactPerson, setContactPerson] = useState('');
   const [phone, setPhone] = useState('');
@@ -122,10 +123,38 @@ export const ZakelijkFormulier: React.FC = () => {
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <div>
                 <label htmlFor="zakelijk-estimate" className="mb-1 block text-xs font-bold text-[#203728]">Geschat aantal messen</label>
-                <select id="zakelijk-estimate" required value={selectedEstimate} onChange={(event) => { setSelectedEstimate(event.target.value); setErrorMsg(''); }} className={`${inputClass} min-h-11 font-semibold`}>
-                  <option value="" disabled>Selecteer aantal messen</option>
-                  {ESTIMATE_OPTIONS.map((option) => <option key={option.value} value={option.value}>{option.label}</option>)}
-                </select>
+                <details ref={estimateMenuRef} className="group relative">
+                  <summary
+                    id="zakelijk-estimate"
+                    aria-haspopup="listbox"
+                    className={`${inputClass} flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 font-semibold [&::-webkit-details-marker]:hidden`}
+                  >
+                    <span>{selectedEstimate || 'Selecteer aantal messen'}</span>
+                    <ChevronDown className="h-4 w-4 shrink-0 text-[#3B7F4B] transition-transform group-open:rotate-180" aria-hidden="true" />
+                  </summary>
+                  <div role="listbox" aria-label="Geschat aantal messen" className="absolute z-20 mt-1 w-full overflow-hidden rounded-xl border border-[#b6c1b6] bg-white p-1 shadow-lg">
+                    {ESTIMATE_OPTIONS.map((option) => (
+                      <button
+                        key={option.value}
+                        type="button"
+                        role="option"
+                        aria-selected={selectedEstimate === option.value}
+                        onClick={() => {
+                          setSelectedEstimate(option.value);
+                          setErrorMsg('');
+                          if (estimateMenuRef.current) estimateMenuRef.current.open = false;
+                        }}
+                        className={`flex min-h-11 w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm transition hover:bg-[#E8EFE8] focus:bg-[#E8EFE8] focus:outline-none ${selectedEstimate === option.value ? 'font-bold text-[#3B7F4B]' : 'font-medium text-[#203728]'}`}
+                      >
+                        <span>{option.value}</span>
+                        <span className="flex shrink-0 items-center gap-1.5">
+                          {option.recommended ? <span className="rounded-full bg-[#E87B5B] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">Meest gekozen</span> : null}
+                          {selectedEstimate === option.value ? <Check className="h-4 w-4 text-[#3B7F4B]" aria-hidden="true" /> : null}
+                        </span>
+                      </button>
+                    ))}
+                  </div>
+                </details>
               </div>
               <div>
                 <label htmlFor="zakelijk-notes" className="mb-1 block text-xs font-bold text-[#203728]">Opmerking voor planning</label>
