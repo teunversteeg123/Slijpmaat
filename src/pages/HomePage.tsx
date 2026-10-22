@@ -65,7 +65,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
       {/* 1. HERO SECTION (Image 2) */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
+      <section className="site-hero site-hero-home relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
         <svg
           aria-hidden="true"
           viewBox="0 0 520 520"
@@ -77,7 +77,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           />
         </svg>
 
-        <div className="relative z-10 grid grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-12 lg:py-8 xl:gap-20">
+        <div className="site-hero-grid relative z-10 grid grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-12 lg:py-8 xl:gap-20">
           {/* Left: Knife revealing brand */}
           <div className="order-2 w-full lg:order-1">
             <img
@@ -89,18 +89,18 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Right: Copy & CTAs */}
-          <div className="order-1 px-4 sm:px-6 lg:order-2 lg:max-w-2xl lg:px-0 lg:pr-10 xl:pr-16">
-            <p className="text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
+          <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-2 lg:max-w-2xl lg:px-0 lg:pr-10 xl:pr-16">
+            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
               Voor particulieren en horeca
             </p>
-            <h1 className="mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
+            <h1 className="site-hero-title mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
               Jouw messenslijper in Utrecht
             </h1>
-            <p className="mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
+            <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
               Voor chefs, thuiskoks en horeca. Slijpmaat haalt je messen thuis of op de zaak op, slijpt ze zorgvuldig met de hand op whetstones en brengt ze vlijmscherp terug.
             </p>
 
-            <div className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <div ref={planRef} className="relative">
                 {!isPlanExpanded ? (
                   <button

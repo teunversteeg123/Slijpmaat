@@ -81,8 +81,8 @@
   }
 }
 
-/* Shared hero rhythm. Desktop remains page-specific; small screens use one
-   consistent hierarchy across all main routes. */
+/* Mobile landing-page heroes: the copy fills the opening viewport, with each
+   page's existing image or video immediately below it. Desktop stays intact. */
 @media (max-width: 639px) {
   /* Prevent iOS Safari from zooming when a visitor focuses a form field. */
   input:not([type='checkbox']):not([type='radio']),
@@ -92,22 +92,33 @@
   }
 
   .site-hero {
-    padding-top: 1.25rem;
+    padding-top: 0;
     padding-right: 0;
-    padding-bottom: 2.5rem;
+    padding-bottom: 2rem;
     padding-left: 0;
   }
 
   .site-hero-grid {
-    gap: 2rem;
+    gap: 1.5rem;
     padding-top: 0;
     padding-bottom: 0;
   }
 
   .site-hero-copy {
+    display: flex;
+    flex-direction: column;
     min-width: 0;
+    min-height: calc(100vh - 5.75rem);
+    padding-top: 3.5rem;
     padding-right: 1rem;
+    padding-bottom: 4rem;
     padding-left: 1rem;
+  }
+
+  @supports (height: 100svh) {
+    .site-hero-copy {
+      min-height: calc(100svh - 5.75rem);
+    }
   }
 
   .site-hero-eyebrow {
@@ -116,21 +127,27 @@
   }
 
   .site-hero-title {
+    margin-top: 2rem;
     max-width: 100%;
-    font-size: clamp(2.35rem, 11.5vw, 3.05rem);
-    line-height: 0.98;
+    font-size: clamp(2.5rem, 11.8vw, 3.5rem);
+    line-height: 1.04;
     overflow-wrap: anywhere;
     text-wrap: balance;
   }
 
   .site-hero-description {
-    margin-top: 1.15rem;
+    margin-top: 2rem;
     font-size: 1rem;
-    line-height: 1.65;
+    line-height: 1.7;
+  }
+
+  .site-hero-home .site-hero-description {
+    font-size: 1.125rem;
+    line-height: 1.75;
   }
 
   .site-hero-actions {
-    margin-top: 1.5rem;
+    margin-top: 2.5rem;
     width: 100%;
   }
 
@@ -143,6 +160,25 @@
     max-width: 36rem;
     margin-right: auto;
     margin-left: auto;
+  }
+}
+
+@media (max-width: 639px) and (max-height: 700px) {
+  .site-hero-copy {
+    padding-top: 2rem;
+    padding-bottom: 2.5rem;
+  }
+
+  .site-hero-title {
+    margin-top: 1.5rem;
+  }
+
+  .site-hero-description {
+    margin-top: 1.5rem;
+  }
+
+  .site-hero-actions {
+    margin-top: 2rem;
   }
 }
 
