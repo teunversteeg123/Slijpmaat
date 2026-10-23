@@ -13,7 +13,7 @@ const ESTIMATE_OPTIONS = [
   { value: '20 tot 40 messen', recommended: false },
   { value: '40+ messen', recommended: false },
 ];
-const SELF_DROPOFF_ADDRESS = 'Scheernoordsstraat 75, Utrecht';
+const SELF_DROPOFF_ADDRESS = SLIJPMAAT_INFO.fullAddress;
 
 export const ZakelijkFormulier: React.FC = () => {
   const estimateMenuRef = useRef<HTMLDetailsElement>(null);

@@ -73,7 +73,7 @@ const PL_CSS = [
   ".pl-card[data-on='0'] .pl-print{transform:scale(.92);filter:saturate(.85) brightness(.97)}",
   ".pl-card[data-on='1'] .pl-print{transform:scale(1);filter:none;box-shadow:0 6px 14px rgba(32,55,40,.1),0 28px 44px -16px rgba(32,55,40,.28)}",
   ".pl-shot{position:relative;aspect-ratio:1;overflow:hidden;border-radius:3px;background:#E8EFE8}",
-  ".pl-shot img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:cover;display:block;pointer-events:none}",
+  ".pl-shot img{position:absolute;inset:0;width:100%;height:100%;max-width:none;object-fit:contain;display:block;pointer-events:none}",
   ".pl-note-wrap{position:relative;height:42px;display:flex;align-items:center;justify-content:center;padding:0 8px}",
   ".pl-brand{display:inline-flex;align-items:center;justify-content:center;pointer-events:none}",
   ".pl-brand img{height:19px;width:auto;max-width:115px;object-fit:contain;opacity:0.95}",

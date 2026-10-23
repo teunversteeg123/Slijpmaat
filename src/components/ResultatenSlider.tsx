@@ -45,10 +45,22 @@ const DEFAULT_RESULT_SLIDES: Slide[] = [
     title: 'Global koksmes',
   },
   {
-    image: '/assets/werkwijze/03-slijpen.webp',
-    thumbnail: '/assets/werkwijze/03-slijpen-thumb.webp',
-    alt: 'Een keukenmes wordt met de hand geslepen op een watersteen',
-    title: 'Handmatig op waterstenen',
+    image: '/assets/resultaten/slider/global-mes-lang-lemmet.webp',
+    thumbnail: '/assets/resultaten/slider/global-mes-lang-lemmet-thumb.webp',
+    alt: 'Global keukenmes met lang lemmet op een houten snijplank',
+    title: 'Global mes met lang lemmet',
+  },
+  {
+    image: '/assets/resultaten/slider/herman-keukenmes.webp',
+    thumbnail: '/assets/resultaten/slider/herman-keukenmes-thumb.webp',
+    alt: 'Herman keukenmes met zwart handvat op een houten snijplank',
+    title: 'Herman keukenmes',
+  },
+  {
+    image: '/assets/resultaten/slider/global-breed-keukenmes.webp',
+    thumbnail: '/assets/resultaten/slider/global-breed-keukenmes-thumb.webp',
+    alt: 'Global keukenmes met breed lemmet op een houten snijplank',
+    title: 'Global mes met breed lemmet',
   },
   {
     image: '/assets/resultaten/06-snede-bijl.webp',
@@ -59,26 +71,8 @@ const DEFAULT_RESULT_SLIDES: Slide[] = [
   {
     image: '/assets/resultaten/07-mes-met-slijpmaat-sticker.webp',
     thumbnail: '/assets/resultaten/07-mes-met-slijpmaat-sticker-thumb.webp',
-    alt: 'Geslepen keukenmes met een Slijpmaat-sticker',
+    alt: 'Hakmes met een Slijpmaat-sticker voor een groene achtergrond',
     title: 'Klaar voor de keuken',
-  },
-  {
-    image: '/assets/werkwijze/01-beoordelen.webp',
-    thumbnail: '/assets/werkwijze/01-beoordelen-thumb.webp',
-    alt: 'Slijpmaat beoordeelt de snede van een keukenmes',
-    title: 'Inspectie en profiel',
-  },
-  {
-    image: '/assets/werkwijze/02-stenen-kiezen.webp',
-    thumbnail: '/assets/werkwijze/02-stenen-kiezen-thumb.webp',
-    alt: 'Japanse waterstenen voor het slijpen van keukenmessen',
-    title: 'De juiste watersteen',
-  },
-  {
-    image: '/assets/werkwijze/04-afwerken.webp',
-    thumbnail: '/assets/werkwijze/04-afwerken-thumb.webp',
-    alt: 'Een keukenmes wordt afgewerkt op een leren strop',
-    title: 'Afwerken op leren strop',
   },
 ];
 

@@ -20,6 +20,7 @@ import {
 import { createWhatsAppUrl } from '../utils/contact';
 import { formatEuroCents } from '../utils/format';
 import { trackAnalyticsEvent } from '../utils/analytics';
+import { SLIJPMAAT_INFO } from '../data/siteData';
 
 interface KnifeCategory {
   id: number;
@@ -62,7 +63,7 @@ const KNIFE_CATEGORIES: KnifeCategory[] = [
   }
 ];
 
-const SELF_DROPOFF_ADDRESS = 'Scheernoordsstraat 75, Utrecht';
+const SELF_DROPOFF_ADDRESS = SLIJPMAAT_INFO.fullAddress;
 
 export const ParticulierenCalculator: React.FC = () => {
   const [counts, setCounts] = useState<number[]>([0, 0, 0, 0]);
