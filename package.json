@@ -10,6 +10,7 @@
     "preview": "node scripts/serve-dist.mjs",
     "test:delivery": "node --test scripts/delivery.test.mjs",
     "test:analytics": "node --test scripts/analytics.test.mjs",
+    "test:order-flow": "node --test scripts/order-flow.test.mjs",
     "verify:seo": "node scripts/verify-seo.mjs",
     "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\"",
     "lint": "tsc --noEmit"

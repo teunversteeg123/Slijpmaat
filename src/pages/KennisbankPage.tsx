@@ -117,12 +117,6 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
             <span className="rounded-full border border-[#d9e1d7] bg-white px-4 py-1.5 text-xs font-semibold text-[#505d54]">
               Stappenplannen
             </span>
-            <span className="rounded-full border border-[#d9e1d7] bg-white px-4 py-1.5 text-xs font-semibold text-[#505d54]">
-              Onderhoud &amp; Schoonmaken
-            </span>
-            <span className="rounded-full border border-[#d9e1d7] bg-white px-4 py-1.5 text-xs font-semibold text-[#505d54]">
-              Japanse vs. Westerse messen
-            </span>
           </div>
 
           <div className="grid gap-8 lg:grid-cols-3">
@@ -191,56 +185,8 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
               </div>
             </article>
 
-            {/* ZIJ-KOLOM: BINNENKORT & DIRECT ADVIES */}
-            <div className="flex flex-col justify-between gap-6">
-              {/* TEASER 1: JAPANSE VS EUROPESE MESSEN */}
-              <div className="flex flex-col justify-between rounded-[2.25rem] border border-[#d9e1d7] bg-white p-6 sm:p-7 shadow-xs">
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-[#FCEEE8] px-3 py-1 text-xs font-bold text-[#C95E3E]">
-                      In voorbereiding
-                    </span>
-                    <UIcon name="compass-alt" className="text-lg text-[#3B7F4B]" aria-hidden="true" />
-                  </div>
-
-                  <h3 className="mt-4 font-heading text-lg font-bold text-[#203728]">
-                    Japans staal vs. Europees staal
-                  </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-[#657068] sm:text-sm">
-                    Waarom een harde VG10 of Shirogami-kern een andere slijphoek en snijtechniek vraagt dan een taai Duits koksmes.
-                  </p>
-                </div>
-
-                <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-[#A9C89E]">
-                  <UIcon name="clock-three" className="text-xs" aria-hidden="true" />
-                  <span>Publicatie binnenkort</span>
-                </div>
-              </div>
-
-              {/* TEASER 2: AANZETSTAAL VS WETSTEEN */}
-              <div className="flex flex-col justify-between rounded-[2.25rem] border border-[#d9e1d7] bg-white p-6 sm:p-7 shadow-xs">
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
-                      In voorbereiding
-                    </span>
-                    <UIcon name="book-alt" className="text-lg text-[#3B7F4B]" aria-hidden="true" />
-                  </div>
-
-                  <h3 className="mt-4 font-heading text-lg font-bold text-[#203728]">
-                    Aanzetstaal vs. Wetsteen: wat doet wat?
-                  </h3>
-                  <p className="mt-2 text-xs leading-relaxed text-[#657068] sm:text-sm">
-                    Het verschil tussen het richten van een microscopische vouw en het daadwerkelijk afnemen van staal.
-                  </p>
-                </div>
-
-                <div className="mt-4 flex items-center gap-2 text-xs font-semibold text-[#A9C89E]">
-                  <UIcon name="clock-three" className="text-xs" aria-hidden="true" />
-                  <span>Publicatie binnenkort</span>
-                </div>
-              </div>
-
+            {/* Only published content is shown; no empty article promises. */}
+            <div className="flex flex-col gap-6">
               {/* DIRECT ADVIES KAART */}
               <div className="rounded-[2.25rem] border border-[#3B7F4B]/20 bg-[#E8EFE8]/70 p-6 sm:p-7 shadow-xs">
                 <div className="flex items-center gap-2.5">

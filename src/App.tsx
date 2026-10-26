@@ -1,23 +1,24 @@
-import { useState, useEffect } from 'react';
+import { lazy, Suspense, useState, useEffect } from 'react';
 import { PageId } from './types';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { CookieConsentProvider } from './context/CookieConsentContext';
+import { PageLoadBoundary } from './components/PageLoadBoundary';
 import { trackAnalyticsEvent, trackPageView } from './utils/analytics';
 
 // Pages
-import { HomePage } from './pages/HomePage';
-import { ParticulierenPage } from './pages/ParticulierenPage';
-import { HorecaPage } from './pages/HorecaPage';
-import { WerkwijzePage } from './pages/WerkwijzePage';
-import { ServicegebiedPage } from './pages/ServicegebiedPage';
-import { KennisbankPage } from './pages/KennisbankPage';
-import { BlogHoeSlijpJeEenMesPage } from './pages/BlogHoeSlijpJeEenMesPage';
-import { OverOnsPage } from './pages/OverOnsPage';
-import { FaqPage } from './pages/FaqPage';
-import { VoorwaardenPage } from './pages/VoorwaardenPage';
-import { PrivacyPage } from './pages/PrivacyPage';
-import { NotFoundPage } from './pages/NotFoundPage';
+const HomePage = lazy(() => import('./pages/HomePage').then((module) => ({ default: module.HomePage })));
+const ParticulierenPage = lazy(() => import('./pages/ParticulierenPage').then((module) => ({ default: module.ParticulierenPage })));
+const HorecaPage = lazy(() => import('./pages/HorecaPage').then((module) => ({ default: module.HorecaPage })));
+const WerkwijzePage = lazy(() => import('./pages/WerkwijzePage').then((module) => ({ default: module.WerkwijzePage })));
+const ServicegebiedPage = lazy(() => import('./pages/ServicegebiedPage').then((module) => ({ default: module.ServicegebiedPage })));
+const KennisbankPage = lazy(() => import('./pages/KennisbankPage').then((module) => ({ default: module.KennisbankPage })));
+const BlogHoeSlijpJeEenMesPage = lazy(() => import('./pages/BlogHoeSlijpJeEenMesPage').then((module) => ({ default: module.BlogHoeSlijpJeEenMesPage })));
+const OverOnsPage = lazy(() => import('./pages/OverOnsPage').then((module) => ({ default: module.OverOnsPage })));
+const FaqPage = lazy(() => import('./pages/FaqPage').then((module) => ({ default: module.FaqPage })));
+const VoorwaardenPage = lazy(() => import('./pages/VoorwaardenPage').then((module) => ({ default: module.VoorwaardenPage })));
+const PrivacyPage = lazy(() => import('./pages/PrivacyPage').then((module) => ({ default: module.PrivacyPage })));
+const NotFoundPage = lazy(() => import('./pages/NotFoundPage').then((module) => ({ default: module.NotFoundPage })));
 import { getRouteByPage, getRouteByPath, getSocialImageAlt, getSocialImageUrl, jsonLdString, NOT_FOUND_SEO, PAGE_PATHS, SITE_URL } from './seo';
 
 const setMetaContent = (selector: string, attribute: 'name' | 'property', key: string, content: string) => {
@@ -49,6 +50,26 @@ const setStructuredData = (pathname: string) => {
     document.head.appendChild(element);
   }
   element.text = jsonLdString(pathname);
+};
+
+const scrollToSectionWhenReady = (id: string) => {
+  const requestedUrl = window.location.href;
+  const scroll = () => {
+    const target = document.getElementById(id);
+    if (!target) return false;
+    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    return true;
+  };
+  if (scroll()) return;
+  // Lazy routes can arrive after the legacy-hash timer; wait for their content.
+  const observer = new MutationObserver(() => {
+    if (window.location.href !== requestedUrl || scroll()) {
+      observer.disconnect();
+      window.clearTimeout(timeout);
+    }
+  });
+  const timeout = window.setTimeout(() => observer.disconnect(), 5000);
+  observer.observe(document.getElementById('root') ?? document.body, { childList: true, subtree: true });
 };
 
 type AppProps = {
@@ -134,14 +155,14 @@ export default function App({ initialPath }: AppProps) {
         setCurrentPage('home');
         window.history.replaceState(null, '', '/#home-contact');
         window.setTimeout(() => {
-          document.getElementById('home-contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          scrollToSectionWhenReady('home-contact');
         }, 60);
         return;
       }
       if (hash === 'home-contact') {
         setCurrentPage('home');
         window.setTimeout(() => {
-          document.getElementById('home-contact')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          scrollToSectionWhenReady('home-contact');
         }, 60);
         return;
       }
@@ -149,7 +170,7 @@ export default function App({ initialPath }: AppProps) {
         setCurrentPage('particulieren');
         window.history.replaceState(null, '', PAGE_PATHS.particulieren);
         window.setTimeout(() => {
-          document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          scrollToSectionWhenReady('calculator');
         }, 60);
         return;
       }
@@ -157,7 +178,7 @@ export default function App({ initialPath }: AppProps) {
         setCurrentPage('over-ons');
         window.history.replaceState(null, '', PAGE_PATHS['over-ons']);
         window.setTimeout(() => {
-          document.getElementById('utrechtse-quotes')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          scrollToSectionWhenReady('utrechtse-quotes');
         }, 60);
         return;
       }
@@ -218,7 +239,11 @@ export default function App({ initialPath }: AppProps) {
 
         {/* Main Page Area */}
         <main className="flex-1 focus:outline-none" tabIndex={-1}>
-          {renderCurrentPage()}
+          <PageLoadBoundary key={currentPage}>
+            <Suspense fallback={<div role="status" className="min-h-[70svh] px-6 py-20 text-center text-[#3B7F4B]">Pagina laden…</div>}>
+              {renderCurrentPage()}
+            </Suspense>
+          </PageLoadBoundary>
         </main>
 
         {/* Footer */}

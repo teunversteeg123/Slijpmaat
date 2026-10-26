@@ -137,7 +137,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={() => onNavigate ? onNavigate('home') : (window.location.hash = '#home')}
-                className="group inline-flex min-h-13 items-center justify-center gap-2 rounded-full border border-[#E87B5B]/20 bg-[#FCEEE8] px-7 py-3.5 text-sm font-bold text-[#C95E3E] transition-all duration-200 hover:bg-[#F8DFD6] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:text-base"
+                className="group order-last inline-flex min-h-11 w-fit items-center justify-center gap-2 self-center px-3 py-2 text-sm font-bold text-[#657068] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:self-auto"
               >
                 <ChevronLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-0.5" aria-hidden="true" />
                 <span>Terug</span>

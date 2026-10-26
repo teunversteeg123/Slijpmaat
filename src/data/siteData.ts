@@ -98,7 +98,7 @@ export const FAQS = [
 export const SERVICEGEBIED_FAQS = [
   {
     q: 'Waar zie ik het bezorgtarief voor mijn postcode?',
-    a: 'Gebruik de postcodechecker en het wijkoverzicht bovenaan deze pagina. Beide gebruiken dezelfde centrale tarieftabel en tonen welk ophaal- en bezorgtarief voor jouw postcode geldt.',
+    a: 'Vul je postcode in bij de postcodechecker op deze pagina. Je ziet direct welk ophaal- en bezorgtarief voor jouw postcode geldt. Vanaf €35 bestelwaarde is ophalen en bezorgen binnen het vaste Utrechtse servicegebied gratis.',
   },
   {
     q: 'Hoe geef ik mijn messen veilig mee aan de deur?',

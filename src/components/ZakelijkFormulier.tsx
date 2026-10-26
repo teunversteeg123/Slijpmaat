@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { AlertCircle, Check, ChevronDown, Mail, MapPin, MessageCircle, ReceiptText } from 'lucide-react';
 import { getDeliveryZone, isValidDutchPostcode, normalizeDutchPostcode } from '../data/delivery';
 import { SLIJPMAAT_INFO } from '../data/siteData';
-import { trackAnalyticsEvent } from '../utils/analytics';
 import { createWhatsAppUrl } from '../utils/contact';
+import { isValidContactPhone } from '../utils/validation';
+import { useOrderFunnel } from '../hooks/useOrderFunnel';
 
 type ServiceType = 'bezorging' | 'langskomen';
 
@@ -16,7 +17,11 @@ const ESTIMATE_OPTIONS = [
 const SELF_DROPOFF_ADDRESS = SLIJPMAAT_INFO.fullAddress;
 
 export const ZakelijkFormulier: React.FC = () => {
-  const estimateMenuRef = useRef<HTMLDetailsElement>(null);
+  const estimateMenuRef = useRef<HTMLDivElement>(null);
+  const estimateButtonRef = useRef<HTMLButtonElement>(null);
+  const [estimateOpen, setEstimateOpen] = useState(false);
+  const [activeEstimate, setActiveEstimate] = useState(0);
+  const funnel = useOrderFunnel('business');
   const [restaurantName, setRestaurantName] = useState('');
   const [contactPerson, setContactPerson] = useState('');
   const [phone, setPhone] = useState('');
@@ -32,8 +37,58 @@ export const ZakelijkFormulier: React.FC = () => {
   const deliveryZone = hasValidPostcode ? getDeliveryZone(postcode) : 'outside';
   const isOutsideArea = hasValidPostcode && deliveryZone === 'outside';
 
+  useEffect(() => {
+    if (!estimateOpen) return;
+    const closeOutside = (event: PointerEvent) => {
+      if (event.target instanceof Node && !estimateMenuRef.current?.contains(event.target)) setEstimateOpen(false);
+    };
+    document.addEventListener('pointerdown', closeOutside);
+    return () => document.removeEventListener('pointerdown', closeOutside);
+  }, [estimateOpen]);
+
+  const chooseEstimate = (index: number) => {
+    setSelectedEstimate(ESTIMATE_OPTIONS[index].value);
+    setActiveEstimate(index);
+    setErrorMsg('');
+    setEstimateOpen(false);
+    estimateButtonRef.current?.focus();
+    funnel.select('estimate_band');
+  };
+
+  const handleEstimateKey = (event: React.KeyboardEvent<HTMLButtonElement>) => {
+    if (event.key === 'Escape' || event.key === 'Tab') {
+      setEstimateOpen(false);
+      if (event.key === 'Escape') event.preventDefault();
+      return;
+    }
+    if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(event.key)) {
+      event.preventDefault();
+      const selectedIndex = Math.max(0, ESTIMATE_OPTIONS.findIndex((option) => option.value === selectedEstimate));
+      const currentIndex = estimateOpen ? activeEstimate : selectedIndex;
+      let nextIndex = selectedIndex;
+      if (event.key === 'Home') nextIndex = 0;
+      else if (event.key === 'End') nextIndex = ESTIMATE_OPTIONS.length - 1;
+      else if (estimateOpen) nextIndex = Math.max(0, Math.min(ESTIMATE_OPTIONS.length - 1, currentIndex + (event.key === 'ArrowDown' ? 1 : -1)));
+      setActiveEstimate(nextIndex);
+      setEstimateOpen(true);
+    } else if ((event.key === 'Enter' || event.key === ' ') && estimateOpen) {
+      event.preventDefault();
+      chooseEstimate(activeEstimate);
+    } else if (/^[124]$/.test(event.key)) {
+      event.preventDefault();
+      setActiveEstimate(event.key === '1' ? 1 : event.key === '2' ? 2 : 3);
+      setEstimateOpen(true);
+    } else if (event.key === '0') {
+      event.preventDefault();
+      setActiveEstimate(0);
+      setEstimateOpen(true);
+    }
+  };
+
   const focusWithError = (message: string, id: string) => {
     setErrorMsg(message);
+    const field = { 'zakelijk-restaurant': 'company', 'zakelijk-contact': 'contact', 'zakelijk-phone': 'phone', 'zakelijk-estimate': 'estimate', 'zakelijk-postcode': 'postcode', 'zakelijk-address': 'address' } as const;
+    funnel.invalid(field[id as keyof typeof field]);
     document.getElementById(id)?.focus();
     return null;
   };
@@ -41,7 +96,7 @@ export const ZakelijkFormulier: React.FC = () => {
   const buildMessageLines = (): string[] | null => {
     if (!restaurantName.trim()) return focusWithError('Vul de naam van jullie restaurant of zaak in.', 'zakelijk-restaurant');
     if (!contactPerson.trim()) return focusWithError('Vul de naam van de contactpersoon in.', 'zakelijk-contact');
-    if (!phone.trim()) return focusWithError('Vul een telefoonnummer in waarop we jullie kunnen bereiken.', 'zakelijk-phone');
+    if (!isValidContactPhone(phone)) return focusWithError('Vul een geldig telefoonnummer in, bijvoorbeeld 06 12 34 56 78 of +31 6 12 34 56 78.', 'zakelijk-phone');
     if (!selectedEstimate) return focusWithError('Selecteer een schatting van het aantal messen.', 'zakelijk-estimate');
     if (serviceType === 'bezorging' && !hasValidPostcode) return focusWithError('Vul een geldige postcode in, bijvoorbeeld 3513 AB.', 'zakelijk-postcode');
     if (serviceType === 'bezorging' && !address.trim()) return focusWithError('Vul de straat en het huisnummer van jullie zaak in.', 'zakelijk-address');
@@ -69,13 +124,7 @@ export const ZakelijkFormulier: React.FC = () => {
     const messageLines = buildMessageLines();
     if (!messageLines) return;
     setErrorMsg('');
-    trackAnalyticsEvent('generate_lead', {
-      lead_type: 'business_request',
-      contact_method: contactMethod,
-      service_type: serviceType,
-      delivery_zone: serviceType === 'langskomen' ? 'self_dropoff' : deliveryZone,
-      estimate_band: selectedEstimate,
-    });
+    funnel.open(contactMethod);
 
     if (contactMethod === 'whatsapp') {
       window.open(createWhatsAppUrl(messageLines.join('\n')), '_blank', 'noopener,noreferrer');
@@ -89,7 +138,7 @@ export const ZakelijkFormulier: React.FC = () => {
   const inputClass = 'w-full rounded-xl border border-[#b6c1b6] bg-white px-3.5 py-2.5 text-sm text-[#203728] placeholder-[#9ca3af] focus:border-[#3B7F4B] focus:outline-none focus:ring-1 focus:ring-[#3B7F4B]';
 
   return (
-    <div className="w-full">
+    <div className="w-full" onFocusCapture={funnel.start} onClickCapture={funnel.start}>
       <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-cols-12 lg:gap-8">
         <div className="rounded-[1.75rem] border border-[#d9e1d7] bg-white p-4 shadow-xs sm:p-7 lg:col-span-7">
           <section aria-labelledby="business-contact-heading">
@@ -122,39 +171,46 @@ export const ZakelijkFormulier: React.FC = () => {
             </div>
             <div className="mt-4 grid gap-3 sm:grid-cols-2">
               <div>
-                <label htmlFor="zakelijk-estimate" className="mb-1 block text-xs font-bold text-[#203728]">Geschat aantal messen</label>
-                <details ref={estimateMenuRef} className="group relative">
-                  <summary
+                <label id="zakelijk-estimate-label" htmlFor="zakelijk-estimate" className="mb-1 block text-xs font-bold text-[#203728]">Geschat aantal messen</label>
+                <div ref={estimateMenuRef} className="relative" onBlur={(event) => { if (!event.currentTarget.contains(event.relatedTarget)) setEstimateOpen(false); }}>
+                  <button
+                    ref={estimateButtonRef}
+                    type="button"
+                    role="combobox"
                     id="zakelijk-estimate"
+                    aria-labelledby="zakelijk-estimate-label zakelijk-estimate-value"
                     aria-haspopup="listbox"
-                    className={`${inputClass} flex min-h-11 cursor-pointer list-none items-center justify-between gap-3 font-semibold [&::-webkit-details-marker]:hidden`}
+                    aria-expanded={estimateOpen}
+                    aria-controls={estimateOpen ? 'zakelijk-estimate-options' : undefined}
+                    aria-activedescendant={estimateOpen ? `zakelijk-option-${activeEstimate}` : undefined}
+                    onKeyDown={handleEstimateKey}
+                    onClick={() => { setActiveEstimate(Math.max(0, ESTIMATE_OPTIONS.findIndex((option) => option.value === selectedEstimate))); setEstimateOpen(!estimateOpen); }}
+                    className={`${inputClass} flex min-h-11 cursor-pointer items-center justify-between gap-3 text-left font-semibold`}
                   >
-                    <span>{selectedEstimate || 'Selecteer aantal messen'}</span>
-                    <ChevronDown className="h-4 w-4 shrink-0 text-[#3B7F4B] transition-transform group-open:rotate-180" aria-hidden="true" />
-                  </summary>
-                  <div role="listbox" aria-label="Geschat aantal messen" className="absolute z-20 mt-1 w-full overflow-hidden rounded-xl border border-[#b6c1b6] bg-white p-1 shadow-lg">
-                    {ESTIMATE_OPTIONS.map((option) => (
-                      <button
+                    <span id="zakelijk-estimate-value">{selectedEstimate || 'Selecteer aantal messen'}</span>
+                    <ChevronDown className={`h-4 w-4 shrink-0 text-[#3B7F4B] transition-transform ${estimateOpen ? 'rotate-180' : ''}`} aria-hidden="true" />
+                  </button>
+                  {estimateOpen ? <div id="zakelijk-estimate-options" role="listbox" aria-labelledby="zakelijk-estimate-label" className="absolute z-20 mt-1 w-full overflow-hidden rounded-xl border border-[#b6c1b6] bg-white p-1 shadow-lg">
+                    {ESTIMATE_OPTIONS.map((option, index) => (
+                      <div
                         key={option.value}
-                        type="button"
+                        id={`zakelijk-option-${index}`}
                         role="option"
                         aria-selected={selectedEstimate === option.value}
-                        onClick={() => {
-                          setSelectedEstimate(option.value);
-                          setErrorMsg('');
-                          if (estimateMenuRef.current) estimateMenuRef.current.open = false;
-                        }}
-                        className={`flex min-h-11 w-full items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm transition hover:bg-[#E8EFE8] focus:bg-[#E8EFE8] focus:outline-none ${selectedEstimate === option.value ? 'font-bold text-[#3B7F4B]' : 'font-medium text-[#203728]'}`}
+                        onPointerMove={() => setActiveEstimate(index)}
+                        onMouseDown={(event) => event.preventDefault()}
+                        onClick={() => chooseEstimate(index)}
+                        className={`flex min-h-11 w-full cursor-pointer items-center justify-between gap-2 rounded-lg px-3 py-2 text-left text-sm transition ${activeEstimate === index ? 'bg-[#E8EFE8]' : ''} ${selectedEstimate === option.value ? 'font-bold text-[#3B7F4B]' : 'font-medium text-[#203728]'}`}
                       >
                         <span>{option.value}</span>
                         <span className="flex shrink-0 items-center gap-1.5">
                           {option.recommended ? <span className="rounded-full bg-[#E87B5B] px-2 py-0.5 text-[9px] font-bold uppercase tracking-wide text-white">Meest gekozen</span> : null}
                           {selectedEstimate === option.value ? <Check className="h-4 w-4 text-[#3B7F4B]" aria-hidden="true" /> : null}
                         </span>
-                      </button>
+                      </div>
                     ))}
-                  </div>
-                </details>
+                  </div> : null}
+                </div>
               </div>
               <div>
                 <label htmlFor="zakelijk-notes" className="mb-1 block text-xs font-bold text-[#203728]">Opmerking voor planning</label>
@@ -169,11 +225,11 @@ export const ZakelijkFormulier: React.FC = () => {
               <h3 id="business-delivery-heading" className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">Ophalen of langskomen?</h3>
             </div>
             <div className="mt-3 grid grid-cols-2 gap-2.5">
-              <button type="button" aria-pressed={serviceType === 'bezorging'} onClick={() => { setServiceType('bezorging'); setErrorMsg(''); }} className={`min-h-[68px] rounded-2xl border-2 p-3 text-left ${serviceType === 'bezorging' ? 'border-[#3B7F4B] bg-[#E8EFE8]/60' : 'border-[#d9e1d7] bg-white'}`}>
+              <button type="button" aria-pressed={serviceType === 'bezorging'} onClick={() => { setServiceType('bezorging'); setErrorMsg(''); funnel.select('service'); }} className={`min-h-[68px] rounded-2xl border-2 p-3 text-left ${serviceType === 'bezorging' ? 'border-[#3B7F4B] bg-[#E8EFE8]/60' : 'border-[#d9e1d7] bg-white'}`}>
                 <span className="flex items-start justify-between gap-1 font-heading text-sm font-bold text-[#203728]">Ophalen &amp; bezorgen{serviceType === 'bezorging' ? <Check className="h-4 w-4 shrink-0 text-[#3B7F4B]" aria-hidden="true" /> : null}</span>
                 <span className="mt-1 block text-[10px] leading-snug text-[#657068] sm:text-xs">Bezorgservice Utrecht</span>
               </button>
-              <button type="button" aria-pressed={serviceType === 'langskomen'} onClick={() => { setServiceType('langskomen'); setErrorMsg(''); }} className={`min-h-[68px] rounded-2xl border-2 p-3 text-left ${serviceType === 'langskomen' ? 'border-[#3B7F4B] bg-[#E8EFE8]/60' : 'border-[#d9e1d7] bg-white'}`}>
+              <button type="button" aria-pressed={serviceType === 'langskomen'} onClick={() => { setServiceType('langskomen'); setErrorMsg(''); funnel.select('service'); }} className={`min-h-[68px] rounded-2xl border-2 p-3 text-left ${serviceType === 'langskomen' ? 'border-[#3B7F4B] bg-[#E8EFE8]/60' : 'border-[#d9e1d7] bg-white'}`}>
                 <span className="flex items-start justify-between gap-1 font-heading text-sm font-bold text-[#203728]">Zelf langskomen{serviceType === 'langskomen' ? <Check className="h-4 w-4 shrink-0 text-[#3B7F4B]" aria-hidden="true" /> : null}</span>
                 <span className="mt-1 block text-[10px] leading-snug text-[#657068] sm:text-xs">Op afspraak · gratis</span>
               </button>

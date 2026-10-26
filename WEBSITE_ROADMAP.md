@@ -1,7 +1,22 @@
 # Slijpmaat website - audit, prioriteiten en voortgang
 
-Peildatum: 12 oktober 2026
-Veilige basis: GitHub-commit `dc810b7` (`main`)
+Peildatum: 26 oktober 2026
+Releasebasis: GitHub-commit `433b13d` (`main`). Deze versie bevat de auditverbeteringen en homepage-SEO van 26 oktober; de exacte publicatiecommit staat in de Gitgeschiedenis.
+
+## Actuele status
+
+- Productie draait op React/Vite via GitHub en Cloudflare Pages, op `slijpmaat.nl`.
+- Elf actieve pagina's, negen sitemap-URL's. De vier dienstpagina's en de losse contactpagina zijn verwijderd met permanente redirects.
+- Prerendering, eigen metadata, beveiligingsheaders, cookievoorkeuren en Advanced Consent Mode zijn al uitgevoerd.
+- Afgerond na de audit: directe particuliere bestel-CTA, consistente studentenkorting/aanvraagbon, reparatiemelding, contrastverbetering, zakelijke telefoonvalidatie en toetsenborddropdown, actuele servicecopy, verborgen ongepubliceerde blogkaarten, routechunks en video laden/pauzeren op zichtbaarheid.
+- Nieuwe privacyarme bestelfunnel: zie `analytics-order-flow.md`. Een concept openen is geen ontvangen aanvraag of verkoop.
+- Controles: lint, zeven bezorgtests, twee Analytics-tests, twee orderflowtests, productiebuild, SEO (elf routes/negen sitemap-URL's) en browsercontrole op 320, 390 en 1280 px.
+- Teun heeft op 26 oktober opdracht gegeven deze versie via GitHub en Cloudflare Pages te publiceren. GA4-rapporten moeten op de nieuwe eventnamen aansluiten; echte gebruikersprestaties blijven apart te meten. De kleinere bundel is geen gemeten conversie- of snelheidsscore.
+- Open inhoudelijke beslissingen blijven de bevestiging van fiscale status en een ingangsdatum voor de voorwaarden. Deze zijn niet verzonnen of automatisch gewijzigd.
+
+## Historische audit van 12 oktober 2026
+
+Onderstaande inventarisatie en vinklijsten zijn historie, niet de actuele lijst met ontbrekende functies. Bovenstaande status en `docs/CURRENT_STATUS.md` in de centrale kennisbank zijn leidend.
 
 ## Besloten werkvolgorde
 

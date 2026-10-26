@@ -6,6 +6,7 @@ import { UIcon, UIconBadge } from '../components/ui/UIcon';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { TrustBar } from '../components/TrustBar';
 import { createWhatsAppUrl } from '../utils/contact';
+import { HeroVideo } from '../components/HeroVideo';
 
 interface ParticulierenPageProps {
   onNavigate?: (page: PageId) => void;
@@ -114,11 +115,11 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
             <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <button
                 type="button"
-                onClick={() => onNavigate ? onNavigate('home') : (window.location.hash = '#home')}
+                onClick={() => document.getElementById('calculator')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
                 className="group inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
               >
-                <UIcon name="angle-small-left" className="text-lg transition-transform duration-200 group-hover:-translate-x-0.5" aria-hidden="true" />
-                <span>Terug</span>
+                <span>Bereken prijs &amp; bestel</span>
+                <UIcon name="arrow-small-down" className="text-lg" aria-hidden="true" />
               </button>
 
               <a
@@ -128,6 +129,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
                 <span>Ik heb een vraag</span>
                 <UIcon name="arrow-small-down" className="text-lg transition-transform duration-200 group-hover:translate-y-0.5" aria-hidden="true" />
               </a>
+              <button type="button" onClick={() => onNavigate ? onNavigate('home') : (window.location.href = '/')} className="min-h-11 w-fit self-center px-3 py-2 text-sm font-semibold text-[#657068] underline-offset-4 hover:underline sm:self-auto">Terug naar home</button>
             </div>
           </div>
 
@@ -139,15 +141,9 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
               className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
             <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-[#203728] shadow-lg lg:aspect-square">
-              <video
-                className="h-full w-full object-cover"
+              <HeroVideo
                 src="/assets/tomaat-website-video.mp4"
-                autoPlay
-                muted
-                loop
-                playsInline
-                preload="auto"
-                aria-label="Een scherp keukenmes snijdt soepel door een tomaat"
+                ariaLabel="Een scherp keukenmes snijdt soepel door een tomaat"
               />
             </div>
           </div>

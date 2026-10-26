@@ -62,8 +62,31 @@
 /* 2. On #A9C89E (Soft Sage): Must use deep dark green, never white! */
 .text-on-sage { color: #162E1C; }
 
-/* 3. On #E87B5B (Coral): Use crisp white */
+/* White text needs the darker action variant; decorative coral stays unchanged. */
 .text-on-coral { color: #FFFFFF; }
+
+:root { --slijpmaat-action: #B94F32; --slijpmaat-action-hover: #963D26; }
+
+/* Preserve brand coral on large/decorative surfaces. Darken small white-text
+   actions/badges only (5.1:1), without recoloring contact sections/dividers. */
+:is(button, a, summary, span)[class~="bg-[#E87B5B]"][class~="text-white"] {
+  background-color: var(--slijpmaat-action);
+}
+:is(button, a, summary)[class~="bg-[#E87B5B]"][class~="text-white"]:hover {
+  background-color: var(--slijpmaat-action-hover);
+}
+[class~="text-[#C95E3E]"] { color: #A84429; }
+[class~="text-[#9ca3af]"] { color: #657068; }
+[class~="placeholder-[#9ca3af]"]::placeholder { color: #657068; opacity: 1; }
+
+/* Contact copy remains legible on the original light coral panels. */
+section[class~="bg-[#E87B5B]"][class~="text-white"] :is(h2, p) {
+  color: #203728;
+}
+[class~="bg-[#E87B5B]"][class~="grid-cols-3"] span,
+div[class~="bg-[#E87B5B]"][class~="text-white"] :is(h3, p) {
+  color: #203728;
+}
 
 /* 4. On Cream/White: Use #244A30 or deep charcoal */
 .text-on-cream { color: #3B7F4B; }

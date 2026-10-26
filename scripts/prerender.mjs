@@ -47,7 +47,7 @@ try {
   const { indexablePaths, prerenderPaths, renderRoute } = await import(pathToFileURL(serverBundle).href);
 
   for (const pathname of prerenderPaths) {
-    const { appHtml, metadata, jsonLd } = renderRoute(pathname);
+    const { appHtml, metadata, jsonLd } = await renderRoute(pathname);
     const html = template
       .replace(/<!-- ROUTE_SEO_START -->[\s\S]*?<!-- ROUTE_SEO_END -->/, renderSeoHead(metadata, jsonLd))
       .replace('<div id="root"></div>', `<div id="root">${appHtml}</div>`);

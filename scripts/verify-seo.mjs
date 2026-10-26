@@ -71,8 +71,8 @@ try {
     const rootText = decodeHtml(rootHtml);
     if (!rootText.includes('KvK: 42198662')) throw new Error(`${pathname}: KvK-nummer ontbreekt`);
     if (rootHtml.includes('href="/diensten/')) throw new Error(`${pathname}: link naar verwijderde dienstpagina`);
-    if (pathname === '/' && description !== 'Mes laten slijpen in Utrecht? Slijpmaat maakt messen van thuiskoks en chefs met de hand weer scherp. We halen ze op en bezorgen ze meestal binnen 48 uur terug.') {
-      throw new Error('Homepage gebruikt niet de bevestigde metabeschrijving');
+    if (pathname === '/' && (title !== 'Messen slijpen Utrecht | Slijpmaat.nl' || description !== 'Messen laten slijpen in Utrecht? Slijpmaat slijpt met de hand voor particulieren en horeca. Wij halen je messen op en bezorgen ze vaak binnen 2 dagen terug.')) {
+      throw new Error('Homepage gebruikt niet de bevestigde SEO-titel en metabeschrijving');
     }
     const jsonLd = match(html, /<script id="route-jsonld" type="application\/ld\+json">(.*?)<\/script>/s, 'JSON-LD', pathname);
     const schema = JSON.parse(jsonLd);

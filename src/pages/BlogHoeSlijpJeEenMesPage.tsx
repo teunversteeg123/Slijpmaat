@@ -223,7 +223,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
             compact
             showRating
             items={[
-              { icon: <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Binnen 24-48 uur retour' },
+              { icon: <UIcon name="clock-three" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Doorgaans binnen 24-48 uur retour' },
               { icon: <UIcon name="marker" className="text-lg text-[#3B7F4B] shrink-0" aria-hidden="true" />, text: 'Gratis ophalen & bezorgen in Utrecht vanaf €35' },
             ]}
           />
@@ -886,7 +886,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                     Geen zin om zelf te klooien met waterstenen?
                   </h3>
                   <p className="mt-1 text-xs sm:text-sm text-[#3B7F4B]">
-                    Wij halen je messen in Utrecht aan huis op, slijpen ze met de hand op waterstenen en brengen ze binnen 24-48 uur vlijmscherp terug.
+                    Wij halen je messen in Utrecht aan huis op, slijpen ze met de hand op waterstenen en brengen ze doorgaans binnen 24-48 uur vlijmscherp terug.
                   </p>
                 </div>
                 <button

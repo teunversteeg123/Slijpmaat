@@ -19,7 +19,7 @@ import {
 } from '../data/delivery';
 import { createWhatsAppUrl } from '../utils/contact';
 import { formatEuroCents } from '../utils/format';
-import { trackAnalyticsEvent } from '../utils/analytics';
+import { useOrderFunnel } from '../hooks/useOrderFunnel';
 import { SLIJPMAAT_INFO } from '../data/siteData';
 
 interface KnifeCategory {
@@ -66,6 +66,7 @@ const KNIFE_CATEGORIES: KnifeCategory[] = [
 const SELF_DROPOFF_ADDRESS = SLIJPMAAT_INFO.fullAddress;
 
 export const ParticulierenCalculator: React.FC = () => {
+  const funnel = useOrderFunnel('consumer');
   const [counts, setCounts] = useState<number[]>([0, 0, 0, 0]);
   const [isStudent, setIsStudent] = useState<boolean>(false);
   const [selfDropoff, setSelfDropoff] = useState<boolean>(false);
@@ -103,7 +104,7 @@ export const ParticulierenCalculator: React.FC = () => {
 
   // Delivery fee calculation
   const deliveryZone = hasValidPostcode ? getDeliveryZone(postcode) : 'outside';
-  const isOutsideArea = hasValidPostcode && deliveryZone === 'outside';
+  const isOutsideArea = !selfDropoff && hasValidPostcode && deliveryZone === 'outside';
   const deliveryFeeCents = selfDropoff
     ? 0
     : hasValidPostcode
@@ -113,6 +114,7 @@ export const ParticulierenCalculator: React.FC = () => {
 
   // Format currency
   const updateCount = (idx: number, delta: number) => {
+    funnel.select('knife_quantity');
     setCounts((prev) => {
       const next = [...prev];
       next[idx] = Math.max(0, Math.min(99, next[idx] + delta));
@@ -125,18 +127,22 @@ export const ParticulierenCalculator: React.FC = () => {
     if (totalKnives < 1) {
       e.preventDefault();
       setErrorMsg('Kies minimaal 1 mes om te laten slijpen.');
+      funnel.invalid('knives');
+      document.getElementById('calculator-knives-heading')?.focus();
       return;
     }
     if (!selfDropoff) {
       if (!hasValidPostcode) {
         e.preventDefault();
         setErrorMsg('Vul een geldige postcode in, bijvoorbeeld 3513 AB.');
+        funnel.invalid('postcode');
         document.getElementById('calc-postcode-input')?.focus();
         return;
       }
       if (!address.trim() || address.trim().length < 3) {
         e.preventDefault();
         setErrorMsg('Vul je straat en huisnummer in.');
+        funnel.invalid('address');
         document.getElementById('calc-address-input')?.focus();
         return;
       }
@@ -144,6 +150,7 @@ export const ParticulierenCalculator: React.FC = () => {
     if (!name.trim()) {
       e.preventDefault();
       setErrorMsg('Vul je voor- en achternaam in.');
+      funnel.invalid('name');
       document.getElementById('calc-name-input')?.focus();
       return;
     }
@@ -186,14 +193,15 @@ export const ParticulierenCalculator: React.FC = () => {
       if (counts[idx] > 0) {
         const itemPrice = idx === 3
           ? 'Op aanvraag'
-          : formatEuroCents(counts[idx] * (isStudent ? 500 : cat.basePrice));
+          : formatEuroCents(counts[idx] * cat.basePrice);
         lines.push(`${counts[idx]} × ${cat.name} (${cat.sizeDesc}): ${itemPrice}`);
       }
     });
 
+    lines.push('', `${hasExtraLarge && standardSharpeningCents > 0 ? 'Bekend slijpwerk' : 'Messen slijpen'}: ${hasExtraLarge && standardSharpeningCents === 0 ? 'Op aanvraag' : formatEuroCents(standardSharpeningCents)}`);
+    if (studentDiscountCents > 0) lines.push(`StudentenMaat voordeel: − ${formatEuroCents(studentDiscountCents)}`);
+    if (hasExtraLarge) lines.push('Extra groot / ander slijpwerk: prijs op aanvraag, niet inbegrepen in bekend slijpwerk.');
     lines.push(
-      '',
-      `Messen slijpen: ${hasExtraLarge ? 'Op aanvraag' : formatEuroCents(finalSharpeningCents)}`,
       `${selfDropoff ? 'Zelf brengen & ophalen' : 'Ophalen & bezorgen'}: ${deliveryText}`,
       `Totaal geschat: ${totalText}`,
       '(Eventuele reparaties of chips niet inbegrepen)'
@@ -212,30 +220,19 @@ export const ParticulierenCalculator: React.FC = () => {
       selfDropoff ? 'Wanneer kan ik mijn messen brengen?' : 'Wanneer kan mijn Maat langskomen?'
     );
 
-    trackAnalyticsEvent('generate_lead', {
-      lead_type: 'consumer_order',
-      contact_method: 'whatsapp',
-      knife_count: totalKnives,
-      estimated_value: hasExtraLarge || deliveryFeeCents === null || isOutsideArea
-        ? finalSharpeningCents / 100
-        : (finalSharpeningCents + deliveryFeeCents) / 100,
-      service_type: selfDropoff ? 'self_dropoff' : 'pickup_delivery',
-      delivery_zone: selfDropoff ? 'self_dropoff' : deliveryZone,
-      student_rate: isStudent,
-      has_extra_large: hasExtraLarge,
-    });
+    funnel.open('whatsapp');
     window.open(createWhatsAppUrl(lines.join('\n')), '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <div className="w-full">
+    <div className="w-full" onFocusCapture={funnel.start} onClickCapture={funnel.start}>
       <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-cols-12 lg:gap-8">
         <div className="rounded-[1.75rem] border border-[#d9e1d7] bg-white p-4 shadow-xs sm:p-7 lg:col-span-7">
           <section aria-labelledby="calculator-knives-heading">
             <div className="flex items-center justify-between gap-3">
               <div className="flex items-center gap-2.5">
                 <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-xs font-bold text-[#3B7F4B]">1</span>
-                <h3 id="calculator-knives-heading" className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">Kies je messen</h3>
+                <h3 id="calculator-knives-heading" tabIndex={-1} className="font-heading text-xl font-bold text-[#3B7F4B] sm:text-2xl">Kies je messen</h3>
               </div>
               <button
                 type="button"
@@ -263,10 +260,10 @@ export const ParticulierenCalculator: React.FC = () => {
                 return (
                   <div key={cat.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2.5 py-3 sm:gap-4 sm:py-4">
                     <div className="min-w-0">
-                      <div className="flex flex-nowrap items-center gap-1.5">
-                        <span className="font-heading text-sm font-bold text-[#203728] sm:text-base">{cat.name}</span>
+                      <div className="flex flex-wrap items-center gap-x-1.5 gap-y-1">
+                        <span className="whitespace-nowrap font-heading text-[13px] font-bold text-[#203728] sm:text-base">{cat.name}</span>
                         {cat.badge && (
-                          <span className="whitespace-nowrap rounded-full bg-[#F9E4DE] px-1.5 py-0.5 text-[8px] font-bold uppercase tracking-normal text-[#C95E3E]">{cat.badge}</span>
+                          <span className="whitespace-nowrap rounded-full bg-[#F9E4DE] px-1.5 py-0.5 text-[8px] font-bold tracking-normal text-[#C95E3E]">{cat.badge}</span>
                         )}
                       </div>
                       <p className="mt-0.5 text-[11px] text-[#657068] sm:text-xs">{cat.sizeDesc}</p>
@@ -336,7 +333,7 @@ export const ParticulierenCalculator: React.FC = () => {
 
             <div className="mt-3 grid gap-2 sm:grid-cols-2">
               <label className="flex min-h-12 cursor-pointer items-center gap-3 rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] px-3.5 py-2.5 hover:border-[#3B7F4B]/40">
-                <input type="checkbox" checked={isStudent} onChange={(e) => setIsStudent(e.target.checked)} className="h-5 w-5 shrink-0 rounded accent-[#3B7F4B]" />
+                <input type="checkbox" checked={isStudent} onChange={(e) => { setIsStudent(e.target.checked); funnel.select('student_rate'); }} className="h-5 w-5 shrink-0 rounded accent-[#3B7F4B]" />
                 <span className="font-heading text-sm font-bold text-[#203728]">Ik ben een StudentenMaat</span>
               </label>
 
@@ -365,11 +362,11 @@ export const ParticulierenCalculator: React.FC = () => {
             </div>
 
             <div className="mt-3 grid grid-cols-2 gap-2.5">
-              <button type="button" onClick={() => { setSelfDropoff(false); setErrorMsg(''); }} className={`min-h-[68px] rounded-2xl border-2 p-3 text-left ${!selfDropoff ? 'border-[#3B7F4B] bg-[#E8EFE8]/60' : 'border-[#d9e1d7] bg-white'}`}>
+              <button type="button" aria-pressed={!selfDropoff} onClick={() => { setSelfDropoff(false); setErrorMsg(''); funnel.select('service'); }} className={`min-h-[68px] rounded-2xl border-2 p-3 text-left ${!selfDropoff ? 'border-[#3B7F4B] bg-[#E8EFE8]/60' : 'border-[#d9e1d7] bg-white'}`}>
                 <span className="flex items-start justify-between gap-1 font-heading text-sm font-bold text-[#203728]">Ophalen &amp; bezorgen{!selfDropoff && <Check className="h-4 w-4 shrink-0 text-[#3B7F4B]" />}</span>
                 <span className="mt-1 block text-[10px] leading-snug text-[#657068] sm:text-xs">Gratis vanaf €35</span>
               </button>
-              <button type="button" onClick={() => { setSelfDropoff(true); setErrorMsg(''); }} className={`min-h-[68px] rounded-2xl border-2 p-3 text-left ${selfDropoff ? 'border-[#3B7F4B] bg-[#E8EFE8]/60' : 'border-[#d9e1d7] bg-white'}`}>
+              <button type="button" aria-pressed={selfDropoff} onClick={() => { setSelfDropoff(true); setErrorMsg(''); funnel.select('service'); }} className={`min-h-[68px] rounded-2xl border-2 p-3 text-left ${selfDropoff ? 'border-[#3B7F4B] bg-[#E8EFE8]/60' : 'border-[#d9e1d7] bg-white'}`}>
                 <span className="flex items-start justify-between gap-1 font-heading text-sm font-bold text-[#203728]">Zelf langskomen{selfDropoff && <Check className="h-4 w-4 shrink-0 text-[#3B7F4B]" />}</span>
                 <span className="mt-1 block text-[10px] leading-snug text-[#657068] sm:text-xs">Op afspraak · gratis</span>
               </button>
@@ -428,7 +425,7 @@ export const ParticulierenCalculator: React.FC = () => {
                 <p className="text-xs italic text-[#9ca3af]">Kies minimaal één mes om je prijs te zien.</p>
               ) : KNIFE_CATEGORIES.map((cat, idx) => {
                 if (counts[idx] === 0) return null;
-                const itemPrice = idx === 3 ? 'Op aanvraag' : formatEuroCents(counts[idx] * (isStudent ? 500 : cat.basePrice));
+                const itemPrice = idx === 3 ? 'Op aanvraag' : formatEuroCents(counts[idx] * cat.basePrice);
                 return (
                   <div key={cat.id} className="flex items-center justify-between gap-3 text-xs sm:text-sm">
                     <span className="font-medium text-[#203728]">{counts[idx]} × {cat.name}</span>
@@ -439,7 +436,7 @@ export const ParticulierenCalculator: React.FC = () => {
             </div>
 
             <div className="space-y-2.5 py-4 text-xs sm:text-sm">
-              <div className="flex items-center justify-between gap-3"><span className="text-[#657068]">Messen slijpen</span><span className="font-heading font-bold text-[#203728]">{formatEuroCents(standardSharpeningCents)}</span></div>
+              <div className="flex items-center justify-between gap-3"><span className="text-[#657068]">{hasExtraLarge && standardSharpeningCents > 0 ? 'Bekend slijpwerk' : 'Messen slijpen'}</span><span className="font-heading font-bold text-[#203728]">{hasExtraLarge && standardSharpeningCents === 0 ? 'Op aanvraag' : formatEuroCents(standardSharpeningCents)}</span></div>
               {isStudent && studentDiscountCents > 0 && (
                 <div className="flex items-center justify-between gap-3 text-[#C95E3E]"><span>StudentenMaat voordeel</span><span className="font-heading font-bold">− {formatEuroCents(studentDiscountCents)}</span></div>
               )}
@@ -447,8 +444,10 @@ export const ParticulierenCalculator: React.FC = () => {
             </div>
 
             <div className="rounded-2xl border border-[#d9e1d7] bg-white p-4">
-              <span className="block text-xs font-semibold text-[#657068]">{hasExtraLarge || isOutsideArea ? 'Prijs op aanvraag' : deliveryFeeCents === null ? 'Totaal excl. bezorging' : 'Totaal incl. bezorging'}</span>
+              <span className="block text-xs font-semibold text-[#657068]">{hasExtraLarge || isOutsideArea ? 'Prijs op aanvraag' : selfDropoff ? 'Totaal slijpbeurt' : deliveryFeeCents === null ? 'Totaal excl. bezorging' : 'Totaal incl. bezorging'}</span>
               <strong className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">{hasExtraLarge || isOutsideArea ? 'Op aanvraag' : formatEuroCents(finalSharpeningCents + (deliveryFeeCents || 0))}</strong>
+              {hasExtraLarge ? <p className="mt-2 text-xs leading-relaxed text-[#657068]">Afwijkend slijpwerk wordt apart geprijsd. Bekende regelprijzen blijven hierboven zichtbaar.</p> : null}
+              <p className="mt-2 text-xs leading-relaxed text-[#657068]">Eventuele reparaties of chips niet inbegrepen. We bespreken de kosten vooraf.</p>
             </div>
 
             {errorMsg && (
