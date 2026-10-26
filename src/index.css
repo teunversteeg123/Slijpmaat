@@ -79,11 +79,13 @@
 [class~="text-[#9ca3af]"] { color: #657068; }
 [class~="placeholder-[#9ca3af]"]::placeholder { color: #657068; opacity: 1; }
 
-/* Contact copy remains legible on the original light coral panels. */
-section[class~="bg-[#E87B5B]"][class~="text-white"] :is(h2, p) {
-  color: #203728;
+/* All closing contact sections retain their original white copy. This is scoped
+   to contact headings/paragraphs, never to green labels inside white buttons. */
+section[id$="-contact"] :is(h2, h3, p) {
+  color: #FFFFFF;
 }
-[class~="bg-[#E87B5B]"][class~="grid-cols-3"] span,
+
+/* Separate vision-card styling; never apply this to page contact sections. */
 div[class~="bg-[#E87B5B]"][class~="text-white"] :is(h3, p) {
   color: #203728;
 }

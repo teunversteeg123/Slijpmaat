@@ -41,6 +41,19 @@ try {
     for (const route of routes) {
       await visit(page, route);
       assert.equal(await page.locator('h1').count(), 1, route);
+      // Guard every contact banner, not just the homepage. Canvas normalizes
+      // both CSS rgb() and Tailwind's oklab()/transparent-white notation.
+      const contactColors = await page.locator('section[id$="-contact"] :is(h2, h3, p)').evaluateAll((nodes) => nodes.map((node) => {
+        const canvas = document.createElement('canvas');
+        canvas.width = canvas.height = 1;
+        const context = canvas.getContext('2d');
+        context.fillStyle = getComputedStyle(node).color;
+        context.fillRect(0, 0, 1, 1);
+        return Array.from(context.getImageData(0, 0, 1, 1).data).slice(0, 3);
+      }));
+      assert.ok(contactColors.every((rgb) => rgb.every((channel) => channel >= 250)), `${route} contact copy must stay white`);
+      const contactButtonColors = await page.locator('section[id$="-contact"] a').evaluateAll((nodes) => nodes.map((node) => getComputedStyle(node).color));
+      assert.ok(contactButtonColors.every((color) => color === 'rgb(59, 127, 75)'), `${route} contact button labels must stay green`);
       assert.ok(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth), `${route} overflow at ${width}`);
       assert.equal(await page.locator('img').evaluateAll((images) => images.filter((image) => image.complete && image.naturalWidth === 0).length), 0, `${route} broken image`);
       checks++;
