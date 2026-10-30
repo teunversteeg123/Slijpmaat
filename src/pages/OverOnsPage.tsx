@@ -131,7 +131,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               Twee Utrechtse vrienden met passie voor scherpte.
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Wij zijn Teun en Mike, de oprichters van Slijpmaat. Twee maten uit Utrecht die vonden dat messenslijpen weer ambachtelijk, betrouwbaar en zonder gedoe aan huis geregeld moet worden - voor buren, wijkgenoten, thuiskoks én landelijke horecagelegenheden. We halen je messen met de fiets of scooter op in Utrecht en brengen ze vlijmscherp weer thuis.
+              Wij zijn Teun en Mike, twee maten uit Utrecht. Met Slijpmaat doen we waar we plezier in hebben: messen weer scherp maken en mensen daar blij mee maken. Elk mes gaat bij ons met de hand over de slijpstenen. Woon je in Utrecht? Dan komen we bij je langs met de fiets of scooter. Ook buiten de stad weten thuiskoks en horecazaken ons te vinden en zijn ze op afspraak welkom.
             </p>
 
             <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
