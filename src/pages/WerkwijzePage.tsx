@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { Pause } from 'lucide-react';
 import { PageId } from '../types';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { UIcon, UIconBadge } from '../components/ui/UIcon';
@@ -70,40 +71,45 @@ const SlijpenVideo: React.FC = () => {
   return (
     <div className="relative">
       <div className="relative aspect-square w-full overflow-hidden bg-white md:aspect-[4/3] md:rounded-[2.5rem] md:border md:border-[#d9e1d7] md:shadow-lg lg:aspect-square">
-      <video
-        ref={videoRef}
-        muted
-        loop
-        playsInline
-        preload="metadata"
-        poster="/assets/werkwijze/slijpen-video-poster.webp"
-        aria-label="Een keukenmes wordt met de hand geslepen op een Japanse watersteen"
-        className="h-full w-full object-cover"
-        onTimeUpdate={hasStarted ? undefined : (event) => {
-          if (event.currentTarget.currentTime > 0) setHasStarted(true);
-        }}
-      >
-        <source src="/assets/werkwijze/slijpen-loop-mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
-        <source src="/assets/werkwijze/slijpen-loop.mp4" type="video/mp4" />
-      </video>
-      {!hasStarted && (
-        <img
-          src="/assets/werkwijze/slijpen-video-poster.webp"
-          alt=""
-          aria-hidden="true"
-          width={1440}
-          height={1440}
-          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
-        />
-      )}
+        <video
+          ref={videoRef}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+          poster="/assets/werkwijze/slijpen-video-poster.webp"
+          aria-label="Een keukenmes wordt met de hand geslepen op een Japanse watersteen"
+          className="h-full w-full object-cover"
+          onTimeUpdate={hasStarted ? undefined : (event) => {
+            if (event.currentTarget.currentTime > 0) setHasStarted(true);
+          }}
+        >
+          <source src="/assets/werkwijze/slijpen-loop-mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
+          <source src="/assets/werkwijze/slijpen-loop.mp4" type="video/mp4" />
+        </video>
+        {!hasStarted && (
+          <img
+            src="/assets/werkwijze/slijpen-video-poster.webp"
+            alt=""
+            aria-hidden="true"
+            width={1440}
+            height={1440}
+            className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+          />
+        )}
+        <button
+          type="button"
+          aria-label={wantsPlayback ? 'Video pauzeren' : 'Video afspelen'}
+          onClick={() => setWantsPlayback((previous) => !previous)}
+          className="absolute inset-0 z-20 flex h-full w-full cursor-pointer items-center justify-center focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-white"
+        >
+          {!wantsPlayback && (
+            <span className="flex h-16 w-16 items-center justify-center rounded-full bg-[#203728]/85 text-white">
+              <Pause className="h-8 w-8" aria-hidden="true" />
+            </span>
+          )}
+        </button>
       </div>
-      <button
-        type="button"
-        onClick={() => setWantsPlayback((previous) => !previous)}
-        className="mx-auto flex min-h-11 items-center px-4 text-sm font-bold text-[#3B7F4B] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3B7F4B] md:absolute md:right-4 md:top-4 md:z-10 md:rounded-full md:bg-[#203728]/90 md:text-white md:no-underline md:focus-visible:outline-white"
-      >
-        {wantsPlayback ? 'Video pauzeren' : 'Video afspelen'}
-      </button>
     </div>
   );
 };
@@ -284,7 +290,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
             />
             <div className="relative z-10">
               <SlijpenVideo />
-              <div className="absolute bottom-4 left-4 z-10 hidden items-center gap-2 rounded-full border border-white/10 bg-[#203728]/85 px-4 py-2 text-xs font-bold text-white shadow-md backdrop-blur-xs md:flex">
+              <div className="pointer-events-none absolute bottom-4 left-4 z-10 hidden items-center gap-2 rounded-full border border-white/10 bg-[#203728]/85 px-4 py-2 text-xs font-bold text-white shadow-md backdrop-blur-xs md:flex">
                 <span className="flex h-2.5 w-2.5 rounded-full bg-[#4CAF50]" />
                 <span>100% handmatig · Japanse waterstenen</span>
               </div>
