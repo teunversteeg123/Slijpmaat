@@ -48,8 +48,8 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     },
     {
       step: '03',
-      title: 'Met de hand geslepen op waterstenen',
-      desc: 'Wij werken vanuit huis in Utrecht. Hier beoordelen we de snede zorgvuldig, slijpen we nat op Japanse waterstenen en stroppen we af op leer.',
+      title: 'Met de hand geslepen op Japanse slijpstenen',
+      desc: 'Wij werken vanuit huis in Utrecht. Hier beoordelen we de snede zorgvuldig, slijpen we op Japanse slijpstenen en stroppen we af op leer.',
       icon: 'knife-kitchen',
     },
     {
@@ -106,7 +106,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
               Je messen weer scherp. Zonder gedoe.
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Wij halen je keukenmessen thuis op in Utrecht, slijpen ze zorgvuldig met de hand op Japanse waterstenen en brengen ze weer vlijmscherp terug.
+              Wij halen je keukenmessen thuis op in Utrecht, slijpen ze zorgvuldig met de hand op Japanse slijpstenen en brengen ze weer vlijmscherp terug.
             </p>
 
             <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">

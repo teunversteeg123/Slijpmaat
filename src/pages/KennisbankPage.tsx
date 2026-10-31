@@ -29,7 +29,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
               Blogs over messen slijpen en onderhoud
             </h1>
             <p className="site-hero-description mt-5 max-w-xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Praktische gidsen, stappenplannen en vakkennis over keukenmessen. Leer hoe je je messen in topconditie houdt en wanneer handmatig watersteenslijpen het verschil maakt.
+              Praktische gidsen, stappenplannen en vakkennis over keukenmessen. Leer hoe je je messen in topconditie houdt en wanneer handmatig slijpen op Japanse slijpstenen het verschil maakt.
             </p>
 
             <div className="site-hero-actions mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
@@ -127,7 +127,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                 <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[2rem] bg-[#203728] sm:aspect-[2/1]">
                   <img
                     src="/assets/werkwijze/03-slijpen.webp"
-                    alt="Handmatig messen slijpen op Japanse waterstenen bij Slijpmaat"
+                    alt="Handmatig messen slijpen op Japanse slijpstenen bij Slijpmaat"
                     className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-[#203728]/85 via-black/20 to-transparent" />
@@ -212,7 +212,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
       <section className="relative w-full overflow-hidden bg-white py-12 sm:py-16">
         <div className="mb-6 px-4 text-center sm:mb-8 sm:px-6">
           <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
-            Vers van de slijpsteen
+            Vers van de Japanse slijpsteen
           </h2>
         </div>
 

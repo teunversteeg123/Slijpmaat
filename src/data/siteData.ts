@@ -34,7 +34,7 @@ export const FAQS = [
   },
   {
     q: 'Hoe gaat mijn Maat te werk met het slijpen van mijn messen?',
-    a: 'We controleren eerst de staat van je mes. Daarna slijpen we met professionele Shapton Pro-slijpstenen in meerdere stappen. Vervolgens werken we het mes af op leer voor een strak en scherp resultaat.'
+    a: 'We controleren eerst de staat van je mes. Daarna slijpen we met professionele Japanse slijpstenen van Shapton Pro in meerdere stappen. Vervolgens werken we het mes af op leer voor een strak en scherp resultaat.'
   },
   {
     q: 'Hoe kom ik in contact met mijn Maat?',
@@ -87,7 +87,7 @@ export const FAQS = [
   },
   {
     q: 'Waarom slijpt mijn Maat keukenmessen met de hand?',
-    a: 'We slijpen jouw keukenmessen met de hand op professionele Shapton Pro-slijpstenen. Zo houden we controle over de slijphoek en halen we zo min mogelijk materiaal van het mes weg. Daarna verwijderen we de braam en werken we de snede af op leer voor een strak en scherp resultaat.'
+    a: 'We slijpen jouw keukenmessen met de hand op professionele Japanse slijpstenen van Shapton Pro. Zo houden we controle over de slijphoek en halen we zo min mogelijk materiaal van het mes weg. Daarna verwijderen we de braam en werken we de snede af op leer voor een strak en scherp resultaat.'
   },
   {
     q: 'Krijg ik als student korting op mijn slijpbeurt?',

@@ -40,7 +40,7 @@ const serviceSteps = [
   {
     number: '03',
     title: 'Met de hand geslepen',
-    text: 'We slijpen elk mes zorgvuldig op Japanse waterstenen, stemmen de juiste steen af en stroppen af op leer.'
+    text: 'We slijpen elk mes zorgvuldig op Japanse slijpstenen, stemmen de juiste Japanse slijpsteen af en stroppen af op leer.'
   },
   {
     number: '04',

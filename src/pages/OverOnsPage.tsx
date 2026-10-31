@@ -23,7 +23,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
     {
       num: '2',
       title: 'Hoe slijp je nou goed een mes?',
-      text: 'We verdiepten ons in de traditionele Japanse slijpfilosofie: de staat van ieder mes beoordelen, een passende steen kiezen en de snede daarna zorgvuldig afwerken op leer. Handmatig werken geeft ons controle over slijphoek, profiel en materiaalafname.',
+      text: 'We verdiepten ons in de traditionele Japanse slijpfilosofie: de staat van ieder mes beoordelen, een passende Japanse slijpsteen kiezen en de snede daarna zorgvuldig afwerken op leer. Handmatig werken geeft ons controle over slijphoek, profiel en materiaalafname.',
     },
     {
       num: '3',
@@ -36,7 +36,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
   const philosophyItems = [
     {
       title: 'Met de hand en met aandacht',
-      desc: 'Geen snelle slijpbeurt op een droge machine. Wij slijpen ieder mes met de hand op Japanse waterstenen. Zo houden we controle over de slijphoek en behandelen we ieder mes met de aandacht die het verdient.',
+      desc: 'Geen snelle slijpbeurt op een droge machine. Wij slijpen ieder mes met de hand op Japanse slijpstenen. Zo houden we controle over de slijphoek en behandelen we ieder mes met de aandacht die het verdient.',
       icon: 'hand-holding-heart',
     },
     {
@@ -90,8 +90,8 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
       answer: 'Elk mes dat bij Slijpmaat binnenkomt wordt persoonlijk door Teun of Mike geslepen. We werken niet met wisselende stagiairs of externe partijen. Zo krijgt elk lemmet dezelfde zorgvuldige, persoonlijke behandeling.',
     },
     {
-      question: 'Welke stenen gebruiken jullie?',
-      answer: 'We werken met professionele Japanse waterstenen. Per mes kijken we naar de staalsoort, het profiel en de conditie van de snede. Daarna werken we het mes af op leer met polijstpasta en controleren we het resultaat.',
+      question: 'Welke Japanse slijpstenen gebruiken jullie?',
+      answer: 'We werken met professionele Japanse slijpstenen. Per mes kijken we naar de staalsoort, het profiel en de conditie van de snede. Daarna werken we het mes af op leer met polijstpasta en controleren we het resultaat.',
     },
     {
       question: 'Waar in Utrecht zijn jullie gevestigd?',
@@ -126,7 +126,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               Twee Utrechtse vrienden met passie voor scherpte.
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Wij zijn Teun en Mike, twee maten uit Utrecht. Met Slijpmaat doen we waar we plezier in hebben: messen weer scherp maken en mensen daar blij mee maken. Elk mes gaat bij ons met de hand over de slijpstenen. Woon je in Utrecht? Dan komen we bij je langs met de fiets of scooter. Ook buiten de stad weten thuiskoks en horecazaken ons te vinden en zijn ze op afspraak welkom.
+              Wij zijn Teun en Mike, twee maten uit Utrecht. Met Slijpmaat doen we waar we plezier in hebben: messen weer scherp maken en mensen daar blij mee maken. Elk mes gaat bij ons met de hand over de Japanse slijpstenen. Woon je in Utrecht? Dan komen we bij je langs met de fiets of scooter. Ook buiten de stad weten thuiskoks en horecazaken ons te vinden en zijn ze op afspraak welkom.
             </p>
 
             <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
@@ -405,7 +405,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           <div className="max-w-md">
             <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Vragen over Slijpmaat?</h2>
             <p className="mt-4 text-base leading-7 text-[#657068]">
-              Wil je meer weten over hoe we vanuit huis werken, onze stenen of de werkwijze in Utrecht? Hier vind je antwoord.
+              Wil je meer weten over hoe we vanuit huis werken, onze Japanse slijpstenen of de werkwijze in Utrecht? Hier vind je antwoord.
             </p>
             <a
               href={whatsappUrl}

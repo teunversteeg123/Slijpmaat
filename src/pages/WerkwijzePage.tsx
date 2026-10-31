@@ -78,7 +78,7 @@ const SlijpenVideo: React.FC = () => {
           playsInline
           preload="metadata"
           poster="/assets/werkwijze/slijpen-video-poster.webp"
-          aria-label="Een keukenmes wordt met de hand geslepen op een Japanse watersteen"
+          aria-label="Een keukenmes wordt met de hand geslepen op een Japanse slijpsteen"
           className="h-full w-full object-cover"
           onTimeUpdate={hasStarted ? undefined : (event) => {
             if (event.currentTarget.currentTime > 0) setHasStarted(true);
@@ -130,21 +130,21 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
     },
     {
       num: '02',
-      title: 'Wij kiezen de juiste steen',
-      desc: 'Elk mes en elke staalsoort vraagt om een eigen aanpak. Wij kiezen nauwkeurig de juiste watersteen voor jouw lemmet. We werken zeer beheerst: we halen alleen weg wat strikt nodig is voor een vlijmscherp resultaat, voor een maximale levensduur van je mes.',
-      badge: 'De juiste watersteen',
+      title: 'Wij kiezen de juiste Japanse slijpsteen',
+      desc: 'Elk mes en elke staalsoort vraagt om een eigen aanpak. Wij kiezen nauwkeurig de juiste Japanse slijpsteen voor jouw lemmet. We werken zeer beheerst: we halen alleen weg wat strikt nodig is voor een vlijmscherp resultaat, voor een maximale levensduur van je mes.',
+      badge: 'De juiste Japanse slijpsteen',
       highlight: 'Minimale staalafname',
       image: '/assets/werkwijze/02-stenen-kiezen.webp',
-      alt: 'Japanse whetstones waterstenen die Slijpmaat gebruikt',
+      alt: 'Japanse slijpstenen die Slijpmaat gebruikt',
     },
     {
       num: '03',
-      title: 'Volledig met de hand op waterstenen',
-      desc: 'We slijpen met de hand op natte waterstenen. Daardoor houden we controle over de slijphoek, de materiaalafname en de afwerking van ieder mes.',
+      title: 'Volledig met de hand op Japanse slijpstenen',
+      desc: 'We slijpen met de hand op Japanse slijpstenen. Daardoor houden we controle over de slijphoek, de materiaalafname en de afwerking van ieder mes.',
       badge: '100% Handwerk',
       highlight: 'Controle over hoek en afname',
       image: '/assets/werkwijze/03-slijpen.webp',
-      alt: 'Een keukenmes wordt met de hand geslepen op een Japanse watersteen',
+      alt: 'Een keukenmes wordt met de hand geslepen op een Japanse slijpsteen',
     },
     {
       num: '04',
@@ -167,15 +167,15 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
     },
     {
       number: 'STAP 02',
-      title: 'De juiste watersteen kiezen',
+      title: 'De juiste Japanse slijpsteen kiezen',
       image: '/assets/werkwijze/02-stenen-kiezen.webp',
-      alt: 'Japanse waterstenen die Slijpmaat gebruikt',
+      alt: 'Japanse slijpstenen die Slijpmaat gebruikt',
     },
     {
       number: 'STAP 03',
       title: 'Handmatig slijpen met water',
       image: '/assets/werkwijze/03-slijpen.webp',
-      alt: 'Een keukenmes wordt met de hand geslepen op een Japanse watersteen',
+      alt: 'Een keukenmes wordt met de hand geslepen op een Japanse slijpsteen',
     },
     {
       number: 'STAP 04',
@@ -198,7 +198,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       title: 'Japanse Keukenmessen',
       examples: 'Santoku, Gyuto, Nakiri, VG10, AUS-10, Shirogami & Aogami koolstofstaal',
       angle: 'Slijphoek ca. 12° - 15°',
-      desc: 'Veel Japanse messen combineren relatief hard staal met een dunne geometrie. We beoordelen de bestaande snijvouw en kiezen een passende steen en slijphoek voor het specifieke mes.',
+      desc: 'Veel Japanse messen combineren relatief hard staal met een dunne geometrie. We beoordelen de bestaande snijvouw en kiezen een passende Japanse slijpsteen en slijphoek voor het specifieke mes.',
       iconName: 'knife',
     },
     {
@@ -214,7 +214,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
   const faqs = [
     {
       q: 'Gaat er veel staal van mijn mes af tijdens het slijpen?',
-      a: 'Handmatig slijpen op waterstenen geeft ons veel controle over de slijphoek, druk en materiaalafname. We verwijderen wat nodig is om de snede opnieuw op te bouwen en proberen daarbij het profiel en de levensduur van het mes zo goed mogelijk te behouden.',
+      a: 'Handmatig slijpen op Japanse slijpstenen geeft ons veel controle over de slijphoek, druk en materiaalafname. We verwijderen wat nodig is om de snede opnieuw op te bouwen en proberen daarbij het profiel en de levensduur van het mes zo goed mogelijk te behouden.',
     },
     {
       q: 'Slijpen jullie ook Japanse messen?',
@@ -226,7 +226,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
     },
     {
       q: 'Waarom gebruiken jullie géén elektrische machines?',
-      a: 'Bij machinaal slijpen hangen warmteontwikkeling en materiaalafname af van de machine, snelheid, korrel en uitvoering. Wij kiezen voor handmatig slijpen op waterstenen omdat we daarmee de hoek, druk en materiaalafname per mes nauwkeurig kunnen sturen.',
+      a: 'Bij machinaal slijpen hangen warmteontwikkeling en materiaalafname af van de machine, snelheid, korrel en uitvoering. Wij kiezen voor handmatig slijpen op Japanse slijpstenen omdat we daarmee de hoek, druk en materiaalafname per mes nauwkeurig kunnen sturen.',
     },
     {
       q: 'Wat doen jullie met de originele hoek van mijn mes?',
@@ -257,7 +257,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
               Ieder mes met de hand geslepen.
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Bij Slijpmaat kiezen we bewust voor handmatig slijpen. We behandelen ieder mes met de hand op Japanse waterstenen en werken de snede zorgvuldig af op leer. Zo zorgen we voor minimale materiaalafname, behoud van het originele lemmetprofiel en een lange levensduur van je mes.
+              Bij Slijpmaat kiezen we bewust voor handmatig slijpen. We behandelen ieder mes met de hand op Japanse slijpstenen en werken de snede zorgvuldig af op leer. Zo zorgen we voor minimale materiaalafname, behoud van het originele lemmetprofiel en een lange levensduur van je mes.
             </p>
 
             <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
@@ -292,7 +292,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
               <SlijpenVideo />
               <div className="pointer-events-none absolute bottom-4 left-4 z-10 hidden items-center gap-2 rounded-full border border-white/10 bg-[#203728]/85 px-4 py-2 text-xs font-bold text-white shadow-md backdrop-blur-xs md:flex">
                 <span className="flex h-2.5 w-2.5 rounded-full bg-[#4CAF50]" />
-                <span>100% handmatig · Japanse waterstenen</span>
+                <span>100% handmatig · Japanse slijpstenen</span>
               </div>
             </div>
           </div>

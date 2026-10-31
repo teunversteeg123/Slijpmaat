@@ -69,7 +69,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
     {
       step: '3',
       title: 'Handmatig geslepen',
-      desc: 'Handmatig geslepen op Japanse Shapton-waterstenen, met controle over slijphoek, profiel en materiaalafname.',
+      desc: 'Handmatig geslepen op Japanse slijpstenen van Shapton, met controle over slijphoek, profiel en materiaalafname.',
       icon: ShieldCheck,
     },
     {
@@ -91,8 +91,8 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
       answer: 'Zakelijk slijpen is maatwerk. Vooraf stemmen we aantallen, planning, prijs en betaalwijze duidelijk af. Eventuele factuurgegevens bevestigen we voordat we starten.',
     },
     {
-      question: 'Waarom slijpen jullie op waterstenen i.p.v. een snelle bandslijper?',
-      answer: 'Bij machinaal slijpen hangen warmteontwikkeling en materiaalafname sterk af van de machine, korrel, snelheid en vakkennis. Wij kiezen voor handmatig slijpen op waterstenen omdat we daarmee de slijphoek, het profiel en de materiaalafname per mes nauwkeurig kunnen sturen.',
+      question: 'Waarom slijpen jullie op Japanse slijpstenen i.p.v. een snelle bandslijper?',
+      answer: 'Bij machinaal slijpen hangen warmteontwikkeling en materiaalafname sterk af van de machine, korrel, snelheid en vakkennis. Wij kiezen voor handmatig slijpen op Japanse slijpstenen omdat we daarmee de slijphoek, het profiel en de materiaalafname per mes nauwkeurig kunnen sturen.',
     },
     {
       question: 'Slijpen jullie zowel restaurant-messen als persoonlijke messen van koks?',
@@ -127,7 +127,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
               Professioneel messen slijpen voor horeca
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Wij slijpen jullie messen met de hand op Japanse waterstenen. Zakelijke klanten uit heel Nederland kunnen hun messen op afspraak in Utrecht brengen en ophalen. Binnen Utrecht is ook lokale haal- en brengservice mogelijk.
+              Wij slijpen jullie messen met de hand op Japanse slijpstenen. Zakelijke klanten uit heel Nederland kunnen hun messen op afspraak in Utrecht brengen en ophalen. Binnen Utrecht is ook lokale haal- en brengservice mogelijk.
             </p>
 
             <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
@@ -332,7 +332,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
           <div className="max-w-md">
             <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Vragen over zakelijk slijpen?</h2>
             <p className="mt-4 text-base leading-7 text-[#657068]">
-              Hier vind je direct antwoord op de meest gestelde vragen van chefs en ondernemers over planning, stenen, prijzen en betaling.
+              Hier vind je direct antwoord op de meest gestelde vragen van chefs en ondernemers over planning, Japanse slijpstenen, prijzen en betaling.
             </p>
             <a
               href={whatsappUrl}

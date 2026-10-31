@@ -32,7 +32,7 @@ const sections: LegalSection[] = [
   ] },
   { heading: 'Artikel 5 - Uitvoering van de dienst', paragraphs: [
     '5.1 Slijpmaat voert de werkzaamheden uit naar beste inzicht, zorgvuldigheid en vakmanschap, passend bij professioneel handmatig slijpwerk.',
-    '5.2 Slijpmaat slijpt messen handmatig op slijpstenen en gebruikt geen industriële slijpmachine voor het standaard slijpproces. Het doel is een scherp en bruikbaar slijpresultaat met zo min mogelijk onnodige materiaalafname.',
+    '5.2 Slijpmaat slijpt messen handmatig op Japanse slijpstenen en gebruikt geen industriële slijpmachine voor het standaard slijpproces. Het doel is een scherp en bruikbaar slijpresultaat met zo min mogelijk onnodige materiaalafname.',
     '5.3 Slijpmaat beoordeelt per mes welke behandeling passend is. Daarbij wordt onder meer gekeken naar de staat van het lemmet, de snede, eventuele beschadigingen, roestvorming, eerdere slijpbeurten en het beoogde gebruik.',
     '5.4 Slijpmaat kan niet garanderen dat ieder mes volledig in nieuwstaat wordt hersteld. Het eindresultaat is mede afhankelijk van de oorspronkelijke kwaliteit, constructie, staalsoort, slijtage, beschadigingen en eerdere behandeling van het mes.',
     '5.5 Slijpmaat mag een behandeling beperken, aanpassen of stoppen indien tijdens de werkzaamheden blijkt dat verder slijpen niet verantwoord is of tot disproportioneel materiaalverlies zou leiden. In dat geval informeert Slijpmaat de Klant zo spoedig mogelijk.',

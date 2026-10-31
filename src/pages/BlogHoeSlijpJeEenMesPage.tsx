@@ -37,14 +37,14 @@ const SECTIONS: NavSection[] = [
     title: 'Wat heb je nodig om zelf te slijpen?',
     shortTitle: 'Benodigdheden',
     category: 'Voorbereiding',
-    keywords: ['watersteen', 'korrel 1000', 'wetsteen', 'slijpsteen', 'theedoek', 'materiaal', 'spullen'],
+    keywords: ['Japanse slijpsteen', 'korrel 1000', 'theedoek', 'materiaal', 'spullen'],
   },
   {
-    id: 'wetsteen-weken',
-    title: 'Moet een wetsteen altijd weken in water?',
+    id: 'japanse-slijpsteen-weken',
+    title: 'Moet een Japanse slijpsteen altijd weken in water?',
     shortTitle: 'Feit of fabel: weken',
     category: 'Kennis',
-    keywords: ['weken', 'splash and go', 'water', 'feit fabel', 'poreus', 'holle steen'],
+    keywords: ['weken', 'splash and go', 'water', 'feit fabel', 'poreus', 'holle Japanse slijpsteen'],
   },
   {
     id: 'slijphoek',
@@ -383,7 +383,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               </h2>
 
               <p className="mt-4 text-base sm:text-lg font-medium leading-relaxed text-[#244A30]">
-                Een keukenmes slijp je door met een slijpsteen gecontroleerd een klein beetje staal van beide kanten van de snede te verwijderen. Houd de bestaande slijphoek zo constant mogelijk, werk van de hiel naar de punt en slijp door tot je over de hele snede een kleine braam voelt. Daarna verfijn je de snede met lichte halen en ontbraam je het lemmet.
+                Een keukenmes slijp je door met een Japanse slijpsteen gecontroleerd een klein beetje staal van beide kanten van de snede te verwijderen. Houd de bestaande slijphoek zo constant mogelijk, werk van de hiel naar de punt en slijp door tot je over de hele snede een kleine braam voelt. Daarna verfijn je de snede met lichte halen en ontbraam je het lemmet.
               </p>
 
               <p className="mt-4 text-base leading-relaxed text-[#244A30]">
@@ -393,7 +393,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               <figure className="mt-7 overflow-hidden rounded-3xl border border-[#d9e1d7] bg-[#FAFAF8] shadow-sm">
                 <img
                   src="/assets/blog/mes-slijpen-detail-pexels-airam-dato-on.jpg"
-                  alt="Een kok slijpt een keukenmes met de hand op een wetsteen"
+                  alt="Een kok slijpt een keukenmes met de hand op een Japanse slijpsteen"
                   className="h-64 w-full object-cover object-[center_72%] sm:h-96"
                   loading="eager"
                 />
@@ -484,11 +484,11 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                 </h3>
                 <ul className="space-y-3">
                   {[
-                    { title: 'Vlakke watersteen korrel 1000', desc: 'Het ideale startpunt voor normaal periodiek onderhoud en het herstellen van de basischerpte.' },
+                    { title: 'Vlakke Japanse slijpsteen, korrel 1000', desc: 'Het ideale startpunt voor normaal periodiek onderhoud en het herstellen van de basischerpte.' },
                     { title: 'Water', desc: 'Koelt de snede continu en voert losgekomen metaal- en steendeeltjes direct af.' },
-                    { title: 'Steenhouder of vochtige theedoek', desc: 'Cruciaal voor de veiligheid: de steen mag tijdens het slijpen absoluut niet wegglijden.' },
+                    { title: 'Houder voor de Japanse slijpsteen of vochtige theedoek', desc: 'Cruciaal voor de veiligheid: de Japanse slijpsteen mag tijdens het slijpen absoluut niet wegglijden.' },
                     { title: 'Schone zachte droogdoek', desc: 'Om het lemmet tussendoor droog te vegen en de controle op braamvorming te vergemakkelijken.' },
-                    { title: 'Optioneel: fijnere steen (korrel 3000-5000)', desc: 'Voor koks die de snede spiegelglad willen polijsten voor een zijdezachte snede.' },
+                    { title: 'Optioneel: fijnere Japanse slijpsteen (korrel 3000-5000)', desc: 'Voor koks die de snede spiegelglad willen polijsten voor een zijdezachte snede.' },
                     { title: 'Optioneel: watervaste stift (marker)', desc: 'Onmisbaar om visueel te controleren of je de juiste hoek raakt over het hele lemmet.' },
                   ].map((item, i) => (
                     <li key={i} className="flex items-start gap-3">
@@ -509,14 +509,14 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                 <strong className="block font-bold text-[#C95E3E] mb-1">
                   Let op bij zichtbare happen of chips in de snede:
                 </strong>
-                Heeft het mes deuken, chips of een afgebroken punt? Dan red je het met alleen een 1000-steen niet en heb je een grove steen (korrel 240-400) nodig. Omdat grof slijpen snel veel staal weghaalt, vereist dit extra ervaring om de geometrie niet te verpesten.
+                Heeft het mes deuken, chips of een afgebroken punt? Dan red je het met alleen een Japanse slijpsteen met korrel 1000 niet en heb je een grove Japanse slijpsteen (korrel 240-400) nodig. Omdat grof slijpen snel veel staal weghaalt, vereist dit extra ervaring om de geometrie niet te verpesten.
               </div>
             </section>
 
-            {/* SECTIE 4: MOET EEN WETSTEEN ALTIJD WEKEN */}
-            <section id="wetsteen-weken" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
+            {/* SECTIE 4: MOET EEN JAPANSE SLIJPSTEEN ALTIJD WEKEN */}
+            <section id="japanse-slijpsteen-weken" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
               <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
-                Moet een wetsteen altijd weken in het water?
+                Moet een Japanse slijpsteen altijd weken in het water?
               </h2>
 
               <p className="mt-4 text-base leading-relaxed text-[#244A30]">
@@ -524,36 +524,36 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               </p>
 
               <p className="mt-3 text-base leading-relaxed text-[#244A30]">
-                Sommige traditionele waterstenen (zoals poreuze klei- of magnesiumstenen) moeten inderdaad 5 tot 15 minuten in een bak water liggen totdat er geen luchtbelletjes meer opstijgen. Maar veel moderne professionele slijpstenen zijn zogeheten <em>splash-and-go</em> stenen (zoals de Shapton Pro en Glass stenen die wij in onze Utrechtse werkplaats gebruiken). Deze hebben alleen een scheutje water op het oppervlak nodig en zijn direct startklaar.
+                Sommige traditionele Japanse slijpstenen, zoals poreuze klei- of magnesiumgebonden varianten, moeten inderdaad 5 tot 15 minuten in een bak water liggen totdat er geen luchtbelletjes meer opstijgen. Maar veel moderne professionele Japanse slijpstenen zijn van het <em>splash-and-go</em>-type, zoals de Japanse slijpstenen uit de Shapton Pro- en Glass-serie die wij in onze Utrechtse werkplaats gebruiken. Deze Japanse slijpstenen hebben alleen een scheutje water op het oppervlak nodig en zijn direct startklaar.
               </p>
 
               <p className="mt-3 text-base leading-relaxed text-[#244A30]">
-                Te lang weken kan bepaalde splash-and-go stenen juist zacht, poreus of bros maken. Raadpleeg dus altijd de fabrikantinstructies van jouw slijpsteen.
+                Te lang weken kan bepaalde Japanse slijpstenen van het splash-and-go-type juist zacht, poreus of bros maken. Raadpleeg dus altijd de fabrikantinstructies van jouw Japanse slijpsteen.
               </p>
 
               <figure className="mt-7 overflow-hidden rounded-3xl border border-[#d9e1d7] bg-[#FAFAF8] shadow-sm">
                 <img
                   src="/assets/blog/mes-slijpen-water-wetsteen-pexels-airam-dato-on.jpg"
-                  alt="Water wordt op een wetsteen gegoten tijdens het handmatig slijpen van een keukenmes"
+                  alt="Water wordt op een Japanse slijpsteen gegoten tijdens het handmatig slijpen van een keukenmes"
                   className="h-56 w-full object-cover object-center sm:h-80"
                   loading="lazy"
                 />
                 <figcaption className="px-4 py-3 text-xs leading-relaxed text-[#244A30]/75 sm:px-5 sm:text-sm">
-                  Water voert slijpsel af en houdt het contact met de wetsteen gelijkmatig. Controleer altijd of jouw steen geweekt moet worden of direct met water gebruikt kan worden.{' '}
+                  Water voert slijpsel af en houdt het contact met de Japanse slijpsteen gelijkmatig. Controleer altijd of jouw Japanse slijpsteen geweekt moet worden of direct met water gebruikt kan worden.{' '}
                   <a href="https://www.pexels.com/photo/person-holding-stainless-steel-knife-9424942/" target="_blank" rel="noopener noreferrer" className="underline decoration-[#3B7F4B]/35 underline-offset-2 hover:text-[#3B7F4B]">
                     Foto: Airam Dato-on via Pexels
                   </a>
                 </figcaption>
               </figure>
 
-              {/* BULLET WIDGET: VLAKHOUDEN VAN DE STEEN */}
+              {/* BULLET WIDGET: VLAKHOUDEN VAN DE JAPANSE SLIJPSTEEN */}
               <div className="mt-5 rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-5">
                 <div className="flex items-center gap-2 font-bold text-[#244A30]">
                   <UIcon name="interrogation" className="text-sm text-[#3B7F4B]" aria-hidden="true" />
-                  <span>Cruciaal voor succes: houd je slijpsteen altijd vlak</span>
+                  <span>Cruciaal voor succes: houd je Japanse slijpsteen altijd vlak</span>
                 </div>
                 <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#244A30]/85">
-                  Tijdens het slijpen slijt een steen in het midden sneller dan aan de randen. Op een holle steen is het mathematisch onmogelijk om een constante slijphoek over de volledige lengte van het lemmet aan te houden. Vlak de steen daarom regelmatig af met een speciale diamantafvlakplaat.
+                  Tijdens het slijpen slijt een Japanse slijpsteen in het midden sneller dan aan de randen. Op een holle Japanse slijpsteen is het mathematisch onmogelijk om een constante slijphoek over de volledige lengte van het lemmet aan te houden. Vlak de Japanse slijpsteen daarom regelmatig af met een speciale diamantafvlakplaat.
                 </p>
               </div>
             </section>
@@ -603,7 +603,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                 </div>
 
                 <p className="mt-3 text-xs sm:text-sm leading-relaxed text-[#244A30]">
-                  Kleur het smalle geslepen facetje direct boven de snede in met een zwarte watervaste stift. Maak vervolgens één rustige haal over de steen en bekijk waar de inkt is verdwenen:
+                  Kleur het smalle geslepen facetje direct boven de snede in met een zwarte watervaste stift. Maak vervolgens één rustige haal over de Japanse slijpsteen en bekijk waar de inkt is verdwenen:
                 </p>
 
                 <div className="mt-3 grid gap-2.5 sm:grid-cols-3">
@@ -637,23 +637,23 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                 {[
                   {
                     step: '01',
-                    title: 'Slijpsteen klaarzetten en stabiliseren',
+                    title: 'Japanse slijpsteen klaarzetten en stabiliseren',
                     prose:
-                      'Bevochtig of bewater de steen volgens de voorschriften van de fabrikant. Plaats de steen op een stroeve houder of op een klamme theedoek op je werkblad. Zorg dat de steen op een comfortabele werkhoogte ligt en tijdens het slijpen met geen millimeter verschuift.',
+                      'Bevochtig of bewater de Japanse slijpsteen volgens de voorschriften van de fabrikant. Plaats de Japanse slijpsteen op een stroeve houder of op een klamme theedoek op je werkblad. Zorg dat de Japanse slijpsteen op een comfortabele werkhoogte ligt en tijdens het slijpen met geen millimeter verschuift.',
                     bullet: 'Stabiele ondergrond, constante waterfilm op het oppervlak.',
                   },
                   {
                     step: '02',
                     title: 'De slijphoek opzoeken en fixeren',
                     prose:
-                      'Zet de hiel van het mes op de steen. Kantel het blad voorzichtig tot het bestaande slijpvlak vlak aansluit op het steenoppervlak (of gebruik de stifttruc om dit te verifiëren). Vergrendel je pols: de beweging moet soepel vanuit je armen en schouders komen, niet vanuit een zwabberende pols.',
+                      'Zet de hiel van het mes op de Japanse slijpsteen. Kantel het blad voorzichtig tot het bestaande slijpvlak vlak aansluit op het oppervlak van de Japanse slijpsteen (of gebruik de stifttruc om dit te verifiëren). Vergrendel je pols: de beweging moet soepel vanuit je armen en schouders komen, niet vanuit een zwabberende pols.',
                     bullet: 'Pols vergrendelen, beweging vanuit de elleboog en schouders.',
                   },
                   {
                     step: '03',
                     title: 'Beheerst slijpen van hiel naar punt',
                     prose:
-                      'Beweeg het lemmet gecontroleerd over de steen. Zorg dat de hiel, het rechte middenstuk en de gebogen punt allemaal gelijkmatig behandeld worden. Bij de punt van het mes til je je handvat een fractie mee op, zodat ook de kromming van het lemmet dezelfde slijphoek behoudt.',
+                      'Beweeg het lemmet gecontroleerd over de Japanse slijpsteen. Zorg dat de hiel, het rechte middenstuk en de gebogen punt allemaal gelijkmatig behandeld worden. Bij de punt van het mes til je je handvat een fractie mee op, zodat ook de kromming van het lemmet dezelfde slijphoek behoudt.',
                     bullet: 'Lichte gelijkmatige druk, handvat licht optillen bij de ronding van de punt.',
                   },
                   {
@@ -674,7 +674,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                     step: '06',
                     title: 'Verfijnen en de braam verwijderen (ontbramen)',
                     prose:
-                      'Zodra beide kanten geslepen zijn, verlaag je de druk drastisch. Maak om en om enkele heel lichte halen over de steen om de braam af te breken. Heb je een fijnere steen (korrel 3000+) of een leren strop met polijstpasta? Gebruik deze nu om de snede te ontbramen en spiegelglad af te werken.',
+                      'Zodra beide kanten geslepen zijn, verlaag je de druk drastisch. Maak om en om enkele heel lichte halen over de Japanse slijpsteen om de braam af te breken. Heb je een fijnere Japanse slijpsteen (korrel 3000+) of een leren strop met polijstpasta? Gebruik deze nu om de snede te ontbramen en spiegelglad af te werken.',
                     bullet: 'Vederlichte afwerkhalingen, eventueel afwerken op leer.',
                   },
                   {
@@ -742,7 +742,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                   {
                     num: '2',
                     fout: 'Veel te veel spierkracht zetten op het lemmet',
-                    uitleg: 'Drukken zorgt niet voor snellere scherpte, maar buigt de fijne snede om en beschadigt je slijpsteen. Laat de korrels van de watersteen het werk doen met beheersing.',
+                    uitleg: 'Drukken zorgt niet voor snellere scherpte, maar buigt de fijne snede om en beschadigt je Japanse slijpsteen. Laat de korrels van de Japanse slijpsteen het werk doen met beheersing.',
                   },
                   {
                     num: '3',
@@ -752,12 +752,12 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                   {
                     num: '4',
                     fout: 'Te snel overstappen naar een te fijne polijststeen',
-                    uitleg: 'Een fijne steen (korrel 3000 of 6000) kan een snede glanzend polijsten, maar kan geen botte vouw opnieuw scherp maken. De basischerpte móét op korrel 1000 al 100% aanwezig zijn.',
+                    uitleg: 'Een fijne Japanse slijpsteen (korrel 3000 of 6000) kan een snede glanzend polijsten, maar kan geen botte vouw opnieuw scherp maken. De basischerpte móét op korrel 1000 al 100% aanwezig zijn.',
                   },
                   {
                     num: '5',
-                    fout: 'De slijpsteen tussentijds niet afvlakken',
-                    uitleg: 'Een hol gesleten steen raakt alleen de zijkanten en mist het midden van je mes. Houd je slijpstenen altijd strak waterpas met een diamantafvlakker.',
+                    fout: 'De Japanse slijpsteen tussentijds niet afvlakken',
+                    uitleg: 'Een hol gesleten Japanse slijpsteen raakt alleen de zijkanten en mist het midden van je mes. Houd je Japanse slijpstenen altijd strak waterpas met een diamantafvlakker.',
                   },
                 ].map((item) => (
                   <div key={item.num} className="rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-4 sm:p-5 flex items-start gap-3.5">
@@ -798,10 +798,10 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
                 <div className="rounded-2xl border border-[#3B7F4B]/30 bg-[#E8EFE8]/50 p-5">
                   <h3 className="font-heading text-base font-bold text-[#244A30]">
-                    Met waterstenen op de werkbank
+                    Met Japanse slijpstenen op de werkbank
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#244A30]">
-                    Bij slijpen neemt de slijpsteen gecontroleerd een microscopisch laagje metaal af aan weerszijden van de snede. Hierdoor ontmoeten de facetten elkaar weer in een vlijmscherpe punt (apex).
+                    Bij slijpen neemt de Japanse slijpsteen gecontroleerd een microscopisch laagje metaal af aan weerszijden van de snede. Hierdoor ontmoeten de facetten elkaar weer in een vlijmscherpe punt (apex).
                   </p>
                 </div>
               </div>
@@ -814,7 +814,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               </h2>
 
               <p className="mt-4 text-base leading-relaxed text-[#244A30]">
-                Zelf je messen slijpen op Japanse waterstenen is een prachtige, rustgevende hobby. Toch zijn er situaties waarin professionele hulp van Slijpmaat verstandiger en veiliger is:
+                Zelf je messen slijpen op Japanse slijpstenen is een prachtige, rustgevende hobby. Toch zijn er situaties waarin professionele hulp van Slijpmaat verstandiger en veiliger is:
               </p>
 
               <p className="mt-3 text-base leading-relaxed text-[#244A30]">
@@ -830,7 +830,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                     'Het lemmet is te dik geworden en moet worden uitgedund',
                     'Je hebt een dierbaar Japans koksmes (VG-10, Aogami, SG2)',
                     'Je vindt het lastig om een constante hoek vast te houden',
-                    'Je hebt geen tijd of zin om waterstenen te onderhouden',
+                    'Je hebt geen tijd of zin om Japanse slijpstenen te onderhouden',
                   ].map((reason, idx) => (
                     <li key={idx} className="flex items-center gap-2.5">
                       <UIcon name="check" className="text-xs text-[#3B7F4B] shrink-0" aria-hidden="true" />
@@ -844,10 +844,10 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               <div className="mt-6 rounded-2xl bg-[#E8EFE8] p-6 text-center sm:text-left sm:flex sm:items-center sm:justify-between sm:gap-6">
                 <div>
                   <h3 className="font-heading text-base sm:text-lg font-bold text-[#244A30]">
-                    Geen zin om zelf te klooien met waterstenen?
+                    Geen zin om zelf te klooien met Japanse slijpstenen?
                   </h3>
                   <p className="mt-1 text-xs sm:text-sm text-[#3B7F4B]">
-                    Wij halen je messen in Utrecht aan huis op, slijpen ze met de hand op waterstenen en brengen ze doorgaans binnen 24-48 uur vlijmscherp terug.
+                    Wij halen je messen in Utrecht aan huis op, slijpen ze met de hand op Japanse slijpstenen en brengen ze doorgaans binnen 24-48 uur vlijmscherp terug.
                   </p>
                 </div>
                 <button
@@ -911,10 +911,10 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-6 text-center">
               <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
-              Vers van de slijpsteen in Utrecht
+              Vers van de Japanse slijpsteen in Utrecht
             </h2>
             <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-[#3B7F4B]/80">
-              Bekijk hoe keukenmessen er na het handmatig watersteenslijpen en ontbramen uitzien.
+              Bekijk hoe keukenmessen er na het handmatig slijpen op Japanse slijpstenen en ontbramen uitzien.
             </p>
           </div>
 

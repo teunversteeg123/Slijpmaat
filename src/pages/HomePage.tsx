@@ -14,7 +14,7 @@ interface HomePageProps {
 const quickSteps = [
   { title: 'Plan je slijpbeurt', text: 'Kies je messen en stuur je aanvraag eenvoudig via WhatsApp.' },
   { title: 'Wij halen ze op', text: 'We spreken een duidelijk ophaalmoment in Utrecht met je af.' },
-  { title: 'Met de hand geslepen', text: 'We slijpen zorgvuldig op whetstones en stroppen de snede af.' },
+  { title: 'Met de hand geslepen', text: 'We slijpen zorgvuldig op Japanse slijpstenen en stroppen de snede af.' },
   { title: 'Scherp terug', text: 'We proberen jouw messen binnen 24-48 uur weer terug te leveren.' },
 ];
 
@@ -27,8 +27,8 @@ const qualities = [
 
 const craftSteps = [
   { number: '01', title: 'Snede beoordelen', image: '/assets/werkwijze/01-beoordelen.webp', alt: 'Slijpmaat beoordeelt de snede van een keukenmes' },
-  { number: '02', title: 'Steen kiezen', image: '/assets/werkwijze/02-stenen-kiezen.webp', alt: 'Japanse whetstones die Slijpmaat gebruikt voor het slijpen' },
-  { number: '03', title: 'Scherpte opbouwen', image: '/assets/werkwijze/03-slijpen.webp', alt: 'Een keukenmes wordt met de hand geslepen op een whetstone' },
+  { number: '02', title: 'Japanse slijpsteen kiezen', image: '/assets/werkwijze/02-stenen-kiezen.webp', alt: 'Japanse slijpstenen die Slijpmaat gebruikt voor het slijpen' },
+  { number: '03', title: 'Scherpte opbouwen', image: '/assets/werkwijze/03-slijpen.webp', alt: 'Een keukenmes wordt met de hand geslepen op een Japanse slijpsteen' },
   { number: '04', title: 'Snede afwerken', image: '/assets/werkwijze/04-afwerken.webp', alt: 'Een keukenmes wordt afgewerkt op een leren strop' },
 ];
 
@@ -115,7 +115,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               Jouw messenslijper in Utrecht
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Voor chefs, thuiskoks en horeca. Slijpmaat haalt je messen thuis of op de zaak op, slijpt ze zorgvuldig met de hand op whetstones en brengt ze vlijmscherp terug.
+              Voor chefs, thuiskoks en horeca. Slijpmaat haalt je messen thuis of op de zaak op, slijpt ze zorgvuldig met de hand op Japanse slijpstenen en brengt ze vlijmscherp terug.
             </p>
 
             <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
