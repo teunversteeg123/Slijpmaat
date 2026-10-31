@@ -29,7 +29,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
               Blogs over messen slijpen en onderhoud
             </h1>
             <p className="site-hero-description mt-5 max-w-xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Praktische gidsen, stappenplannen en vakkennis over keukenmessen. Leer hoe je je messen in topconditie houdt en wanneer handmatig slijpen op Japanse slijpstenen het verschil maakt.
+              Praktische gidsen, stappenplannen en vakkennis over messen. Leer hoe je je messen in topconditie houdt en wanneer handmatig slijpen op Japanse slijpstenen het verschil maakt.
             </p>
 
             <div className="site-hero-actions mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">

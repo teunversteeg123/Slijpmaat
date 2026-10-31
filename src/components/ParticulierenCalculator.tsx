@@ -175,7 +175,7 @@ export const ParticulierenCalculator: React.FC = () => {
     const lines = [
       'Hoi Slijpmaat!',
       '',
-      'Ik wil graag een slijpbeurt plannen voor mijn keukenmessen:',
+      'Ik wil graag een slijpbeurt plannen voor mijn messen:',
       '',
       `Naam: ${name.trim()}`,
       `Service: ${selfDropoff ? 'Ik kom zelf langs op afspraak' : 'Ophalen en bezorgen aan huis'}`
@@ -454,7 +454,7 @@ export const ParticulierenCalculator: React.FC = () => {
               <div role="alert" className="mt-3 flex items-center gap-2 rounded-xl bg-[#FFF3F1] p-3 text-xs font-semibold text-[#8B2921]"><AlertCircle className="h-4 w-4 shrink-0" /><span>{errorMsg}</span></div>
             )}
 
-            <button type="button" onClick={handleOrderClick} className="group mt-4 inline-flex min-h-[52px] w-full items-center justify-center gap-2.5 rounded-full bg-[#E87B5B] px-4 py-3.5 font-heading text-sm font-bold text-white shadow-md transition hover:bg-[#C95E3E] hover:shadow-lg active:scale-[0.98] sm:text-base">
+            <button type="button" onClick={handleOrderClick} className="group mt-4 inline-flex min-h-[52px] w-full items-center justify-center gap-2.5 rounded-full bg-[#3B7F4B] px-4 py-3.5 font-heading text-sm font-bold text-white shadow-md outline-[#203728] transition hover:bg-[#315F3B] hover:shadow-lg focus-visible:outline-2 focus-visible:outline-offset-3 active:scale-[0.98] sm:text-base">
               <MessageCircle className="h-5 w-5 shrink-0 transition-transform group-hover:scale-110" />
               <span>Bestellen via WhatsApp</span>
             </button>

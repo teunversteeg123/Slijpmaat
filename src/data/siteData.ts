@@ -22,7 +22,7 @@ export const FAQS = [
   },
   {
     q: 'Welke typen / soorten messen slijpt mijn Maat?',
-    a: 'Wij slijpen gladde keukenmessen, zoals koksmessen, schilmessen en andere messen met een gladde snede. Speciale messen beoordelen we vooraf. Kartelmessen slijpen we op dit moment niet.'
+    a: 'Wij slijpen gladde messen, zoals koksmessen, schilmessen en andere messen met een gladde snede. Speciale messen beoordelen we vooraf. Kartelmessen slijpen we op dit moment niet.'
   },
   {
     q: 'Slijpt mijn Maat ook Japanse messen?',
@@ -50,7 +50,7 @@ export const FAQS = [
   },
   {
     q: 'In welke Utrechtse wijken en postcodes haalt mijn Maat messen op?',
-    a: 'Je Maat haalt keukenmessen op in de volgende Utrechtse wijken en postcodegebieden:\n• Binnenstad en centrum: 3511 en 3512\n• Noordwest - Pijlsweerd, Ondiep en Zuilen: 3513 en 3551 t/m 3555\n• Noordoost - Tuinwijk, Tuindorp, Wittevrouwen en Voordorp: 3514, 3515 en 3571 t/m 3573\n• Overvecht: 3561 t/m 3566\n• Oost - Oudwijk, Abstede, Wilhelminapark en Rijnsweerd: 3581 t/m 3585\n• Zuid - Tolsteeg, Hoograven en Lunetten: 3523 t/m 3525\n• Zuidwest - Dichterswijk, Rivierenwijk, Transwijk en Kanaleneiland: 3521, 3522, 3526 en 3527\n• West - Lombok, Oog in Al en Nieuw Engeland: 3531 t/m 3534 en 3542\n• Leidsche Rijn - Terwijde, Het Zand, Parkwijk en Langerak: 3528, 3541 en 3543 t/m 3545\n\nVul in het bestelformulier je postcode in om de bezorgprijs te bekijken. Vanaf €35 bestelwaarde komen we binnen Utrecht gratis langs. Voor de buitenring, waaronder Kanaleneiland en Leidsche Rijn, is het tarief onder €35 precies €7,25.',
+    a: 'Je Maat haalt messen op in de volgende Utrechtse wijken en postcodegebieden:\n• Binnenstad en centrum: 3511 en 3512\n• Noordwest - Pijlsweerd, Ondiep en Zuilen: 3513 en 3551 t/m 3555\n• Noordoost - Tuinwijk, Tuindorp, Wittevrouwen en Voordorp: 3514, 3515 en 3571 t/m 3573\n• Overvecht: 3561 t/m 3566\n• Oost - Oudwijk, Abstede, Wilhelminapark en Rijnsweerd: 3581 t/m 3585\n• Zuid - Tolsteeg, Hoograven en Lunetten: 3523 t/m 3525\n• Zuidwest - Dichterswijk, Rivierenwijk, Transwijk en Kanaleneiland: 3521, 3522, 3526 en 3527\n• West - Lombok, Oog in Al en Nieuw Engeland: 3531 t/m 3534 en 3542\n• Leidsche Rijn - Terwijde, Het Zand, Parkwijk en Langerak: 3528, 3541 en 3543 t/m 3545\n\nVul in het bestelformulier je postcode in om de bezorgprijs te bekijken. Vanaf €35 bestelwaarde komen we binnen Utrecht gratis langs. Voor de buitenring, waaronder Kanaleneiland en Leidsche Rijn, is het tarief onder €35 precies €7,25.',
     items: [
       'Binnenstad en centrum: 3511 en 3512',
       'Noordwest - Pijlsweerd, Ondiep en Zuilen: 3513 en 3551 t/m 3555',
@@ -78,7 +78,7 @@ export const FAQS = [
     ]
   },
   {
-    q: 'Wat kost het om mijn keukenmessen te laten slijpen?',
+    q: 'Wat kost het om mijn messen te laten slijpen?',
     a: 'Een klein keukenmes korter dan 15 centimeter kost €6,50. Voor een normaal keukenmes van 15 tot 19,99 centimeter betaal je €8,50. Een groot keukenmes van 20 tot en met 25 centimeter kost €10,50. Messen langer dan 25 centimeter beoordelen we vooraf en slijpen we op aanvraag. In het bestelformulier zie je vooraf de berekende prijs; reparaties bespreken we altijd eerst.'
   },
   {
@@ -86,8 +86,8 @@ export const FAQS = [
     a: 'Ja, kleine chips en beschadigingen kunnen we vaak tijdens de slijpbeurt herstellen. Een kleine chip herstellen kost €2,50 extra. Is het profiel van het mes beschadigd? Dan kunnen we voor €8,50 extra een nieuw profiel aanbrengen. Reparaties voeren we alleen uit in combinatie met een slijpbeurt.'
   },
   {
-    q: 'Waarom slijpt mijn Maat keukenmessen met de hand?',
-    a: 'We slijpen jouw keukenmessen met de hand op professionele Japanse slijpstenen van Shapton Pro. Zo houden we controle over de slijphoek en halen we zo min mogelijk materiaal van het mes weg. Daarna verwijderen we de braam en werken we de snede af op leer voor een strak en scherp resultaat.'
+    q: 'Waarom slijpt mijn Maat messen met de hand?',
+    a: 'We slijpen jouw messen met de hand op professionele Japanse slijpstenen van Shapton Pro. Zo houden we controle over de slijphoek en halen we zo min mogelijk materiaal van het mes weg. Daarna verwijderen we de braam en werken we de snede af op leer voor een strak en scherp resultaat.'
   },
   {
     q: 'Krijg ik als student korting op mijn slijpbeurt?',

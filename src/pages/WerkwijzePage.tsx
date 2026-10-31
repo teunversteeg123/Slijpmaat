@@ -188,14 +188,14 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
   // Verschillende typen messen
   const knifeTypes = [
     {
-      title: 'Westerse Keukenmessen',
+      title: 'Westerse messen',
       examples: 'Wüsthof, Zwilling, Sabatier, Diamant Sabatier, Victorinox, etc.',
       angle: 'Slijphoek ca. 15° - 20°',
       desc: 'Westerse messen hebben taaier staal en een rondere snijboog (voor de wiegende snijtechniek). We slijpen een stevige, duurzame snijrand die tegen een stootje kan.',
       iconName: 'knife-kitchen',
     },
     {
-      title: 'Japanse Keukenmessen',
+      title: 'Japanse messen',
       examples: 'Santoku, Gyuto, Nakiri, VG10, AUS-10, Shirogami & Aogami koolstofstaal',
       angle: 'Slijphoek ca. 12° - 15°',
       desc: 'Veel Japanse messen combineren relatief hard staal met een dunne geometrie. We beoordelen de bestaande snijvouw en kiezen een passende Japanse slijpsteen en slijphoek voor het specifieke mes.',

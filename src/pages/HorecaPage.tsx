@@ -96,7 +96,7 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
     },
     {
       question: 'Slijpen jullie zowel restaurant-messen als persoonlijke messen van koks?',
-      answer: 'Ja. We kunnen zowel algemene keukenmessen van het restaurant als persoonlijke messen van koks beoordelen. We bekijken ieder mes afzonderlijk en stemmen de behandeling af op het type mes, het staal, de staat en het gebruik.',
+      answer: 'Ja. We kunnen zowel algemene messen van het restaurant als persoonlijke messen van koks beoordelen. We bekijken ieder mes afzonderlijk en stemmen de behandeling af op het type mes, het staal, de staat en het gebruik.',
     },
     {
       question: 'Kunnen we een periodiek schema of vaste slijpronde afspreken?',

@@ -16,7 +16,7 @@ const escapeHtml = (value) => value
 const renderSeoHead = (metadata, jsonLd) => {
   const canonicalUrl = `https://slijpmaat.nl${metadata.path}`;
   const socialImage = `https://slijpmaat.nl${metadata.image ?? '/assets/slijpmaat-homepage-hero.jpg'}`;
-  const socialImageAlt = metadata.imageAlt ?? 'Slijpmaat slijpt keukenmessen met de hand in Utrecht';
+  const socialImageAlt = metadata.imageAlt ?? 'Slijpmaat slijpt messen met de hand in Utrecht';
   const socialType = metadata.datePublished ? 'article' : 'website';
   const robots = metadata.index ? 'index,follow' : 'noindex,follow';
   return [

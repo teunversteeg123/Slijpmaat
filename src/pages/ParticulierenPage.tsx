@@ -67,7 +67,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
     },
     {
       question: 'Welke soorten messen slijpen jullie wel en niet?',
-      answer: 'Wij slijpen alle gladde keukenmessen: koksmessen, schilmessen, santoku’s, groentemessen en vleesmessen. Ook Japanse messen slijpen we zonder meerprijs. Kartelmessen (zoals broodmessen) en tuingereedschap slijpen we op dit moment niet.',
+      answer: 'Wij slijpen alle gladde messen: koksmessen, schilmessen, santoku’s, groentemessen en vleesmessen. Ook Japanse messen slijpen we zonder meerprijs. Kartelmessen (zoals broodmessen) en tuingereedschap slijpen we op dit moment niet.',
     },
     {
       question: 'Hoe snel heb ik mijn messen weer scherp terug?',
@@ -106,7 +106,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
               Je messen weer scherp. Zonder gedoe.
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Wij halen je keukenmessen thuis op in Utrecht, slijpen ze zorgvuldig met de hand op Japanse slijpstenen en brengen ze weer vlijmscherp terug.
+              Wij halen je messen thuis op in Utrecht, slijpen ze zorgvuldig met de hand op Japanse slijpstenen en brengen ze weer vlijmscherp terug.
             </p>
 
             <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">

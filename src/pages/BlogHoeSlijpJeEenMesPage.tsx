@@ -412,7 +412,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                   <span>Belangrijke afbakening vooraf</span>
                 </div>
                 <p className="mt-1.5 text-xs sm:text-sm text-[#244A30]/90">
-                  Deze uitleg is specifiek geschreven voor gewone stalen keukenmessen met een gladde, aan twee kanten geslepen snede (zowel Europese koksmessen als tweezijdig geslepen Japanse Santoku&apos;s en Gyuto&apos;s). Kartelmessen, keramische messen en traditionele enkelzijdige Japanse messen (zoals Deba of Yanagiba) vereisen een geheel andere techniek.
+                  Deze uitleg is specifiek geschreven voor gewone stalen messen met een gladde, aan twee kanten geslepen snede (zowel Europese koksmessen als tweezijdig geslepen Japanse Santoku&apos;s en Gyuto&apos;s). Kartelmessen, keramische messen en traditionele enkelzijdige Japanse messen (zoals Deba of Yanagiba) vereisen een geheel andere techniek.
                 </p>
               </div>
             </section>
@@ -571,7 +571,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               {/* BULLET WIDGET RICHTLIJNEN */}
               <div className="mt-4 grid gap-3 sm:grid-cols-2">
                 <div className="rounded-xl border border-[#d9e1d7] bg-[#FAFAF8] p-4 text-xs sm:text-sm">
-                  <span className="font-bold text-[#3B7F4B]">Japanse keukenmessen:</span>
+                  <span className="font-bold text-[#3B7F4B]">Japanse messen:</span>
                   <p className="mt-1 text-[#244A30]/85">
                     Meestal circa <strong>15 graden per kant</strong> (totaal 30° inclusief). Dunner lemmet, hard staal, extreem scherp maar iets gevoeliger voor zijwaartse druk.
                   </p>
@@ -914,7 +914,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               Vers van de Japanse slijpsteen in Utrecht
             </h2>
             <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-[#3B7F4B]/80">
-              Bekijk hoe keukenmessen er na het handmatig slijpen op Japanse slijpstenen en ontbramen uitzien.
+              Bekijk hoe messen er na het handmatig slijpen op Japanse slijpstenen en ontbramen uitzien.
             </p>
           </div>
 

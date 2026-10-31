@@ -3,7 +3,7 @@ import { FAQS, SERVICEGEBIED_FAQS } from './data/siteData';
 
 export const SITE_URL = 'https://slijpmaat.nl';
 const DEFAULT_SOCIAL_IMAGE = '/assets/slijpmaat-homepage-hero.jpg';
-const DEFAULT_SOCIAL_IMAGE_ALT = 'Slijpmaat slijpt keukenmessen met de hand in Utrecht';
+const DEFAULT_SOCIAL_IMAGE_ALT = 'Slijpmaat slijpt messen met de hand in Utrecht';
 
 type RouteSeo = {
   pageId: PageId;
@@ -33,7 +33,7 @@ const ROUTES: RouteSeo[] = [
     pageId: 'particulieren',
     path: '/particulier/',
     label: 'Particulier',
-    title: 'Keukenmessen slijpen Utrecht · Prijzen · Slijpmaat',
+    title: 'Messen slijpen Utrecht · Prijzen · Slijpmaat',
     description: 'Bereken direct je slijpprijs. In Utrecht is ophalen en bezorgen gratis vanaf €35 bestelwaarde; daaronder geldt het tarief voor je postcode.',
     index: true,
     image: '/assets/tomaat-video-poster.webp',
@@ -54,7 +54,7 @@ const ROUTES: RouteSeo[] = [
     path: '/werkwijze/',
     label: 'Werkwijze',
     title: 'Messen slijpen op Japanse slijpstenen · Werkwijze · Slijpmaat',
-    description: 'Bekijk hoe Slijpmaat keukenmessen beoordeelt, met de hand slijpt op Japanse slijpstenen en zorgvuldig afwerkt op leer.',
+    description: 'Bekijk hoe Slijpmaat messen beoordeelt, met de hand slijpt op Japanse slijpstenen en zorgvuldig afwerkt op leer.',
     index: true,
     image: '/assets/werkwijze/03-slijpen.webp',
     imageAlt: 'Handmatig slijpen op Japanse slijpstenen bij Slijpmaat',
@@ -74,7 +74,7 @@ const ROUTES: RouteSeo[] = [
     path: '/blogs/',
     label: 'Blogs',
     title: 'Blogs over messen slijpen en onderhoud · Slijpmaat',
-    description: 'Lees praktische artikelen van Slijpmaat over keukenmessen, onderhoud, veilig gebruik en professioneel slijpen.',
+    description: 'Lees praktische artikelen van Slijpmaat over messen, onderhoud, veilig gebruik en professioneel slijpen.',
     index: true,
     image: '/assets/kennisbank-slijpmaat-kaartje-planten.webp',
     imageAlt: 'Slijpmaat-kaartje tussen groene planten bij de blogs',
@@ -96,7 +96,7 @@ const ROUTES: RouteSeo[] = [
     path: '/over-ons/',
     label: 'Over ons',
     title: 'Over Slijpmaat · Messenslijper uit Utrecht',
-    description: 'Lees hoe Teun en Mike Slijpmaat begonnen en waarom zij keukenmessen met de hand slijpen voor duurzaam behoud en langdurig snijplezier.',
+    description: 'Lees hoe Teun en Mike Slijpmaat begonnen en waarom zij messen met de hand slijpen voor duurzaam behoud en langdurig snijplezier.',
     index: true,
     image: '/assets/team/teun-en-mike-samen.webp',
     imageAlt: 'Teun en Mike, de oprichters van Slijpmaat',
