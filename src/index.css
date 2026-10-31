@@ -146,13 +146,15 @@ div[class~="bg-[#E87B5B]"][class~="text-white"] :is(h3, p) {
     }
   }
 
-  .site-hero-eyebrow {
-    line-height: 1.45;
-    letter-spacing: 0.2em;
+  /* Keep the original homepage composition; remove only the empty space
+     below its actions so the existing knife image follows the copy sooner. */
+  .site-hero-home .site-hero-copy {
+    min-height: 0;
+    padding-bottom: 1.5rem;
   }
 
   .site-hero-title {
-    margin-top: 2rem;
+    margin-top: 0;
     max-width: 100%;
     font-size: clamp(2.5rem, 11.8vw, 3.5rem);
     line-height: 1.04;
@@ -188,6 +190,15 @@ div[class~="bg-[#E87B5B]"][class~="text-white"] :is(h3, p) {
   }
 }
 
+@media (max-width: 767px) {
+  .site-hero-media.site-hero-media-video {
+    width: 100%;
+    max-width: none;
+    padding-right: 0;
+    padding-left: 0;
+  }
+}
+
 @media (max-width: 639px) and (max-height: 700px) {
   .site-hero-copy {
     padding-top: 2rem;
@@ -195,7 +206,7 @@ div[class~="bg-[#E87B5B]"][class~="text-white"] :is(h3, p) {
   }
 
   .site-hero-title {
-    margin-top: 1.5rem;
+    margin-top: 0;
   }
 
   .site-hero-description {

@@ -30,10 +30,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
 
         <div className="site-hero-grid relative z-10 mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-14 xl:gap-20">
           <div className="site-hero-copy max-w-2xl">
-            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
-              Vragen &amp; antwoorden
-            </p>
-            <h1 className="site-hero-title mt-3 font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
+            <h1 className="site-hero-title font-heading text-4xl font-bold leading-[1.05] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
               Alles wat je wilt weten over Slijpmaat.
             </h1>
             <p className="site-hero-description mt-5 text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
@@ -92,7 +89,6 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
       <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.42fr_1fr] lg:gap-16">
           <aside className="lg:sticky lg:top-32 lg:self-start space-y-4">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Veelgestelde vragen</p>
             <h2 className="font-heading text-3xl font-bold text-[#3B7F4B]">
               Snel naar het antwoord dat je zoekt
             </h2>
@@ -123,8 +119,7 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
       {/* 4. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="faq-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Staat je vraag er niet bij?</p>
-          <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
+          <h2 className="max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
             Vraag het je Maat
           </h2>
           <p className="mt-6 max-w-4xl text-lg leading-relaxed text-white/95 sm:text-xl">

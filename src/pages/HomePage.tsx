@@ -43,16 +43,37 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
   const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik wil graag mijn messen laten slijpen!');
   const [isPlanExpanded, setIsPlanExpanded] = useState(false);
   const planRef = useRef<HTMLDivElement>(null);
+  const planButtonRef = useRef<HTMLButtonElement>(null);
+  const firstPlanChoiceRef = useRef<HTMLButtonElement>(null);
+  const restorePlanFocusRef = useRef(false);
 
   useEffect(() => {
-    if (!isPlanExpanded) return;
+    if (!isPlanExpanded) {
+      if (restorePlanFocusRef.current) {
+        planButtonRef.current?.focus({ preventScroll: true });
+        restorePlanFocusRef.current = false;
+      }
+      return;
+    }
+
+    firstPlanChoiceRef.current?.focus({ preventScroll: true });
     const handleClickOutside = (e: MouseEvent) => {
       if (planRef.current && !planRef.current.contains(e.target as Node)) {
         setIsPlanExpanded(false);
       }
     };
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== 'Escape') return;
+      e.preventDefault();
+      restorePlanFocusRef.current = true;
+      setIsPlanExpanded(false);
+    };
     document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
+    document.addEventListener('keydown', handleKeyDown);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
   }, [isPlanExpanded]);
 
   const openCalculator = () => {
@@ -90,10 +111,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
           {/* Right: Copy & CTAs */}
           <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-2 lg:max-w-2xl lg:px-0 lg:pr-10 xl:pr-16">
-            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
-              Voor particulieren en horeca
-            </p>
-            <h1 className="site-hero-title mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
+            <h1 className="site-hero-title max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
               Jouw messenslijper in Utrecht
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
@@ -104,7 +122,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <div ref={planRef} className="relative">
                 {!isPlanExpanded ? (
                   <button
+                    ref={planButtonRef}
                     type="button"
+                    aria-expanded={isPlanExpanded}
                     onClick={() => setIsPlanExpanded(true)}
                     className="group inline-flex min-h-13 w-full sm:w-auto items-center justify-center gap-2 rounded-full bg-[#E87B5B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#C95E3E] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] active:scale-[0.98] sm:text-base cursor-pointer"
                   >
@@ -112,14 +132,15 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                     <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                   </button>
                 ) : (
-                  <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2 rounded-2xl sm:rounded-full bg-[#E87B5B] p-2.5 sm:p-1.5 shadow-md transition-all duration-300 ease-out animate-in fade-in zoom-in-95">
+                  <div id="home-plan-options" role="group" aria-label="Kies je slijpbeurt" className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2 sm:gap-2 rounded-2xl sm:rounded-full bg-[#E87B5B] p-2.5 sm:p-1.5 shadow-md transition-all duration-300 ease-out animate-in fade-in zoom-in-95">
                     <button
+                      ref={firstPlanChoiceRef}
                       type="button"
                       onClick={() => {
                         setIsPlanExpanded(false);
                         openCalculator();
                       }}
-                      className="w-full sm:w-auto text-center rounded-xl sm:rounded-full bg-white px-5 sm:px-6 py-3 sm:py-2.5 text-sm sm:text-base font-bold text-[#E87B5B] shadow-2xs hover:bg-[#FFF4EF] active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                      className="w-full sm:w-auto text-center rounded-xl sm:rounded-full bg-white px-5 sm:px-6 py-3 sm:py-2.5 text-sm sm:text-base font-bold text-[#E87B5B] shadow-2xs hover:bg-[#FFF4EF] active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#203728] cursor-pointer whitespace-nowrap"
                     >
                       Particulier
                     </button>
@@ -129,14 +150,17 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                         setIsPlanExpanded(false);
                         onNavigate('horeca');
                       }}
-                      className="w-full sm:w-auto text-center rounded-xl sm:rounded-full bg-[#C95E3E] px-5 sm:px-6 py-3 sm:py-2.5 text-sm sm:text-base font-bold text-white hover:bg-white hover:text-[#E87B5B] active:scale-95 transition-all cursor-pointer whitespace-nowrap"
+                      className="w-full sm:w-auto text-center rounded-xl sm:rounded-full bg-[#C95E3E] px-5 sm:px-6 py-3 sm:py-2.5 text-sm sm:text-base font-bold text-white hover:bg-white hover:text-[#E87B5B] active:scale-95 transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#203728] cursor-pointer whitespace-nowrap"
                     >
                       Zakelijk
                     </button>
                     <button
                       type="button"
-                      onClick={() => setIsPlanExpanded(false)}
-                      className="flex items-center justify-center gap-1.5 py-1 sm:p-2 text-xs sm:text-sm font-semibold text-white/80 hover:text-white rounded-full hover:bg-white/20 transition-all cursor-pointer"
+                      onClick={() => {
+                        restorePlanFocusRef.current = true;
+                        setIsPlanExpanded(false);
+                      }}
+                      className="flex min-h-11 sm:min-h-0 items-center justify-center gap-1.5 py-1 sm:p-2 text-xs sm:text-sm font-semibold text-white/80 hover:text-white rounded-full hover:bg-white/20 transition-all focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#203728] cursor-pointer"
                       aria-label="Sluiten"
                     >
                       <UIcon name="cross-small" className="text-lg" />
@@ -182,8 +206,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         <div className="relative mx-auto max-w-7xl">
           <div className="mb-8 max-w-2xl sm:mb-10">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Kies wat bij je past</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Thuiskeuken of professionele keuken?</h2>
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Thuiskeuken of professionele keuken?</h2>
           </div>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-2 md:gap-7">
@@ -238,8 +261,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Van aanvraag tot scherpe messen</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-white sm:text-4xl">Zo eenvoudig werkt het</h2>
+            <h2 className="font-heading text-3xl font-bold text-white sm:text-4xl">Zo eenvoudig werkt het</h2>
           </div>
 
           <ol className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -273,8 +295,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[2.5rem] border border-[#E87B5B]/20 bg-[#FFF7F3] shadow-sm lg:grid-cols-[1.05fr_0.95fr]">
           <div className="relative px-7 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-14">
             <div className="relative max-w-xl">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Duidelijk vooraf</p>
-              <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Bekijk direct wat jouw slijpbeurt kost</h2>
+              <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Bekijk direct wat jouw slijpbeurt kost</h2>
               <button
                 type="button"
                 onClick={openCalculator}
@@ -286,7 +307,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
               <button
                 type="button"
                 onClick={() => onNavigate('horeca')}
-                className="mt-4 block text-sm font-bold text-[#3B7F4B] underline decoration-[#A9C89E] decoration-2 underline-offset-4 hover:text-[#3B7F4B] cursor-pointer"
+                className="mt-4 block min-h-11 text-sm font-bold text-[#3B7F4B] underline decoration-[#A9C89E] decoration-2 underline-offset-4 hover:text-[#3B7F4B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:min-h-0 cursor-pointer"
               >
                 Zakelijke aanvraag of grotere aantallen?
               </button>
@@ -294,20 +315,20 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="grid grid-cols-3 divide-x divide-white/25 bg-[#E87B5B] px-4 py-9 text-center sm:px-8 lg:items-center lg:py-12">
-            <div className="px-2">
+            <div className="px-1 sm:px-2">
               <span className="block font-heading text-2xl font-bold text-white sm:text-3xl">€6,50</span>
               <span className="mt-1 block text-xs font-semibold text-white/85">Klein</span>
-              <span className="mt-1 block text-[11px] text-white/70">tot 15 cm</span>
+              <span className="mt-1 block text-xs text-white/70 sm:text-[11px]">tot 15 cm</span>
             </div>
-            <div className="px-2">
+            <div className="px-1 sm:px-2">
               <span className="block font-heading text-2xl font-bold text-white sm:text-3xl">€8,50</span>
               <span className="mt-1 block text-xs font-semibold text-white/85">Normaal</span>
-              <span className="mt-1 block text-[11px] text-white/70">15-19,99 cm</span>
+              <span className="mt-1 block text-xs text-white/70 sm:text-[11px]">15-19,99 cm</span>
             </div>
-            <div className="px-2">
+            <div className="px-1 sm:px-2">
               <span className="block font-heading text-2xl font-bold text-white sm:text-3xl">€10,50</span>
               <span className="mt-1 block text-xs font-semibold text-white/85">Groot</span>
-              <span className="mt-1 block text-[11px] text-white/70">20-25 cm</span>
+              <span className="mt-1 block text-xs text-white/70 sm:text-[11px]">20-25 cm</span>
             </div>
           </div>
         </div>
@@ -332,8 +353,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
           {/* Right: Team story & forest green CTA button */}
           <div className="max-w-xl">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Persoonlijk en lokaal</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Wij zijn Teun en Mike</h2>
+              <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Wij zijn Teun en Mike</h2>
             <p className="mt-5 text-base leading-8 text-[#657068] sm:text-lg">
               We begonnen Slijpmaat omdat veel goede messen worden vervangen terwijl ze vaak alleen bot zijn. Daarom combineren we zorgvuldig handwerk met persoonlijke service in Utrecht.
             </p>
@@ -362,13 +382,12 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="grid items-end gap-6 lg:grid-cols-[1fr_auto]">
             <div className="max-w-2xl">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Waarom Slijpmaat</p>
-              <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Goed slijpwerk, makkelijk geregeld</h2>
+              <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Goed slijpwerk, makkelijk geregeld</h2>
             </div>
             <button
               type="button"
               onClick={() => onNavigate('werkwijze')}
-              className="group inline-flex w-fit items-center gap-2 text-sm font-bold text-[#3B7F4B] transition-colors hover:text-[#3B7F4B] cursor-pointer"
+              className="group inline-flex min-h-11 w-fit items-center gap-2 text-sm font-bold text-[#3B7F4B] transition-colors hover:text-[#3B7F4B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:min-h-0 cursor-pointer"
             >
               <span>Bekijk onze volledige werkwijze</span>
               <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
@@ -436,12 +455,11 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
 
         <div className="relative z-10 mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <div className="max-w-md">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Veelgestelde vragen</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Eerst nog iets weten?</h2>
+              <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Eerst nog iets weten?</h2>
             <button
               type="button"
               onClick={() => onNavigate('faq')}
-              className="group mt-6 inline-flex items-center gap-2 text-sm font-bold text-[#3B7F4B] transition-colors hover:text-[#3B7F4B] cursor-pointer"
+              className="group mt-6 inline-flex min-h-11 items-center gap-2 text-sm font-bold text-[#3B7F4B] transition-colors hover:text-[#3B7F4B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:min-h-0 cursor-pointer"
             >
               <span>Bekijk alle vragen</span>
               <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
@@ -472,8 +490,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
       {/* 10. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="home-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Contact</p>
-          <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
+          <h2 className="max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
             Neem contact op met je Maat
           </h2>
           <p className="mt-6 max-w-4xl text-lg leading-relaxed text-white/95 sm:text-xl">

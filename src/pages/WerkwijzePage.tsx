@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { PageId } from '../types';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { UIcon, UIconBadge } from '../components/ui/UIcon';
@@ -8,6 +8,105 @@ import { createWhatsAppUrl } from '../utils/contact';
 interface WerkwijzePageProps {
   onNavigate: (page: PageId) => void;
 }
+
+const SlijpenVideo: React.FC = () => {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const loadRequestedRef = useRef(false);
+  const [wantsPlayback, setWantsPlayback] = useState(false);
+  const [hasStarted, setHasStarted] = useState(false);
+
+  useEffect(() => {
+    const preference = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setWantsPlayback(!preference.matches);
+    update();
+    preference.addEventListener('change', update);
+    return () => preference.removeEventListener('change', update);
+  }, []);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+    let inView = false;
+    const update = () => {
+      if (wantsPlayback && inView && !document.hidden) {
+        if (!loadRequestedRef.current) {
+          loadRequestedRef.current = true;
+          video.preload = 'auto';
+          video.load();
+        }
+        // Keep the poster visible until enough video is buffered for a calm start.
+        const bufferedAhead = video.buffered.length > 0
+          ? video.buffered.end(video.buffered.length - 1) - video.currentTime
+          : 0;
+        const startBuffer = Math.min(1.5, video.duration || 1.5);
+        if (video.currentTime > 0 || video.readyState === 4 || bufferedAhead >= startBuffer) {
+          void video.play().catch((error: unknown) => {
+            if (!(error instanceof DOMException && error.name === 'AbortError')) {
+              setWantsPlayback(false);
+            }
+          });
+        }
+      } else {
+        video.pause();
+      }
+    };
+    const observer = new IntersectionObserver(([entry]) => {
+      inView = entry.isIntersecting;
+      update();
+    }, { threshold: 0.1 });
+    observer.observe(video);
+    document.addEventListener('visibilitychange', update);
+    video.addEventListener('progress', update);
+    video.addEventListener('canplaythrough', update);
+    return () => {
+      observer.disconnect();
+      document.removeEventListener('visibilitychange', update);
+      video.removeEventListener('progress', update);
+      video.removeEventListener('canplaythrough', update);
+      video.pause();
+    };
+  }, [wantsPlayback]);
+
+  return (
+    <div className="relative">
+      <div className="relative aspect-square w-full overflow-hidden bg-white md:aspect-[4/3] md:rounded-[2.5rem] md:border md:border-[#d9e1d7] md:shadow-lg lg:aspect-square">
+      <video
+        ref={videoRef}
+        muted
+        loop
+        playsInline
+        preload="metadata"
+        poster="/assets/werkwijze/slijpen-video-poster.webp"
+        aria-label="Een keukenmes wordt met de hand geslepen op een Japanse watersteen"
+        className="h-full w-full object-cover"
+        onTimeUpdate={hasStarted ? undefined : (event) => {
+          if (event.currentTarget.currentTime > 0) setHasStarted(true);
+        }}
+      >
+        <source src="/assets/werkwijze/slijpen-loop-mobile.mp4" media="(max-width: 767px)" type="video/mp4" />
+        <source src="/assets/werkwijze/slijpen-loop.mp4" type="video/mp4" />
+      </video>
+      {!hasStarted && (
+        <img
+          src="/assets/werkwijze/slijpen-video-poster.webp"
+          alt=""
+          aria-hidden="true"
+          width={1440}
+          height={1440}
+          className="pointer-events-none absolute inset-0 h-full w-full object-cover"
+        />
+      )}
+      </div>
+      <button
+        type="button"
+        onClick={() => setWantsPlayback((previous) => !previous)}
+        className="mx-auto flex min-h-11 items-center px-4 text-sm font-bold text-[#3B7F4B] underline underline-offset-4 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#3B7F4B] md:absolute md:right-4 md:top-4 md:z-10 md:rounded-full md:bg-[#203728]/90 md:text-white md:no-underline md:focus-visible:outline-white"
+      >
+        {wantsPlayback ? 'Video pauzeren' : 'Video afspelen'}
+      </button>
+    </div>
+  );
+};
 
 export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
   const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik heb een vraag over jullie werkwijze en het slijpen van mijn messen!');
@@ -148,12 +247,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
         <div className="site-hero-grid relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-14 lg:py-8 xl:gap-20">
           {/* Left: Copy & CTAs */}
           <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0">
-            <div className="mb-2">
-              <span className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.24em] text-[#244A30] sm:text-sm">
-                HET SLIJPMAAT AMBACHT
-              </span>
-            </div>
-            <h1 className="site-hero-title mt-2 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
+            <h1 className="site-hero-title max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
               Ieder mes met de hand geslepen.
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
@@ -182,20 +276,15 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          {/* Right: Foto in dezelfde compacte kaartopmaak als de hero van Over ons */}
-          <div className="site-hero-media relative order-2 mx-auto w-full max-w-xl px-4 sm:px-6 lg:order-2 lg:px-0">
+          {/* Right: Stille slijpvideo in de bestaande hero-opmaak */}
+          <div className="site-hero-media site-hero-media-video relative order-2 mx-auto w-full md:max-w-xl md:px-6 lg:order-2 lg:px-0">
             <div
               aria-hidden="true"
-              className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
+              className="pointer-events-none absolute -bottom-7 -left-7 hidden h-52 w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105 md:block"
             />
-            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg lg:aspect-square">
-              <img
-                src="/assets/werkwijze/03-slijpen.webp"
-                alt="Teun of Mike slijpt met de hand op Japanse waterstenen"
-                className="h-full w-full object-cover"
-                loading="eager"
-              />
-              <div className="absolute bottom-4 left-4 z-10 flex items-center gap-2 rounded-full border border-white/10 bg-[#203728]/85 px-4 py-2 text-xs font-bold text-white shadow-md backdrop-blur-xs">
+            <div className="relative z-10">
+              <SlijpenVideo />
+              <div className="absolute bottom-4 left-4 z-10 hidden items-center gap-2 rounded-full border border-white/10 bg-[#203728]/85 px-4 py-2 text-xs font-bold text-white shadow-md backdrop-blur-xs md:flex">
                 <span className="flex h-2.5 w-2.5 rounded-full bg-[#4CAF50]" />
                 <span>100% handmatig · Japanse waterstenen</span>
               </div>
@@ -248,8 +337,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-12 max-w-2xl sm:mb-16">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Onze Aanpak</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
               Hoe wij te werk gaan: minimale afname, maximale scherpte
             </h2>
           </div>
@@ -289,10 +377,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
 
           <figure className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-[#FAFAF8] shadow-sm sm:mt-16">
             <div className="border-b border-[#d9e1d7]/80 px-5 py-5 sm:px-8 sm:py-6">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">
-                Van bot naar scherp
-              </p>
-              <h3 className="mt-2 font-heading text-xl font-bold text-[#203728] sm:text-2xl">
+              <h3 className="font-heading text-xl font-bold text-[#203728] sm:text-2xl">
                 Wat er tijdens het slijpen met de snede gebeurt
               </h3>
               <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#657068] sm:text-base">
@@ -328,10 +413,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
 
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">
-              Maatwerk per lemmet
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
               Elk mes vraagt om een eigen behandeling
             </h2>
           </div>
@@ -392,8 +474,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-16">
             <div className="max-w-md">
-              <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Vragen over de werkwijze</p>
-              <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
                 Veelgestelde vragen
               </h2>
               <p className="mt-4 text-base leading-7 text-[#657068]">
@@ -442,8 +523,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       {/* 8. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="werkwijze-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Contact &amp; Advies</p>
-          <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
+          <h2 className="max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
             Vraag advies aan je Maat
           </h2>
           <p className="mt-6 max-w-4xl text-lg leading-relaxed text-white/95 sm:text-xl">

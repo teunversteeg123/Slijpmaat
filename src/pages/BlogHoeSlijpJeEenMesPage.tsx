@@ -175,9 +175,6 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
           </button>
 
           <div className="flex flex-wrap items-center gap-3">
-            <span className="inline-flex items-center rounded-full bg-[#E8EFE8] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
-              Stappenplan &amp; Ambacht
-            </span>
             <span className="inline-flex items-center gap-1.5 text-xs font-medium text-[#3B7F4B] sm:text-sm">
               <UIcon name="calendar" className="text-xs text-[#3B7F4B]" aria-hidden="true" />
               15 oktober 2026
@@ -316,10 +313,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
         <section aria-label="Inhoudsopgave en zoekbank" className="hidden lg:block mb-12 rounded-3xl border border-[#d9e1d7] bg-[#FAFAF8] p-7 shadow-xs">
           <div className="flex items-center justify-between gap-6 border-b border-[#d9e1d7]/70 pb-5">
             <div>
-              <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-                Snelgids &amp; Zoekbank
-              </span>
-              <h2 className="mt-1 font-heading text-xl font-black text-[#244A30]">
+              <h2 className="font-heading text-xl font-black text-[#244A30]">
                 Inhoudsopgave: spring direct naar een onderdeel
               </h2>
               <p className="mt-0.5 text-xs text-[#3B7F4B]/80 font-medium">
@@ -384,10 +378,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
             {/* SECTIE 1: INLEIDING & KORTE ANTWOORD */}
             <section id="inleiding" className="scroll-mt-24 pb-12 border-b border-[#E8EFE8]">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-                Inleiding &amp; Snel Samengevat
-              </span>
-              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
                 Het korte antwoord: hoe slijp je een keukenmes?
               </h2>
 
@@ -428,10 +419,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
             {/* SECTIE 2: DIAGNOSE - WANNEER IS JE MES TOE AAN EEN SLIJPBEURT */}
             <section id="diagnose" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-                Diagnose &amp; Signalen
-              </span>
-              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
                 Wanneer is je mes toe aan een slijpbeurt?
               </h2>
 
@@ -481,10 +469,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
             {/* SECTIE 3: WAT HEB JE NODIG */}
             <section id="benodigdheden" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-                Gereedschap &amp; Voorbereiding
-              </span>
-              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
                 Wat heb je nodig om zelf een mes te slijpen?
               </h2>
 
@@ -530,10 +515,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
             {/* SECTIE 4: MOET EEN WETSTEEN ALTIJD WEKEN */}
             <section id="wetsteen-weken" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-                Feit of Fabel
-              </span>
-              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
                 Moet een wetsteen altijd weken in het water?
               </h2>
 
@@ -578,10 +560,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
             {/* SECTIE 5: WELKE SLIJPHOEK GEBRUIKEN */}
             <section id="slijphoek" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-                Geometrie &amp; Slijphoek
-              </span>
-              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
                 Welke slijphoek moet je aanhouden?
               </h2>
 
@@ -646,10 +625,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
             {/* SECTIE 6: HET 7-STAPPENPLAN */}
             <section id="stappenplan" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-                Stap voor Stap
-              </span>
-              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
                 Het stappenplan: een mes slijpen in 7 stappen
               </h2>
 
@@ -747,10 +723,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
             {/* SECTIE 7: DE 5 MEEST GEMAAKTE FOUTEN */}
             <section id="fouten" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-                Valkuilen Voorkomen
-              </span>
-              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
                 De vijf fouten die we het vaakst tegenkomen
               </h2>
 
@@ -804,10 +777,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
             {/* SECTIE 8: AANZETTEN VS SLIJPEN */}
             <section id="aanzetten-vs-slijpen" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-                Belangrijk Verschil
-              </span>
-              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
                 Aanzetstaal vs. Slijpen: wat is het verschil?
               </h2>
 
@@ -818,10 +788,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               {/* BULLET WIDGET VERGELIJKING */}
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 <div className="rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
-                    Aanzetten (staal richten)
-                  </span>
-                  <h3 className="mt-1 font-heading text-base font-bold text-[#244A30]">
+                  <h3 className="font-heading text-base font-bold text-[#244A30]">
                     Met een klassiek aanzetstaal
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#244A30]/85">
@@ -830,10 +797,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
                 </div>
 
                 <div className="rounded-2xl border border-[#3B7F4B]/30 bg-[#E8EFE8]/50 p-5">
-                  <span className="text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
-                    Slijpen (nieuwe snede)
-                  </span>
-                  <h3 className="mt-1 font-heading text-base font-bold text-[#244A30]">
+                  <h3 className="font-heading text-base font-bold text-[#244A30]">
                     Met waterstenen op de werkbank
                   </h3>
                   <p className="mt-2 text-xs sm:text-sm leading-relaxed text-[#244A30]">
@@ -845,10 +809,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
             {/* SECTIE 9: WANNEER PROFESSIONEEL LATEN SLIJPEN */}
             <section id="wanneer-uitbesteden" className="scroll-mt-24 py-12 border-b border-[#E8EFE8]">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-                Professioneel Uitbesteden
-              </span>
-              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
                 Wanneer kun je een mes beter laten slijpen?
               </h2>
 
@@ -902,10 +863,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
             {/* SECTIE 10: ONDERHOUD & 4 GOUDEN REGELS */}
             <section id="onderhoud" className="scroll-mt-24 py-12">
-              <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-                Scherptebehoud
-              </span>
-              <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
                 Vier gouden regels: zo blijft je mes veel langer scherp
               </h2>
 
@@ -952,10 +910,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
       <section className="border-t border-[#E8EFE8] bg-white py-12 sm:py-16">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="mb-6 text-center">
-            <span className="text-xs font-bold uppercase tracking-[0.2em] text-[#3B7F4B]">
-              Sfeer &amp; Resultaten
-            </span>
-            <h2 className="mt-1 font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
+              <h2 className="font-heading text-2xl sm:text-3xl font-black text-[#244A30]">
               Vers van de slijpsteen in Utrecht
             </h2>
             <p className="mx-auto mt-2 max-w-lg text-xs sm:text-sm text-[#3B7F4B]/80">

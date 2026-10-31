@@ -102,10 +102,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         <div className="site-hero-grid relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-14 lg:py-8 xl:gap-20">
           {/* Left: Copy & CTAs */}
           <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0">
-            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.28em] text-[#3B7F4B] sm:text-sm">
-              Voor particulieren in Utrecht
-            </p>
-            <h1 className="site-hero-title mt-3 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
+            <h1 className="site-hero-title max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-5xl xl:text-6xl">
               Je messen weer scherp. Zonder gedoe.
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
@@ -167,8 +164,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         <div className="relative mx-auto max-w-7xl">
           {/* Header */}
           <div className="mb-6 max-w-2xl sm:mb-8">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Zo werkt het voor particulieren</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Eenvoudig van bot naar vlijmscherp</h2>
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Eenvoudig van bot naar vlijmscherp</h2>
           </div>
 
           {/* 3 Korte Stappen - Horizontale layout & minder hoog */}
@@ -191,12 +187,16 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         </div>
       </section>
 
+      {/* 5. RESULTATEN SLIDER (Volledige breedte over de pagina) */}
+      <section className="relative w-full overflow-hidden bg-[#FAFAF8] pb-8 pt-4 sm:pb-14 sm:pt-6">
+        <ResultatenSlider />
+      </section>
+
       {/* 4. HET BESTELFORMULIER (CALCULATOR) - Volledig geintegreerd, zonder zakelijk knip */}
       <section id="calculator" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-8 text-left sm:mb-12 sm:text-center">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E]">Bestelformulier</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Bereken direct je prijs &amp; bestel</h2>
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Bereken direct je prijs &amp; bestel</h2>
           </div>
 
           <div className="sm:rounded-[2.5rem] sm:border sm:border-[#d9e1d7] sm:bg-white sm:p-8 sm:shadow-sm lg:p-10">
@@ -205,19 +205,13 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
         </div>
       </section>
 
-      {/* 5. RESULTATEN SLIDER (Volledige breedte over de pagina) */}
-      <section className="relative w-full overflow-hidden bg-[#FAFAF8] pb-8 pt-4 sm:pb-14 sm:pt-6">
-        <ResultatenSlider />
-      </section>
-
       <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#3B7F4B" variant="scalloped" />
 
       {/* 6. EXTRA INFO OVER HET PROCES NÁ DE BESTELLING (Green section with wave dividers) - Compact & horizontaal */}
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-12 pt-10 sm:px-6 sm:pb-16 sm:pt-14 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-8 max-w-2xl sm:mb-10">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">Wat gebeurt er daarna?</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-white sm:text-4xl">Wat gebeurt er na je bestelling?</h2>
+            <h2 className="font-heading text-3xl font-bold text-white sm:text-4xl">Wat gebeurt er na je bestelling?</h2>
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-4 md:gap-5">
@@ -259,8 +253,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
 
         <div className="relative z-10 mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <div className="max-w-md">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Veelgestelde vragen</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Vragen over het slijpen?</h2>
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Vragen over het slijpen?</h2>
             <a
               href={whatsappUrl}
               target="_blank"
@@ -296,8 +289,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
       {/* 7. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="particulieren-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Contact</p>
-          <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
+          <h2 className="max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
             Neem contact op met je Maat
           </h2>
           <p className="mt-6 max-w-4xl text-lg leading-relaxed text-white/95 sm:text-xl">

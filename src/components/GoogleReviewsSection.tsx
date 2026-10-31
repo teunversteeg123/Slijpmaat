@@ -57,9 +57,6 @@ export const GoogleReviewsSection: React.FC = () => {
   return (
     <section className="bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
       <div className="mx-auto max-w-[1100px] overflow-hidden rounded-[2.625rem] border border-[#d9e1d7] bg-[#F4F7F4] px-4 py-10 sm:px-8 sm:py-16 lg:px-[46px] lg:py-[78px]">
-        <p className="mb-3 inline-flex items-center gap-2 font-heading text-[13px] font-extrabold uppercase tracking-[0.08em] text-[#3B7F4B] before:h-0.5 before:w-[34px] before:rounded-full before:bg-[#3B7F4B]">
-          Google reviews
-        </p>
         <h2 className="mb-7 max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.035em] text-[#3B7F4B] sm:text-5xl lg:text-[64px]">
           Scherpe woorden van blije klanten
         </h2>

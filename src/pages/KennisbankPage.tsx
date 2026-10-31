@@ -25,10 +25,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
       <section className="site-hero relative overflow-hidden px-4 pb-14 pt-10 sm:px-6 sm:pb-20 sm:pt-14 lg:px-8 lg:pb-24 lg:pt-16">
         <div className="site-hero-grid mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-2 lg:gap-16">
           <div className="site-hero-copy">
-            <p className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.24em] text-[#3B7F4B] sm:text-sm">
-              Kennis &amp; Ambacht · Voor heel Nederland
-            </p>
-            <h1 className="site-hero-title mt-3 font-heading text-4xl font-bold leading-[1.04] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
+            <h1 className="site-hero-title font-heading text-4xl font-bold leading-[1.04] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
               Blogs over messen slijpen en onderhoud
             </h1>
             <p className="site-hero-description mt-5 max-w-xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
@@ -101,10 +98,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
 
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#C95E3E]">
-              Gidsen &amp; Artikelen
-            </p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
               Uitgelichte kennis uit onze werkplaats
             </h2>
           </div>
@@ -139,9 +133,6 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                   <div className="absolute inset-0 bg-gradient-to-t from-[#203728]/85 via-black/20 to-transparent" />
 
                   <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center gap-2 sm:bottom-5 sm:left-5">
-                    <span className="rounded-full bg-[#E87B5B] px-3.5 py-1 text-xs font-bold uppercase tracking-wider text-white shadow-xs">
-                      Stappenplan &amp; Ambacht
-                    </span>
                     <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-[#203728] backdrop-blur-xs">
                       15 oktober 2026
                     </span>
@@ -152,12 +143,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                 </div>
 
                 <div className="mt-6">
-                  <div className="flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-[#3B7F4B]">
-                    <UIcon name="book-alt" className="text-xs text-[#3B7F4B]" aria-hidden="true" />
-                    <span>Uitgelicht hoofdartikel</span>
-                  </div>
-
-                  <h3 className="mt-2 font-heading text-2xl font-bold leading-tight text-[#203728] transition-colors duration-200 group-hover:text-[#3B7F4B] sm:text-3xl">
+                  <h3 className="font-heading text-2xl font-bold leading-tight text-[#203728] transition-colors duration-200 group-hover:text-[#3B7F4B] sm:text-3xl">
                     Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug
                   </h3>
                 </div>
@@ -225,10 +211,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
       {/* 4. RESULTATEN SLIDER (De authentieke waslijn met echte geslepen messen) */}
       <section className="relative w-full overflow-hidden bg-white py-12 sm:py-16">
         <div className="mb-6 px-4 text-center sm:mb-8 sm:px-6">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-[#C95E3E]">
-            Sfeer &amp; Resultaten
-          </p>
-          <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+          <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
             Vers van de slijpsteen
           </h2>
         </div>

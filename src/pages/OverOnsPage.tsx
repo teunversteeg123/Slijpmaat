@@ -122,12 +122,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
         <div className="site-hero-grid relative z-10 mx-auto grid max-w-7xl grid-cols-1 items-center gap-7 py-6 sm:py-10 lg:min-h-[540px] lg:grid-cols-2 lg:gap-14 lg:py-8 xl:gap-20">
           {/* Left: Copy & CTAs */}
           <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0">
-            <div className="mb-2.5">
-              <span className="site-hero-eyebrow text-xs font-bold uppercase tracking-[0.24em] text-[#C95E3E] sm:text-sm">
-                OVER ONS · LEER JE MATEN KENNEN
-              </span>
-            </div>
-            <h1 className="site-hero-title mt-2 max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
+            <h1 className="site-hero-title max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
               Twee Utrechtse vrienden met passie voor scherpte.
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
@@ -201,8 +196,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
 
         <div className="relative mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Ons verhaal</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Hoe het begon aan de keukentafel</h2>
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Hoe het begon aan de keukentafel</h2>
           </div>
 
           <div className="grid grid-cols-1 gap-5 md:grid-cols-3 md:gap-6">
@@ -244,10 +238,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               <div className="relative mb-6">
                 <UIconBadge name="target" variant="sage" size="lg" rounded="2xl" />
               </div>
-              <span className="relative text-xs font-bold uppercase tracking-wider text-[#A9C89E]">
-                Onze Missie
-              </span>
-              <h3 className="relative mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
+              <h3 className="relative font-heading text-2xl font-bold text-white sm:text-3xl">
                 Elk mes in Utrecht weer het respect en de scherpte geven die het verdient.
               </h3>
               <p className="relative mt-4 text-base leading-relaxed text-[#E8EFE8]">
@@ -261,10 +252,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
               <div className="relative mb-6">
                 <UIconBadge name="compass-alt" variant="coral" size="lg" rounded="2xl" className="bg-white/20 text-white border-white/20" />
               </div>
-              <span className="relative text-xs font-bold uppercase tracking-wider text-white/85">
-                Onze Visie
-              </span>
-              <h3 className="relative mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
+              <h3 className="relative font-heading text-2xl font-bold text-white sm:text-3xl">
                 Duurzaam behoud als de nieuwe standaard in de keuken.
               </h3>
               <p className="relative mt-4 text-base leading-relaxed text-[#FFF7F3]">
@@ -279,12 +267,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
       <section className="relative overflow-hidden bg-[#FAFAF8] px-4 py-16 sm:px-6 sm:py-24 lg:px-8 border-t border-[#d9e1d7]/60">
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 text-center sm:mb-14">
-            <div className="mb-2">
-              <span className="text-xs font-bold uppercase tracking-[0.22em] text-[#C95E3E] sm:text-sm">
-                AAN HET WERK IN UTRECHT
-              </span>
-            </div>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
               Teun en Mike in actie
             </h2>
           </div>
@@ -333,8 +316,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
       <section className="relative px-4 py-16 sm:px-6 sm:py-24 lg:px-8 bg-[#FAFAF8] border-t border-[#d9e1d7]/60">
         <div className="mx-auto max-w-6xl">
           <div className="mb-10 text-center sm:mb-14">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Vakmanschap</p>
-            <h2 className="mt-2 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
               Onze slijpfilosofie
             </h2>
           </div>
@@ -371,8 +353,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
       <section className="relative overflow-hidden bg-[#3B7F4B] px-4 pb-28 pt-20 sm:px-6 sm:pb-36 sm:pt-24 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
           <div className="mb-10 max-w-2xl sm:mb-12">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#E8EFE8]">De Slijpmaat belofte</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-white sm:text-4xl">
+            <h2 className="font-heading text-3xl font-bold text-white sm:text-4xl">
               Wat kun je van jouw Maat verwachten?
             </h2>
           </div>
@@ -422,8 +403,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
 
         <div className="relative z-10 mx-auto grid max-w-7xl gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:gap-20">
           <div className="max-w-md">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-[#3B7F4B]">Veelgestelde vragen</p>
-            <h2 className="mt-3 font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Vragen over Slijpmaat?</h2>
+            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Vragen over Slijpmaat?</h2>
             <p className="mt-4 text-base leading-7 text-[#657068]">
               Wil je meer weten over hoe we vanuit huis werken, onze stenen of de werkwijze in Utrecht? Hier vind je antwoord.
             </p>
@@ -467,8 +447,7 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
       {/* 9. BOTTOM CONTACT BANNER with top and bottom wave dividers */}
       <section id="over-ons-contact" className="relative scroll-mt-20 overflow-hidden bg-[#E87B5B] px-4 pb-24 pt-20 text-white sm:px-6 sm:pb-32 sm:pt-28 lg:px-8">
         <div className="relative z-10 mx-auto max-w-7xl">
-          <p className="font-heading text-xs font-semibold uppercase tracking-[0.36em] text-white sm:text-sm">Maak kennis</p>
-          <h2 className="mt-6 max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
+          <h2 className="max-w-5xl font-heading text-4xl font-bold leading-[1.05] tracking-[-0.035em] text-white sm:text-5xl lg:text-6xl">
             Laat je messen slijpen door je Maat.
           </h2>
           <p className="mt-6 max-w-4xl text-lg leading-relaxed text-white/95 sm:text-xl">
