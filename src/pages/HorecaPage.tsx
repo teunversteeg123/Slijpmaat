@@ -153,12 +153,12 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Right: Tomatenvideo in dezelfde begrensde kaartopmaak als Over ons */}
-          <div className="site-hero-media relative order-2 mx-auto w-full max-w-xl px-4 sm:px-6 lg:order-2 lg:px-0">
+          <div className="site-hero-media site-hero-media-video relative order-2 mx-auto w-full max-w-xl px-4 sm:px-6 lg:order-2 lg:px-0">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-[#203728] shadow-lg lg:aspect-square">
+            <div className="site-hero-video-frame relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-[#203728] shadow-lg lg:aspect-square">
               <HeroVideo
                 src="/assets/tomaat-website-video.mp4"
                 ariaLabel="Een scherp keukenmes snijdt soepel door een tomaat"
@@ -218,10 +218,10 @@ export const HorecaPage: React.FC<HorecaPageProps> = ({ onNavigate }) => {
         <ResultatenSlider />
       </section>
 
-      <section id="zakelijk-formulier" className="scroll-mt-24 px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <section className="px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto max-w-6xl">
           <div className="mb-8 text-left sm:mb-12">
-            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Zakelijke aanvraag &amp; offerte</h2>
+            <h2 id="zakelijk-formulier" ref={(node) => { if (node) node.dataset.navigationReady = 'true'; }} tabIndex={-1} className="scroll-mt-28 font-heading text-3xl font-bold text-[#3B7F4B] focus:outline-none sm:scroll-mt-32 sm:text-4xl">Zakelijke aanvraag &amp; offerte</h2>
           </div>
 
           <div className="sm:rounded-[2.5rem] sm:border sm:border-[#d9e1d7] sm:bg-white sm:p-8 sm:shadow-sm lg:p-10">

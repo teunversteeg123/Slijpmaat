@@ -1,5 +1,6 @@
 import type { ReactNode } from 'react';
 import { GoogleIcon, GOOGLE_REVIEW_COUNT } from './GoogleReviewsSection';
+import { ReviewStars } from './ReviewStars';
 
 type TrustBarItem = {
   icon: ReactNode;
@@ -23,8 +24,9 @@ export const TrustBar = ({ items, showRating: _showRating = false, compact = fal
         <div className="grid gap-4 sm:grid-cols-3 sm:gap-0">
           <div className={`flex flex-wrap items-center gap-2 sm:justify-center sm:border-r sm:border-[#d9e1d7]/70 ${itemPadding}`}>
             <GoogleIcon />
+            <ReviewStars />
             <span className="text-sm font-bold text-[#3B7F4B]">
-              5,0 · {GOOGLE_REVIEW_COUNT} reviews
+              {GOOGLE_REVIEW_COUNT} reviews
             </span>
           </div>
           {items.map((item, index) => (

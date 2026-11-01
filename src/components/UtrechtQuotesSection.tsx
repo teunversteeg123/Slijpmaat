@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { UIcon } from './ui/UIcon';
 import { GoogleIcon, GOOGLE_REVIEWS } from './GoogleReviewsSection';
+import { ReviewStars } from './ReviewStars';
 
 const FEATURED_REVIEW_NAMES = [
   'Jodocus van Lodensteinstraat',
@@ -144,7 +145,7 @@ export const UtrechtQuotesSection: React.FC = () => {
                   <span className="font-bold text-[#3B7F4B] truncate">{item.name}</span>
                   <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[#FCEEE8] px-2.5 py-1 font-bold text-[#C95E3E]">
                     <GoogleIcon />
-                    <span>5,0 op Google</span>
+                    <ReviewStars compact />
                   </span>
                 </div>
               </article>

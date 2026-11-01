@@ -7,7 +7,7 @@ import { createWhatsAppUrl } from '../utils/contact';
 
 interface HeaderProps {
   currentPage: PageId | null;
-  onNavigate: (page: PageId) => void;
+  onNavigate: (page: PageId, sectionId?: string) => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
@@ -102,19 +102,19 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
     document.querySelectorAll<HTMLDetailsElement>('[data-header-menu]').forEach((menu) => menu.removeAttribute('open'));
   };
 
-  const handleLinkClick = (pageId: PageId) => {
+  const handleLinkClick = (pageId: PageId, sectionId?: string) => {
     if (mobileMenuOpen) {
       restoreScrollOnMenuCloseRef.current = false;
     }
-    onNavigate(pageId);
+    onNavigate(pageId, sectionId);
     closeHeaderMenus();
-    window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
+    if (!sectionId) window.scrollTo({ top: 0, left: 0, behavior: 'auto' });
   };
 
-  const handleInternalClick = (event: React.MouseEvent<HTMLAnchorElement>, pageId: PageId) => {
+  const handleInternalClick = (event: React.MouseEvent<HTMLAnchorElement>, pageId: PageId, sectionId?: string) => {
     if (event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
-    handleLinkClick(pageId);
+    handleLinkClick(pageId, sectionId);
   };
 
   const isHeaderVisible = isVisible || mobileMenuOpen;
@@ -224,11 +224,11 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
 
               <div className="absolute right-0 top-full z-50 w-60 pt-3">
                 <div className="overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-2 shadow-xl">
-                  <a href={PAGE_PATHS.particulieren} onClick={(event) => handleInternalClick(event, 'particulieren')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
+                  <a href={`${PAGE_PATHS.particulieren}#calculator`} onClick={(event) => handleInternalClick(event, 'particulieren', 'calculator')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#E8EFE8]">
                     <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
                   </a>
-                  <a href={PAGE_PATHS.horeca} onClick={(event) => handleInternalClick(event, 'horeca')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
+                  <a href={`${PAGE_PATHS.horeca}#zakelijk-formulier`} onClick={(event) => handleInternalClick(event, 'horeca', 'zakelijk-formulier')} className="block w-full rounded-xl px-4 py-3 text-left transition-colors hover:bg-[#FFF4EF]">
                     <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>
                     <span className="mt-0.5 block text-xs text-[#657068]">Naar de zakelijke aanvraag</span>
                   </a>
@@ -423,16 +423,16 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
                 {mobilePlanOpen && (
                   <div id="mobile-plan-options" className="mt-2 space-y-1 overflow-hidden rounded-2xl border border-[#d9e1d7] bg-white p-1.5 shadow-sm animate-in fade-in slide-in-from-top-1 duration-200">
                     <a
-                      href={PAGE_PATHS.particulieren}
-                      onClick={(event) => handleInternalClick(event, 'particulieren')}
+                      href={`${PAGE_PATHS.particulieren}#calculator`}
+                      onClick={(event) => handleInternalClick(event, 'particulieren', 'calculator')}
                       className="block min-h-11 w-full rounded-xl px-4 py-2 text-left transition-colors hover:bg-[#E8EFE8]"
                     >
                       <span className="block font-heading text-sm font-bold text-[#3B7F4B]">Particulier</span>
                       <span className="mt-0.5 block text-xs text-[#657068]">Naar de prijs- en bestelform</span>
                     </a>
                     <a
-                      href={PAGE_PATHS.horeca}
-                      onClick={(event) => handleInternalClick(event, 'horeca')}
+                      href={`${PAGE_PATHS.horeca}#zakelijk-formulier`}
+                      onClick={(event) => handleInternalClick(event, 'horeca', 'zakelijk-formulier')}
                       className="block min-h-11 w-full rounded-xl px-4 py-2 text-left transition-colors hover:bg-[#FFF4EF]"
                     >
                       <span className="block font-heading text-sm font-bold text-[#C95E3E]">Zakelijk</span>

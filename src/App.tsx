@@ -54,14 +54,17 @@ const setStructuredData = (pathname: string) => {
 
 const scrollToSectionWhenReady = (id: string) => {
   const requestedUrl = window.location.href;
+  const isOrderForm = id === 'calculator' || id === 'zakelijk-formulier';
   const scroll = () => {
     const target = document.getElementById(id);
-    if (!target) return false;
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (!target || (isOrderForm && target.dataset.navigationReady !== 'true')) return false;
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    target.scrollIntoView({ behavior: isOrderForm || reduceMotion ? 'instant' : 'smooth', block: 'start' });
+    if (isOrderForm) target.focus({ preventScroll: true });
     return true;
   };
   if (scroll()) return;
-  // Lazy routes can arrive after the legacy-hash timer; wait for their content.
+  // Wait for lazy routes, including client hydration of prerendered form headings.
   const observer = new MutationObserver(() => {
     if (window.location.href !== requestedUrl || scroll()) {
       observer.disconnect();
@@ -69,7 +72,9 @@ const scrollToSectionWhenReady = (id: string) => {
     }
   });
   const timeout = window.setTimeout(() => observer.disconnect(), 5000);
-  observer.observe(document.getElementById('root') ?? document.body, { childList: true, subtree: true });
+  observer.observe(document.getElementById('root') ?? document.body, {
+    childList: true, subtree: true, attributes: true, attributeFilter: ['data-navigation-ready'],
+  });
 };
 
 type AppProps = {
@@ -124,8 +129,9 @@ export default function App({ initialPath }: AppProps) {
     trackPageView(metadata.path, metadata.title);
   }, [currentPage]);
 
-  const handleNavigate = (page: PageId) => {
+  const handleNavigate = (page: PageId, sectionId?: string) => {
     const nextPath = PAGE_PATHS[page];
+    const nextUrl = sectionId ? `${nextPath}#${sectionId}` : nextPath;
     const fromPath = currentPage ? PAGE_PATHS[currentPage] : window.location.pathname;
 
     if (fromPath !== nextPath) {
@@ -136,16 +142,28 @@ export default function App({ initialPath }: AppProps) {
     }
 
     setCurrentPage(page);
-    if (window.location.pathname !== nextPath || window.location.hash) {
-      window.history.pushState(null, '', nextPath);
+    if (`${window.location.pathname}${window.location.hash}` !== nextUrl) {
+      window.history.pushState(null, '', nextUrl);
     }
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (sectionId) {
+      // Wait for the lazy page and for the mobile menu to release its scroll lock.
+      window.requestAnimationFrame(() => scrollToSectionWhenReady(sectionId));
+    } else {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
   };
 
   // Ondersteun echte paden, browsernavigatie en oude hashlinks.
   useEffect(() => {
     const syncLocation = () => {
       const hash = window.location.hash.replace('#', '');
+      const route = getRouteByPath(window.location.pathname);
+      if ((hash === 'calculator' && route?.pageId === 'particulieren') ||
+          (hash === 'zakelijk-formulier' && route?.pageId === 'horeca')) {
+        setCurrentPage(route.pageId);
+        window.requestAnimationFrame(() => scrollToSectionWhenReady(hash));
+        return;
+      }
       if (/^\/diensten\/(keukenmessen-slijpen|japanse-messen-slijpen|chips-herstellen|wat-slijpen-we)\/?$/.test(window.location.pathname)) {
         setCurrentPage('particulieren');
         window.history.replaceState(null, '', PAGE_PATHS.particulieren);
@@ -189,7 +207,6 @@ export default function App({ initialPath }: AppProps) {
         return;
       }
 
-      const route = getRouteByPath(window.location.pathname);
       setCurrentPage(route?.pageId ?? null);
     };
 

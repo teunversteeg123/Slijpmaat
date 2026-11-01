@@ -4,6 +4,7 @@ import { PageId } from '../types';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { UIcon, UIconBadge } from '../components/ui/UIcon';
 import { TrustBar } from '../components/TrustBar';
+import { LogoCloud } from '../components/ui/logo-cloud-3';
 import { createWhatsAppUrl } from '../utils/contact';
 
 interface WerkwijzePageProps {
@@ -411,7 +412,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
       />
 
       {/* 5. VOOR ELK MES EEN ANDERE AANPAK (Westers vs. Japans vs. Chips herstel) in warm cream #F7F4EC */}
-      <section className="relative overflow-hidden bg-[#F7F4EC] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-8 pt-16 sm:px-6 sm:pb-12 sm:pt-24 lg:px-8">
         <div
           aria-hidden="true"
           className="pointer-events-none absolute -right-20 top-1/4 h-72 w-72 rounded-[45%_55%_50%_50%/50%_45%_55%_50%] bg-[#E8EFE8]/70"
@@ -466,6 +467,8 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
           </div>
         </div>
       </section>
+
+      <LogoCloud />
 
       <OrganicSectionDivider
         fromColor="#F7F4EC"

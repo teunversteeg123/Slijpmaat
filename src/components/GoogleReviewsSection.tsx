@@ -1,22 +1,40 @@
-import React, { useCallback, useRef, useState } from 'react';
-import { UIcon } from './ui/UIcon';
+import React from 'react';
+import { ReviewMarquee } from './ui/review-marquee';
+import { ReviewStars } from './ReviewStars';
 
 const GOOGLE_REVIEW_URL = 'https://g.page/r/CYtVeBVtieCBEAE/review';
-export const GOOGLE_REVIEW_COUNT = 27;
+export const GOOGLE_REVIEW_COUNT = 29;
 
 export const GOOGLE_REVIEWS = [
-  { name: 'Arda Brink', text: 'Altijd gedacht dat ik m’n messen zelf prima kon slijpen, maar nu ze door Slijpmaat écht geslepen zijn, merk ik een groot verschil: vlijmscherp! En bovendien een prima service: de geslepen messen werden keurig en veilig ingepakt weer afgeleverd. Fantastisch en bedankt Slijpmaat!' },
-  { name: 'Jodocus van Lodensteinstraat', text: '5 messen laten slijpen, allemaal perfect scherp teruggekomen en heel makkelijk geregeld!' },
-  { name: 'K B', text: 'Volle service en vlijmscherpe messen! Aanrader!' },
+  { name: 'Karin F', text: 'De gratis haal- en brengservice vind ik ideaal. En zo ontmoet je ook de mannen achter Slijpmaat. Mijn messen zijn iig weer lekker scherp en dat in 48u.' },
+  { name: 'Thomas Brader', text: 'Chille gasten, scherpe messen!' },
+  { name: 'sieme raijmakers', text: '' },
+  { name: 'Beau Van Winssen', text: '' },
+  { name: 'Florine van Galen Last', text: 'geweldif' },
+  { name: 'Sophia Hené', text: 'Heel leuk bedrijfje! Communicatie is fijn, ze komen op een geschikt moment de messen ophalen en brengen ze vervolgens ook weer terug. Kwaliteit is goed, ben erg tevreden!' },
+  { name: 'Teun Stoop', text: '' },
+  { name: 'Angelina Barkhuis', text: '3 messen laten slijpen, geweldig resultaat! Heel leuk initiatief!' },
+  { name: 'Emaal Barek', text: '5 sterren voor slijpmaat! Onze messen hielden het niet meer vol, maar zijn ze weer vlijmscherp door deze top service! Binnen een dag de messen weer terug gekregen en ze doen het fantastisch! Mega aanrader.' },
+  { name: 'Bo Kaarsgaren', text: 'Echt heel blij met Slijpmaat! M’n messen waren echt mega bot geworden en ik dacht eerlijk gezegd dat ik misschien zelfs nieuwe moest kopen. Maar na het slijpen zijn ze weer super scherp. Ook echt ideaal dat je ze gewoon kunt laten ophalen en weer thuisbezorgd krijgt, scheelt een hoop gedoe. Snelle reactie en de communicatie was ook heel fijn! Zeker een aanrader' },
+  { name: 'Pauline', text: 'Zeker een aanrader. De messen zijn weer vlijmscherp en de service is top.' },
+  { name: 'Dylan Prins', text: 'Top service!! Snel een afspraak kunnen maken en messen zijn weer als nieuw. Echte aanrader!!' },
+  { name: 'Max Hablé', text: 'Ik heb een heel aantal messen meegegeven en binnen de kortste keren vlijmscherp teruggekregen. Ik merk echt een wereld van verschil. Heel goed werk!' },
+  { name: 'Indya de Jong', text: 'Perfect!!!' },
+  { name: 'Ro We', text: 'Scherper dan scherp! Wij komen elke maand terug voor onze zaak, vertrouwd en kwaliteit' },
+  { name: 'Reinout Dekker', text: 'Leuke gasten die dit op hebben gezet! Communicatie verloopt soepel en mijn mes is weer vlijmscherp. Echt top dat het ook opgehaald en weer gebracht wordt, echt perfecte uitkomst voor mij. Aanrader!' },
+  { name: 'Maarten Laurs', text: 'Deze startup verdient alle lof. De 4 messen zijn opgehaald, netjes geslepen en terugbezorgd binnen 2 dagen. Contact verliep super soepel. Zeker een aanrader.' },
+  { name: 'Rudolf van Raalten', text: '' },
+  { name: 'Calandra Culinaria', text: 'Snelle en echt goede service! Misschien nog belangrijker; mijn messen zijn weer echt goed scherp!🔥' },
+  { name: 'Huib Botman', text: "Quick Response times, both pickup and drop-off services and quality work. What's not to love?" },
+  { name: 'Melle van Sprew', text: 'Strakke prijs voor goede service!' },
+  { name: 'Cyril Versteeg', text: 'Fijn dat we nu vlijmscherpe messen hebben en ze werden perfect geleverd.' },
   { name: 'Matthijs', text: 'Leuk initiatief. Ook heel gemakkelijk. Ze komen de messen ophalen en de volgende dag had ik ze al weer terug. Ze waren mooi geslepen en eentje was ook hersteld omdat er een chip in zat. De prijzen zijn goed. Wij zijn alles bij elkaar zeer tevreden. Ik kan slijpmaat dan ook aanraden!' },
-  { name: 'Cyril', text: 'Fijn dat we nu vlijmscherpe messen hebben en ze werden perfect geleverd.' },
   { name: 'Pieke Van Der Nol', text: 'Super goed geslepen, aardige meneer' },
   { name: 'Olivier van Heiningen', text: 'Hele goede service!' },
   { name: 'Suus', text: 'Alles was snel en goed geregeld. Messen waren weer vlijmscherp echt top' },
-  { name: 'Calandra Culinaria', text: 'Snelle en echt goede service! Misschien nog belangrijker; mijn messen zijn weer echt goed scherp!🔥' },
-  { name: 'Tom Snijders', text: '' },
-  { name: 'Huib Botman', text: "Quick Response times, both pickup and drop-off services and quality work. What's not to love?" },
-  { name: 'Melle van Sprew', text: 'Strakke prijs voor goede service!' },
+  { name: 'Jodocus van Lodensteinstraat', text: '5 messen laten slijpen, allemaal perfect scherp teruggekomen en heel makkelijk geregeld!' },
+  { name: 'arda brink', text: 'Altijd gedacht dat ik m’n messen zelf prima kon slijpen, maar nu ze door Slijpmaat écht geslepen zijn, merk ik een groot verschil: vlijmscherp! En bovendien een prima service: de geslepen messen werden keurig en veilig ingepakt weer afgeleverd. Fantastisch en bedankt Slijpmaat!' },
+  { name: 'K B', text: 'Volle service en vlijmscherpe messen! Aanrader!' },
 ];
 
 export const GoogleIcon: React.FC = () => (
@@ -28,85 +46,55 @@ export const GoogleIcon: React.FC = () => (
   </svg>
 );
 
-export const GoogleReviewsSection: React.FC = () => {
-  const [activeIndex, setActiveIndex] = useState(0);
-  const trackRef = useRef<HTMLDivElement>(null);
-
-  const moveTo = useCallback((requestedIndex: number) => {
-    const index = (requestedIndex + GOOGLE_REVIEWS.length) % GOOGLE_REVIEWS.length;
-    const track = trackRef.current;
-    const card = track?.children.item(index) as HTMLElement | null;
-
-    if (track && card) {
-      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-      track.scrollTo({ left: card.offsetLeft - track.offsetLeft, behavior: reduceMotion ? 'auto' : 'smooth' });
-      setActiveIndex(index);
-    }
-  }, []);
-
-  const handleScroll = useCallback(() => {
-    const track = trackRef.current;
-    const firstCard = track?.firstElementChild as HTMLElement | null;
-    if (!track || !firstCard) return;
-
-    const cardStep = firstCard.offsetWidth + 16;
-    const nextIndex = Math.min(GOOGLE_REVIEWS.length - 1, Math.max(0, Math.round(track.scrollLeft / cardStep)));
-    setActiveIndex(nextIndex);
-  }, []);
+const ReviewCard = ({ review }: { review: (typeof GOOGLE_REVIEWS)[number] }) => {
+  const words = review.name.trim().split(/\s+/);
+  const initials = `${words[0][0]}${words.length > 1 ? words[words.length - 1][0] : ''}`;
+  const cardWidth = review.text.length > 200 ? 'sm:w-[32rem]' : review.text.length > 100 ? 'sm:w-[24rem]' : 'sm:w-[20rem]';
 
   return (
-    <section className="bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-      <div className="mx-auto max-w-[1100px] overflow-hidden rounded-[2.625rem] border border-[#d9e1d7] bg-[#F4F7F4] px-4 py-10 sm:px-8 sm:py-16 lg:px-[46px] lg:py-[78px]">
-        <h2 className="mb-7 max-w-4xl font-heading text-4xl font-black leading-[0.95] tracking-[-0.035em] text-[#3B7F4B] sm:text-5xl lg:text-[64px]">
-          Scherpe woorden van blije klanten
-        </h2>
+    <article className={`w-[min(86vw,24rem)] shrink-0 rounded-2xl border border-[#d9e1d7] bg-white p-5 shadow-[0_4px_14px_rgba(36,74,48,0.04)] ${cardWidth}`}>
+      <div className="flex items-start gap-3">
+        <span aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-sm font-bold uppercase text-[#3B7F4B]">{initials}</span>
+        <div className="min-w-0 flex-1">
+          <h3 className="font-heading text-[15px] font-bold leading-5 text-[#244A30] [overflow-wrap:anywhere]">{review.name}</h3>
+          <span className="mt-1 block text-xs text-[#657068]">Google-review</span>
+        </div>
+        <GoogleIcon />
+      </div>
+      <div className="mt-3"><ReviewStars /></div>
+      {review.text ? <p className="mt-2 whitespace-normal text-sm leading-relaxed text-[#4F6354]">{review.text}</p> : null}
+    </article>
+  );
+};
 
-        <div className="mb-[18px] flex flex-col items-start justify-between gap-4 rounded-[18px] border border-[#d9e1d7] bg-white px-5 py-[18px] shadow-[0_8px_24px_rgba(36,74,48,0.05)] sm:flex-row sm:items-center">
-          <div className="flex flex-wrap items-center gap-2.5 font-bold text-[#3B7F4B]">
-            <span>Slijpmaat op Google</span>
-            <span className="text-[14px] text-[#3B7F4B]">· {GOOGLE_REVIEW_COUNT} reviews · 5,0 score</span>
+const WRITTEN_REVIEWS = GOOGLE_REVIEWS.filter(review => review.text.trim().length > 0);
+const REVIEW_MIDDLE = Math.ceil(WRITTEN_REVIEWS.length / 2);
+const REVIEW_ROWS = [WRITTEN_REVIEWS.slice(0, REVIEW_MIDDLE), WRITTEN_REVIEWS.slice(REVIEW_MIDDLE)]
+  .map((row) => row.map((review) => <ReviewCard key={review.name} review={review} />));
+
+export const GoogleReviewsSection: React.FC = () => (
+    <section id="klantreviews" aria-labelledby="klantreviews-title" className="scroll-mt-32 overflow-hidden bg-white py-10 sm:py-12">
+        <div className="px-5 text-center sm:px-10">
+          <h2 id="klantreviews-title" className="mx-auto max-w-3xl font-heading text-4xl font-bold leading-[1.04] tracking-[-0.035em] text-[#3B7F4B] sm:text-5xl lg:text-[56px]">
+            Scherpe woorden van blije klanten
+          </h2>
+          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm font-semibold text-[#3B7F4B]">
+            <span className="inline-flex items-center gap-2"><GoogleIcon />Slijpmaat op Google</span>
+            <ReviewStars />
+            <span>{GOOGLE_REVIEW_COUNT} reviews</span>
           </div>
         </div>
 
-        <div
-          ref={trackRef}
-          onScroll={handleScroll}
-          role="region"
-          aria-label="Klantreviews"
-          className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 pt-0.5 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-        >
-          {GOOGLE_REVIEWS.map((review) => (
-            <article key={review.name} className="min-h-[270px] min-w-full snap-start rounded-[20px] border border-[#d9e1d7] bg-white p-6 shadow-[0_12px_32px_rgba(36,74,48,0.06)] sm:p-[34px] md:min-w-[calc((100%-1rem)/2)]">
-              <div className="flex flex-wrap items-center justify-between gap-3 border-b border-[#E8EFE8] pb-4">
-                <h3 className="font-heading text-[22px] font-black leading-[1.18] text-[#3B7F4B] sm:text-[26px]">{review.name}</h3>
-                <div className="inline-flex items-center gap-1.5 rounded-full bg-[#E8EFE8] px-2.5 py-1 text-xs font-bold text-[#3B7F4B]">
-                  <GoogleIcon />
-                  <span>5,0 review</span>
-                </div>
-              </div>
-              {review.text ? <p className="mt-5 text-[15px] leading-[1.65] text-[#4F6354] sm:text-[17px]">{review.text}</p> : null}
-            </article>
-          ))}
-        </div>
+        <div className="mt-6 sm:mt-8"><ReviewMarquee rows={REVIEW_ROWS} /></div>
 
-        <div className="mt-[18px] flex gap-2.5">
-          <button type="button" onClick={() => moveTo(activeIndex - 1)} className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_8px_20px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] cursor-pointer" aria-label="Vorige review">
-            <UIcon name="angle-small-left" className="text-xl" aria-hidden="true" />
-          </button>
-          <button type="button" onClick={() => moveTo(activeIndex + 1)} className="flex h-[42px] w-[42px] items-center justify-center rounded-full bg-[#3B7F4B] text-white shadow-[0_8px_20px_rgba(59,127,75,0.20)] transition-colors hover:bg-[#315F3B] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] cursor-pointer" aria-label="Volgende review">
-            <UIcon name="angle-small-right" className="text-xl" aria-hidden="true" />
-          </button>
-        </div>
-
-        <div className="mt-7 grid items-center gap-[18px] rounded-[20px] bg-[#3B7F4B] p-[22px] text-white shadow-[0_16px_36px_rgba(59,127,75,0.18)] sm:grid-cols-[1fr_auto]">
-          <p className="text-base font-extrabold leading-[1.45] text-white sm:text-[19px]">
-            Heb je jouw messen laten slijpen? Deel je ervaring met je Maat en help anderen ook scherp kiezen.
-          </p>
-          <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-[42px] items-center justify-center rounded-full bg-white px-5 py-[11px] text-[14px] font-black text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-white">
+        <div className="mx-auto mt-7 flex max-w-4xl flex-col items-center gap-4 px-6 text-center sm:mt-8 sm:flex-row sm:justify-center sm:gap-6 sm:text-left">
+          <div>
+            <p className="font-heading text-xl font-bold leading-snug text-[#3B7F4B] sm:text-2xl">Heb je jouw messen laten slijpen?</p>
+            <p className="mt-2 text-sm leading-relaxed text-[#4F6354]">Deel je ervaring met je Maat en help anderen ook scherp kiezen.</p>
+          </div>
+          <a href={GOOGLE_REVIEW_URL} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 shrink-0 items-center justify-center rounded-full border border-[#3B7F4B] bg-white px-6 py-3 text-sm font-bold text-[#3B7F4B] transition-colors hover:bg-[#E8EFE8] focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B]">
             Schrijf een review
           </a>
         </div>
-      </div>
     </section>
-  );
-};
+);

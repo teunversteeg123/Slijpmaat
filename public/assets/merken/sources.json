@@ -1,0 +1,71 @@
+{
+  "retrieved": "2026-11-01",
+  "purpose": "Identification of kitchen knife brands in the requested Slijpmaat logo strip; no partnership claim.",
+  "treatment": "Original files, locally hosted. No ownership or open-licence claim. Logos retain their native colours and proportions.",
+  "logos": [
+    {
+      "brand": "Wüsthof",
+      "file": "wusthof.svg",
+      "sourcePage": "https://www.wusthof.com/",
+      "sourceAsset": "https://wusthof.com/cdn/shop/files/wust_logo.svg?v=1742849221",
+      "bytes": 2867,
+      "sha256": "04039464c63852c4c9ab0e70515ca76aad5589a6534d53fcc5cb5b2f6da59be7"
+    },
+    {
+      "brand": "Zwilling",
+      "file": "zwilling.png",
+      "sourcePage": "https://www.zwilling.com/us/",
+      "sourceAsset": "https://www.zwilling.com/on/demandware.static/-/Library-Sites-ZwillingSharedLibrary/default/dw7b03d629/ZWILLING-Culinary-World_black.png",
+      "bytes": 22025,
+      "sha256": "4a33daebc08dae9ff4bbda7067025890c2cb80eda3b58313a5f5a82b9860c272"
+    },
+    {
+      "brand": "Victorinox",
+      "file": "victorinox.svg",
+      "sourcePage": "https://www.victorinox.com/",
+      "sourceAsset": "https://assets.victorinox.com/_ui/static/media/victorinox-logo.svg",
+      "bytes": 13244,
+      "sha256": "618ef6ab0e1891b02ad9e6512abc2df0e13fe14cd3cdf51b255ffb9e3dfdb1fe"
+    },
+    {
+      "brand": "Sabatier K",
+      "file": "sabatier.png",
+      "sourcePage": "https://www.sabatier-k.com/",
+      "sourceAsset": "https://www.sabatier-k.com/templates-assets/frontOffice/sabatier_V2/dist/images/logo.png",
+      "bytes": 7296,
+      "sha256": "6b1911c5cedbc311c57ba6949c075282ac3d040b1f6a7904ae69fbc38b49d79b"
+    },
+    {
+      "brand": "Global",
+      "file": "global.svg",
+      "sourcePage": "https://www.global-knives.com/",
+      "sourceAsset": "https://www.global-knives.com/images/brand/global-logo.svg",
+      "bytes": 6684,
+      "sha256": "0ace6c3900e81c81a0bda1c4c846e1644e3817edcba2dc627d21119e563ddd50"
+    },
+    {
+      "brand": "Kai",
+      "file": "kai.svg",
+      "sourcePage": "https://kai-europe.com/",
+      "sourceAsset": "https://kai-europe.com/wp-content/uploads/2022/10/kai_logo.svg",
+      "bytes": 419,
+      "sha256": "8c5902080485bffee187952bd3535ed55aa1033debcd5a9b04e28ecc5a528ed4"
+    },
+    {
+      "brand": "Miyabi",
+      "file": "miyabi.png",
+      "sourcePage": "https://www.zwilling.com/us/miyabi/",
+      "sourceAsset": "https://www.zwilling.com/on/demandware.static/-/Sites-zwilling-storefront-catalog-us/default/dw96f0f62f/images/brand-logo/nav-logo-miyabi-secondary-navigation_V2.png",
+      "bytes": 2177,
+      "sha256": "1aac10085ef7fc9088d46069a394c702dd830f154a346b36a09534f2d51785d5"
+    },
+    {
+      "brand": "Tojiro",
+      "file": "tojiro.webp",
+      "sourcePage": "https://www.tojiro-japan.com/",
+      "sourceAsset": "Inline data image in the official homepage header",
+      "bytes": 3564,
+      "sha256": "732e2e387c86d0da15fa3e4ccefeae0f8dc21a8d1dc1072a503247eda95be1de"
+    }
+  ]
+}
