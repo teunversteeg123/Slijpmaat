@@ -23,6 +23,21 @@ export const Header: React.FC<HeaderProps> = ({ currentPage, onNavigate }) => {
   const restoreScrollOnMenuCloseRef = useRef(true);
 
   useEffect(() => {
+    // Match the navigation's lg breakpoint: a hidden mobile drawer must never
+    // keep the document locked after a tablet rotates or a window grows.
+    const desktopNavigation = window.matchMedia('(min-width: 64rem)');
+    const closeMobileNavigation = () => {
+      if (!desktopNavigation.matches) return;
+      setMobileMenuOpen(false);
+      setMobilePrijzenOpen(false);
+      setMobilePlanOpen(false);
+      setIsVisible(true);
+    };
+    desktopNavigation.addEventListener('change', closeMobileNavigation);
+    return () => desktopNavigation.removeEventListener('change', closeMobileNavigation);
+  }, []);
+
+  useEffect(() => {
     const handleScroll = () => {
       const currentScrollY = window.scrollY;
 

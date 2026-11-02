@@ -106,6 +106,15 @@ div[class~="bg-[#E87B5B]"][class~="text-white"] :is(h3, p) {
   }
 }
 
+/* These split heroes have no outer desktop padding. Keep their existing
+   80rem maximum, but retain the standard 2rem gutter on smaller laptops.
+   The homepage's edge-to-edge knife composition is intentionally excluded. */
+@media (min-width: 64rem) {
+  .site-hero-inset .site-hero-grid {
+    width: min(80rem, calc(100% - 4rem));
+  }
+}
+
 /* Mobile landing-page heroes: the copy fills the opening viewport, with each
    page's existing image or video immediately below it. Desktop stays intact. */
 @media (max-width: 639px) {

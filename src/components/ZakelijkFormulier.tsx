@@ -296,6 +296,6 @@ export const ZakelijkFormulier: React.FC = () => {
 const SummaryRow: React.FC<{ label: string; value: string; accent?: boolean }> = ({ label, value, accent = false }) => (
   <div className="flex items-start justify-between gap-3">
     <span className="text-[#657068]">{label}</span>
-    <span className={`max-w-[60%] text-right font-semibold ${accent ? 'text-[#3B7F4B]' : 'text-[#203728]'}`}>{value}</span>
+    <span className={`min-w-0 max-w-[60%] [overflow-wrap:anywhere] text-right font-semibold ${accent ? 'text-[#3B7F4B]' : 'text-[#203728]'}`}>{value}</span>
   </div>
 );

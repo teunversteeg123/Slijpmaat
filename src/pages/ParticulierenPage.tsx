@@ -86,7 +86,7 @@ export const ParticulierenPage: React.FC<ParticulierenPageProps> = ({ onNavigate
   return (
     <div className="overflow-hidden bg-[#FAFAF8]">
       {/* 1. HERO SECTION (Zonder wazige gloed, met herkenbare organische blobs) */}
-      <section className="site-hero relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
+      <section className="site-hero site-hero-inset relative overflow-hidden bg-[#FAFAF8] pb-4 pt-2 sm:pb-8 sm:pt-4 lg:min-h-[580px] lg:pb-12">
         {/* Crisp organic SVG blob in top-right background (geen wazige gloed, maar duidelijke blob-vorm) */}
         <svg
           aria-hidden="true"
