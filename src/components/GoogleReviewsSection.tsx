@@ -52,7 +52,7 @@ const ReviewCard = ({ review }: { review: (typeof GOOGLE_REVIEWS)[number] }) => 
   const cardWidth = review.text.length > 200 ? 'sm:w-[32rem]' : review.text.length > 100 ? 'sm:w-[24rem]' : 'sm:w-[20rem]';
 
   return (
-    <article className={`w-[min(86vw,24rem)] shrink-0 rounded-2xl border border-[#d9e1d7] bg-white p-5 shadow-[0_4px_14px_rgba(36,74,48,0.04)] ${cardWidth}`}>
+    <article className={`w-[min(92vw,26rem)] shrink-0 rounded-2xl border border-[#d9e1d7] bg-white p-4 sm:p-5 shadow-[0_4px_14px_rgba(36,74,48,0.04)] ${cardWidth}`}>
       <div className="flex items-start gap-3">
         <span aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#E8EFE8] font-heading text-sm font-bold uppercase text-[#3B7F4B]">{initials}</span>
         <div className="min-w-0 flex-1">
@@ -61,8 +61,8 @@ const ReviewCard = ({ review }: { review: (typeof GOOGLE_REVIEWS)[number] }) => 
         </div>
         <GoogleIcon />
       </div>
-      <div className="mt-3"><ReviewStars /></div>
-      {review.text ? <p className="mt-2 whitespace-normal text-sm leading-relaxed text-[#4F6354]">{review.text}</p> : null}
+      <div className="mt-2 sm:mt-3"><ReviewStars /></div>
+      {review.text ? <p className="mt-2 whitespace-normal text-sm leading-5 sm:leading-relaxed text-[#4F6354]">{review.text}</p> : null}
     </article>
   );
 };
@@ -73,21 +73,22 @@ const REVIEW_ROWS = [WRITTEN_REVIEWS.slice(0, REVIEW_MIDDLE), WRITTEN_REVIEWS.sl
   .map((row) => row.map((review) => <ReviewCard key={review.name} review={review} />));
 
 export const GoogleReviewsSection: React.FC = () => (
-    <section id="klantreviews" aria-labelledby="klantreviews-title" className="scroll-mt-32 overflow-hidden bg-white py-10 sm:py-12">
+    <section id="klantreviews" aria-labelledby="klantreviews-title" className="scroll-mt-32 overflow-hidden bg-white py-6 sm:py-12">
         <div className="px-5 text-center sm:px-10">
-          <h2 id="klantreviews-title" className="mx-auto max-w-3xl font-heading text-4xl font-bold leading-[1.04] tracking-[-0.035em] text-[#3B7F4B] sm:text-5xl lg:text-[56px]">
+          <h2 id="klantreviews-title" className="mx-auto max-w-3xl font-heading text-3xl font-bold leading-[1.04] tracking-[-0.035em] text-[#3B7F4B] sm:text-5xl lg:text-[56px]">
             Scherpe woorden van blije klanten
           </h2>
-          <div className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm font-semibold text-[#3B7F4B]">
+          <div className="mt-3 sm:mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-2 text-sm font-semibold text-[#3B7F4B]">
             <span className="inline-flex items-center gap-2"><GoogleIcon />Slijpmaat op Google</span>
             <ReviewStars />
             <span>{GOOGLE_REVIEW_COUNT} reviews</span>
           </div>
         </div>
 
-        <div className="mt-6 sm:mt-8"><ReviewMarquee rows={REVIEW_ROWS} /></div>
+        <div className="mt-4 sm:hidden"><ReviewMarquee rows={[REVIEW_ROWS.flat()]} /></div>
+        <div className="hidden sm:mt-8 sm:block"><ReviewMarquee rows={REVIEW_ROWS} /></div>
 
-        <div className="mx-auto mt-7 flex max-w-4xl flex-col items-center gap-4 px-6 text-center sm:mt-8 sm:flex-row sm:justify-center sm:gap-6 sm:text-left">
+        <div className="mx-auto mt-4 flex max-w-4xl flex-col items-center gap-3 px-6 text-center sm:mt-8 sm:flex-row sm:justify-center sm:gap-6 sm:text-left">
           <div>
             <p className="font-heading text-xl font-bold leading-snug text-[#3B7F4B] sm:text-2xl">Heb je jouw messen laten slijpen?</p>
             <p className="mt-2 text-sm leading-relaxed text-[#4F6354]">Deel je ervaring met je Maat en help anderen ook scherp kiezen.</p>

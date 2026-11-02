@@ -1,10 +1,10 @@
-import { useEffect, useRef, useState, type CSSProperties, type ReactNode } from 'react';
+import { useEffect, useId, useRef, useState, type CSSProperties, type ReactNode } from 'react';
 
 type ReviewMarqueeProps = {
   rows: readonly (readonly ReactNode[])[];
 };
 
-const ReviewRow = ({ cards, index, onRead }: { cards: readonly ReactNode[]; index: number; onRead: () => void }) => {
+const ReviewRow = ({ cards, index, onRead, helpId }: { cards: readonly ReactNode[]; index: number; onRead: () => void; helpId: string }) => {
   const rowRef = useRef<HTMLDivElement>(null);
   const groupRef = useRef<HTMLDivElement>(null);
   const [loop, setLoop] = useState({ distance: 0, copies: 2 });
@@ -34,7 +34,7 @@ const ReviewRow = ({ cards, index, onRead }: { cards: readonly ReactNode[]; inde
         className="review-marquee-row py-2 focus-visible:outline-2 focus-visible:outline-offset-[-2px] focus-visible:outline-[#3B7F4B] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
         role="region"
         aria-label={`Klantreviews, rij ${index + 1}`}
-        aria-describedby="review-marquee-help"
+        aria-describedby={helpId}
         tabIndex={0}
         onFocus={onRead}
         onPointerDown={onRead}
@@ -57,6 +57,7 @@ const ReviewRow = ({ cards, index, onRead }: { cards: readonly ReactNode[]; inde
 };
 
 export const ReviewMarquee = ({ rows }: ReviewMarqueeProps) => {
+  const helpId = useId();
   const rootRef = useRef<HTMLDivElement>(null);
   const [manual, setManual] = useState(false);
   const [inView, setInView] = useState(false);
@@ -79,12 +80,12 @@ export const ReviewMarquee = ({ rows }: ReviewMarqueeProps) => {
 
   return (
     <div ref={rootRef} className="review-marquee" data-paused={!inView} data-manual={manual}>
-      <p id="review-marquee-help" className="sr-only">
+      <p id={helpId} className="sr-only">
         Scroll horizontaal om alle reviews te lezen. De beweging pauzeert wanneer je met de muis of het toetsenbord een rij gebruikt.
       </p>
       <div className="space-y-1 sm:space-y-1.5">
         {rows.map((cards, rowIndex) => (
-          <ReviewRow key={rowIndex} cards={cards} index={rowIndex} onRead={readManually} />
+          <ReviewRow key={rowIndex} cards={cards} index={rowIndex} onRead={readManually} helpId={helpId} />
         ))}
       </div>
     </div>

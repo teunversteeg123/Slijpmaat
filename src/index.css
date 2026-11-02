@@ -264,6 +264,28 @@ i[class*="fi-brands-"] {
 
 .review-marquee-track-reverse { animation-direction: reverse; }
 
+@keyframes slijpmaat-scooter-enter {
+  from { transform: translateX(100vw) rotate(3deg); opacity: 0; }
+  72% { transform: translateX(-10px) rotate(-1deg); opacity: 1; }
+  to { transform: translateX(0) rotate(0); opacity: 1; }
+}
+
+.service-scooter-enter { opacity: 0; }
+.service-scooter-enter[data-loaded='true'] {
+  animation: slijpmaat-scooter-enter 1.2s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .service-scooter-enter { animation: none; opacity: 1; }
+}
+
+@media (max-width: 639px) {
+  .site-hero-servicegebied .site-hero-copy {
+    min-height: 0;
+    padding-bottom: 0;
+  }
+}
+
 @keyframes slijpmaat-logo-loop {
   to { transform: translateX(calc(-1 * var(--logo-distance, 0px))); }
 }

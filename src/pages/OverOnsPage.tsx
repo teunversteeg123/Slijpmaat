@@ -232,16 +232,16 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 lg:gap-8">
-            {/* Missie Kaart (Diep donkergroen #244A30 per gebruikerswens) */}
-            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#244A30] bg-[#244A30] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10 text-white">
+            {/* Missiekaart in Slijpmaat-groen met witte tekst en icoon. */}
+            <div className="relative overflow-hidden rounded-[2.5rem] border border-[#3B7F4B] bg-[#3B7F4B] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10 text-white">
               <div aria-hidden="true" className="absolute -right-12 -top-12 h-40 w-40 rounded-full bg-white/6" />
               <div className="relative mb-6">
-                <UIconBadge name="target" variant="sage" size="lg" rounded="2xl" />
+                <UIconBadge name="target" variant="sage" size="lg" rounded="2xl" className="!bg-white/20 !text-white !border-white/20" />
               </div>
-              <h3 className="relative font-heading text-2xl font-bold text-white sm:text-3xl">
+              <h3 className="relative font-heading text-2xl font-bold !text-white sm:text-3xl">
                 Elk mes in Utrecht weer het respect en de scherpte geven die het verdient.
               </h3>
-              <p className="relative mt-4 text-base leading-relaxed text-[#E8EFE8]">
+              <p className="relative mt-4 text-base leading-relaxed !text-white">
                 Koken hoort leuk, ontspannen en veilig te zijn. Wij maken professioneel messenslijpen toegankelijk voor iedereen: voor particulieren, wijkgenoten, gezinnen en thuiskoks tot professionele chefs in de Utrechtse horeca. Direct aan de voordeur geregeld zonder gedoe.
               </p>
             </div>
@@ -250,12 +250,12 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
             <div className="relative overflow-hidden rounded-[2.5rem] border border-[#E87B5B] bg-[#E87B5B] p-8 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-lg sm:p-10 text-white">
               <div aria-hidden="true" className="absolute -bottom-16 -right-10 h-48 w-48 rounded-full bg-white/8" />
               <div className="relative mb-6">
-                <UIconBadge name="compass-alt" variant="coral" size="lg" rounded="2xl" className="bg-white/20 text-white border-white/20" />
+                <UIconBadge name="compass-alt" variant="coral" size="lg" rounded="2xl" className="!bg-white/20 !text-white !border-white/20" />
               </div>
-              <h3 className="relative font-heading text-2xl font-bold text-white sm:text-3xl">
+              <h3 className="relative font-heading text-2xl font-bold !text-white sm:text-3xl">
                 Duurzaam behoud als de nieuwe standaard in de keuken.
               </h3>
-              <p className="relative mt-4 text-base leading-relaxed text-[#FFF7F3]">
+              <p className="relative mt-4 text-base leading-relaxed !text-white">
                 In een maatschappij waar spullen snel worden weggegooid, laten wij zien dat goed gereedschap een lange levensduur verdient. Met vakkundig handmatig onderhoud behoud je de kwaliteit en voorkom je onnodig afval.
               </p>
             </div>
