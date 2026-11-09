@@ -10,7 +10,7 @@ const routes = [
   ['/servicegebied/', true, 'Ophalen, bezorgen &amp; langsbrengen.'],
   ['/blogs/', true, 'Blogs over messen slijpen en onderhoud'],
   ['/blogs/hoe-slijp-je-een-mes/', true, 'Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug'],
-  ['/over-ons/', true, 'Twee Utrechtse vrienden met passie voor scherpte.'],
+  ['/over-ons/', true, 'De twee maten achter Slijpmaat'],
   ['/veelgestelde-vragen/', true, 'Alles wat je wilt weten over Slijpmaat.'],
   ['/algemene-voorwaarden/', false, 'Algemene voorwaarden Slijpmaat'],
   ['/privacyverklaring/', false, 'Privacyverklaring Slijpmaat'],

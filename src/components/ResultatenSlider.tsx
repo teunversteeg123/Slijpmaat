@@ -63,6 +63,48 @@ const DEFAULT_RESULT_SLIDES: Slide[] = [
     title: 'Global mes met breed lemmet',
   },
   {
+    image: '/assets/resultaten/slider/cuisinart-koksmes.webp',
+    thumbnail: '/assets/resultaten/slider/cuisinart-koksmes-thumb.webp',
+    alt: 'Cuisinart-koksmes met zwart handvat op een houten snijplank',
+    title: 'Cuisinart-koksmes',
+  },
+  {
+    image: '/assets/resultaten/slider/satake-mes-breed-lemmet.webp',
+    thumbnail: '/assets/resultaten/slider/satake-mes-breed-lemmet-thumb.webp',
+    alt: 'Satake-mes met breed lemmet en licht houten handvat op een snijplank',
+    title: 'Satake-mes met breed lemmet',
+  },
+  {
+    image: '/assets/resultaten/slider/groentemes-recht-lemmet.webp',
+    thumbnail: '/assets/resultaten/slider/groentemes-recht-lemmet-thumb.webp',
+    alt: 'Groentemes met rechthoekig lemmet en licht houten handvat op een snijplank',
+    title: 'Groentemes met recht lemmet',
+  },
+  {
+    image: '/assets/resultaten/slider/herman-mes-smal-lemmet.webp',
+    thumbnail: '/assets/resultaten/slider/herman-mes-smal-lemmet-thumb.webp',
+    alt: 'Herman-keukenmes met smal lemmet en zwart handvat op een houten snijplank',
+    title: 'Herman-mes met smal lemmet',
+  },
+  {
+    image: '/assets/resultaten/slider/satake-mes-smal-lemmet.webp',
+    thumbnail: '/assets/resultaten/slider/satake-mes-smal-lemmet-thumb.webp',
+    alt: 'Satake-mes met smal lemmet en licht houten handvat op een snijplank',
+    title: 'Satake-mes met smal lemmet',
+  },
+  {
+    image: '/assets/resultaten/slider/koksmes-met-stalen-krop.webp',
+    thumbnail: '/assets/resultaten/slider/koksmes-met-stalen-krop-thumb.webp',
+    alt: 'Koksmes met stalen krop en drie klinknagels in het zwarte handvat op een houten snijplank',
+    title: 'Koksmes met stalen krop',
+  },
+  {
+    image: '/assets/resultaten/slider/wusthof-classic-koksmes.webp',
+    thumbnail: '/assets/resultaten/slider/wusthof-classic-koksmes-thumb.webp',
+    alt: 'Wüsthof Classic-koksmes met zwart handvat op een houten snijplank',
+    title: 'Wüsthof Classic-koksmes',
+  },
+  {
     image: '/assets/resultaten/06-snede-bijl.webp',
     thumbnail: '/assets/resultaten/06-snede-bijl-thumb.webp',
     alt: 'Close-up van de geslepen snede van een bijl',

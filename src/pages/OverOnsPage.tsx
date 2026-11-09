@@ -123,10 +123,10 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           {/* Left: Copy & CTAs */}
           <div className="site-hero-copy order-1 px-4 sm:px-6 lg:order-1 lg:max-w-2xl lg:px-0">
             <h1 className="site-hero-title max-w-3xl font-heading text-4xl font-bold leading-[1.02] tracking-tight text-[#3B7F4B] sm:text-5xl lg:text-6xl">
-              Twee Utrechtse vrienden met passie voor scherpte.
+              De twee maten achter Slijpmaat
             </h1>
             <p className="site-hero-description mt-5 max-w-2xl text-base leading-7 text-[#657068] sm:text-lg lg:text-xl lg:leading-8">
-              Wij zijn Teun en Mike, twee maten uit Utrecht. Met Slijpmaat doen we waar we plezier in hebben: messen weer scherp maken en mensen daar blij mee maken. Elk mes gaat bij ons met de hand over de Japanse slijpstenen. Woon je in Utrecht? Dan komen we bij je langs met de fiets of scooter. Ook buiten de stad weten thuiskoks en horecazaken ons te vinden en zijn ze op afspraak welkom.
+              Wij zijn Teun en Mike. Slijpmaat begon aan onze eigen keukentafel in Utrecht, waar we ons stoorden aan botte messen. Nu slijpen we met de hand voor thuiskoks en chefs die, net als wij, graag met een scherp mes koken.
             </p>
 
             <div className="site-hero-actions mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">

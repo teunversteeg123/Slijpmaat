@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import { UIcon, UIconBadge } from '../components/ui/UIcon';
 import { GoogleReviewsSection } from '../components/GoogleReviewsSection';
 import { ResultatenSlider } from '../components/ResultatenSlider';
+import { InstagramReels } from '../components/InstagramReels';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { TrustBar } from '../components/TrustBar';
 import { PageId } from '../types';
@@ -23,13 +24,6 @@ const qualities = [
   { title: 'Makkelijk geregeld', text: 'Snel contact via WhatsApp, duidelijke afspraken en geen ingewikkeld proces.', icon: 'comment-alt' },
   { title: 'Duidelijke prijzen', text: 'Je ziet vooraf wat het slijpen kost. Reparaties bespreken we altijd eerst.', icon: 'euro' },
   { title: 'Langer plezier van je mes', text: 'Goed onderhoud verlengt de levensduur van je messen en voorkomt onnodig vervangen.', icon: 'leaf' },
-];
-
-const craftSteps = [
-  { number: '01', title: 'Snede beoordelen', image: '/assets/werkwijze/01-beoordelen.webp', alt: 'Slijpmaat beoordeelt de snede van een keukenmes' },
-  { number: '02', title: 'Japanse slijpsteen kiezen', image: '/assets/werkwijze/02-stenen-kiezen.webp', alt: 'Japanse slijpstenen die Slijpmaat gebruikt voor het slijpen' },
-  { number: '03', title: 'Scherpte opbouwen', image: '/assets/werkwijze/03-slijpen.webp', alt: 'Een keukenmes wordt met de hand geslepen op een Japanse slijpsteen' },
-  { number: '04', title: 'Snede afwerken', image: '/assets/werkwijze/04-afwerken.webp', alt: 'Een keukenmes wordt afgewerkt op een leren strop' },
 ];
 
 const faqs = [
@@ -288,10 +282,49 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      <OrganicSectionDivider fromColor="#3B7F4B" middleColor="#A9C89E" toColor="#FFFFFF" variant="rolling" mirror />
+      <OrganicSectionDivider fromColor="#3B7F4B" middleColor="#A9C89E" toColor="#FAFAF8" variant="rolling" mirror />
 
-      {/* 5. CALCULATOR CTA SECTION */}
-      <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+      {/* 5. TEAM SECTION "WIJ ZIJN TEUN EN MIKE" */}
+      <section className="relative overflow-hidden bg-[#FAFAF8] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
+        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
+          {/* Left: Photo with organic sage-green blob peeking behind bottom-left (Image 1) */}
+          <div className="relative isolate max-sm:-mx-4">
+            <div
+              className="pointer-events-none absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-95 transition-transform duration-500 hover:scale-105 z-0"
+              aria-hidden="true"
+            />
+            <img
+              src="/assets/team/teun-en-mike-met-mes.webp"
+              alt="Teun en Mike van Slijpmaat met een keukenmes"
+              className="relative z-10 aspect-[3/2] w-full rounded-[2rem] object-cover shadow-sm transition-transform duration-500 sm:hover:scale-[1.01]"
+              loading="lazy"
+            />
+          </div>
+
+          {/* Right: Team story & forest green CTA button */}
+          <div className="max-w-xl">
+              <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Wij zijn Teun en Mike</h2>
+            <p className="mt-5 text-base leading-8 text-[#657068] sm:text-lg">
+              Slijpmaat begon aan onze eigen keukentafel in Utrecht. We merkten hoeveel fijner koken is met een scherp mes. Nu slijpen we met de hand de messen van thuiskoks en chefs die dat verschil ook willen voelen.
+            </p>
+            <button
+              type="button"
+              onClick={() => onNavigate('over-ons')}
+              className="group mt-7 inline-flex items-center gap-2 rounded-full bg-[#3B7F4B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#315F3B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] cursor-pointer"
+            >
+              <span>Leer ons kennen</span>
+              <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <InstagramReels />
+
+      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#FFFFFF" variant="scalloped" />
+
+      {/* 6. CALCULATOR CTA SECTION */}
+      <section id="home-prijzen" className="relative scroll-mt-24 overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
         <div className="mx-auto grid max-w-7xl overflow-hidden rounded-[2.5rem] border border-[#E87B5B]/20 bg-[#FFF7F3] shadow-sm lg:grid-cols-[1.05fr_0.95fr]">
           <div className="relative px-7 py-10 sm:px-10 sm:py-12 lg:px-14 lg:py-14">
             <div className="relative max-w-xl">
@@ -334,44 +367,9 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
         </div>
       </section>
 
-      {/* 6. TEAM SECTION "WIJ ZIJN TEUN EN MIKE" (Image 1) */}
-      <section className="relative overflow-hidden bg-[#FAFAF8] px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="mx-auto grid max-w-7xl items-center gap-10 lg:grid-cols-[1.08fr_0.92fr] lg:gap-16">
-          {/* Left: Photo with organic sage-green blob peeking behind bottom-left (Image 1) */}
-          <div className="relative isolate">
-            <div
-              className="pointer-events-none absolute -bottom-6 -left-6 sm:-bottom-8 sm:-left-8 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-95 transition-transform duration-500 hover:scale-105 z-0"
-              aria-hidden="true"
-            />
-            <img
-              src="/assets/team/teun-en-mike-met-mes.webp"
-              alt="Teun en Mike van Slijpmaat met een keukenmes"
-              className="relative z-10 aspect-[3/2] w-full rounded-[2rem] object-cover shadow-sm transition-transform duration-500 hover:scale-[1.01]"
-              loading="lazy"
-            />
-          </div>
+      <OrganicSectionDivider fromColor="#FFFFFF" middleColor="#E8EFE8" toColor="#F7F4EC" variant="calm" />
 
-          {/* Right: Team story & forest green CTA button */}
-          <div className="max-w-xl">
-              <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">Wij zijn Teun en Mike</h2>
-            <p className="mt-5 text-base leading-8 text-[#657068] sm:text-lg">
-              We begonnen Slijpmaat omdat veel goede messen worden vervangen terwijl ze vaak alleen bot zijn. Daarom combineren we zorgvuldig handwerk met persoonlijke service in Utrecht.
-            </p>
-            <button
-              type="button"
-              onClick={() => onNavigate('over-ons')}
-              className="group mt-7 inline-flex items-center gap-2 rounded-full bg-[#3B7F4B] px-7 py-3.5 text-sm font-bold text-white shadow-sm transition-all duration-200 hover:bg-[#315F3B] hover:shadow-md focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] cursor-pointer"
-            >
-              <span>Leer ons kennen</span>
-              <UIcon name="arrow-small-right" className="text-lg transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
-            </button>
-          </div>
-        </div>
-      </section>
-
-      <OrganicSectionDivider fromColor="#FAFAF8" middleColor="#E8EFE8" toColor="#F7F4EC" variant="calm" />
-
-      {/* 7. WAAROM SLIJPMAAT & CRAFT STAPPEN - With soft top and bottom wave dividers */}
+      {/* 7. WAAROM SLIJPMAAT */}
       <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-20 pt-20 sm:px-6 sm:pb-28 sm:pt-28 lg:px-8">
         {/* Subtle decorative curved blob */}
         <div
@@ -410,26 +408,6 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
                 <h3 className="font-heading text-xl font-bold text-[#3B7F4B]">{quality.title}</h3>
                 <p className="mt-2 text-sm leading-6 text-[#657068]">{quality.text}</p>
               </article>
-            ))}
-          </div>
-
-          <div className="mt-12 grid gap-3 sm:grid-cols-2 lg:grid-cols-4 sm:gap-4">
-            {craftSteps.map((step) => (
-              <figure
-                key={step.title}
-                className="group relative aspect-[4/3] overflow-hidden rounded-[1.5rem] shadow-sm"
-              >
-                <img
-                  src={step.image}
-                  alt={step.alt}
-                  className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-[1.03]"
-                  loading="lazy"
-                />
-                <figcaption className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-[#203728]/95 via-[#203728]/65 to-transparent px-4 pb-4 pt-14 text-white sm:px-5 sm:pb-5">
-                  <span className="text-xs font-bold text-[#A9C89E]">{step.number}</span>
-                  <span className="mt-1 block font-heading text-sm font-bold leading-tight sm:text-base">{step.title}</span>
-                </figcaption>
-              </figure>
             ))}
           </div>
         </div>

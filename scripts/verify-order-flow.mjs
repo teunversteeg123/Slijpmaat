@@ -172,7 +172,7 @@ try {
   await visit(navigation.page, '/#prijzen-bestellen');
   await navigation.page.waitForFunction(() => document.querySelector('#calculator') && scrollY > 300);
   await navigation.page.locator('footer').getByRole('link', { name: 'Over ons', exact: true }).click();
-  await navigation.page.getByRole('heading', { name: 'Twee Utrechtse vrienden met passie voor scherpte.', exact: true }).waitFor();
+  await navigation.page.getByRole('heading', { name: 'De twee maten achter Slijpmaat', exact: true }).waitFor();
   assert.ok(new URL(navigation.page.url()).pathname === '/over-ons/');
   await navigation.context.close();
   assert.deepEqual(errors, []);
