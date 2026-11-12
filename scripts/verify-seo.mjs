@@ -9,7 +9,7 @@ const routes = [
   ['/werkwijze/', true, 'Ieder mes met de hand geslepen.'],
   ['/servicegebied/', true, 'Ophalen, bezorgen &amp; langsbrengen.'],
   ['/blogs/', true, 'Blogs over messen slijpen en onderhoud'],
-  ['/blogs/hoe-slijp-je-een-mes/', true, 'Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug'],
+  ['/blogs/hoe-slijp-je-een-mes/', true, 'Hoe slijp je een keukenmes op een slijpsteen?'],
   ['/over-ons/', true, 'De twee maten achter Slijpmaat'],
   ['/veelgestelde-vragen/', true, 'Alles wat je wilt weten over Slijpmaat.'],
   ['/algemene-voorwaarden/', false, 'Algemene voorwaarden Slijpmaat'],
@@ -113,6 +113,12 @@ try {
       if (!articleSchema?.headline || !articleSchema?.image?.length || !articleSchema?.datePublished || !articleSchema?.dateModified || !articleSchema?.author?.length) {
         throw new Error(`${pathname}: BlogPosting-schema is onvolledig`);
       }
+      const articleHeading = decodeHtml(match(rootHtml, /<h1\b[^>]*>(.*?)<\/h1>/s, 'artikelkop', pathname));
+      if (articleHeading !== expectedH1 || articleSchema.headline !== articleHeading || !decodeHtml(title).startsWith(articleHeading)) {
+        throw new Error(`${pathname}: artikelkop, title en BlogPosting komen niet overeen`);
+      }
+      const serviceSection = match(rootHtml, /<section id="wanneer-uitbesteden"[^>]*>(.*?)<\/section>/s, 'uitbesteden-sectie', pathname);
+      if (!serviceSection.includes('href="/zakelijk/"')) throw new Error(`${pathname}: zakelijke link in uitbesteden-sectie ontbreekt`);
     } else if (articleSchema) {
       throw new Error(`${pathname}: onverwacht BlogPosting-schema`);
     }

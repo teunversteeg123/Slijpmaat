@@ -3,7 +3,7 @@ import type { PageId } from '../types';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import { TrustBar } from '../components/TrustBar';
 import { UIcon } from '../components/ui/UIcon';
-import { PAGE_PATHS } from '../seo';
+import { KNIFE_SHARPENING_ARTICLE_TITLE, PAGE_PATHS } from '../seo';
 
 interface BlogHoeSlijpJeEenMesPageProps {
   onNavigate: (page: PageId) => void;
@@ -157,7 +157,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
           </button>
           <span aria-hidden="true" className="text-[#A9C89E]">/</span>
           <span className="truncate text-[#244A30] font-bold" aria-current="page">
-            Hoe slijp je een mes?
+            {KNIFE_SHARPENING_ARTICLE_TITLE}
           </span>
         </div>
       </nav>
@@ -186,7 +186,7 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
           </div>
 
           <h1 className="mt-4 max-w-4xl font-heading text-3xl font-black leading-[1.08] tracking-tight text-[#244A30] sm:text-4xl lg:text-5xl">
-            Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug
+            {KNIFE_SHARPENING_ARTICLE_TITLE}
           </h1>
 
           {/* Auteursblok Teun & Mike */}
@@ -819,6 +819,9 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
 
               <p className="mt-3 text-base leading-relaxed text-[#244A30]">
                 Bekijk <a href={PAGE_PATHS.werkwijze} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">hoe Slijpmaat je messen met de hand slijpt</a> of ga direct naar de <a href={PAGE_PATHS.particulieren} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">prijzen en afspraak</a>.
+              </p>
+              <p className="mt-3 text-base leading-relaxed text-[#244A30]">
+                Wil je <a href={PAGE_PATHS.horeca} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">messen laten slijpen voor je restaurant</a>? Horeca uit heel Nederland kan messen op afspraak in Utrecht brengen en ophalen.
               </p>
 
               {/* BULLET WIDGET REDENEN */}

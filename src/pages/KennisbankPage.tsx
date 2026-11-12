@@ -4,7 +4,7 @@ import type { PageId } from '../types';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import { TrustBar } from '../components/TrustBar';
-import { PAGE_PATHS } from '../seo';
+import { KNIFE_SHARPENING_ARTICLE_TITLE, PAGE_PATHS } from '../seo';
 import { createWhatsAppUrl } from '../utils/contact';
 
 interface KennisbankPageProps {
@@ -120,7 +120,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
                 href={PAGE_PATHS['blog-hoe-slijp-je-een-mes']}
                 onClick={handleArticleClick}
                 className="absolute inset-0 z-20 h-full w-full cursor-pointer rounded-[2.5rem] focus:outline-none focus:ring-2 focus:ring-[#3B7F4B] focus:ring-offset-2"
-                aria-label="Lees artikel: Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug"
+                aria-label={`Lees artikel: ${KNIFE_SHARPENING_ARTICLE_TITLE}`}
               />
 
               <div>
@@ -144,7 +144,7 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
 
                 <div className="mt-6">
                   <h3 className="font-heading text-2xl font-bold leading-tight text-[#203728] transition-colors duration-200 group-hover:text-[#3B7F4B] sm:text-3xl">
-                    Hoe slijp je een mes? Zo krijgt je keukenmes zijn scherpte terug
+                    {KNIFE_SHARPENING_ARTICLE_TITLE}
                   </h3>
                 </div>
               </div>
