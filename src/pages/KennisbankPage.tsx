@@ -4,19 +4,25 @@ import type { PageId } from '../types';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
 import { ResultatenSlider } from '../components/ResultatenSlider';
 import { TrustBar } from '../components/TrustBar';
-import { KNIFE_SHARPENING_ARTICLE_TITLE, PAGE_PATHS } from '../seo';
+import { getRouteByPage } from '../seo';
 import { createWhatsAppUrl } from '../utils/contact';
 
 interface KennisbankPageProps {
   onNavigate: (page: PageId) => void;
 }
 
+const articles = [
+  getRouteByPage('blog-koksmessen-slijpen-horeca'),
+  getRouteByPage('blog-hoe-slijp-je-een-mes'),
+];
+const articleDate = new Intl.DateTimeFormat('nl-NL', { dateStyle: 'long', timeZone: 'UTC' });
+
 export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
   const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik las jullie blogs en heb een vraag over het onderhoud van mijn messen!');
-  const handleArticleClick = (event: MouseEvent<HTMLAnchorElement>) => {
+  const handleArticleClick = (event: MouseEvent<HTMLAnchorElement>, pageId: PageId) => {
     if (event.defaultPrevented || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
     event.preventDefault();
-    onNavigate('blog-hoe-slijp-je-een-mes');
+    onNavigate(pageId);
   };
 
   return (
@@ -103,73 +109,65 @@ export const KennisbankPage: FC<KennisbankPageProps> = ({ onNavigate }) => {
             </h2>
           </div>
 
-          {/* ONDERWERPEN PILLS */}
-          <div className="mb-8 flex flex-wrap items-center gap-2.5">
-            <span className="rounded-full bg-[#3B7F4B] px-4 py-1.5 text-xs font-bold text-white shadow-xs">
-              Alle publicaties (1)
-            </span>
-            <span className="rounded-full border border-[#d9e1d7] bg-white px-4 py-1.5 text-xs font-semibold text-[#505d54]">
-              Stappenplannen
-            </span>
-          </div>
-
           <div className="grid gap-8 lg:grid-cols-3">
-            {/* HOOFDTEGEL: HOE SLIJP JE EEN MES */}
-            <article className="group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white p-6 sm:p-8 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-[#3B7F4B]/50 hover:shadow-xl lg:col-span-2">
-              <a
-                href={PAGE_PATHS['blog-hoe-slijp-je-een-mes']}
-                onClick={handleArticleClick}
-                className="absolute inset-0 z-20 h-full w-full cursor-pointer rounded-[2.5rem] focus:outline-none focus:ring-2 focus:ring-[#3B7F4B] focus:ring-offset-2"
-                aria-label={`Lees artikel: ${KNIFE_SHARPENING_ARTICLE_TITLE}`}
-              />
-
-              <div>
-                <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[2rem] bg-[#203728] sm:aspect-[2/1]">
-                  <img
-                    src="/assets/werkwijze/03-slijpen.webp"
-                    alt="Handmatig messen slijpen op Japanse slijpstenen bij Slijpmaat"
-                    className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
+            <div className="grid gap-6 sm:grid-cols-2 lg:col-span-2">
+              {articles.map((article) => (
+                <article key={article.pageId} className="group relative flex flex-col justify-between overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white p-5 sm:p-6 shadow-xs transition-all duration-300 hover:-translate-y-1.5 hover:border-[#3B7F4B]/50 hover:shadow-xl">
+                  <a
+                    href={article.path}
+                    onClick={(event) => handleArticleClick(event, article.pageId)}
+                    className="absolute inset-0 z-20 h-full w-full cursor-pointer rounded-[2.5rem] focus:outline-none focus:ring-2 focus:ring-[#3B7F4B] focus:ring-offset-2"
+                    aria-label={`Lees artikel: ${article.articleHeadline}`}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#203728]/85 via-black/20 to-transparent" />
 
-                  <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center gap-2 sm:bottom-5 sm:left-5">
-                    <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-[#203728] backdrop-blur-xs">
-                      15 oktober 2026
-                    </span>
-                    <span className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-[#203728] backdrop-blur-xs">
-                      7 min leestijd
-                    </span>
-                  </div>
-                </div>
-
-                <div className="mt-6">
-                  <h3 className="font-heading text-2xl font-bold leading-tight text-[#203728] transition-colors duration-200 group-hover:text-[#3B7F4B] sm:text-3xl">
-                    {KNIFE_SHARPENING_ARTICLE_TITLE}
-                  </h3>
-                </div>
-              </div>
-
-              <div className="mt-8 flex items-center justify-between border-t border-[#d9e1d7]/70 pt-5">
-                <div className="flex items-center gap-3">
-                  <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#E8EFE8] font-heading text-sm font-bold text-[#3B7F4B]">
-                    S
-                  </div>
                   <div>
-                    <span className="block text-xs font-bold text-[#203728] sm:text-sm">
-                      Teun &amp; Mike van Slijpmaat
-                    </span>
-                    <span className="text-[11px] text-[#657068]">
-                      Messenslijpers uit Utrecht
+                    <div className="relative aspect-[16/9] w-full overflow-hidden rounded-[2rem] bg-[#203728] sm:aspect-[2/1]">
+                      <img
+                        src={article.image}
+                        alt={article.imageAlt}
+                        className="h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.04]"
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-[#203728]/85 via-black/20 to-transparent" />
+
+                      <div className="absolute bottom-4 left-4 right-4 flex flex-wrap items-center gap-2 sm:bottom-5 sm:left-5">
+                        {article.datePublished && (
+                          <time dateTime={article.datePublished} className="rounded-full bg-white/95 px-3 py-1 text-xs font-semibold text-[#203728] backdrop-blur-xs">
+                            {articleDate.format(new Date(article.datePublished))}
+                          </time>
+                        )}
+                      </div>
+                    </div>
+
+                    <div className="mt-6">
+                      <h3 className="font-heading text-2xl font-bold leading-tight text-[#203728] transition-colors duration-200 group-hover:text-[#3B7F4B]">
+                        {article.articleHeadline}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="mt-6 flex flex-wrap items-center justify-between gap-3 border-t border-[#d9e1d7]/70 pt-5">
+                    <div className="flex items-center gap-3">
+                      <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[#E8EFE8] font-heading text-sm font-bold text-[#3B7F4B]">
+                        S
+                      </div>
+                      <div>
+                        <span className="block text-xs font-bold text-[#203728] sm:text-sm">
+                          Teun &amp; Mike van Slijpmaat
+                        </span>
+                        <span className="text-[11px] text-[#657068]">
+                          Messenslijpers uit Utrecht
+                        </span>
+                      </div>
+                    </div>
+
+                    <span className="inline-flex items-center gap-2 rounded-full bg-[#E8EFE8] px-4 py-2 text-xs font-bold text-[#3B7F4B] transition-colors group-hover:bg-[#3B7F4B] group-hover:text-white sm:text-sm">
+                      <span>Lees artikel</span>
+                      <UIcon name="arrow-right" className="text-sm transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
                     </span>
                   </div>
-                </div>
-
-                <span className="inline-flex items-center gap-2 rounded-full bg-[#E8EFE8] px-4 py-2 text-xs font-bold text-[#3B7F4B] transition-colors group-hover:bg-[#3B7F4B] group-hover:text-white sm:text-sm">
-                  <span>Lees artikel</span>
-                  <UIcon name="arrow-right" className="text-sm transition-transform duration-200 group-hover:translate-x-1" aria-hidden="true" />
-                </span>
-              </div>
-            </article>
+                </article>
+              ))}
+            </div>
 
             {/* Only published content is shown; no empty article promises. */}
             <div className="flex flex-col gap-6">

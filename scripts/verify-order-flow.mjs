@@ -7,7 +7,7 @@ const { chromium } = await import(process.env.SLIJPMAAT_PLAYWRIGHT_MODULE ?? 'pl
 const baseUrl = process.env.SLIJPMAAT_TEST_URL ?? 'http://127.0.0.1:4173';
 const browser = await chromium.launch({ headless: true, executablePath: process.env.SLIJPMAAT_CHROME_PATH ?? 'C:/Program Files/Google/Chrome/Application/chrome.exe' });
 const errors = [];
-const routes = ['/', '/particulier/', '/zakelijk/', '/werkwijze/', '/servicegebied/', '/blogs/', '/blogs/hoe-slijp-je-een-mes/', '/over-ons/', '/veelgestelde-vragen/', '/algemene-voorwaarden/', '/privacyverklaring/'];
+const routes = ['/', '/particulier/', '/zakelijk/', '/werkwijze/', '/servicegebied/', '/blogs/', '/blogs/hoe-slijp-je-een-mes/', '/blogs/hoe-vaak-koksmessen-slijpen-horeca/', '/over-ons/', '/veelgestelde-vragen/', '/algemene-voorwaarden/', '/privacyverklaring/'];
 let checks = 0;
 
 const setup = async (width, reducedMotion = 'reduce') => {

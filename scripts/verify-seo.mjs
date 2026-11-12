@@ -10,6 +10,7 @@ const routes = [
   ['/servicegebied/', true, 'Ophalen, bezorgen &amp; langsbrengen.'],
   ['/blogs/', true, 'Blogs over messen slijpen en onderhoud'],
   ['/blogs/hoe-slijp-je-een-mes/', true, 'Hoe slijp je een keukenmes op een slijpsteen?'],
+  ['/blogs/hoe-vaak-koksmessen-slijpen-horeca/', true, 'Hoe vaak moet je koksmessen slijpen in de horeca?'],
   ['/over-ons/', true, 'De twee maten achter Slijpmaat'],
   ['/veelgestelde-vragen/', true, 'Alles wat je wilt weten over Slijpmaat.'],
   ['/algemene-voorwaarden/', false, 'Algemene voorwaarden Slijpmaat'],
@@ -90,7 +91,8 @@ try {
     if (!socialImage.startsWith('https://slijpmaat.nl/assets/')) throw new Error(`${pathname}: onjuiste absolute og:image`);
     if (!socialImageAlt.trim()) throw new Error(`${pathname}: lege og:image:alt`);
     if (twitterImage !== socialImage) throw new Error(`${pathname}: twitter:image wijkt af van og:image`);
-    if (socialType !== (pathname === '/blogs/hoe-slijp-je-een-mes/' ? 'article' : 'website')) throw new Error(`${pathname}: onjuist og:type ${socialType}`);
+    const isArticle = pathname.startsWith('/blogs/') && pathname !== '/blogs/';
+    if (socialType !== (isArticle ? 'article' : 'website')) throw new Error(`${pathname}: onjuist og:type ${socialType}`);
     const socialImageResponse = await fetch(`${baseUrl}${new URL(socialImage).pathname}`);
     if (socialImageResponse.status !== 200 || !socialImageResponse.headers.get('content-type')?.startsWith('image/')) {
       throw new Error(`${pathname}: social-afbeelding is niet als afbeelding bereikbaar`);
@@ -109,16 +111,18 @@ try {
       }
     }
     const articleSchema = schema['@graph'].find((item) => item['@type'] === 'BlogPosting');
-    if (pathname === '/blogs/hoe-slijp-je-een-mes/') {
-      if (!articleSchema?.headline || !articleSchema?.image?.length || !articleSchema?.datePublished || !articleSchema?.dateModified || !articleSchema?.author?.length) {
+    if (isArticle) {
+      if (!articleSchema?.headline || !articleSchema?.image?.length || !articleSchema?.datePublished || !articleSchema?.author?.length) {
         throw new Error(`${pathname}: BlogPosting-schema is onvolledig`);
       }
       const articleHeading = decodeHtml(match(rootHtml, /<h1\b[^>]*>(.*?)<\/h1>/s, 'artikelkop', pathname));
       if (articleHeading !== expectedH1 || articleSchema.headline !== articleHeading || !decodeHtml(title).startsWith(articleHeading)) {
         throw new Error(`${pathname}: artikelkop, title en BlogPosting komen niet overeen`);
       }
-      const serviceSection = match(rootHtml, /<section id="wanneer-uitbesteden"[^>]*>(.*?)<\/section>/s, 'uitbesteden-sectie', pathname);
-      if (!serviceSection.includes('href="/zakelijk/"')) throw new Error(`${pathname}: zakelijke link in uitbesteden-sectie ontbreekt`);
+      if (pathname === '/blogs/hoe-slijp-je-een-mes/') {
+        const serviceSection = match(rootHtml, /<section id="wanneer-uitbesteden"[^>]*>(.*?)<\/section>/s, 'uitbesteden-sectie', pathname);
+        if (!serviceSection.includes('href="/zakelijk/"')) throw new Error(`${pathname}: zakelijke link in uitbesteden-sectie ontbreekt`);
+      }
     } else if (articleSchema) {
       throw new Error(`${pathname}: onverwacht BlogPosting-schema`);
     }

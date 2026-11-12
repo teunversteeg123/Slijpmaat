@@ -3,6 +3,7 @@ import { FAQS, SERVICEGEBIED_FAQS } from './data/siteData';
 
 export const SITE_URL = 'https://slijpmaat.nl';
 export const KNIFE_SHARPENING_ARTICLE_TITLE = 'Hoe slijp je een keukenmes op een slijpsteen?';
+export const HORECA_SHARPENING_ARTICLE_TITLE = 'Hoe vaak moet je koksmessen slijpen in de horeca?';
 const DEFAULT_SOCIAL_IMAGE = '/assets/slijpmaat-homepage-hero.jpg';
 const DEFAULT_SOCIAL_IMAGE_ALT = 'Slijpmaat slijpt messen met de hand in Utrecht';
 
@@ -17,6 +18,7 @@ type RouteSeo = {
   imageAlt?: string;
   datePublished?: string;
   dateModified?: string;
+  articleHeadline?: string;
 };
 
 const ROUTES: RouteSeo[] = [
@@ -75,7 +77,7 @@ const ROUTES: RouteSeo[] = [
     path: '/blogs/',
     label: 'Blogs',
     title: 'Blogs over messen slijpen en onderhoud | Slijpmaat',
-    description: 'Lees hoe je zelf een keukenmes slijpt op een Japanse slijpsteen en hoe je je messen onderhoudt. Met tips uit de praktijk van Slijpmaat.',
+    description: 'Leer zelf een keukenmes slijpen op een Japanse slijpsteen en ontdek hoe je slijpbeurten voor koksmessen plant in de horeca.',
     index: true,
     image: '/assets/kennisbank-slijpmaat-kaartje-planten.webp',
     imageAlt: 'Slijpmaat-kaartje tussen groene planten bij de blogs',
@@ -89,8 +91,21 @@ const ROUTES: RouteSeo[] = [
     index: true,
     image: '/assets/werkwijze/03-slijpen.webp',
     imageAlt: 'Keukenmes wordt met de hand geslepen op een Japanse slijpsteen',
+    articleHeadline: KNIFE_SHARPENING_ARTICLE_TITLE,
     datePublished: '2026-10-15',
     dateModified: '2026-10-17',
+  },
+  {
+    pageId: 'blog-koksmessen-slijpen-horeca',
+    path: '/blogs/hoe-vaak-koksmessen-slijpen-horeca/',
+    label: 'Koksmessen slijpen in de horeca',
+    title: `${HORECA_SHARPENING_ARTICLE_TITLE} | Slijpmaat`,
+    description: 'Wanneer is een koksmes toe aan een slijpbeurt? Herken een bot mes en plan het slijpen in rond de service van je restaurant.',
+    index: true,
+    image: '/assets/tomaat-video-poster.webp',
+    imageAlt: 'Een koksmes snijdt een tomaat op een houten snijplank',
+    articleHeadline: HORECA_SHARPENING_ARTICLE_TITLE,
+    datePublished: '2026-11-12',
   },
   {
     pageId: 'over-ons',
@@ -193,7 +208,7 @@ const getStructuredData = (pathname: string) => {
   ];
 
   if (route && route.path !== '/') {
-    const breadcrumbItems = route.pageId === 'blog-hoe-slijp-je-een-mes'
+    const breadcrumbItems = route.articleHeadline
       ? [
           { '@type': 'ListItem', position: 1, name: 'Home', item: `${SITE_URL}/` },
           { '@type': 'ListItem', position: 2, name: 'Blogs', item: `${SITE_URL}/blogs/` },
@@ -213,11 +228,11 @@ const getStructuredData = (pathname: string) => {
 
   if (route?.pageId === 'faq') graph.push(faqSchema(FAQS));
   if (route?.pageId === 'ophalen-bezorgen') graph.push(faqSchema(SERVICEGEBIED_FAQS));
-  if (route?.pageId === 'blog-hoe-slijp-je-een-mes') {
+  if (route?.articleHeadline) {
     graph.push({
       '@type': 'BlogPosting',
       '@id': `${canonicalUrl}#article`,
-      headline: KNIFE_SHARPENING_ARTICLE_TITLE,
+      headline: route.articleHeadline,
       description: route.description,
       image: [getSocialImageUrl(route)],
       datePublished: route.datePublished,

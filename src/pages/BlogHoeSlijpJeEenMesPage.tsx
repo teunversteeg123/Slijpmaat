@@ -823,6 +823,9 @@ export const BlogHoeSlijpJeEenMesPage: FC<BlogHoeSlijpJeEenMesPageProps> = ({ on
               <p className="mt-3 text-base leading-relaxed text-[#244A30]">
                 Wil je <a href={PAGE_PATHS.horeca} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">messen laten slijpen voor je restaurant</a>? Horeca uit heel Nederland kan messen op afspraak in Utrecht brengen en ophalen.
               </p>
+              <p className="mt-3 text-base leading-relaxed text-[#244A30]">
+                Lees ook <a href={PAGE_PATHS['blog-koksmessen-slijpen-horeca']} className="font-bold text-[#3B7F4B] underline decoration-[#3B7F4B]/35 underline-offset-4 hover:text-[#203728]">hoe vaak je koksmessen in de horeca moet slijpen</a> en hoe je dat rond de service plant.
+              </p>
 
               {/* BULLET WIDGET REDENEN */}
               <div className="mt-5 rounded-2xl border border-[#d9e1d7] bg-[#FAFAF8] p-5">

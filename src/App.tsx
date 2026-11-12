@@ -14,6 +14,7 @@ const WerkwijzePage = lazy(() => import('./pages/WerkwijzePage').then((module) =
 const ServicegebiedPage = lazy(() => import('./pages/ServicegebiedPage').then((module) => ({ default: module.ServicegebiedPage })));
 const KennisbankPage = lazy(() => import('./pages/KennisbankPage').then((module) => ({ default: module.KennisbankPage })));
 const BlogHoeSlijpJeEenMesPage = lazy(() => import('./pages/BlogHoeSlijpJeEenMesPage').then((module) => ({ default: module.BlogHoeSlijpJeEenMesPage })));
+const BlogKoksmessenHorecaPage = lazy(() => import('./pages/blog-koksmessen-horeca-page').then((module) => ({ default: module.BlogKoksmessenHorecaPage })));
 const OverOnsPage = lazy(() => import('./pages/OverOnsPage').then((module) => ({ default: module.OverOnsPage })));
 const FaqPage = lazy(() => import('./pages/FaqPage').then((module) => ({ default: module.FaqPage })));
 const VoorwaardenPage = lazy(() => import('./pages/VoorwaardenPage').then((module) => ({ default: module.VoorwaardenPage })));
@@ -235,6 +236,8 @@ export default function App({ initialPath }: AppProps) {
         return <KennisbankPage onNavigate={handleNavigate} />;
       case 'blog-hoe-slijp-je-een-mes':
         return <BlogHoeSlijpJeEenMesPage onNavigate={handleNavigate} />;
+      case 'blog-koksmessen-slijpen-horeca':
+        return <BlogKoksmessenHorecaPage />;
       case 'over-ons':
         return <OverOnsPage onNavigate={handleNavigate} />;
       case 'faq':
