@@ -71,7 +71,7 @@ const SlijpenVideo: React.FC = () => {
 
   return (
     <div className="relative">
-      <div className="relative aspect-square w-full overflow-hidden bg-white md:aspect-[4/3] md:rounded-[2.5rem] md:border md:border-[#d9e1d7] md:shadow-lg lg:aspect-square">
+      <div className="mobile-media-frame relative aspect-square w-full overflow-hidden bg-white md:aspect-[4/3] md:rounded-[2.5rem] md:border md:border-[#d9e1d7] md:shadow-lg lg:aspect-square">
         <video
           ref={videoRef}
           muted
@@ -315,7 +315,7 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
             {craftPhotos.map((item) => (
               <figure
                 key={item.title}
-                className="group relative aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
+                className="mobile-media-frame group relative max-sm:-mx-4 aspect-[4/3] overflow-hidden rounded-[1.75rem] shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-md"
               >
                 <img
                   src={item.image}

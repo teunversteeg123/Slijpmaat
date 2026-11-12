@@ -58,12 +58,12 @@ export const FaqPage: React.FC<FaqPageProps> = ({ onNavigate }) => {
             </div>
           </div>
 
-          <div className="site-hero-media relative mx-auto w-full max-w-xl">
+          <div className="site-hero-media site-hero-media-wide relative mx-auto w-full max-w-xl">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-6 -left-5 h-44 w-44 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] sm:-bottom-8 sm:-left-8 sm:h-56 sm:w-56"
             />
-            <div className="relative aspect-[4/3] overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg lg:aspect-square">
+            <div className="mobile-media-frame relative aspect-[4/3] overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg lg:aspect-square">
               <img
                 src="/assets/faq-slijpmaat-kaartje-bessen.webp"
                 alt="Slijpmaat-kaartje tussen oranje bessen en groene bladeren"

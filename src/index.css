@@ -218,6 +218,19 @@ div[class~="bg-[#E87B5B]"][class~="text-white"] :is(h3, p) {
   }
 }
 
+@media (max-width: 639px) {
+  .site-hero-media.site-hero-media-wide {
+    width: 100%;
+    max-width: none;
+    padding-inline: 0;
+  }
+
+  .mobile-media-frame {
+    aspect-ratio: 3 / 2;
+    border-radius: 2rem;
+  }
+}
+
 @media (max-width: 639px) and (max-height: 700px) {
   .site-hero-copy {
     padding-top: 2rem;

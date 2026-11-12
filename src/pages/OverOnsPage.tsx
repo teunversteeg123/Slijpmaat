@@ -152,12 +152,12 @@ export const OverOnsPage: React.FC<OverOnsPageProps> = ({ onNavigate }) => {
           </div>
 
           {/* Right: Foto van Teun & Mike samen (met arm over de schouder) & organische blob */}
-          <div className="site-hero-media relative order-2 mx-auto w-full max-w-xl px-4 sm:px-6 lg:order-2 lg:px-0">
+          <div className="site-hero-media site-hero-media-wide relative order-2 mx-auto w-full max-w-xl px-4 sm:px-6 lg:order-2 lg:px-0">
             <div
               aria-hidden="true"
               className="pointer-events-none absolute -bottom-5 -left-5 sm:-bottom-7 sm:-left-7 h-40 w-40 sm:h-52 sm:w-52 rounded-[42%_58%_62%_38%/55%_42%_58%_45%] bg-[#A9C89E] opacity-90 z-0 transition-transform duration-500 hover:scale-105"
             />
-            <div className="relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg lg:aspect-square">
+            <div className="mobile-media-frame relative z-10 aspect-[4/3] w-full overflow-hidden rounded-[2.5rem] border border-[#d9e1d7] bg-white shadow-lg lg:aspect-square">
               <img
                 src="/assets/team/teun-en-mike-samen.webp"
                 alt="Teun en Mike van Slijpmaat samen in Utrecht"

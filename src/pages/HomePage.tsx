@@ -296,7 +296,7 @@ export const HomePage: React.FC<HomePageProps> = ({ onNavigate }) => {
             <img
               src="/assets/team/teun-en-mike-met-mes.webp"
               alt="Teun en Mike van Slijpmaat met een keukenmes"
-              className="relative z-10 aspect-[3/2] w-full rounded-[2rem] object-cover shadow-sm transition-transform duration-500 sm:hover:scale-[1.01]"
+              className="mobile-media-frame relative z-10 aspect-[3/2] w-full rounded-[2rem] object-cover shadow-sm transition-transform duration-500 sm:hover:scale-[1.01]"
               loading="lazy"
             />
           </div>
