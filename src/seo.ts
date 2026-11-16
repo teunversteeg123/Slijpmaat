@@ -3,7 +3,7 @@ import { FAQS, SERVICEGEBIED_FAQS } from './data/siteData';
 
 export const SITE_URL = 'https://slijpmaat.nl';
 export const KNIFE_SHARPENING_ARTICLE_TITLE = 'Hoe slijp je een keukenmes op een slijpsteen?';
-export const HORECA_SHARPENING_ARTICLE_TITLE = 'Hoe vaak moet je koksmessen slijpen in de horeca?';
+export const JAPANESE_KNIVES_ARTICLE_TITLE = 'Japanse messen: soorten, staal en slijpen';
 const DEFAULT_SOCIAL_IMAGE = '/assets/slijpmaat-homepage-hero.jpg';
 const DEFAULT_SOCIAL_IMAGE_ALT = 'Slijpmaat slijpt messen met de hand in Utrecht';
 
@@ -77,7 +77,7 @@ const ROUTES: RouteSeo[] = [
     path: '/blogs/',
     label: 'Blogs',
     title: 'Blogs over messen slijpen en onderhoud | Slijpmaat',
-    description: 'Leer zelf een keukenmes slijpen op een Japanse slijpsteen en ontdek hoe je slijpbeurten voor koksmessen plant in de horeca.',
+    description: 'Leer zelf een keukenmes slijpen op een Japanse slijpsteen en ontdek welke Japanse messen en staalsoorten er zijn en hoe je ze onderhoudt.',
     index: true,
     image: '/assets/kennisbank-slijpmaat-kaartje-planten.webp',
     imageAlt: 'Slijpmaat-kaartje tussen groene planten bij de blogs',
@@ -96,16 +96,16 @@ const ROUTES: RouteSeo[] = [
     dateModified: '2026-10-17',
   },
   {
-    pageId: 'blog-koksmessen-slijpen-horeca',
-    path: '/blogs/hoe-vaak-koksmessen-slijpen-horeca/',
-    label: 'Koksmessen slijpen in de horeca',
-    title: `${HORECA_SHARPENING_ARTICLE_TITLE} | Slijpmaat`,
-    description: 'Wanneer is een koksmes toe aan een slijpbeurt? Herken een bot mes en plan het slijpen in rond de service van je restaurant.',
+    pageId: 'blog-japanse-messen',
+    path: '/blogs/japanse-messen/',
+    label: JAPANESE_KNIVES_ARTICLE_TITLE,
+    title: `${JAPANESE_KNIVES_ARTICLE_TITLE} | Slijpmaat`,
+    description: 'Leer welke Japanse messen en staalsoorten er zijn, hoe je een santoku, gyuto of nakiri zelf slijpt en wanneer je je Japanse mes kunt laten slijpen.',
     index: true,
-    image: '/assets/tomaat-video-poster.webp',
-    imageAlt: 'Een koksmes snijdt een tomaat op een houten snijplank',
-    articleHeadline: HORECA_SHARPENING_ARTICLE_TITLE,
-    datePublished: '2026-11-12',
+    image: '/assets/resultaten/slider/japans-santokumes.webp',
+    imageAlt: 'Japans santokumes van Slijpmaat',
+    articleHeadline: JAPANESE_KNIVES_ARTICLE_TITLE,
+    datePublished: '2026-11-16',
   },
   {
     pageId: 'over-ons',

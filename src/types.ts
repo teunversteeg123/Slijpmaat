@@ -6,7 +6,7 @@ export type PageId =
   | 'ophalen-bezorgen'
   | 'blogs'
   | 'blog-hoe-slijp-je-een-mes'
-  | 'blog-koksmessen-slijpen-horeca'
+  | 'blog-japanse-messen'
   | 'over-ons'
   | 'faq'
   | 'algemene-voorwaarden'

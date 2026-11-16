@@ -12,7 +12,7 @@ interface KennisbankPageProps {
 }
 
 const articles = [
-  getRouteByPage('blog-koksmessen-slijpen-horeca'),
+  getRouteByPage('blog-japanse-messen'),
   getRouteByPage('blog-hoe-slijp-je-een-mes'),
 ];
 const articleDate = new Intl.DateTimeFormat('nl-NL', { dateStyle: 'long', timeZone: 'UTC' });

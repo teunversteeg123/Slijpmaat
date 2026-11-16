@@ -10,7 +10,7 @@ const routes = [
   ['/servicegebied/', true, 'Ophalen, bezorgen &amp; langsbrengen.'],
   ['/blogs/', true, 'Blogs over messen slijpen en onderhoud'],
   ['/blogs/hoe-slijp-je-een-mes/', true, 'Hoe slijp je een keukenmes op een slijpsteen?'],
-  ['/blogs/hoe-vaak-koksmessen-slijpen-horeca/', true, 'Hoe vaak moet je koksmessen slijpen in de horeca?'],
+  ['/blogs/japanse-messen/', true, 'Japanse messen: soorten, staal en slijpen'],
   ['/over-ons/', true, 'De twee maten achter Slijpmaat'],
   ['/veelgestelde-vragen/', true, 'Alles wat je wilt weten over Slijpmaat.'],
   ['/algemene-voorwaarden/', false, 'Algemene voorwaarden Slijpmaat'],
