@@ -1,3 +1,7 @@
+import { formatEuroCents } from '../utils/format';
+
+export const STUDENT_PRICE_CENTS = 650;
+
 export const SLIJPMAAT_INFO = {
   fullAddress: 'Gerard Noodtstraat 57, 3515 VW Utrecht',
   whatsappNumber: '+31682074967',
@@ -9,7 +13,7 @@ export const SLIJPMAAT_INFO = {
     normal: { name: 'Normaal mes', size: '15 tot 19,99 cm', price: 8.50, desc: 'Kleine koksmessen, santoku’s, universele messen' },
     large: { name: 'Groot mes', size: '20 tot en met 25 cm', price: 10.50, desc: 'Chefsmessen, vleesmessen, grote santoku’s' },
     extraLarge: { name: 'Extra groot mes', size: 'Langer dan 25 cm', price: 0, custom: true, desc: 'Zalmmessen, grote trancheermessen (prijs op aanvraag)' },
-    student: { name: 'StudentenMaat', price: 5.00, desc: 'Speciaal studententarief voor kleine, normale en grote messen (extra groot uitgesloten)' },
+    student: { name: 'StudentenMaat', price: STUDENT_PRICE_CENTS / 100, desc: 'Speciaal studententarief voor kleine, normale en grote messen (extra groot uitgesloten)' },
     chipRepair: { name: 'Kleine chip herstellen', price: 2.50, desc: 'Verwijderen van een kleine hap uit de snede op grove korrelsteen' },
     profileRepair: { name: 'Nieuw profiel aanbrengen', price: 8.50, desc: 'Herstellen van een ernstig vervormde snede, doorgebogen buik of afgebroken punt' }
   }
@@ -91,7 +95,7 @@ export const FAQS = [
   },
   {
     q: 'Krijg ik als student korting op mijn slijpbeurt?',
-    a: 'Ja. Als StudentenMaat betaal je €5 per klein, normaal of groot keukenmes; extra grote messen zijn uitgesloten en blijven op aanvraag. Selecteer in het bestelformulier de optie ‘Ik ben een StudentenMaat’. De studentenkorting wordt dan automatisch in de totaalprijs verwerkt.'
+    a: `Ja. Als StudentenMaat betaal je ${formatEuroCents(STUDENT_PRICE_CENTS)} per klein, normaal of groot keukenmes; extra grote messen zijn uitgesloten en blijven op aanvraag. Selecteer in het bestelformulier de optie ‘Ik ben een StudentenMaat’. De studentenkorting wordt dan automatisch in de totaalprijs verwerkt.`
   }
 ];
 

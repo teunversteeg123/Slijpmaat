@@ -20,7 +20,7 @@ import {
 import { createWhatsAppUrl } from '../utils/contact';
 import { formatEuroCents } from '../utils/format';
 import { useOrderFunnel } from '../hooks/useOrderFunnel';
-import { SLIJPMAAT_INFO } from '../data/siteData';
+import { SLIJPMAAT_INFO, STUDENT_PRICE_CENTS } from '../data/siteData';
 
 interface KnifeCategory {
   id: number;
@@ -92,10 +92,10 @@ export const ParticulierenCalculator: React.FC = () => {
     return total + counts[idx] * cat.basePrice;
   }, 0);
 
-  // Student discount (€5,00 for small, normal, large)
+  // Student discount for small, normal and large knives
   const studentDiscountCents = isStudent
     ? KNIFE_CATEGORIES.slice(0, 3).reduce((total, cat, idx) => {
-        const discountPerKnife = Math.max(0, cat.basePrice - 500);
+        const discountPerKnife = Math.max(0, cat.basePrice - STUDENT_PRICE_CENTS);
         return total + counts[idx] * discountPerKnife;
       }, 0)
     : 0;
@@ -256,7 +256,7 @@ export const ParticulierenCalculator: React.FC = () => {
             <div className="mt-3 divide-y divide-[#d9e1d7] border-y border-[#d9e1d7]">
               {KNIFE_CATEGORIES.slice(0, 3).map((cat, idx) => {
                 const count = counts[idx];
-                const currentPrice = formatEuroCents(isStudent ? 500 : cat.basePrice);
+                const currentPrice = formatEuroCents(isStudent ? STUDENT_PRICE_CENTS : cat.basePrice);
                 return (
                   <div key={cat.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2.5 py-3 sm:gap-4 sm:py-4">
                     <div className="min-w-0">

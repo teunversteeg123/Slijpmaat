@@ -76,12 +76,12 @@ try {
     await page.getByRole('button', { name: /Zelf langskomen/ }).click();
     await page.locator('#calc-name-input').fill('Testpersoon');
     const discounted = await text(receipt);
-    assert.ok(discounted.includes('€8,50') && discounted.includes('€3,50') && discounted.includes('€5,00'), discounted);
+    assert.ok(discounted.includes('€8,50') && discounted.includes('€2,00') && discounted.includes('€6,50'), discounted);
     assert.ok(discounted.includes('Totaal slijpbeurt') && discounted.includes('niet inbegrepen'));
     await order.click();
     const draft = await page.evaluate(() => window.__drafts.at(-1));
     const message = new URL(draft).searchParams.get('text');
-    assert.ok(message.includes('Gerard Noodtstraat 57') && message.includes('StudentenMaat voordeel: − €3,50') && message.includes('Totaal geschat: €5,00'), message);
+    assert.ok(message.includes('Gerard Noodtstraat 57') && message.includes('StudentenMaat voordeel: − €2,00') && message.includes('Totaal geschat: €6,50'), message);
     await page.getByRole('button', { name: /Langer dan 25 cm/ }).click();
     assert.equal(await page.getByRole('button', { name: 'Minder extra groot of ander slijpwerk' }).isDisabled(), true);
     await page.getByRole('button', { name: 'Meer extra groot of ander slijpwerk' }).click();
@@ -109,12 +109,12 @@ try {
 
     await page.getByRole('button', { name: /Ophalen & bezorgen/ }).click();
     await page.locator('#calc-address-input').fill('Teststraat 1');
-    for (const [postcode, total] of [['3513 AB', '€5,00'], ['3511 AB', '€9,50'], ['3521 AB', '€12,25']]) {
+    for (const [postcode, total] of [['3513 AB', '€6,50'], ['3511 AB', '€11,00'], ['3521 AB', '€13,75']]) {
       await page.locator('#calc-postcode-input').fill(postcode);
       assert.equal(await text(receipt.locator('strong').last()), total);
     }
     for (let i = 0; i < 6; i++) await page.getByRole('button', { name: 'Meer Normaal mes', exact: true }).click();
-    assert.equal(await text(receipt.locator('strong').last()), '€35,00');
+    assert.equal(await text(receipt.locator('strong').last()), '€45,50');
 
     await visit(page, '/zakelijk/');
     const combo = page.getByRole('combobox');
