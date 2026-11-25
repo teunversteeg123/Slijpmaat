@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { Pause } from 'lucide-react';
 import { PageId } from '../types';
 import { OrganicSectionDivider } from '../components/OrganicSectionDivider';
-import { UIcon, UIconBadge } from '../components/ui/UIcon';
+import { UIcon } from '../components/ui/UIcon';
 import { TrustBar } from '../components/TrustBar';
 import { LogoCloud } from '../components/ui/logo-cloud-3';
 import { createWhatsAppUrl } from '../utils/contact';
@@ -117,44 +117,25 @@ const SlijpenVideo: React.FC = () => {
 
 export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
   const whatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik heb een vraag over jullie werkwijze en het slijpen van mijn messen!');
+  const repairWhatsappUrl = createWhatsAppUrl('Hoi Teun en Mike, ik heb een beschadigd mes. Kunnen jullie beoordelen welk herstel mogelijk is?');
 
-  // De 4 kernstappen van hoe we omgaan met elk mes (foto + toelichting in 1 geïntegreerde aanpak)
+  // De vier stappen van inspectie tot eindcontrole.
   const processPhases = [
     {
-      num: '01',
-      title: 'Snede & profiel zorgvuldig beoordelen',
-      desc: 'We bekijken eerst het staal, de bestaande snijhoek en de kromming van het lemmet. Elk mes is uniek: we volgen de bestaande snede nauwkeurig en respecteren het originele lemmetprofiel.',
-      badge: 'Inspectie & Analyse',
-      highlight: 'Origineel profiel behouden',
-      image: '/assets/werkwijze/01-beoordelen.webp',
-      alt: 'Slijpmaat beoordeelt de snede en het profiel van een keukenmes',
+      title: 'Snede en profiel beoordelen',
+      desc: 'We bekijken het staal, de bestaande slijphoek en de kromming van het lemmet. Zo weten we hoe we het originele profiel kunnen behouden.',
     },
     {
-      num: '02',
-      title: 'Wij kiezen de juiste Japanse slijpsteen',
-      desc: 'Elk mes en elke staalsoort vraagt om een eigen aanpak. Wij kiezen nauwkeurig de juiste Japanse slijpsteen voor jouw lemmet. We werken zeer beheerst: we halen alleen weg wat strikt nodig is voor een vlijmscherp resultaat, voor een maximale levensduur van je mes.',
-      badge: 'De juiste Japanse slijpsteen',
-      highlight: 'Minimale staalafname',
-      image: '/assets/werkwijze/02-stenen-kiezen.webp',
-      alt: 'Japanse slijpstenen die Slijpmaat gebruikt',
+      title: 'De juiste slijpsteen kiezen',
+      desc: 'We kiezen een Japanse slijpsteen die past bij het staal en de staat van de snede, zodat we alleen wegnemen wat nodig is.',
     },
     {
-      num: '03',
-      title: 'Volledig met de hand op Japanse slijpstenen',
+      title: 'Met de hand slijpen',
       desc: 'We slijpen met de hand op Japanse slijpstenen. Daardoor houden we controle over de slijphoek, de materiaalafname en de afwerking van ieder mes.',
-      badge: '100% Handwerk',
-      highlight: 'Controle over hoek en afname',
-      image: '/assets/werkwijze/03-slijpen.webp',
-      alt: 'Een keukenmes wordt met de hand geslepen op een Japanse slijpsteen',
     },
     {
-      num: '04',
-      title: 'Afwerken en ontbramen op leer',
-      desc: 'Tot slot verwijderen we de braam zorgvuldig en stroppen we de snede af op een soepele leren strop met polijstpasta. Daarna controleren we of het mes over de volledige snede soepel snijdt.',
-      badge: 'Leren strop',
-      highlight: 'Vlijmscherp & braamvrij',
-      image: '/assets/werkwijze/04-afwerken.webp',
-      alt: 'Een keukenmes wordt gepolijst en afgestropt op een leren strop',
+      title: 'Afwerken op leer en testen',
+      desc: 'We verwijderen de braam, werken de snede af op een leren strop met polijstpasta en controleren of het mes van hiel tot punt soepel snijdt.',
     },
   ];
 
@@ -186,28 +167,22 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
     },
   ];
 
-  // Verschillende typen messen
   const knifeTypes = [
     {
       title: 'Westerse messen',
       examples: 'Wüsthof, Zwilling, Sabatier, Diamant Sabatier, Victorinox, etc.',
       angle: 'Slijphoek ca. 15° - 20°',
       desc: 'Westerse messen hebben taaier staal en een rondere snijboog (voor de wiegende snijtechniek). We slijpen een stevige, duurzame snijrand die tegen een stootje kan.',
-      iconName: 'knife-kitchen',
+      image: '/assets/resultaten/slider/wusthof-classic-koksmes-thumb.webp',
+      alt: 'Westers koksmes op een houten snijplank',
     },
     {
       title: 'Japanse messen',
       examples: 'Santoku, Gyuto, Nakiri, VG10, AUS-10, Shirogami & Aogami koolstofstaal',
       angle: 'Slijphoek ca. 12° - 15°',
       desc: 'Veel Japanse messen combineren relatief hard staal met een dunne geometrie. We beoordelen de bestaande snijvouw en kiezen een passende Japanse slijpsteen en slijphoek voor het specifieke mes.',
-      iconName: 'knife',
-    },
-    {
-      title: 'Chips & Beschadigde Punten',
-      examples: 'Happen in de snede, verbogen of afgebroken punten',
-      angle: 'Altijd in goed overleg',
-      desc: 'Heeft je mes een flinke chip? We herstellen het mes gelijkmatig over de hele lengte zodat het profiel klopt. Vóór we beginnen stemmen we dit altijd even telefonisch of via WhatsApp met je af.',
-      iconName: 'tools',
+      image: '/assets/resultaten/slider/japans-santokumes-thumb.webp',
+      alt: 'Japans santokumes op een houten snijplank',
     },
   ];
 
@@ -340,69 +315,46 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
         variant="calm"
       />
 
-      {/* 4. HOE WIJ MET JE MES OMGAAN (De 4 fasen: minimale staalafname & profielbehoud) */}
-      <section className="relative overflow-hidden bg-white px-4 py-16 sm:px-6 sm:py-24 lg:px-8">
-        <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="mb-12 max-w-2xl sm:mb-16">
-            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
-              Hoe wij te werk gaan: minimale afname, maximale scherpte
-            </h2>
-          </div>
+      <section aria-labelledby="werkwijze-slijpstappen" className="bg-white px-4 py-14 sm:px-6 sm:py-20 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <h2 id="werkwijze-slijpstappen" className="max-w-2xl scroll-mt-28 text-balance font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+            Van botte snede naar scherp mes
+          </h2>
 
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {processPhases.map((phase) => (
-              <div
-                key={phase.num}
-                className="group relative flex flex-col justify-between rounded-[2rem] border border-[#d9e1d7] bg-[#FAFAF8] p-7 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:border-[#3B7F4B]/50 hover:bg-white hover:shadow-md"
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-[#E8EFE8] font-heading text-sm font-bold text-[#3B7F4B] transition-colors group-hover:bg-[#3B7F4B] group-hover:text-white">
-                      {phase.num}
-                    </span>
-                    <span className="rounded-full bg-[#FCEEE8] px-3 py-1 text-[11px] font-bold text-[#C95E3E]">
-                      {phase.badge}
-                    </span>
+          <div className="mt-8 grid items-start gap-8 sm:mt-10 lg:grid-cols-[1fr_0.94fr] lg:items-center lg:gap-12 xl:gap-16">
+            <ol role="list" className="list-none divide-y divide-[#d9e1d7] border-y border-[#d9e1d7]">
+              {processPhases.map((phase, index) => (
+                <li key={phase.title} className="grid grid-cols-[2rem_minmax(0,1fr)] gap-3 py-4 sm:grid-cols-[2.5rem_minmax(0,1fr)] sm:gap-4 sm:py-5">
+                  <span aria-hidden="true" className="grid size-8 place-items-center rounded-full bg-[#E8EFE8] font-heading text-sm font-bold text-[#244A30] sm:size-10">
+                    {index + 1}
+                  </span>
+                  <div className="pt-0.5">
+                    <h3 className="font-heading text-lg font-bold leading-snug text-[#203728] sm:text-xl">{phase.title}</h3>
+                    <p className="mt-1.5 text-sm leading-relaxed text-[#657068] sm:text-base">{phase.desc}</p>
                   </div>
+                </li>
+              ))}
+            </ol>
 
-                  <h3 className="mt-5 font-heading text-lg font-bold text-[#203728]">
-                    {phase.title}
-                  </h3>
-
-                  <p className="mt-3 text-sm leading-relaxed text-[#657068]">
-                    {phase.desc}
-                  </p>
-                </div>
-
-                <div className="mt-6 flex items-center gap-2 border-t border-[#d9e1d7]/60 pt-4 text-xs font-bold text-[#3B7F4B]">
-                  <UIcon name="check" className="text-xs shrink-0 text-[#3B7F4B]" aria-hidden="true" />
-                  <span>{phase.highlight}</span>
-                </div>
-              </div>
-            ))}
-          </div>
-
-          <figure className="mx-auto mt-12 max-w-5xl overflow-hidden rounded-[2rem] border border-[#d9e1d7] bg-[#FAFAF8] shadow-sm sm:mt-16">
-            <div className="border-b border-[#d9e1d7]/80 px-5 py-5 sm:px-8 sm:py-6">
-              <h3 className="font-heading text-xl font-bold text-[#203728] sm:text-2xl">
-                Wat er tijdens het slijpen met de snede gebeurt
-              </h3>
-              <p className="mt-2 max-w-3xl text-sm leading-relaxed text-[#657068] sm:text-base">
-                De snede wordt opnieuw gevormd, krijgt tijdens het slijpen een fijne braam en wordt daarna zorgvuldig ontbraamd en afgewerkt.
-              </p>
-            </div>
-            <div className="bg-[#eeeeee] p-3 sm:p-6">
+            <figure className="overflow-hidden rounded-[2rem] bg-[#F7F4EC] p-4 sm:p-6">
               <img
                 src="/assets/werkwijze/slijpproces-snede.png"
                 alt="Diagram van een botte messnede, het slijpproces, de gevormde braam en de uiteindelijke scherpe snede"
-                className="h-auto w-full object-contain"
+                width={622}
+                height={360}
+                className="h-auto w-full rounded-[1.25rem]"
                 loading="lazy"
               />
-            </div>
-          </figure>
+              <figcaption className="px-1 pb-1 pt-4 sm:px-2 sm:pt-5">
+                <h3 className="font-heading text-lg font-bold text-[#203728] sm:text-xl">Wat er met de snede gebeurt</h3>
+                <p className="mt-1.5 text-sm leading-relaxed text-[#657068] sm:text-base">
+                  Tijdens het slijpen vormen we de snede opnieuw. Daarbij ontstaat een fijne braam, die we vóór de eindcontrole verwijderen.
+                </p>
+              </figcaption>
+            </figure>
+          </div>
         </div>
       </section>
-
       <OrganicSectionDivider
         fromColor="#FFFFFF"
         middleColor="#F9E4DE"
@@ -411,63 +363,54 @@ export const WerkwijzePage: React.FC<WerkwijzePageProps> = ({ onNavigate }) => {
         mirror
       />
 
-      {/* 5. VOOR ELK MES EEN ANDERE AANPAK (Westers vs. Japans vs. Chips herstel) in warm cream #F7F4EC */}
-      <section className="relative overflow-hidden bg-[#F7F4EC] px-4 pb-8 pt-16 sm:px-6 sm:pb-12 sm:pt-24 lg:px-8">
-        <div
-          aria-hidden="true"
-          className="pointer-events-none absolute -right-20 top-1/4 h-72 w-72 rounded-[45%_55%_50%_50%/50%_45%_55%_50%] bg-[#E8EFE8]/70"
-        />
+      <section aria-labelledby="werkwijze-mestypes" className="bg-[#F7F4EC] px-4 pb-8 pt-12 sm:px-6 sm:pb-12 sm:pt-20 lg:px-8">
+        <div className="mx-auto max-w-7xl">
+          <h2 id="werkwijze-mestypes" className="max-w-2xl scroll-mt-28 text-balance font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
+            Elk mes vraagt om een eigen behandeling
+          </h2>
 
-        <div className="relative z-10 mx-auto max-w-7xl">
-          <div className="mb-10 max-w-2xl sm:mb-12">
-            <h2 className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">
-              Elk mes vraagt om een eigen behandeling
-            </h2>
+          <div className="mt-8 grid gap-4 sm:mt-10 lg:grid-cols-2 lg:gap-6">
+            {knifeTypes.map((type) => (
+              <article key={type.title} className="grid grid-cols-[5.75rem_minmax(0,1fr)] gap-x-4 gap-y-3 rounded-[2rem] bg-white p-4 ring-1 ring-[#D9E1D7] sm:grid-cols-[9rem_minmax(0,1fr)] sm:grid-rows-[auto_1fr] sm:gap-x-5 sm:gap-y-3 sm:p-5 xl:grid-cols-[11rem_minmax(0,1fr)]">
+                <img
+                  src={type.image}
+                  alt={type.alt}
+                  width={480}
+                  height={640}
+                  loading="lazy"
+                  className="row-start-1 aspect-[3/4] h-auto w-full self-start rounded-2xl object-cover sm:row-span-2"
+                />
+                <header className="min-w-0 self-center sm:self-start">
+                  <h3 className="font-heading text-xl font-bold leading-tight text-[#203728] sm:text-2xl">{type.title}</h3>
+                  <p className="mt-2 text-sm leading-snug font-medium text-[#244A30]">{type.angle}</p>
+                </header>
+                <div className="col-span-2 min-w-0 sm:col-span-1">
+                  <p className="text-sm leading-relaxed text-[#657068] sm:text-base">{type.desc}</p>
+                  <p className="mt-3 border-t border-[#D9E1D7] pt-3 text-sm leading-relaxed text-[#657068]">{type.examples}</p>
+                </div>
+              </article>
+            ))}
           </div>
 
-          <div className="grid gap-6 md:grid-cols-3">
-            {knifeTypes.map((type, idx) => (
-              <div
-                key={idx}
-                className="rounded-[2.25rem] border border-[#d9e1d7] bg-white p-7 sm:p-8 shadow-xs transition-all duration-300 hover:-translate-y-1 hover:shadow-md flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between">
-                    <UIconBadge
-                      name={type.iconName}
-                      variant="soft"
-                      size="lg"
-                      rounded="2xl"
-                      aria-label={`Icoon voor ${type.title}`}
-                    />
-                    <span className="rounded-full bg-[#E8EFE8] px-3 py-1 text-xs font-bold text-[#3B7F4B]">
-                      {type.angle}
-                    </span>
-                  </div>
-
-                    <h3 className="mt-5 font-heading text-xl font-bold text-[#203728]">
-                      {type.title}
-                    </h3>
-                    <p className="mt-1 text-xs font-semibold text-[#C95E3E]">
-                      {type.examples}
-                    </p>
-
-                    <p className="mt-4 text-sm leading-relaxed text-[#657068]">
-                      {type.desc}
-                    </p>
-                  </div>
-
-                  <div className="mt-6 pt-4 border-t border-[#d9e1d7]/60">
-                    <p className="text-xs font-semibold text-[#3B7F4B]">
-                      {idx === 2 ? '✓ Altijd vooraf telefonisch of via WhatsApp overleg' : '✓ Behoud van fabrieksgeometrie'}
-                    </p>
-                  </div>
-                </div>
-              ))}
+          <div className="mt-5 flex flex-col gap-4 rounded-[2rem] bg-[#E8EFE8] p-5 sm:mt-6 sm:p-7 lg:flex-row lg:items-center lg:justify-between lg:gap-8">
+            <div className="max-w-3xl">
+              <h3 className="font-heading text-xl font-bold text-[#203728] sm:text-2xl">Een chip of beschadigde punt?</h3>
+              <p className="mt-2 text-sm leading-relaxed text-[#244A30] sm:text-base">
+                Bij een hap in de snede of een verbogen of afgebroken punt bekijken we welk herstel mogelijk is en wat het betekent voor het profiel. Vóór we beginnen stemmen we de behandeling telefonisch of via WhatsApp met je af.
+              </p>
+            </div>
+            <a
+              href={repairWhatsappUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 w-fit shrink-0 items-center gap-2 rounded-full bg-[#244A30] px-5 py-2.5 text-sm font-bold text-white transition-colors hover:bg-[#203728] focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#244A30]"
+            >
+              <UIcon name="whatsapp" brand className="shrink-0 text-base" aria-hidden="true" />
+              Bespreek de schade
+            </a>
           </div>
         </div>
       </section>
-
       <LogoCloud />
 
       <OrganicSectionDivider
