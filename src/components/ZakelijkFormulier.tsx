@@ -5,6 +5,8 @@ import { SLIJPMAAT_INFO } from '../data/siteData';
 import { createWhatsAppUrl } from '../utils/contact';
 import { isValidContactPhone } from '../utils/validation';
 import { useOrderFunnel } from '../hooks/useOrderFunnel';
+import { BlackFridayFormNotice, useBlackFriday } from './black-friday';
+import { BLACK_FRIDAY_QUOTE_REQUEST } from '../data/black-friday';
 
 type ServiceType = 'bezorging' | 'langskomen';
 
@@ -22,6 +24,7 @@ export const ZakelijkFormulier: React.FC = () => {
   const [estimateOpen, setEstimateOpen] = useState(false);
   const [activeEstimate, setActiveEstimate] = useState(0);
   const funnel = useOrderFunnel('business');
+  const blackFridayActive = useBlackFriday();
   const [restaurantName, setRestaurantName] = useState('');
   const [contactPerson, setContactPerson] = useState('');
   const [phone, setPhone] = useState('');
@@ -116,6 +119,7 @@ export const ZakelijkFormulier: React.FC = () => {
     if (serviceType === 'bezorging') messageLines.push(`• Adres: ${address.trim()}, ${cleanPostcode}`);
     else messageLines.push(`• Afspraaklocatie: ${SELF_DROPOFF_ADDRESS}`);
     if (notes.trim()) messageLines.push('', `Opmerkingen / planning: ${notes.trim()}`);
+    if (blackFridayActive) messageLines.push('', BLACK_FRIDAY_QUOTE_REQUEST);
     messageLines.push('', 'Kunnen jullie ons een voorstel inclusief btw en een planning sturen?', 'Alvast bedankt!');
     return messageLines;
   };
@@ -139,6 +143,7 @@ export const ZakelijkFormulier: React.FC = () => {
 
   return (
     <div className="w-full" onFocusCapture={funnel.start} onClickCapture={funnel.start}>
+      <BlackFridayFormNotice />
       <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-cols-12 lg:gap-8">
         <div className="rounded-[1.75rem] border border-[#d9e1d7] bg-white p-4 shadow-xs sm:p-7 lg:col-span-7">
           <section aria-labelledby="business-contact-heading">
@@ -279,6 +284,7 @@ export const ZakelijkFormulier: React.FC = () => {
                 <span className="inline-flex items-center gap-1 rounded-full bg-[#E8EFE8] px-2.5 py-1 text-[10px] font-bold uppercase tracking-wider text-[#3B7F4B]"><ReceiptText className="h-3.5 w-3.5" aria-hidden="true" />incl. btw</span>
               </div>
               <strong className="mt-1 block font-heading text-3xl font-bold text-[#3B7F4B]">Prijs op maat</strong>
+              {blackFridayActive && <p className="mt-2 text-xs font-bold text-red-700">10% Black Friday-korting op de hele offerte.</p>}
               <p className="mt-1 text-xs text-[#657068]">We starten pas nadat jullie akkoord zijn met het voorstel.</p>
             </div>
             {errorMsg ? <div role="alert" className="mt-3 flex items-center gap-2 rounded-xl bg-[#FFF3F1] p-3 text-xs font-semibold text-[#8B2921]"><AlertCircle className="h-4 w-4 shrink-0" aria-hidden="true" /><span>{errorMsg}</span></div> : null}

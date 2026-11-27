@@ -17,6 +17,7 @@ type StoredConsent = {
 };
 
 type CookieConsentContextValue = {
+  cookiePromptVisible: boolean;
   openCookieSettings: () => void;
 };
 
@@ -163,7 +164,7 @@ export const CookieConsentProvider = ({ children }: { children: React.ReactNode 
   const choiceButtonClass = 'min-h-11 rounded-full border border-[#3B7F4B] px-3 py-2.5 text-xs font-bold transition-colors focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[#3B7F4B] sm:px-5 sm:text-sm';
 
   return (
-    <CookieConsentContext.Provider value={{ openCookieSettings }}>
+    <CookieConsentContext.Provider value={{ openCookieSettings, cookiePromptVisible: showBanner || settingsOpen }}>
       {children}
 
       {showBanner ? (

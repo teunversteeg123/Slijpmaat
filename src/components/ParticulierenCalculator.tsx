@@ -21,6 +21,8 @@ import { createWhatsAppUrl } from '../utils/contact';
 import { formatEuroCents } from '../utils/format';
 import { useOrderFunnel } from '../hooks/useOrderFunnel';
 import { SLIJPMAAT_INFO, STUDENT_PRICE_CENTS } from '../data/siteData';
+import { BLACK_FRIDAY_QUOTE_REQUEST, getBlackFridayDiscountCents } from '../data/black-friday';
+import { BlackFridayFormNotice, BlackFridayPrice, useBlackFriday } from './black-friday';
 
 interface KnifeCategory {
   id: number;
@@ -67,6 +69,7 @@ const SELF_DROPOFF_ADDRESS = SLIJPMAAT_INFO.fullAddress;
 
 export const ParticulierenCalculator: React.FC = () => {
   const funnel = useOrderFunnel('consumer');
+  const blackFridayActive = useBlackFriday();
   const [counts, setCounts] = useState<number[]>([0, 0, 0, 0]);
   const [isStudent, setIsStudent] = useState<boolean>(false);
   const [selfDropoff, setSelfDropoff] = useState<boolean>(false);
@@ -111,6 +114,10 @@ export const ParticulierenCalculator: React.FC = () => {
       ? getDeliveryFeeCents(postcode, finalSharpeningCents, false)
       : null;
   const amountUntilFreeDeliveryCents = Math.max(0, FREE_DELIVERY_THRESHOLD_CENTS - finalSharpeningCents);
+  const totalBeforeBlackFridayCents = finalSharpeningCents + (deliveryFeeCents ?? 0);
+  const blackFridayDiscountCents = getBlackFridayDiscountCents(totalBeforeBlackFridayCents, blackFridayActive);
+  const totalCents = totalBeforeBlackFridayCents - blackFridayDiscountCents;
+  const needsQuote = hasExtraLarge || isOutsideArea;
 
   // Format currency
   const updateCount = (idx: number, delta: number) => {
@@ -169,7 +176,7 @@ export const ParticulierenCalculator: React.FC = () => {
 
     let totalText = 'Op aanvraag';
     if (!hasExtraLarge && deliveryFeeCents !== null && !isOutsideArea) {
-      totalText = formatEuroCents(finalSharpeningCents + deliveryFeeCents);
+      totalText = formatEuroCents(totalCents);
     }
 
     const lines = [
@@ -203,6 +210,13 @@ export const ParticulierenCalculator: React.FC = () => {
     if (hasExtraLarge) lines.push('Extra groot / ander slijpwerk: prijs op aanvraag, niet inbegrepen in bekend slijpwerk.');
     lines.push(
       `${selfDropoff ? 'Zelf brengen & ophalen' : 'Ophalen & bezorgen'}: ${deliveryText}`,
+    );
+    if (blackFridayActive && needsQuote) {
+      lines.push(BLACK_FRIDAY_QUOTE_REQUEST);
+    } else if (blackFridayDiscountCents > 0) {
+      lines.push(`Black Friday-korting (10%): − ${formatEuroCents(blackFridayDiscountCents)}`);
+    }
+    lines.push(
       `Totaal geschat: ${totalText}`,
       '(Eventuele reparaties of chips niet inbegrepen)'
     );
@@ -226,6 +240,7 @@ export const ParticulierenCalculator: React.FC = () => {
 
   return (
     <div className="w-full" onFocusCapture={funnel.start} onClickCapture={funnel.start}>
+      <BlackFridayFormNotice />
       <div className="grid grid-cols-1 items-start gap-4 sm:gap-6 lg:grid-cols-12 lg:gap-8">
         <div className="rounded-[1.75rem] border border-[#d9e1d7] bg-white p-4 shadow-xs sm:p-7 lg:col-span-7">
           <section aria-labelledby="calculator-knives-heading">
@@ -256,7 +271,7 @@ export const ParticulierenCalculator: React.FC = () => {
             <div className="mt-3 divide-y divide-[#d9e1d7] border-y border-[#d9e1d7]">
               {KNIFE_CATEGORIES.slice(0, 3).map((cat, idx) => {
                 const count = counts[idx];
-                const currentPrice = formatEuroCents(isStudent ? STUDENT_PRICE_CENTS : cat.basePrice);
+                const priceCents = isStudent ? STUDENT_PRICE_CENTS : cat.basePrice;
                 return (
                   <div key={cat.id} className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2.5 py-3 sm:gap-4 sm:py-4">
                     <div className="min-w-0">
@@ -268,7 +283,7 @@ export const ParticulierenCalculator: React.FC = () => {
                       </div>
                       <p className="mt-0.5 text-[11px] text-[#657068] sm:text-xs">{cat.sizeDesc}</p>
                       <p className="mt-0.5 font-heading text-sm font-bold text-[#3B7F4B]">
-                        {currentPrice}
+                        <BlackFridayPrice cents={priceCents} />
                         {isStudent && <span className="ml-1 text-[10px] font-medium text-[#657068]">StudentenMaat</span>}
                       </p>
                     </div>
@@ -441,11 +456,17 @@ export const ParticulierenCalculator: React.FC = () => {
                 <div className="flex items-center justify-between gap-3 text-[#C95E3E]"><span>StudentenMaat voordeel</span><span className="font-heading font-bold">− {formatEuroCents(studentDiscountCents)}</span></div>
               )}
               <div className="flex items-center justify-between gap-3"><span className="text-[#657068]">{selfDropoff ? 'Zelf langskomen' : 'Ophalen & bezorgen'}</span><span className="font-heading font-bold text-[#203728]">{selfDropoff ? 'Gratis' : deliveryFeeCents === null ? (isOutsideArea ? 'Op aanvraag' : 'Postcode nodig') : deliveryFeeCents === 0 ? 'Gratis' : formatEuroCents(deliveryFeeCents)}</span></div>
+              {blackFridayActive && (needsQuote || blackFridayDiscountCents > 0) && (
+                <div className="flex items-center justify-between gap-3 font-bold text-red-700">
+                  <span>Black Friday-korting (10%)</span>
+                  <span className="text-right">{needsQuote ? 'Wordt verrekend op de offerte' : `− ${formatEuroCents(blackFridayDiscountCents)}`}</span>
+                </div>
+              )}
             </div>
 
             <div className="rounded-2xl border border-[#d9e1d7] bg-white p-4">
               <span className="block text-xs font-semibold text-[#657068]">{hasExtraLarge || isOutsideArea ? 'Prijs op aanvraag' : selfDropoff ? 'Totaal slijpbeurt' : deliveryFeeCents === null ? 'Totaal excl. bezorging' : 'Totaal incl. bezorging'}</span>
-              <strong className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">{hasExtraLarge || isOutsideArea ? 'Op aanvraag' : formatEuroCents(finalSharpeningCents + (deliveryFeeCents || 0))}</strong>
+              <strong className="font-heading text-3xl font-bold text-[#3B7F4B] sm:text-4xl">{needsQuote ? 'Op aanvraag' : formatEuroCents(totalCents)}</strong>
               {hasExtraLarge ? <p className="mt-2 text-xs leading-relaxed text-[#657068]">Afwijkend slijpwerk wordt apart geprijsd. Bekende regelprijzen blijven hierboven zichtbaar.</p> : null}
               <p className="mt-2 text-xs leading-relaxed text-[#657068]">Eventuele reparaties of chips niet inbegrepen. We bespreken de kosten vooraf.</p>
             </div>

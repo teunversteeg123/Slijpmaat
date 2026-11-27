@@ -3,6 +3,7 @@ import { PageId } from './types';
 import { Header } from './components/Header';
 import { Footer } from './components/Footer';
 import { CookieConsentProvider } from './context/CookieConsentContext';
+import { BlackFridayProvider } from './components/black-friday';
 import { PageLoadBoundary } from './components/PageLoadBoundary';
 import { trackAnalyticsEvent, trackPageView } from './utils/analytics';
 
@@ -253,6 +254,7 @@ export default function App({ initialPath }: AppProps) {
 
   return (
     <CookieConsentProvider>
+      <BlackFridayProvider>
       <div className="min-h-screen flex flex-col bg-[#FAFAF8] text-[#244A30] antialiased font-sans">
         {/* Top Header */}
         <Header currentPage={currentPage} onNavigate={handleNavigate} />
@@ -269,6 +271,7 @@ export default function App({ initialPath }: AppProps) {
         {/* Footer */}
         <Footer onNavigate={handleNavigate} />
       </div>
+      </BlackFridayProvider>
     </CookieConsentProvider>
   );
 }
